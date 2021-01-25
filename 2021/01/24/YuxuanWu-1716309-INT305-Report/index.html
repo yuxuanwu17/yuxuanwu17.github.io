@@ -1,117 +1,172 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>YuxuanWu_1716309_INT305_Report | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Name: Yuxuan WuID: 1716309Data downloadYou could simply download the data from my own Github repository: https:&#x2F;&#x2F;media.githubusercontent.com&#x2F;media&#x2F;yuxuanwu17&#x2F;kaggle&#x2F;main&#x2F;heart_failure_clinical_records">
-<meta property="og:type" content="article">
-<meta property="og:title" content="YuxuanWu_1716309_INT305_Report">
-<meta property="og:url" content="http://example.com/2021/01/24/YuxuanWu-1716309-INT305-Report/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Name: Yuxuan WuID: 1716309Data downloadYou could simply download the data from my own Github repository: https:&#x2F;&#x2F;media.githubusercontent.com&#x2F;media&#x2F;yuxuanwu17&#x2F;kaggle&#x2F;main&#x2F;heart_failure_clinical_records">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://i2.tiimg.com/732634/6142260ea33218d3.png">
-<meta property="og:image" content="http://i1.fuimg.com/732634/d2e422a950079a81.png">
-<meta property="og:image" content="http://i1.fuimg.com/732634/12c3c71fe7a77951.png">
-<meta property="og:image" content="http://i1.fuimg.com/732634/79316f216c960b29.png">
-<meta property="og:image" content="http://i2.tiimg.com/732634/c3cf27edc28fd595.png">
-<meta property="og:image" content="http://i2.tiimg.com/732634/1643949fc06a2d10.png">
-<meta property="og:image" content="http://i2.tiimg.com/732634/2d657b2005256d56.png">
-<meta property="og:image" content="http://i2.tiimg.com/732634/f3accef6dfd2ee38.png">
-<meta property="og:image" content="http://i2.tiimg.com/732634/7261b8fdd617408a.png">
-<meta property="og:image" content="http://i1.fuimg.com/732634/2c89446d39ad4ab7.png">
-<meta property="og:image" content="http://i2.tiimg.com/732634/7fbdc5dcac6a34a6.png">
-<meta property="og:image" content="http://i2.tiimg.com/732634/2407f6defc2653a5.png">
-<meta property="og:image" content="http://i2.tiimg.com/732634/45a09aaa074d900e.png">
-<meta property="og:image" content="http://i2.tiimg.com/732634/0f1422e7de2481d4.png">
-<meta property="article:published_time" content="2021-01-24T13:11:26.000Z">
-<meta property="article:modified_time" content="2021-01-24T14:18:12.457Z">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://i2.tiimg.com/732634/6142260ea33218d3.png">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Keep team">
     
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
-
-  
-  
+    <title>
+        
+            Heart failure detection by SVM-based machine learning model |
+        
+        Keep Theme
+    </title>
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
 <link rel="stylesheet" href="/css/style.css">
 
-  
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
 
-  
-<meta name="generator" content="Hexo 5.3.0"></head>
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.3.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days age","week":"%s weeks age","month":"%s months age","year":"%s years age"};
+  </script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
 
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Keep Theme
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+        </ul>
     </div>
-  </div>
+
+    <div class="window-mask"></div>
+
 </header>
 
-      <div class="outer">
-        <section id="main"><article id="post-YuxuanWu-1716309-INT305-Report" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/01/24/YuxuanWu-1716309-INT305-Report/" class="article-date">
-  <time class="dt-published" datetime="2021-01-24T13:11:26.000Z" itemprop="datePublished">2021-01-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      YuxuanWu_1716309_INT305_Report
-    </h1>
-  
 
-      </header>
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content normal-code-theme">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Heart failure detection by SVM-based machine learning model</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Keep team</span>
+                        <span class="level">Lv1</span>
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i> 2021-01-24 21:11:26
+    </span>
     
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Name-Yuxuan-Wu"><a href="#Name-Yuxuan-Wu" class="headerlink" title="Name: Yuxuan Wu"></a>Name: Yuxuan Wu</h1><h1 id="ID-1716309"><a href="#ID-1716309" class="headerlink" title="ID: 1716309"></a>ID: 1716309</h1><h2 id="Data-download"><a href="#Data-download" class="headerlink" title="Data download"></a>Data download</h2><p>You could simply download the data from my own Github repository: <a target="_blank" rel="noopener" href="https://media.githubusercontent.com/media/yuxuanwu17/kaggle/main/heart_failure_clinical_records_dataset.csv">https://media.githubusercontent.com/media/yuxuanwu17/kaggle/main/heart_failure_clinical_records_dataset.csv</a></p>
-<p>You could also download the data from kaggle：<br><a target="_blank" rel="noopener" href="https://www.kaggle.com/andrewmvd/heart-failure-clinical-data">https://www.kaggle.com/andrewmvd/heart-failure-clinical-data</a></p>
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Machine-learning-Explorative-data-analysis-kaggle-MathJax/">Machine learning, Explorative data analysis, kaggle, MathJax</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="Name-Yuxuan-Wu"><a href="#Name-Yuxuan-Wu" class="headerlink" title="Name: Yuxuan Wu"></a>Name: Yuxuan Wu</h1><h2 id="Data-download"><a href="#Data-download" class="headerlink" title="Data download"></a>Data download</h2><p>You could simply download the data from my own Github repository: <a class="link"   target="_blank" rel="noopener" href="https://media.githubusercontent.com/media/yuxuanwu17/kaggle/main/heart_failure_clinical_records_dataset.csv" >https://media.githubusercontent.com/media/yuxuanwu17/kaggle/main/heart_failure_clinical_records_dataset.csv<i class="fas fa-external-link-alt"></i></a></p>
+<p>You could also download the data from kaggle：<br><a class="link"   target="_blank" rel="noopener" href="https://www.kaggle.com/andrewmvd/heart-failure-clinical-data" >https://www.kaggle.com/andrewmvd/heart-failure-clinical-data<i class="fas fa-external-link-alt"></i></a></p>
 <h2 id="Libraries-used-in-this-project"><a href="#Libraries-used-in-this-project" class="headerlink" title="Libraries used in this project"></a>Libraries used in this project</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> LinearSVC</span><br><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> SVC</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split, cross_val_score, LeaveOneOut,GridSearchCV</span><br><span class="line"><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> Pipeline</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler, StandardScaler, RobustScaler</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score, mean_squared_error</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> confusion_matrix, plot_confusion_matrix, plot_roc_curve, plot_precision_recall_curve, classification_report</span><br><span class="line"><span class="keyword">from</span> scipy.stats <span class="keyword">import</span> chi2_contingency</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sn</span><br><span class="line"><span class="keyword">import</span> plotly.express <span class="keyword">as</span> px</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <hr>
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="Background-data"><a href="#Background-data" class="headerlink" title="Background data"></a>Background data</h3><p>Cardiovascular diseases (CVDs) are the number 1 cause of death globally, taking an estimated 17.9 million lives each year, which accounts for 31% of all deaths worlwide.<br>Heart failure is a common event caused by CVDs.</p>
@@ -147,15 +202,15 @@
 </ol>
 <hr>
 <h2 id="Related-work"><a href="#Related-work" class="headerlink" title="Related work"></a>Related work</h2><h3 id="Explorative-data-analysis-EDA-approach"><a href="#Explorative-data-analysis-EDA-approach" class="headerlink" title="Explorative data analysis (EDA) approach"></a>Explorative data analysis (EDA) approach</h3><ol>
-<li><a target="_blank" rel="noopener" href="https://www.kaggle.com/nayansakhiya/heart-fail-analysis-and-quick-prediction">heart-fail-analysis-and-quick-prediction</a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.kaggle.com/nayansakhiya/heart-fail-analysis-and-quick-prediction" >heart-fail-analysis-and-quick-prediction<i class="fas fa-external-link-alt"></i></a></li>
 </ol>
 <p><strong>Strength</strong>: Detailed explorative and associative data analysis with great data visualization: each factor is visualized by different types of figures <br><br><strong>Weakness</strong>: Prediction model are quite rudimentary, the author did not select the features and tune the models’ hyperparameters.<br><br><strong>Similarity</strong>: I learned and applied the plotly.express API to create fancy and concise figures for easy comparison; I furthered his rudimentary model by optimization</p>
 <h3 id="Predictive-data-analysis-PDA-approach"><a href="#Predictive-data-analysis-PDA-approach" class="headerlink" title="Predictive data analysis (PDA) approach"></a>Predictive data analysis (PDA) approach</h3><ol>
-<li><a target="_blank" rel="noopener" href="https://www.kaggle.com/rude009/heart-failure-model-prediction-comparisons-95">heart-failure-model-prediction-comparisons-95</a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.kaggle.com/rude009/heart-failure-model-prediction-comparisons-95" >heart-failure-model-prediction-comparisons-95<i class="fas fa-external-link-alt"></i></a></li>
 </ol>
 <p><strong>Strength</strong>: The author compares six prediction models with feature selection. The Extra Gradient Booster Classifier could achieve the accuracy up to 95.0% <br><br><strong>Weakness</strong>: The author consider the “time” column as the useful features. <br><br><strong>Similarity</strong>: I don’t think “time” colume should be included since “time” column stands for Follow-up period (days), which means itself could not contribute the diseases itself. Therefore, I consider this feature as uselessness in our prediction model</p>
 <ol start="2">
-<li><a target="_blank" rel="noopener" href="https://www.kaggle.com/ksvmuralidhar/heart-failure-prediction-auc-0-98">heart-failure-prediction-auc-0-98</a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.kaggle.com/ksvmuralidhar/heart-failure-prediction-auc-0-98" >heart-failure-prediction-auc-0-98<i class="fas fa-external-link-alt"></i></a></li>
 </ol>
 <p><strong>Strength</strong>: The author uses a new method: Chi-square test to find the correlation between single categorical feature with target death_event <br><br><strong>Weakness</strong>: The visualization part does not as fancy as previous work <br><br><strong>Similarity</strong>: I learned and used the Chi-square test to conduct the correlation test between single categorical data with the categorical death_event; but i didn’t agree the author’s method in using box plot comparison between numerical data with categorical data, I used heat map instead.</p>
 <hr>
@@ -322,7 +377,7 @@ DEATH_EVENT 0.0%</code></pre>
 <li>time - Follow-up period (days)</li>
 </ul>
 <h3 id="Citation-or-Reference"><a href="#Citation-or-Reference" class="headerlink" title="Citation or Reference"></a>Citation or Reference</h3><p>Dataset from Davide Chicco, Giuseppe Jurman: Machine learning can predict survival of patients with heart failure from serum creatinine and ejection fraction alone. BMC Medical Informatics and Decision Making 20, 16 (2020)</p>
-<p>The dataset downloaded from Kaggle <a target="_blank" rel="noopener" href="https://www.kaggle.com/andrewmvd/heart-failure-clinical-data">https://www.kaggle.com/andrewmvd/heart-failure-clinical-data</a></p>
+<p>The dataset downloaded from Kaggle <a class="link"   target="_blank" rel="noopener" href="https://www.kaggle.com/andrewmvd/heart-failure-clinical-data" >https://www.kaggle.com/andrewmvd/heart-failure-clinical-data<i class="fas fa-external-link-alt"></i></a></p>
 <hr>
 <h3 id="Principle-components-analysis"><a href="#Principle-components-analysis" class="headerlink" title="Principle components analysis"></a>Principle components analysis</h3><p>Reduce the dimensions and return the sample distribution</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line">X = heart_data.iloc[:,<span class="number">0</span>:<span class="number">11</span>]</span><br><span class="line">X = StandardScaler().fit_transform(X)</span><br><span class="line">y = heart_data[<span class="string">&#x27;DEATH_EVENT&#x27;</span>]</span><br><span class="line">pca = PCA(n_components=<span class="number">2</span>)</span><br><span class="line">pca.fit(X)</span><br><span class="line">X_pca = pca.transform(X)</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">8</span>,<span class="number">8</span>))</span><br><span class="line">plt.scatter(X_pca[y==<span class="number">0</span>,<span class="number">0</span>],X_pca[y==<span class="number">0</span>,<span class="number">1</span>],label=<span class="string">&quot;Alive&quot;</span>,c=<span class="string">&quot;red&quot;</span>)</span><br><span class="line">plt.scatter(X_pca[y==<span class="number">1</span>,<span class="number">0</span>],X_pca[y==<span class="number">1</span>,<span class="number">1</span>],label=<span class="string">&quot;Death&quot;</span>,c=<span class="string">&quot;black&quot;</span>)</span><br><span class="line">plt.legend([<span class="string">&quot;Alive&quot;</span>,<span class="string">&quot;Death&quot;</span>])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -743,8 +798,6 @@ Heart Not Failed       0.85      0.93      0.89        43
 <p>where  and  are the precision and recall at the nth threshold. A pair  is referred to as an operating point.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot_precision_recall_curve(model,X_test,y_test)</span><br></pre></td></tr></table></figure>
 
-
-
 <p><img src="http://i2.tiimg.com/732634/0f1422e7de2481d4.png" alt="Markdown"></p>
 <h3 id="Summary-of-the-results"><a href="#Summary-of-the-results" class="headerlink" title="Summary of the results"></a>Summary of the results</h3><ul>
 <li>Grid search to find the best hyperparameters in optimization of the model</li>
@@ -759,106 +812,143 @@ Heart Not Failed       0.85      0.93      0.89        43
 </ul>
 <h2 id="Conclusion-and-future-work"><a href="#Conclusion-and-future-work" class="headerlink" title="Conclusion and future work"></a>Conclusion and future work</h2><p>In this project, I compared and devised a RBF SVM machine learning model for the prediction of heart failure. I firstly conducted a preliminary analysis of the whole dataset and utilized the PCA method to visualize the distribution condition of the samples. The initial analysis was not robust and precise, which required me to optimize the model. Then, I conducted feature selection to return the top 4 most correlated feature with the death event. Apart from that, I also compared the difference between normalization method as well as the validation methods. The final determined methods were to use four selected features (‘serum_creatinine’,’age’,’ejection_fraction’, ‘creatinine_phosphokinase’), StandardScalar methods and ten-fold cross validation to conduct the prediction. In addition, I also conduct the explorative data analysis to have a view of the selected feature. Furthermore, the PCA condition after feature selection still could not determine whether the dataset is linearly seperable or not, I, therefore, used the grid serach to return the most suitable hyperparameters. The final results suggested that the SVM with RBF kernel in gamma equals 0.1 and penalty C equals 1 could achieve the best performance. After that, the model performance was evaluated from confusion matrix, accuracy, precision, recall, f1-score. Moreover, the ROC plot and PR-curve plot with AUC and AP accordingly were indicated. The final accuracy could achieve 0.83, which is satisfactory.</p>
 <p>In the future, since this project only used SVM related algorithms, I would like to incorporate more complicate algorithms, for instance, XGboost. Furthermore, the model’s interpretability are not great enough, and that would be my focus in the future.</p>
-<h2 id="Bibliography"><a href="#Bibliography" class="headerlink" title="Bibliography"></a>Bibliography</h2><p>Heart Fail:Analysis and Quick-prediction | Kaggle. (n.d.). Retrieved January 8, 2021, from <a target="_blank" rel="noopener" href="https://www.kaggle.com/nayansakhiya/heart-fail-analysis-and-quick-prediction">https://www.kaggle.com/nayansakhiya/heart-fail-analysis-and-quick-prediction</a></p>
-<p>Heart Failure - Model Prediction Comparisons (95%) | Kaggle. (n.d.). Retrieved January 8, 2021, from <a target="_blank" rel="noopener" href="https://www.kaggle.com/rude009/heart-failure-model-prediction-comparisons-95">https://www.kaggle.com/rude009/heart-failure-model-prediction-comparisons-95</a></p>
-<p>Heart Failure Prediction (AUC: 0.98) | Kaggle. (n.d.). Retrieved January 8, 2021, from <a target="_blank" rel="noopener" href="https://www.kaggle.com/ksvmuralidhar/heart-failure-prediction-auc-0-98">https://www.kaggle.com/ksvmuralidhar/heart-failure-prediction-auc-0-98</a></p>
+<h2 id="Bibliography"><a href="#Bibliography" class="headerlink" title="Bibliography"></a>Bibliography</h2><p>Heart Fail:Analysis and Quick-prediction | Kaggle. (n.d.). Retrieved January 8, 2021, from <a class="link"   target="_blank" rel="noopener" href="https://www.kaggle.com/nayansakhiya/heart-fail-analysis-and-quick-prediction" >https://www.kaggle.com/nayansakhiya/heart-fail-analysis-and-quick-prediction<i class="fas fa-external-link-alt"></i></a></p>
+<p>Heart Failure - Model Prediction Comparisons (95%) | Kaggle. (n.d.). Retrieved January 8, 2021, from <a class="link"   target="_blank" rel="noopener" href="https://www.kaggle.com/rude009/heart-failure-model-prediction-comparisons-95" >https://www.kaggle.com/rude009/heart-failure-model-prediction-comparisons-95<i class="fas fa-external-link-alt"></i></a></p>
+<p>Heart Failure Prediction (AUC: 0.98) | Kaggle. (n.d.). Retrieved January 8, 2021, from <a class="link"   target="_blank" rel="noopener" href="https://www.kaggle.com/ksvmuralidhar/heart-failure-prediction-auc-0-98" >https://www.kaggle.com/ksvmuralidhar/heart-failure-prediction-auc-0-98<i class="fas fa-external-link-alt"></i></a></p>
 <p>Pedregosa et al., Scikit-learn: Machine Learning in Python, JMLR 12, pp. 2825-2830, 2011.</p>
-<h2 id="Other-resources-to-download-the-code"><a href="#Other-resources-to-download-the-code" class="headerlink" title="Other resources to download the code"></a>Other resources to download the code</h2><p>Kaggle:<br><a target="_blank" rel="noopener" href="https://www.kaggle.com/yuxuanwu17/eda-of-heart-failure-and-optimization-of-svm">https://www.kaggle.com/yuxuanwu17/eda-of-heart-failure-and-optimization-of-svm</a></p>
-<p>Github:<br><a target="_blank" rel="noopener" href="https://github.com/yuxuanwu17/kaggle/blob/main/Final_report.ipynb">https://github.com/yuxuanwu17/kaggle/blob/main/Final_report.ipynb</a></p>
+<h2 id="Other-resources-to-download-the-code"><a href="#Other-resources-to-download-the-code" class="headerlink" title="Other resources to download the code"></a>Other resources to download the code</h2><p>Kaggle:<br><a class="link"   target="_blank" rel="noopener" href="https://www.kaggle.com/yuxuanwu17/eda-of-heart-failure-and-optimization-of-svm" >https://www.kaggle.com/yuxuanwu17/eda-of-heart-failure-and-optimization-of-svm<i class="fas fa-external-link-alt"></i></a></p>
+<p>Github:<br><a class="link"   target="_blank" rel="noopener" href="https://github.com/yuxuanwu17/kaggle/blob/main/Final_report.ipynb" >https://github.com/yuxuanwu17/kaggle/blob/main/Final_report.ipynb<i class="fas fa-external-link-alt"></i></a></p>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/01/24/YuxuanWu-1716309-INT305-Report/" data-id="ckkb5zg8i00002uj848qy14kw" data-title="YuxuanWu_1716309_INT305_Report" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-    
-  
-</article>
+        </div>
 
-
-</section>
         
-          <aside id="sidebar">
-  
-    
 
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
         
-          <li>
-            <a href="/2021/01/24/YuxuanWu-1716309-INT305-Report/">YuxuanWu_1716309_INT305_Report</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
 
-  
-</aside>
         
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2021 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
-  </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span> -
+            
+            2021 <i class="fas fa-heart icon-animate"></i> <a href="/">Keep team</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a> | Theme <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.3.1</a>
+        </div>
+    </div>
 </footer>
 
+        </div>
     </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
     
 
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
 
-<script src="/js/jquery-3.4.1.min.js"></script>
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
 
 
 
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
 
 
 
 
-<script src="/js/script.js"></script>
 
 
 
 
+<div class="post-scripts">
+    
+</div>
 
-  </div>
+
+
 </body>
 </html>
