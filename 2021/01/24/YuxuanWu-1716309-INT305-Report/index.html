@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="keywords" content="Hexo Theme Keep">
     <meta name="description" content="Hexo Theme Keep">
-    <meta name="author" content="Keep team">
+    <meta name="author" content="Yuxuan Wu">
     
     <title>
         
             Heart failure detection by SVM-based machine learning model |
         
-        Keep Theme
+        Yuxuan Wu
     </title>
     <link rel="shortcut icon" href="/images/logo.svg">
     
@@ -23,7 +23,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
-    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.3.1"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.3.1"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days age","week":"%s weeks age","month":"%s months age","year":"%s years age"};
   </script>
 <!-- hexo injector head_end start -->
@@ -35,6 +35,8 @@
 
 <body>
 <div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
     
 
     
@@ -53,7 +55,7 @@
     <div class="header-content">
         <div class="left">
             <a class="logo-title" href="/">
-                Keep Theme
+                Yuxuan Wu
             </a>
         </div>
 
@@ -77,10 +79,48 @@
                             </a>
                         </li>
                     
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
                     
                 </ul>
             </div>
             <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
                 
                 <div class="icon-item menu-bar">
                     <div class="menu-bar-middle"></div>
@@ -100,6 +140,26 @@
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
                 </li>
             
         </ul>
@@ -131,7 +191,7 @@
                 </div>
                 <div class="info">
                     <div class="author">
-                        <span class="name">Keep team</span>
+                        <span class="name">Yuxuan Wu</span>
                         <span class="level">Lv1</span>
                     </div>
                     <div class="meta-info">
@@ -822,6 +882,23 @@ Heart Not Failed       0.85      0.93      0.89        43
         </div>
 
         
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：Heart failure detection by SVM-based machine learning model</li>
+        <li>Post author：Yuxuan Wu</li>
+        <li>Create time：2021-01-24 21:11:26</li>
+        <li>
+            Post link：yuxuanwu17.github.io2021/01/24/YuxuanWu-1716309-INT305-Report/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
 
         
 
@@ -843,7 +920,7 @@ Heart Not Failed       0.85      0.93      0.89        43
             
               <span>2020</span> -
             
-            2021 <i class="fas fa-heart icon-animate"></i> <a href="/">Keep team</a>
+            2021 <i class="fas fa-heart icon-animate"></i> <a href="/">Yuxuan Wu</a>
         </div>
         
         <div class="theme-info info-item">
@@ -860,6 +937,10 @@ Heart Not Failed       0.85      0.93      0.89        43
             <div class="post-tools-container">
     <ul class="tools-list">
         <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
         
 
         <!-- go comment -->
@@ -893,10 +974,6 @@ Heart Not Failed       0.85      0.93      0.89        43
         
 
         
-            <li class="tools-item tool-scroll-to-top flex-center">
-                <i class="fas fa-arrow-up"></i>
-            </li>
-        
 
         <li class="tools-item tool-scroll-to-bottom flex-center">
             <i class="fas fa-arrow-down"></i>
@@ -908,17 +985,59 @@ Heart Not Failed       0.85      0.93      0.89        43
             <i class="fas fa-cog fa-spin"></i>
         </li>
         
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
     </ul>
 </div>
 
     </div>
 
     
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Name-Yuxuan-Wu"><span class="nav-number">1.</span> <span class="nav-text">Name: Yuxuan Wu</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-download"><span class="nav-number">1.1.</span> <span class="nav-text">Data download</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Libraries-used-in-this-project"><span class="nav-number">1.2.</span> <span class="nav-text">Libraries used in this project</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.3.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Background-data"><span class="nav-number">1.3.1.</span> <span class="nav-text">Background data</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Project-description-overview"><span class="nav-number">1.3.2.</span> <span class="nav-text">Project description (overview)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Related-work"><span class="nav-number">1.4.</span> <span class="nav-text">Related work</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Explorative-data-analysis-EDA-approach"><span class="nav-number">1.4.1.</span> <span class="nav-text">Explorative data analysis (EDA) approach</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Predictive-data-analysis-PDA-approach"><span class="nav-number">1.4.2.</span> <span class="nav-text">Predictive data analysis (PDA) approach</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-formulation"><span class="nav-number">1.5.</span> <span class="nav-text">Problem formulation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Return-the-head-of-dataset-a-overview-of-inside-components"><span class="nav-number">1.5.1.</span> <span class="nav-text">Return the head of dataset (a overview of inside components)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Print-the-size-of-the-dataset"><span class="nav-number">1.5.2.</span> <span class="nav-text">Print the size of the dataset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Check-the-ratio-of-the-NaNs-for-each-column"><span class="nav-number">1.5.3.</span> <span class="nav-text">Check the ratio of the NaNs for each column</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dataset-description"><span class="nav-number">1.5.4.</span> <span class="nav-text">Dataset description</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Citation-or-Reference"><span class="nav-number">1.5.5.</span> <span class="nav-text">Citation or Reference</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Principle-components-analysis"><span class="nav-number">1.5.6.</span> <span class="nav-text">Principle components analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Correlation-analysis"><span class="nav-number">1.5.7.</span> <span class="nav-text">Correlation analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-partition"><span class="nav-number">1.5.8.</span> <span class="nav-text">Data partition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Feature-selection-feature-engineering"><span class="nav-number">1.5.9.</span> <span class="nav-text">Feature selection (feature engineering)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Visualized-the-learning-curve-after-feature-selection"><span class="nav-number">1.5.10.</span> <span class="nav-text">Visualized the learning curve after feature selection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Explorative-data-analysis-of-the-four-selected-features"><span class="nav-number">1.5.11.</span> <span class="nav-text">Explorative data analysis of the four selected features:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Specify-the-figure-size"><span class="nav-number">1.5.11.1.</span> <span class="nav-text">Specify the figure size</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Methods"><span class="nav-number">1.6.</span> <span class="nav-text">Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Python-library"><span class="nav-number">1.6.1.</span> <span class="nav-text">Python library</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Description-how-you-learned-the-predictor"><span class="nav-number">2.</span> <span class="nav-text">Description: how you learned the predictor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PCA-to-visualize-the-sample-distribution"><span class="nav-number">2.0.1.</span> <span class="nav-text">PCA to visualize the sample distribution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Machine-learning-algorithms-with-description"><span class="nav-number">2.0.2.</span> <span class="nav-text">Machine learning algorithms with description</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SVM-with-linear-kernel"><span class="nav-number">2.0.2.1.</span> <span class="nav-text">SVM with linear kernel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SVM-with-RBF-kernel"><span class="nav-number">2.0.2.2.</span> <span class="nav-text">SVM with RBF kernel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Evaluation-method"><span class="nav-number">2.0.2.3.</span> <span class="nav-text">Evaluation method</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiments-and-results"><span class="nav-number">2.1.</span> <span class="nav-text">Experiments and results</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Compare-the-efficacy-of-different-preprocessing-methods"><span class="nav-number">2.1.1.</span> <span class="nav-text">Compare the efficacy of different preprocessing methods</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Compare-the-model-performance-by-ten-fold-cross-validation-and-leave-one-out-method-in-model-evaluation"><span class="nav-number">2.1.2.</span> <span class="nav-text">Compare the model performance by ten-fold cross validation and leave-one-out method in model evaluation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Ten-fold-cross-validation-of-SVM"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">Ten-fold cross validation of SVM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Leave-on-out-method-of-SVM"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">Leave-on-out method of SVM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Comparison-of-the-two-methods"><span class="nav-number">2.1.2.3.</span> <span class="nav-text">Comparison of the two methods</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hyperparameters-tuning"><span class="nav-number">2.1.3.</span> <span class="nav-text">Hyperparameters tuning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Training-and-validation-loss"><span class="nav-number">2.1.4.</span> <span class="nav-text">Training and validation loss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Plot-the-confusion-matrix-plot"><span class="nav-number">2.1.5.</span> <span class="nav-text">Plot the confusion matrix plot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Evaluate-the-performance-of-the-final-selected-model-performance-with-respect-to-the-chosen-performance-matrix"><span class="nav-number">2.1.6.</span> <span class="nav-text">Evaluate the performance of the final selected model performance with respect to the chosen performance matrix</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Accuracy"><span class="nav-number">2.1.7.</span> <span class="nav-text">Accuracy:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Total"><span class="nav-number">2.1.8.</span> <span class="nav-text">Total:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Precision"><span class="nav-number">2.1.9.</span> <span class="nav-text">Precision:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Recall"><span class="nav-number">2.1.10.</span> <span class="nav-text">Recall:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ROC-curve"><span class="nav-number">2.1.11.</span> <span class="nav-text">ROC curve</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PR-curve"><span class="nav-number">2.1.12.</span> <span class="nav-text">PR-curve</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Summary-of-the-results"><span class="nav-number">2.1.13.</span> <span class="nav-text">Summary of the results</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-and-future-work"><span class="nav-number">2.2.</span> <span class="nav-text">Conclusion and future work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bibliography"><span class="nav-number">2.3.</span> <span class="nav-text">Bibliography</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Other-resources-to-download-the-code"><span class="nav-number">2.4.</span> <span class="nav-text">Other resources to download the code</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
 
     <div class="image-viewer-container">
     <img src="">
 </div>
 
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
 
     
 
@@ -939,12 +1058,28 @@ Heart Not Failed       0.85      0.93      0.89        43
 
 
 
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
 
 
 
 
 
 <div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
     
 </div>
 
