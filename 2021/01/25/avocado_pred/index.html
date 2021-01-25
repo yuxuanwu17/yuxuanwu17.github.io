@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Yuxuan Wu">
+    
+    <title>
+        
+            Explorative data anlysis of avocado price from 2015-2020 |
+        
+        Yuxuan Wu
+    </title>
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.3.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days age","week":"%s weeks age","month":"%s months age","year":"%s years age"};
+  </script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Yuxuan Wu
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content normal-code-theme">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Explorative data anlysis of avocado price from 2015-2020</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Yuxuan Wu</span>
+                        <span class="level">Lv1</span>
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i> 2021-01-25 14:21:26
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/tags/EDA-kaggle-R/">EDA, kaggle, R</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i> <span>4.4k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i> <span>27 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>Avocado, bright green fruit with a large pit and dark leathery skin, has become a fashion among millennials in America. Avocados are featured in their unique flavor, rich texture, and the high percentage of healthy fat, which is an ideal food for the healthy diet. However, the average price for avocados is not cheap, which made those millennials unable to achieve their “Avocado Freedom” dream. In addition, as an applicant in American master degree and a fan of avocados, it is of significant interest for me to conduct the explorative data analysis of avocados, hoping to figure out some hidden patterns, like seasonal patterns or cyclical patterns. Furthermore, related factors were also evaluated to suggest the influence on the avocados’ price, which could help these millennials to find the cheaper avocados in a scientific way. </p>
+<h3 id="Import-the-libraries"><a href="#Import-the-libraries" class="headerlink" title="Import the libraries"></a>Import the libraries</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">library(tidyr)</span><br><span class="line">library(skimr)</span><br><span class="line">library(GGally)</span><br><span class="line">library(viridis)</span><br><span class="line">library(caret)</span><br><span class="line">library(e1071)</span><br><span class="line">library(rpart)</span><br><span class="line">library(xgboost)</span><br><span class="line">library(forecast)</span><br><span class="line">library(corrplot)</span><br><span class="line">library(corrgram)</span><br><span class="line">library(ggplot2)</span><br><span class="line">library(ggthemes)</span><br><span class="line">library(psych)</span><br><span class="line">library(scales)</span><br><span class="line">library(treemap)</span><br><span class="line">library(repr)</span><br><span class="line">library(cowplot)</span><br><span class="line">library(magrittr)</span><br><span class="line">library(ggpubr)</span><br><span class="line">library(RColorBrewer)</span><br><span class="line">library(plotrix)</span><br><span class="line">library(ggrepel)</span><br><span class="line">library(tidyverse)</span><br><span class="line">library(gridExtra)</span><br><span class="line">library(lubridate)</span><br><span class="line">library(tibbletime)</span><br><span class="line">library(reshape2)</span><br><span class="line">library(prophet)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="Load-the-data-and-return-the-head-of-data"><a href="#Load-the-data-and-return-the-head-of-data" class="headerlink" title="Load the data and return the head of data"></a>Load the data and return the head of data</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df &lt;- read.csv(&quot;&#x2F;Users&#x2F;yuxuan&#x2F;Desktop&#x2F;INT303-Avocado-prediction&#x2F;avocado-updated-2020.csv&quot;)</span><br><span class="line">head(df)</span><br><span class="line">colnames(df)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">date</th>
+<th align="left">average_price</th>
+<th align="left">total_volume</th>
+<th align="left">X4046</th>
+<th align="left">X4225</th>
+<th align="left">X4770</th>
+<th align="left">total_bags</th>
+<th align="left">small_bags</th>
+<th align="left">large_bags</th>
+<th align="left">xlarge_bags</th>
+<th align="left">type</th>
+<th align="left">year</th>
+<th align="left">geography</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"></td>
+<td align="left"><fct></td>
+<td align="left"><dbl></td>
+<td align="left"><dbl></td>
+<td align="left"><dbl></td>
+<td align="left"><dbl></td>
+<td align="left"><dbl></td>
+<td align="left"><dbl></td>
+<td align="left"><dbl></td>
+<td align="left"><dbl></td>
+<td align="left"><dbl></td>
+<td align="left"><fct></td>
+<td align="left"><int></td>
+<td align="left"><fct></td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">2015-01-04</td>
+<td align="left">1.22</td>
+<td align="left">40873.28</td>
+<td align="left">2819.50</td>
+<td align="left">28287.42</td>
+<td align="left">49.90</td>
+<td align="left">9716.46</td>
+<td align="left">9186.93</td>
+<td align="left">529.53</td>
+<td align="left">0</td>
+<td align="left">conventional</td>
+<td align="left">2015</td>
+<td align="left">Albany</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">2015-01-04</td>
+<td align="left">1.79</td>
+<td align="left">1373.95</td>
+<td align="left">57.42</td>
+<td align="left">153.88</td>
+<td align="left">0.00</td>
+<td align="left">1162.65</td>
+<td align="left">1162.65</td>
+<td align="left">0.00</td>
+<td align="left">0</td>
+<td align="left">organic</td>
+<td align="left">2015</td>
+<td align="left">Albany</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">2015-01-04</td>
+<td align="left">1.00</td>
+<td align="left">435021.49</td>
+<td align="left">364302.39</td>
+<td align="left">23821.16</td>
+<td align="left">82.15</td>
+<td align="left">46815.79</td>
+<td align="left">16707.15</td>
+<td align="left">30108.64</td>
+<td align="left">0</td>
+<td align="left">conventional</td>
+<td align="left">2015</td>
+<td align="left">Atlanta</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">2015-01-04</td>
+<td align="left">1.76</td>
+<td align="left">3846.69</td>
+<td align="left">1500.15</td>
+<td align="left">938.35</td>
+<td align="left">0.00</td>
+<td align="left">1408.19</td>
+<td align="left">1071.35</td>
+<td align="left">336.84</td>
+<td align="left">0</td>
+<td align="left">organic</td>
+<td align="left">2015</td>
+<td align="left">Atlanta</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left">2015-01-04</td>
+<td align="left">1.08</td>
+<td align="left">788025.06</td>
+<td align="left">53987.31</td>
+<td align="left">552906.04</td>
+<td align="left">39995.03</td>
+<td align="left">141136.68</td>
+<td align="left">137146.07</td>
+<td align="left">3990.61</td>
+<td align="left">0</td>
+<td align="left">conventional</td>
+<td align="left">2015</td>
+<td align="left">Baltimore/Washington</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left">2015-01-04</td>
+<td align="left">1.29</td>
+<td align="left">19137.28</td>
+<td align="left">8040.64</td>
+<td align="left">6557.47</td>
+<td align="left">657.48</td>
+<td align="left">3881.69</td>
+<td align="left">3881.69</td>
+<td align="left">0.00</td>
+<td align="left">0</td>
+<td align="left">organic</td>
+<td align="left">2015</td>
+<td align="left">Baltimore/Washington</td>
+</tr>
+</tbody></table>
+<h3 id="Check-whether-the-dataset-contains-the-missing-value"><a href="#Check-whether-the-dataset-contains-the-missing-value" class="headerlink" title="Check whether the dataset contains the missing value"></a>Check whether the dataset contains the missing value</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sum(is.na(df))</span><br></pre></td></tr></table></figure>
+<p>The overall dataset do not contain any missing value</p>
+<h3 id="Explore-the-data-and-some-clarification"><a href="#Explore-the-data-and-some-clarification" class="headerlink" title="Explore the data and some clarification"></a>Explore the data and some clarification</h3><h4 id="Explain-the-features"><a href="#Explain-the-features" class="headerlink" title="Explain the features"></a>Explain the features</h4><ul>
+<li>date - The date of the observation</li>
+<li>average_price - The average price of a single</li>
+<li>total_volume - Total number of avocados sold</li>
+<li>year - The year</li>
+<li>type - conventional or organic</li>
+<li>geography - The city or region of the observation</li>
+</ul>
+<h4 id="X4046-X4225-X4770-stands-for-the-PLU-code"><a href="#X4046-X4225-X4770-stands-for-the-PLU-code" class="headerlink" title="X4046, X4225, X4770 stands for the PLU code"></a>X4046, X4225, X4770 stands for the PLU code</h4><ul>
+<li>Small/Medium Hass Avocado (~3-5oz avocado) | #4046 </li>
+<li>Large Hass Avocado (~8-10oz avocado) | #4225 </li>
+<li>Extra Large Hass Avocado (~10-15oz avocado) | #4770 </li>
+</ul>
+<h3 id="Exploratory-Data-Analysis"><a href="#Exploratory-Data-Analysis" class="headerlink" title="Exploratory Data Analysis"></a>Exploratory Data Analysis</h3><h4 id="Density-plot-of-the-difference-between-two-avocados"><a href="#Density-plot-of-the-difference-between-two-avocados" class="headerlink" title="Density plot of the difference between two avocados."></a>Density plot of the difference between two avocados.</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">levels(df$type)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">library(ggplot2)</span><br><span class="line">options(repr.plot.width &#x3D; 8, repr.plot.height &#x3D; 4)</span><br><span class="line">density_plot &lt;- ggplot(df, aes(x&#x3D;average_price, fill&#x3D;type))+</span><br><span class="line">  geom_density()+</span><br><span class="line">  facet_wrap(~type)+</span><br><span class="line">  theme_minimal()+</span><br><span class="line">  theme(plot.title &#x3D; element_text(hjust &#x3D; 0.5),legend.position &#x3D; &quot;bottom&quot;)+</span><br><span class="line">  labs(title &#x3D; &quot;Avocado Price by type&quot;)+</span><br><span class="line">  scale_fill_brewer(palette &#x3D; &quot;Set2&quot;)</span><br><span class="line">density_plot</span><br></pre></td></tr></table></figure>
+<p><img src="https://www.kaggleusercontent.com/kf/49257785/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..tZfBZbcjjkqxj4RmQEJoyw.A2C4X-_8qnKSkIVucnomHICENKUmjTPXUgT1XqFjrKp8Vwfpyt-nJXhYhke8yzjlDiL_FT1jvmw9GnBDuF_MeWzQUxn59txsXKEQ5TNxy2sZy6GYoHD4yeJb96CHu7tEvhTmc3Pf1nseFJUmMjAKCktdygT-uHDSuVQKAPNnGUpFNmn5fx_6OsujxRZO9TdXdWiqH1GGat_EqgxwZW-_o856VcxtNXe5WenELwGdFrP_fHsmRkvvcjtEmEXzl2_blPw6GMAdMmDD7WsNhKVd4zJoOVKvPx1awtn9623tYAqFfDJ3qzKqLfFAhNRAMsqQ-zfIos2ndjfK3YTRnRTKn_TX9TkPBnbni_OR6teuY24PW_hMZpFYW332SdtN2sCHyHke6Oaqgs6uq8l6jX14yyIMEhgiWkl5Usn36w1aLLtP4YQZIjO1m7B9FsVSOFeULVuVmThf6LyKuvsoG3N568gEqTKblQvj-_R0hUqGhc6W-3DZyE0hBoqgO__LBxbYYZ51DdMf-2bv2Hj99gNwuS-EVb1GFv__UrplkB63GGn-ftucHSQBkxSDoKlB0F99ZiGNWL4cmii009OqgG_mJQI9W-iqgB6sW3k3T3RdVL3QpdG-D3XEhYgfQTcMV6P23-9iQKNgOcTD1CWwWPVjsJfgu_NZHVIoUScEs9mdivE.1eUtwBW-D1O5QgrEgVmjhw/__results___files/__results___14_1.png" alt="img"></p>
+<ol>
+<li><h3 id="Create-a-matrix-to-demonstrate-the-volume-of-conventional-and-organic-avocados"><a href="#Create-a-matrix-to-demonstrate-the-volume-of-conventional-and-organic-avocados" class="headerlink" title="Create a matrix to demonstrate the volume of conventional and organic avocados"></a>Create a matrix to demonstrate the volume of conventional and organic avocados</h3></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">library(dplyr)</span><br><span class="line">vol_type &lt;- df %&gt;% group_by(type) %&gt;% summarise(average_volume &#x3D; round(mean(total_volume),3),average_price &#x3D; round(mean(average_price),3)) %&gt;% mutate(volume_percent&#x3D; round(prop.table(average_volume)*100,3))</span><br><span class="line">vol_type</span><br><span class="line"></span><br><span class="line">#plu_conv &lt;- df %&gt;% select(type,total_volume,X4046,X4225,X4770) %&gt;% group_by(type) %&gt;% summarise(average_volume &#x3D; round(mean(total_volume),3),x4046 &#x3D; sum(X4046),x4225 &#x3D; sum(X4225),x4770 &#x3D; sum(X4770)) %&gt;% mutate(volume_percent&#x3D; round(prop.table(average_volume)*100,3))</span><br><span class="line">#plu_conv</span><br><span class="line"></span><br><span class="line">#cor(df$average_price,df$total_volume)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="center">type</th>
+<th align="left">average_volume</th>
+<th align="left">average_price</th>
+<th align="left">volume_percent</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">organic</td>
+<td align="left">60127.48</td>
+<td align="left">1.624</td>
+<td align="left">3.201%</td>
+</tr>
+<tr>
+<td align="center">conventional</td>
+<td align="left">1818206.02</td>
+<td align="left">1.158</td>
+<td align="left">96.799%</td>
+</tr>
+</tbody></table>
+<p><strong>As can be seen from the density plot and the table in avocados.</strong> </p>
+<ul>
+<li>there are two types of avocado: organic and conventional  </li>
+<li>organic avocado share a small percent (3.2%) of volume but has a high price (1.62)  </li>
+<li>conventional avocado share a large percent (96.8) of volume but has a relative low price (1.16) </li>
+</ul>
+<h3 id="Compare-the-volume-of-each-avocado"><a href="#Compare-the-volume-of-each-avocado" class="headerlink" title="Compare the volume of each avocado"></a>Compare the volume of each avocado</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x4770 &lt;- df$X4770 %&gt;% sum()</span><br><span class="line">x4046 &lt;- df$X4046 %&gt;% sum()</span><br><span class="line">x4225 &lt;- df$X4225 %&gt;% sum()</span><br><span class="line">total_types &lt;- x4770+x4046+x4225</span><br><span class="line">total_types</span><br><span class="line">df$total_volume %&gt;% sum()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[1] &quot;The sum of volume in x4770, x4046, x4225 is:  18181860558.8&quot;</span><br><span class="line">[1] &quot;The sum of volume in the sum of total_volume:  28197362107.92&quot;</span><br></pre></td></tr></table></figure>
+<p>The reason causing this difference is that there are different kinds of avocados, this dataset only consider the plu code of Hass avocados, it is obvious that it will cause the difference</p>
+<h3 id="Avocado-price-from-2015-2020"><a href="#Avocado-price-from-2015-2020" class="headerlink" title="Avocado price from 2015-2020"></a>Avocado price from 2015-2020</h3><figure class="highlight plain"><figcaption><span>ggplot&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">library(ggplot2)</span><br><span class="line">## Change the Date column from factor to the date format</span><br><span class="line">df$date &lt;- as.Date(df$date, &quot;%Y-%m-%d&quot;)</span><br><span class="line"></span><br><span class="line">## Sort the dates and order the datesets in date</span><br><span class="line">df &lt;- df[order(df$date),]</span><br><span class="line"></span><br><span class="line">## Make the plot</span><br><span class="line">comparision_plot &lt;- df %&gt;% select(date, average_price, type) %&gt;%</span><br><span class="line">  ggplot(aes(x&#x3D;date,y&#x3D;average_price))+</span><br><span class="line">  geom_area(aes(color&#x3D;type,fill&#x3D;type),alpha&#x3D;0.3,position&#x3D;position_dodge(0.8))+</span><br><span class="line">  theme_bw()+</span><br><span class="line">  scale_color_manual(values &#x3D; c(&quot;#ED7921&quot;,&quot;#62BE51&quot;))+</span><br><span class="line">  scale_fill_manual(values &#x3D; c(&quot;#FD833E&quot;,&quot;#B8FC5F&quot;)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">comparision_plot</span><br><span class="line">#plot_grid(density_plot,comparision,ncol &#x3D; 2)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://www.kaggleusercontent.com/kf/49257785/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..tZfBZbcjjkqxj4RmQEJoyw.A2C4X-_8qnKSkIVucnomHICENKUmjTPXUgT1XqFjrKp8Vwfpyt-nJXhYhke8yzjlDiL_FT1jvmw9GnBDuF_MeWzQUxn59txsXKEQ5TNxy2sZy6GYoHD4yeJb96CHu7tEvhTmc3Pf1nseFJUmMjAKCktdygT-uHDSuVQKAPNnGUpFNmn5fx_6OsujxRZO9TdXdWiqH1GGat_EqgxwZW-_o856VcxtNXe5WenELwGdFrP_fHsmRkvvcjtEmEXzl2_blPw6GMAdMmDD7WsNhKVd4zJoOVKvPx1awtn9623tYAqFfDJ3qzKqLfFAhNRAMsqQ-zfIos2ndjfK3YTRnRTKn_TX9TkPBnbni_OR6teuY24PW_hMZpFYW332SdtN2sCHyHke6Oaqgs6uq8l6jX14yyIMEhgiWkl5Usn36w1aLLtP4YQZIjO1m7B9FsVSOFeULVuVmThf6LyKuvsoG3N568gEqTKblQvj-_R0hUqGhc6W-3DZyE0hBoqgO__LBxbYYZ51DdMf-2bv2Hj99gNwuS-EVb1GFv__UrplkB63GGn-ftucHSQBkxSDoKlB0F99ZiGNWL4cmii009OqgG_mJQI9W-iqgB6sW3k3T3RdVL3QpdG-D3XEhYgfQTcMV6P23-9iQKNgOcTD1CWwWPVjsJfgu_NZHVIoUScEs9mdivE.1eUtwBW-D1O5QgrEgVmjhw/__results___files/__results___22_0.png" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ggplot(data&#x3D;df, aes(x&#x3D;date, y&#x3D;average_price,col&#x3D;type))+</span><br><span class="line">  geom_line()+</span><br><span class="line">  facet_wrap(~ type)+</span><br><span class="line">  theme_bw()+</span><br><span class="line">  theme(legend.position &#x3D; &quot;position&quot;)</span><br></pre></td></tr></table></figure>
+<p><img src="https://www.kaggleusercontent.com/kf/49257785/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..tZfBZbcjjkqxj4RmQEJoyw.A2C4X-_8qnKSkIVucnomHICENKUmjTPXUgT1XqFjrKp8Vwfpyt-nJXhYhke8yzjlDiL_FT1jvmw9GnBDuF_MeWzQUxn59txsXKEQ5TNxy2sZy6GYoHD4yeJb96CHu7tEvhTmc3Pf1nseFJUmMjAKCktdygT-uHDSuVQKAPNnGUpFNmn5fx_6OsujxRZO9TdXdWiqH1GGat_EqgxwZW-_o856VcxtNXe5WenELwGdFrP_fHsmRkvvcjtEmEXzl2_blPw6GMAdMmDD7WsNhKVd4zJoOVKvPx1awtn9623tYAqFfDJ3qzKqLfFAhNRAMsqQ-zfIos2ndjfK3YTRnRTKn_TX9TkPBnbni_OR6teuY24PW_hMZpFYW332SdtN2sCHyHke6Oaqgs6uq8l6jX14yyIMEhgiWkl5Usn36w1aLLtP4YQZIjO1m7B9FsVSOFeULVuVmThf6LyKuvsoG3N568gEqTKblQvj-_R0hUqGhc6W-3DZyE0hBoqgO__LBxbYYZ51DdMf-2bv2Hj99gNwuS-EVb1GFv__UrplkB63GGn-ftucHSQBkxSDoKlB0F99ZiGNWL4cmii009OqgG_mJQI9W-iqgB6sW3k3T3RdVL3QpdG-D3XEhYgfQTcMV6P23-9iQKNgOcTD1CWwWPVjsJfgu_NZHVIoUScEs9mdivE.1eUtwBW-D1O5QgrEgVmjhw/__results___files/__results___23_0.png" alt="img"></p>
+<ul>
+<li>The price of organic avocados are always higher than normal</li>
+<li>The price of both avocados follow some seasonal patterns, which obeyed the commob view</li>
+<li>Whether the relationship between the volume and price existed need to be explored in the following part</li>
+</ul>
+<h3 id="Relationship-between-Prices-and-Total-on-either-conventional-or-organic-avocados"><a href="#Relationship-between-Prices-and-Total-on-either-conventional-or-organic-avocados" class="headerlink" title="Relationship between Prices and Total on either conventional or organic avocados"></a>Relationship between Prices and Total on either conventional or organic avocados</h3><h4 id="Filter-the-data-into-two-categories-conventional-or-organic"><a href="#Filter-the-data-into-two-categories-conventional-or-organic" class="headerlink" title="Filter the data into two categories, conventional or organic"></a>Filter the data into two categories, conventional or organic</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">organic &lt;- df %&gt;% select(type,average_price,total_volume,date) %&gt;% filter(type&#x3D;&#x3D;&quot;organic&quot;)</span><br><span class="line">#head(organic)</span><br><span class="line">conventional &lt;- df %&gt;% select(type,average_price,total_volume,date) %&gt;% filter(type&#x3D;&#x3D;&quot;conventional&quot;)</span><br><span class="line">#head(conventional)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><figcaption><span>tribble_tabel&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">library(tibbletime)</span><br><span class="line">organic &lt;- as_tbl_time(organic,index &#x3D; date) %&gt;% as_period(&#39;1 month&#39;)</span><br><span class="line">conventional &lt;- as_tbl_time(conventional,index &#x3D; date) %&gt;% as_period(&#39;monthly&#39;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="Monthly-avocados-price-in-either-conventional-or-organic-avocados"><a href="#Monthly-avocados-price-in-either-conventional-or-organic-avocados" class="headerlink" title="Monthly avocados price in either conventional or organic avocados"></a>Monthly avocados price in either conventional or organic avocados</h4><figure class="highlight plain"><figcaption><span>cowplot, fig.width </span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">library(ggplot2)</span><br><span class="line">library(ggthemes)</span><br><span class="line">library(cowplot)</span><br><span class="line"></span><br><span class="line">options(repr.plot.width&#x3D;8, repr.plot.height&#x3D;6)</span><br><span class="line"></span><br><span class="line">## average-price with time series</span><br><span class="line">conventional_monthly &lt;- conventional %&gt;%</span><br><span class="line">    ggplot(aes(x&#x3D;date,y&#x3D;average_price))+</span><br><span class="line">    geom_line(color&#x3D;&quot;#5C374C&quot;)+</span><br><span class="line">    theme_economist()+</span><br><span class="line">    theme(plot.title &#x3D; element_text(hjust &#x3D; 0.5),plot.background &#x3D; element_rect(fill &#x3D; &quot;#D5D8DC&quot;))+</span><br><span class="line">    labs(title &#x3D; &quot;Conventional Avocados&quot;)+</span><br><span class="line">    geom_hline(yintercept &#x3D; max(conventional$average_price),linetype&#x3D;&quot;dashed&quot;,color &#x3D; &quot;red&quot;)+</span><br><span class="line">    geom_hline(yintercept &#x3D; min(conventional$average_price),linetype&#x3D;&quot;dashed&quot;,color &#x3D; &quot;blue&quot;)</span><br><span class="line"></span><br><span class="line">organic_monthly &lt;- organic %&gt;%</span><br><span class="line">    ggplot(aes(x&#x3D;date,y&#x3D;average_price))+</span><br><span class="line">    geom_line(color&#x3D;&quot;#58D68D&quot;)+</span><br><span class="line">    theme_economist()+</span><br><span class="line">    theme(plot.title &#x3D; element_text(hjust &#x3D; 0.5),plot.background &#x3D; element_rect(fill &#x3D; &quot;#D5D8DC&quot;))+</span><br><span class="line">    labs(title &#x3D; &quot;Organic Avocados&quot;)+</span><br><span class="line">    geom_hline(yintercept &#x3D; max(organic$average_price),linetype&#x3D;&quot;dashed&quot;,color &#x3D; &quot;red&quot;)+</span><br><span class="line">    geom_hline(yintercept &#x3D; min(organic$average_price),linetype&#x3D;&quot;dashed&quot;,color &#x3D; &quot;blue&quot;)</span><br><span class="line"></span><br><span class="line">## create a volume chart</span><br><span class="line">conventional_volume &lt;- conventional %&gt;%</span><br><span class="line">    ggplot(aes(x&#x3D;date,y&#x3D;total_volume))+</span><br><span class="line">    geom_bar(stat &#x3D; &#39;identity&#39;,fill&#x3D;&quot;#7FB3D5&quot;,color&#x3D;&quot;black&quot;)+</span><br><span class="line">    theme_economist()+</span><br><span class="line">    theme(plot.title &#x3D; element_text(hjust &#x3D; 0.5),plot.background &#x3D; element_rect(fill &#x3D; &quot;#D5D8DC&quot;))+</span><br><span class="line">    geom_smooth(method &#x3D; &quot;loess&quot;,color&#x3D;&quot;red&quot;)</span><br><span class="line"></span><br><span class="line">organic_volume &lt;- organic %&gt;%</span><br><span class="line">    ggplot(aes(x&#x3D;date,y&#x3D;total_volume))+</span><br><span class="line">    geom_bar(stat &#x3D; &#39;identity&#39;,fill&#x3D;&#39;#58D68D&#39;,color&#x3D;&quot;black&quot;)+</span><br><span class="line">    theme_economist()+</span><br><span class="line">    theme(plot.title &#x3D; element_text(hjust &#x3D; 0.5),plot.background &#x3D; element_rect(fill &#x3D; &quot;#D5D8DC&quot;))+</span><br><span class="line">    geom_smooth(method &#x3D; &quot;loess&quot;,color &#x3D;&quot;red&quot;)</span><br><span class="line"></span><br><span class="line">plot_grid(conventional_monthly,organic_monthly,conventional_volume,organic_volume,nrow &#x3D; 2,ncol &#x3D; 2,labels &#x3D; c(&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;))</span><br><span class="line"></span><br><span class="line">#plot_grid(conventional_monthly,conventional_volume,nrow &#x3D; 2)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://www.kaggleusercontent.com/kf/49257785/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..tZfBZbcjjkqxj4RmQEJoyw.A2C4X-_8qnKSkIVucnomHICENKUmjTPXUgT1XqFjrKp8Vwfpyt-nJXhYhke8yzjlDiL_FT1jvmw9GnBDuF_MeWzQUxn59txsXKEQ5TNxy2sZy6GYoHD4yeJb96CHu7tEvhTmc3Pf1nseFJUmMjAKCktdygT-uHDSuVQKAPNnGUpFNmn5fx_6OsujxRZO9TdXdWiqH1GGat_EqgxwZW-_o856VcxtNXe5WenELwGdFrP_fHsmRkvvcjtEmEXzl2_blPw6GMAdMmDD7WsNhKVd4zJoOVKvPx1awtn9623tYAqFfDJ3qzKqLfFAhNRAMsqQ-zfIos2ndjfK3YTRnRTKn_TX9TkPBnbni_OR6teuY24PW_hMZpFYW332SdtN2sCHyHke6Oaqgs6uq8l6jX14yyIMEhgiWkl5Usn36w1aLLtP4YQZIjO1m7B9FsVSOFeULVuVmThf6LyKuvsoG3N568gEqTKblQvj-_R0hUqGhc6W-3DZyE0hBoqgO__LBxbYYZ51DdMf-2bv2Hj99gNwuS-EVb1GFv__UrplkB63GGn-ftucHSQBkxSDoKlB0F99ZiGNWL4cmii009OqgG_mJQI9W-iqgB6sW3k3T3RdVL3QpdG-D3XEhYgfQTcMV6P23-9iQKNgOcTD1CWwWPVjsJfgu_NZHVIoUScEs9mdivE.1eUtwBW-D1O5QgrEgVmjhw/__results___files/__results___29_1.png"></p>
+<ul>
+<li>In order to find the seasonal patterns, I used the average price and volume in each month to conduct data analysis</li>
+<li>Figure A,B stands for the average price in each month (monthly)</li>
+<li>Blue dashed line stands for the minimum value while the red dashed value stands for the max value</li>
+<li>The most expensive conventional avocados in one month could 1.8 $, the cheapest month of conventional avocados can be 0.82 $</li>
+<li>The most expensive organic avocados in one month could 2.1 $, the cheapest month of conventional avocados can be 1.21 $</li>
+<li>Figure C,D stands for the volume in each month, the red line stands for the trend</li>
+<li>The love of American people are consistent, the sold volume continues to grow (conventional avocado)</li>
+<li>Regarding with the organic avocados, in 2019-2020, possibly owing to the decline of economic situation and the covid 19 pandemic after 2020</li>
+<li>The volume patterns could follow some seasonal patterns and need further analysis</li>
+</ul>
+<h3 id="Patterns-among-the-years-in-each-month-Autoplot-library"><a href="#Patterns-among-the-years-in-each-month-Autoplot-library" class="headerlink" title="Patterns among the years in each month (Autoplot library)"></a>Patterns among the years in each month (Autoplot library)</h3><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Process the data into year and month format</span></span><br><span class="line">library(forecast)</span><br><span class="line">seasonal_df &lt;- read.csv(<span class="string">&quot;/Users/yuxuan/Desktop/INT303-Avocado-prediction/avocado-updated-2020.csv&quot;</span>)</span><br><span class="line">seasonal_df$month_year &lt;- format(as.Date(seasonal_df$date),<span class="string">&quot;%Y-%m&quot;</span>)</span><br><span class="line">seasonal_df$month &lt;- format(as.Date(seasonal_df$date),<span class="string">&quot;%m&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## Change the month from a Date format into a numerical foramt, then convert to the three letter format</span></span><br><span class="line"></span><br><span class="line">seasonal_df$monthabb &lt;- sapply(seasonal_df$month, <span class="keyword">function</span> (x) <span class="built_in">month.abb</span>[<span class="built_in">as.numeric</span>(x)])</span><br><span class="line">seasonal_df$monthabb &lt;- factor(seasonal_df$monthabb,levels=<span class="built_in">month.abb</span>)</span><br><span class="line">seasonal_df$monthabb &lt;- factor(seasonal_df$monthabb)</span><br></pre></td></tr></table></figure>
+
+<p>​                              </p>
+<h3 id="Seasonal-patterns-analysis"><a href="#Seasonal-patterns-analysis" class="headerlink" title="Seasonal patterns analysis"></a>Seasonal patterns analysis</h3><p>Avocado price (both organic and conventional) distribution plot from 2015 to 2020</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ggplot(seasonal_df,aes(x&#x3D;average_price,fill&#x3D;as.factor(year)))+</span><br><span class="line">geom_density(alpha&#x3D;0.5)+</span><br><span class="line">theme_economist()+</span><br><span class="line">facet_wrap(~year)+</span><br><span class="line">theme(plot.title &#x3D; element_text(hjust &#x3D; 0.5),plot.background &#x3D; element_rect(fill&#x3D;&quot;#D5D8DC&quot;))+</span><br><span class="line">guides(fill&#x3D;FALSE)+</span><br><span class="line">labs(title &#x3D; &quot;Distribution of Prices by year&quot;,x&#x3D;&#39;Average Price&#39;,y&#x3D;&#39;Density&#39;)+</span><br><span class="line">scale_fill_manual(values &#x3D; c(&quot;#DA4511&quot;, &quot;#FFBD00&quot;, &quot;#6A953F&quot;, &quot;#9A6233&quot;, &quot;#D3AE7C&quot;, &quot;#307CA1&quot;))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://www.kaggleusercontent.com/kf/49257785/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..Z0nhYvsbYiSXOwi0a3e_Vg.wiLxMBjmfH5zWgzbsyZmfX2LJ0G-TVaPvleMT_PnWnotXv9dMjLJOtv8HFfJB7VIKvaAiOuXOOnNoTfWMLNEsEmQ1mmHeVxFySzLDhVmEuNmhxbLPABCkDVdAAYu7lR3qLD4xuVLxb3CB1zqFhx00gKpCQ0KuMvuDogyMx8hZRnqRMpmN1BUdn9El9QgP0b39UCV6mFT_PHsMspROzMRXXWyLHa2OZk4LsOrllmxRmB2Z9QPNQumEVqNYhwLRXXaANlyENe5DUxBwdfHmK5317bJ12u_rA7mhEhbeV-0eqtoXoB-qJq2HVUfK1W8iEs6QQbGRR7HmPZ2HQO9EKmlZgJKoqLfa7YVA2yznP33QAvi-BHRStxgPRM36xNkRbGb8tTSf0KpaEqFZ2efZ15GqoD1LWYpCRxpZuuvV7B7Z24dQDZ-QfqKubUyzTDhrvSM3G0TBgWBt5fTNyP63r-FAuGXScA7BGlTIIyRQ23XG0w6Mg8X-ce0e2YbLK92ZgH9XIpuWrwdHEoNTCGhjWqrlJPSqkwLeceQhVxUlmEpVGQjC84iUebEnoPU7sNGzis1_haznEpo_OluFxMsvGGa6rpfmRKYHFo4U59pFOhZdUyAHICe_GdGbI73ue-mbyOKSs34XNlRW8m6ooJwM1Z2UaGKQqW1ZOyByXQKf3_Wobs.rI46PCTrAXYR5Yqoaj5Dlg/__results___files/__results___35_0.png" alt="img"></p>
+<ul>
+<li>The distribution plot of each year from 2015 to 2020</li>
+<li>2017 is the year when avocado price functions like the normal distribution plot</li>
+</ul>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">## Set the figure size</span></span><br><span class="line"></span><br><span class="line">options(repr.plot.width=<span class="number">10</span>,repr.plot.height=<span class="number">8</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## Analyze the price by month</span></span><br><span class="line"></span><br><span class="line">conv_price &lt;- seasonal_df %&gt;% select(type,year,monthabb,average_price) %&gt;% filter(type==<span class="string">&quot;conventional&quot;</span>) %&gt;% group_by(year,monthabb) %&gt;% summarise(avg=mean(average_price))</span><br><span class="line"></span><br><span class="line">org_price &lt;- seasonal_df %&gt;% select(type,year,monthabb,average_price) %&gt;% filter(type==<span class="string">&quot;organic&quot;</span>) %&gt;% group_by(year,monthabb) %&gt;% summarise(avg=mean(average_price))</span><br><span class="line"></span><br><span class="line">conv_price &lt;- ts(conv_price$avg,start = <span class="number">2015</span>,frequency = <span class="number">12</span>)</span><br><span class="line">org_price &lt;- ts(org_price$avg,start = <span class="number">2015</span>,frequency = <span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## Analyze the volume by month</span></span><br><span class="line"></span><br><span class="line">conv_volume &lt;- seasonal_df %&gt;% select(type,year,monthabb,total_volume) %&gt;% filter(type==<span class="string">&quot;conventional&quot;</span>) %&gt;% group_by(year,monthabb) %&gt;% summarise(avg=mean(total_volume))</span><br><span class="line"></span><br><span class="line">org_volume &lt;- seasonal_df %&gt;% select(type,year,monthabb,total_volume) %&gt;% filter(type==<span class="string">&quot;organic&quot;</span>) %&gt;% group_by(year,monthabb) %&gt;% summarise(avg=mean(total_volume))</span><br><span class="line"></span><br><span class="line">conv_volume &lt;- ts(conv_volume$avg,start = <span class="number">2015</span>,frequency = <span class="number">12</span>)</span><br><span class="line">org_volume &lt;- ts(org_volume$avg,start = <span class="number">2015</span>,frequency = <span class="number">12</span>)</span><br><span class="line"></span><br><span class="line">byyearplot_price_conv &lt;- ggseasonplot(conv_price,year.labels = <span class="literal">TRUE</span>,year.labels.left = <span class="literal">TRUE</span>)+</span><br><span class="line">theme_economist()+</span><br><span class="line">theme(plot.title = element_text(hjust = <span class="number">0.5</span>),plot.background = element_rect(fill=<span class="string">&quot;#D5D8DC&quot;</span>))+</span><br><span class="line">labs(title = <span class="string">&quot;Average conventional Avocados price \n by year for each month&quot;</span>, y=<span class="string">&quot;Average Price&quot;</span>)+</span><br><span class="line">scale_fill_manual(values = <span class="built_in">c</span>(<span class="string">&quot;#922B21&quot;</span>, <span class="string">&quot;#EE865D&quot;</span>, <span class="string">&quot;#DDCD5E&quot;</span>, <span class="string">&quot;#59BEC4&quot;</span>, <span class="string">&quot;#048B9F&quot;</span>, <span class="string">&quot;#114676&quot;</span>))</span><br><span class="line"></span><br><span class="line">byyearplot_price_org &lt;- ggseasonplot(org_price,year.labels = <span class="literal">TRUE</span>,year.labels.left = <span class="literal">TRUE</span>)+</span><br><span class="line">theme_economist()+</span><br><span class="line">theme(plot.title = element_text(hjust = <span class="number">0.5</span>),plot.background = element_rect(fill=<span class="string">&quot;#D5D8DC&quot;</span>))+</span><br><span class="line">labs(title = <span class="string">&quot;Average organic Avocados price \n by year for each month&quot;</span>, y=<span class="string">&quot;Average Price&quot;</span>)+</span><br><span class="line">scale_fill_manual(values = <span class="built_in">c</span>(<span class="string">&quot;#922B21&quot;</span>, <span class="string">&quot;#EE865D&quot;</span>, <span class="string">&quot;#DDCD5E&quot;</span>, <span class="string">&quot;#59BEC4&quot;</span>, <span class="string">&quot;#048B9F&quot;</span>, <span class="string">&quot;#114676&quot;</span>))</span><br><span class="line"></span><br><span class="line">byyearplot_volume_conv &lt;- ggseasonplot(conv_volume,year.labels = <span class="literal">TRUE</span>,year.labels.left = <span class="literal">TRUE</span>)+</span><br><span class="line">theme_economist()+</span><br><span class="line">theme(plot.title = element_text(hjust = <span class="number">0.5</span>),plot.background = element_rect(fill=<span class="string">&quot;#D5D8DC&quot;</span>))+</span><br><span class="line">labs(title = <span class="string">&quot;Average conventional Avocados volume \n by year for each month&quot;</span>, y=<span class="string">&quot;Average volume&quot;</span>)+</span><br><span class="line">scale_fill_manual(values = <span class="built_in">c</span>(<span class="string">&quot;#922B21&quot;</span>, <span class="string">&quot;#EE865D&quot;</span>, <span class="string">&quot;#DDCD5E&quot;</span>, <span class="string">&quot;#59BEC4&quot;</span>, <span class="string">&quot;#048B9F&quot;</span>, <span class="string">&quot;#114676&quot;</span>))</span><br><span class="line"></span><br><span class="line">byyearplot_volume_org &lt;- ggseasonplot(org_volume,year.labels = <span class="literal">TRUE</span>,year.labels.left = <span class="literal">TRUE</span>)+</span><br><span class="line">theme_economist()+</span><br><span class="line">theme(plot.title = element_text(hjust = <span class="number">0.5</span>),plot.background = element_rect(fill=<span class="string">&quot;#D5D8DC&quot;</span>))+</span><br><span class="line">labs(title = <span class="string">&quot;Average organic Avocados volume by year \n for each month&quot;</span>, y=<span class="string">&quot;Average volume&quot;</span>)+</span><br><span class="line">scale_fill_manual(values = <span class="built_in">c</span>(<span class="string">&quot;#922B21&quot;</span>, <span class="string">&quot;#EE865D&quot;</span>, <span class="string">&quot;#DDCD5E&quot;</span>, <span class="string">&quot;#59BEC4&quot;</span>, <span class="string">&quot;#048B9F&quot;</span>, <span class="string">&quot;#114676&quot;</span>))</span><br><span class="line"></span><br><span class="line">plot_grid(byyearplot_price_conv,byyearplot_price_org,byyearplot_volume_conv,byyearplot_volume_org,nrow = <span class="number">2</span>,ncol = <span class="number">2</span>,labels = <span class="built_in">c</span>(<span class="string">&quot;A&quot;</span>,<span class="string">&quot;B&quot;</span>,<span class="string">&quot;C&quot;</span>,<span class="string">&quot;D&quot;</span>))</span><br></pre></td></tr></table></figure>
+<p><img src="https://www.kaggleusercontent.com/kf/49257785/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..Z0nhYvsbYiSXOwi0a3e_Vg.wiLxMBjmfH5zWgzbsyZmfX2LJ0G-TVaPvleMT_PnWnotXv9dMjLJOtv8HFfJB7VIKvaAiOuXOOnNoTfWMLNEsEmQ1mmHeVxFySzLDhVmEuNmhxbLPABCkDVdAAYu7lR3qLD4xuVLxb3CB1zqFhx00gKpCQ0KuMvuDogyMx8hZRnqRMpmN1BUdn9El9QgP0b39UCV6mFT_PHsMspROzMRXXWyLHa2OZk4LsOrllmxRmB2Z9QPNQumEVqNYhwLRXXaANlyENe5DUxBwdfHmK5317bJ12u_rA7mhEhbeV-0eqtoXoB-qJq2HVUfK1W8iEs6QQbGRR7HmPZ2HQO9EKmlZgJKoqLfa7YVA2yznP33QAvi-BHRStxgPRM36xNkRbGb8tTSf0KpaEqFZ2efZ15GqoD1LWYpCRxpZuuvV7B7Z24dQDZ-QfqKubUyzTDhrvSM3G0TBgWBt5fTNyP63r-FAuGXScA7BGlTIIyRQ23XG0w6Mg8X-ce0e2YbLK92ZgH9XIpuWrwdHEoNTCGhjWqrlJPSqkwLeceQhVxUlmEpVGQjC84iUebEnoPU7sNGzis1_haznEpo_OluFxMsvGGa6rpfmRKYHFo4U59pFOhZdUyAHICe_GdGbI73ue-mbyOKSs34XNlRW8m6ooJwM1Z2UaGKQqW1ZOyByXQKf3_Wobs.rI46PCTrAXYR5Yqoaj5Dlg/__results___files/__results___37_1.png" alt="img"></p>
+<h3 id="Seasonality-patterns"><a href="#Seasonality-patterns" class="headerlink" title="Seasonality patterns"></a>Seasonality patterns</h3><h4 id="Monthly-analysis"><a href="#Monthly-analysis" class="headerlink" title="Monthly analysis"></a>Monthly analysis</h4><figure class="highlight plain"><figcaption><span>seaonal patterns, fig.align </span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">options(repr.plot.width&#x3D;10,repr.plot.height&#x3D;8)</span><br><span class="line">conv_patterns &lt;- seasonal_df %&gt;% select(monthabb,average_price,type) %&gt;% filter(type&#x3D;&#x3D;&quot;conventional&quot;) %&gt;% group_by(monthabb) %&gt;% summarise(avg&#x3D;mean(average_price)) %&gt;%</span><br><span class="line">  ggplot(aes(x&#x3D;monthabb, y&#x3D;avg))+</span><br><span class="line">  geom_point(color&#x3D;&quot;#F35D5D&quot;,aes(size&#x3D;avg))+</span><br><span class="line">  geom_line(group&#x3D;0)+</span><br><span class="line">  theme_economist()+</span><br><span class="line">  theme(legend.position &#x3D; &quot;none&quot;,plot.title &#x3D; element_text(hjust &#x3D; 0.5),plot.background &#x3D; element_rect(fill&#x3D;&quot;#D5D8DC&quot;))+</span><br><span class="line">  labs(title &#x3D; &quot;Conventional Avocados&quot;,x&#x3D;&quot;Month&quot;,y&#x3D;&quot;Average Price&quot;)</span><br><span class="line"></span><br><span class="line">organic_patterns &lt;- seasonal_df %&gt;% select(monthabb,average_price,type) %&gt;% filter(type&#x3D;&#x3D;&quot;organic&quot;) %&gt;% group_by(monthabb) %&gt;% summarise(avg&#x3D;mean(average_price)) %&gt;%</span><br><span class="line">ggplot(aes(x&#x3D;monthabb,y&#x3D;avg))+</span><br><span class="line">  geom_point(color&#x3D;&quot;#F35D5D&quot;,aes(size&#x3D;avg))+</span><br><span class="line">  geom_line(group&#x3D;0)+</span><br><span class="line">  theme_economist()+</span><br><span class="line">  theme(legend.position &#x3D; &quot;none&quot;,plot.title &#x3D; element_text(hjust &#x3D; 0.5),plot.background &#x3D; element_rect(fill&#x3D;&quot;#D5D8DC&quot;))+</span><br><span class="line">  labs(title &#x3D; &quot;Organic Avocados&quot;,x&#x3D;&quot;Month&quot;,y&#x3D;&quot;Average Price&quot;)</span><br><span class="line"></span><br><span class="line">whole_patterns &lt;- seasonal_df %&gt;% select(monthabb,average_price,type) %&gt;% group_by(monthabb) %&gt;% summarise(avg&#x3D;mean(average_price)) %&gt;%</span><br><span class="line">  ggplot(aes(x&#x3D;monthabb,y&#x3D;avg))+</span><br><span class="line">  geom_point(color&#x3D;&quot;#F35D5D&quot;,aes(size&#x3D;avg))+</span><br><span class="line">  geom_line(group&#x3D;0)+</span><br><span class="line">  theme_economist()+</span><br><span class="line">  theme(legend.position &#x3D; &quot;none&quot;,plot.title &#x3D; element_text(hjust &#x3D; 0.5),plot.background &#x3D; element_rect(fill&#x3D;&quot;#D5D8DC&quot;))+</span><br><span class="line">  labs(title &#x3D; &quot;All Avocados&quot;,x&#x3D;&quot;Month&quot;,y&#x3D;&quot;Average Price&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">plot_grid(conv_patterns,organic_patterns,whole_patterns,nrow &#x3D; 3)</span><br><span class="line">#conv_patterns</span><br></pre></td></tr></table></figure>
+<p><img src="https://www.kaggleusercontent.com/kf/49257785/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..Z0nhYvsbYiSXOwi0a3e_Vg.wiLxMBjmfH5zWgzbsyZmfX2LJ0G-TVaPvleMT_PnWnotXv9dMjLJOtv8HFfJB7VIKvaAiOuXOOnNoTfWMLNEsEmQ1mmHeVxFySzLDhVmEuNmhxbLPABCkDVdAAYu7lR3qLD4xuVLxb3CB1zqFhx00gKpCQ0KuMvuDogyMx8hZRnqRMpmN1BUdn9El9QgP0b39UCV6mFT_PHsMspROzMRXXWyLHa2OZk4LsOrllmxRmB2Z9QPNQumEVqNYhwLRXXaANlyENe5DUxBwdfHmK5317bJ12u_rA7mhEhbeV-0eqtoXoB-qJq2HVUfK1W8iEs6QQbGRR7HmPZ2HQO9EKmlZgJKoqLfa7YVA2yznP33QAvi-BHRStxgPRM36xNkRbGb8tTSf0KpaEqFZ2efZ15GqoD1LWYpCRxpZuuvV7B7Z24dQDZ-QfqKubUyzTDhrvSM3G0TBgWBt5fTNyP63r-FAuGXScA7BGlTIIyRQ23XG0w6Mg8X-ce0e2YbLK92ZgH9XIpuWrwdHEoNTCGhjWqrlJPSqkwLeceQhVxUlmEpVGQjC84iUebEnoPU7sNGzis1_haznEpo_OluFxMsvGGa6rpfmRKYHFo4U59pFOhZdUyAHICe_GdGbI73ue-mbyOKSs34XNlRW8m6ooJwM1Z2UaGKQqW1ZOyByXQKf3_Wobs.rI46PCTrAXYR5Yqoaj5Dlg/__results___files/__results___39_1.png" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">conv_patterns_vol &lt;- seasonal_df %&gt;% select(monthabb,total_volume,type) %&gt;% filter(type&#x3D;&#x3D;&quot;conventional&quot;) %&gt;% group_by(monthabb) %&gt;% summarise(avg&#x3D;mean(total_volume)) %&gt;%</span><br><span class="line">  ggplot(aes(x&#x3D;monthabb, y&#x3D;avg))+</span><br><span class="line">  geom_point(color&#x3D;&quot;#F35D5D&quot;,aes(size&#x3D;avg))+</span><br><span class="line">  geom_line(group&#x3D;0)+</span><br><span class="line">  theme_economist()+</span><br><span class="line">  theme(legend.position &#x3D; &quot;none&quot;,plot.title &#x3D; element_text(hjust &#x3D; 0.5),plot.background &#x3D; element_rect(fill&#x3D;&quot;#D5D8DC&quot;))+</span><br><span class="line">  labs(title &#x3D; &quot;Conventional Avocados volume&quot;,x&#x3D;&quot;Month&quot;,y&#x3D;&quot;Average Price&quot;)</span><br><span class="line"></span><br><span class="line">organic_patterns_vol &lt;- seasonal_df %&gt;% select(monthabb,total_volume,type) %&gt;% filter(type&#x3D;&#x3D;&quot;organic&quot;) %&gt;% group_by(monthabb) %&gt;% summarise(avg&#x3D;mean(total_volume)) %&gt;%</span><br><span class="line">ggplot(aes(x&#x3D;monthabb,y&#x3D;avg))+</span><br><span class="line">  geom_point(color&#x3D;&quot;#F35D5D&quot;,aes(size&#x3D;avg))+</span><br><span class="line">  geom_line(group&#x3D;0)+</span><br><span class="line">  theme_economist()+</span><br><span class="line">  theme(legend.position &#x3D; &quot;none&quot;,plot.title &#x3D; element_text(hjust &#x3D; 0.5),plot.background &#x3D; element_rect(fill&#x3D;&quot;#D5D8DC&quot;))+</span><br><span class="line">  labs(title &#x3D; &quot;Organic Avocados volume&quot;,x&#x3D;&quot;Month&quot;,y&#x3D;&quot;Average Price&quot;)</span><br><span class="line"></span><br><span class="line">whole_patterns_vol &lt;- seasonal_df %&gt;% select(monthabb,total_volume,type) %&gt;% group_by(monthabb) %&gt;% summarise(avg&#x3D;mean(total_volume)) %&gt;%</span><br><span class="line">  ggplot(aes(x&#x3D;monthabb,y&#x3D;avg))+</span><br><span class="line">  geom_point(color&#x3D;&quot;#F35D5D&quot;,aes(size&#x3D;avg))+</span><br><span class="line">  geom_line(group&#x3D;0)+</span><br><span class="line">  theme_economist()+</span><br><span class="line">  theme(legend.position &#x3D; &quot;none&quot;,plot.title &#x3D; element_text(hjust &#x3D; 0.5),plot.background &#x3D; element_rect(fill&#x3D;&quot;#D5D8DC&quot;))+</span><br><span class="line">  labs(title &#x3D; &quot;All Avocados volume&quot;,x&#x3D;&quot;Month&quot;,y&#x3D;&quot;Average Price&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">plot_grid(conv_patterns_vol,organic_patterns_vol,whole_patterns_vol,nrow &#x3D; 3)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://www.kaggleusercontent.com/kf/49257785/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..Z0nhYvsbYiSXOwi0a3e_Vg.wiLxMBjmfH5zWgzbsyZmfX2LJ0G-TVaPvleMT_PnWnotXv9dMjLJOtv8HFfJB7VIKvaAiOuXOOnNoTfWMLNEsEmQ1mmHeVxFySzLDhVmEuNmhxbLPABCkDVdAAYu7lR3qLD4xuVLxb3CB1zqFhx00gKpCQ0KuMvuDogyMx8hZRnqRMpmN1BUdn9El9QgP0b39UCV6mFT_PHsMspROzMRXXWyLHa2OZk4LsOrllmxRmB2Z9QPNQumEVqNYhwLRXXaANlyENe5DUxBwdfHmK5317bJ12u_rA7mhEhbeV-0eqtoXoB-qJq2HVUfK1W8iEs6QQbGRR7HmPZ2HQO9EKmlZgJKoqLfa7YVA2yznP33QAvi-BHRStxgPRM36xNkRbGb8tTSf0KpaEqFZ2efZ15GqoD1LWYpCRxpZuuvV7B7Z24dQDZ-QfqKubUyzTDhrvSM3G0TBgWBt5fTNyP63r-FAuGXScA7BGlTIIyRQ23XG0w6Mg8X-ce0e2YbLK92ZgH9XIpuWrwdHEoNTCGhjWqrlJPSqkwLeceQhVxUlmEpVGQjC84iUebEnoPU7sNGzis1_haznEpo_OluFxMsvGGa6rpfmRKYHFo4U59pFOhZdUyAHICe_GdGbI73ue-mbyOKSs34XNlRW8m6ooJwM1Z2UaGKQqW1ZOyByXQKf3_Wobs.rI46PCTrAXYR5Yqoaj5Dlg/__results___files/__results___40_1.png" alt="img"></p>
+<ul>
+<li>Overall, the avocado price could reach the peak of the year during Sep and Oct, and Feb could be the lowest price</li>
+<li>Regarding with the volume avocado sold, American people like to buy avocado at Feb and May, but not at Nov</li>
+<li>Based on the research, avocado tend to ripe at Aug and Sep, plus the time in transportation and packaging, it is unavoidable that it could have some delay</li>
+<li>From the plot we could see that the trend in Aug are positive</li>
+<li>We could see that the sold volume and price demonstrated some negative correlation at some time, which obeys our common sense, people like buying staffs when their price are low</li>
+<li>Meanwhile, some positive correlation could be discovered between price and volumes, the hypothesis is that the newly harvest avocados are definitely in high quality and the previous stored avocados could be consumed significantly, which means there is a gap between demand and output</li>
+<li>The volumes are increasing with the time which possibly because of the widely broadcasting.</li>
+</ul>
+<h4 id="Seasonal-patterns"><a href="#Seasonal-patterns" class="headerlink" title="Seasonal patterns"></a>Seasonal patterns</h4><figure class="highlight plain"><figcaption><span>fig.height </span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">options(repr.plot.width&#x3D;10,repr.plot.height&#x3D;8)</span><br><span class="line"></span><br><span class="line">## seperate the month into four seasons</span><br><span class="line">seasonal_df$season &lt;- ifelse(seasonal_df$month %in% c(&quot;03&quot;,&quot;04&quot;,&quot;05&quot;),&quot;Spring&quot;,</span><br><span class="line">ifelse(seasonal_df$month %in% c(&quot;06&quot;,&quot;07&quot;,&quot;08&quot;),&quot;Summer&quot;,</span><br><span class="line">ifelse(seasonal_df$month %in% c(&quot;09&quot;,&quot;10&quot;,&quot;11&quot;),&quot;Autumn&quot;,&quot;Winter&quot;)))</span><br><span class="line"></span><br><span class="line">## Prepare to analyze the results</span><br><span class="line">seasonality_plot_conventional_price &lt;- seasonal_df %&gt;% select(season,year,average_price,type) %&gt;% filter(type &#x3D;&#x3D;&quot;conventional&quot;) %&gt;% group_by(season,year) %&gt;% summarise(avg&#x3D;mean(average_price)) %&gt;%</span><br><span class="line">  ggplot(aes(x&#x3D;season,y&#x3D;avg,color&#x3D;season))+</span><br><span class="line">  geom_segment(aes(x&#x3D;season,xend&#x3D;season,y&#x3D;0,yend&#x3D;avg),show.legend &#x3D; FALSE)+</span><br><span class="line">  coord_flip()+</span><br><span class="line">  facet_wrap(~as.factor(year))+</span><br><span class="line">  theme_minimal()+</span><br><span class="line">  theme(plot.title &#x3D; element_text(hjust &#x3D; 0.5),plot.background &#x3D; element_rect(fill&#x3D;&quot;#F4F6F7&quot;))+</span><br><span class="line">  labs(title &#x3D; &quot;Conventional Avocados average price by Season&quot;,x&#x3D;&quot;&quot;,y&#x3D;&quot;Average price&quot;)+</span><br><span class="line">  geom_text(aes(x&#x3D;season,y&#x3D;0.01,label&#x3D;paste0(&quot;$ &quot;,round(avg,2))),hjust&#x3D;-0.5,vjust&#x3D;-0.5,size&#x3D;4,color&#x3D;&quot;black&quot;,fontface&#x3D;&#39;italic&#39;,angle&#x3D;360)</span><br><span class="line"></span><br><span class="line">seasonality_plot_conventional_volume &lt;- seasonal_df %&gt;% select(season,year,total_volume,type) %&gt;% filter(type&#x3D;&#x3D;&quot;conventional&quot;) %&gt;% group_by(season,year) %&gt;% summarise(avg&#x3D;round(mean(total_volume&#x2F;1000000),2)) %&gt;%</span><br><span class="line">  ggplot(aes(x&#x3D;season,y&#x3D;avg,color&#x3D;season))+</span><br><span class="line">  geom_segment(aes(x&#x3D;season,xend&#x3D;season,y&#x3D;0,yend&#x3D;avg),show.legend &#x3D; FALSE)+</span><br><span class="line">  coord_flip()+</span><br><span class="line">  facet_wrap(~as.factor(year))+</span><br><span class="line">  theme_minimal()+</span><br><span class="line">  theme(plot.title &#x3D; element_text(hjust &#x3D; 0.5),plot.background &#x3D; element_rect(fill&#x3D;&quot;#F4F6F7&quot;))+</span><br><span class="line">  labs(title &#x3D; &quot;Conventional Avocados total volume by Season&quot;,x&#x3D;&quot;&quot;,y&#x3D;&quot;Average volume&quot;)+</span><br><span class="line">  geom_text(aes(x&#x3D;season,y&#x3D;0.01,label&#x3D;paste0(avg,&quot; m&quot;)),hjust&#x3D;-0.5,vjust&#x3D;-0.5,size&#x3D;4,color&#x3D;&quot;black&quot;,fontface&#x3D;&#39;italic&#39;,angle&#x3D;360)</span><br><span class="line"></span><br><span class="line">#plot_grid(seasonality_plot_conventional_price,seasonality_plot_conventional_volume,nrow &#x3D; 2)</span><br><span class="line"></span><br><span class="line">seasonality_plot_organic_price &lt;- seasonal_df %&gt;% select(season,year,average_price,type) %&gt;% filter(type &#x3D;&#x3D;&quot;organic&quot;) %&gt;% group_by(season,year) %&gt;% summarise(avg&#x3D;mean(average_price)) %&gt;%</span><br><span class="line">  ggplot(aes(x&#x3D;season,y&#x3D;avg,color&#x3D;season))+</span><br><span class="line">  geom_segment(aes(x&#x3D;season,xend&#x3D;season,y&#x3D;0,yend&#x3D;avg),show.legend &#x3D; FALSE)+</span><br><span class="line">  coord_flip()+</span><br><span class="line">  facet_wrap(~as.factor(year))+</span><br><span class="line">  theme_minimal()+</span><br><span class="line">  theme(plot.title &#x3D; element_text(hjust &#x3D; 0.5),plot.background &#x3D; element_rect(fill&#x3D;&quot;#F4F6F7&quot;))+</span><br><span class="line">  labs(title &#x3D; &quot;Organic Avocados average price by Season&quot;,x&#x3D;&quot;&quot;,y&#x3D;&quot;Average price&quot;)+</span><br><span class="line">  geom_text(aes(x&#x3D;season,y&#x3D;0.01,label&#x3D;paste0(&quot;$ &quot;,round(avg,2))),hjust&#x3D;-0.5,vjust&#x3D;-0.5,size&#x3D;4,color&#x3D;&quot;black&quot;,fontface&#x3D;&#39;italic&#39;,angle&#x3D;360)</span><br><span class="line"></span><br><span class="line">seasonality_plot_organic_volume &lt;- seasonal_df %&gt;% select(season,year,total_volume,type) %&gt;% filter(type&#x3D;&#x3D;&quot;organic&quot;) %&gt;% group_by(season,year) %&gt;% summarise(avg&#x3D;round(mean(total_volume&#x2F;1000000),2)) %&gt;%</span><br><span class="line">  ggplot(aes(x&#x3D;season,y&#x3D;avg,color&#x3D;season))+</span><br><span class="line">  geom_segment(aes(x&#x3D;season,xend&#x3D;season,y&#x3D;0,yend&#x3D;avg),show.legend &#x3D; FALSE)+</span><br><span class="line">  coord_flip()+</span><br><span class="line">  facet_wrap(~as.factor(year))+</span><br><span class="line">  theme_minimal()+</span><br><span class="line">  theme(plot.title &#x3D; element_text(hjust &#x3D; 0.5),plot.background &#x3D; element_rect(fill&#x3D;&quot;#F4F6F7&quot;))+</span><br><span class="line">  labs(title &#x3D; &quot;Organic Avocados total volume by Season&quot;,x&#x3D;&quot;&quot;,y&#x3D;&quot;Average volume&quot;)+</span><br><span class="line">  geom_text(aes(x&#x3D;season,y&#x3D;0.01,label&#x3D;paste0(avg,&quot; m&quot;)),hjust&#x3D;-0.5,vjust&#x3D;-0.5,size&#x3D;4,color&#x3D;&quot;black&quot;,fontface&#x3D;&#39;italic&#39;,angle&#x3D;360)</span><br><span class="line"></span><br><span class="line">plot_grid(seasonality_plot_conventional_price,seasonality_plot_organic_price,seasonality_plot_conventional_volume,seasonality_plot_organic_volume,nrow &#x3D; 2,ncol &#x3D; 2,labels &#x3D; c(&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://www.kaggleusercontent.com/kf/49257785/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..Z0nhYvsbYiSXOwi0a3e_Vg.wiLxMBjmfH5zWgzbsyZmfX2LJ0G-TVaPvleMT_PnWnotXv9dMjLJOtv8HFfJB7VIKvaAiOuXOOnNoTfWMLNEsEmQ1mmHeVxFySzLDhVmEuNmhxbLPABCkDVdAAYu7lR3qLD4xuVLxb3CB1zqFhx00gKpCQ0KuMvuDogyMx8hZRnqRMpmN1BUdn9El9QgP0b39UCV6mFT_PHsMspROzMRXXWyLHa2OZk4LsOrllmxRmB2Z9QPNQumEVqNYhwLRXXaANlyENe5DUxBwdfHmK5317bJ12u_rA7mhEhbeV-0eqtoXoB-qJq2HVUfK1W8iEs6QQbGRR7HmPZ2HQO9EKmlZgJKoqLfa7YVA2yznP33QAvi-BHRStxgPRM36xNkRbGb8tTSf0KpaEqFZ2efZ15GqoD1LWYpCRxpZuuvV7B7Z24dQDZ-QfqKubUyzTDhrvSM3G0TBgWBt5fTNyP63r-FAuGXScA7BGlTIIyRQ23XG0w6Mg8X-ce0e2YbLK92ZgH9XIpuWrwdHEoNTCGhjWqrlJPSqkwLeceQhVxUlmEpVGQjC84iUebEnoPU7sNGzis1_haznEpo_OluFxMsvGGa6rpfmRKYHFo4U59pFOhZdUyAHICe_GdGbI73ue-mbyOKSs34XNlRW8m6ooJwM1Z2UaGKQqW1ZOyByXQKf3_Wobs.rI46PCTrAXYR5Yqoaj5Dlg/__results___files/__results___43_1.png" alt="img"></p>
+<ul>
+<li>Spring (3-5), Summer (6-8), Autumn (9-11), Winter (12-2)</li>
+<li>Figure A, B stands for the average price of avocados for either conventional or organic</li>
+<li>Figure C, D stands for the volume sold for either conventional or organic, the unit is million (m)</li>
+<li>In summary:<ul>
+<li>it is relative cheaper to avocado in Spring or Winter</li>
+<li>avocado most sold in Spring and Summer since it is close to the next round of ripen in avocado and the market are in great supply of avocados</li>
+</ul>
+</li>
+</ul>
+<h3 id="Find-the-city-where-avocado’s-price-is-lowest"><a href="#Find-the-city-where-avocado’s-price-is-lowest" class="headerlink" title="Find the city where avocado’s price is lowest"></a>Find the city where avocado’s price is lowest</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">library(forcats)</span><br><span class="line">geo_conv_price &lt;- seasonal_df %&gt;% select(geography,average_price,type) %&gt;% filter(type&#x3D;&#x3D;&quot;conventional&quot;) %&gt;% group_by(geography)%&gt;%  summarise(avg&#x3D;round(mean(average_price),2)) %&gt;% arrange(avg) %&gt;% slice(1:6)  %&gt;% mutate(geography&#x3D;fct_reorder(geography,desc(avg))) %&gt;%</span><br><span class="line">  ggplot(aes(x&#x3D;geography,y&#x3D;avg))+</span><br><span class="line">  geom_bar(stat &#x3D; &quot;identity&quot;,position &#x3D; &quot;dodge&quot;,alpha&#x3D;.6,width &#x3D;.4,show.legend &#x3D; FALSE)+</span><br><span class="line">  coord_flip()+</span><br><span class="line">  geom_text(aes(label&#x3D;avg),vjust&#x3D;1.5,color&#x3D;&#39;black&#39;,size&#x3D;5)+</span><br><span class="line">  theme_minimal()+</span><br><span class="line">  theme(title &#x3D; element_text(hjust &#x3D; 0.6),plot.background &#x3D; element_rect(fill&#x3D;&quot;#F4F6F7&quot;))+</span><br><span class="line">  labs(title &#x3D; &quot;Conventional Avocados average price by geography&quot;,x&#x3D;&quot;Geography place&quot;,y&#x3D;&quot;Average Price&quot;)</span><br><span class="line"></span><br><span class="line">geo_org_price &lt;- seasonal_df %&gt;% select(geography,average_price,type) %&gt;% filter(type&#x3D;&#x3D;&quot;organic&quot;) %&gt;% group_by(geography)%&gt;%  summarise(avg&#x3D;round(mean(average_price),2)) %&gt;% arrange(avg) %&gt;% slice(1:6) %&gt;% mutate(geography&#x3D;fct_reorder(geography,desc(avg))) %&gt;%</span><br><span class="line">  ggplot(aes(x&#x3D;geography,y&#x3D;avg))+</span><br><span class="line">  geom_bar(stat &#x3D; &quot;identity&quot;,position &#x3D; &quot;dodge&quot;,alpha&#x3D;.6,width &#x3D;.4,show.legend &#x3D; FALSE)+</span><br><span class="line">  coord_flip()+</span><br><span class="line">  geom_text(aes(label&#x3D;avg),vjust&#x3D;1.5,color&#x3D;&#39;black&#39;,size&#x3D;5)+</span><br><span class="line">  theme_minimal()+</span><br><span class="line">  theme(title &#x3D; element_text(hjust &#x3D; 0.6),plot.background &#x3D; element_rect(fill&#x3D;&quot;#F4F6F7&quot;))+</span><br><span class="line">  labs(title &#x3D; &quot;Organic Avocados average price by geography&quot;,x&#x3D;&quot;Geography place&quot;,y&#x3D;&quot;Average Price&quot;)</span><br><span class="line"></span><br><span class="line">plot_grid(geo_conv_price,geo_org_price,nrow &#x3D; 2)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://www.kaggleusercontent.com/kf/49257785/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..Z0nhYvsbYiSXOwi0a3e_Vg.wiLxMBjmfH5zWgzbsyZmfX2LJ0G-TVaPvleMT_PnWnotXv9dMjLJOtv8HFfJB7VIKvaAiOuXOOnNoTfWMLNEsEmQ1mmHeVxFySzLDhVmEuNmhxbLPABCkDVdAAYu7lR3qLD4xuVLxb3CB1zqFhx00gKpCQ0KuMvuDogyMx8hZRnqRMpmN1BUdn9El9QgP0b39UCV6mFT_PHsMspROzMRXXWyLHa2OZk4LsOrllmxRmB2Z9QPNQumEVqNYhwLRXXaANlyENe5DUxBwdfHmK5317bJ12u_rA7mhEhbeV-0eqtoXoB-qJq2HVUfK1W8iEs6QQbGRR7HmPZ2HQO9EKmlZgJKoqLfa7YVA2yznP33QAvi-BHRStxgPRM36xNkRbGb8tTSf0KpaEqFZ2efZ15GqoD1LWYpCRxpZuuvV7B7Z24dQDZ-QfqKubUyzTDhrvSM3G0TBgWBt5fTNyP63r-FAuGXScA7BGlTIIyRQ23XG0w6Mg8X-ce0e2YbLK92ZgH9XIpuWrwdHEoNTCGhjWqrlJPSqkwLeceQhVxUlmEpVGQjC84iUebEnoPU7sNGzis1_haznEpo_OluFxMsvGGa6rpfmRKYHFo4U59pFOhZdUyAHICe_GdGbI73ue-mbyOKSs34XNlRW8m6ooJwM1Z2UaGKQqW1ZOyByXQKf3_Wobs.rI46PCTrAXYR5Yqoaj5Dlg/__results___files/__results___47_1.png" alt="img"></p>
+<ul>
+<li>Use the calculation to return the six cities or regions whether the average price for avocados is lowest</li>
+<li>Based on the research from map, Top 5 is close to the Mexico, where the avocado originated</li>
+<li>These places are possibly the region to supply avocado</li>
+</ul>
+<h3 id="The-future-price-prediction"><a href="#The-future-price-prediction" class="headerlink" title="The future price prediction"></a>The future price prediction</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">library(prophet)</span><br><span class="line">library(cowplot)</span><br><span class="line">library(gridExtra)</span><br><span class="line">library(ggplot2)</span><br><span class="line">library(ggpubr)</span><br><span class="line">library(devtools)</span><br><span class="line">## Select and filter the data and fit the model</span><br><span class="line">price_predict &lt;- df %&gt;% select(date,average_price) %&gt;% group_by(date) %&gt;% summarise(avg&#x3D;mean(average_price))</span><br><span class="line">colnames(price_predict) &lt;- c(&#39;ds&#39;,&#39;y&#39;)</span><br><span class="line">model &lt;- prophet(price_predict,daily.seasonality &#x3D; TRUE)</span><br><span class="line"></span><br><span class="line">## make prediction or forecast the results</span><br><span class="line">future &lt;- make_future_dataframe(model,periods &#x3D; 365)</span><br><span class="line">forecast &lt;- predict(model,future)</span><br><span class="line">plot(model,forecast)+</span><br><span class="line">theme_minimal()+</span><br><span class="line">  theme(plot.title &#x3D; element_text(hjust &#x3D; 0.5),plot.background &#x3D; element_rect(fill&#x3D;&quot;#F4F6F7&quot;))+</span><br><span class="line">  labs(title &#x3D; &quot;Avocados price prediction in next year&quot;,x&#x3D;&quot;year&quot;,y&#x3D;&quot;Average Price&quot;)</span><br><span class="line"></span><br><span class="line">trend &lt;- prophet_plot_components(model,forecast)</span><br><span class="line"></span><br><span class="line">year_trend &lt;- trend[1]</span><br><span class="line">month_trend &lt;- trend[3]</span><br><span class="line">week_trend &lt;- trend[2]</span><br><span class="line">time_trend &lt;- trend[4]</span><br><span class="line"></span><br><span class="line">overall_trend &lt;- c(year_trend,month_trend,week_trend,time_trend)</span><br><span class="line">ggarrange(plotlist &#x3D; overall_trend, labels &#x3D; c(&#39;A&#39;, &#39;B&#39;,&#39;C&#39;,&#39;D&#39;))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://www.kaggleusercontent.com/kf/49257785/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..Z0nhYvsbYiSXOwi0a3e_Vg.wiLxMBjmfH5zWgzbsyZmfX2LJ0G-TVaPvleMT_PnWnotXv9dMjLJOtv8HFfJB7VIKvaAiOuXOOnNoTfWMLNEsEmQ1mmHeVxFySzLDhVmEuNmhxbLPABCkDVdAAYu7lR3qLD4xuVLxb3CB1zqFhx00gKpCQ0KuMvuDogyMx8hZRnqRMpmN1BUdn9El9QgP0b39UCV6mFT_PHsMspROzMRXXWyLHa2OZk4LsOrllmxRmB2Z9QPNQumEVqNYhwLRXXaANlyENe5DUxBwdfHmK5317bJ12u_rA7mhEhbeV-0eqtoXoB-qJq2HVUfK1W8iEs6QQbGRR7HmPZ2HQO9EKmlZgJKoqLfa7YVA2yznP33QAvi-BHRStxgPRM36xNkRbGb8tTSf0KpaEqFZ2efZ15GqoD1LWYpCRxpZuuvV7B7Z24dQDZ-QfqKubUyzTDhrvSM3G0TBgWBt5fTNyP63r-FAuGXScA7BGlTIIyRQ23XG0w6Mg8X-ce0e2YbLK92ZgH9XIpuWrwdHEoNTCGhjWqrlJPSqkwLeceQhVxUlmEpVGQjC84iUebEnoPU7sNGzis1_haznEpo_OluFxMsvGGa6rpfmRKYHFo4U59pFOhZdUyAHICe_GdGbI73ue-mbyOKSs34XNlRW8m6ooJwM1Z2UaGKQqW1ZOyByXQKf3_Wobs.rI46PCTrAXYR5Yqoaj5Dlg/__results___files/__results___52_0.png" alt="img"></p>
+<ul>
+<li>Figure A is analyze based on year: Since 2015, the average price of avocados continues to grow and 2017 was a crazy year, they grow in a speed higher than 1.3; After 2018, the average price tend to be stable, but still has a rate about 1.28; Regarding to the future prediction, the range is about [1.20-1.34]. But considering the pandemic in North America, the possible rate could be 1.20</li>
+<li>Figure B is the analysis based on month: we could see that during May, the price tend to grow in a positive way and this trend continues to grow to Oct; After Oct, the price starts to decrease, which follows the previous analysis</li>
+<li>Figure C is the analysis based on week. The average price follow the rule that ordinary family shopping habits, they prefer to buy things during weekends, so the price during weekends could be higher in other days</li>
+</ul>
+<hr>
+<h3 id="Other-platforms"><a href="#Other-platforms" class="headerlink" title="Other platforms:"></a>Other platforms:</h3><p><strong>kaggle:</strong> <a class="link"   target="_blank" rel="noopener" href="https://www.kaggle.com/yuxuanwu17/eda-of-avocado-price-from-2015-to-2020" >https://www.kaggle.com/yuxuanwu17/eda-of-avocado-price-from-2015-to-2020<i class="fas fa-external-link-alt"></i></a></p>
+<p><strong>zhihu (Chinese version):</strong> <a class="link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/332699778" >https://zhuanlan.zhihu.com/p/332699778<i class="fas fa-external-link-alt"></i></a></p>
+<p><strong>Github:</strong> <a class="link"   target="_blank" rel="noopener" href="https://github.com/yuxuanwu17/INT303-Avocado-prediction" >https://github.com/yuxuanwu17/INT303-Avocado-prediction<i class="fas fa-external-link-alt"></i></a></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：Explorative data anlysis of avocado price from 2015-2020</li>
+        <li>Post author：Yuxuan Wu</li>
+        <li>Create time：2021-01-25 14:21:26</li>
+        <li>
+            Post link：yuxuanwu17.github.io2021/01/25/avocado_pred/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/01/24/YuxuanWu-1716309-INT305-Report/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Heart failure detection by SVM-based machine learning model</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span> -
+            
+            2021 <i class="fas fa-heart icon-animate"></i> <a href="/">Yuxuan Wu</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count <span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a> | Theme <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.3.1</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Import-the-libraries"><span class="nav-number">1.</span> <span class="nav-text">Import the libraries</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Load-the-data-and-return-the-head-of-data"><span class="nav-number">2.</span> <span class="nav-text">Load the data and return the head of data</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Check-whether-the-dataset-contains-the-missing-value"><span class="nav-number">3.</span> <span class="nav-text">Check whether the dataset contains the missing value</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Explore-the-data-and-some-clarification"><span class="nav-number">4.</span> <span class="nav-text">Explore the data and some clarification</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Explain-the-features"><span class="nav-number">4.1.</span> <span class="nav-text">Explain the features</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#X4046-X4225-X4770-stands-for-the-PLU-code"><span class="nav-number">4.2.</span> <span class="nav-text">X4046, X4225, X4770 stands for the PLU code</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploratory-Data-Analysis"><span class="nav-number">5.</span> <span class="nav-text">Exploratory Data Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Density-plot-of-the-difference-between-two-avocados"><span class="nav-number">5.1.</span> <span class="nav-text">Density plot of the difference between two avocados.</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-matrix-to-demonstrate-the-volume-of-conventional-and-organic-avocados"><span class="nav-number">6.</span> <span class="nav-text">Create a matrix to demonstrate the volume of conventional and organic avocados</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Compare-the-volume-of-each-avocado"><span class="nav-number">7.</span> <span class="nav-text">Compare the volume of each avocado</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Avocado-price-from-2015-2020"><span class="nav-number">8.</span> <span class="nav-text">Avocado price from 2015-2020</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Relationship-between-Prices-and-Total-on-either-conventional-or-organic-avocados"><span class="nav-number">9.</span> <span class="nav-text">Relationship between Prices and Total on either conventional or organic avocados</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Filter-the-data-into-two-categories-conventional-or-organic"><span class="nav-number">9.1.</span> <span class="nav-text">Filter the data into two categories, conventional or organic</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Monthly-avocados-price-in-either-conventional-or-organic-avocados"><span class="nav-number">9.2.</span> <span class="nav-text">Monthly avocados price in either conventional or organic avocados</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Patterns-among-the-years-in-each-month-Autoplot-library"><span class="nav-number">10.</span> <span class="nav-text">Patterns among the years in each month (Autoplot library)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Seasonal-patterns-analysis"><span class="nav-number">11.</span> <span class="nav-text">Seasonal patterns analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Seasonality-patterns"><span class="nav-number">12.</span> <span class="nav-text">Seasonality patterns</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Monthly-analysis"><span class="nav-number">12.1.</span> <span class="nav-text">Monthly analysis</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Seasonal-patterns"><span class="nav-number">12.2.</span> <span class="nav-text">Seasonal patterns</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Find-the-city-where-avocado%E2%80%99s-price-is-lowest"><span class="nav-number">13.</span> <span class="nav-text">Find the city where avocado’s price is lowest</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-future-price-prediction"><span class="nav-number">14.</span> <span class="nav-text">The future price prediction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Other-platforms"><span class="nav-number">15.</span> <span class="nav-text">Other platforms:</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
