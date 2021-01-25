@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Yuxuan Wu">
+    
+    <title>
+        
+            MATLAB based neural network for image classification |
+        
+        Yuxuan Wu
+    </title>
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep coding and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.3.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days age","week":"%s weeks age","month":"%s months age","year":"%s years age"};
+  </script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Yuxuan Wu
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content normal-code-theme">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">MATLAB based neural network for image classification</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Yuxuan Wu</span>
+                        <span class="level">Lv1</span>
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i> 2021-01-25 20:56:06
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Matlab/">Matlab</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i> <span>1.2k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i> <span>7 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="Project-overview"><a href="#Project-overview" class="headerlink" title="Project overview :"></a>Project overview :</h2><p>This task includes five algorithms to classify the characters segmented from the license plates of automobiles using MATLAB</p>
+<ul>
+<li>MLP (multi-layer perceptron)</li>
+<li>CNN (convolutional neural network)</li>
+<li>LVQ (learning vector quantization)</li>
+<li>RBF1 with k-means clustering</li>
+<li>RBF2 with SOM (self-organizing map)</li>
+</ul>
+<hr>
+<h2 id="Files-running-order"><a href="#Files-running-order" class="headerlink" title="Files running order"></a>Files running order</h2><ol>
+<li>run the figure_preprocessing.m and create a new file folder ass2_processede_data</li>
+<li>run data_partition.m split the dataset in 8:2 version and returned the X_train, X_test, y_train, y_test and save as train_test_data.mat</li>
+<li>run ass2_CNN.m (this script did not use the processed data, but read the figure directly from the original file)</li>
+<li>run ass2_mlp.m </li>
+<li>run ass2_lvq.m</li>
+<li>run ass2_rbf_kmean.m</li>
+<li>run ass2_rbf_som.m</li>
+<li>run ass2_confusion_matrix_summary.m</li>
+</ol>
+<hr>
+<h2 id="Components-Scripts-inside-the-project"><a href="#Components-Scripts-inside-the-project" class="headerlink" title="Components/Scripts inside the project"></a>Components/Scripts inside the project</h2><h2 id="The-script-part"><a href="#The-script-part" class="headerlink" title="The script part"></a>The script part</h2><h3 id="figure-preprocessing-m"><a href="#figure-preprocessing-m" class="headerlink" title="figure_preprocessing.m"></a>figure_preprocessing.m</h3><p>This is the script to extract the ass2data and rewrite to a new file folder ass2_processed_data. </p>
+<pre><code>- read both jpeg and jpg files in all folders ass2_data
+- rewrite into another folders ass2_processed_data with uniform style (jpeg) and uniform naming styles (label+number) e.g. (A1,B10,C99)</code></pre>
+<h3 id="data-partition-m"><a href="#data-partition-m" class="headerlink" title="data_partition.m"></a>data_partition.m</h3><p>This is the script splitted the processed data into training and testing dataset in 8:2 ratio. It adjusted the size and columns or rows for fitting the designed model’s network.</p>
+<pre><code>- read images from the processed folder ass2_processed_data. 
+- split the dataset into 8:2
+- save the splitted samples and parameters as train_test_data.mat</code></pre>
+<h3 id="ass2-CNN-m"><a href="#ass2-CNN-m" class="headerlink" title="ass2_CNN.m"></a>ass2_CNN.m</h3><p>This is the script to conduct the CNN.</p>
+<pre><code>- use imageDataset to store and train the model
+- use splitEachLabel to split the training and testing datasets
+- do not use the train_test_data as the input since CNN has standard samples in Matlab documents
+- imageInputLayer(48,24,1)
+- Layer 1:
+    - kernel size: 3; filters number: 8; padding: same
+    - batchNormalizationLayer
+    - Relu layer
+    - Maxpooling with a pooling size equals [2 2] and Stride equals [2 2]
+- Layer 2:
+    - kernel size: 3; filters number: 16; padding: same    
+    - batchNormalizationLayer
+    - Relu layer
+    - Maxpooling with a pooling size equals [2 2] and Stride equals [2 2]
+- Layer 3:
+    - kernel size: 3; filters number: 32; padding: same    
+    - batchNormalizationLayer
+    - Relu layer
+    - Maxpooling with a pooling size equals [2 2] and Stride equals [2 2]
+- Layer 4:
+    - fully connected layer with neurons equals 24
+    - softmaxLayer
+- calculate the training and testing accuracy
+- return and save the confusion matrix as C_CNN.mat</code></pre>
+<h3 id="ass2-mlp-m"><a href="#ass2-mlp-m" class="headerlink" title="ass2_mlp.m"></a>ass2_mlp.m</h3><p>This is the script to conduct the MLP</p>
+<pre><code>- load the dataset obtained previously train_test_data.mat
+- lr_rate = 0.2;
+- momentum = 0.4;
+- epochs = 1000;
+- 3 layers with 50, 100, 100 
+- Hyperbolic tangent sigmoid transfer function (tansig)
+- gradient descent to update the weights
+- calculate the training and testing accuracy
+- return and save the confusion matrix as C_mlp.mat</code></pre>
+<h3 id="ass2-lvq-m"><a href="#ass2-lvq-m" class="headerlink" title="ass2_lvq.m"></a>ass2_lvq.m</h3><pre><code>- load the dataset obtained previously train_test_data.mat
+- set the cluster into 360 due to its performance, you could also set cluster into 24 for computational convenience
+- lvqnet(24) could achieve ideal performance, but the performance could not be comparable with the cluster set into 360
+- save the lvqnet(360) as lvq_360.mat, uncomment the line if you wish to see the performance
+- calculate the training and testing accuracy
+- return and save the confusion matrix C_lvq.mat</code></pre>
+<h3 id="ass2-rbf-kmean-m"><a href="#ass2-rbf-kmean-m" class="headerlink" title="ass2_rbf_kmean.m"></a>ass2_rbf_kmean.m</h3><pre><code>- load the dataset obtained previously train_test_data.mat
+- use kmeans to return the center of each cluster, the number of cluster is determined as 360
+- use assembled function RBF_training_kmeans to calculate the W (weights), sigma (the variance of the RBF kernel) and the coordinate of each cluster's center 
+- use the previous returned parameter to return the training prediction by assembled function: RBF_predict
+- calculate the training and testing accuracy
+- return and save the confusion matrix C_rbf_kmeans.mat</code></pre>
+<h3 id="ass2-rbf-som-m"><a href="#ass2-rbf-som-m" class="headerlink" title="ass2_rbf_som.m"></a>ass2_rbf_som.m</h3><pre><code>- load the dataset obtained previously train_test_data.mat
+- define the SOM network, the dimension is set to 18*20 for convenience, keep it uniform to the previous number of clusters: 360
+- coverSteps = 10 %% Number of training steps for initial covering of the input space (default = 100)
+- initNeighbor = 80 %% Initial neighborhood size (default = 3)
+- topologyFcn = 'hextop' %% Layer topology function (default = 'hextop')
+- distanceFcn = 'dist' %%  Neuron distance function (default = 'linkdist')
+- once finished the training of SOM network, use assembled function RBF_training_som.m to calculate the weights W, sigma (the variance of the RBF kernel) and center of SOM clusters, which is the IW{1,1}.
+- use the previous returned parameter to return the training prediction by assembled function: RBF_predict
+- return and save the confusion matrix C_rbf_som.mat</code></pre>
+<h3 id="ass2-confusion-matrix-summary-m"><a href="#ass2-confusion-matrix-summary-m" class="headerlink" title="ass2_confusion_matrix_summary.m"></a>ass2_confusion_matrix_summary.m</h3><pre><code>- load the previous saved mat file
+- reshow the confusion matrix
+- compare the performance returned by different neural networks
+- compare the accuracy returned by different neural networks  </code></pre>
+<hr>
+<h2 id="The-function-part-assembled-function-for-reproduction"><a href="#The-function-part-assembled-function-for-reproduction" class="headerlink" title="The function part (assembled function for reproduction)"></a>The function part (assembled function for reproduction)</h2><h3 id="getimdata-m"><a href="#getimdata-m" class="headerlink" title="getimdata.m"></a>getimdata.m</h3><pre><code>- Input: the file path, in this case the processed file with renamed figure and same format jpeg (ass2_processed_data) 
+- Output: Transormed the numerical data into the one-hot encoding vector format (one-hot format)</code></pre>
+<h3 id="getimdata2-m"><a href="#getimdata2-m" class="headerlink" title="getimdata2.m"></a>getimdata2.m</h3><pre><code>- Input: the file path, in this case the processed file with renamed figure and same format jpeg (ass2_processed_data) 
+    - normalize the data into range 0-1
+    - assign the numerical labels to each character
+    - combine all the processed plot into a dataset 2400 * 1152
+    - 2400 stands for the number of samples; 1152 stands for the features in one figure
+- Output: The normalized figure data (0-1), with data and corresponding labels. Labels are in numerical format (1,2,3...24) (without one-hot)
+- This function method is selected in the whole project</code></pre>
+<h3 id="RBF-training-kmeans-m"><a href="#RBF-training-kmeans-m" class="headerlink" title="RBF_training_kmeans.m"></a>RBF_training_kmeans.m</h3><pre><code>- Input: data, labels, number of clusters to be determined by kmeans
+- sigma is determined by the mean Euclidean distance between two clusters
+- k weight matrix is calculated by the radbas(distance of samples between clusters' centers/2*sigma^2)
+- W weights is calculated by the pesudo inverse of (k'*k)*k'*labels</code></pre>
+<h3 id="RBF-training-som-m"><a href="#RBF-training-som-m" class="headerlink" title="RBF_training_som.m"></a>RBF_training_som.m</h3><pre><code>- Input: data, labels and net
+- net is pre-trained by som networks
+- the cluster center is returned by the first layer of som network, which is denoted by net.IW{1,1}
+- sigma is determined by the mean Euclidean distance between two clusters
+- k weight matrix is calculated by the radbas(distance of samples between clusters' centers/2*sigma^2)
+- W weights is calculated by the pesudo inverse of (k'*k)*k'*labels</code></pre>
+<h3 id="RBF-predict-m"><a href="#RBF-predict-m" class="headerlink" title="RBF_predict.m"></a>RBF_predict.m</h3><pre><code>- Input: data, W, sigma, C trained previously from either RBF_training_kmeans or RBF_training_som
+- Output: vectors of the final prediction
+- data could be either training data or testing data</code></pre>
+<h3 id="getcls-m"><a href="#getcls-m" class="headerlink" title="getcls.m"></a>getcls.m</h3><pre><code>- Input: vecs - matrix of column vectors (returned from the RBF_predict.m)
+- Output: cls - matrix where the largest element in each column in vectors is set to 1 and the rest to 0   Ex: vecs = [2 4; 1 5], gives c = [1 0; 0 1]
+- This function is used to return the most likely label in multi-variable classification, especially after the one-hot encoding method</code></pre>
+<h3 id="rate-m"><a href="#rate-m" class="headerlink" title="rate.m"></a>rate.m</h3><pre><code>- Input: matrix of class vectors
+- Computes the percentage of equal columns in t1 and t2, can be used to compute the rate of correct classified patterns in a pattern recognition application
+- Output: number of matching vectors</code></pre>
+<hr>
+<h2 id="Saved-parameters"><a href="#Saved-parameters" class="headerlink" title="Saved parameters"></a>Saved parameters</h2><h3 id="train-test-data-mat"><a href="#train-test-data-mat" class="headerlink" title="train_test_data.mat"></a>train_test_data.mat</h3><pre><code>- the value obtained from the data_partition.m
+- X_train, X_test, y_train, y_value</code></pre>
+<h3 id="som-net-data-mat"><a href="#som-net-data-mat" class="headerlink" title="som_net_data.mat"></a>som_net_data.mat</h3><pre><code>- the network trained by som (it takes long time, for computation convenience)</code></pre>
+<h3 id="lvq-360-mat"><a href="#lvq-360-mat" class="headerlink" title="lvq_360.mat"></a>lvq_360.mat</h3><pre><code>- lvq with cluster set to 360</code></pre>
+<h3 id="lvq-24-mat"><a href="#lvq-24-mat" class="headerlink" title="lvq_24.mat"></a>lvq_24.mat</h3><pre><code>- lvq with cluster set to 24 </code></pre>
+<h3 id="kmeans-plot-mat"><a href="#kmeans-plot-mat" class="headerlink" title="kmeans_plot.mat"></a>kmeans_plot.mat</h3><pre><code>- calculate silhouette value to find the suitable cluster k, but the results are not satisfied
+- return the plot of each epoch</code></pre>
+<h3 id="Confusion-matrix-summary"><a href="#Confusion-matrix-summary" class="headerlink" title="Confusion_matrix summary:"></a>Confusion_matrix summary:</h3><pre><code>- CNN_confusion.mat
+- C_rbf_som.mat
+- C_rbf_kmeans.mat
+- C_mlp.mat
+- C_lvq.mat
+- C_CNN.mat</code></pre>
+<hr>
+<p>Assessment2</p>
+<p>You could download the whole file with script and report in 1716309_Yuxuan_Wu.zip from my own repository</p>
+<p><a class="link" target="_blank" rel="noopener" href="https://github.com/yuxuanwu17/INT301_Assessment2">https://github.com/yuxuanwu17/INT301_Assessment2<i class="fas fa-external-link-alt"></i></a></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：MATLAB based neural network for image classification</li>
+        <li>Post author：Yuxuan Wu</li>
+        <li>Create time：2021-01-25 20:56:06</li>
+        <li>
+            Post link：yuxuanwu17.github.io2021/01/25/matlab/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/01/25/Linux_htop/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Linux htop 详解</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/01/25/Hadoop/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Hadoop based big data analysis</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span> -
+            
+            2021 <i class="fas fa-heart icon-animate"></i> <a href="/">Yuxuan Wu</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count <span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a> | Theme <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.3.1</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Project-overview"><span class="nav-number">1.</span> <span class="nav-text">Project overview :</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Files-running-order"><span class="nav-number">2.</span> <span class="nav-text">Files running order</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Components-Scripts-inside-the-project"><span class="nav-number">3.</span> <span class="nav-text">Components&#x2F;Scripts inside the project</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-script-part"><span class="nav-number">4.</span> <span class="nav-text">The script part</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#figure-preprocessing-m"><span class="nav-number">4.1.</span> <span class="nav-text">figure_preprocessing.m</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#data-partition-m"><span class="nav-number">4.2.</span> <span class="nav-text">data_partition.m</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ass2-CNN-m"><span class="nav-number">4.3.</span> <span class="nav-text">ass2_CNN.m</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ass2-mlp-m"><span class="nav-number">4.4.</span> <span class="nav-text">ass2_mlp.m</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ass2-lvq-m"><span class="nav-number">4.5.</span> <span class="nav-text">ass2_lvq.m</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ass2-rbf-kmean-m"><span class="nav-number">4.6.</span> <span class="nav-text">ass2_rbf_kmean.m</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ass2-rbf-som-m"><span class="nav-number">4.7.</span> <span class="nav-text">ass2_rbf_som.m</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ass2-confusion-matrix-summary-m"><span class="nav-number">4.8.</span> <span class="nav-text">ass2_confusion_matrix_summary.m</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-function-part-assembled-function-for-reproduction"><span class="nav-number">5.</span> <span class="nav-text">The function part (assembled function for reproduction)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#getimdata-m"><span class="nav-number">5.1.</span> <span class="nav-text">getimdata.m</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getimdata2-m"><span class="nav-number">5.2.</span> <span class="nav-text">getimdata2.m</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RBF-training-kmeans-m"><span class="nav-number">5.3.</span> <span class="nav-text">RBF_training_kmeans.m</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RBF-training-som-m"><span class="nav-number">5.4.</span> <span class="nav-text">RBF_training_som.m</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RBF-predict-m"><span class="nav-number">5.5.</span> <span class="nav-text">RBF_predict.m</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getcls-m"><span class="nav-number">5.6.</span> <span class="nav-text">getcls.m</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rate-m"><span class="nav-number">5.7.</span> <span class="nav-text">rate.m</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Saved-parameters"><span class="nav-number">6.</span> <span class="nav-text">Saved parameters</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#train-test-data-mat"><span class="nav-number">6.1.</span> <span class="nav-text">train_test_data.mat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#som-net-data-mat"><span class="nav-number">6.2.</span> <span class="nav-text">som_net_data.mat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lvq-360-mat"><span class="nav-number">6.3.</span> <span class="nav-text">lvq_360.mat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lvq-24-mat"><span class="nav-number">6.4.</span> <span class="nav-text">lvq_24.mat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kmeans-plot-mat"><span class="nav-number">6.5.</span> <span class="nav-text">kmeans_plot.mat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Confusion-matrix-summary"><span class="nav-number">6.6.</span> <span class="nav-text">Confusion_matrix summary:</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

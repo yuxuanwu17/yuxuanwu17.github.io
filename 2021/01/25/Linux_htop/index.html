@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Yuxuan Wu">
+    
+    <title>
+        
+            Linux htop 详解 |
+        
+        Yuxuan Wu
+    </title>
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep coding and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.3.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days age","week":"%s weeks age","month":"%s months age","year":"%s years age"};
+  </script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Yuxuan Wu
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                LINKS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content normal-code-theme">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Linux htop 详解</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Yuxuan Wu</span>
+                        <span class="level">Lv1</span>
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i> 2021-01-25 21:22:06
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Linux/">Linux</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i> <span>1.2k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i> <span>4 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>之前在学校实验室工作的时候，接触的第一个命令就是htop。之前就是觉得这个花花绿绿的界面很有趣（牛逼），如下图，常常在女朋友面前故作牛逼的打开（<em>实际就看看我的程序在不在跑，虚伪的不行🤪</em>）</p>
+<p><img src="https://pic1.zhimg.com/v2-317c74bdfc0734f88813c5fe532d3220_b.png" alt="img"></p>
+<p>为了以后装逼更有资本，我觉得得仔细弄清楚这些值到底是干什么的</p>
+<p>本篇文章参考</p>
+<p>Understanding Output of htop Command - Linux Togetherlinuxtogether.org</p>
+<h3 id="htop是top的升级版-允许用户监视系统上运行的进程及其完整的命令行"><a href="#htop是top的升级版-允许用户监视系统上运行的进程及其完整的命令行" class="headerlink" title="htop是top的升级版,允许用户监视系统上运行的进程及其完整的命令行"></a>htop是top的升级版,允许用户监视系统上运行的进程及其完整的命令行</h3><ol>
+<li>系统不会自带，若是Ubuntu，sudo apt, 若是Centos， yum 可以安装。根据不过系统来进行安装</li>
+<li>支持用户交互，可以通过鼠标来kill进程而不用通过输入其PID，支持用鼠标上下拖动，且不同的颜色代表不同的意思。</li>
+<li>允许用户根据CPU，内存和时间间隔对进程进行排序</li>
+</ol>
+<h3 id="htop-的安装"><a href="#htop-的安装" class="headerlink" title="htop 的安装"></a>htop 的安装</h3><p>Ubuntu 安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install htop</span><br></pre></td></tr></table></figure>
+<p>CentOS 安装</p>
+<p><a class="link"   target="_blank" rel="noopener" href="http://www.vue5.com/centos/23046.htmlwww.vue5.com" >http://www.vue5.com/centos/23046.htmlwww.vue5.com<i class="fas fa-external-link-alt"></i></a></p>
+<p><strong>基本的概念</strong></p>
+<p>tasks/process 进程， thread 线程相关的知识可以从下面的链接学习</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://www.zhihu.com/question/307100151/answer/894486042" >如何理解：程序、进程、线程、并发、并行、高并发？<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/125716637" >宇宙之一粟：为什么校招面试中“线程与进程的区别”老是被问到?我该如何回答？<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/difference-between-process-and-thread/" >Difference between Process and Thread - GeeksforGeeks<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/82746153" >什么是虚拟内存(Virtual Memory)?<i class="fas fa-external-link-alt"></i></a></p>
+<p><img src="https://pic2.zhimg.com/v2-f876d2e42e8d5e1110f22f7198fcc591_b.png" alt="img"></p>
+<h3 id="红色边框"><a href="#红色边框" class="headerlink" title="红色边框"></a>红色边框</h3><p><em>数字1，2，3，4分别代表CPU处理器/核，上图是一个四核的处理器</em></p>
+<h3 id="灰色边框（progress-bar）"><a href="#灰色边框（progress-bar）" class="headerlink" title="灰色边框（progress bar）"></a>灰色边框（progress bar）</h3><p><em>每一个CPU的总用量情况，注意这条上面会有不同的颜色：</em></p>
+<ol>
+<li>蓝色：显示低优先级(low priority)进程使用的CPU百分比。 </li>
+<li>绿色：显示用于普通用户(user)拥有的进程的CPU百分比。 </li>
+<li>红色：显示系统进程(kernel threads)使用的CPU百分比。</li>
+<li>橙色：显示IRQ时间使用的CPU百分比。</li>
+<li>洋红色(Magenta)：显示Soft IRQ时间消耗的CPU百分比。</li>
+<li>灰色：显示IO等待时间消耗的CPU百分比。</li>
+<li>青色：显示窃取时间(Steal time)消耗的CPU百分比。</li>
+</ol>
+<h3 id="黄色边框"><a href="#黄色边框" class="headerlink" title="黄色边框"></a>黄色边框</h3><p><em>提供了内存（Memory）和交换（Swap）使用情况。 类似于CPU中的进度条，内存监视也包含具有多种颜色的进度条：</em></p>
+<ol>
+<li>绿色：显示内存页面占用的RAM百分比</li>
+<li>蓝色：显示缓冲区页面占用的RAM百分比</li>
+<li>橙色：显示缓存页面占用的RAM百分比</li>
+</ol>
+<p><img src="https://pic1.zhimg.com/v2-e9a5539a25c37421fc429424aab510b8_b.png" alt="img"></p>
+<h3 id="蓝色边框"><a href="#蓝色边框" class="headerlink" title="蓝色边框"></a>蓝色边框</h3><ul>
+<li><p><strong>第一行 (Tasks, thr, running)</strong></p>
+</li>
+<li><p>参考上面的屏幕截图，我们在计算机上运行的106个任务(tasks)被分解为113个线程(thread)，其中只有1个进程处于运行(running)状态。</p>
+</li>
+<li><p>任务(tasks)是打开的进程总数的代表，但并不是每个打开的进程都在不断消耗CPU。 每个进程都处于几种状态</p>
+</li>
+<li><p>R: Running：表示进程(process)正在使用CPU</p>
+</li>
+<li><p>S: Sleeping: 通常进程在大多数时间都处于睡眠状态，并以固定的时间间隔执行小检查，或者等待用户输入后再返回运行状态。</p>
+</li>
+<li><p>T/S: Traced/Stoped: 表示进程正在处于暂停的状态</p>
+</li>
+<li><p>Z:Zombie or defunct:已完成执行但在进程表中仍具有条目的进程。</p>
+</li>
+<li><p><strong>第二行  Load Average</strong></p>
+</li>
+<li><p>三个值是指系统在最后1分钟，最近5分钟和最后15分钟的平均负载 (0.21,0.19,0.15)</p>
+</li>
+<li><p><strong>第三行 Uptime</strong></p>
+</li>
+<li><p>表示这个系统一共运行了多长的时间，这里一共运行了78天</p>
+</li>
+</ul>
+<h3 id="下半部分"><a href="#下半部分" class="headerlink" title="下半部分"></a>下半部分</h3><p><img src="https://pic2.zhimg.com/v2-dd7ca8f231cfa317243987fd4bf02189_b.png" alt="img"></p>
+<ul>
+<li>PID – 描述进程的ID号</li>
+<li>USER – 描述进程的所有者（谁跑的）</li>
+<li>PRI – 描述Linux内核查看的进程优先级</li>
+<li>NI – 描述由用户或root重置的进程优先级</li>
+<li>VIR – 它描述进程正在使用的虚拟内存 （virtual memory）</li>
+<li>RES – 描述进程正在消耗的物理内存（physical memory）</li>
+<li>SHR – 描述进程正在使用的共享内存（shared memory）</li>
+<li>S – 描述流程的当前状态 (state)</li>
+<li>CPU％ – 描述每个进程消耗的CPU百分比</li>
+<li>MEM％ – 描述每个进程消耗的内存百分比</li>
+<li>TIME+ – 显示自流程开始执行以来的时间</li>
+<li>Command –它与每个进程并行显示完整的命令执行 (比如/usr/lib/R)</li>
+</ul>
+<hr>
+<h3 id="一些快捷键"><a href="#一些快捷键" class="headerlink" title="一些快捷键"></a>一些快捷键</h3><p>u – 用于显示特定用户拥有的所有进程。</p>
+<p>P –用于基于高CPU消耗对进程进行排序。</p>
+<p>M –用于基于高内存消耗对进程进行排序。</p>
+<p>T –用于根据时间段对过程进行排序。</p>
+<p>h –用于打开帮助窗口并查看此处未提及的更多快捷方式。</p>
+<p><strong>帮助： htop -h</strong></p>
+<p><strong>更细致的解释：man htop</strong></p>
+<p><img src="https://pic1.zhimg.com/v2-3aece676cc1a36e4ea439e75ce81b238_b.png" alt="img"></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：Linux htop 详解</li>
+        <li>Post author：Yuxuan Wu</li>
+        <li>Create time：2021-01-25 21:22:06</li>
+        <li>
+            Post link：yuxuanwu17.github.io2021/01/25/Linux_htop/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/01/25/MATLAB%E5%9B%BE%E7%89%87%E6%8F%90%E5%8F%96%E4%B8%8E%E5%88%86%E6%9E%90/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">基于MATLAB的图片提取和分析</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/01/25/matlab/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">MATLAB based neural network for image classification</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span> -
+            
+            2021 <i class="fas fa-heart icon-animate"></i> <a href="/">Yuxuan Wu</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count <span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a> | Theme <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.3.1</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#htop%E6%98%AFtop%E7%9A%84%E5%8D%87%E7%BA%A7%E7%89%88-%E5%85%81%E8%AE%B8%E7%94%A8%E6%88%B7%E7%9B%91%E8%A7%86%E7%B3%BB%E7%BB%9F%E4%B8%8A%E8%BF%90%E8%A1%8C%E7%9A%84%E8%BF%9B%E7%A8%8B%E5%8F%8A%E5%85%B6%E5%AE%8C%E6%95%B4%E7%9A%84%E5%91%BD%E4%BB%A4%E8%A1%8C"><span class="nav-number">1.</span> <span class="nav-text">htop是top的升级版,允许用户监视系统上运行的进程及其完整的命令行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#htop-%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">htop 的安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%A2%E8%89%B2%E8%BE%B9%E6%A1%86"><span class="nav-number">3.</span> <span class="nav-text">红色边框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%81%B0%E8%89%B2%E8%BE%B9%E6%A1%86%EF%BC%88progress-bar%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">灰色边框（progress bar）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BB%84%E8%89%B2%E8%BE%B9%E6%A1%86"><span class="nav-number">5.</span> <span class="nav-text">黄色边框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%93%9D%E8%89%B2%E8%BE%B9%E6%A1%86"><span class="nav-number">6.</span> <span class="nav-text">蓝色边框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E5%8D%8A%E9%83%A8%E5%88%86"><span class="nav-number">7.</span> <span class="nav-text">下半部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">8.</span> <span class="nav-text">一些快捷键</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

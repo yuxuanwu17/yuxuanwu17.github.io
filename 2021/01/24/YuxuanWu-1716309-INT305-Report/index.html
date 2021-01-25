@@ -23,7 +23,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.3.1"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep coding and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.3.1"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days age","week":"%s weeks age","month":"%s months age","year":"%s years age"};
   </script>
 <!-- hexo injector head_end start -->
@@ -206,7 +206,7 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/Machine-learning-EDA-kaggle-python/">Machine learning, EDA, kaggle, python</a>
+                        <a href="/tags/kaggle/">kaggle</a>
                     </li>
                 
             </ul>
@@ -475,100 +475,29 @@ The number of testing sample is 60</code></pre>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> scipy.stats <span class="keyword">import</span> chi2_contingency</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">heart_data = df.copy()</span><br><span class="line">cat_features = [<span class="string">&quot;anaemia&quot;</span>,<span class="string">&quot;diabetes&quot;</span>,<span class="string">&quot;high_blood_pressure&quot;</span>,<span class="string">&quot;sex&quot;</span>,<span class="string">&quot;smoking&quot;</span>,<span class="string">&quot;DEATH_EVENT&quot;</span>]</span><br><span class="line">num_features = pd.Series(heart_data.columns)</span><br><span class="line">num_features = num_features[~num_features.isin(cat_features)]</span><br><span class="line">num_features</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> cat_features:</span><br><span class="line">    ct = pd.crosstab(columns=heart_data[i],index=heart_data[<span class="string">&quot;DEATH_EVENT&quot;</span>])</span><br><span class="line">    stat, p, dof, expected = chi2_contingency(ct)</span><br><span class="line">    print(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">    print(<span class="string">&#x27;-&#x27;</span>*<span class="built_in">len</span>(<span class="string">&#x27;CROSSTAB BETWEEN &#123;&#125; &amp; DEATH_EVENT&#x27;</span>.<span class="built_in">format</span>(i.upper())))</span><br><span class="line">    print(<span class="string">&quot;CROSSTAB BETWEEN &#123;&#125; &amp; DEATH_EVENT&quot;</span>.<span class="built_in">format</span>(i.upper()))</span><br><span class="line">    print(<span class="string">&#x27;-&#x27;</span>*<span class="built_in">len</span>(<span class="string">&#x27;CROSSTAB BETWEEN &#123;&#125; &amp; DEATH_EVENT&#x27;</span>.<span class="built_in">format</span>(i.upper())))</span><br><span class="line">    print(ct)</span><br><span class="line">    print(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">    print(<span class="string">&quot;H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; &#123;&#125; \nH1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; &#123;&#125;&quot;</span>.<span class="built_in">format</span>(i.upper(),i.upper()))</span><br><span class="line">    print(<span class="string">&quot;\nP-VALUE: &#123;&#125;&quot;</span>.<span class="built_in">format</span>(np.<span class="built_in">round</span>(p,<span class="number">2</span>)))</span><br><span class="line">    print(<span class="string">&quot;REJECT H0&quot;</span> <span class="keyword">if</span> p&lt;<span class="number">0.05</span> <span class="keyword">else</span> <span class="string">&quot;FAILED TO REJECT H0&quot;</span>)</span><br></pre></td></tr></table></figure>
 
-
-<pre><code>--------------------------------------
-CROSSTAB BETWEEN ANAEMIA &amp; DEATH_EVENT
---------------------------------------
-anaemia        0   1
-DEATH_EVENT         
-0            120  83
-1             50  46
-
-
-H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; ANAEMIA 
-H1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; ANAEMIA
-
-P-VALUE: 0.31
-FAILED TO REJECT H0
-
-
----------------------------------------
-CROSSTAB BETWEEN DIABETES &amp; DEATH_EVENT
----------------------------------------
-diabetes       0   1
-DEATH_EVENT         
-0            118  85
-1             56  40
-
-
-H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; DIABETES 
-H1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; DIABETES
-
-P-VALUE: 0.93
-FAILED TO REJECT H0
-
-
---------------------------------------------------
-CROSSTAB BETWEEN HIGH_BLOOD_PRESSURE &amp; DEATH_EVENT
---------------------------------------------------
-high_blood_pressure    0   1
-DEATH_EVENT                 
-0                    137  66
-1                     57  39
-
-
-H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; HIGH_BLOOD_PRESSURE 
-H1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; HIGH_BLOOD_PRESSURE
-
-P-VALUE: 0.21
-FAILED TO REJECT H0
-
-
-----------------------------------
-CROSSTAB BETWEEN SEX &amp; DEATH_EVENT
-----------------------------------
-sex           0    1
-DEATH_EVENT         
-0            71  132
-1            34   62
-
-
-H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; SEX 
-H1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; SEX
-
-P-VALUE: 0.96
-FAILED TO REJECT H0
-
-
---------------------------------------
-CROSSTAB BETWEEN SMOKING &amp; DEATH_EVENT
---------------------------------------
-smoking        0   1
-DEATH_EVENT         
-0            137  66
-1             66  30
-
-
-H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; SMOKING 
-H1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; SMOKING
-
-P-VALUE: 0.93
-FAILED TO REJECT H0
-
-
-------------------------------------------
-CROSSTAB BETWEEN DEATH_EVENT &amp; DEATH_EVENT
-------------------------------------------
-DEATH_EVENT    0   1
-DEATH_EVENT         
-0            203   0
-1              0  96
-
-
-H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; DEATH_EVENT 
-H1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; DEATH_EVENT
-
-P-VALUE: 0.0
+<p>​<br>    ————————————–<br>    CROSSTAB BETWEEN ANAEMIA &amp; DEATH_EVENT<br>    ————————————–<br>    anaemia        0   1<br>    DEATH_EVENT<br>    0            120  83<br>    1             50  46</p>
+<p>​<br>    H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; ANAEMIA<br>    H1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; ANAEMIA</p>
+<pre><code>P-VALUE: 0.31
+FAILED TO REJECT H0</code></pre>
+<p>​<br>    —————————————<br>    CROSSTAB BETWEEN DIABETES &amp; DEATH_EVENT<br>    —————————————<br>    diabetes       0   1<br>    DEATH_EVENT<br>    0            118  85<br>    1             56  40</p>
+<p>​<br>    H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; DIABETES<br>    H1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; DIABETES</p>
+<pre><code>P-VALUE: 0.93
+FAILED TO REJECT H0</code></pre>
+<p>​<br>    ————————————————–<br>    CROSSTAB BETWEEN HIGH_BLOOD_PRESSURE &amp; DEATH_EVENT<br>    ————————————————–<br>    high_blood_pressure    0   1<br>    DEATH_EVENT<br>    0                    137  66<br>    1                     57  39</p>
+<p>​<br>    H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; HIGH_BLOOD_PRESSURE<br>    H1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; HIGH_BLOOD_PRESSURE</p>
+<pre><code>P-VALUE: 0.21
+FAILED TO REJECT H0</code></pre>
+<p>​<br>    ———————————-<br>    CROSSTAB BETWEEN SEX &amp; DEATH_EVENT<br>    ———————————-<br>    sex           0    1<br>    DEATH_EVENT<br>    0            71  132<br>    1            34   62</p>
+<p>​<br>    H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; SEX<br>    H1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; SEX</p>
+<pre><code>P-VALUE: 0.96
+FAILED TO REJECT H0</code></pre>
+<p>​<br>    ————————————–<br>    CROSSTAB BETWEEN SMOKING &amp; DEATH_EVENT<br>    ————————————–<br>    smoking        0   1<br>    DEATH_EVENT<br>    0            137  66<br>    1             66  30</p>
+<p>​<br>    H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; SMOKING<br>    H1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; SMOKING</p>
+<pre><code>P-VALUE: 0.93
+FAILED TO REJECT H0</code></pre>
+<p>​<br>    ——————————————<br>    CROSSTAB BETWEEN DEATH_EVENT &amp; DEATH_EVENT<br>    ——————————————<br>    DEATH_EVENT    0   1<br>    DEATH_EVENT<br>    0            203   0<br>    1              0  96</p>
+<p>​<br>    H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; DEATH_EVENT<br>    H1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; DEATH_EVENT</p>
+<pre><code>P-VALUE: 0.0
 REJECT H0</code></pre>
 <p><strong>Method 2: correlation analysis</strong></p>
 <ul>
@@ -683,8 +612,7 @@ Accuracy of linear SVM model with feature creatinine_phosphokinase is : 83.33%</
 <li>C parameter trades off correct classification of training examples against maximization of the decision function’s margin</li>
 </ul>
 <h4 id="Evaluation-method"><a href="#Evaluation-method" class="headerlink" title="Evaluation method"></a>Evaluation method</h4><p>Mean squared error (MSE)</p>
-<p>$$<br>MSE = \frac{1}{n}\sum_{i=1}^n(Y_i- \hat{Y_i})^2</p>
-<p>$$</p>
+<p>$$<br>MSE = \frac{1}{n}\sum_{i=1}^n(Y_i- \hat{Y_i})^2<br>$$</p>
 <p>where $Y_i$ is the label and $\hat{Y_i}$ is the predicted label by model</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">heart_data = df.copy()</span><br><span class="line"></span><br><span class="line">X = heart_data.iloc[:, <span class="number">0</span>:<span class="number">11</span>]</span><br><span class="line">y = heart_data[<span class="string">&#x27;DEATH_EVENT&#x27;</span>]</span><br><span class="line"></span><br><span class="line">selected_feature = [<span class="string">&#x27;serum_creatinine&#x27;</span>,<span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;ejection_fraction&#x27;</span>,<span class="string">&#x27;creatinine_phosphokinase&#x27;</span>]</span><br><span class="line">X_processed = X[selected_feature]</span><br><span class="line">X_processed = StandardScaler().fit_transform(X_processed)</span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X_processed, y, test_size=<span class="number">0.2</span>, shuffle=<span class="literal">True</span>, random_state=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## linear svm</span></span><br><span class="line"><span class="comment"># sv_clf = LinearSVC(loss=&#x27;hinge&#x27;,random_state=1, C=1.0, penalty = &#x27;l2&#x27;)</span></span><br><span class="line">sv_clf = SVC(kernel=<span class="string">&quot;linear&quot;</span>,random_state=<span class="number">1</span>)</span><br><span class="line">sv_clf.fit(X_train, y_train)</span><br><span class="line">sv_clf_pred = sv_clf.predict(X_test)</span><br><span class="line">sv_clf_acc = accuracy_score(y_test,sv_clf_pred)</span><br><span class="line">sv_clf_mse = mean_squared_error(y_test,sv_clf_pred)</span><br><span class="line">print(<span class="string">&quot;Accuracy of linear SVM model is :&quot;</span>,<span class="string">&quot;&#123;:.2f&#125;%&quot;</span>.<span class="built_in">format</span>(<span class="number">100</span>*sv_clf_acc))</span><br><span class="line">print(<span class="string">&quot;Mean squared error of linear SVM model is :&quot;</span>,<span class="string">&quot;&#123;:.2f&#125;&quot;</span>.<span class="built_in">format</span>(sv_clf_mse))</span><br><span class="line"></span><br><span class="line"><span class="comment">## RBF kernel SVM</span></span><br><span class="line">sv_clf = SVC(kernel=<span class="string">&quot;rbf&quot;</span>,random_state=<span class="number">1</span>, C=<span class="number">1.0</span>, gamma=<span class="number">0.1</span>)</span><br><span class="line">sv_clf.fit(X_train, y_train)</span><br><span class="line">sv_clf_pred = sv_clf.predict(X_test)</span><br><span class="line">sv_clf_acc = accuracy_score(y_test,sv_clf_pred)</span><br><span class="line">sv_clf_mse = mean_squared_error(y_test,sv_clf_pred)</span><br><span class="line">print(<span class="string">&quot;Accuracy of RBF SVM model is :&quot;</span>,<span class="string">&quot;&#123;:.2f&#125;%&quot;</span>.<span class="built_in">format</span>(<span class="number">100</span>*sv_clf_acc))</span><br><span class="line">print(<span class="string">&quot;Mean squared error of linear SVM model is :&quot;</span>,<span class="string">&quot;&#123;:.2f&#125;&quot;</span>.<span class="built_in">format</span>(sv_clf_mse))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <pre><code>Accuracy of linear SVM model is : 83.33%

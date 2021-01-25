@@ -241,100 +241,29 @@ The number of testing sample is 60</code></pre>
 </ul>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> scipy.stats <span class="keyword">import</span> chi2_contingency</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">heart_data = df.copy()</span><br><span class="line">cat_features = [<span class="string">&quot;anaemia&quot;</span>,<span class="string">&quot;diabetes&quot;</span>,<span class="string">&quot;high_blood_pressure&quot;</span>,<span class="string">&quot;sex&quot;</span>,<span class="string">&quot;smoking&quot;</span>,<span class="string">&quot;DEATH_EVENT&quot;</span>]</span><br><span class="line">num_features = pd.Series(heart_data.columns)</span><br><span class="line">num_features = num_features[~num_features.isin(cat_features)]</span><br><span class="line">num_features</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> cat_features:</span><br><span class="line">    ct = pd.crosstab(columns=heart_data[i],index=heart_data[<span class="string">&quot;DEATH_EVENT&quot;</span>])</span><br><span class="line">    stat, p, dof, expected = chi2_contingency(ct)</span><br><span class="line">    print(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">    print(<span class="string">&#x27;-&#x27;</span>*<span class="built_in">len</span>(<span class="string">&#x27;CROSSTAB BETWEEN &#123;&#125; &amp; DEATH_EVENT&#x27;</span>.<span class="built_in">format</span>(i.upper())))</span><br><span class="line">    print(<span class="string">&quot;CROSSTAB BETWEEN &#123;&#125; &amp; DEATH_EVENT&quot;</span>.<span class="built_in">format</span>(i.upper()))</span><br><span class="line">    print(<span class="string">&#x27;-&#x27;</span>*<span class="built_in">len</span>(<span class="string">&#x27;CROSSTAB BETWEEN &#123;&#125; &amp; DEATH_EVENT&#x27;</span>.<span class="built_in">format</span>(i.upper())))</span><br><span class="line">    print(ct)</span><br><span class="line">    print(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">    print(<span class="string">&quot;H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; &#123;&#125; \nH1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; &#123;&#125;&quot;</span>.<span class="built_in">format</span>(i.upper(),i.upper()))</span><br><span class="line">    print(<span class="string">&quot;\nP-VALUE: &#123;&#125;&quot;</span>.<span class="built_in">format</span>(np.<span class="built_in">round</span>(p,<span class="number">2</span>)))</span><br><span class="line">    print(<span class="string">&quot;REJECT H0&quot;</span> <span class="keyword">if</span> p&lt;<span class="number">0.05</span> <span class="keyword">else</span> <span class="string">&quot;FAILED TO REJECT H0&quot;</span>)</span><br></pre></td></tr></table></figure>
 
-
-<pre><code>--------------------------------------
-CROSSTAB BETWEEN ANAEMIA &amp; DEATH_EVENT
---------------------------------------
-anaemia        0   1
-DEATH_EVENT         
-0            120  83
-1             50  46
-
-
-H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; ANAEMIA 
-H1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; ANAEMIA
-
-P-VALUE: 0.31
-FAILED TO REJECT H0
-
-
----------------------------------------
-CROSSTAB BETWEEN DIABETES &amp; DEATH_EVENT
----------------------------------------
-diabetes       0   1
-DEATH_EVENT         
-0            118  85
-1             56  40
-
-
-H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; DIABETES 
-H1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; DIABETES
-
-P-VALUE: 0.93
-FAILED TO REJECT H0
-
-
---------------------------------------------------
-CROSSTAB BETWEEN HIGH_BLOOD_PRESSURE &amp; DEATH_EVENT
---------------------------------------------------
-high_blood_pressure    0   1
-DEATH_EVENT                 
-0                    137  66
-1                     57  39
-
-
-H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; HIGH_BLOOD_PRESSURE 
-H1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; HIGH_BLOOD_PRESSURE
-
-P-VALUE: 0.21
-FAILED TO REJECT H0
-
-
-----------------------------------
-CROSSTAB BETWEEN SEX &amp; DEATH_EVENT
-----------------------------------
-sex           0    1
-DEATH_EVENT         
-0            71  132
-1            34   62
-
-
-H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; SEX 
-H1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; SEX
-
-P-VALUE: 0.96
-FAILED TO REJECT H0
-
-
---------------------------------------
-CROSSTAB BETWEEN SMOKING &amp; DEATH_EVENT
---------------------------------------
-smoking        0   1
-DEATH_EVENT         
-0            137  66
-1             66  30
-
-
-H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; SMOKING 
-H1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; SMOKING
-
-P-VALUE: 0.93
-FAILED TO REJECT H0
-
-
-------------------------------------------
-CROSSTAB BETWEEN DEATH_EVENT &amp; DEATH_EVENT
-------------------------------------------
-DEATH_EVENT    0   1
-DEATH_EVENT         
-0            203   0
-1              0  96
-
-
-H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; DEATH_EVENT 
-H1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; DEATH_EVENT
-
-P-VALUE: 0.0
+<p>​<br>    ————————————–<br>    CROSSTAB BETWEEN ANAEMIA &amp; DEATH_EVENT<br>    ————————————–<br>    anaemia        0   1<br>    DEATH_EVENT<br>    0            120  83<br>    1             50  46</p>
+<p>​<br>    H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; ANAEMIA<br>    H1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; ANAEMIA</p>
+<pre><code>P-VALUE: 0.31
+FAILED TO REJECT H0</code></pre>
+<p>​<br>    —————————————<br>    CROSSTAB BETWEEN DIABETES &amp; DEATH_EVENT<br>    —————————————<br>    diabetes       0   1<br>    DEATH_EVENT<br>    0            118  85<br>    1             56  40</p>
+<p>​<br>    H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; DIABETES<br>    H1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; DIABETES</p>
+<pre><code>P-VALUE: 0.93
+FAILED TO REJECT H0</code></pre>
+<p>​<br>    ————————————————–<br>    CROSSTAB BETWEEN HIGH_BLOOD_PRESSURE &amp; DEATH_EVENT<br>    ————————————————–<br>    high_blood_pressure    0   1<br>    DEATH_EVENT<br>    0                    137  66<br>    1                     57  39</p>
+<p>​<br>    H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; HIGH_BLOOD_PRESSURE<br>    H1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; HIGH_BLOOD_PRESSURE</p>
+<pre><code>P-VALUE: 0.21
+FAILED TO REJECT H0</code></pre>
+<p>​<br>    ———————————-<br>    CROSSTAB BETWEEN SEX &amp; DEATH_EVENT<br>    ———————————-<br>    sex           0    1<br>    DEATH_EVENT<br>    0            71  132<br>    1            34   62</p>
+<p>​<br>    H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; SEX<br>    H1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; SEX</p>
+<pre><code>P-VALUE: 0.96
+FAILED TO REJECT H0</code></pre>
+<p>​<br>    ————————————–<br>    CROSSTAB BETWEEN SMOKING &amp; DEATH_EVENT<br>    ————————————–<br>    smoking        0   1<br>    DEATH_EVENT<br>    0            137  66<br>    1             66  30</p>
+<p>​<br>    H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; SMOKING<br>    H1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; SMOKING</p>
+<pre><code>P-VALUE: 0.93
+FAILED TO REJECT H0</code></pre>
+<p>​<br>    ——————————————<br>    CROSSTAB BETWEEN DEATH_EVENT &amp; DEATH_EVENT<br>    ——————————————<br>    DEATH_EVENT    0   1<br>    DEATH_EVENT<br>    0            203   0<br>    1              0  96</p>
+<p>​<br>    H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; DEATH_EVENT<br>    H1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; DEATH_EVENT</p>
+<pre><code>P-VALUE: 0.0
 REJECT H0</code></pre>
 <p><strong>Method 2: correlation analysis</strong></p>
 <ul>
@@ -449,8 +378,7 @@ Accuracy of linear SVM model with feature creatinine_phosphokinase is : 83.33%</
 <li>C parameter trades off correct classification of training examples against maximization of the decision function’s margin</li>
 </ul>
 <h4 id="Evaluation-method"><a href="#Evaluation-method" class="headerlink" title="Evaluation method"></a>Evaluation method</h4><p>Mean squared error (MSE)</p>
-<p>$$<br>MSE = \frac{1}{n}\sum_{i=1}^n(Y_i- \hat{Y_i})^2</p>
-<p>$$</p>
+<p>$$<br>MSE = \frac{1}{n}\sum_{i=1}^n(Y_i- \hat{Y_i})^2<br>$$</p>
 <p>where $Y_i$ is the label and $\hat{Y_i}$ is the predicted label by model</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">heart_data = df.copy()</span><br><span class="line"></span><br><span class="line">X = heart_data.iloc[:, <span class="number">0</span>:<span class="number">11</span>]</span><br><span class="line">y = heart_data[<span class="string">&#x27;DEATH_EVENT&#x27;</span>]</span><br><span class="line"></span><br><span class="line">selected_feature = [<span class="string">&#x27;serum_creatinine&#x27;</span>,<span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;ejection_fraction&#x27;</span>,<span class="string">&#x27;creatinine_phosphokinase&#x27;</span>]</span><br><span class="line">X_processed = X[selected_feature]</span><br><span class="line">X_processed = StandardScaler().fit_transform(X_processed)</span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X_processed, y, test_size=<span class="number">0.2</span>, shuffle=<span class="literal">True</span>, random_state=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## linear svm</span></span><br><span class="line"><span class="comment"># sv_clf = LinearSVC(loss=&#x27;hinge&#x27;,random_state=1, C=1.0, penalty = &#x27;l2&#x27;)</span></span><br><span class="line">sv_clf = SVC(kernel=<span class="string">&quot;linear&quot;</span>,random_state=<span class="number">1</span>)</span><br><span class="line">sv_clf.fit(X_train, y_train)</span><br><span class="line">sv_clf_pred = sv_clf.predict(X_test)</span><br><span class="line">sv_clf_acc = accuracy_score(y_test,sv_clf_pred)</span><br><span class="line">sv_clf_mse = mean_squared_error(y_test,sv_clf_pred)</span><br><span class="line">print(<span class="string">&quot;Accuracy of linear SVM model is :&quot;</span>,<span class="string">&quot;&#123;:.2f&#125;%&quot;</span>.<span class="built_in">format</span>(<span class="number">100</span>*sv_clf_acc))</span><br><span class="line">print(<span class="string">&quot;Mean squared error of linear SVM model is :&quot;</span>,<span class="string">&quot;&#123;:.2f&#125;&quot;</span>.<span class="built_in">format</span>(sv_clf_mse))</span><br><span class="line"></span><br><span class="line"><span class="comment">## RBF kernel SVM</span></span><br><span class="line">sv_clf = SVC(kernel=<span class="string">&quot;rbf&quot;</span>,random_state=<span class="number">1</span>, C=<span class="number">1.0</span>, gamma=<span class="number">0.1</span>)</span><br><span class="line">sv_clf.fit(X_train, y_train)</span><br><span class="line">sv_clf_pred = sv_clf.predict(X_test)</span><br><span class="line">sv_clf_acc = accuracy_score(y_test,sv_clf_pred)</span><br><span class="line">sv_clf_mse = mean_squared_error(y_test,sv_clf_pred)</span><br><span class="line">print(<span class="string">&quot;Accuracy of RBF SVM model is :&quot;</span>,<span class="string">&quot;&#123;:.2f&#125;%&quot;</span>.<span class="built_in">format</span>(<span class="number">100</span>*sv_clf_acc))</span><br><span class="line">print(<span class="string">&quot;Mean squared error of linear SVM model is :&quot;</span>,<span class="string">&quot;&#123;:.2f&#125;&quot;</span>.<span class="built_in">format</span>(sv_clf_mse))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <pre><code>Accuracy of linear SVM model is : 83.33%
@@ -658,7 +586,7 @@ Heart Not Failed       0.85      0.93      0.89        43
 <p>Github:<br><a class="link"   href="https://github.com/yuxuanwu17/kaggle/blob/main/Final_report.ipynb" >https://github.com/yuxuanwu17/kaggle/blob/main/Final_report.ipynb<i class="fas fa-external-link-alt"></i></a></p>
 ]]></content>
       <tags>
-        <tag>Machine learning, EDA, kaggle, python</tag>
+        <tag>kaggle</tag>
       </tags>
   </entry>
   <entry>
@@ -933,7 +861,321 @@ Heart Not Failed       0.85      0.93      0.89        43
 <p><strong>Github:</strong> <a class="link"   href="https://github.com/yuxuanwu17/INT303-Avocado-prediction" >https://github.com/yuxuanwu17/INT303-Avocado-prediction<i class="fas fa-external-link-alt"></i></a></p>
 ]]></content>
       <tags>
-        <tag>EDA, kaggle, R</tag>
+        <tag>kaggle</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hadoop based big data analysis</title>
+    <url>/2021/01/25/Hadoop/</url>
+    <content><![CDATA[<p>Hadoop comprises three part:</p>
+<ol>
+<li>Main function, including some basic configuration of job</li>
+<li>Mapper class, inherited from and override the Map function</li>
+<li>Reduce class, inherited from Reduce function and override it</li>
+</ol>
+<h3 id="1-Calculate-the-bigram-frequency-and-return-the-Top-10"><a href="#1-Calculate-the-bigram-frequency-and-return-the-Top-10" class="headerlink" title="1. Calculate the bigram frequency and return the Top 10"></a>1. Calculate the bigram frequency and return the Top 10</h3><hr>
+<h4 id="data-cleaning-part-single-world"><a href="#data-cleaning-part-single-world" class="headerlink" title="data cleaning part (single world)"></a>data cleaning part (single world)</h4><ul>
+<li>Use regular expression to extract the useful information</li>
+<li>For the neat of code, I separate the word cleaning part into one method: deleteNotion</li>
+<li>The idea is to loop all the words and feed into the deleteNotion function to clean the data</li>
+<li>Since the word fed into the program is a txt file, we need first calculate each word by .split(“\s+”), and called String [] single_word</li>
+<li>The regular expression is designed to match all the punctuation and numbers except for English words </li>
+<li>Note that \W didn’t include the number, so we have to make a union of numbers and other punctuation in \W, that is [\\w[0-9]]</li>
+<li>Create an ArrayList to store the processed data.</li>
+</ul>
+<h4 id="bigram-extraction"><a href="#bigram-extraction" class="headerlink" title="bigram extraction"></a>bigram extraction</h4><ul>
+<li>loop through the single_word [] list</li>
+<li>Note that: since we are calculating the bigram, the length should be length(single_word)-1</li>
+<li>We also need to ensure that the first and last were not empty</li>
+<li>Then add the data to the newly created Arraylist</li>
+</ul>
+<hr>
+<h3 id="2-Return-the-line-containing-the-word-‘torture’"><a href="#2-Return-the-line-containing-the-word-‘torture’" class="headerlink" title="2. Return the line containing the word ‘torture’"></a>2. Return the line containing the word ‘torture’</h3><ul>
+<li>Use regular expression to separate line and store it in to the list</li>
+<li>The regular expression was written as {\\n{1,}}, detecting the “\n” and store it as one line </li>
+<li>Create an arraylist results to each line </li>
+<li>Loop through the arraylist and use .contain function to find the line contain “torture”</li>
+<li>Note that, the mapper variable and reduce variable should be switched to Text, the attribute problem should take it seriously</li>
+</ul>
+<hr>
+<h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><h4 id="bigram-frequency"><a href="#bigram-frequency" class="headerlink" title="bigram frequency"></a>bigram frequency</h4><p><img src="/fig/wordcount.png" alt="wordcount"></p>
+<h4 id="lines-containing-“torture”"><a href="#lines-containing-“torture”" class="headerlink" title="lines containing “torture”"></a>lines containing “torture”</h4><p><img src="/fig/Shuffled_Maps.png" alt="img"></p>
+<hr>
+<h2 id="Code-resources"><a href="#Code-resources" class="headerlink" title="Code resources"></a>Code resources</h2><p>Github: <a class="link"   href="https://github.com/yuxuanwu17/Hadoop_cw2" >https://github.com/yuxuanwu17/Hadoop_cw2<i class="fas fa-external-link-alt"></i></a></p>
+]]></content>
+      <tags>
+        <tag>Hadoop</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MATLAB based neural network for image classification</title>
+    <url>/2021/01/25/matlab/</url>
+    <content><![CDATA[<h2 id="Project-overview"><a href="#Project-overview" class="headerlink" title="Project overview :"></a>Project overview :</h2><p>This task includes five algorithms to classify the characters segmented from the license plates of automobiles using MATLAB</p>
+<ul>
+<li>MLP (multi-layer perceptron)</li>
+<li>CNN (convolutional neural network)</li>
+<li>LVQ (learning vector quantization)</li>
+<li>RBF1 with k-means clustering</li>
+<li>RBF2 with SOM (self-organizing map)</li>
+</ul>
+<hr>
+<h2 id="Files-running-order"><a href="#Files-running-order" class="headerlink" title="Files running order"></a>Files running order</h2><ol>
+<li>run the figure_preprocessing.m and create a new file folder ass2_processede_data</li>
+<li>run data_partition.m split the dataset in 8:2 version and returned the X_train, X_test, y_train, y_test and save as train_test_data.mat</li>
+<li>run ass2_CNN.m (this script did not use the processed data, but read the figure directly from the original file)</li>
+<li>run ass2_mlp.m </li>
+<li>run ass2_lvq.m</li>
+<li>run ass2_rbf_kmean.m</li>
+<li>run ass2_rbf_som.m</li>
+<li>run ass2_confusion_matrix_summary.m</li>
+</ol>
+<hr>
+<h2 id="Components-Scripts-inside-the-project"><a href="#Components-Scripts-inside-the-project" class="headerlink" title="Components/Scripts inside the project"></a>Components/Scripts inside the project</h2><h2 id="The-script-part"><a href="#The-script-part" class="headerlink" title="The script part"></a>The script part</h2><h3 id="figure-preprocessing-m"><a href="#figure-preprocessing-m" class="headerlink" title="figure_preprocessing.m"></a>figure_preprocessing.m</h3><p>This is the script to extract the ass2data and rewrite to a new file folder ass2_processed_data. </p>
+<pre><code>- read both jpeg and jpg files in all folders ass2_data
+- rewrite into another folders ass2_processed_data with uniform style (jpeg) and uniform naming styles (label+number) e.g. (A1,B10,C99)</code></pre>
+<h3 id="data-partition-m"><a href="#data-partition-m" class="headerlink" title="data_partition.m"></a>data_partition.m</h3><p>This is the script splitted the processed data into training and testing dataset in 8:2 ratio. It adjusted the size and columns or rows for fitting the designed model’s network.</p>
+<pre><code>- read images from the processed folder ass2_processed_data. 
+- split the dataset into 8:2
+- save the splitted samples and parameters as train_test_data.mat</code></pre>
+<h3 id="ass2-CNN-m"><a href="#ass2-CNN-m" class="headerlink" title="ass2_CNN.m"></a>ass2_CNN.m</h3><p>This is the script to conduct the CNN.</p>
+<pre><code>- use imageDataset to store and train the model
+- use splitEachLabel to split the training and testing datasets
+- do not use the train_test_data as the input since CNN has standard samples in Matlab documents
+- imageInputLayer(48,24,1)
+- Layer 1:
+    - kernel size: 3; filters number: 8; padding: same
+    - batchNormalizationLayer
+    - Relu layer
+    - Maxpooling with a pooling size equals [2 2] and Stride equals [2 2]
+- Layer 2:
+    - kernel size: 3; filters number: 16; padding: same    
+    - batchNormalizationLayer
+    - Relu layer
+    - Maxpooling with a pooling size equals [2 2] and Stride equals [2 2]
+- Layer 3:
+    - kernel size: 3; filters number: 32; padding: same    
+    - batchNormalizationLayer
+    - Relu layer
+    - Maxpooling with a pooling size equals [2 2] and Stride equals [2 2]
+- Layer 4:
+    - fully connected layer with neurons equals 24
+    - softmaxLayer
+- calculate the training and testing accuracy
+- return and save the confusion matrix as C_CNN.mat</code></pre>
+<h3 id="ass2-mlp-m"><a href="#ass2-mlp-m" class="headerlink" title="ass2_mlp.m"></a>ass2_mlp.m</h3><p>This is the script to conduct the MLP</p>
+<pre><code>- load the dataset obtained previously train_test_data.mat
+- lr_rate = 0.2;
+- momentum = 0.4;
+- epochs = 1000;
+- 3 layers with 50, 100, 100 
+- Hyperbolic tangent sigmoid transfer function (tansig)
+- gradient descent to update the weights
+- calculate the training and testing accuracy
+- return and save the confusion matrix as C_mlp.mat</code></pre>
+<h3 id="ass2-lvq-m"><a href="#ass2-lvq-m" class="headerlink" title="ass2_lvq.m"></a>ass2_lvq.m</h3><pre><code>- load the dataset obtained previously train_test_data.mat
+- set the cluster into 360 due to its performance, you could also set cluster into 24 for computational convenience
+- lvqnet(24) could achieve ideal performance, but the performance could not be comparable with the cluster set into 360
+- save the lvqnet(360) as lvq_360.mat, uncomment the line if you wish to see the performance
+- calculate the training and testing accuracy
+- return and save the confusion matrix C_lvq.mat</code></pre>
+<h3 id="ass2-rbf-kmean-m"><a href="#ass2-rbf-kmean-m" class="headerlink" title="ass2_rbf_kmean.m"></a>ass2_rbf_kmean.m</h3><pre><code>- load the dataset obtained previously train_test_data.mat
+- use kmeans to return the center of each cluster, the number of cluster is determined as 360
+- use assembled function RBF_training_kmeans to calculate the W (weights), sigma (the variance of the RBF kernel) and the coordinate of each cluster's center 
+- use the previous returned parameter to return the training prediction by assembled function: RBF_predict
+- calculate the training and testing accuracy
+- return and save the confusion matrix C_rbf_kmeans.mat</code></pre>
+<h3 id="ass2-rbf-som-m"><a href="#ass2-rbf-som-m" class="headerlink" title="ass2_rbf_som.m"></a>ass2_rbf_som.m</h3><pre><code>- load the dataset obtained previously train_test_data.mat
+- define the SOM network, the dimension is set to 18*20 for convenience, keep it uniform to the previous number of clusters: 360
+- coverSteps = 10 %% Number of training steps for initial covering of the input space (default = 100)
+- initNeighbor = 80 %% Initial neighborhood size (default = 3)
+- topologyFcn = 'hextop' %% Layer topology function (default = 'hextop')
+- distanceFcn = 'dist' %%  Neuron distance function (default = 'linkdist')
+- once finished the training of SOM network, use assembled function RBF_training_som.m to calculate the weights W, sigma (the variance of the RBF kernel) and center of SOM clusters, which is the IW{1,1}.
+- use the previous returned parameter to return the training prediction by assembled function: RBF_predict
+- return and save the confusion matrix C_rbf_som.mat</code></pre>
+<h3 id="ass2-confusion-matrix-summary-m"><a href="#ass2-confusion-matrix-summary-m" class="headerlink" title="ass2_confusion_matrix_summary.m"></a>ass2_confusion_matrix_summary.m</h3><pre><code>- load the previous saved mat file
+- reshow the confusion matrix
+- compare the performance returned by different neural networks
+- compare the accuracy returned by different neural networks  </code></pre>
+<hr>
+<h2 id="The-function-part-assembled-function-for-reproduction"><a href="#The-function-part-assembled-function-for-reproduction" class="headerlink" title="The function part (assembled function for reproduction)"></a>The function part (assembled function for reproduction)</h2><h3 id="getimdata-m"><a href="#getimdata-m" class="headerlink" title="getimdata.m"></a>getimdata.m</h3><pre><code>- Input: the file path, in this case the processed file with renamed figure and same format jpeg (ass2_processed_data) 
+- Output: Transormed the numerical data into the one-hot encoding vector format (one-hot format)</code></pre>
+<h3 id="getimdata2-m"><a href="#getimdata2-m" class="headerlink" title="getimdata2.m"></a>getimdata2.m</h3><pre><code>- Input: the file path, in this case the processed file with renamed figure and same format jpeg (ass2_processed_data) 
+    - normalize the data into range 0-1
+    - assign the numerical labels to each character
+    - combine all the processed plot into a dataset 2400 * 1152
+    - 2400 stands for the number of samples; 1152 stands for the features in one figure
+- Output: The normalized figure data (0-1), with data and corresponding labels. Labels are in numerical format (1,2,3...24) (without one-hot)
+- This function method is selected in the whole project</code></pre>
+<h3 id="RBF-training-kmeans-m"><a href="#RBF-training-kmeans-m" class="headerlink" title="RBF_training_kmeans.m"></a>RBF_training_kmeans.m</h3><pre><code>- Input: data, labels, number of clusters to be determined by kmeans
+- sigma is determined by the mean Euclidean distance between two clusters
+- k weight matrix is calculated by the radbas(distance of samples between clusters' centers/2*sigma^2)
+- W weights is calculated by the pesudo inverse of (k'*k)*k'*labels</code></pre>
+<h3 id="RBF-training-som-m"><a href="#RBF-training-som-m" class="headerlink" title="RBF_training_som.m"></a>RBF_training_som.m</h3><pre><code>- Input: data, labels and net
+- net is pre-trained by som networks
+- the cluster center is returned by the first layer of som network, which is denoted by net.IW{1,1}
+- sigma is determined by the mean Euclidean distance between two clusters
+- k weight matrix is calculated by the radbas(distance of samples between clusters' centers/2*sigma^2)
+- W weights is calculated by the pesudo inverse of (k'*k)*k'*labels</code></pre>
+<h3 id="RBF-predict-m"><a href="#RBF-predict-m" class="headerlink" title="RBF_predict.m"></a>RBF_predict.m</h3><pre><code>- Input: data, W, sigma, C trained previously from either RBF_training_kmeans or RBF_training_som
+- Output: vectors of the final prediction
+- data could be either training data or testing data</code></pre>
+<h3 id="getcls-m"><a href="#getcls-m" class="headerlink" title="getcls.m"></a>getcls.m</h3><pre><code>- Input: vecs - matrix of column vectors (returned from the RBF_predict.m)
+- Output: cls - matrix where the largest element in each column in vectors is set to 1 and the rest to 0   Ex: vecs = [2 4; 1 5], gives c = [1 0; 0 1]
+- This function is used to return the most likely label in multi-variable classification, especially after the one-hot encoding method</code></pre>
+<h3 id="rate-m"><a href="#rate-m" class="headerlink" title="rate.m"></a>rate.m</h3><pre><code>- Input: matrix of class vectors
+- Computes the percentage of equal columns in t1 and t2, can be used to compute the rate of correct classified patterns in a pattern recognition application
+- Output: number of matching vectors</code></pre>
+<hr>
+<h2 id="Saved-parameters"><a href="#Saved-parameters" class="headerlink" title="Saved parameters"></a>Saved parameters</h2><h3 id="train-test-data-mat"><a href="#train-test-data-mat" class="headerlink" title="train_test_data.mat"></a>train_test_data.mat</h3><pre><code>- the value obtained from the data_partition.m
+- X_train, X_test, y_train, y_value</code></pre>
+<h3 id="som-net-data-mat"><a href="#som-net-data-mat" class="headerlink" title="som_net_data.mat"></a>som_net_data.mat</h3><pre><code>- the network trained by som (it takes long time, for computation convenience)</code></pre>
+<h3 id="lvq-360-mat"><a href="#lvq-360-mat" class="headerlink" title="lvq_360.mat"></a>lvq_360.mat</h3><pre><code>- lvq with cluster set to 360</code></pre>
+<h3 id="lvq-24-mat"><a href="#lvq-24-mat" class="headerlink" title="lvq_24.mat"></a>lvq_24.mat</h3><pre><code>- lvq with cluster set to 24 </code></pre>
+<h3 id="kmeans-plot-mat"><a href="#kmeans-plot-mat" class="headerlink" title="kmeans_plot.mat"></a>kmeans_plot.mat</h3><pre><code>- calculate silhouette value to find the suitable cluster k, but the results are not satisfied
+- return the plot of each epoch</code></pre>
+<h3 id="Confusion-matrix-summary"><a href="#Confusion-matrix-summary" class="headerlink" title="Confusion_matrix summary:"></a>Confusion_matrix summary:</h3><pre><code>- CNN_confusion.mat
+- C_rbf_som.mat
+- C_rbf_kmeans.mat
+- C_mlp.mat
+- C_lvq.mat
+- C_CNN.mat</code></pre>
+<hr>
+<p>Assessment2</p>
+<p>You could download the whole file with script and report in 1716309_Yuxuan_Wu.zip from my own repository</p>
+<p><a class="link" href="https://github.com/yuxuanwu17/INT301_Assessment2">https://github.com/yuxuanwu17/INT301_Assessment2<i class="fas fa-external-link-alt"></i></a></p>
+]]></content>
+      <tags>
+        <tag>Matlab</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux htop 详解</title>
+    <url>/2021/01/25/Linux_htop/</url>
+    <content><![CDATA[<p>之前在学校实验室工作的时候，接触的第一个命令就是htop。之前就是觉得这个花花绿绿的界面很有趣（牛逼），如下图，常常在女朋友面前故作牛逼的打开（<em>实际就看看我的程序在不在跑，虚伪的不行🤪</em>）</p>
+<p><img src="https://pic1.zhimg.com/v2-317c74bdfc0734f88813c5fe532d3220_b.png" alt="img"></p>
+<p>为了以后装逼更有资本，我觉得得仔细弄清楚这些值到底是干什么的</p>
+<p>本篇文章参考</p>
+<p>Understanding Output of htop Command - Linux Togetherlinuxtogether.org</p>
+<h3 id="htop是top的升级版-允许用户监视系统上运行的进程及其完整的命令行"><a href="#htop是top的升级版-允许用户监视系统上运行的进程及其完整的命令行" class="headerlink" title="htop是top的升级版,允许用户监视系统上运行的进程及其完整的命令行"></a>htop是top的升级版,允许用户监视系统上运行的进程及其完整的命令行</h3><ol>
+<li>系统不会自带，若是Ubuntu，sudo apt, 若是Centos， yum 可以安装。根据不过系统来进行安装</li>
+<li>支持用户交互，可以通过鼠标来kill进程而不用通过输入其PID，支持用鼠标上下拖动，且不同的颜色代表不同的意思。</li>
+<li>允许用户根据CPU，内存和时间间隔对进程进行排序</li>
+</ol>
+<h3 id="htop-的安装"><a href="#htop-的安装" class="headerlink" title="htop 的安装"></a>htop 的安装</h3><p>Ubuntu 安装</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt install htop</span><br></pre></td></tr></table></figure>
+<p>CentOS 安装</p>
+<p><a class="link"   href="http://www.vue5.com/centos/23046.htmlwww.vue5.com" >http://www.vue5.com/centos/23046.htmlwww.vue5.com<i class="fas fa-external-link-alt"></i></a></p>
+<p><strong>基本的概念</strong></p>
+<p>tasks/process 进程， thread 线程相关的知识可以从下面的链接学习</p>
+<p><a class="link"   href="https://www.zhihu.com/question/307100151/answer/894486042" >如何理解：程序、进程、线程、并发、并行、高并发？<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   href="https://zhuanlan.zhihu.com/p/125716637" >宇宙之一粟：为什么校招面试中“线程与进程的区别”老是被问到?我该如何回答？<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   href="https://www.geeksforgeeks.org/difference-between-process-and-thread/" >Difference between Process and Thread - GeeksforGeeks<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   href="https://zhuanlan.zhihu.com/p/82746153" >什么是虚拟内存(Virtual Memory)?<i class="fas fa-external-link-alt"></i></a></p>
+<p><img src="https://pic2.zhimg.com/v2-f876d2e42e8d5e1110f22f7198fcc591_b.png" alt="img"></p>
+<h3 id="红色边框"><a href="#红色边框" class="headerlink" title="红色边框"></a>红色边框</h3><p><em>数字1，2，3，4分别代表CPU处理器/核，上图是一个四核的处理器</em></p>
+<h3 id="灰色边框（progress-bar）"><a href="#灰色边框（progress-bar）" class="headerlink" title="灰色边框（progress bar）"></a>灰色边框（progress bar）</h3><p><em>每一个CPU的总用量情况，注意这条上面会有不同的颜色：</em></p>
+<ol>
+<li>蓝色：显示低优先级(low priority)进程使用的CPU百分比。 </li>
+<li>绿色：显示用于普通用户(user)拥有的进程的CPU百分比。 </li>
+<li>红色：显示系统进程(kernel threads)使用的CPU百分比。</li>
+<li>橙色：显示IRQ时间使用的CPU百分比。</li>
+<li>洋红色(Magenta)：显示Soft IRQ时间消耗的CPU百分比。</li>
+<li>灰色：显示IO等待时间消耗的CPU百分比。</li>
+<li>青色：显示窃取时间(Steal time)消耗的CPU百分比。</li>
+</ol>
+<h3 id="黄色边框"><a href="#黄色边框" class="headerlink" title="黄色边框"></a>黄色边框</h3><p><em>提供了内存（Memory）和交换（Swap）使用情况。 类似于CPU中的进度条，内存监视也包含具有多种颜色的进度条：</em></p>
+<ol>
+<li>绿色：显示内存页面占用的RAM百分比</li>
+<li>蓝色：显示缓冲区页面占用的RAM百分比</li>
+<li>橙色：显示缓存页面占用的RAM百分比</li>
+</ol>
+<p><img src="https://pic1.zhimg.com/v2-e9a5539a25c37421fc429424aab510b8_b.png" alt="img"></p>
+<h3 id="蓝色边框"><a href="#蓝色边框" class="headerlink" title="蓝色边框"></a>蓝色边框</h3><ul>
+<li><p><strong>第一行 (Tasks, thr, running)</strong></p>
+</li>
+<li><p>参考上面的屏幕截图，我们在计算机上运行的106个任务(tasks)被分解为113个线程(thread)，其中只有1个进程处于运行(running)状态。</p>
+</li>
+<li><p>任务(tasks)是打开的进程总数的代表，但并不是每个打开的进程都在不断消耗CPU。 每个进程都处于几种状态</p>
+</li>
+<li><p>R: Running：表示进程(process)正在使用CPU</p>
+</li>
+<li><p>S: Sleeping: 通常进程在大多数时间都处于睡眠状态，并以固定的时间间隔执行小检查，或者等待用户输入后再返回运行状态。</p>
+</li>
+<li><p>T/S: Traced/Stoped: 表示进程正在处于暂停的状态</p>
+</li>
+<li><p>Z:Zombie or defunct:已完成执行但在进程表中仍具有条目的进程。</p>
+</li>
+<li><p><strong>第二行  Load Average</strong></p>
+</li>
+<li><p>三个值是指系统在最后1分钟，最近5分钟和最后15分钟的平均负载 (0.21,0.19,0.15)</p>
+</li>
+<li><p><strong>第三行 Uptime</strong></p>
+</li>
+<li><p>表示这个系统一共运行了多长的时间，这里一共运行了78天</p>
+</li>
+</ul>
+<h3 id="下半部分"><a href="#下半部分" class="headerlink" title="下半部分"></a>下半部分</h3><p><img src="https://pic2.zhimg.com/v2-dd7ca8f231cfa317243987fd4bf02189_b.png" alt="img"></p>
+<ul>
+<li>PID – 描述进程的ID号</li>
+<li>USER – 描述进程的所有者（谁跑的）</li>
+<li>PRI – 描述Linux内核查看的进程优先级</li>
+<li>NI – 描述由用户或root重置的进程优先级</li>
+<li>VIR – 它描述进程正在使用的虚拟内存 （virtual memory）</li>
+<li>RES – 描述进程正在消耗的物理内存（physical memory）</li>
+<li>SHR – 描述进程正在使用的共享内存（shared memory）</li>
+<li>S – 描述流程的当前状态 (state)</li>
+<li>CPU％ – 描述每个进程消耗的CPU百分比</li>
+<li>MEM％ – 描述每个进程消耗的内存百分比</li>
+<li>TIME+ – 显示自流程开始执行以来的时间</li>
+<li>Command –它与每个进程并行显示完整的命令执行 (比如/usr/lib/R)</li>
+</ul>
+<hr>
+<h3 id="一些快捷键"><a href="#一些快捷键" class="headerlink" title="一些快捷键"></a>一些快捷键</h3><p>u – 用于显示特定用户拥有的所有进程。</p>
+<p>P –用于基于高CPU消耗对进程进行排序。</p>
+<p>M –用于基于高内存消耗对进程进行排序。</p>
+<p>T –用于根据时间段对过程进行排序。</p>
+<p>h –用于打开帮助窗口并查看此处未提及的更多快捷方式。</p>
+<p><strong>帮助： htop -h</strong></p>
+<p><strong>更细致的解释：man htop</strong></p>
+<p><img src="https://pic1.zhimg.com/v2-3aece676cc1a36e4ea439e75ce81b238_b.png" alt="img"></p>
+]]></content>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基于MATLAB的图片提取和分析</title>
+    <url>/2021/01/25/MATLAB%E5%9B%BE%E7%89%87%E6%8F%90%E5%8F%96%E4%B8%8E%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<p>完成学校Matlab作业后的一些总结，数据可以从我的GitHub账户下载。作为一名Matlab的初学者，请多多海涵</p>
+<p><a class="link" href="https://github.com/yuxuanwu17/INT301/blob/main/ass2data.zip">数据在此<i class="fas fa-external-link-alt"></i></a></p>
+<p>数据是来自车牌号图片（冷知识：I,O天生是在车牌里不出现的）。一共24个文件夹，每个文件夹里有100张图片，所以一共有2400张图片。这次的项目是构建预测模型来进行图像识别。</p>
+<p><img src="https://pic1.zhimg.com/v2-442cbdaf16d424739603ef3c267914dc_b.png" alt="img"></p>
+<p>我们打开这些文件，查看图片的详细信息</p>
+<p><img src="https://pic1.zhimg.com/v2-37aefc51ea4c68ec2b8dddee4939a708_b.png" alt="img"></p>
+<p>我们发现这里面的图片格式不一致，且命名没有统一规律。</p>
+<p>下文开始处理图片数据，并将每一张照片提取出来，用Matlab分析</p>
+<h3 id="方法一：暴力修改文档法"><a href="#方法一：暴力修改文档法" class="headerlink" title="方法一：暴力修改文档法"></a>方法一：暴力修改文档法</h3><p>核心思路：将图片全部提取出来，然后统一格式，统一名称，保存在一个新的文件夹里</p>
+<p>参考 <a class="link" href="https://blog.csdn.net/FX677588/article/details/53126961">matlab遍历文件夹下所有图片和遍历所有子文件夹下图片_无鞋童鞋的博客-CSDN博客_matlab遍历文件夹下子文件夹所有文件<i class="fas fa-external-link-alt"></i></a></p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">imgDataPath = <span class="string">'../INT301_Assessment2/ass2data/'</span>;</span><br><span class="line">imgDataDir  = dir(imgDataPath);             <span class="comment">% 遍历该路径下的所有文件</span></span><br><span class="line">savepath =  <span class="string">'../INT301_Assessment2/ass2_processed_data/'</span>; <span class="comment">% 要改写的文件路径</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:<span class="built_in">length</span>(imgDataDir)</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">isequal</span>(imgDataDir(<span class="built_in">i</span>).name,<span class="string">'.'</span>)||... <span class="comment">% 去除系统自带的两个隐文件夹</span></span><br><span class="line">       <span class="built_in">isequal</span>(imgDataDir(<span class="built_in">i</span>).name,<span class="string">'..'</span>)||...</span><br><span class="line">       <span class="built_in">isequal</span>(imgDataDir(<span class="built_in">i</span>).name,<span class="string">'.DS_Store'</span>)||...</span><br><span class="line">       ~imgDataDir(<span class="built_in">i</span>).isdir)                <span class="comment">% 去除遍历中不是文件夹的</span></span><br><span class="line">           <span class="keyword">continue</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    imgDir_jpeg = dir([imgDataPath imgDataDir(<span class="built_in">i</span>).name <span class="string">'/*.jpeg'</span>]); <span class="comment">%读取jpeg格式的图片</span></span><br><span class="line">    imgDir_jpg = dir([imgDataPath imgDataDir(<span class="built_in">i</span>).name <span class="string">'/*.jpg'</span>]); <span class="comment">%读取jpg格式的图片</span></span><br><span class="line">    imgDir = [imgDir_jpeg',imgDir_jpg']'; <span class="comment">% 合并成子文件夹下的所有图片地址</span></span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span> =<span class="number">1</span>:<span class="built_in">length</span>(imgDir)                 <span class="comment">% 遍历所有文件的地址</span></span><br><span class="line">        img = imread([imgDataPath imgDataDir(<span class="built_in">i</span>).name <span class="string">'/'</span> imgDir(<span class="built_in">j</span>).name]); <span class="comment">%读取单个文件</span></span><br><span class="line">        imwrite(img, [savepath,imgDataDir(<span class="built_in">i</span>).name,num2str(<span class="built_in">j</span>),<span class="string">'.jpeg'</span>]) <span class="comment">%以字符+编号为命名</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>新建立的文件夹，检查一下有没有漏，可以直接看每个字母的最后一个是不是”字母100.jpeg”</p>
+<p><img src="https://pic4.zhimg.com/v2-98d05aac73ddf39e77aa168050c19a97_b.png" alt="img"></p>
+<h3 id="处理单个图片，以矩阵形式保存倒入的图片"><a href="#处理单个图片，以矩阵形式保存倒入的图片" class="headerlink" title="处理单个图片，以矩阵形式保存倒入的图片"></a>处理单个图片，以矩阵形式保存倒入的图片</h3><p>下图getimdata2这个函数输入的是重写后的新文件夹地址，输出的是训练集X和标签y （这里用数字代指标签）</p>
+<p>不好意思有点懒得动脑子了，就直接写了24个if，大家可以随意优化</p>
+<p>如果继续处理例如转换为onehot之类的可以直接用ind2vec来转换</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[ data,target ]</span> = <span class="title">getimdata2</span><span class="params">(path)</span></span></span><br><span class="line"><span class="comment">%GETIMDATA Summary of this function goes here</span></span><br><span class="line"><span class="comment">%   Detailed explanation goes here</span></span><br><span class="line">    files = dir([path <span class="string">'*.jpeg'</span>]);</span><br><span class="line">    data=[];</span><br><span class="line">    target=[];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> file = files'</span><br><span class="line">        im = imread([path file.name]);</span><br><span class="line">        <span class="comment">% Normalize the data </span></span><br><span class="line">        im = double(im);</span><br><span class="line">        im = im/<span class="number">255</span>;</span><br><span class="line">        </span><br><span class="line">        data = [data im(:)];</span><br><span class="line">        <span class="keyword">if</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'A'</span>) <span class="comment">% 如果文件第一个字符等于‘A‘，那就用1代替a</span></span><br><span class="line">            target=[target [<span class="number">1</span>]];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'B'</span>)</span><br><span class="line">            target=[target [<span class="number">2</span>]];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'C'</span>)</span><br><span class="line">            target=[target [<span class="number">3</span>]];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'D'</span>)</span><br><span class="line">            target=[target [<span class="number">4</span>]];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'E'</span>)</span><br><span class="line">            target=[target [<span class="number">5</span>]];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'F'</span>)</span><br><span class="line">            target=[target [<span class="number">6</span>]];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'G'</span>)</span><br><span class="line">            target=[target [<span class="number">7</span>]];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'H'</span>)</span><br><span class="line">            target=[target [<span class="number">8</span>]];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'J'</span>)</span><br><span class="line">            target=[target [<span class="number">9</span>]];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'K'</span>)</span><br><span class="line">            target=[target [<span class="number">10</span>]];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'L'</span>)</span><br><span class="line">            target=[target [<span class="number">11</span>]];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'M'</span>)</span><br><span class="line">            target=[target [<span class="number">12</span>]];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'N'</span>)</span><br><span class="line">            target=[target [<span class="number">13</span>]];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'P'</span>)</span><br><span class="line">            target=[target [<span class="number">14</span>]];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'Q'</span>)</span><br><span class="line">            target=[target [<span class="number">15</span>]];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'R'</span>)</span><br><span class="line">            target=[target [<span class="number">16</span>]];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'S'</span>)</span><br><span class="line">            target=[target [<span class="number">17</span>]];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'T'</span>)</span><br><span class="line">            target=[target [<span class="number">18</span>]];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'U'</span>)</span><br><span class="line">            target=[target [<span class="number">19</span>]];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'V'</span>)</span><br><span class="line">            target=[target [<span class="number">20</span>]];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'W'</span>)</span><br><span class="line">            target=[target [<span class="number">21</span>]];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'X'</span>)</span><br><span class="line">            target=[target [<span class="number">22</span>]];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'Y'</span>)</span><br><span class="line">            target=[target [<span class="number">23</span>]];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'Z'</span>)</span><br><span class="line">            target=[target [<span class="number">24</span>]];</span><br><span class="line">        <span class="keyword">end</span>    </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>另外一个getimdata 函数和上面大体差不多，但是输出的是已经onehot encoding后的结果（e.g. A-&gt; (1,0,0,…0)）标签用一个1*24的向量来表示</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[ data,target ]</span> = <span class="title">getimdata</span><span class="params">(path)</span></span></span><br><span class="line"><span class="comment">%GETIMDATA Summary of this function goes here</span></span><br><span class="line"><span class="comment">%   Detailed explanation goes here</span></span><br><span class="line">    files = dir([path <span class="string">'*.jpeg'</span>]);</span><br><span class="line">    data=[];</span><br><span class="line">    target=[];</span><br><span class="line">    </span><br><span class="line"><span class="comment">%   Generated the cell and zero matrix to store</span></span><br><span class="line">    store = cell(<span class="number">1</span>,<span class="number">24</span>);</span><br><span class="line">    tst_zero = <span class="built_in">zeros</span>(<span class="number">1</span>,<span class="number">24</span>);</span><br><span class="line">    </span><br><span class="line"><span class="comment">%   Fill the zeros matrix </span></span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:<span class="number">24</span></span><br><span class="line">        copy = tst_zero;</span><br><span class="line">        copy(<span class="number">1</span>,<span class="built_in">i</span>) = <span class="number">1</span>;</span><br><span class="line">        store{<span class="built_in">i</span>} = copy;</span><br><span class="line">    <span class="keyword">end</span> </span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> file = files'</span><br><span class="line">        im = imread([path file.name]);</span><br><span class="line">        <span class="comment">% Normalize the data </span></span><br><span class="line">        im = double(im);</span><br><span class="line">        im = im/<span class="number">255</span>;</span><br><span class="line">        data = [data im(:)];</span><br><span class="line">        test_zero = <span class="built_in">zeros</span>(<span class="number">1</span>,<span class="number">24</span>);</span><br><span class="line">        <span class="keyword">if</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'A'</span>)</span><br><span class="line">            target=[target [store{<span class="number">1</span>}]'];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'B'</span>)</span><br><span class="line">            target=[target [store{<span class="number">2</span>}]'];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'C'</span>)</span><br><span class="line">            target=[target [store{<span class="number">3</span>}]'];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'D'</span>)</span><br><span class="line">            target=[target [store{<span class="number">4</span>}]'];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'E'</span>)</span><br><span class="line">            target=[target [store{<span class="number">5</span>}]'];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'F'</span>)</span><br><span class="line">            target=[target [store{<span class="number">6</span>}]'];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'G'</span>)</span><br><span class="line">            target=[target [store{<span class="number">7</span>}]'];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'H'</span>)</span><br><span class="line">            target=[target [store{<span class="number">8</span>}]'];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'J'</span>)</span><br><span class="line">            target=[target [store{<span class="number">9</span>}]'];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'K'</span>)</span><br><span class="line">            target=[target [store{<span class="number">10</span>}]'];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'L'</span>)</span><br><span class="line">            target=[target [store{<span class="number">11</span>}]'];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'M'</span>)</span><br><span class="line">            target=[target [store{<span class="number">12</span>}]'];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'N'</span>)</span><br><span class="line">            target=[target [store{<span class="number">13</span>}]'];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'P'</span>)</span><br><span class="line">            target=[target [store{<span class="number">14</span>}]'];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'Q'</span>)</span><br><span class="line">            target=[target [store{<span class="number">15</span>}]'];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'R'</span>)</span><br><span class="line">            target=[target [store{<span class="number">16</span>}]'];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'S'</span>)</span><br><span class="line">            target=[target [store{<span class="number">17</span>}]'];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'T'</span>)</span><br><span class="line">            target=[target [store{<span class="number">18</span>}]'];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'U'</span>)</span><br><span class="line">            target=[target [store{<span class="number">19</span>}]'];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'V'</span>)</span><br><span class="line">            target=[target [store{<span class="number">20</span>}]'];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'W'</span>)</span><br><span class="line">            target=[target [store{<span class="number">21</span>}]'];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'X'</span>)</span><br><span class="line">            target=[target [store{<span class="number">22</span>}]'];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'Y'</span>)</span><br><span class="line">            target=[target [store{<span class="number">23</span>}]'];</span><br><span class="line">        <span class="keyword">elseif</span> strcmp(file.name(<span class="number">1</span>),<span class="string">'Z'</span>)</span><br><span class="line">            target=[target [store{<span class="number">24</span>}]'];</span><br><span class="line">        <span class="keyword">end</span>    </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="方法二：利用imageDatastore"><a href="#方法二：利用imageDatastore" class="headerlink" title="方法二：利用imageDatastore"></a>方法二：利用imageDatastore</h3><p>简便的方法永远是在你写完做完后发现的🙄</p>
+<p>imageDatastore 可以直接读取你这个文件夹下的所有子文件及其图片</p>
+<p>下面的代码是直接将数据集和标签都已经分好处理好了，可以直接喂到模型里面去的</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%%</span></span><br><span class="line">clc;</span><br><span class="line">clear;</span><br><span class="line"></span><br><span class="line"><span class="comment">%% </span></span><br><span class="line">F = <span class="string">'../INT301_Assessment2/ass2data'</span>;</span><br><span class="line">imds = imageDatastore(F,<span class="string">'IncludeSubfolders'</span>,<span class="built_in">true</span>,<span class="string">'LabelSource'</span>,<span class="string">'foldernames'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">%%</span></span><br><span class="line">labelCount = countEachLabel(imds);   <span class="comment">%统计imds中各标签值的图片数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% 2，8分割，8为training，2为testing</span></span><br><span class="line">numTrainFiles = <span class="number">80</span>;</span><br><span class="line">[imdsTrain, imdsTest] = splitEachLabel(imds, numTrainFiles,<span class="string">'randomize'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">%%</span></span><br><span class="line">data = [];</span><br><span class="line">files = imdsTrain.Files;</span><br><span class="line">x = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> file = files'</span><br><span class="line">    im = imread(file{<span class="number">1</span>});</span><br><span class="line">    im = double(im);</span><br><span class="line">    im = im/<span class="number">255</span>;</span><br><span class="line">    data = [data im(:)];</span><br><span class="line"><span class="keyword">end</span> </span><br><span class="line"><span class="comment">%%</span></span><br><span class="line">X_train = data';</span><br><span class="line">y_train = imdsTrain.Labels;</span><br><span class="line">y_train = label_preprocess(y_train);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">%%</span></span><br><span class="line">data = []</span><br><span class="line">files = imdsTest.Files;</span><br><span class="line">x = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> file = files'</span><br><span class="line">    im = imread(file{<span class="number">1</span>});</span><br><span class="line">    im = double(im);</span><br><span class="line">    im = im/<span class="number">255</span>;</span><br><span class="line">    data = [data im(:)];</span><br><span class="line"><span class="keyword">end</span> </span><br><span class="line"><span class="comment">%%</span></span><br><span class="line">X_test = data';</span><br><span class="line">y_test = imdsTest.Labels;</span><br><span class="line">y_test = label_preprocess(y_test);</span><br></pre></td></tr></table></figure>
+<p>这里我将那24个 if 打包写成了一个新的函数叫label_preprocess，输入的是标签，输出的是onehot encoding后的结果</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[target]</span> = <span class="title">label_preprocess</span><span class="params">(y_train)</span></span></span><br><span class="line">target = [];</span><br><span class="line"><span class="keyword">for</span> y = y_train'</span><br><span class="line">    <span class="keyword">if</span> y == <span class="string">'A'</span></span><br><span class="line">        target=[target [<span class="number">1</span>]];</span><br><span class="line">    <span class="keyword">elseif</span> y==<span class="string">'B'</span></span><br><span class="line">        target=[target [<span class="number">2</span>]];</span><br><span class="line">    <span class="keyword">elseif</span> y==<span class="string">'C'</span></span><br><span class="line">        target=[target [<span class="number">3</span>]];</span><br><span class="line">    <span class="keyword">elseif</span> y==<span class="string">'D'</span></span><br><span class="line">        target=[target [<span class="number">4</span>]];</span><br><span class="line">    <span class="keyword">elseif</span> y==<span class="string">'E'</span></span><br><span class="line">        target=[target [<span class="number">5</span>]];</span><br><span class="line">    <span class="keyword">elseif</span> y==<span class="string">'F'</span></span><br><span class="line">        target=[target [<span class="number">6</span>]];</span><br><span class="line">    <span class="keyword">elseif</span> y==<span class="string">'G'</span></span><br><span class="line">        target=[target [<span class="number">7</span>]];</span><br><span class="line">    <span class="keyword">elseif</span> y==<span class="string">'H'</span></span><br><span class="line">        target=[target [<span class="number">8</span>]];</span><br><span class="line">    <span class="keyword">elseif</span> y==<span class="string">'J'</span></span><br><span class="line">        target=[target [<span class="number">9</span>]];</span><br><span class="line">    <span class="keyword">elseif</span> y==<span class="string">'K'</span></span><br><span class="line">        target=[target [<span class="number">10</span>]];</span><br><span class="line">    <span class="keyword">elseif</span> y==<span class="string">'L'</span></span><br><span class="line">        target=[target [<span class="number">11</span>]];</span><br><span class="line">    <span class="keyword">elseif</span> y==<span class="string">'M'</span></span><br><span class="line">        target=[target [<span class="number">12</span>]];</span><br><span class="line">    <span class="keyword">elseif</span> y==<span class="string">'N'</span></span><br><span class="line">        target=[target [<span class="number">13</span>]];</span><br><span class="line">    <span class="keyword">elseif</span> y==<span class="string">'P'</span></span><br><span class="line">        target=[target [<span class="number">14</span>]];</span><br><span class="line">    <span class="keyword">elseif</span> y==<span class="string">'Q'</span></span><br><span class="line">        target=[target [<span class="number">15</span>]];</span><br><span class="line">    <span class="keyword">elseif</span> y==<span class="string">'R'</span></span><br><span class="line">        target=[target [<span class="number">16</span>]];</span><br><span class="line">    <span class="keyword">elseif</span> y==<span class="string">'S'</span></span><br><span class="line">        target=[target [<span class="number">17</span>]];</span><br><span class="line">    <span class="keyword">elseif</span> y==<span class="string">'T'</span></span><br><span class="line">        target=[target [<span class="number">18</span>]];</span><br><span class="line">    <span class="keyword">elseif</span> y==<span class="string">'U'</span></span><br><span class="line">        target=[target [<span class="number">19</span>]];</span><br><span class="line">    <span class="keyword">elseif</span> y==<span class="string">'V'</span></span><br><span class="line">        target=[target [<span class="number">20</span>]];</span><br><span class="line">    <span class="keyword">elseif</span> y==<span class="string">'W'</span></span><br><span class="line">        target=[target [<span class="number">21</span>]];</span><br><span class="line">    <span class="keyword">elseif</span> y==<span class="string">'X'</span></span><br><span class="line">        target=[target [<span class="number">22</span>]];</span><br><span class="line">    <span class="keyword">elseif</span> y==<span class="string">'Y'</span></span><br><span class="line">        target=[target [<span class="number">23</span>]];</span><br><span class="line">    <span class="keyword">elseif</span> y==<span class="string">'Z'</span></span><br><span class="line">        target=[target [<span class="number">24</span>]];</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span> </span><br><span class="line"></span><br><span class="line">target =ind2vec(target);</span><br><span class="line">target = target';</span><br></pre></td></tr></table></figure>
+<h3 id="方法三：直接读取-g格式（仅限本题使用）"><a href="#方法三：直接读取-g格式（仅限本题使用）" class="headerlink" title="方法三：直接读取.g格式（仅限本题使用）"></a>方法三：直接读取.g格式（仅限本题使用）</h3><p>因为jpeg和jpg都是以g结尾，所以可以本题可以直读取g。代码就略了</p>
+]]></content>
+      <tags>
+        <tag>Matlab</tag>
       </tags>
   </entry>
 </search>
