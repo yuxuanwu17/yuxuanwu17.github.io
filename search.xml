@@ -1,0 +1,664 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Heart failure detection by SVM-based machine learning model</title>
+    <url>/2021/01/24/YuxuanWu-1716309-INT305-Report/</url>
+    <content><![CDATA[<h1 id="Name-Yuxuan-Wu"><a href="#Name-Yuxuan-Wu" class="headerlink" title="Name: Yuxuan Wu"></a>Name: Yuxuan Wu</h1><h2 id="Data-download"><a href="#Data-download" class="headerlink" title="Data download"></a>Data download</h2><p>You could simply download the data from my own Github repository: <a class="link"   href="https://media.githubusercontent.com/media/yuxuanwu17/kaggle/main/heart_failure_clinical_records_dataset.csv" >https://media.githubusercontent.com/media/yuxuanwu17/kaggle/main/heart_failure_clinical_records_dataset.csv<i class="fas fa-external-link-alt"></i></a></p>
+<p>You could also download the data from kaggle：<br><a class="link"   href="https://www.kaggle.com/andrewmvd/heart-failure-clinical-data" >https://www.kaggle.com/andrewmvd/heart-failure-clinical-data<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="Libraries-used-in-this-project"><a href="#Libraries-used-in-this-project" class="headerlink" title="Libraries used in this project"></a>Libraries used in this project</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> LinearSVC</span><br><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> SVC</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split, cross_val_score, LeaveOneOut,GridSearchCV</span><br><span class="line"><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> Pipeline</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler, StandardScaler, RobustScaler</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score, mean_squared_error</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> confusion_matrix, plot_confusion_matrix, plot_roc_curve, plot_precision_recall_curve, classification_report</span><br><span class="line"><span class="keyword">from</span> scipy.stats <span class="keyword">import</span> chi2_contingency</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sn</span><br><span class="line"><span class="keyword">import</span> plotly.express <span class="keyword">as</span> px</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="Background-data"><a href="#Background-data" class="headerlink" title="Background data"></a>Background data</h3><p>Cardiovascular diseases (CVDs) are the number 1 cause of death globally, taking an estimated 17.9 million lives each year, which accounts for 31% of all deaths worlwide.<br>Heart failure is a common event caused by CVDs.</p>
+<p>Most cardiovascular diseases can be prevented by addressing behavioural risk factors such as tobacco use, unhealthy diet and obesity, physical inactivity and harmful use of alcohol using population-wide strategies.</p>
+<p>People with cardiovascular disease or who are at high cardiovascular risk (due to the presence of one or more risk factors such as hypertension, diabetes, hyperlipidaemia or already established disease) need early detection and management wherein a machine learning model can be of great help.</p>
+<h3 id="Project-description-overview"><a href="#Project-description-overview" class="headerlink" title="Project description (overview)"></a>Project description (overview)</h3><p>The input to our predictor is is a medical dataset which contains 12 features that can be used to predict mortality by heart failure.</p>
+<ol>
+<li>Data exploration<ul>
+<li>Principle Components Analysis (PCA) to reduce the dimension of features to have a view of the input data distribution</li>
+<li>Build a preliminary linear SVM model to incorporate all the features to see the model performance.</li>
+</ul>
+</li>
+<li>Feature selection part.<ul>
+<li>Chi-square test to check the correlation between each categorical feature and the target death event.</li>
+<li>Heat map to return the features with high correlation coefficient with death events.</li>
+<li>Visualized the each feature’s contribution significance in the SVM model</li>
+<li>Compared the returned features and determined the final selected features</li>
+</ul>
+</li>
+<li>Model comparison and hyperparameter tuning<ul>
+<li>compare the performance in difference preprocessing methods MinMaxScalar, StandardScalar, RobustScalar</li>
+<li>compare the performance in k-fold cross validation and leave-one-out methods</li>
+<li>compare the kernel selected in Support Vector Machine (linear or rbf)</li>
+<li>grid search to find the best performance model</li>
+</ul>
+</li>
+<li>Selected model performance<ul>
+<li>calculated the precision, recall, accuracy and f1-score</li>
+<li>plot the ROC and PR-curve</li>
+<li>plot the learning curve</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="Related-work"><a href="#Related-work" class="headerlink" title="Related work"></a>Related work</h2><h3 id="Explorative-data-analysis-EDA-approach"><a href="#Explorative-data-analysis-EDA-approach" class="headerlink" title="Explorative data analysis (EDA) approach"></a>Explorative data analysis (EDA) approach</h3><ol>
+<li><a class="link"   href="https://www.kaggle.com/nayansakhiya/heart-fail-analysis-and-quick-prediction" >heart-fail-analysis-and-quick-prediction<i class="fas fa-external-link-alt"></i></a></li>
+</ol>
+<p><strong>Strength</strong>: Detailed explorative and associative data analysis with great data visualization: each factor is visualized by different types of figures <br><br><strong>Weakness</strong>: Prediction model are quite rudimentary, the author did not select the features and tune the models’ hyperparameters.<br><br><strong>Similarity</strong>: I learned and applied the plotly.express API to create fancy and concise figures for easy comparison; I furthered his rudimentary model by optimization</p>
+<h3 id="Predictive-data-analysis-PDA-approach"><a href="#Predictive-data-analysis-PDA-approach" class="headerlink" title="Predictive data analysis (PDA) approach"></a>Predictive data analysis (PDA) approach</h3><ol>
+<li><a class="link"   href="https://www.kaggle.com/rude009/heart-failure-model-prediction-comparisons-95" >heart-failure-model-prediction-comparisons-95<i class="fas fa-external-link-alt"></i></a></li>
+</ol>
+<p><strong>Strength</strong>: The author compares six prediction models with feature selection. The Extra Gradient Booster Classifier could achieve the accuracy up to 95.0% <br><br><strong>Weakness</strong>: The author consider the “time” column as the useful features. <br><br><strong>Similarity</strong>: I don’t think “time” colume should be included since “time” column stands for Follow-up period (days), which means itself could not contribute the diseases itself. Therefore, I consider this feature as uselessness in our prediction model</p>
+<ol start="2">
+<li><a class="link"   href="https://www.kaggle.com/ksvmuralidhar/heart-failure-prediction-auc-0-98" >heart-failure-prediction-auc-0-98<i class="fas fa-external-link-alt"></i></a></li>
+</ol>
+<p><strong>Strength</strong>: The author uses a new method: Chi-square test to find the correlation between single categorical feature with target death_event <br><br><strong>Weakness</strong>: The visualization part does not as fancy as previous work <br><br><strong>Similarity</strong>: I learned and used the Chi-square test to conduct the correlation test between single categorical data with the categorical death_event; but i didn’t agree the author’s method in using box plot comparison between numerical data with categorical data, I used heat map instead.</p>
+<hr>
+<h2 id="Problem-formulation"><a href="#Problem-formulation" class="headerlink" title="Problem formulation"></a>Problem formulation</h2><h3 id="Return-the-head-of-dataset-a-overview-of-inside-components"><a href="#Return-the-head-of-dataset-a-overview-of-inside-components" class="headerlink" title="Return the head of dataset (a overview of inside components)"></a>Return the head of dataset (a overview of inside components)</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># df = pd.read_csv(&quot;/home/yuxuan/kaggle/heart_failure_clinical_records_dataset.csv&quot;)</span></span><br><span class="line">df = pd.read_csv(<span class="string">&quot;/Users/yuxuan/Desktop/kaggle/heart_failure_clinical_records_dataset.csv&quot;</span>)</span><br><span class="line"><span class="comment"># df = pd.read_csv(&quot;../input/heart-failure-clinical-data/heart_failure_clinical_records_dataset.csv&quot;)</span></span><br><span class="line">heart_data = df.copy()</span><br><span class="line">heart_data.head()</span><br></pre></td></tr></table></figure>
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>anaemia</th>
+      <th>creatinine_phosphokinase</th>
+      <th>diabetes</th>
+      <th>ejection_fraction</th>
+      <th>high_blood_pressure</th>
+      <th>platelets</th>
+      <th>serum_creatinine</th>
+      <th>serum_sodium</th>
+      <th>sex</th>
+      <th>smoking</th>
+      <th>time</th>
+      <th>DEATH_EVENT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>75.0</td>
+      <td>0</td>
+      <td>582</td>
+      <td>0</td>
+      <td>20</td>
+      <td>1</td>
+      <td>265000.00</td>
+      <td>1.9</td>
+      <td>130</td>
+      <td>1</td>
+      <td>0</td>
+      <td>4</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>55.0</td>
+      <td>0</td>
+      <td>7861</td>
+      <td>0</td>
+      <td>38</td>
+      <td>0</td>
+      <td>263358.03</td>
+      <td>1.1</td>
+      <td>136</td>
+      <td>1</td>
+      <td>0</td>
+      <td>6</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>65.0</td>
+      <td>0</td>
+      <td>146</td>
+      <td>0</td>
+      <td>20</td>
+      <td>0</td>
+      <td>162000.00</td>
+      <td>1.3</td>
+      <td>129</td>
+      <td>1</td>
+      <td>1</td>
+      <td>7</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>50.0</td>
+      <td>1</td>
+      <td>111</td>
+      <td>0</td>
+      <td>20</td>
+      <td>0</td>
+      <td>210000.00</td>
+      <td>1.9</td>
+      <td>137</td>
+      <td>1</td>
+      <td>0</td>
+      <td>7</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>65.0</td>
+      <td>1</td>
+      <td>160</td>
+      <td>1</td>
+      <td>20</td>
+      <td>0</td>
+      <td>327000.00</td>
+      <td>2.7</td>
+      <td>116</td>
+      <td>0</td>
+      <td>0</td>
+      <td>8</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<h3 id="Print-the-size-of-the-dataset"><a href="#Print-the-size-of-the-dataset" class="headerlink" title="Print the size of the dataset"></a>Print the size of the dataset</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(heart_data.shape)</span><br></pre></td></tr></table></figure>
+<pre><code>(299, 13)</code></pre>
+<h3 id="Check-the-ratio-of-the-NaNs-for-each-column"><a href="#Check-the-ratio-of-the-NaNs-for-each-column" class="headerlink" title="Check the ratio of the NaNs for each column"></a>Check the ratio of the NaNs for each column</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> col <span class="keyword">in</span> heart_data.columns:</span><br><span class="line">    print(col, <span class="built_in">str</span>(<span class="built_in">round</span>(<span class="number">100</span>* heart_data[col].isnull().<span class="built_in">sum</span>() / <span class="built_in">len</span>(heart_data), <span class="number">2</span>)) + <span class="string">&#x27;%&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>age 0.0%
+anaemia 0.0%
+creatinine_phosphokinase 0.0%
+diabetes 0.0%
+ejection_fraction 0.0%
+high_blood_pressure 0.0%
+platelets 0.0%
+serum_creatinine 0.0%
+serum_sodium 0.0%
+sex 0.0%
+smoking 0.0%
+time 0.0%
+DEATH_EVENT 0.0%</code></pre>
+<hr>
+<h3 id="Dataset-description"><a href="#Dataset-description" class="headerlink" title="Dataset description"></a>Dataset description</h3><p>There are 13 dimensions and 299 samples. All the columns are devoid of NaNs. We need make some rules before the data processing。</p>
+<p>Target features (binary classification): DEATH_EVENT</p>
+<p><strong>Categorical data</strong></p>
+<ul>
+<li>Sex - Gender of patient Male = 1, Female =0</li>
+<li>Diabetes - 0 = No, 1 = Yes</li>
+<li>Anaemia - 0 = No, 1 = Yes</li>
+<li>High_blood_pressure - 0 = No, 1 = Yes</li>
+<li>Smoking - 0 = No, 1 = Yes</li>
+<li>DEATH_EVENT - 0 = No, 1 = Yes</li>
+</ul>
+<p><strong>Numerical data</strong></p>
+<ul>
+<li>Age - Age of patient</li>
+<li>creatinine_phosphokinase - Level of the CPK enzyme in the blood (mcg/L)</li>
+<li>ejection_fraction - Percentage of blood leaving the heart at each contraction (percentage)</li>
+<li>platelets - Platelets in the blood (kiloplatelets/mL)</li>
+<li>serum_creatinine - Level of serum creatinine in the blood (mg/dL)</li>
+<li>serum_sodium - Level of serum sodium in the blood (mEq/L)</li>
+<li>time - Follow-up period (days)</li>
+</ul>
+<h3 id="Citation-or-Reference"><a href="#Citation-or-Reference" class="headerlink" title="Citation or Reference"></a>Citation or Reference</h3><p>Dataset from Davide Chicco, Giuseppe Jurman: Machine learning can predict survival of patients with heart failure from serum creatinine and ejection fraction alone. BMC Medical Informatics and Decision Making 20, 16 (2020)</p>
+<p>The dataset downloaded from Kaggle <a class="link"   href="https://www.kaggle.com/andrewmvd/heart-failure-clinical-data" >https://www.kaggle.com/andrewmvd/heart-failure-clinical-data<i class="fas fa-external-link-alt"></i></a></p>
+<hr>
+<h3 id="Principle-components-analysis"><a href="#Principle-components-analysis" class="headerlink" title="Principle components analysis"></a>Principle components analysis</h3><p>Reduce the dimensions and return the sample distribution</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line">X = heart_data.iloc[:,<span class="number">0</span>:<span class="number">11</span>]</span><br><span class="line">X = StandardScaler().fit_transform(X)</span><br><span class="line">y = heart_data[<span class="string">&#x27;DEATH_EVENT&#x27;</span>]</span><br><span class="line">pca = PCA(n_components=<span class="number">2</span>)</span><br><span class="line">pca.fit(X)</span><br><span class="line">X_pca = pca.transform(X)</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">8</span>,<span class="number">8</span>))</span><br><span class="line">plt.scatter(X_pca[y==<span class="number">0</span>,<span class="number">0</span>],X_pca[y==<span class="number">0</span>,<span class="number">1</span>],label=<span class="string">&quot;Alive&quot;</span>,c=<span class="string">&quot;red&quot;</span>)</span><br><span class="line">plt.scatter(X_pca[y==<span class="number">1</span>,<span class="number">0</span>],X_pca[y==<span class="number">1</span>,<span class="number">1</span>],label=<span class="string">&quot;Death&quot;</span>,c=<span class="string">&quot;black&quot;</span>)</span><br><span class="line">plt.legend([<span class="string">&quot;Alive&quot;</span>,<span class="string">&quot;Death&quot;</span>])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="http://i2.tiimg.com/732634/6142260ea33218d3.png" alt="Markdown"></p>
+<p>I would like to have a view of the sample distribution in the dataset. Therefore, I used the principle component analysis (PCA) to reduce the dimension of features into 2D for visualization. The figure suggested that the data are densed and not easy to seperate (either linear or non-linear model), indicating the existence of insignificant feature which could negatively influence the future prediction accuracy.</p>
+<hr>
+<h3 id="Correlation-analysis"><a href="#Correlation-analysis" class="headerlink" title="Correlation analysis"></a>Correlation analysis</h3><p>I would like to find the correlation between each feature, especially with the target variable: DEATH_EVENT.<br>In this case, I excluded the column “time” since the time tracked could not contribute to the heart failure itself.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sn</span><br><span class="line">heart_data = heart_data.drop([<span class="string">&#x27;time&#x27;</span>],axis=<span class="number">1</span>)</span><br><span class="line">plt.figure(figsize=(<span class="number">12</span>,<span class="number">12</span>))</span><br><span class="line">sn.heatmap(heart_data.corr(),vmin=-<span class="number">1</span>,cmap=<span class="string">&#x27;coolwarm&#x27;</span>,annot=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://i1.fuimg.com/732634/d2e422a950079a81.png" alt="Markdown"></p>
+<h3 id="Data-partition"><a href="#Data-partition" class="headerlink" title="Data partition"></a>Data partition</h3><ul>
+<li>As I mentioned before, I will not take the feature “time” into consideration. Therefore, 11 features are included in the final model prediction.</li>
+<li>I split the dataset into two categories. 80% for raining data and 20% for testing data.</li>
+<li>I used the StandardScalar normalization method to preprocess the data</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"></span><br><span class="line">X = heart_data.iloc[:,<span class="number">0</span>:<span class="number">11</span>]</span><br><span class="line">X = StandardScaler().fit_transform(X)</span><br><span class="line">y = heart_data[<span class="string">&#x27;DEATH_EVENT&#x27;</span>]</span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=<span class="number">0.2</span>,random_state=<span class="number">2</span>)</span><br><span class="line">print(<span class="string">&quot;The number of training sample is &#123;&#125;&quot;</span>.<span class="built_in">format</span>(X_train.shape[<span class="number">0</span>]))</span><br><span class="line">print(<span class="string">&quot;The number of testing sample is &#123;&#125;&quot;</span>.<span class="built_in">format</span>(X_test.shape[<span class="number">0</span>]))</span><br></pre></td></tr></table></figure>
+<pre><code>The number of training sample is 239
+The number of testing sample is 60</code></pre>
+<h3 id="Feature-selection-feature-engineering"><a href="#Feature-selection-feature-engineering" class="headerlink" title="Feature selection (feature engineering)"></a>Feature selection (feature engineering)</h3><p><strong>Method 1: Chi-square test</strong></p>
+<ul>
+<li>Based on previous research, I could conclude that DEATH_EVENT is our target. Since I have six categorical data I would like to figure out whether these single categorical valuable has significant correlation with the DEATH_EVENT.<br></li>
+<li>Crosstables/contingency tables are one of the best ways to see how categorical variables are distributed among each other.</li>
+<li>The following test suggests that we failed to reject the $H_0$ problem, indicating that there is no direct relationship between the DEATH_EVENT</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> scipy.stats <span class="keyword">import</span> chi2_contingency</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">heart_data = df.copy()</span><br><span class="line">cat_features = [<span class="string">&quot;anaemia&quot;</span>,<span class="string">&quot;diabetes&quot;</span>,<span class="string">&quot;high_blood_pressure&quot;</span>,<span class="string">&quot;sex&quot;</span>,<span class="string">&quot;smoking&quot;</span>,<span class="string">&quot;DEATH_EVENT&quot;</span>]</span><br><span class="line">num_features = pd.Series(heart_data.columns)</span><br><span class="line">num_features = num_features[~num_features.isin(cat_features)]</span><br><span class="line">num_features</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> cat_features:</span><br><span class="line">    ct = pd.crosstab(columns=heart_data[i],index=heart_data[<span class="string">&quot;DEATH_EVENT&quot;</span>])</span><br><span class="line">    stat, p, dof, expected = chi2_contingency(ct)</span><br><span class="line">    print(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">    print(<span class="string">&#x27;-&#x27;</span>*<span class="built_in">len</span>(<span class="string">&#x27;CROSSTAB BETWEEN &#123;&#125; &amp; DEATH_EVENT&#x27;</span>.<span class="built_in">format</span>(i.upper())))</span><br><span class="line">    print(<span class="string">&quot;CROSSTAB BETWEEN &#123;&#125; &amp; DEATH_EVENT&quot;</span>.<span class="built_in">format</span>(i.upper()))</span><br><span class="line">    print(<span class="string">&#x27;-&#x27;</span>*<span class="built_in">len</span>(<span class="string">&#x27;CROSSTAB BETWEEN &#123;&#125; &amp; DEATH_EVENT&#x27;</span>.<span class="built_in">format</span>(i.upper())))</span><br><span class="line">    print(ct)</span><br><span class="line">    print(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">    print(<span class="string">&quot;H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; &#123;&#125; \nH1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; &#123;&#125;&quot;</span>.<span class="built_in">format</span>(i.upper(),i.upper()))</span><br><span class="line">    print(<span class="string">&quot;\nP-VALUE: &#123;&#125;&quot;</span>.<span class="built_in">format</span>(np.<span class="built_in">round</span>(p,<span class="number">2</span>)))</span><br><span class="line">    print(<span class="string">&quot;REJECT H0&quot;</span> <span class="keyword">if</span> p&lt;<span class="number">0.05</span> <span class="keyword">else</span> <span class="string">&quot;FAILED TO REJECT H0&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+<pre><code>--------------------------------------
+CROSSTAB BETWEEN ANAEMIA &amp; DEATH_EVENT
+--------------------------------------
+anaemia        0   1
+DEATH_EVENT         
+0            120  83
+1             50  46
+
+
+H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; ANAEMIA 
+H1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; ANAEMIA
+
+P-VALUE: 0.31
+FAILED TO REJECT H0
+
+
+---------------------------------------
+CROSSTAB BETWEEN DIABETES &amp; DEATH_EVENT
+---------------------------------------
+diabetes       0   1
+DEATH_EVENT         
+0            118  85
+1             56  40
+
+
+H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; DIABETES 
+H1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; DIABETES
+
+P-VALUE: 0.93
+FAILED TO REJECT H0
+
+
+--------------------------------------------------
+CROSSTAB BETWEEN HIGH_BLOOD_PRESSURE &amp; DEATH_EVENT
+--------------------------------------------------
+high_blood_pressure    0   1
+DEATH_EVENT                 
+0                    137  66
+1                     57  39
+
+
+H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; HIGH_BLOOD_PRESSURE 
+H1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; HIGH_BLOOD_PRESSURE
+
+P-VALUE: 0.21
+FAILED TO REJECT H0
+
+
+----------------------------------
+CROSSTAB BETWEEN SEX &amp; DEATH_EVENT
+----------------------------------
+sex           0    1
+DEATH_EVENT         
+0            71  132
+1            34   62
+
+
+H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; SEX 
+H1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; SEX
+
+P-VALUE: 0.96
+FAILED TO REJECT H0
+
+
+--------------------------------------
+CROSSTAB BETWEEN SMOKING &amp; DEATH_EVENT
+--------------------------------------
+smoking        0   1
+DEATH_EVENT         
+0            137  66
+1             66  30
+
+
+H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; SMOKING 
+H1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; SMOKING
+
+P-VALUE: 0.93
+FAILED TO REJECT H0
+
+
+------------------------------------------
+CROSSTAB BETWEEN DEATH_EVENT &amp; DEATH_EVENT
+------------------------------------------
+DEATH_EVENT    0   1
+DEATH_EVENT         
+0            203   0
+1              0  96
+
+
+H0: THERE IS NO RELATIONSHIP BETWEEN DEATH_EVENT &amp; DEATH_EVENT 
+H1: THERE IS RELATIONSHIP BETWEEN DEATH_EVENT &amp; DEATH_EVENT
+
+P-VALUE: 0.0
+REJECT H0</code></pre>
+<p><strong>Method 2: correlation analysis</strong></p>
+<ul>
+<li>Use correlation coefficient &gt; 0.1 with death event</li>
+<li>This method is applicable for both categorical data and numerical data</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">feature_corr = heart_data.corr()</span><br><span class="line">feature_corr[<span class="built_in">abs</span>(feature_corr[<span class="string">&#x27;DEATH_EVENT&#x27;</span>]) &gt; <span class="number">0.1</span>][<span class="string">&#x27;DEATH_EVENT&#x27;</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>age                  0.253729
+ejection_fraction   -0.268603
+serum_creatinine     0.294278
+serum_sodium        -0.195204
+time                -0.526964
+DEATH_EVENT          1.000000
+Name: DEATH_EVENT, dtype: float64</code></pre>
+<p><strong>Method 3: Visualized plots of feature importance in linear SVM</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">feature_plot</span>(<span class="params">classifier, feature_names, top_features=<span class="number">5</span></span>):</span></span><br><span class="line">    coef = classifier.coef_.ravel()</span><br><span class="line">    top_positive_coefficients = np.argsort(coef)[-top_features:]</span><br><span class="line">    top_negative_coefficients = np.argsort(coef)[:top_features]</span><br><span class="line">    middle_coefficient = np.argsort(coef)[top_features]</span><br><span class="line">    top_coefficients = np.hstack([top_negative_coefficients, middle_coefficient, top_positive_coefficients])</span><br><span class="line">    plt.figure(figsize=(<span class="number">18</span>, <span class="number">7</span>))</span><br><span class="line">    colors = [<span class="string">&#x27;green&#x27;</span> <span class="keyword">if</span> c &lt; <span class="number">0</span> <span class="keyword">else</span> <span class="string">&#x27;blue&#x27;</span> <span class="keyword">for</span> c <span class="keyword">in</span> coef[top_coefficients]]</span><br><span class="line">    plt.bar(np.arange(<span class="number">2</span> * top_features+<span class="number">1</span>), coef[top_coefficients], color=colors)</span><br><span class="line">    feature_names = np.array(feature_names)</span><br><span class="line">    plt.xticks(np.arange(<span class="number">2</span> * top_features+<span class="number">1</span>), feature_names[top_coefficients], rotation=<span class="number">45</span>, ha=<span class="string">&#x27;right&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    plt.show()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> LinearSVC</span><br><span class="line">heart_data = df.copy()</span><br><span class="line">X = heart_data.iloc[:, <span class="number">0</span>:<span class="number">11</span>]</span><br><span class="line">X = StandardScaler().fit_transform(X)</span><br><span class="line">y = heart_data[<span class="string">&#x27;DEATH_EVENT&#x27;</span>]</span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">0.1</span>, shuffle=<span class="literal">True</span>, random_state=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># print(heart_data.drop([&#x27;DEATH_EVENT&#x27;, &#x27;time&#x27;], axis=1).columns.values)</span></span><br><span class="line"></span><br><span class="line">trainedsvm = LinearSVC().fit(X, y)</span><br><span class="line">feature_plot(trainedsvm, heart_data.drop([<span class="string">&#x27;DEATH_EVENT&#x27;</span>, <span class="string">&#x27;time&#x27;</span>], axis=<span class="number">1</span>).columns.values)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="http://i1.fuimg.com/732634/12c3c71fe7a77951.png" alt="Markdown"></p>
+<ul>
+<li>The ahead plot illustrates the importance of feature in SVM model. y axis could be considered as weights and the absolute value of weights could suggest the contribution to the final results.</li>
+<li>The correlation analysis between factors and death event returned the coefficient &gt; 0.1 features</li>
+<li>Both analysis returned three same features: serum_creatinine, age, ejection_fraction</li>
+<li>we need to evaluate and compare the performance in serum_sodium and creatinine_phosphokinase</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> SVC</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score</span><br><span class="line">heart_data = df.copy()</span><br><span class="line">X = heart_data.iloc[:, <span class="number">0</span>:<span class="number">11</span>]</span><br><span class="line">y = heart_data[<span class="string">&#x27;DEATH_EVENT&#x27;</span>]</span><br><span class="line">options = [<span class="string">&#x27;serum_sodium&#x27;</span>,<span class="string">&#x27;creatinine_phosphokinase&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> options:</span><br><span class="line">    selected_feature = [<span class="string">&#x27;serum_creatinine&#x27;</span>,<span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;ejection_fraction&#x27;</span>]</span><br><span class="line">    selected_feature.append(i)</span><br><span class="line">    X_processed = X[selected_feature]</span><br><span class="line">    X_processed = StandardScaler().fit_transform(X_processed)</span><br><span class="line">    X_train, X_test, y_train, y_test = train_test_split(X_processed, y, test_size=<span class="number">0.2</span>, shuffle=<span class="literal">True</span>, random_state=<span class="number">1</span>)</span><br><span class="line">    sv_clf = SVC(kernel=<span class="string">&quot;linear&quot;</span>,random_state=<span class="number">1</span>)</span><br><span class="line">    sv_clf.fit(X_train, y_train)</span><br><span class="line">    sv_clf_pred = sv_clf.predict(X_test)</span><br><span class="line">    sv_clf_acc = accuracy_score(y_test,sv_clf_pred)</span><br><span class="line">    sc_clf_acc_format = <span class="built_in">round</span>(sv_clf_acc*<span class="number">100</span>,<span class="number">2</span>)</span><br><span class="line"><span class="comment">#     accuracy_list.append(round(sv_clf_acc,2))</span></span><br><span class="line">    print(<span class="string">&quot;Accuracy of linear SVM model with feature &#123;&#125; is : &#123;&#125;%&quot;</span>.<span class="built_in">format</span>(i, sc_clf_acc_format))</span><br></pre></td></tr></table></figure>
+<pre><code>Accuracy of linear SVM model with feature serum_sodium is : 81.67%
+Accuracy of linear SVM model with feature creatinine_phosphokinase is : 83.33%</code></pre>
+<p>Therefore, four features including serum_creatinine, age, ejection_fraction, creatinine_phosphokinase</p>
+<hr>
+<h3 id="Visualized-the-learning-curve-after-feature-selection"><a href="#Visualized-the-learning-curve-after-feature-selection" class="headerlink" title="Visualized the learning curve after feature selection"></a>Visualized the learning curve after feature selection</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> learning_curve</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_learning_curve</span>(<span class="params">estimator, title, X, y, axes=<span class="literal">None</span>, ylim=<span class="literal">None</span>, cv=<span class="literal">None</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">                        n_jobs=<span class="literal">None</span>, train_sizes=np.linspace(<span class="params"><span class="number">.1</span>, <span class="number">1.0</span>, <span class="number">5</span></span>)</span>):</span></span><br><span class="line">    <span class="keyword">if</span> axes <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        _, axes = plt.subplots(<span class="number">1</span>, <span class="number">3</span>, figsize=(<span class="number">20</span>, <span class="number">5</span>))</span><br><span class="line"></span><br><span class="line">    axes[<span class="number">0</span>].set_title(title)</span><br><span class="line">    <span class="keyword">if</span> ylim <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">        axes[<span class="number">0</span>].set_ylim(*ylim)</span><br><span class="line">    axes[<span class="number">0</span>].set_xlabel(<span class="string">&quot;Training examples&quot;</span>)</span><br><span class="line">    axes[<span class="number">0</span>].set_ylabel(<span class="string">&quot;Score&quot;</span>)</span><br><span class="line"></span><br><span class="line">    train_sizes, train_scores, test_scores, fit_times, _ = \</span><br><span class="line">        learning_curve(estimator, X, y, cv=cv, n_jobs=n_jobs,</span><br><span class="line">                       train_sizes=train_sizes,</span><br><span class="line">                       return_times=<span class="literal">True</span>)</span><br><span class="line">    train_scores_mean = np.mean(train_scores, axis=<span class="number">1</span>)</span><br><span class="line">    train_scores_std = np.std(train_scores, axis=<span class="number">1</span>)</span><br><span class="line">    test_scores_mean = np.mean(test_scores, axis=<span class="number">1</span>)</span><br><span class="line">    test_scores_std = np.std(test_scores, axis=<span class="number">1</span>)</span><br><span class="line">    fit_times_mean = np.mean(fit_times, axis=<span class="number">1</span>)</span><br><span class="line">    fit_times_std = np.std(fit_times, axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Plot learning curve</span></span><br><span class="line">    axes[<span class="number">0</span>].grid()</span><br><span class="line">    axes[<span class="number">0</span>].fill_between(train_sizes, train_scores_mean - train_scores_std,</span><br><span class="line">                         train_scores_mean + train_scores_std, alpha=<span class="number">0.1</span>,</span><br><span class="line">                         color=<span class="string">&quot;r&quot;</span>)</span><br><span class="line">    axes[<span class="number">0</span>].fill_between(train_sizes, test_scores_mean - test_scores_std,</span><br><span class="line">                         test_scores_mean + test_scores_std, alpha=<span class="number">0.1</span>,</span><br><span class="line">                         color=<span class="string">&quot;g&quot;</span>)</span><br><span class="line">    axes[<span class="number">0</span>].plot(train_sizes, train_scores_mean, <span class="string">&#x27;o-&#x27;</span>, color=<span class="string">&quot;r&quot;</span>,</span><br><span class="line">                 label=<span class="string">&quot;Training score&quot;</span>)</span><br><span class="line">    axes[<span class="number">0</span>].plot(train_sizes, test_scores_mean, <span class="string">&#x27;o-&#x27;</span>, color=<span class="string">&quot;g&quot;</span>,</span><br><span class="line">                 label=<span class="string">&quot;Cross-validation score&quot;</span>)</span><br><span class="line">    axes[<span class="number">0</span>].legend(loc=<span class="string">&quot;best&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Plot n_samples vs fit_times</span></span><br><span class="line">    axes[<span class="number">1</span>].grid()</span><br><span class="line">    axes[<span class="number">1</span>].plot(train_sizes, fit_times_mean, <span class="string">&#x27;o-&#x27;</span>)</span><br><span class="line">    axes[<span class="number">1</span>].fill_between(train_sizes, fit_times_mean - fit_times_std,</span><br><span class="line">                         fit_times_mean + fit_times_std, alpha=<span class="number">0.1</span>)</span><br><span class="line">    axes[<span class="number">1</span>].set_xlabel(<span class="string">&quot;Training examples&quot;</span>)</span><br><span class="line">    axes[<span class="number">1</span>].set_ylabel(<span class="string">&quot;fit_times&quot;</span>)</span><br><span class="line">    axes[<span class="number">1</span>].set_title(<span class="string">&quot;Scalability of the model&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Plot fit_time vs score</span></span><br><span class="line">    axes[<span class="number">2</span>].grid()</span><br><span class="line">    axes[<span class="number">2</span>].plot(fit_times_mean, test_scores_mean, <span class="string">&#x27;o-&#x27;</span>)</span><br><span class="line">    axes[<span class="number">2</span>].fill_between(fit_times_mean, test_scores_mean - test_scores_std,</span><br><span class="line">                         test_scores_mean + test_scores_std, alpha=<span class="number">0.1</span>)</span><br><span class="line">    axes[<span class="number">2</span>].set_xlabel(<span class="string">&quot;fit_times&quot;</span>)</span><br><span class="line">    axes[<span class="number">2</span>].set_ylabel(<span class="string">&quot;Score&quot;</span>)</span><br><span class="line">    axes[<span class="number">2</span>].set_title(<span class="string">&quot;Performance of the model&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> plt</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fig, axes = plt.subplots(<span class="number">3</span>, <span class="number">2</span>, figsize=(<span class="number">10</span>, <span class="number">15</span>))</span><br><span class="line"></span><br><span class="line">heart_data = df.copy()</span><br><span class="line"></span><br><span class="line">X = heart_data.iloc[:, <span class="number">0</span>:<span class="number">11</span>]</span><br><span class="line">y = heart_data[<span class="string">&#x27;DEATH_EVENT&#x27;</span>]</span><br><span class="line"></span><br><span class="line">selected_feature = [<span class="string">&#x27;serum_creatinine&#x27;</span>,<span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;ejection_fraction&#x27;</span>,<span class="string">&#x27;creatinine_phosphokinase&#x27;</span>]</span><br><span class="line">X_processed = X[selected_feature]</span><br><span class="line">X_processed = StandardScaler().fit_transform(X_processed)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">title = <span class="string">&quot;Learning Curves (SVM, linear kernel)&quot;</span></span><br><span class="line"><span class="comment"># cv = ShuffleSplit(n_splits=10, test_size=0.2, random_state=0)</span></span><br><span class="line"></span><br><span class="line">estimator = SVC(kernel=<span class="string">&quot;linear&quot;</span>,random_state=<span class="number">1</span>)</span><br><span class="line">plot_learning_curve(estimator, title, X_processed, y, axes=axes[:, <span class="number">0</span>], ylim=(<span class="number">0.5</span>, <span class="number">1.01</span>),</span><br><span class="line">                     n_jobs=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">title = <span class="string">r&quot;Learning Curves (SVM, RBF kernel)&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># cv = ShuffleSplit(n_splits=10, test_size=0.2, random_state=0)</span></span><br><span class="line">estimator = SVC(kernel=<span class="string">&quot;rbf&quot;</span>,random_state=<span class="number">1</span>)</span><br><span class="line">plot_learning_curve(estimator, title, X_processed, y, axes=axes[:, <span class="number">1</span>], ylim=(<span class="number">0.5</span>, <span class="number">1.01</span>),</span><br><span class="line">                     n_jobs=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="http://i1.fuimg.com/732634/79316f216c960b29.png" alt="Markdown"></p>
+<ul>
+<li><p>First column is the combination of learning curves, model scability, model performance in a SVM model with linear kernel. First row is the learning curve of linear SVM model: the training score is very high at the beginning and decreases and the cross-validation score is very low at the beginning and increases. The training score and the cross-validation score intertwines at about 220 training samples, and their difference after that are not significant</p>
+</li>
+<li><p>Second column is the combination of learning curves, model scability, model performance in a SVM model with linear kernel. The learning curve plots indicate that accuracy for both training score and cross validation score tend to be stable after 130 samples, which is similar in linear SVM model. The fit time for RBF kernel SVM is higher than linear kernel because of the complexity in calculation</p>
+</li>
+<li><p>RBF kernel has a relative higher performance, but the difference is not significant</p>
+</li>
+<li><p>The figure above doesn’t indicate either overfitting or underfitting problems</p>
+</li>
+</ul>
+<hr>
+<h3 id="Explorative-data-analysis-of-the-four-selected-features"><a href="#Explorative-data-analysis-of-the-four-selected-features" class="headerlink" title="Explorative data analysis of the four selected features:"></a>Explorative data analysis of the four selected features:</h3><ul>
+<li>‘serum_creatinine’</li>
+<li>‘age’</li>
+<li>‘ejection_fraction’</li>
+<li>‘creatinine_phosphokinase’</li>
+</ul>
+<h4 id="Specify-the-figure-size"><a href="#Specify-the-figure-size" class="headerlink" title="Specify the figure size"></a>Specify the figure size</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">HEIGHT = <span class="number">500</span></span><br><span class="line">WIDTH = <span class="number">700</span></span><br><span class="line">NBINS = <span class="number">50</span></span><br><span class="line">SCATTER_SIZE=<span class="number">700</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">## Define the histogram</span></span><br><span class="line"><span class="keyword">import</span> plotly.express <span class="keyword">as</span> px</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_histogram</span>(<span class="params">dataframe, column, color, bins, marginal,title, width=WIDTH, height=HEIGHT</span>):</span></span><br><span class="line">    figure = px.histogram(</span><br><span class="line">        dataframe,</span><br><span class="line">        column,</span><br><span class="line">        color=color,</span><br><span class="line">        nbins=bins,</span><br><span class="line">        marginal= marginal,</span><br><span class="line">        title=title,</span><br><span class="line">        width=width,</span><br><span class="line">        height=height</span><br><span class="line">    )</span><br><span class="line">    figure.show()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">plot_histogram(heart_data, <span class="string">&#x27;serum_creatinine&#x27;</span>, <span class="string">&#x27;DEATH_EVENT&#x27;</span>, NBINS, <span class="string">&quot;violin&quot;</span>,<span class="string">&#x27;Figure 1: Distribution of serum creatinine VS death event&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://i2.tiimg.com/732634/c3cf27edc28fd595.png" alt="Markdown"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">plot_histogram(heart_data, <span class="string">&#x27;ejection_fraction&#x27;</span>, <span class="string">&#x27;DEATH_EVENT&#x27;</span>, NBINS, <span class="string">&quot;violin&quot;</span>,<span class="string">&#x27;Figure 2: Distribution of ejection fraction VS death event&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://i2.tiimg.com/732634/1643949fc06a2d10.png" alt="Markdown"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">plot_histogram(heart_data, <span class="string">&#x27;creatinine_phosphokinase&#x27;</span>, <span class="string">&#x27;DEATH_EVENT&#x27;</span>, NBINS, <span class="string">&quot;violin&quot;</span>,<span class="string">&#x27;Figure 3: Distribution of creatinine_phosphokinase VS death event&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://i2.tiimg.com/732634/2d657b2005256d56.png" alt="Markdown"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> plotly.graph_objs <span class="keyword">as</span> go</span><br><span class="line">heart_data = df.copy()</span><br><span class="line">male = heart_data[heart_data[<span class="string">&quot;sex&quot;</span>]==<span class="number">1</span>]</span><br><span class="line">female = heart_data[heart_data[<span class="string">&quot;sex&quot;</span>]==<span class="number">0</span>]</span><br><span class="line">male_survival= male[male[<span class="string">&quot;DEATH_EVENT&quot;</span>]==<span class="number">0</span>]</span><br><span class="line">female_survival= female[female[<span class="string">&quot;DEATH_EVENT&quot;</span>]==<span class="number">0</span>]</span><br><span class="line"><span class="comment">## assign the labels</span></span><br><span class="line">labels = [<span class="string">&#x27;Male - Survived&#x27;</span>,<span class="string">&#x27;Male - Not Survived&#x27;</span>, <span class="string">&quot;Female -  Survived&quot;</span>, <span class="string">&quot;Female - Not Survived&quot;</span>]</span><br><span class="line"><span class="comment">## value is set according to the labels</span></span><br><span class="line">values = [<span class="built_in">len</span>(male[heart_data[<span class="string">&quot;DEATH_EVENT&quot;</span>]==<span class="number">0</span>]),<span class="built_in">len</span>(male[heart_data[<span class="string">&quot;DEATH_EVENT&quot;</span>]==<span class="number">1</span>]),</span><br><span class="line">         <span class="built_in">len</span>(female[heart_data[<span class="string">&quot;DEATH_EVENT&quot;</span>]==<span class="number">0</span>]),<span class="built_in">len</span>(female[heart_data[<span class="string">&quot;DEATH_EVENT&quot;</span>]==<span class="number">1</span>])]</span><br><span class="line">fig = go.Figure(data=[go.Pie(labels=labels,values=values,hole=<span class="number">.3</span>)])</span><br><span class="line">fig.update_layout(</span><br><span class="line">    title_text = <span class="string">&quot;Figure 4: Analysis on Survival - Gender factor&quot;</span></span><br><span class="line">)</span><br><span class="line">fig.show()</span><br></pre></td></tr></table></figure>
+<p><img src="http://i2.tiimg.com/732634/f3accef6dfd2ee38.png" alt="Markdown"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">## Define the violin plot function method</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">violin_boxplot</span>(<span class="params">dataframe, x, y,color,points,hover_data, box, width=WIDTH, height=HEIGHT</span>):</span></span><br><span class="line">    figure = px.violin(</span><br><span class="line">        dataframe,</span><br><span class="line">        x=x,</span><br><span class="line">        y=y,</span><br><span class="line">        color = color,</span><br><span class="line">        box = box,</span><br><span class="line">        hover_data=hover_data,</span><br><span class="line">        points=points,</span><br><span class="line">        width=width,</span><br><span class="line">        height=height</span><br><span class="line">    )</span><br><span class="line">    figure.update_layout(title_text=<span class="string">&quot;Figure 5: Analysis of both gender and age factors in survival rates&quot;</span>)</span><br><span class="line">    figure.show()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">violin_boxplot(heart_data,x = <span class="string">&quot;sex&quot;</span>,y=<span class="string">&quot;age&quot;</span>,color=<span class="string">&quot;DEATH_EVENT&quot;</span>,points=<span class="string">&quot;all&quot;</span>,box=<span class="literal">True</span>,hover_data=heart_data.columns)</span><br></pre></td></tr></table></figure>
+<p><img src="http://i2.tiimg.com/732634/7261b8fdd617408a.png" alt="Markdown"></p>
+<p>Figure 1 - Figure 5 is the visualization of each feature, there is no clear patterns or strong association between the death_event. Therefore, we need to further our research by conducting the model prediction process.</p>
+<h2 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h2><h3 id="Python-library"><a href="#Python-library" class="headerlink" title="Python library"></a>Python library</h3><h1 id="Description-how-you-learned-the-predictor"><a href="#Description-how-you-learned-the-predictor" class="headerlink" title="Description: how you learned the predictor"></a>Description: how you learned the predictor</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> SVC</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score, mean_squared_error</span><br><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> LinearSVC</span><br></pre></td></tr></table></figure>
+<h3 id="PCA-to-visualize-the-sample-distribution"><a href="#PCA-to-visualize-the-sample-distribution" class="headerlink" title="PCA to visualize the sample distribution"></a>PCA to visualize the sample distribution</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pca = PCA(n_components=<span class="number">2</span>)</span><br><span class="line">pca.fit(X_processed)</span><br><span class="line">X_pca = pca.transform(X_processed)</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">8</span>,<span class="number">8</span>))</span><br><span class="line">plt.scatter(X_pca[y==<span class="number">0</span>,<span class="number">0</span>],X_pca[y==<span class="number">0</span>,<span class="number">1</span>],label=<span class="string">&quot;Alive&quot;</span>,c=<span class="string">&quot;red&quot;</span>)</span><br><span class="line">plt.scatter(X_pca[y==<span class="number">1</span>,<span class="number">0</span>],X_pca[y==<span class="number">1</span>,<span class="number">1</span>],label=<span class="string">&quot;Death&quot;</span>,c=<span class="string">&quot;black&quot;</span>)</span><br><span class="line">plt.legend([<span class="string">&quot;Alive&quot;</span>,<span class="string">&quot;Death&quot;</span>])</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>&lt;matplotlib.legend.Legend at 0x7fdff0ee0d90&gt;</code></pre>
+<p><img src="http://i1.fuimg.com/732634/2c89446d39ad4ab7.png" alt="Markdown"></p>
+<p>In this case, the data distribution after feature selection are scattered, which could be beneficial for separation. Still, we could not determine whether linear kernel or RBF kernel is suitable for classification. I then would compare the performance between these two methods.</p>
+<h3 id="Machine-learning-algorithms-with-description"><a href="#Machine-learning-algorithms-with-description" class="headerlink" title="Machine learning algorithms with description"></a>Machine learning algorithms with description</h3><h4 id="SVM-with-linear-kernel"><a href="#SVM-with-linear-kernel" class="headerlink" title="SVM with linear kernel"></a>SVM with linear kernel</h4><p>$$ K(x,y) = X^Ty=x\cdot y$$</p>
+<p>Loss function: hinge loss / squared hinge loss</p>
+<p>$$ Agreement: z = y_i(w \cdot x_i + \alpha) $$</p>
+<p>Hinge loss</p>
+<p>$$<br>L_h(z)= \begin{cases}<br>0 &amp; \text{if z$\geq$1}\<br>1-z &amp; \text{z&lt;1}<br>\end{cases}<br>$$</p>
+<p>Squared hinge loss</p>
+<p>$$<br>L_{hsqr}(z)= \begin{cases}<br>0 &amp; \text{if z$\geq$1}\<br>(1-z)^2 &amp; \text{z&lt;1}<br>\end{cases}<br>$$</p>
+<p>Optimization objective formula for hinge loss:</p>
+<p>$$<br>J(w,\alpha) = \frac{1}{n}\sum_{i=1}^nL_h(y_i(w\cdot x_i + \alpha))+\frac{\lambda}{2}(||w||)^2<br>$$</p>
+<p>Description:</p>
+<ul>
+<li>Linear Kernel is used when the data is linearly separable dataset.</li>
+<li>One of the goal is to minimize the previous objective formula for the hinge loss. $\lambda$ in this case stands for the regularization hyperparameter.</li>
+<li>The strength of the regularization is inversely proportional to $\lambda$, it has to be strictly positive. The smaller regularization parameter means less tolerant to misclassification.</li>
+<li>Require grid serach to return the suitable hyperparameter</li>
+</ul>
+<h4 id="SVM-with-RBF-kernel"><a href="#SVM-with-RBF-kernel" class="headerlink" title="SVM with RBF kernel"></a>SVM with RBF kernel</h4><p>$$ K(x,y) = e^{-\gamma||x-y||^2}, \gamma &gt;0 $$</p>
+<p>Loss function: hinge loss / squared hinge loss</p>
+<p>$$ Agreement: z = y_i(w \cdot \phi(x_i) + \alpha) $$</p>
+<p>Hinge loss</p>
+<p>$$<br>L_h(z)= \begin{cases}<br>0 &amp; \text{if z$\geq$1}\<br>1-z &amp; \text{z&lt;1}<br>\end{cases}<br>$$</p>
+<p>Squared hinge loss</p>
+<p>$$<br>L_{hsqr}(z)= \begin{cases}<br>0 &amp; \text{if z$\geq$1}\<br>(1-z)^2 &amp; \text{z&lt;1}<br>\end{cases}<br>$$</p>
+<p>Optimization objective formula for hinge loss:</p>
+<p>$$<br>J(w,\alpha) = \frac{1}{n}\sum_{i=1}^nL_h(y_i(w\cdot \phi(x_i) + \alpha))+\frac{\lambda}{2}(||w||)^2<br>$$</p>
+<p>Description:</p>
+<ul>
+<li>SVM with RBF kernel was utilized to solve the linearly inseparable probelms</li>
+<li>kernel trick was used in RBF kernel SVM to increase the computational efficiency</li>
+<li>$\gamma$ parameter how far the influence of a single training example reaches</li>
+<li>C parameter trades off correct classification of training examples against maximization of the decision function’s margin</li>
+</ul>
+<h4 id="Evaluation-method"><a href="#Evaluation-method" class="headerlink" title="Evaluation method"></a>Evaluation method</h4><p>Mean squared error (MSE)</p>
+<p>$$<br>MSE = \frac{1}{n}\sum_{i=1}^n(Y_i- \hat{Y_i})^2</p>
+<p>$$</p>
+<p>where $Y_i$ is the label and $\hat{Y_i}$ is the predicted label by model</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">heart_data = df.copy()</span><br><span class="line"></span><br><span class="line">X = heart_data.iloc[:, <span class="number">0</span>:<span class="number">11</span>]</span><br><span class="line">y = heart_data[<span class="string">&#x27;DEATH_EVENT&#x27;</span>]</span><br><span class="line"></span><br><span class="line">selected_feature = [<span class="string">&#x27;serum_creatinine&#x27;</span>,<span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;ejection_fraction&#x27;</span>,<span class="string">&#x27;creatinine_phosphokinase&#x27;</span>]</span><br><span class="line">X_processed = X[selected_feature]</span><br><span class="line">X_processed = StandardScaler().fit_transform(X_processed)</span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X_processed, y, test_size=<span class="number">0.2</span>, shuffle=<span class="literal">True</span>, random_state=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## linear svm</span></span><br><span class="line"><span class="comment"># sv_clf = LinearSVC(loss=&#x27;hinge&#x27;,random_state=1, C=1.0, penalty = &#x27;l2&#x27;)</span></span><br><span class="line">sv_clf = SVC(kernel=<span class="string">&quot;linear&quot;</span>,random_state=<span class="number">1</span>)</span><br><span class="line">sv_clf.fit(X_train, y_train)</span><br><span class="line">sv_clf_pred = sv_clf.predict(X_test)</span><br><span class="line">sv_clf_acc = accuracy_score(y_test,sv_clf_pred)</span><br><span class="line">sv_clf_mse = mean_squared_error(y_test,sv_clf_pred)</span><br><span class="line">print(<span class="string">&quot;Accuracy of linear SVM model is :&quot;</span>,<span class="string">&quot;&#123;:.2f&#125;%&quot;</span>.<span class="built_in">format</span>(<span class="number">100</span>*sv_clf_acc))</span><br><span class="line">print(<span class="string">&quot;Mean squared error of linear SVM model is :&quot;</span>,<span class="string">&quot;&#123;:.2f&#125;&quot;</span>.<span class="built_in">format</span>(sv_clf_mse))</span><br><span class="line"></span><br><span class="line"><span class="comment">## RBF kernel SVM</span></span><br><span class="line">sv_clf = SVC(kernel=<span class="string">&quot;rbf&quot;</span>,random_state=<span class="number">1</span>, C=<span class="number">1.0</span>, gamma=<span class="number">0.1</span>)</span><br><span class="line">sv_clf.fit(X_train, y_train)</span><br><span class="line">sv_clf_pred = sv_clf.predict(X_test)</span><br><span class="line">sv_clf_acc = accuracy_score(y_test,sv_clf_pred)</span><br><span class="line">sv_clf_mse = mean_squared_error(y_test,sv_clf_pred)</span><br><span class="line">print(<span class="string">&quot;Accuracy of RBF SVM model is :&quot;</span>,<span class="string">&quot;&#123;:.2f&#125;%&quot;</span>.<span class="built_in">format</span>(<span class="number">100</span>*sv_clf_acc))</span><br><span class="line">print(<span class="string">&quot;Mean squared error of linear SVM model is :&quot;</span>,<span class="string">&quot;&#123;:.2f&#125;&quot;</span>.<span class="built_in">format</span>(sv_clf_mse))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code>Accuracy of linear SVM model is : 83.33%
+Mean squared error of linear SVM model is : 0.17
+Accuracy of RBF SVM model is : 86.67%
+Mean squared error of linear SVM model is : 0.13</code></pre>
+<h2 id="Experiments-and-results"><a href="#Experiments-and-results" class="headerlink" title="Experiments and results"></a>Experiments and results</h2><h3 id="Compare-the-efficacy-of-different-preprocessing-methods"><a href="#Compare-the-efficacy-of-different-preprocessing-methods" class="headerlink" title="Compare the efficacy of different preprocessing methods"></a>Compare the efficacy of different preprocessing methods</h3><ul>
+<li>MinMaxScalar</li>
+<li>StandardScalar</li>
+<li>RobustScalar</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> Pipeline</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler, StandardScaler, RobustScaler</span><br><span class="line"></span><br><span class="line">heart_data = df.copy()</span><br><span class="line"></span><br><span class="line">X = heart_data.iloc[:, <span class="number">0</span>:<span class="number">11</span>]</span><br><span class="line">y = heart_data[<span class="string">&#x27;DEATH_EVENT&#x27;</span>]</span><br><span class="line"></span><br><span class="line">selected_feature = [<span class="string">&#x27;serum_creatinine&#x27;</span>,<span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;ejection_fraction&#x27;</span>,<span class="string">&#x27;creatinine_phosphokinase&#x27;</span>]</span><br><span class="line">X_processed = X[selected_feature]</span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X_processed, y, test_size=<span class="number">0.2</span>, shuffle=<span class="literal">True</span>, random_state=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># MinMaxScalar</span></span><br><span class="line">pipe1 = Pipeline([(<span class="string">&quot;scalar&quot;</span>,MinMaxScaler()),(<span class="string">&quot;svm&quot;</span>,SVC(random_state=<span class="number">1</span>))])</span><br><span class="line">pipe1.fit(X_train,y_train)</span><br><span class="line">print(<span class="string">&quot;Test score for MinMaxScalar RBF kernel: &#123;:.3f&#125;&quot;</span>.<span class="built_in">format</span>(pipe1.score(X_test,y_test)))</span><br><span class="line"></span><br><span class="line">pipe1_linear = Pipeline([(<span class="string">&quot;scalar&quot;</span>,MinMaxScaler()),(<span class="string">&quot;svm&quot;</span>,SVC(kernel=<span class="string">&quot;linear&quot;</span>,random_state=<span class="number">1</span>))])</span><br><span class="line">pipe1_linear.fit(X_train,y_train)</span><br><span class="line">print(<span class="string">&quot;Test score for MinMaxScalar linear kernel: &#123;:.3f&#125;\n&quot;</span>.<span class="built_in">format</span>(pipe1_linear.score(X_test,y_test)))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># StandardScalar</span></span><br><span class="line"></span><br><span class="line">pipe2 = Pipeline([(<span class="string">&quot;scalar&quot;</span>,StandardScaler()),(<span class="string">&quot;svm&quot;</span>,SVC(random_state=<span class="number">1</span>))])</span><br><span class="line">pipe2.fit(X_train,y_train)</span><br><span class="line">print(<span class="string">&quot;Test score for StandardScalar in RBF kernel: &#123;:.3f&#125;&quot;</span>.<span class="built_in">format</span>(pipe2.score(X_test,y_test)))</span><br><span class="line"></span><br><span class="line">pipe2_linear = Pipeline([(<span class="string">&quot;scalar&quot;</span>,StandardScaler()),(<span class="string">&quot;svm&quot;</span>,SVC(kernel=<span class="string">&quot;linear&quot;</span> ,random_state=<span class="number">1</span>))])</span><br><span class="line">pipe2_linear.fit(X_train,y_train)</span><br><span class="line">print(<span class="string">&quot;Test score for StandardScalar in linear kernel: &#123;:.3f&#125;\n&quot;</span>.<span class="built_in">format</span>(pipe2_linear.score(X_test,y_test)))</span><br><span class="line"></span><br><span class="line"><span class="comment"># RobustScalar</span></span><br><span class="line"></span><br><span class="line">pipe3 = Pipeline([(<span class="string">&quot;scalar&quot;</span>,RobustScaler()),(<span class="string">&quot;svm&quot;</span>,SVC(random_state=<span class="number">1</span>))])</span><br><span class="line">pipe3.fit(X_train,y_train)</span><br><span class="line">print(<span class="string">&quot;Test score for RobustScalar in RBF kernel: &#123;:.3f&#125;&quot;</span>.<span class="built_in">format</span>(pipe3.score(X_test,y_test)))</span><br><span class="line"></span><br><span class="line">pipe3_linear = Pipeline([(<span class="string">&quot;scalar&quot;</span>,RobustScaler()),(<span class="string">&quot;svm&quot;</span>,SVC(kernel = <span class="string">&quot;linear&quot;</span>,random_state=<span class="number">1</span>))])</span><br><span class="line">pipe3_linear.fit(X_train,y_train)</span><br><span class="line">print(<span class="string">&quot;Test score for RobustScalar in linear kernel: &#123;:.3f&#125;&quot;</span>.<span class="built_in">format</span>(pipe3_linear.score(X_test,y_test)))</span><br></pre></td></tr></table></figure>
+<pre><code>Test score for MinMaxScalar RBF kernel: 0.850
+Test score for MinMaxScalar linear kernel: 0.767
+
+Test score for StandardScalar in RBF kernel: 0.850
+Test score for StandardScalar in linear kernel: 0.833
+
+Test score for RobustScalar in RBF kernel: 0.800
+Test score for RobustScalar in linear kernel: 0.817</code></pre>
+<ul>
+<li>There is no significant difference between different preprocessing method in RBF kernels, especially in MinMaxScalar and StandardScalar.</li>
+<li>Overall RBF kernel outperforms than linear kernel.</li>
+<li>In this case, I would insist on using StandardScalar in following procedure.<br>
+<br>
+<br>
+
+
+
+</li>
+</ul>
+<h3 id="Compare-the-model-performance-by-ten-fold-cross-validation-and-leave-one-out-method-in-model-evaluation"><a href="#Compare-the-model-performance-by-ten-fold-cross-validation-and-leave-one-out-method-in-model-evaluation" class="headerlink" title="Compare the model performance by ten-fold cross validation and leave-one-out method in model evaluation"></a>Compare the model performance by ten-fold cross validation and leave-one-out method in model evaluation</h3><br>
+
+<p>Owing to the fact that the dataset I used is a small one, only containing 299 samples in total. In order to minimize the bias or error leading by accident, I used ten-fold cross validation and leave-one-out method to return a more general evaluation (calculating the mean value)</p>
+<h4 id="Ten-fold-cross-validation-of-SVM"><a href="#Ten-fold-cross-validation-of-SVM" class="headerlink" title="Ten-fold cross validation of SVM"></a>Ten-fold cross validation of SVM</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">heart_data = df.copy()</span><br><span class="line">X = heart_data.iloc[:, <span class="number">0</span>:<span class="number">11</span>]</span><br><span class="line">y = heart_data[<span class="string">&#x27;DEATH_EVENT&#x27;</span>]</span><br><span class="line"></span><br><span class="line">selected_feature = [<span class="string">&#x27;serum_creatinine&#x27;</span>,<span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;ejection_fraction&#x27;</span>,<span class="string">&#x27;creatinine_phosphokinase&#x27;</span>]</span><br><span class="line">X_processed = X[selected_feature]</span><br><span class="line">X_processed = StandardScaler().fit_transform(X_processed)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_val_score</span><br><span class="line">sv_clf = SVC(kernel= <span class="string">&#x27;linear&#x27;</span>,random_state=<span class="number">1</span>)</span><br><span class="line">sv_clf_rbf = SVC(kernel=<span class="string">&#x27;rbf&#x27;</span>,random_state=<span class="number">1</span>)</span><br><span class="line">scores = cross_val_score(sv_clf, X_processed,y,cv=<span class="number">10</span>)</span><br><span class="line">scores_rbf = cross_val_score(sv_clf_rbf, X_processed,y,cv=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">&quot;Ten-fold cross validation scores of linear SVM:&#123;:.3f&#125; &quot;</span>.<span class="built_in">format</span>(np.mean(scores)))</span><br><span class="line">print(<span class="string">&quot;Ten-fold cross validation scores of RBF kernel SVM:&#123;:.3f&#125;&quot;</span>.<span class="built_in">format</span>(np.mean(scores_rbf)))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code>Ten-fold cross validation scores of linear SVM:0.756 
+Ten-fold cross validation scores of RBF kernel SVM:0.763</code></pre>
+<h4 id="Leave-on-out-method-of-SVM"><a href="#Leave-on-out-method-of-SVM" class="headerlink" title="Leave-on-out method of SVM"></a>Leave-on-out method of SVM</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> LeaveOneOut</span><br><span class="line">loo = LeaveOneOut()</span><br><span class="line">scores_loo = cross_val_score(sv_clf,X_processed,y,cv=loo)</span><br><span class="line">scores_loo_rbf = cross_val_score(sv_clf_rbf,X_processed,y,cv=loo)</span><br><span class="line">print(<span class="string">&quot;Number of CV iterations: &#123;&#125;&quot;</span>.<span class="built_in">format</span>(<span class="built_in">len</span>(scores_loo)))</span><br><span class="line">print(<span class="string">&quot;Leave one out method mean scores for linear SVM:&#123;:.3f&#125;&quot;</span>.<span class="built_in">format</span>(scores_loo.mean()))</span><br><span class="line">print(<span class="string">&quot;Leave one out method mean scores for RBF SVM:&#123;:.3f&#125;&quot;</span>.<span class="built_in">format</span>(scores_loo_rbf.mean()))</span><br></pre></td></tr></table></figure>
+<pre><code>Number of CV iterations: 299
+Leave one out method mean scores for linear SVM:0.763
+Leave one out method mean scores for RBF SVM:0.756</code></pre>
+<h4 id="Comparison-of-the-two-methods"><a href="#Comparison-of-the-two-methods" class="headerlink" title="Comparison of the two methods"></a>Comparison of the two methods</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(<span class="string">&quot;Ten-fold cross validation scores of linear SVM:&#123;:.3f&#125; &quot;</span>.<span class="built_in">format</span>(np.mean(scores)))</span><br><span class="line">print(<span class="string">&quot;Ten-fold cross validation scores of RBF kernel SVM:&#123;:.3f&#125;&quot;</span>.<span class="built_in">format</span>(np.mean(scores_rbf)))</span><br><span class="line">print(<span class="string">&quot;Leave one out method mean scores for linear SVM:&#123;:.3f&#125;&quot;</span>.<span class="built_in">format</span>(scores_loo.mean()))</span><br><span class="line">print(<span class="string">&quot;Leave one out method mean scores for RBF SVM:&#123;:.3f&#125;&quot;</span>.<span class="built_in">format</span>(scores_loo_rbf.mean()))</span><br></pre></td></tr></table></figure>
+<pre><code>Ten-fold cross validation scores of linear SVM:0.756 
+Ten-fold cross validation scores of RBF kernel SVM:0.763
+Leave one out method mean scores for linear SVM:0.763
+Leave one out method mean scores for RBF SVM:0.756</code></pre>
+<p>**Summary: **<br>The results of either ten-fold cross validation and leave-one-out method results are quite similar, based on the consideration of time elapse, I would use ten-fold cross-validation for the following analysis</p>
+<h3 id="Hyperparameters-tuning"><a href="#Hyperparameters-tuning" class="headerlink" title="Hyperparameters tuning"></a>Hyperparameters tuning</h3><ul>
+<li>Grid search for SVM algorithm with ten-fold cross validation method</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> GridSearchCV</span><br><span class="line">param_grid = [&#123;<span class="string">&#x27;kernel&#x27;</span>: [<span class="string">&#x27;rbf&#x27;</span>],</span><br><span class="line">               <span class="string">&#x27;C&#x27;</span>: [<span class="number">0.01</span>,<span class="number">0.1</span>,<span class="number">1</span>,<span class="number">10</span>,<span class="number">100</span>],</span><br><span class="line">               <span class="string">&#x27;gamma&#x27;</span>:[<span class="number">0.01</span>,<span class="number">0.1</span>,<span class="number">1</span>,<span class="number">10</span>,<span class="number">100</span>]&#125;,</span><br><span class="line">                &#123;<span class="string">&#x27;kernel&#x27;</span>:[<span class="string">&#x27;linear&#x27;</span>],</span><br><span class="line">               <span class="string">&#x27;C&#x27;</span>: [<span class="number">0.01</span>,<span class="number">0.1</span>,<span class="number">1</span>,<span class="number">10</span>,<span class="number">100</span>]</span><br><span class="line">                &#125;]</span><br><span class="line"><span class="comment"># print(param_grid)</span></span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X_processed, y, test_size=<span class="number">0.2</span>, shuffle=<span class="literal">True</span>, random_state=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">grid_search = GridSearchCV(SVC(random_state=<span class="number">1</span>),param_grid,cv =<span class="number">10</span>, n_jobs=-<span class="number">1</span>)</span><br><span class="line">grid_search.fit(X_train,y_train)</span><br><span class="line">print(<span class="string">&quot;Best cross validation accuracy: &#123;:.2f&#125;&quot;</span>.<span class="built_in">format</span>(grid_search.best_score_))</span><br><span class="line">print(<span class="string">&quot;Test set score: &#123;:.2f&#125;&quot;</span>.<span class="built_in">format</span>(grid_search.score(X_test,y_test)))</span><br><span class="line">print(<span class="string">&quot;Best parameters: &#123;&#125;&quot;</span>.<span class="built_in">format</span>(grid_search.best_params_))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code>Best cross validation accuracy: 0.75
+Test set score: 0.87
+Best parameters: &#123;&#39;C&#39;: 1, &#39;gamma&#39;: 0.1, &#39;kernel&#39;: &#39;rbf&#39;&#125;</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">results = pd.DataFrame(grid_search.cv_results_)</span><br><span class="line">results_rbf = results.iloc[<span class="number">0</span>:<span class="number">25</span>,:]</span><br><span class="line">results_linear = results.iloc[<span class="number">25</span>:,:]</span><br><span class="line"><span class="comment"># display(results_linear.T.head())</span></span><br><span class="line"><span class="comment"># display(results_rbf.T.head())</span></span><br><span class="line"><span class="comment"># display(results.T.head())</span></span><br><span class="line"><span class="comment"># display(results.T)</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">12</span>,<span class="number">12</span>))</span><br><span class="line">scores = np.array(results_rbf.mean_test_score).reshape(<span class="number">5</span>,<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">heatmap = sn.heatmap(data=scores,xticklabels=param_grid[<span class="number">0</span>][<span class="string">&#x27;gamma&#x27;</span>],</span><br><span class="line">           yticklabels=param_grid[<span class="number">0</span>][<span class="string">&#x27;C&#x27;</span>],</span><br><span class="line">           annot=<span class="literal">True</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;C&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&quot;gamma&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>Text(0.5, 87.0, &#39;gamma&#39;)</code></pre>
+<p><img src="http://i2.tiimg.com/732634/7fbdc5dcac6a34a6.png" alt="Markdown"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sv_clf_rbf = SVC(kernel=<span class="string">&#x27;rbf&#x27;</span>,random_state=<span class="number">1</span>,C=<span class="number">1</span>, gamma = <span class="number">0.1</span>)</span><br><span class="line">scores_loo_rbf = cross_val_score(sv_clf_rbf,X_processed,y,cv=<span class="number">10</span>)</span><br><span class="line"><span class="comment"># print(&quot;Number of CV iterations: &#123;&#125;&quot;.format(len(scores_loo)))</span></span><br><span class="line">print(<span class="string">&quot;10-fold cross validation mean method scores for RBF SVM:&#123;:.3f&#125;&quot;</span>.<span class="built_in">format</span>(scores_loo_rbf.mean()))</span><br></pre></td></tr></table></figure>
+<pre><code>10-fold cross validation mean method scores for RBF SVM:0.763</code></pre>
+<p>As can be seen from the grid search, the SVM with RBF kernel and hyperparameter C: 1, gamma 0.1 could achieve the highest performance</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">linear_score = np.array(results_linear.mean_test_score)</span><br><span class="line">display(results_linear.T.head())</span><br><span class="line">print(<span class="built_in">max</span>(linear_score))</span><br></pre></td></tr></table></figure>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;</code></pre>
+<p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>25</th>
+      <th>26</th>
+      <th>27</th>
+      <th>28</th>
+      <th>29</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>mean_fit_time</th>
+      <td>0.0021414</td>
+      <td>0.00199142</td>
+      <td>0.00196731</td>
+      <td>0.00795052</td>
+      <td>0.0434071</td>
+    </tr>
+    <tr>
+      <th>std_fit_time</th>
+      <td>0.000204684</td>
+      <td>0.0003023</td>
+      <td>0.000284892</td>
+      <td>0.00302314</td>
+      <td>0.010914</td>
+    </tr>
+    <tr>
+      <th>mean_score_time</th>
+      <td>0.000635695</td>
+      <td>0.000739121</td>
+      <td>0.000567961</td>
+      <td>0.000703764</td>
+      <td>0.000822139</td>
+    </tr>
+    <tr>
+      <th>std_score_time</th>
+      <td>0.000104189</td>
+      <td>0.000289296</td>
+      <td>9.88127e-05</td>
+      <td>8.55103e-05</td>
+      <td>0.000257763</td>
+    </tr>
+    <tr>
+      <th>param_C</th>
+      <td>0.01</td>
+      <td>0.1</td>
+      <td>1</td>
+      <td>10</td>
+      <td>100</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+<pre><code>0.7358695652173913</code></pre>
+<p>In the meantime, the best performance in linear model is 0.73587, and the mean_test_score in c =1,10,100 is relative similar. The influence of hyperparameter C are not significant. Apart from that the SVC function only provide</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">### Hyperparameter tuning for linear SVM (penalty, loss, C)</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">parameters = &#123;<span class="string">&#x27;penalty&#x27;</span>:[<span class="string">&#x27;l1&#x27;</span>, <span class="string">&#x27;l2&#x27;</span>], <span class="string">&#x27;loss&#x27;</span>:[<span class="string">&#x27;hinge&#x27;</span>, <span class="string">&#x27;squared_hinge&#x27;</span>],<span class="string">&#x27;C&#x27;</span>:[<span class="number">1</span>, <span class="number">10</span>,<span class="number">100</span>]&#125;</span><br><span class="line">grid_search = GridSearchCV(LinearSVC(random_state=<span class="number">1</span>),parameters,cv =<span class="number">10</span>, n_jobs=-<span class="number">1</span>)</span><br><span class="line">grid_search.fit(X_train,y_train)</span><br><span class="line">print(<span class="string">&quot;Best cross validation accuracy: &#123;:.2f&#125;&quot;</span>.<span class="built_in">format</span>(grid_search.best_score_))</span><br><span class="line">print(<span class="string">&quot;Test set score: &#123;:.2f&#125;&quot;</span>.<span class="built_in">format</span>(grid_search.score(X_test,y_test)))</span><br><span class="line">print(<span class="string">&quot;Best parameters: &#123;&#125;&quot;</span>.<span class="built_in">format</span>(grid_search.best_params_))</span><br></pre></td></tr></table></figure>
+<pre><code>Best cross validation accuracy: 0.75
+Test set score: 0.80
+Best parameters: &#123;&#39;C&#39;: 10, &#39;loss&#39;: &#39;squared_hinge&#39;, &#39;penalty&#39;: &#39;l2&#39;&#125;</code></pre>
+<p>The test score of linear svm (test set score:0.80) still could not compete with the rbf kernel (test set score: 0.87), therefore, I would still insist on the SVM with RBF kernel and hyperparameter C: 1, gamma 0.1</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> plot_confusion_matrix, confusion_matrix</span><br><span class="line">heart_data = df.copy()</span><br><span class="line"></span><br><span class="line">X = heart_data.iloc[:, <span class="number">0</span>:<span class="number">11</span>]</span><br><span class="line">y = heart_data[<span class="string">&#x27;DEATH_EVENT&#x27;</span>]</span><br><span class="line"></span><br><span class="line">selected_feature = [<span class="string">&#x27;serum_creatinine&#x27;</span>,<span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;ejection_fraction&#x27;</span>,<span class="string">&#x27;creatinine_phosphokinase&#x27;</span>]</span><br><span class="line">X_processed = X[selected_feature]</span><br><span class="line">X_processed = StandardScaler().fit_transform(X_processed)</span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X_processed,y,test_size=<span class="number">0.2</span>,random_state=<span class="number">2</span>)</span><br><span class="line">model = SVC(kernel=<span class="string">&#x27;rbf&#x27;</span>,random_state=<span class="number">1</span>,C=<span class="number">1</span>, gamma = <span class="number">0.1</span>)</span><br><span class="line">model.fit(X_train,y_train)</span><br><span class="line">y_pred = model.predict(X_test)</span><br><span class="line">y_pred_train = model.predict(X_train)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="Training-and-validation-loss"><a href="#Training-and-validation-loss" class="headerlink" title="Training and validation loss"></a>Training and validation loss</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(<span class="string">&quot;Training loss is: &#123;&#125;&quot;</span>.<span class="built_in">format</span>(<span class="built_in">round</span>(model.score(X_train,y_train),<span class="number">2</span>)))</span><br><span class="line">print(<span class="string">&quot;Testing loss is: &#123;&#125;&quot;</span>.<span class="built_in">format</span>(<span class="built_in">round</span>(model.score(X_test,y_test),<span class="number">2</span>)))</span><br></pre></td></tr></table></figure>
+<pre><code>Training loss is: 0.78
+Testing loss is: 0.83</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">train_mse = mean_squared_error(y_train,y_pred_train)</span><br><span class="line">test_mse = mean_squared_error(y_test,y_pred)</span><br><span class="line">print(<span class="string">&quot;The MSE value of training sample is: &#123;&#125;&quot;</span>.<span class="built_in">format</span>(<span class="built_in">round</span>(train_mse,<span class="number">2</span>)))</span><br><span class="line">print(<span class="string">&quot;The MSE value of testing sample is: &#123;&#125;&quot;</span>.<span class="built_in">format</span>(<span class="built_in">round</span>(test_mse,<span class="number">2</span>)))</span><br></pre></td></tr></table></figure>
+<pre><code>The MSE value of training sample is: 0.22
+The MSE value of testing sample is: 0.17</code></pre>
+<p>The training loss in SVM with RBF kernel in hyperparameter C: 1, gamma 0.1 is 0.78, with testing loss equals 0.83<br>The MSE value for training and testing in SVM with RBF kernel is 0.22 and 0.17 accordingly</p>
+<h3 id="Plot-the-confusion-matrix-plot"><a href="#Plot-the-confusion-matrix-plot" class="headerlink" title="Plot the confusion matrix plot"></a>Plot the confusion matrix plot</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># confusion = confusion_matrix(y_test,y_pred)</span></span><br><span class="line">plot_confusion_matrix(model,X_test,y_test)</span><br><span class="line">plt.title(<span class="string">&quot;SVC Model - Confusion Matrix&quot;</span>)</span><br><span class="line">plt.xticks(<span class="built_in">range</span>(<span class="number">2</span>), [<span class="string">&quot;Alive&quot;</span>, <span class="string">&quot;Dead&quot;</span>], fontsize=<span class="number">8</span>)</span><br><span class="line">plt.yticks(<span class="built_in">range</span>(<span class="number">2</span>), [<span class="string">&quot;Alive&quot;</span>, <span class="string">&quot;Dead&quot;</span>], fontsize=<span class="number">8</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://i2.tiimg.com/732634/2407f6defc2653a5.png" alt="Markdown"></p>
+<h3 id="Evaluate-the-performance-of-the-final-selected-model-performance-with-respect-to-the-chosen-performance-matrix"><a href="#Evaluate-the-performance-of-the-final-selected-model-performance-with-respect-to-the-chosen-performance-matrix" class="headerlink" title="Evaluate the performance of the final selected model performance with respect to the chosen performance matrix"></a>Evaluate the performance of the final selected model performance with respect to the chosen performance matrix</h3><br>
+
+<h3 id="Accuracy"><a href="#Accuracy" class="headerlink" title="Accuracy:"></a>Accuracy:</h3><p>$$\frac{TP+TN}{TP+TN+FP+FN}$$<br><br></p>
+<h3 id="Total"><a href="#Total" class="headerlink" title="Total:"></a>Total:</h3><p>$$Total = TP+TN+FP+FN$$</p>
+<h3 id="Precision"><a href="#Precision" class="headerlink" title="Precision:"></a>Precision:</h3><p>$$\frac{TP}{TP+FP}$$</p>
+<h3 id="Recall"><a href="#Recall" class="headerlink" title="Recall:"></a>Recall:</h3><p>$$\frac{TP}{TP+FN}$$</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> classification_report</span><br><span class="line">print(classification_report(y_test,y_pred,target_names=[<span class="string">&quot;Heart Not Failed&quot;</span>, <span class="string">&quot;Heart Fail&quot;</span>]))</span><br></pre></td></tr></table></figure>
+<pre><code>                  precision    recall  f1-score   support
+
+Heart Not Failed       0.85      0.93      0.89        43
+      Heart Fail       0.77      0.59      0.67        17
+
+        accuracy                           0.83        60
+       macro avg       0.81      0.76      0.78        60
+    weighted avg       0.83      0.83      0.83        60</code></pre>
+<h3 id="ROC-curve"><a href="#ROC-curve" class="headerlink" title="ROC curve"></a>ROC curve</h3><p>AUC = Area under the curve</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> confusion_matrix, plot_confusion_matrix, plot_roc_curve, plot_precision_recall_curve</span><br><span class="line">plot_roc_curve(model,X_test,y_test)</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>&lt;sklearn.metrics._plot.roc_curve.RocCurveDisplay at 0x7fdff1de91f0&gt;</code></pre>
+<p><img src="http://i2.tiimg.com/732634/45a09aaa074d900e.png" alt="Markdown"></p>
+<h3 id="PR-curve"><a href="#PR-curve" class="headerlink" title="PR-curve"></a>PR-curve</h3><p>AP = Average Precision, summarizes such a plot as the weighted mean of precisions achieved at each threshold, with the increase in recall from the previous threshold used as the weight:</p>
+<p>$$ AP =\sum_{N}(R_n-R_{n-1})P_n$$</p>
+<p>where  and  are the precision and recall at the nth threshold. A pair  is referred to as an operating point.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">plot_precision_recall_curve(model,X_test,y_test)</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://i2.tiimg.com/732634/0f1422e7de2481d4.png" alt="Markdown"></p>
+<h3 id="Summary-of-the-results"><a href="#Summary-of-the-results" class="headerlink" title="Summary of the results"></a>Summary of the results</h3><ul>
+<li>Grid search to find the best hyperparameters in optimization of the model</li>
+<li>ten-fold cross validation used to evaluate machine learning models on a limited data sample</li>
+<li>SVM with RBF kernel and hyperparameter C: 1, gamma 0.1 would be the best performed model</li>
+<li>precision, recall, f1-score, accuracy value were applied and summarized in the previous table</li>
+<li>train loss and validation loss were 0.78 and 0.83 accordingly</li>
+<li>MSE value of training sample and testing sample is 0.22 and 0.17 accordingly</li>
+<li>No overfitting or underfitting problem observed because regularization method, cross-validation method were used to mitigate the potential problems</li>
+<li>The overall model is robust and in good generalization ability</li>
+<li>ROC curve and PR curve were visualized to demonstrate the final results; AUC is 0.83 and AP is 0.7</li>
+</ul>
+<h2 id="Conclusion-and-future-work"><a href="#Conclusion-and-future-work" class="headerlink" title="Conclusion and future work"></a>Conclusion and future work</h2><p>In this project, I compared and devised a RBF SVM machine learning model for the prediction of heart failure. I firstly conducted a preliminary analysis of the whole dataset and utilized the PCA method to visualize the distribution condition of the samples. The initial analysis was not robust and precise, which required me to optimize the model. Then, I conducted feature selection to return the top 4 most correlated feature with the death event. Apart from that, I also compared the difference between normalization method as well as the validation methods. The final determined methods were to use four selected features (‘serum_creatinine’,’age’,’ejection_fraction’, ‘creatinine_phosphokinase’), StandardScalar methods and ten-fold cross validation to conduct the prediction. In addition, I also conduct the explorative data analysis to have a view of the selected feature. Furthermore, the PCA condition after feature selection still could not determine whether the dataset is linearly seperable or not, I, therefore, used the grid serach to return the most suitable hyperparameters. The final results suggested that the SVM with RBF kernel in gamma equals 0.1 and penalty C equals 1 could achieve the best performance. After that, the model performance was evaluated from confusion matrix, accuracy, precision, recall, f1-score. Moreover, the ROC plot and PR-curve plot with AUC and AP accordingly were indicated. The final accuracy could achieve 0.83, which is satisfactory.</p>
+<p>In the future, since this project only used SVM related algorithms, I would like to incorporate more complicate algorithms, for instance, XGboost. Furthermore, the model’s interpretability are not great enough, and that would be my focus in the future.</p>
+<h2 id="Bibliography"><a href="#Bibliography" class="headerlink" title="Bibliography"></a>Bibliography</h2><p>Heart Fail:Analysis and Quick-prediction | Kaggle. (n.d.). Retrieved January 8, 2021, from <a class="link"   href="https://www.kaggle.com/nayansakhiya/heart-fail-analysis-and-quick-prediction" >https://www.kaggle.com/nayansakhiya/heart-fail-analysis-and-quick-prediction<i class="fas fa-external-link-alt"></i></a></p>
+<p>Heart Failure - Model Prediction Comparisons (95%) | Kaggle. (n.d.). Retrieved January 8, 2021, from <a class="link"   href="https://www.kaggle.com/rude009/heart-failure-model-prediction-comparisons-95" >https://www.kaggle.com/rude009/heart-failure-model-prediction-comparisons-95<i class="fas fa-external-link-alt"></i></a></p>
+<p>Heart Failure Prediction (AUC: 0.98) | Kaggle. (n.d.). Retrieved January 8, 2021, from <a class="link"   href="https://www.kaggle.com/ksvmuralidhar/heart-failure-prediction-auc-0-98" >https://www.kaggle.com/ksvmuralidhar/heart-failure-prediction-auc-0-98<i class="fas fa-external-link-alt"></i></a></p>
+<p>Pedregosa et al., Scikit-learn: Machine Learning in Python, JMLR 12, pp. 2825-2830, 2011.</p>
+<h2 id="Other-resources-to-download-the-code"><a href="#Other-resources-to-download-the-code" class="headerlink" title="Other resources to download the code"></a>Other resources to download the code</h2><p>Kaggle:<br><a class="link"   href="https://www.kaggle.com/yuxuanwu17/eda-of-heart-failure-and-optimization-of-svm" >https://www.kaggle.com/yuxuanwu17/eda-of-heart-failure-and-optimization-of-svm<i class="fas fa-external-link-alt"></i></a></p>
+<p>Github:<br><a class="link"   href="https://github.com/yuxuanwu17/kaggle/blob/main/Final_report.ipynb" >https://github.com/yuxuanwu17/kaggle/blob/main/Final_report.ipynb<i class="fas fa-external-link-alt"></i></a></p>
+]]></content>
+      <tags>
+        <tag>Machine learning, Explorative data analysis, kaggle, MathJax</tag>
+      </tags>
+  </entry>
+</search>
