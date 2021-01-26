@@ -9,7 +9,7 @@
     
     <title>
         
-            Hadoop based big data analysis |
+            Hadoop 在mac本地的配置 |
         
         Yuxuan Wu
     </title>
@@ -181,7 +181,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">Hadoop based big data analysis</span>
+            <span class="title-hover-animation">Hadoop 在mac本地的配置</span>
         </div>
 
         
@@ -197,7 +197,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i> 2021-01-25 19:44:27
+        <i class="fas fa-edit"></i> 2021-01-26 09:36:27
     </span>
     
     
@@ -216,12 +216,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i> <span>296 Words</span>
+            <i class="fas fa-file-word"></i> <span>1k Words</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i> <span>1 Mins</span>
+            <i class="fas fa-clock"></i> <span>4 Mins</span>
         </span>
     
     
@@ -237,41 +237,70 @@
         
 
         <div class="article-content markdown-body">
-            <p>Hadoop comprises three part:</p>
+            <p><a class="link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/269047002" >loner：从阿里云轻量服务器安装Hadoop及环境配置<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/271772216" >loner：阿里云Hadoop第二弹（运行WordCount）<i class="fas fa-external-link-alt"></i></a></p>
+<p>之前在阿里云上的案例我成功运行了wordcount。但是考虑到实际的编程，在阿里云上的可视化界面显得有些艰难，更不要提eclipse界面有点丑。我觉得还是用jetbrain公司的IDEA来开发，这儿学生可以免费使用专业版，如果有需要可以自行下载。主要是有大数据工具的插件Hadoop，然后就开始我一个礼拜的捣鼓，然后发现好像阿里云的9000端口好像无法打开（网上说什么内网的原因，所以在Hadoop上链接不上）于是偶然发现mac在本地配置的教程，就此汇总一下。</p>
+<p><strong>Java的安装</strong></p>
+<p>不再赘述，网上有很多的教程，在保证</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version </span><br></pre></td></tr></table></figure>
+<p>可以输出如下界面，则我们开始Hadoop的配置</p>
+<p><img src="https://pic3.zhimg.com/v2-d0a5d1671f8e707705db4068ed2c3b36_b.png" alt="img"></p>
+<p><strong>下载Hadoop的原始代码</strong></p>
+<p>本文章全程以hadoop-2.9.2为例子，在下面的链接中下载hadoop-2.9.2.tar.gz 既可以</p>
+<p>Index of /dist/hadoop/core/hadoop-2.9.2archive.apache.org</p>
+<p>解压到本地的目录下面</p>
+<p><strong>添加Hadoop的环境变量</strong></p>
+<p>这儿我们需要用vim修改 ~/.bash_profile</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~&#x2F;.bash_profile</span><br></pre></td></tr></table></figure>
+<p>在最下面添加这几行代码，编辑完成后:wq退出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export HADOOP_HOME&#x3D;&#x2F;Users&#x2F;yuxuan&#x2F;hadoop-2.9.2</span><br><span class="line">export CLASSPATH&#x3D;$($HADOOP_HOME&#x2F;bin&#x2F;hadoop classpath):$CLASSPATH</span><br><span class="line">export HADOOP_COMMON_LIB_NATIVE_DIR&#x3D;$HADOOP_HOME&#x2F;lib&#x2F;native</span><br><span class="line">export PATH&#x3D;$PATH:$HADOOP_HOME&#x2F;bin</span><br></pre></td></tr></table></figure>
+<p><img src="https://pic2.zhimg.com/v2-930eafe5cc710ad971b5117743db5a01_b.png" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~&#x2F;.bash_profile</span><br></pre></td></tr></table></figure>
+<p>运行保存修改，然后用hadoop version 查看Hadoop是否配置成功，若如下界面则成功</p>
+<p><img src="https://pic1.zhimg.com/v2-ee20ec242e386db002380dcb72867920_b.png" alt="img"></p>
+<p><strong>修改Hadoop的配置文件(如下操作都需要cd到Hadoop解压的环境来操作)</strong></p>
+<p><strong>这些配置文件都保存在hadoop-2.9.2/etc/hadoop/路径下</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;Users&#x2F;yuxuan&#x2F;hadoop-2.9.2&#x2F;etc&#x2F;hadoop&#x2F;</span><br></pre></td></tr></table></figure>
 <ol>
-<li>Main function, including some basic configuration of job</li>
-<li>Mapper class, inherited from and override the Map function</li>
-<li>Reduce class, inherited from Reduce function and override it</li>
+<li><a class="link"   target="_blank" rel="noopener" href="http://hadoop-env.sh/" >hadoop-env.sh<i class="fas fa-external-link-alt"></i></a></li>
 </ol>
-<h3 id="1-Calculate-the-bigram-frequency-and-return-the-Top-10"><a href="#1-Calculate-the-bigram-frequency-and-return-the-Top-10" class="headerlink" title="1. Calculate the bigram frequency and return the Top 10"></a>1. Calculate the bigram frequency and return the Top 10</h3><hr>
-<h4 id="data-cleaning-part-single-world"><a href="#data-cleaning-part-single-world" class="headerlink" title="data cleaning part (single world)"></a>data cleaning part (single world)</h4><ul>
-<li>Use regular expression to extract the useful information</li>
-<li>For the neat of code, I separate the word cleaning part into one method: deleteNotion</li>
-<li>The idea is to loop all the words and feed into the deleteNotion function to clean the data</li>
-<li>Since the word fed into the program is a txt file, we need first calculate each word by .split(“\s+”), and called String [] single_word</li>
-<li>The regular expression is designed to match all the punctuation and numbers except for English words </li>
-<li>Note that \W didn’t include the number, so we have to make a union of numbers and other punctuation in \W, that is [\\w[0-9]]</li>
-<li>Create an ArrayList to store the processed data.</li>
-</ul>
-<h4 id="bigram-extraction"><a href="#bigram-extraction" class="headerlink" title="bigram extraction"></a>bigram extraction</h4><ul>
-<li>loop through the single_word [] list</li>
-<li>Note that: since we are calculating the bigram, the length should be length(single_word)-1</li>
-<li>We also need to ensure that the first and last were not empty</li>
-<li>Then add the data to the newly created Arraylist</li>
-</ul>
-<hr>
-<h3 id="2-Return-the-line-containing-the-word-‘torture’"><a href="#2-Return-the-line-containing-the-word-‘torture’" class="headerlink" title="2. Return the line containing the word ‘torture’"></a>2. Return the line containing the word ‘torture’</h3><ul>
-<li>Use regular expression to separate line and store it in to the list</li>
-<li>The regular expression was written as {\\n{1,}}, detecting the “\n” and store it as one line </li>
-<li>Create an arraylist results to each line </li>
-<li>Loop through the arraylist and use .contain function to find the line contain “torture”</li>
-<li>Note that, the mapper variable and reduce variable should be switched to Text, the attribute problem should take it seriously</li>
-</ul>
-<hr>
-<h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><h4 id="bigram-frequency"><a href="#bigram-frequency" class="headerlink" title="bigram frequency"></a>bigram frequency</h4><p><img src="/fig/wordcount.png" alt="wordcount"></p>
-<h4 id="lines-containing-“torture”"><a href="#lines-containing-“torture”" class="headerlink" title="lines containing “torture”"></a>lines containing “torture”</h4><p><img src="/fig/Shuffled_Maps.png" alt="img"></p>
-<hr>
-<h2 id="Code-resources"><a href="#Code-resources" class="headerlink" title="Code resources"></a>Code resources</h2><p>Github: <a class="link"   target="_blank" rel="noopener" href="https://github.com/yuxuanwu17/Hadoop_cw2" >https://github.com/yuxuanwu17/Hadoop_cw2<i class="fas fa-external-link-alt"></i></a></p>
+<p>用vim打开后在JAVA_HOME 和 HADOOP_CONF_DIR和HADOOP_HOME 来进行修改,这些分别对应着本地各自的目录</p>
+<p><img src="https://pic4.zhimg.com/v2-94f2b2349ea9e6c2702503234f4693a7_b.png" alt="img"></p>
+<p>\2. core_site.xml </p>
+<p><img src="https://pic2.zhimg.com/v2-53c0b5f20163d17f1ec17df2aba54361_b.png" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">    &lt;name&gt;fs.defaultFS&lt;&#x2F;name&gt;</span><br><span class="line">    &lt;value&gt;hdfs:&#x2F;&#x2F;localhost:9000&lt;&#x2F;value&gt;</span><br><span class="line">  &lt;&#x2F;property&gt;</span><br><span class="line"></span><br><span class="line">  &lt;!--用来指定hadoop运行时产生文件的存放目录  自己创建--&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">    &lt;name&gt;hadoop.tmp.dir&lt;&#x2F;name&gt;</span><br><span class="line">    &lt;value&gt;&#x2F;Users&#x2F;yuxuan&#x2F;hadoop-2.9.2&#x2F;tmp&lt;&#x2F;value&gt;</span><br><span class="line">  &lt;&#x2F;property&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure>
+<p>\3. 修改hdfs-site.xml</p>
+<p><img src="https://pic2.zhimg.com/v2-e604bbc1c67dbf33d1362ce2e607ada5_b.png" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">                &lt;name&gt;dfs.replication&lt;&#x2F;name&gt;</span><br><span class="line">                &lt;value&gt;1&lt;&#x2F;value&gt;</span><br><span class="line">        &lt;&#x2F;property&gt;</span><br><span class="line">        &lt;!--不是root用户也可以写文件到hdfs--&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">                &lt;name&gt;dfs.permissions&lt;&#x2F;name&gt;</span><br><span class="line">                &lt;value&gt;false&lt;&#x2F;value&gt;    &lt;!--关闭防火墙--&gt;</span><br><span class="line">        &lt;&#x2F;property&gt;</span><br><span class="line">        &lt;!--把路径换成本地的name坐在位置--&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">                &lt;name&gt;dfs.namenode.name.dir&lt;&#x2F;name&gt;</span><br><span class="line">                &lt;value&gt;&#x2F;Users&#x2F;yuxuan&#x2F;hadoop-2.9.2&#x2F;tmp&#x2F;dfs&#x2F;name&lt;&#x2F;value&gt;</span><br><span class="line">        &lt;&#x2F;property&gt;</span><br><span class="line">        &lt;!--在本地新建一个存放hadoop数据的文件夹，然后将路径在这里配置一下--&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">                &lt;name&gt;dfs.datanode.data.dir&lt;&#x2F;name&gt;</span><br><span class="line">                &lt;value&gt;&#x2F;Users&#x2F;yuxuan&#x2F;hadoop-2.9.2&#x2F;tmp&#x2F;dfs&#x2F;data&lt;&#x2F;value&gt;</span><br><span class="line">        &lt;&#x2F;property&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>启动Hadoop</strong></p>
+<ol>
+<li><strong>NameNode</strong></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop namenode -format</span><br></pre></td></tr></table></figure>
+<p><strong>2. HDFS</strong></p>
+<p><strong>首先先进入到sbin目录</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;Users&#x2F;yuxuan&#x2F;hadoop-2.9.2&#x2F;sbin&#x2F;</span><br></pre></td></tr></table></figure>
+<p><strong>启动HDFS</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;start-dfs.sh</span><br></pre></td></tr></table></figure>
+<p>若成功了，需要输入三次密码</p>
+<p>若失败，则检查mac系统的远程登陆的许可是否打开</p>
+<p><img src="https://pic2.zhimg.com/v2-81822aef74c93d30d0922e6418988df5_b.png" alt="img"></p>
+<p><img src="https://pic4.zhimg.com/v2-3dfdcfacb09068a89b21bdb0fb8bfc73_b.png" alt="img"></p>
+<p>确保界面呈现这样</p>
+<p><strong>3. 启动yarn</strong></p>
+<p><strong>还是进入sbin目录</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;start-yarn.sh</span><br></pre></td></tr></table></figure>
+<p><strong>4. jps检查</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jps </span><br></pre></td></tr></table></figure>
+<p><img src="https://pic1.zhimg.com/v2-e769560739e1e9e5b1d4d9ab625a1c38_b.png" alt="img"></p>
+<p>若出现上述界面则配置成功了</p>
+<p>然后可以在浏览器里验证(50070,8088)</p>
+<p><a class="link"   target="_blank" rel="noopener" href="http://localhost:50070/dfshealth.html#tab-overview" >http://localhost:50070/dfshealth.html#tab-overview<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="http://localhost:8088/cluster" >http://localhost:8088/cluster<i class="fas fa-external-link-alt"></i></a></p>
+<p><img src="https://pic2.zhimg.com/v2-cd6f142d46fe05e5de300617bfd95451_b.png" alt="img"></p>
+<p><img src="https://pic1.zhimg.com/v2-159a137c51c6c512abfdf60574fec7d0_b.png" alt="img"></p>
+<p>后记：</p>
+<p>如果隔了几天没有打开Hadoop，或者你的电脑重启了，反正就是jps上出现不了那几个玩意，或者你的浏览器页面打不开，请严格遵照Hadoop启动后的代码，比如进入Hadoop的sbin界面之类的，然后依次操作，于是就能重新打开Hadoop的界面了</p>
 
         </div>
 
@@ -279,11 +308,11 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>Post title：Hadoop based big data analysis</li>
+        <li>Post title：Hadoop 在mac本地的配置</li>
         <li>Post author：Yuxuan Wu</li>
-        <li>Create time：2021-01-25 19:44:27</li>
+        <li>Create time：2021-01-26 09:36:27</li>
         <li>
-            Post link：yuxuanwu17.github.io2021/01/25/Hadoop/
+            Post link：yuxuanwu17.github.io2021/01/26/Hadoop-在mac本地的配置/
         </li>
         <li>
             Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
@@ -300,13 +329,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2021/01/25/matlab/"
+                           href="/2021/01/26/%E9%98%BF%E9%87%8C%E4%BA%91Hadoop%E7%AC%AC%E4%BA%8C%E5%BC%B9%EF%BC%88%E8%BF%90%E8%A1%8CWordCount%EF%BC%89/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">MATLAB based neural network for image classification</span>
+                                <span class="post-nav-title-item">阿里云Hadoop第二弹（运行WordCount）</span>
                                 <span class="post-nav-item">Prev posts</span>
                             </span>
                         </a>
@@ -316,10 +345,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/01/25/kaggle/avocado_pred/"
+                           href="/2021/01/26/%E4%BB%8E%E9%98%BF%E9%87%8C%E4%BA%91%E8%BD%BB%E9%87%8F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85Hadoop%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">Explorative data anlysis of avocado price from 2015-2020</span>
+                                <span class="post-nav-title-item">从阿里云轻量服务器安装Hadoop及环境配置</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -442,7 +471,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Calculate-the-bigram-frequency-and-return-the-Top-10"><span class="nav-number">1.</span> <span class="nav-text">1. Calculate the bigram frequency and return the Top 10</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#data-cleaning-part-single-world"><span class="nav-number">1.1.</span> <span class="nav-text">data cleaning part (single world)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bigram-extraction"><span class="nav-number">1.2.</span> <span class="nav-text">bigram extraction</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Return-the-line-containing-the-word-%E2%80%98torture%E2%80%99"><span class="nav-number">2.</span> <span class="nav-text">2. Return the line containing the word ‘torture’</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Results"><span class="nav-number">3.</span> <span class="nav-text">Results</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bigram-frequency"><span class="nav-number">3.1.</span> <span class="nav-text">bigram frequency</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lines-containing-%E2%80%9Ctorture%E2%80%9D"><span class="nav-number">3.2.</span> <span class="nav-text">lines containing “torture”</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code-resources"><span class="nav-number"></span> <span class="nav-text">Code resources</span></a>
+        
     </div>
 </div>
         </aside>

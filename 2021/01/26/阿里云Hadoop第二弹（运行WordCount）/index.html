@@ -9,7 +9,7 @@
     
     <title>
         
-            Hadoop based big data analysis |
+            阿里云Hadoop第二弹（运行WordCount） |
         
         Yuxuan Wu
     </title>
@@ -181,7 +181,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">Hadoop based big data analysis</span>
+            <span class="title-hover-animation">阿里云Hadoop第二弹（运行WordCount）</span>
         </div>
 
         
@@ -197,7 +197,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i> 2021-01-25 19:44:27
+        <i class="fas fa-edit"></i> 2021-01-26 09:36:27
     </span>
     
     
@@ -216,12 +216,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i> <span>296 Words</span>
+            <i class="fas fa-file-word"></i> <span>909 Words</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i> <span>1 Mins</span>
+            <i class="fas fa-clock"></i> <span>3 Mins</span>
         </span>
     
     
@@ -237,41 +237,73 @@
         
 
         <div class="article-content markdown-body">
-            <p>Hadoop comprises three part:</p>
-<ol>
-<li>Main function, including some basic configuration of job</li>
-<li>Mapper class, inherited from and override the Map function</li>
-<li>Reduce class, inherited from Reduce function and override it</li>
-</ol>
-<h3 id="1-Calculate-the-bigram-frequency-and-return-the-Top-10"><a href="#1-Calculate-the-bigram-frequency-and-return-the-Top-10" class="headerlink" title="1. Calculate the bigram frequency and return the Top 10"></a>1. Calculate the bigram frequency and return the Top 10</h3><hr>
-<h4 id="data-cleaning-part-single-world"><a href="#data-cleaning-part-single-world" class="headerlink" title="data cleaning part (single world)"></a>data cleaning part (single world)</h4><ul>
-<li>Use regular expression to extract the useful information</li>
-<li>For the neat of code, I separate the word cleaning part into one method: deleteNotion</li>
-<li>The idea is to loop all the words and feed into the deleteNotion function to clean the data</li>
-<li>Since the word fed into the program is a txt file, we need first calculate each word by .split(“\s+”), and called String [] single_word</li>
-<li>The regular expression is designed to match all the punctuation and numbers except for English words </li>
-<li>Note that \W didn’t include the number, so we have to make a union of numbers and other punctuation in \W, that is [\\w[0-9]]</li>
-<li>Create an ArrayList to store the processed data.</li>
-</ul>
-<h4 id="bigram-extraction"><a href="#bigram-extraction" class="headerlink" title="bigram extraction"></a>bigram extraction</h4><ul>
-<li>loop through the single_word [] list</li>
-<li>Note that: since we are calculating the bigram, the length should be length(single_word)-1</li>
-<li>We also need to ensure that the first and last were not empty</li>
-<li>Then add the data to the newly created Arraylist</li>
-</ul>
-<hr>
-<h3 id="2-Return-the-line-containing-the-word-‘torture’"><a href="#2-Return-the-line-containing-the-word-‘torture’" class="headerlink" title="2. Return the line containing the word ‘torture’"></a>2. Return the line containing the word ‘torture’</h3><ul>
-<li>Use regular expression to separate line and store it in to the list</li>
-<li>The regular expression was written as {\\n{1,}}, detecting the “\n” and store it as one line </li>
-<li>Create an arraylist results to each line </li>
-<li>Loop through the arraylist and use .contain function to find the line contain “torture”</li>
-<li>Note that, the mapper variable and reduce variable should be switched to Text, the attribute problem should take it seriously</li>
-</ul>
-<hr>
-<h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><h4 id="bigram-frequency"><a href="#bigram-frequency" class="headerlink" title="bigram frequency"></a>bigram frequency</h4><p><img src="/fig/wordcount.png" alt="wordcount"></p>
-<h4 id="lines-containing-“torture”"><a href="#lines-containing-“torture”" class="headerlink" title="lines containing “torture”"></a>lines containing “torture”</h4><p><img src="/fig/Shuffled_Maps.png" alt="img"></p>
-<hr>
-<h2 id="Code-resources"><a href="#Code-resources" class="headerlink" title="Code resources"></a>Code resources</h2><p>Github: <a class="link"   target="_blank" rel="noopener" href="https://github.com/yuxuanwu17/Hadoop_cw2" >https://github.com/yuxuanwu17/Hadoop_cw2<i class="fas fa-external-link-alt"></i></a></p>
+            <p>书接上文</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/269047002" >loner：从阿里云轻量服务器安装Hadoop及环境配置<i class="fas fa-external-link-alt"></i></a></p>
+<p>首先检查java 环境和Hadoop 环境是否配置妥当, 并且检查Hadoop是否已经启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop version</span><br></pre></td></tr></table></figure>
+<p><img src="https://pic4.zhimg.com/v2-bc60a5be51a0785a8340726cdb26419b_b.png" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+<p><img src="https://pic2.zhimg.com/v2-ea0b84eac9c4d56857a7f185622ef725_b.png" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jps</span><br></pre></td></tr></table></figure>
+<p><img src="https://pic2.zhimg.com/v2-106a2381128b4ff82a48be073263819d_b.png" alt="img"></p>
+<p>本文章用到的WordCount使用自web，java文件如有需要请在下方连接下载（如有机会，大家给我GitHub账户点个关注，谢谢）（如果是xjtlu的小伙伴，暂时不要用老师给的wordcount.java，因为反正不知道什么原因我这个方法就是运行不出来，如果只是需要check一下他配置的好不好，可以直接拿我这个确定的可以成功的script来试一下）</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://github.com/yuxuanwu17/Hadoop/blob/main/WordCount_success.java" >https://github.com/yuxuanwu17/Hadoop/blob/main/WordCount_success.java<i class="fas fa-external-link-alt"></i></a></p>
+<p>这里推荐一个传文件的图形化界面，可以直接拖拽，这样就不用繁琐的scp语句</p>
+<p>Windows： wincsp </p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://winscp.net/eng/download.php" >https://winscp.net/eng/download.php<i class="fas fa-external-link-alt"></i></a></p>
+<p>MAC: FileZilla  </p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://filezilla-project.org/download.php?type=client" >Download FileZilla Client for Mac OS X<i class="fas fa-external-link-alt"></i></a></p>
+<p>对上述两app的具体操作可以看官方文档，这里不再赘述</p>
+<p>以下以MAC：FileZilla 为例子</p>
+<p><img src="https://pic3.zhimg.com/v2-96269965d3602b37766b8ec2bff6f26a_b.png" alt="img"></p>
+<p>再这儿输入你的主机用户名和密码，这里通常以root权限来操作，然后端口22（ssh连接）</p>
+<p>连接成功后，进入如下的界面</p>
+<p><img src="https://pic3.zhimg.com/v2-84b3168e88338d3dc213a128f7c1a026_b.png" alt="img"></p>
+<p>然后你可以在你的远端服务器上右键，“Create Directory”，我这里面叫cw里面包含两个子文件 “inputdata”和“tutorial_classes”，并且把之前提到的java文件“WordCount”拖入到cw这个子文件下，效果图如下。</p>
+<p><img src="https://pic1.zhimg.com/v2-4d3cfa1b16960f8588e33f3b040c3548_b.png" alt="img"></p>
+<p>这儿的input_data 需要存放你等会需要处理的文件，pg100是我们test的对象</p>
+<p><img src="https://pic1.zhimg.com/v2-108e735d3349cbda806a7fb50be210c8_b.png" alt="img"></p>
+<p>接下来配置Hadoop的路径之类的，同理，terminal打开，进入你的阿里云服务器</p>
+<p>配置HADOOP_CLASSPATH （注意，如果是关闭后打开，记得重新运行一下这行代码，原因暂时不知道，若有知道的请评论区告诉呀）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export HADOOP_CLASSPATH&#x3D;$(hadoop classpath)</span><br></pre></td></tr></table></figure>
+<p>同时输出以下HADOOP_CLASSPATH 来看一下是否成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $HADOOP_CLASSPATH</span><br></pre></td></tr></table></figure>
+<p><img src="https://pic3.zhimg.com/v2-63dbc77d229db739c7c1ecf61b6bed76_b.png" alt="img"></p>
+<p>若出现如下结果则说明一切运行成功</p>
+<p>接下来在HDFS上创建一个文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -mkdir &#x2F;pg100</span><br></pre></td></tr></table></figure>
+<p>打开你的50070 端口，在右上角的Utilities里面的Browse the file system可以查看</p>
+<p><img src="https://pic4.zhimg.com/v2-55f6f53ec031fe6e3d44410195c04693_b.png" alt="img"></p>
+<p>再在这个文件里创建一个子文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -mkdir &#x2F;pg100&#x2F;input</span><br></pre></td></tr></table></figure>
+<p>然后你点入那个pg100，就会发现有个input，此时里面暂时还没有文件</p>
+<p><img src="https://pic1.zhimg.com/v2-f1e7f777fa5efcbb6651e230df6c4780_b.png" alt="img"></p>
+<p>下来你需要upload你的文件到input地址下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -put &#39;&#x2F;root&#x2F;cw&#x2F;input_data&#x2F;pg100.txt&#39; &#x2F;pg100&#x2F;input</span><br></pre></td></tr></table></figure>
+<p>然后你就会发现如下情况，说明已经上传成功了</p>
+<p><img src="https://pic1.zhimg.com/v2-0a68b432563ddc0ad7f766e7d2caaff4_b.png" alt="img"></p>
+<p>下来需要在terminal进入你的cw文件, 来运行你的java code 以下操作都cw路径底下操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd cw</span><br></pre></td></tr></table></figure>
+<p>进入成功后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javac -classpath $&#123;HADOOP_CLASSPATH&#125; -d &#39;&#x2F;root&#x2F;cw&#x2F;tutorial_classes&#39; &#39;&#x2F;root&#x2F;cw&#x2F;WordCount.java&#39;</span><br></pre></td></tr></table></figure>
+<p>上述的意思是将java 文件里的class compile到tutorial_classes</p>
+<p>结果是在路径底下会出现三个class文件</p>
+<p><img src="https://pic1.zhimg.com/v2-e9b12f0aa357d9b29482e2e4474fd9e8_b.png" alt="img"></p>
+<p>下来需要将output出来的三个文件放在一个jar文件里</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jar -cvf firstTrial.jar -C tutorial_classes&#x2F; .</span><br></pre></td></tr></table></figure>
+<p><img src="https://pic4.zhimg.com/v2-d9827900535428bb7c739d2f97cb00f7_b.png" alt="img"></p>
+<p><img src="https://pic3.zhimg.com/v2-7dfb7f7667dd3c26cdb4d30013d42082_b.png" alt="img"></p>
+<p>下来是在Hadoop上运行jar文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop jar &#39;&#x2F;root&#x2F;cw&#x2F;firstTrial.jar&#39; WordCount &#x2F;pg100&#x2F;input &#x2F;pg100&#x2F;output</span><br></pre></td></tr></table></figure>
+<p>注意：中间的WordCount指的是之前那个java文件的Class后面，注意下面只是上文的格式，不用运行！！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop jar &lt;jar_file&gt; &lt;class_name&gt; &lt;HDFS_input_directory&gt; &lt;HDFS_output_directory&gt;</span><br></pre></td></tr></table></figure>
+<p>结果</p>
+<p><img src="https://pic3.zhimg.com/v2-5e6f74dafefc6178e7455b7a919456b6_b.png" alt="img"></p>
+<p>可以查看output，“| head” 是为了查看前几个，这个sample的个数比较大，不适宜全部展开</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop dfs -cat &#x2F;pg100&#x2F;output&#x2F;* | head</span><br></pre></td></tr></table></figure>
+<p>效果图</p>
+<p><img src="https://pic2.zhimg.com/v2-79965028669722decc012e514f918c35_b.png" alt="img"></p>
+<p>如有问题，欢迎在评论区指出呀，写文件不容易，求点赞</p>
 
         </div>
 
@@ -279,11 +311,11 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>Post title：Hadoop based big data analysis</li>
+        <li>Post title：阿里云Hadoop第二弹（运行WordCount）</li>
         <li>Post author：Yuxuan Wu</li>
-        <li>Create time：2021-01-25 19:44:27</li>
+        <li>Create time：2021-01-26 09:36:27</li>
         <li>
-            Post link：yuxuanwu17.github.io2021/01/25/Hadoop/
+            Post link：yuxuanwu17.github.io2021/01/26/阿里云Hadoop第二弹（运行WordCount）/
         </li>
         <li>
             Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
@@ -297,29 +329,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2021/01/25/matlab/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">MATLAB based neural network for image classification</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/01/25/kaggle/avocado_pred/"
+                           href="/2021/01/26/Hadoop-%E5%9C%A8mac%E6%9C%AC%E5%9C%B0%E7%9A%84%E9%85%8D%E7%BD%AE/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">Explorative data anlysis of avocado price from 2015-2020</span>
+                                <span class="post-nav-title-item">Hadoop 在mac本地的配置</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -442,7 +459,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Calculate-the-bigram-frequency-and-return-the-Top-10"><span class="nav-number">1.</span> <span class="nav-text">1. Calculate the bigram frequency and return the Top 10</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#data-cleaning-part-single-world"><span class="nav-number">1.1.</span> <span class="nav-text">data cleaning part (single world)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bigram-extraction"><span class="nav-number">1.2.</span> <span class="nav-text">bigram extraction</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Return-the-line-containing-the-word-%E2%80%98torture%E2%80%99"><span class="nav-number">2.</span> <span class="nav-text">2. Return the line containing the word ‘torture’</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Results"><span class="nav-number">3.</span> <span class="nav-text">Results</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bigram-frequency"><span class="nav-number">3.1.</span> <span class="nav-text">bigram frequency</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lines-containing-%E2%80%9Ctorture%E2%80%9D"><span class="nav-number">3.2.</span> <span class="nav-text">lines containing “torture”</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code-resources"><span class="nav-number"></span> <span class="nav-text">Code resources</span></a>
+        
     </div>
 </div>
         </aside>

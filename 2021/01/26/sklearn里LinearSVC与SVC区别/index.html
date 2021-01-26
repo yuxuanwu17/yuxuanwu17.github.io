@@ -9,7 +9,7 @@
     
     <title>
         
-            Hadoop based big data analysis |
+            sklearn里LinearSVC与SVC区别 |
         
         Yuxuan Wu
     </title>
@@ -181,7 +181,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">Hadoop based big data analysis</span>
+            <span class="title-hover-animation">sklearn里LinearSVC与SVC区别</span>
         </div>
 
         
@@ -197,7 +197,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i> 2021-01-25 19:44:27
+        <i class="fas fa-edit"></i> 2021-01-26 08:32:27
     </span>
     
     
@@ -206,7 +206,7 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/Hadoop/">Hadoop</a>
+                        <a href="/tags/ML/">ML</a>
                     </li>
                 
             </ul>
@@ -216,7 +216,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i> <span>296 Words</span>
+            <i class="fas fa-file-word"></i> <span>385 Words</span>
         </span>
     
     
@@ -237,41 +237,17 @@
         
 
         <div class="article-content markdown-body">
-            <p>Hadoop comprises three part:</p>
-<ol>
-<li>Main function, including some basic configuration of job</li>
-<li>Mapper class, inherited from and override the Map function</li>
-<li>Reduce class, inherited from Reduce function and override it</li>
-</ol>
-<h3 id="1-Calculate-the-bigram-frequency-and-return-the-Top-10"><a href="#1-Calculate-the-bigram-frequency-and-return-the-Top-10" class="headerlink" title="1. Calculate the bigram frequency and return the Top 10"></a>1. Calculate the bigram frequency and return the Top 10</h3><hr>
-<h4 id="data-cleaning-part-single-world"><a href="#data-cleaning-part-single-world" class="headerlink" title="data cleaning part (single world)"></a>data cleaning part (single world)</h4><ul>
-<li>Use regular expression to extract the useful information</li>
-<li>For the neat of code, I separate the word cleaning part into one method: deleteNotion</li>
-<li>The idea is to loop all the words and feed into the deleteNotion function to clean the data</li>
-<li>Since the word fed into the program is a txt file, we need first calculate each word by .split(“\s+”), and called String [] single_word</li>
-<li>The regular expression is designed to match all the punctuation and numbers except for English words </li>
-<li>Note that \W didn’t include the number, so we have to make a union of numbers and other punctuation in \W, that is [\\w[0-9]]</li>
-<li>Create an ArrayList to store the processed data.</li>
+            <p>这里综合了stackoverflow上的一位发言和另一位知乎用户的文章，链接在下方：</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://stackoverflow.com/questions/45384185/what-is-the-difference-between-linearsvc-and-svckernel-linear" >What is the difference between LinearSVC and SVC(kernel=”linear”)?<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/57162092" >baiziyu：sklearn.svm.LinearSVC与sklearn.svm.SVC区别<i class="fas fa-external-link-alt"></i></a></p>
+<p>LinearSVC 和 SVC(kernel=’linear’) 会产生不同的结果，例如 不同的分数以及不同的decision boundary， 原因是他们采用了不同的计算方式。下面的代码可以自己运行一下，感受一下不同的地方</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">from sklearn.datasets import load_iris</span><br><span class="line">from sklearn.svm import LinearSVC, SVC</span><br><span class="line"></span><br><span class="line">X, y &#x3D; load_iris(return_X_y&#x3D;True)</span><br><span class="line"></span><br><span class="line">clf_1 &#x3D; LinearSVC(loss&#x3D;&#39;hinge&#39;).fit(X, y)  # possible to state loss&#x3D;&#39;hinge&#39;</span><br><span class="line">clf_2 &#x3D; LinearSVC().fit(X, y)  # possible to state loss&#x3D;&#39;hinge&#39;</span><br><span class="line">clf_3 &#x3D; SVC(kernel&#x3D;&#39;linear&#39;).fit(X, y)</span><br><span class="line"></span><br><span class="line">score_1 &#x3D; clf_1.score(X, y)</span><br><span class="line">score_2 &#x3D; clf_2.score(X, y)</span><br><span class="line">score_3 &#x3D; clf_2.score(X, y)</span><br><span class="line"></span><br><span class="line">print(&#39;LinearSVC score %s&#39; % score_1)</span><br><span class="line">print(&#39;LinearSVC score with hinge loss %s&#39; % score_2)</span><br><span class="line">print(&#39;SVC score %s&#39; % score_3)</span><br><span class="line"></span><br><span class="line">------------------------</span><br><span class="line">LinearSVC score 0.94</span><br><span class="line">LinearSVC score with hinge loss 0.9666666666666667</span><br><span class="line">SVC score 0.9666666666666667</span><br></pre></td></tr></table></figure>
+<h3 id="最主要的不同点："><a href="#最主要的不同点：" class="headerlink" title="最主要的不同点："></a>最主要的不同点：</h3><ul>
+<li>默认情况下，LinearSVC最小化squared hinge loss，而SVC最小化hinge loss。（上图代码块）</li>
+<li>LinearSVC是基于liblinear实现的，事实上会惩罚截距(penalize the intercept), 然而，SVC是基于libsvm实现的，并不会惩罚截距</li>
+<li>liblinear库针对线性的模型进行了优化，因此在大量的数据上收敛速度会高于libsvm。所以LinearSVC在大数据上也能很好的归一化，但是SVC在大量数据上很难收敛</li>
+<li>LinearSVC使用 （One-vs-All）方式来实现多分类问题，但SVC使用的是One-vs-One的方式来处理多分类的问题</li>
 </ul>
-<h4 id="bigram-extraction"><a href="#bigram-extraction" class="headerlink" title="bigram extraction"></a>bigram extraction</h4><ul>
-<li>loop through the single_word [] list</li>
-<li>Note that: since we are calculating the bigram, the length should be length(single_word)-1</li>
-<li>We also need to ensure that the first and last were not empty</li>
-<li>Then add the data to the newly created Arraylist</li>
-</ul>
-<hr>
-<h3 id="2-Return-the-line-containing-the-word-‘torture’"><a href="#2-Return-the-line-containing-the-word-‘torture’" class="headerlink" title="2. Return the line containing the word ‘torture’"></a>2. Return the line containing the word ‘torture’</h3><ul>
-<li>Use regular expression to separate line and store it in to the list</li>
-<li>The regular expression was written as {\\n{1,}}, detecting the “\n” and store it as one line </li>
-<li>Create an arraylist results to each line </li>
-<li>Loop through the arraylist and use .contain function to find the line contain “torture”</li>
-<li>Note that, the mapper variable and reduce variable should be switched to Text, the attribute problem should take it seriously</li>
-</ul>
-<hr>
-<h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><h4 id="bigram-frequency"><a href="#bigram-frequency" class="headerlink" title="bigram frequency"></a>bigram frequency</h4><p><img src="/fig/wordcount.png" alt="wordcount"></p>
-<h4 id="lines-containing-“torture”"><a href="#lines-containing-“torture”" class="headerlink" title="lines containing “torture”"></a>lines containing “torture”</h4><p><img src="/fig/Shuffled_Maps.png" alt="img"></p>
-<hr>
-<h2 id="Code-resources"><a href="#Code-resources" class="headerlink" title="Code resources"></a>Code resources</h2><p>Github: <a class="link"   target="_blank" rel="noopener" href="https://github.com/yuxuanwu17/Hadoop_cw2" >https://github.com/yuxuanwu17/Hadoop_cw2<i class="fas fa-external-link-alt"></i></a></p>
 
         </div>
 
@@ -279,11 +255,11 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>Post title：Hadoop based big data analysis</li>
+        <li>Post title：sklearn里LinearSVC与SVC区别</li>
         <li>Post author：Yuxuan Wu</li>
-        <li>Create time：2021-01-25 19:44:27</li>
+        <li>Create time：2021-01-26 08:32:27</li>
         <li>
-            Post link：yuxuanwu17.github.io2021/01/25/Hadoop/
+            Post link：yuxuanwu17.github.io2021/01/26/sklearn里LinearSVC与SVC区别/
         </li>
         <li>
             Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
@@ -300,13 +276,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2021/01/25/matlab/"
+                           href="/2021/01/26/macOS%E4%BD%BF%E7%94%A8IntelliJ-IDEA%E8%BF%9E%E6%8E%A5%E6%9C%AC%E5%9C%B0Hadoop/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">MATLAB based neural network for image classification</span>
+                                <span class="post-nav-title-item">macOS:使用IntelliJ IDEA连接本地Hadoop</span>
                                 <span class="post-nav-item">Prev posts</span>
                             </span>
                         </a>
@@ -316,10 +292,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/01/25/kaggle/avocado_pred/"
+                           href="/2021/01/26/%E9%98%BF%E9%87%8C%E4%BA%91%E8%BD%BB%E9%87%8F%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AEjupyter-notebook%E5%8F%8A%E8%BF%9C%E7%A8%8B%E7%BD%91%E9%A1%B5%E6%89%93%E5%BC%80/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">Explorative data anlysis of avocado price from 2015-2020</span>
+                                <span class="post-nav-title-item">阿里云轻量服务器配置jupyter notebook及远程网页打开</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -442,7 +418,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Calculate-the-bigram-frequency-and-return-the-Top-10"><span class="nav-number">1.</span> <span class="nav-text">1. Calculate the bigram frequency and return the Top 10</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#data-cleaning-part-single-world"><span class="nav-number">1.1.</span> <span class="nav-text">data cleaning part (single world)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bigram-extraction"><span class="nav-number">1.2.</span> <span class="nav-text">bigram extraction</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Return-the-line-containing-the-word-%E2%80%98torture%E2%80%99"><span class="nav-number">2.</span> <span class="nav-text">2. Return the line containing the word ‘torture’</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Results"><span class="nav-number">3.</span> <span class="nav-text">Results</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bigram-frequency"><span class="nav-number">3.1.</span> <span class="nav-text">bigram frequency</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lines-containing-%E2%80%9Ctorture%E2%80%9D"><span class="nav-number">3.2.</span> <span class="nav-text">lines containing “torture”</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code-resources"><span class="nav-number"></span> <span class="nav-text">Code resources</span></a>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E4%B8%BB%E8%A6%81%E7%9A%84%E4%B8%8D%E5%90%8C%E7%82%B9%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">最主要的不同点：</span></a></li></ol>
     </div>
 </div>
         </aside>

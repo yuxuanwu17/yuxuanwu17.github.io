@@ -9,7 +9,7 @@
     
     <title>
         
-            Hadoop based big data analysis |
+            Tag: Jupyter_notebook |
         
         Yuxuan Wu
     </title>
@@ -88,7 +88,7 @@
                         </li>
                     
                         <li class="menu-item">
-                            <a class=""
+                            <a class="active"
                                href="/tags"
                             >
                                 TAGS
@@ -148,7 +148,7 @@
                 </li>
             
                 <li class="drawer-menu-item flex-center">
-                    <a class=""
+                    <a class="active"
                        href="/tags">TAGS</a>
                 </li>
             
@@ -178,160 +178,42 @@
 
                 
                     <div class="fade-in-down-animation">
-    <div class="article-content-container">
-
-        <div class="article-title">
-            <span class="title-hover-animation">Hadoop based big data analysis</span>
+    <div class="tag-container">
+        <div class="tag-name"><i class="fas fa-tag"></i> Jupyter_notebook (1)
         </div>
-
-        
-            <div class="article-header">
-                <div class="avatar">
-                    <img src="/images/avatar.svg">
-                </div>
-                <div class="info">
-                    <div class="author">
-                        <span class="name">Yuxuan Wu</span>
-                        <span class="level">Lv2</span>
-                    </div>
-                    <div class="meta-info">
-                        <div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i> 2021-01-25 19:44:27
-    </span>
+        <div class="tag--post-list">
+            
+<div class="archive-list-container">
     
-    
-        <span class="article-tags article-meta-item">
-            <i class="fas fa-tags"></i>
-            <ul>
+        <section class="archive-item">
+            <div class="archive-item-header">
+                <span class="archive-year">2021</span>
+                <span class="archive-year-post-count">(1)</span>
+            </div>
+            <ul class="article-list">
                 
-                    <li>
-                        <a href="/tags/Hadoop/">Hadoop</a>
+                    <li class="article-item">
+                        <a class="article-title"
+                           href="/2021/01/26/%E9%98%BF%E9%87%8C%E4%BA%91%E8%BD%BB%E9%87%8F%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AEjupyter-notebook%E5%8F%8A%E8%BF%9C%E7%A8%8B%E7%BD%91%E9%A1%B5%E6%89%93%E5%BC%80/"
+                        >阿里云轻量服务器配置jupyter notebook及远程网页打开</a>
+                        <span class="article-date">01-26</span>
                     </li>
                 
             </ul>
-        </span>
-    
-
-    
-    
-        <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i> <span>296 Words</span>
-        </span>
-    
-    
-        <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i> <span>1 Mins</span>
-        </span>
-    
-    
-        <span class="article-pv article-meta-item">
-            <i class="fas fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
-        </span>
+        </section>
     
 </div>
-
-                    </div>
-                </div>
-            </div>
-        
-
-        <div class="article-content markdown-body">
-            <p>Hadoop comprises three part:</p>
-<ol>
-<li>Main function, including some basic configuration of job</li>
-<li>Mapper class, inherited from and override the Map function</li>
-<li>Reduce class, inherited from Reduce function and override it</li>
-</ol>
-<h3 id="1-Calculate-the-bigram-frequency-and-return-the-Top-10"><a href="#1-Calculate-the-bigram-frequency-and-return-the-Top-10" class="headerlink" title="1. Calculate the bigram frequency and return the Top 10"></a>1. Calculate the bigram frequency and return the Top 10</h3><hr>
-<h4 id="data-cleaning-part-single-world"><a href="#data-cleaning-part-single-world" class="headerlink" title="data cleaning part (single world)"></a>data cleaning part (single world)</h4><ul>
-<li>Use regular expression to extract the useful information</li>
-<li>For the neat of code, I separate the word cleaning part into one method: deleteNotion</li>
-<li>The idea is to loop all the words and feed into the deleteNotion function to clean the data</li>
-<li>Since the word fed into the program is a txt file, we need first calculate each word by .split(“\s+”), and called String [] single_word</li>
-<li>The regular expression is designed to match all the punctuation and numbers except for English words </li>
-<li>Note that \W didn’t include the number, so we have to make a union of numbers and other punctuation in \W, that is [\\w[0-9]]</li>
-<li>Create an ArrayList to store the processed data.</li>
-</ul>
-<h4 id="bigram-extraction"><a href="#bigram-extraction" class="headerlink" title="bigram extraction"></a>bigram extraction</h4><ul>
-<li>loop through the single_word [] list</li>
-<li>Note that: since we are calculating the bigram, the length should be length(single_word)-1</li>
-<li>We also need to ensure that the first and last were not empty</li>
-<li>Then add the data to the newly created Arraylist</li>
-</ul>
-<hr>
-<h3 id="2-Return-the-line-containing-the-word-‘torture’"><a href="#2-Return-the-line-containing-the-word-‘torture’" class="headerlink" title="2. Return the line containing the word ‘torture’"></a>2. Return the line containing the word ‘torture’</h3><ul>
-<li>Use regular expression to separate line and store it in to the list</li>
-<li>The regular expression was written as {\\n{1,}}, detecting the “\n” and store it as one line </li>
-<li>Create an arraylist results to each line </li>
-<li>Loop through the arraylist and use .contain function to find the line contain “torture”</li>
-<li>Note that, the mapper variable and reduce variable should be switched to Text, the attribute problem should take it seriously</li>
-</ul>
-<hr>
-<h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><h4 id="bigram-frequency"><a href="#bigram-frequency" class="headerlink" title="bigram frequency"></a>bigram frequency</h4><p><img src="/fig/wordcount.png" alt="wordcount"></p>
-<h4 id="lines-containing-“torture”"><a href="#lines-containing-“torture”" class="headerlink" title="lines containing “torture”"></a>lines containing “torture”</h4><p><img src="/fig/Shuffled_Maps.png" alt="img"></p>
-<hr>
-<h2 id="Code-resources"><a href="#Code-resources" class="headerlink" title="Code resources"></a>Code resources</h2><p>Github: <a class="link"   target="_blank" rel="noopener" href="https://github.com/yuxuanwu17/Hadoop_cw2" >https://github.com/yuxuanwu17/Hadoop_cw2<i class="fas fa-external-link-alt"></i></a></p>
 
         </div>
+    </div>
 
-        
-            <div class="post-copyright-info">
-                <div class="article-copyright-info-container">
-    <ul>
-        <li>Post title：Hadoop based big data analysis</li>
-        <li>Post author：Yuxuan Wu</li>
-        <li>Create time：2021-01-25 19:44:27</li>
-        <li>
-            Post link：yuxuanwu17.github.io2021/01/25/Hadoop/
-        </li>
-        <li>
-            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
-        </li>
-    </ul>
+    <div class="tag-paginator">
+        <div class="paginator">
+    
+
+    
 </div>
 
-            </div>
-        
-
-        
-            <div class="article-nav">
-                
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2021/01/25/matlab/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">MATLAB based neural network for image classification</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
-                
-                    <div class="article-next">
-                        <a class="next"
-                           rel="next"
-                           href="/2021/01/25/kaggle/avocado_pred/"
-                        >
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">Explorative data anlysis of avocado price from 2015-2020</span>
-                                <span class="post-nav-item">Next posts</span>
-                            </span>
-                            <span class="right arrow-icon flex-center">
-                              <i class="fas fa-chevron-right"></i>
-                            </span>
-                        </a>
-                    </div>
-                
-            </div>
-        
-
-        
     </div>
 </div>
 
@@ -375,23 +257,6 @@
         </div>
     </div>
 
-    
-        <div class="post-tools">
-            <div class="post-tools-container">
-    <ul class="tools-list">
-        <!-- TOC aside toggle -->
-        
-            <li class="tools-item page-aside-toggle">
-                <i class="fas fa-outdent"></i>
-            </li>
-        
-
-        <!-- go comment -->
-        
-    </ul>
-</div>
-
-        </div>
     
 
     <div class="right-bottom-side-tools">
@@ -438,14 +303,6 @@
 
     </div>
 
-    
-        <aside class="page-aside">
-            <div class="post-toc-wrap">
-    <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Calculate-the-bigram-frequency-and-return-the-Top-10"><span class="nav-number">1.</span> <span class="nav-text">1. Calculate the bigram frequency and return the Top 10</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#data-cleaning-part-single-world"><span class="nav-number">1.1.</span> <span class="nav-text">data cleaning part (single world)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bigram-extraction"><span class="nav-number">1.2.</span> <span class="nav-text">bigram extraction</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Return-the-line-containing-the-word-%E2%80%98torture%E2%80%99"><span class="nav-number">2.</span> <span class="nav-text">2. Return the line containing the word ‘torture’</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Results"><span class="nav-number">3.</span> <span class="nav-text">Results</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bigram-frequency"><span class="nav-number">3.1.</span> <span class="nav-text">bigram frequency</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lines-containing-%E2%80%9Ctorture%E2%80%9D"><span class="nav-number">3.2.</span> <span class="nav-text">lines containing “torture”</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code-resources"><span class="nav-number"></span> <span class="nav-text">Code resources</span></a>
-    </div>
-</div>
-        </aside>
     
 
     <div class="image-viewer-container">
@@ -515,14 +372,6 @@
 
 
 <div class="post-scripts">
-    
-        
-<script src="/js/left-side-toggle.js"></script>
-
-<script src="/js/libs/anime.min.js"></script>
-
-<script src="/js/toc.js"></script>
-
     
 </div>
 

@@ -9,7 +9,7 @@
     
     <title>
         
-            Hadoop based big data analysis |
+            从阿里云轻量服务器安装Hadoop及环境配置 |
         
         Yuxuan Wu
     </title>
@@ -181,7 +181,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">Hadoop based big data analysis</span>
+            <span class="title-hover-animation">从阿里云轻量服务器安装Hadoop及环境配置</span>
         </div>
 
         
@@ -197,7 +197,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i> 2021-01-25 19:44:27
+        <i class="fas fa-edit"></i> 2021-01-26 09:35:27
     </span>
     
     
@@ -216,12 +216,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i> <span>296 Words</span>
+            <i class="fas fa-file-word"></i> <span>1.3k Words</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i> <span>1 Mins</span>
+            <i class="fas fa-clock"></i> <span>5 Mins</span>
         </span>
     
     
@@ -237,41 +237,83 @@
         
 
         <div class="article-content markdown-body">
-            <p>Hadoop comprises three part:</p>
+            <p>知乎首次写文章，恳请大家多多担待</p>
+<p>本人是一名大四生物信息的学生，在大数据课上，老师需要我们配置Hadoop去处理一些东西。网上的一些教程互相冲突，记录一下这个从头可以完全运行成功的教程</p>
 <ol>
-<li>Main function, including some basic configuration of job</li>
-<li>Mapper class, inherited from and override the Map function</li>
-<li>Reduce class, inherited from Reduce function and override it</li>
+<li>购买服务器</li>
 </ol>
-<h3 id="1-Calculate-the-bigram-frequency-and-return-the-Top-10"><a href="#1-Calculate-the-bigram-frequency-and-return-the-Top-10" class="headerlink" title="1. Calculate the bigram frequency and return the Top 10"></a>1. Calculate the bigram frequency and return the Top 10</h3><hr>
-<h4 id="data-cleaning-part-single-world"><a href="#data-cleaning-part-single-world" class="headerlink" title="data cleaning part (single world)"></a>data cleaning part (single world)</h4><ul>
-<li>Use regular expression to extract the useful information</li>
-<li>For the neat of code, I separate the word cleaning part into one method: deleteNotion</li>
-<li>The idea is to loop all the words and feed into the deleteNotion function to clean the data</li>
-<li>Since the word fed into the program is a txt file, we need first calculate each word by .split(“\s+”), and called String [] single_word</li>
-<li>The regular expression is designed to match all the punctuation and numbers except for English words </li>
-<li>Note that \W didn’t include the number, so we have to make a union of numbers and other punctuation in \W, that is [\\w[0-9]]</li>
-<li>Create an ArrayList to store the processed data.</li>
-</ul>
-<h4 id="bigram-extraction"><a href="#bigram-extraction" class="headerlink" title="bigram extraction"></a>bigram extraction</h4><ul>
-<li>loop through the single_word [] list</li>
-<li>Note that: since we are calculating the bigram, the length should be length(single_word)-1</li>
-<li>We also need to ensure that the first and last were not empty</li>
-<li>Then add the data to the newly created Arraylist</li>
-</ul>
-<hr>
-<h3 id="2-Return-the-line-containing-the-word-‘torture’"><a href="#2-Return-the-line-containing-the-word-‘torture’" class="headerlink" title="2. Return the line containing the word ‘torture’"></a>2. Return the line containing the word ‘torture’</h3><ul>
-<li>Use regular expression to separate line and store it in to the list</li>
-<li>The regular expression was written as {\\n{1,}}, detecting the “\n” and store it as one line </li>
-<li>Create an arraylist results to each line </li>
-<li>Loop through the arraylist and use .contain function to find the line contain “torture”</li>
-<li>Note that, the mapper variable and reduce variable should be switched to Text, the attribute problem should take it seriously</li>
-</ul>
-<hr>
-<h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><h4 id="bigram-frequency"><a href="#bigram-frequency" class="headerlink" title="bigram frequency"></a>bigram frequency</h4><p><img src="/fig/wordcount.png" alt="wordcount"></p>
-<h4 id="lines-containing-“torture”"><a href="#lines-containing-“torture”" class="headerlink" title="lines containing “torture”"></a>lines containing “torture”</h4><p><img src="/fig/Shuffled_Maps.png" alt="img"></p>
-<hr>
-<h2 id="Code-resources"><a href="#Code-resources" class="headerlink" title="Code resources"></a>Code resources</h2><p>Github: <a class="link"   target="_blank" rel="noopener" href="https://github.com/yuxuanwu17/Hadoop_cw2" >https://github.com/yuxuanwu17/Hadoop_cw2<i class="fas fa-external-link-alt"></i></a></p>
+<p>因为本人使用的仍然是14年的MBP，怕随随便便装个新系统把电脑给折腾坏了，这里购买的是云服务器，这里首推阿里云。</p>
+<p>若您是常年使用谷歌搜索，请注意关闭梯子，因为阿里云是有国内国外两个系统，各自独立，虽然墙外的服务器可以免费试用2个月，但各种实名认证是绕不开的。</p>
+<p>若您是学生，阿里云有一个开发者成长计划，专门针对在校大学生，也就是教育优惠。非常便宜，只需要9.5一个月</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://developer.aliyun.com/plan/grow-up" >阿里云开发者成长计划<i class="fas fa-external-link-alt"></i></a></p>
+<p><img src="https://pic1.zhimg.com/v2-b9cf2d24d57aa3e715020e3f6e38cd1c_b.png" alt="img"></p>
+<p>\2. 服务器选择和配置</p>
+<p>这里选择的是轻量服务器，系统镜像和应用镜像不需要改变，保持默认值就行（WordPress, CentOS 7.3）</p>
+<p><img src="https://pic2.zhimg.com/v2-12c765376ed1ffb827435c4047b8a671_b.png" alt="img"></p>
+<p>这里需要设置root权限和密码</p>
+<p>设置成功后通过本地terminal（MAC）或者cmd（Windows）来构建ssh</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@****</span><br></pre></td></tr></table></figure>
+<p>然后输入之前设置的root的权限的密码（注意：这里的密码是不会有任何显示的）</p>
+<p><img src="https://pic1.zhimg.com/v2-af9e75a4cb07870aa8373b4671862198_b.png" alt="img"></p>
+<p>若出现上图的情况，需要清理一下之前的key</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -R XX.XX.XX.XX</span><br></pre></td></tr></table></figure>
+<p>然后再次用ssh连接，然后yes</p>
+<p><img src="https://pic2.zhimg.com/v2-e12d923ff1d5a1f5f75c86ee11fd447d_b.png" alt="img"></p>
+<p>好，到此我们进入到了阿里云的服务器</p>
+<p>\3. 我们开始配置java环境</p>
+<p>首先下载java的jdk</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;download.java.net&#x2F;openjdk&#x2F;jdk8u41&#x2F;ri&#x2F;openjdk-8u41-b04-linux-x64-14_jan_2020.tar.gz</span><br></pre></td></tr></table></figure>
+<p>然后解压</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf openjdk-8u41-b04-linux-x64-14_jan_2020.tar.gz</span><br></pre></td></tr></table></figure>
+<p>移动位置并且配置java路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mv java-se-8u41-ri&#x2F; &#x2F;usr&#x2F;java8</span><br><span class="line">echo &#39;export JAVA_HOME&#x3D;&#x2F;usr&#x2F;java8&#39; &gt;&gt; &#x2F;etc&#x2F;profile</span><br><span class="line">echo &#39;export PATH&#x3D;$PATH:$JAVA_HOME&#x2F;bin&#39; &gt;&gt; &#x2F;etc&#x2F;profile</span><br><span class="line">source &#x2F;etc&#x2F;profile</span><br></pre></td></tr></table></figure>
+<p>检查是否安装成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+<p><img src="https://pic1.zhimg.com/v2-85701c9548e5c31b2faaf569c31eed48_b.png" alt="img"></p>
+<p>这是理想情况，若安装成功会出现如下结果</p>
+<p>\4. 我们进行Hadoop的安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;apache&#x2F;hadoop&#x2F;common&#x2F;hadoop-2.9.2&#x2F;hadoop-2.9.2.tar.gz</span><br></pre></td></tr></table></figure>
+<p>这儿是清华的镜像源，国内的小伙伴下载比较快</p>
+<p>按照惯例解压</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf hadoop-2.9.2.tar.gz -C &#x2F;opt&#x2F;</span><br><span class="line">mv &#x2F;opt&#x2F;hadoop-2.9.2 &#x2F;opt&#x2F;hadoop</span><br></pre></td></tr></table></figure>
+<p>配置地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">echo &#39;export HADOOP_HOME&#x3D;&#x2F;opt&#x2F;hadoop&#x2F;&#39; &gt;&gt; &#x2F;etc&#x2F;profile</span><br><span class="line">echo &#39;export PATH&#x3D;$PATH:$HADOOP_HOME&#x2F;bin&#39; &gt;&gt; &#x2F;etc&#x2F;profile</span><br><span class="line">echo &#39;export PATH&#x3D;$PATH:$HADOOP_HOME&#x2F;sbin&#39; &gt;&gt; &#x2F;etc&#x2F;profile</span><br><span class="line">source &#x2F;etc&#x2F;profile</span><br></pre></td></tr></table></figure>
+<p>配置yarn和hadoop</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;export JAVA_HOME&#x3D;&#x2F;usr&#x2F;java8&quot; &gt;&gt; &#x2F;opt&#x2F;hadoop&#x2F;etc&#x2F;hadoop&#x2F;yarn-env.sh</span><br><span class="line">echo &quot;export JAVA_HOME&#x3D;&#x2F;usr&#x2F;java8&quot; &gt;&gt; &#x2F;opt&#x2F;hadoop&#x2F;etc&#x2F;hadoop&#x2F;hadoop-env.sh</span><br></pre></td></tr></table></figure>
+<p>查看Hadoop 安装情况</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop version</span><br></pre></td></tr></table></figure>
+<p><img src="https://pic3.zhimg.com/v2-c7b11851e5c3f5083809748875ef90aa_b.png" alt="img"></p>
+<p>若出现上图情况，则说明安装成功</p>
+<p>\5. 接下来需要利用vim来操作core-site 和 hdfs-site</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;opt&#x2F;hadoop&#x2F;etc&#x2F;hadoop&#x2F;core-site.xml</span><br></pre></td></tr></table></figure>
+<p>进入vim环境</p>
+<p><img src="https://pic2.zhimg.com/v2-c913566815ccb9dc077e6b1905c9f261_b.png" alt="img"></p>
+<p>按下i（insert）修改</p>
+<p>光标移动至configuration之间，复制如下的信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;hadoop.tmp.dir&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;file:&#x2F;opt&#x2F;hadoop&#x2F;tmp&lt;&#x2F;value&gt;</span><br><span class="line">        &lt;description&gt;location to store temporary files&lt;&#x2F;description&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;fs.defaultFS&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;hdfs:&#x2F;&#x2F;localhost:9000&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br></pre></td></tr></table></figure>
+<p>然后按下esc，停止修改，然后打”:wq”（实际无“”）退出vim修改</p>
+<p>同理操作hdfs-site</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;opt&#x2F;hadoop&#x2F;etc&#x2F;hadoop&#x2F;hdfs-site.xml</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.replication&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;1&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.namenode.name.dir&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;file:&#x2F;opt&#x2F;hadoop&#x2F;tmp&#x2F;dfs&#x2F;name&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.datanode.data.dir&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;file:&#x2F;opt&#x2F;hadoop&#x2F;tmp&#x2F;dfs&#x2F;data&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br></pre></td></tr></table></figure>
+<p>配置master和slave连接，运行如下指令，并且一直回车，直至出现如下图</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa </span><br></pre></td></tr></table></figure>
+<p><img src="https://pic3.zhimg.com/v2-2a2c7f685bee80d7e51469a49c64c282_b.png" alt="img"></p>
+<p>运行如下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd .ssh</span><br><span class="line">cat id_rsa.pub &gt;&gt; authorized_keys</span><br></pre></td></tr></table></figure>
+<p>启动Hadoop</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hadoop namenode -format</span><br><span class="line">start-dfs.sh</span><br><span class="line">start-yarn.sh</span><br></pre></td></tr></table></figure>
+<p>查看是否配置成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jps</span><br></pre></td></tr></table></figure>
+<p>成功图</p>
+<p><img src="https://pic3.zhimg.com/v2-1d41b7f780ab263558dcdd06b11623be_b.png" alt="img"></p>
+<p>\7. 注意注意：接下来需要开启你在阿里云的防火墙端口，才可以在浏览器上访问，否则你怎么弄都是访问不到 (这里我卡了快一个礼拜，最后非常感谢阿里云的小哥哥帮我解决了这个问题)</p>
+<p><img src="https://pic1.zhimg.com/v2-ca4e2239f097d66886dae184064870fc_b.png" alt="img"></p>
+<p>最后你就可以在浏览器输入XX.XX.XX.XX**:50070 或者**XX.XX.XX.XX:8088来在浏览器上访问你的Hadoop</p>
+<p>效果图如下</p>
+<p><img src="https://pic1.zhimg.com/v2-a562c44a3df91441ca1fd4945fdcbc10_b.png" alt="img"></p>
+<p>以及</p>
+<p><img src="https://pic3.zhimg.com/v2-335aaf433e9d3fdec8ef045419837fba_b.png" alt="img"></p>
+<p><strong>结语</strong> </p>
+<p>因为我是一名大四生物信息的学生，对于计算机的至少掌握不是全，一些tcp-ip协议之类的指令没有掌握，所以很多都是一知半解，只是照着教程一步步装，若有错误，请大家指导。</p>
 
         </div>
 
@@ -279,11 +321,11 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>Post title：Hadoop based big data analysis</li>
+        <li>Post title：从阿里云轻量服务器安装Hadoop及环境配置</li>
         <li>Post author：Yuxuan Wu</li>
-        <li>Create time：2021-01-25 19:44:27</li>
+        <li>Create time：2021-01-26 09:35:27</li>
         <li>
-            Post link：yuxuanwu17.github.io2021/01/25/Hadoop/
+            Post link：yuxuanwu17.github.io2021/01/26/从阿里云轻量服务器安装Hadoop及环境配置/
         </li>
         <li>
             Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
@@ -300,13 +342,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2021/01/25/matlab/"
+                           href="/2021/01/26/Hadoop-%E5%9C%A8mac%E6%9C%AC%E5%9C%B0%E7%9A%84%E9%85%8D%E7%BD%AE/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">MATLAB based neural network for image classification</span>
+                                <span class="post-nav-title-item">Hadoop 在mac本地的配置</span>
                                 <span class="post-nav-item">Prev posts</span>
                             </span>
                         </a>
@@ -316,10 +358,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/01/25/kaggle/avocado_pred/"
+                           href="/2021/01/26/macOS%E4%BD%BF%E7%94%A8IntelliJ-IDEA%E8%BF%9E%E6%8E%A5%E6%9C%AC%E5%9C%B0Hadoop/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">Explorative data anlysis of avocado price from 2015-2020</span>
+                                <span class="post-nav-title-item">macOS:使用IntelliJ IDEA连接本地Hadoop</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -442,7 +484,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Calculate-the-bigram-frequency-and-return-the-Top-10"><span class="nav-number">1.</span> <span class="nav-text">1. Calculate the bigram frequency and return the Top 10</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#data-cleaning-part-single-world"><span class="nav-number">1.1.</span> <span class="nav-text">data cleaning part (single world)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bigram-extraction"><span class="nav-number">1.2.</span> <span class="nav-text">bigram extraction</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Return-the-line-containing-the-word-%E2%80%98torture%E2%80%99"><span class="nav-number">2.</span> <span class="nav-text">2. Return the line containing the word ‘torture’</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Results"><span class="nav-number">3.</span> <span class="nav-text">Results</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bigram-frequency"><span class="nav-number">3.1.</span> <span class="nav-text">bigram frequency</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lines-containing-%E2%80%9Ctorture%E2%80%9D"><span class="nav-number">3.2.</span> <span class="nav-text">lines containing “torture”</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code-resources"><span class="nav-number"></span> <span class="nav-text">Code resources</span></a>
+        
     </div>
 </div>
         </aside>
