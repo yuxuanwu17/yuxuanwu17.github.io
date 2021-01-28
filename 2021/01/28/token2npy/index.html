@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Welcome to my personal blogs">
+    <meta name="author" content="Yuxuan Wu">
+    
+    <title>
+        
+            token2npy explanation |
+        
+        Yuxuan Wu
+    </title>
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep coding and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.3.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days age","week":"%s weeks age","month":"%s months age","year":"%s years age"};
+  </script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Yuxuan Wu
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content normal-code-theme">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">token2npy explanation</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Yuxuan Wu</span>
+                        <span class="level">Lv3</span>
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i> 2021-01-28 20:07:21
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Python/">Python</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/tags/tutorial/">tutorial</a>
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Multi-instance-learning/">Multi-instance learning</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i> <span>719 Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i> <span>4 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>This python file was to read the processed data from RDS file and conduct the embedding.</p>
+<p>In this case, instance length was set to 40, and the stride was set to 5. These two parameters could be tuned to achieve better results.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> rpy2.robjects <span class="keyword">as</span> ro</span><br><span class="line"></span><br><span class="line">np.random.seed(<span class="number">323</span>)</span><br><span class="line"></span><br><span class="line">readRDS = ro.r[<span class="string">&#x27;readRDS&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># KSHV，RSV，WNV，ZIKV，hMPV</span></span><br><span class="line"><span class="comment"># HCV, DENV, HIV-1</span></span><br><span class="line"></span><br><span class="line">gene_data = <span class="string">&quot;RSV&quot;</span></span><br><span class="line">data_dir = <span class="string">&#x27;/home/yuxuan/FYP/Virus_init_codes/processed_data/&#x27;</span>+gene_data+<span class="string">&#x27;/&#x27;</span></span><br><span class="line"></span><br><span class="line">train_seq = readRDS(data_dir + <span class="string">&#x27;train_seq.rds&#x27;</span>)</span><br><span class="line">train_seq = np.asarray(train_seq)</span><br><span class="line">train_seq = [np.asarray(seq) <span class="keyword">for</span> seq <span class="keyword">in</span> train_seq]</span><br><span class="line"></span><br><span class="line">train_label = readRDS(data_dir + <span class="string">&#x27;train_label.rds&#x27;</span>)</span><br><span class="line">train_label = np.asarray(train_label)</span><br><span class="line"></span><br><span class="line">valid_seq = readRDS(data_dir + <span class="string">&#x27;valid_seq.rds&#x27;</span>)</span><br><span class="line">valid_seq = np.asarray(valid_seq)</span><br><span class="line">valid_seq = [np.asarray(seq) <span class="keyword">for</span> seq <span class="keyword">in</span> valid_seq]</span><br><span class="line"></span><br><span class="line">valid_label = readRDS(data_dir + <span class="string">&#x27;valid_label.rds&#x27;</span>)</span><br><span class="line">valid_label = np.asarray(valid_label)</span><br><span class="line"></span><br><span class="line">test_seq = readRDS(data_dir + <span class="string">&#x27;test_seq.rds&#x27;</span>)</span><br><span class="line">test_seq = np.asarray(test_seq)</span><br><span class="line">test_seq = [np.asarray(seq) <span class="keyword">for</span> seq <span class="keyword">in</span> test_seq]</span><br><span class="line"></span><br><span class="line">test_label = readRDS(data_dir + <span class="string">&#x27;test_label.rds&#x27;</span>)</span><br><span class="line">test_label = np.asarray(test_label)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Multi-instance-data-preparation"><a href="#Multi-instance-data-preparation" class="headerlink" title="Multi-instance data preparation:"></a>Multi-instance data preparation:</h3><ul>
+<li> the train_seq, test_seq and valid_seq are all in token format (1,2,3,4)</li>
+<li>They need to undergo encoding and transform to the vector format</li>
+</ul>
+<p><strong>sliding window</strong>: instance_len = 40</p>
+<p><strong>Moving stride</strong>: instance_stride = 5</p>
+<p>Based on the experience in WSCNN, The number of instance per bag is [(l-c)/s]+1, where c and s are two hyper-parameters</p>
+<p><strong>instance sequence</strong>: [n*instance_stride, n*instance_stride+instance_len]</p>
+<p>For instance: 1st instance [0,40], 2nd instance [5,45]</p>
+<p>Since the token format is [1,2,3,4] and the encoding method was finished by using np.eye(4). The bag should minus one to ensure the range were in [0,1,2,3].</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create a new direction for storing the multi-instance data</span></span><br><span class="line">target_dir = data_dir + <span class="string">&#x27;data_for_mil/&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># create a file directory directly by the following command</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(target_dir):</span><br><span class="line">    os.mkdir(target_dir)</span><br><span class="line"></span><br><span class="line"><span class="comment"># cut them into segments</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">embed</span>(<span class="params">sequence, instance_len, instance_stride</span>):</span></span><br><span class="line">    instance_num = <span class="built_in">int</span>((<span class="built_in">len</span>(sequence)-instance_len)/instance_stride) + <span class="number">1</span></span><br><span class="line">    bag = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(instance_num):</span><br><span class="line">        instance = sequence[i*instance_stride:i*instance_stride+instance_len]</span><br><span class="line">        bag.append(instance)</span><br><span class="line">    bag = np.stack(bag).astype(np.int32)</span><br><span class="line">    <span class="comment">## let numerical denoted onehot to vector format</span></span><br><span class="line">    one_hot_bag = np.eye(<span class="number">4</span>)[bag - <span class="number">1</span>].astype(np.float32) </span><br><span class="line">    <span class="keyword">return</span> one_hot_bag</span><br><span class="line"></span><br><span class="line"><span class="comment">## sliding window</span></span><br><span class="line">instance_len = <span class="number">40</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Moving stride</span></span><br><span class="line">instance_stride = <span class="number">5</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># length and strides could be simulated via cross validation</span></span><br><span class="line"></span><br><span class="line">train_bags = []</span><br><span class="line"><span class="keyword">for</span> seq <span class="keyword">in</span> train_seq:</span><br><span class="line">    ont_hot_bag = embed(seq, instance_len, instance_stride)</span><br><span class="line">    train_bags.append(ont_hot_bag)</span><br><span class="line"></span><br><span class="line">train_bags = np.asarray(train_bags)</span><br><span class="line"></span><br><span class="line">valid_bags = []</span><br><span class="line"><span class="keyword">for</span> seq <span class="keyword">in</span> valid_seq:</span><br><span class="line">    ont_hot_bag = embed(seq, instance_len, instance_stride)</span><br><span class="line">    valid_bags.append(ont_hot_bag)</span><br><span class="line"></span><br><span class="line">valid_bags = np.asarray(valid_bags)</span><br><span class="line"></span><br><span class="line">test_bags = []</span><br><span class="line"><span class="keyword">for</span> seq <span class="keyword">in</span> test_seq:</span><br><span class="line">    ont_hot_bag = embed(seq, instance_len, instance_stride)</span><br><span class="line">    test_bags.append(ont_hot_bag)</span><br><span class="line"></span><br><span class="line">test_bags = np.asarray(test_bags)</span><br><span class="line"></span><br><span class="line">np.save(target_dir + <span class="string">&#x27;train_data.npy&#x27;</span>, train_bags)</span><br><span class="line">np.save(target_dir + <span class="string">&#x27;valid_data.npy&#x27;</span>, valid_bags)</span><br><span class="line">np.save(target_dir + <span class="string">&#x27;test_data.npy&#x27;</span>, test_bags)</span><br><span class="line"></span><br><span class="line">np.save(target_dir + <span class="string">&#x27;train_label.npy&#x27;</span>, train_label.reshape(-<span class="number">1</span>, <span class="number">1</span>).astype(np.int32))</span><br><span class="line">np.save(target_dir + <span class="string">&#x27;valid_label.npy&#x27;</span>, valid_label.reshape(-<span class="number">1</span>, <span class="number">1</span>).astype(np.int32))</span><br><span class="line">np.save(target_dir + <span class="string">&#x27;test_label.npy&#x27;</span>, test_label.reshape(-<span class="number">1</span>, <span class="number">1</span>).astype(np.int32))</span><br><span class="line"></span><br><span class="line">print(<span class="string">&quot;tokens successfully transformed to npy format&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="Supplementary"><a href="#Supplementary" class="headerlink" title="Supplementary"></a>Supplementary</h3><p><strong><em>Note 1:</em></strong></p>
+<p>one_hot encoding: <strong>[[0,1,2,3]]</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">np.eye(<span class="number">4</span>)[[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>array([[<span class="number">0.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">1.</span>]])</span><br></pre></td></tr></table></figure>
+<p><strong><em>Note 2:</em></strong></p>
+<p>np.stack (<em>arrays**</em>,** <em>axis=0**</em>,** <em>out=None</em>): </p>
+<p>Join a sequence of arrays along a new axis.</p>
+<p>The <code>axis</code> parameter specifies the index of the new axis in the dimensions of the result. For example, if <code>axis=0</code> it will be the first dimension and if <code>axis=-1</code> it will be the last dimension.</p>
+<blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;arrays = [np.random.randn(<span class="number">3</span>, <span class="number">4</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)]</span><br><span class="line">&gt;&gt;&gt;&gt; np.stack(arrays, axis=<span class="number">0</span>).shape</span><br><span class="line">&gt;(<span class="number">10</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><strong><em>Note3:</em></strong></p>
+<p><code>numpy.append</code>(<em>arr</em>, <em>values</em>, <em>axis=None</em>)</p>
+<p>Append values to the end of an array.</p>
+<blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;&gt; np.append([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [[<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>], [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]])</span><br><span class="line">&gt;array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, ..., <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>])</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><strong><em>Note4:</em></strong> why nay format </p>
+<p>The . <strong>npy format</strong> is the standard binary file format in NumPy for persisting a single arbitrary NumPy array on disk. The format stores all of the shape and dtype information necessary to reconstruct the array correctly even on another machine with a different architecture.</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://numpy.org/devdocs/reference/generated/numpy.lib.format.html#:~:text=The%20.,machine%20with%20a%20different%20architecture" >numpy api explanation<i class="fas fa-external-link-alt"></i></a>.</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/wfei101/article/details/82077631" >csdn_explanation (chinese)<i class="fas fa-external-link-alt"></i></a></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：token2npy explanation</li>
+        <li>Post author：Yuxuan Wu</li>
+        <li>Create time：2021-01-28 20:07:21</li>
+        <li>
+            Post link：yuxuanwu17.github.io2021/01/28/token2npy/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/01/28/python-%E7%9B%B8%E5%85%B3%E7%9A%84%E7%9F%A5%E8%AF%86%E5%92%8C%E7%AC%94%E8%AE%B0%E9%93%BE%E6%8E%A5/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">python 相关的知识和笔记链接</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span> -
+            
+            2021 <i class="fas fa-heart icon-animate"></i> <a href="/">Yuxuan Wu</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count <span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a> | Theme <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.3.1</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Multi-instance-data-preparation"><span class="nav-number">1.</span> <span class="nav-text">Multi-instance data preparation:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Supplementary"><span class="nav-number">2.</span> <span class="nav-text">Supplementary</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

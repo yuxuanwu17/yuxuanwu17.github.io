@@ -1,153 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>MATLAB based neural network for image classification</title>
-    <url>/2021/01/25/matlab/</url>
-    <content><![CDATA[<h2 id="Project-overview"><a href="#Project-overview" class="headerlink" title="Project overview :"></a>Project overview :</h2><p>This task includes five algorithms to classify the characters segmented from the license plates of automobiles using MATLAB</p>
-<ul>
-<li>MLP (multi-layer perceptron)</li>
-<li>CNN (convolutional neural network)</li>
-<li>LVQ (learning vector quantization)</li>
-<li>RBF1 with k-means clustering</li>
-<li>RBF2 with SOM (self-organizing map)</li>
-</ul>
-<hr>
-<h2 id="Files-running-order"><a href="#Files-running-order" class="headerlink" title="Files running order"></a>Files running order</h2><ol>
-<li>run the figure_preprocessing.m and create a new file folder ass2_processede_data</li>
-<li>run data_partition.m split the dataset in 8:2 version and returned the X_train, X_test, y_train, y_test and save as train_test_data.mat</li>
-<li>run ass2_CNN.m (this script did not use the processed data, but read the figure directly from the original file)</li>
-<li>run ass2_mlp.m </li>
-<li>run ass2_lvq.m</li>
-<li>run ass2_rbf_kmean.m</li>
-<li>run ass2_rbf_som.m</li>
-<li>run ass2_confusion_matrix_summary.m</li>
-</ol>
-<hr>
-<h2 id="Components-Scripts-inside-the-project"><a href="#Components-Scripts-inside-the-project" class="headerlink" title="Components/Scripts inside the project"></a>Components/Scripts inside the project</h2><h2 id="The-script-part"><a href="#The-script-part" class="headerlink" title="The script part"></a>The script part</h2><h3 id="figure-preprocessing-m"><a href="#figure-preprocessing-m" class="headerlink" title="figure_preprocessing.m"></a>figure_preprocessing.m</h3><p>This is the script to extract the ass2data and rewrite to a new file folder ass2_processed_data. </p>
-<pre><code>- read both jpeg and jpg files in all folders ass2_data
-- rewrite into another folders ass2_processed_data with uniform style (jpeg) and uniform naming styles (label+number) e.g. (A1,B10,C99)</code></pre>
-<h3 id="data-partition-m"><a href="#data-partition-m" class="headerlink" title="data_partition.m"></a>data_partition.m</h3><p>This is the script splitted the processed data into training and testing dataset in 8:2 ratio. It adjusted the size and columns or rows for fitting the designed model’s network.</p>
-<pre><code>- read images from the processed folder ass2_processed_data. 
-- split the dataset into 8:2
-- save the splitted samples and parameters as train_test_data.mat</code></pre>
-<h3 id="ass2-CNN-m"><a href="#ass2-CNN-m" class="headerlink" title="ass2_CNN.m"></a>ass2_CNN.m</h3><p>This is the script to conduct the CNN.</p>
-<pre><code>- use imageDataset to store and train the model
-- use splitEachLabel to split the training and testing datasets
-- do not use the train_test_data as the input since CNN has standard samples in Matlab documents
-- imageInputLayer(48,24,1)
-- Layer 1:
-    - kernel size: 3; filters number: 8; padding: same
-    - batchNormalizationLayer
-    - Relu layer
-    - Maxpooling with a pooling size equals [2 2] and Stride equals [2 2]
-- Layer 2:
-    - kernel size: 3; filters number: 16; padding: same    
-    - batchNormalizationLayer
-    - Relu layer
-    - Maxpooling with a pooling size equals [2 2] and Stride equals [2 2]
-- Layer 3:
-    - kernel size: 3; filters number: 32; padding: same    
-    - batchNormalizationLayer
-    - Relu layer
-    - Maxpooling with a pooling size equals [2 2] and Stride equals [2 2]
-- Layer 4:
-    - fully connected layer with neurons equals 24
-    - softmaxLayer
-- calculate the training and testing accuracy
-- return and save the confusion matrix as C_CNN.mat</code></pre>
-<h3 id="ass2-mlp-m"><a href="#ass2-mlp-m" class="headerlink" title="ass2_mlp.m"></a>ass2_mlp.m</h3><p>This is the script to conduct the MLP</p>
-<pre><code>- load the dataset obtained previously train_test_data.mat
-- lr_rate = 0.2;
-- momentum = 0.4;
-- epochs = 1000;
-- 3 layers with 50, 100, 100 
-- Hyperbolic tangent sigmoid transfer function (tansig)
-- gradient descent to update the weights
-- calculate the training and testing accuracy
-- return and save the confusion matrix as C_mlp.mat</code></pre>
-<h3 id="ass2-lvq-m"><a href="#ass2-lvq-m" class="headerlink" title="ass2_lvq.m"></a>ass2_lvq.m</h3><pre><code>- load the dataset obtained previously train_test_data.mat
-- set the cluster into 360 due to its performance, you could also set cluster into 24 for computational convenience
-- lvqnet(24) could achieve ideal performance, but the performance could not be comparable with the cluster set into 360
-- save the lvqnet(360) as lvq_360.mat, uncomment the line if you wish to see the performance
-- calculate the training and testing accuracy
-- return and save the confusion matrix C_lvq.mat</code></pre>
-<h3 id="ass2-rbf-kmean-m"><a href="#ass2-rbf-kmean-m" class="headerlink" title="ass2_rbf_kmean.m"></a>ass2_rbf_kmean.m</h3><pre><code>- load the dataset obtained previously train_test_data.mat
-- use kmeans to return the center of each cluster, the number of cluster is determined as 360
-- use assembled function RBF_training_kmeans to calculate the W (weights), sigma (the variance of the RBF kernel) and the coordinate of each cluster's center 
-- use the previous returned parameter to return the training prediction by assembled function: RBF_predict
-- calculate the training and testing accuracy
-- return and save the confusion matrix C_rbf_kmeans.mat</code></pre>
-<h3 id="ass2-rbf-som-m"><a href="#ass2-rbf-som-m" class="headerlink" title="ass2_rbf_som.m"></a>ass2_rbf_som.m</h3><pre><code>- load the dataset obtained previously train_test_data.mat
-- define the SOM network, the dimension is set to 18*20 for convenience, keep it uniform to the previous number of clusters: 360
-- coverSteps = 10 %% Number of training steps for initial covering of the input space (default = 100)
-- initNeighbor = 80 %% Initial neighborhood size (default = 3)
-- topologyFcn = 'hextop' %% Layer topology function (default = 'hextop')
-- distanceFcn = 'dist' %%  Neuron distance function (default = 'linkdist')
-- once finished the training of SOM network, use assembled function RBF_training_som.m to calculate the weights W, sigma (the variance of the RBF kernel) and center of SOM clusters, which is the IW{1,1}.
-- use the previous returned parameter to return the training prediction by assembled function: RBF_predict
-- return and save the confusion matrix C_rbf_som.mat</code></pre>
-<h3 id="ass2-confusion-matrix-summary-m"><a href="#ass2-confusion-matrix-summary-m" class="headerlink" title="ass2_confusion_matrix_summary.m"></a>ass2_confusion_matrix_summary.m</h3><pre><code>- load the previous saved mat file
-- reshow the confusion matrix
-- compare the performance returned by different neural networks
-- compare the accuracy returned by different neural networks  </code></pre>
-<hr>
-<h2 id="The-function-part-assembled-function-for-reproduction"><a href="#The-function-part-assembled-function-for-reproduction" class="headerlink" title="The function part (assembled function for reproduction)"></a>The function part (assembled function for reproduction)</h2><h3 id="getimdata-m"><a href="#getimdata-m" class="headerlink" title="getimdata.m"></a>getimdata.m</h3><pre><code>- Input: the file path, in this case the processed file with renamed figure and same format jpeg (ass2_processed_data) 
-- Output: Transormed the numerical data into the one-hot encoding vector format (one-hot format)</code></pre>
-<h3 id="getimdata2-m"><a href="#getimdata2-m" class="headerlink" title="getimdata2.m"></a>getimdata2.m</h3><pre><code>- Input: the file path, in this case the processed file with renamed figure and same format jpeg (ass2_processed_data) 
-    - normalize the data into range 0-1
-    - assign the numerical labels to each character
-    - combine all the processed plot into a dataset 2400 * 1152
-    - 2400 stands for the number of samples; 1152 stands for the features in one figure
-- Output: The normalized figure data (0-1), with data and corresponding labels. Labels are in numerical format (1,2,3...24) (without one-hot)
-- This function method is selected in the whole project</code></pre>
-<h3 id="RBF-training-kmeans-m"><a href="#RBF-training-kmeans-m" class="headerlink" title="RBF_training_kmeans.m"></a>RBF_training_kmeans.m</h3><pre><code>- Input: data, labels, number of clusters to be determined by kmeans
-- sigma is determined by the mean Euclidean distance between two clusters
-- k weight matrix is calculated by the radbas(distance of samples between clusters' centers/2*sigma^2)
-- W weights is calculated by the pesudo inverse of (k'*k)*k'*labels</code></pre>
-<h3 id="RBF-training-som-m"><a href="#RBF-training-som-m" class="headerlink" title="RBF_training_som.m"></a>RBF_training_som.m</h3><pre><code>- Input: data, labels and net
-- net is pre-trained by som networks
-- the cluster center is returned by the first layer of som network, which is denoted by net.IW{1,1}
-- sigma is determined by the mean Euclidean distance between two clusters
-- k weight matrix is calculated by the radbas(distance of samples between clusters' centers/2*sigma^2)
-- W weights is calculated by the pesudo inverse of (k'*k)*k'*labels</code></pre>
-<h3 id="RBF-predict-m"><a href="#RBF-predict-m" class="headerlink" title="RBF_predict.m"></a>RBF_predict.m</h3><pre><code>- Input: data, W, sigma, C trained previously from either RBF_training_kmeans or RBF_training_som
-- Output: vectors of the final prediction
-- data could be either training data or testing data</code></pre>
-<h3 id="getcls-m"><a href="#getcls-m" class="headerlink" title="getcls.m"></a>getcls.m</h3><pre><code>- Input: vecs - matrix of column vectors (returned from the RBF_predict.m)
-- Output: cls - matrix where the largest element in each column in vectors is set to 1 and the rest to 0   Ex: vecs = [2 4; 1 5], gives c = [1 0; 0 1]
-- This function is used to return the most likely label in multi-variable classification, especially after the one-hot encoding method</code></pre>
-<h3 id="rate-m"><a href="#rate-m" class="headerlink" title="rate.m"></a>rate.m</h3><pre><code>- Input: matrix of class vectors
-- Computes the percentage of equal columns in t1 and t2, can be used to compute the rate of correct classified patterns in a pattern recognition application
-- Output: number of matching vectors</code></pre>
-<hr>
-<h2 id="Saved-parameters"><a href="#Saved-parameters" class="headerlink" title="Saved parameters"></a>Saved parameters</h2><h3 id="train-test-data-mat"><a href="#train-test-data-mat" class="headerlink" title="train_test_data.mat"></a>train_test_data.mat</h3><pre><code>- the value obtained from the data_partition.m
-- X_train, X_test, y_train, y_value</code></pre>
-<h3 id="som-net-data-mat"><a href="#som-net-data-mat" class="headerlink" title="som_net_data.mat"></a>som_net_data.mat</h3><pre><code>- the network trained by som (it takes long time, for computation convenience)</code></pre>
-<h3 id="lvq-360-mat"><a href="#lvq-360-mat" class="headerlink" title="lvq_360.mat"></a>lvq_360.mat</h3><pre><code>- lvq with cluster set to 360</code></pre>
-<h3 id="lvq-24-mat"><a href="#lvq-24-mat" class="headerlink" title="lvq_24.mat"></a>lvq_24.mat</h3><pre><code>- lvq with cluster set to 24 </code></pre>
-<h3 id="kmeans-plot-mat"><a href="#kmeans-plot-mat" class="headerlink" title="kmeans_plot.mat"></a>kmeans_plot.mat</h3><pre><code>- calculate silhouette value to find the suitable cluster k, but the results are not satisfied
-- return the plot of each epoch</code></pre>
-<h3 id="Confusion-matrix-summary"><a href="#Confusion-matrix-summary" class="headerlink" title="Confusion_matrix summary:"></a>Confusion_matrix summary:</h3><pre><code>- CNN_confusion.mat
-- C_rbf_som.mat
-- C_rbf_kmeans.mat
-- C_mlp.mat
-- C_lvq.mat
-- C_CNN.mat</code></pre>
-<hr>
-<p>Assessment2</p>
-<p>You could download the whole file with script and report in 1716309_Yuxuan_Wu.zip from my own repository</p>
-<p><a class="link" href="https://github.com/yuxuanwu17/INT301_Assessment2">https://github.com/yuxuanwu17/INT301_Assessment2<i class="fas fa-external-link-alt"></i></a></p>
-]]></content>
-      <categories>
-        <category>Matlab</category>
-      </categories>
-      <tags>
-        <tag>tutorial</tag>
-        <tag>Neural networks</tag>
-        <tag>image classification</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Linux htop 详解</title>
     <url>/2021/01/25/Linux_htop/</url>
     <content><![CDATA[<p>之前在学校实验室工作的时候，接触的第一个命令就是htop。之前就是觉得这个花花绿绿的界面很有趣（牛逼），如下图，常常在女朋友面前故作牛逼的打开（<em>实际就看看我的程序在不在跑，虚伪的不行🤪</em>）</p>
@@ -2146,6 +1999,356 @@ Heart Not Failed       0.85      0.93      0.89        43
         <tag>R</tag>
         <tag>RNA modification</tag>
         <tag>meta-analysis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MATLAB based neural network for image classification</title>
+    <url>/2021/01/25/matlab_cw2_readme/</url>
+    <content><![CDATA[<h2 id="Project-overview"><a href="#Project-overview" class="headerlink" title="Project overview :"></a>Project overview :</h2><p>This task includes five algorithms to classify the characters segmented from the license plates of automobiles using MATLAB</p>
+<ul>
+<li>MLP (multi-layer perceptron)</li>
+<li>CNN (convolutional neural network)</li>
+<li>LVQ (learning vector quantization)</li>
+<li>RBF1 with k-means clustering</li>
+<li>RBF2 with SOM (self-organizing map)</li>
+</ul>
+<hr>
+<h2 id="Files-running-order"><a href="#Files-running-order" class="headerlink" title="Files running order"></a>Files running order</h2><ol>
+<li>run the figure_preprocessing.m and create a new file folder ass2_processede_data</li>
+<li>run data_partition.m split the dataset in 8:2 version and returned the X_train, X_test, y_train, y_test and save as train_test_data.mat</li>
+<li>run ass2_CNN.m (this script did not use the processed data, but read the figure directly from the original file)</li>
+<li>run ass2_mlp.m </li>
+<li>run ass2_lvq.m</li>
+<li>run ass2_rbf_kmean.m</li>
+<li>run ass2_rbf_som.m</li>
+<li>run ass2_confusion_matrix_summary.m</li>
+</ol>
+<hr>
+<h2 id="Components-Scripts-inside-the-project"><a href="#Components-Scripts-inside-the-project" class="headerlink" title="Components/Scripts inside the project"></a>Components/Scripts inside the project</h2><h2 id="The-script-part"><a href="#The-script-part" class="headerlink" title="The script part"></a>The script part</h2><h3 id="figure-preprocessing-m"><a href="#figure-preprocessing-m" class="headerlink" title="figure_preprocessing.m"></a>figure_preprocessing.m</h3><p>This is the script to extract the ass2data and rewrite to a new file folder ass2_processed_data. </p>
+<pre><code>- read both jpeg and jpg files in all folders ass2_data
+- rewrite into another folders ass2_processed_data with uniform style (jpeg) and uniform naming styles (label+number) e.g. (A1,B10,C99)</code></pre>
+<h3 id="data-partition-m"><a href="#data-partition-m" class="headerlink" title="data_partition.m"></a>data_partition.m</h3><p>This is the script splitted the processed data into training and testing dataset in 8:2 ratio. It adjusted the size and columns or rows for fitting the designed model’s network.</p>
+<pre><code>- read images from the processed folder ass2_processed_data. 
+- split the dataset into 8:2
+- save the splitted samples and parameters as train_test_data.mat</code></pre>
+<h3 id="ass2-CNN-m"><a href="#ass2-CNN-m" class="headerlink" title="ass2_CNN.m"></a>ass2_CNN.m</h3><p>This is the script to conduct the CNN.</p>
+<pre><code>- use imageDataset to store and train the model
+- use splitEachLabel to split the training and testing datasets
+- do not use the train_test_data as the input since CNN has standard samples in Matlab documents
+- imageInputLayer(48,24,1)
+- Layer 1:
+    - kernel size: 3; filters number: 8; padding: same
+    - batchNormalizationLayer
+    - Relu layer
+    - Maxpooling with a pooling size equals [2 2] and Stride equals [2 2]
+- Layer 2:
+    - kernel size: 3; filters number: 16; padding: same    
+    - batchNormalizationLayer
+    - Relu layer
+    - Maxpooling with a pooling size equals [2 2] and Stride equals [2 2]
+- Layer 3:
+    - kernel size: 3; filters number: 32; padding: same    
+    - batchNormalizationLayer
+    - Relu layer
+    - Maxpooling with a pooling size equals [2 2] and Stride equals [2 2]
+- Layer 4:
+    - fully connected layer with neurons equals 24
+    - softmaxLayer
+- calculate the training and testing accuracy
+- return and save the confusion matrix as C_CNN.mat</code></pre>
+<h3 id="ass2-mlp-m"><a href="#ass2-mlp-m" class="headerlink" title="ass2_mlp.m"></a>ass2_mlp.m</h3><p>This is the script to conduct the MLP</p>
+<pre><code>- load the dataset obtained previously train_test_data.mat
+- lr_rate = 0.2;
+- momentum = 0.4;
+- epochs = 1000;
+- 3 layers with 50, 100, 100 
+- Hyperbolic tangent sigmoid transfer function (tansig)
+- gradient descent to update the weights
+- calculate the training and testing accuracy
+- return and save the confusion matrix as C_mlp.mat</code></pre>
+<h3 id="ass2-lvq-m"><a href="#ass2-lvq-m" class="headerlink" title="ass2_lvq.m"></a>ass2_lvq.m</h3><pre><code>- load the dataset obtained previously train_test_data.mat
+- set the cluster into 360 due to its performance, you could also set cluster into 24 for computational convenience
+- lvqnet(24) could achieve ideal performance, but the performance could not be comparable with the cluster set into 360
+- save the lvqnet(360) as lvq_360.mat, uncomment the line if you wish to see the performance
+- calculate the training and testing accuracy
+- return and save the confusion matrix C_lvq.mat</code></pre>
+<h3 id="ass2-rbf-kmean-m"><a href="#ass2-rbf-kmean-m" class="headerlink" title="ass2_rbf_kmean.m"></a>ass2_rbf_kmean.m</h3><pre><code>- load the dataset obtained previously train_test_data.mat
+- use kmeans to return the center of each cluster, the number of cluster is determined as 360
+- use assembled function RBF_training_kmeans to calculate the W (weights), sigma (the variance of the RBF kernel) and the coordinate of each cluster's center 
+- use the previous returned parameter to return the training prediction by assembled function: RBF_predict
+- calculate the training and testing accuracy
+- return and save the confusion matrix C_rbf_kmeans.mat</code></pre>
+<h3 id="ass2-rbf-som-m"><a href="#ass2-rbf-som-m" class="headerlink" title="ass2_rbf_som.m"></a>ass2_rbf_som.m</h3><pre><code>- load the dataset obtained previously train_test_data.mat
+- define the SOM network, the dimension is set to 18*20 for convenience, keep it uniform to the previous number of clusters: 360
+- coverSteps = 10 %% Number of training steps for initial covering of the input space (default = 100)
+- initNeighbor = 80 %% Initial neighborhood size (default = 3)
+- topologyFcn = 'hextop' %% Layer topology function (default = 'hextop')
+- distanceFcn = 'dist' %%  Neuron distance function (default = 'linkdist')
+- once finished the training of SOM network, use assembled function RBF_training_som.m to calculate the weights W, sigma (the variance of the RBF kernel) and center of SOM clusters, which is the IW{1,1}.
+- use the previous returned parameter to return the training prediction by assembled function: RBF_predict
+- return and save the confusion matrix C_rbf_som.mat</code></pre>
+<h3 id="ass2-confusion-matrix-summary-m"><a href="#ass2-confusion-matrix-summary-m" class="headerlink" title="ass2_confusion_matrix_summary.m"></a>ass2_confusion_matrix_summary.m</h3><pre><code>- load the previous saved mat file
+- reshow the confusion matrix
+- compare the performance returned by different neural networks
+- compare the accuracy returned by different neural networks  </code></pre>
+<hr>
+<h2 id="The-function-part-assembled-function-for-reproduction"><a href="#The-function-part-assembled-function-for-reproduction" class="headerlink" title="The function part (assembled function for reproduction)"></a>The function part (assembled function for reproduction)</h2><h3 id="getimdata-m"><a href="#getimdata-m" class="headerlink" title="getimdata.m"></a>getimdata.m</h3><pre><code>- Input: the file path, in this case the processed file with renamed figure and same format jpeg (ass2_processed_data) 
+- Output: Transormed the numerical data into the one-hot encoding vector format (one-hot format)</code></pre>
+<h3 id="getimdata2-m"><a href="#getimdata2-m" class="headerlink" title="getimdata2.m"></a>getimdata2.m</h3><pre><code>- Input: the file path, in this case the processed file with renamed figure and same format jpeg (ass2_processed_data) 
+    - normalize the data into range 0-1
+    - assign the numerical labels to each character
+    - combine all the processed plot into a dataset 2400 * 1152
+    - 2400 stands for the number of samples; 1152 stands for the features in one figure
+- Output: The normalized figure data (0-1), with data and corresponding labels. Labels are in numerical format (1,2,3...24) (without one-hot)
+- This function method is selected in the whole project</code></pre>
+<h3 id="RBF-training-kmeans-m"><a href="#RBF-training-kmeans-m" class="headerlink" title="RBF_training_kmeans.m"></a>RBF_training_kmeans.m</h3><pre><code>- Input: data, labels, number of clusters to be determined by kmeans
+- sigma is determined by the mean Euclidean distance between two clusters
+- k weight matrix is calculated by the radbas(distance of samples between clusters' centers/2*sigma^2)
+- W weights is calculated by the pesudo inverse of (k'*k)*k'*labels</code></pre>
+<h3 id="RBF-training-som-m"><a href="#RBF-training-som-m" class="headerlink" title="RBF_training_som.m"></a>RBF_training_som.m</h3><pre><code>- Input: data, labels and net
+- net is pre-trained by som networks
+- the cluster center is returned by the first layer of som network, which is denoted by net.IW{1,1}
+- sigma is determined by the mean Euclidean distance between two clusters
+- k weight matrix is calculated by the radbas(distance of samples between clusters' centers/2*sigma^2)
+- W weights is calculated by the pesudo inverse of (k'*k)*k'*labels</code></pre>
+<h3 id="RBF-predict-m"><a href="#RBF-predict-m" class="headerlink" title="RBF_predict.m"></a>RBF_predict.m</h3><pre><code>- Input: data, W, sigma, C trained previously from either RBF_training_kmeans or RBF_training_som
+- Output: vectors of the final prediction
+- data could be either training data or testing data</code></pre>
+<h3 id="getcls-m"><a href="#getcls-m" class="headerlink" title="getcls.m"></a>getcls.m</h3><pre><code>- Input: vecs - matrix of column vectors (returned from the RBF_predict.m)
+- Output: cls - matrix where the largest element in each column in vectors is set to 1 and the rest to 0   Ex: vecs = [2 4; 1 5], gives c = [1 0; 0 1]
+- This function is used to return the most likely label in multi-variable classification, especially after the one-hot encoding method</code></pre>
+<h3 id="rate-m"><a href="#rate-m" class="headerlink" title="rate.m"></a>rate.m</h3><pre><code>- Input: matrix of class vectors
+- Computes the percentage of equal columns in t1 and t2, can be used to compute the rate of correct classified patterns in a pattern recognition application
+- Output: number of matching vectors</code></pre>
+<hr>
+<h2 id="Saved-parameters"><a href="#Saved-parameters" class="headerlink" title="Saved parameters"></a>Saved parameters</h2><h3 id="train-test-data-mat"><a href="#train-test-data-mat" class="headerlink" title="train_test_data.mat"></a>train_test_data.mat</h3><pre><code>- the value obtained from the data_partition.m
+- X_train, X_test, y_train, y_value</code></pre>
+<h3 id="som-net-data-mat"><a href="#som-net-data-mat" class="headerlink" title="som_net_data.mat"></a>som_net_data.mat</h3><pre><code>- the network trained by som (it takes long time, for computation convenience)</code></pre>
+<h3 id="lvq-360-mat"><a href="#lvq-360-mat" class="headerlink" title="lvq_360.mat"></a>lvq_360.mat</h3><pre><code>- lvq with cluster set to 360</code></pre>
+<h3 id="lvq-24-mat"><a href="#lvq-24-mat" class="headerlink" title="lvq_24.mat"></a>lvq_24.mat</h3><pre><code>- lvq with cluster set to 24 </code></pre>
+<h3 id="kmeans-plot-mat"><a href="#kmeans-plot-mat" class="headerlink" title="kmeans_plot.mat"></a>kmeans_plot.mat</h3><pre><code>- calculate silhouette value to find the suitable cluster k, but the results are not satisfied
+- return the plot of each epoch</code></pre>
+<h3 id="Confusion-matrix-summary"><a href="#Confusion-matrix-summary" class="headerlink" title="Confusion_matrix summary:"></a>Confusion_matrix summary:</h3><pre><code>- CNN_confusion.mat
+- C_rbf_som.mat
+- C_rbf_kmeans.mat
+- C_mlp.mat
+- C_lvq.mat
+- C_CNN.mat</code></pre>
+<hr>
+<p>Assessment2</p>
+<p>You could download the whole file with script and report in 1716309_Yuxuan_Wu.zip from my own repository</p>
+<p><a class="link" href="https://github.com/yuxuanwu17/INT301_Assessment2">https://github.com/yuxuanwu17/INT301_Assessment2<i class="fas fa-external-link-alt"></i></a></p>
+]]></content>
+      <categories>
+        <category>Matlab</category>
+      </categories>
+      <tags>
+        <tag>tutorial</tag>
+        <tag>Neural networks</tag>
+        <tag>image classification</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>matlab相关的知识</title>
+    <url>/2021/01/28/matlab_links/</url>
+    <content><![CDATA[<p><strong>matlab神经网络newff函数的用法</strong></p>
+<p><a class="link"   href="https://blog.csdn.net/xiaotao_1/article/details/79078729" >https://blog.csdn.net/xiaotao_1/article/details/79078729<i class="fas fa-external-link-alt"></i></a></p>
+<p><strong>分割数据集</strong></p>
+<p><a class="link"   href="https://blog.csdn.net/shengchaohua163/article/details/79876007" >https://blog.csdn.net/shengchaohua163/article/details/79876007<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   href="https://www.itdaan.com/blog/2018/04/10/7c17309d448c3f414edafe886a257d7b.html" >https://www.itdaan.com/blog/2018/04/10/7c17309d448c3f414edafe886a257d7b.html<i class="fas fa-external-link-alt"></i></a></p>
+<p><strong>理解train的函数的意义</strong></p>
+<p><a class="link"   href="https://www.mathworks.com/matlabcentral/answers/337308-net-tr-y-e-train-net-p-t-how-y-and-e-get-their-dimensions-with-this-syntax" >https://www.mathworks.com/matlabcentral/answers/337308-net-tr-y-e-train-net-p-t-how-y-and-e-get-their-dimensions-with-this-syntax<i class="fas fa-external-link-alt"></i></a></p>
+<p><strong>newff</strong></p>
+<p><a class="link"   href="https://blog.csdn.net/weixin_43857827/article/details/102924575" >https://blog.csdn.net/weixin_43857827/article/details/102924575<i class="fas fa-external-link-alt"></i></a></p>
+<p>net = newff(minmax(p),[隐层的神经元的个数，输出层的神经元的个数],{隐层神经元的传输函数，输出层的传输函数｝,’反向传播的训练函数’)</p>
+<p><strong>混淆矩阵</strong></p>
+<p><a class="link"   href="https://ww2.mathworks.cn/help/stats/confusionmat.html" >https://ww2.mathworks.cn/help/stats/confusionmat.html<i class="fas fa-external-link-alt"></i></a></p>
+<p><strong>如何优化MLP</strong></p>
+<p><a class="link"   href="https://ww2.mathworks.cn/matlabcentral/answers/137-how-do-i-improve-my-neural-network-performance" >https://ww2.mathworks.cn/matlabcentral/answers/137-how-do-i-improve-my-neural-network-performance<i class="fas fa-external-link-alt"></i></a></p>
+<p><strong>XOR problem</strong> </p>
+<p>[<a class="link"   href="https://medium.com/@jayeshbahire/the-xor-problem-in-neural-networks-50006411840b#:~:text=The%20XOr%2C%20or%20%E2%80%9Cexclusive%20or,value%20if%20they%20are%20equal]" >https://medium.com/@jayeshbahire/the-xor-problem-in-neural-networks-50006411840b#:~:text=The%20XOr%2C%20or%20%E2%80%9Cexclusive%20or,value%20if%20they%20are%20equal]<i class="fas fa-external-link-alt"></i></a>(<a class="link"   href="https://medium.com/@jayeshbahire/the-xor-problem-in-neural-networks-50006411840b#:~:text=The" >https://medium.com/@jayeshbahire/the-xor-problem-in-neural-networks-50006411840b#:~:text=The<i class="fas fa-external-link-alt"></i></a> XOr%2C or “exclusive or,value if they are equal)</p>
+<p><strong>Rbf 问题算法</strong></p>
+<p><a class="link"   href="https://blog.csdn.net/zouxy09/article/details/13297881" >https://blog.csdn.net/zouxy09/article/details/13297881<i class="fas fa-external-link-alt"></i></a></p>
+<p><strong>Rbf 神经网络和bp神经网络的区别和优缺点</strong></p>
+<p><a class="link"   href="https://blog.csdn.net/kykankankan/article/details/79749307?utm_medium=distribute.pc_relevant_bbs_down.none-task-blog-baidujs-1.nonecase&amp;depth_1-utm_source=distribute.pc_relevant_bbs_down.none-task-blog-baidujs-1.nonecase" >https://blog.csdn.net/kykankankan/article/details/79749307?utm_medium=distribute.pc_relevant_bbs_down.none-task-blog-baidujs-1.nonecase&amp;depth_1-utm_source=distribute.pc_relevant_bbs_down.none-task-blog-baidujs-1.nonecase<i class="fas fa-external-link-alt"></i></a></p>
+<p>遍历读取文件</p>
+<p><a class="link"   href="https://blog.csdn.net/FX677588/article/details/53126961" >https://blog.csdn.net/FX677588/article/details/53126961<i class="fas fa-external-link-alt"></i></a></p>
+<p><strong>Matlab CNN</strong></p>
+<p><a class="link"   href="https://blog.csdn.net/weixin_41923961/article/details/80382502" >https://blog.csdn.net/weixin_41923961/article/details/80382502<i class="fas fa-external-link-alt"></i></a></p>
+<p><strong>for语句循环系列处理一部分文件，并且改写</strong></p>
+<p><a class="link"   href="https://blog.csdn.net/zhangziyou719/article/details/54647331?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control" >https://blog.csdn.net/zhangziyou719/article/details/54647331?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control<i class="fas fa-external-link-alt"></i></a></p>
+<p><strong>kmeans</strong></p>
+<p><a class="link"   href="https://www.mathworks.com/help/stats/k-means-clustering.html" >https://www.mathworks.com/help/stats/k-means-clustering.html<i class="fas fa-external-link-alt"></i></a></p>
+<p><strong>matlab函数</strong></p>
+<p><a class="link"   href="https://zhuanlan.zhihu.com/p/19802747" >https://zhuanlan.zhihu.com/p/19802747<i class="fas fa-external-link-alt"></i></a></p>
+<p><strong>径向基函数的sigma选择（当然也可以用mean）</strong></p>
+<p><a class="link"   href="https://www.cnblogs.com/yymn/p/4537992.html" >https://www.cnblogs.com/yymn/p/4537992.html<i class="fas fa-external-link-alt"></i></a></p>
+<p><strong>SOM</strong></p>
+<p><a class="link"   href="https://blog.csdn.net/weixin_30300225/article/details/95509788?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.control" >https://blog.csdn.net/weixin_30300225/article/details/95509788?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.control<i class="fas fa-external-link-alt"></i></a></p>
+]]></content>
+      <categories>
+        <category>Matlab</category>
+      </categories>
+      <tags>
+        <tag>tutorial</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python 相关的知识和笔记链接</title>
+    <url>/2021/01/28/python-%E7%9B%B8%E5%85%B3%E7%9A%84%E7%9F%A5%E8%AF%86%E5%92%8C%E7%AC%94%E8%AE%B0%E9%93%BE%E6%8E%A5/</url>
+    <content><![CDATA[<p>tf 里面的training=True</p>
+<p>Some neural network layers behave differently during training and inference, for example Dropout and BatchNormalization layers. For example</p>
+<ul>
+<li>During training, dropout will randomly drop out units and correspondingly scale up activations of the remaining units.</li>
+<li>During inference, it does nothing (since you usually don’t want the randomness of dropping out units here).</li>
+</ul>
+<p>The training argument lets the layer know which of the two “paths” it should take. If you set this incorrectly, your network might not behave as expected.</p>
+<p>pycharm的奇技淫巧</p>
+<p><a class="link"   href="https://www.zhihu.com/question/37787004" >https://www.zhihu.com/question/37787004<i class="fas fa-external-link-alt"></i></a></p>
+<p>为什么要做归一化处理</p>
+<p><a class="link"   href="https://mp.weixin.qq.com/s/TF6d9NRz0lDFQeC_K3CVaw" >https://mp.weixin.qq.com/s/TF6d9NRz0lDFQeC_K3CVaw<i class="fas fa-external-link-alt"></i></a></p>
+<p>npy 格式的好处</p>
+<p><a class="link"   href="https://towardsdatascience.com/what-is-npy-files-and-why-you-should-use-them-603373c78883" >https://towardsdatascience.com/what-is-npy-files-and-why-you-should-use-them-603373c78883<i class="fas fa-external-link-alt"></i></a></p>
+<ol>
+<li>不用reshape了，什么格式保存，什么格式读取</li>
+<li>storage比较小</li>
+<li>Read的速度比较快</li>
+</ol>
+<p>pickle data</p>
+<p><a class="link"   href="https://www.geeksforgeeks.org/understanding-python-pickling-example/" >https://www.geeksforgeeks.org/understanding-python-pickling-example/<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   href="https://www.zhihu.com/search?type=content&amp;q=Pickling" >https://www.zhihu.com/search?type=content&amp;q=Pickling<i class="fas fa-external-link-alt"></i></a></p>
+<p>答：Pickle模块读入任何Python对象，将它们转换成字符串，然后使用dump函数将其转储到一个文件中——这个过程叫做pickling。反之从存储的字符串文件中提取原始Python对象的过程，叫做unpickling。    allow_pickle = True文件传输的过程中可能会有压缩，true则表示压缩后文件不变</p>
+<p>Python的面试</p>
+<p><a class="link"   href="https://zhuanlan.zhihu.com/p/41962762" >https://zhuanlan.zhihu.com/p/41962762<i class="fas fa-external-link-alt"></i></a></p>
+<p><strong>1.这两个参数是什么意思:*args,\</strong>kwargs？我们为什么要使用它们?**</p>
+<p>答:如果我们不确定往一个函数中传入多少参数，或者我们希望以元组(tuple)或者列表(list)的形式传参数的时候，我们可以使用*args(单星号).如果我们不知道往函数中传递多少个关键词参数或者想传入字典的值作为关键词参数的时候我们可以使用**kwargs(双星号),args,kwargs两个标识符是约定俗成的用法。</p>
+<p>lists are mutable while tuple are not </p>
+<p><strong>这个就非常的好，解释kargs and args</strong></p>
+<p><a class="link"   href="https://realpython.com/python-kwargs-and-args/" >https://realpython.com/python-kwargs-and-args/<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   href="https://www.jianshu.com/p/592cf526b1e6" >https://www.jianshu.com/p/592cf526b1e6<i class="fas fa-external-link-alt"></i></a></p>
+<p>Python 的iteration 这个模块的用法</p>
+<p><a class="link"   href="https://www.zhihu.com/search?type=content&amp;q=itertools" >https://www.zhihu.com/search?type=content&amp;q=itertools<i class="fas fa-external-link-alt"></i></a></p>
+<p><strong>Itertools.zip_longest()</strong></p>
+<p>This iterator falls under the category of <a class="link"   href="https://www.geeksforgeeks.org/python-itertools/#terminate" >Terminating Iterators<i class="fas fa-external-link-alt"></i></a>. It prints the values of iterables alternatively in sequence. If one of the iterables is printed fully, the remaining values are filled by the values assigned to fillvalue parameter.</p>
+<p>Python新手常见的坑</p>
+<p><a class="link"   href="https://zhuanlan.zhihu.com/p/81012511" >https://zhuanlan.zhihu.com/p/81012511<i class="fas fa-external-link-alt"></i></a></p>
+<p><strong>Tf.function 装饰器的玩意</strong> </p>
+<table>
+<thead>
+<tr>
+<th>func</th>
+<th>the function to be compiled. If func is None, <a class="link"   href="https://www.tensorflow.org/api_docs/python/tf/function" >tf.function<i class="fas fa-external-link-alt"></i></a> returns a decorator that can be invoked with a single argument - func. In other words, tf.function(input_signature=…)(func) is equivalent to <a class="link"   href="https://www.tensorflow.org/api_docs/python/tf/function" >tf.function(func, input_signature=…)<i class="fas fa-external-link-alt"></i></a>. The former can be used as decorator.</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>input_signature</td>
+<td>A possibly nested sequence of <a class="link"   href="https://www.tensorflow.org/api_docs/python/tf/TensorSpec" >tf.TensorSpec<i class="fas fa-external-link-alt"></i></a> objects specifying the shapes and dtypes of the Tensors that will be supplied to this function. If None, a separate function is instantiated for each inferred input signature. If input_signature is specified, every input to func must be a Tensor, and func cannot accept **kwargs.</td>
+</tr>
+</tbody></table>
+<p><strong>tf graph：</strong></p>
+<p>Graphs are data structures that contain a set of <a class="link"   href="https://www.tensorflow.org/api_docs/python/tf/Operation" >tf.Operation<i class="fas fa-external-link-alt"></i></a> objects, which represent units of computation; and <a class="link"   href="https://www.tensorflow.org/api_docs/python/tf/Tensor" >tf.Tensor<i class="fas fa-external-link-alt"></i></a> objects, which represent the units of data that flow between operations. They are defined in a <a class="link"   href="https://www.tensorflow.org/api_docs/python/tf/Graph" >tf.Graph<i class="fas fa-external-link-alt"></i></a> context. Since these graphs are data structures, they can be saved, run, and restored all without the original Python code.</p>
+<p><strong>permutation invariant</strong></p>
+<p>In this context this refers to the fact that the model does not assume any spatial relationships between the features. E.g. for multilayer perceptron, you can permute the pixels and the performance would be the same. This is not the case for convolutional networks, which assume neighbourhood relations.</p>
+<p>numpy -1 的作用</p>
+<p><a class="link"   href="https://stackoverflow.com/questions/tagged/numpy-ndarray" >https://stackoverflow.com/questions/tagged/numpy-ndarray<i class="fas fa-external-link-alt"></i></a></p>
+<p>Tensorflow.Dataset中map，shuffle，repeat，batch的总结 </p>
+<p><a class="link"   href="https://blog.csdn.net/anshuai_aw1/article/details/105094548" >https://blog.csdn.net/anshuai_aw1/article/details/105094548<i class="fas fa-external-link-alt"></i></a></p>
+<p>shuffle的顺序很重要，应该先shuffle再batch，如果先batch后shuffle的话，那么此时就只是对batch进行shuffle，而batch里面的数据顺序依旧是有序的，那么随机程度会减弱</p>
+<p>buffer_size 越大，打乱的程度越高</p>
+<p><a class="link"   href="https://www.cnblogs.com/HolyShine/p/8673322.html" >https://www.cnblogs.com/HolyShine/p/8673322.html<i class="fas fa-external-link-alt"></i></a></p>
+<p>数据集的处理和预处理，非常重要</p>
+<p><a class="link"   href="https://tf.wiki/zh_hans/basic/tools.html#zh-hans-tfdata" >https://tf.wiki/zh_hans/basic/tools.html#zh-hans-tfdata<i class="fas fa-external-link-alt"></i></a></p>
+<p>Tensorflow Dataset API 用法</p>
+<p><a class="link"   href="https://zhuanlan.zhihu.com/p/30751039" >https://zhuanlan.zhihu.com/p/30751039<i class="fas fa-external-link-alt"></i></a></p>
+<p>Tensorflow 数据读取机制</p>
+<p><a class="link"   href="https://zhuanlan.zhihu.com/p/27238630" >https://zhuanlan.zhihu.com/p/27238630<i class="fas fa-external-link-alt"></i></a></p>
+<p>训练gpu的tricks</p>
+<p><a class="link"   href="https://zhuanlan.zhihu.com/p/53345706" >https://zhuanlan.zhihu.com/p/53345706<i class="fas fa-external-link-alt"></i></a></p>
+<p><strong><em>\</em>tensorflow的训练和教程(非常重要)</strong></p>
+<p><a class="link"   href="https://tf.wiki/" >https://tf.wiki/<i class="fas fa-external-link-alt"></i></a></p>
+<p><img src="blob:file:///c0a2b963-ad70-4970-82dd-9ca515c90f18" alt="model.png"></p>
+<p>python的包之类的问题</p>
+<p><a class="link"   href="https://www.zhihu.com/question/430339227/answer/1577177268" >https://www.zhihu.com/question/430339227/answer/1577177268<i class="fas fa-external-link-alt"></i></a></p>
+<p>Python __init__之类的问题</p>
+<p><a class="link"   href="https://www.zhihu.com/question/46973549/answer/767530541" >https://www.zhihu.com/question/46973549/answer/767530541<i class="fas fa-external-link-alt"></i></a></p>
+<p>nohup</p>
+<p><a class="link"   href="https://www.zhihu.com/question/429726293/answer/1568963793" >https://www.zhihu.com/question/429726293/answer/1568963793<i class="fas fa-external-link-alt"></i></a></p>
+<p>Pycharm 的debug</p>
+<p><a class="link"   href="https://www.zhihu.com/search?type=content&q=pycharm%E6%96%AD%E7%82%B9debug" >https://www.zhihu.com/search?type=content&amp;q=pycharm%E6%96%AD%E7%82%B9debug<i class="fas fa-external-link-alt"></i></a></p>
+<p>五分钟学算法</p>
+<p><a class="link"   href="http://www.cxyxiaowu.com/" >http://www.cxyxiaowu.com/<i class="fas fa-external-link-alt"></i></a></p>
+<p>python浅拷贝</p>
+<p><a class="link"   href="https://mp.weixin.qq.com/s/KrdXyYMtyElUGuPH5eNYvg" >https://mp.weixin.qq.com/s/KrdXyYMtyElUGuPH5eNYvg<i class="fas fa-external-link-alt"></i></a></p>
+<p>爬取b站的弹幕</p>
+<p><a class="link"   href="https://mp.weixin.qq.com/s/OYo1VwKkUWIX9p73mvSLOQ" >https://mp.weixin.qq.com/s/OYo1VwKkUWIX9p73mvSLOQ<i class="fas fa-external-link-alt"></i></a></p>
+<p>表情包</p>
+<p><a class="link"   href="https://mp.weixin.qq.com/s/0Yguofg54GZSjvfUfjezmw" >https://mp.weixin.qq.com/s/0Yguofg54GZSjvfUfjezmw<i class="fas fa-external-link-alt"></i></a></p>
+<p>爬去百度的表格</p>
+<p><a class="link"   href="https://blog.csdn.net/wyquin/article/details/79601918" >https://blog.csdn.net/wyquin/article/details/79601918<i class="fas fa-external-link-alt"></i></a></p>
+<p>python 的项目组织结构</p>
+<p><a class="link"   href="https://marlous.github.io/2019/04/03/Python-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E7%BB%84%E7%BB%87/" >https://marlous.github.io/2019/04/03/Python-%E8%BD%AF%E4%BB%B6%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84%E7%BB%84%E7%BB%87/<i class="fas fa-external-link-alt"></i></a></p>
+<p>爬虫403问题</p>
+<p><a class="link"   href="http://zhaoxuhui.top/blog/2017/06/19/Python%E7%88%AC%E8%99%AB403%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%E4%B8%8E%E5%AE%9E%E4%BE%8B.html" >http://zhaoxuhui.top/blog/2017/06/19/Python%E7%88%AC%E8%99%AB403%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%E4%B8%8E%E5%AE%9E%E4%BE%8B.html<i class="fas fa-external-link-alt"></i></a></p>
+<p>Matplot 问题总结</p>
+<p><a class="link"   href="https://www.jianshu.com/p/778d78463028" >https://www.jianshu.com/p/778d78463028<i class="fas fa-external-link-alt"></i></a></p>
+<p>爬虫csdn 大全</p>
+<p><a class="link"   href="https://blog.csdn.net/llllllkkkkkooooo/category_10129586.html" >https://blog.csdn.net/llllllkkkkkooooo/category_10129586.html<i class="fas fa-external-link-alt"></i></a></p>
+<p>阿里云部署 flask</p>
+<p><a class="link"   href="https://blog.csdn.net/qq_16293649/article/details/78601569?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_baidulandingword-2&amp;spm=1001.2101.3001.4242" >https://blog.csdn.net/qq_16293649/article/details/78601569?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_baidulandingword-2&amp;spm=1001.2101.3001.4242<i class="fas fa-external-link-alt"></i></a></p>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>tutorial</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>token2npy explanation</title>
+    <url>/2021/01/28/token2npy/</url>
+    <content><![CDATA[<p>This python file was to read the processed data from RDS file and conduct the embedding.</p>
+<p>In this case, instance length was set to 40, and the stride was set to 5. These two parameters could be tuned to achieve better results.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> rpy2.robjects <span class="keyword">as</span> ro</span><br><span class="line"></span><br><span class="line">np.random.seed(<span class="number">323</span>)</span><br><span class="line"></span><br><span class="line">readRDS = ro.r[<span class="string">&#x27;readRDS&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># KSHV，RSV，WNV，ZIKV，hMPV</span></span><br><span class="line"><span class="comment"># HCV, DENV, HIV-1</span></span><br><span class="line"></span><br><span class="line">gene_data = <span class="string">&quot;RSV&quot;</span></span><br><span class="line">data_dir = <span class="string">&#x27;/home/yuxuan/FYP/Virus_init_codes/processed_data/&#x27;</span>+gene_data+<span class="string">&#x27;/&#x27;</span></span><br><span class="line"></span><br><span class="line">train_seq = readRDS(data_dir + <span class="string">&#x27;train_seq.rds&#x27;</span>)</span><br><span class="line">train_seq = np.asarray(train_seq)</span><br><span class="line">train_seq = [np.asarray(seq) <span class="keyword">for</span> seq <span class="keyword">in</span> train_seq]</span><br><span class="line"></span><br><span class="line">train_label = readRDS(data_dir + <span class="string">&#x27;train_label.rds&#x27;</span>)</span><br><span class="line">train_label = np.asarray(train_label)</span><br><span class="line"></span><br><span class="line">valid_seq = readRDS(data_dir + <span class="string">&#x27;valid_seq.rds&#x27;</span>)</span><br><span class="line">valid_seq = np.asarray(valid_seq)</span><br><span class="line">valid_seq = [np.asarray(seq) <span class="keyword">for</span> seq <span class="keyword">in</span> valid_seq]</span><br><span class="line"></span><br><span class="line">valid_label = readRDS(data_dir + <span class="string">&#x27;valid_label.rds&#x27;</span>)</span><br><span class="line">valid_label = np.asarray(valid_label)</span><br><span class="line"></span><br><span class="line">test_seq = readRDS(data_dir + <span class="string">&#x27;test_seq.rds&#x27;</span>)</span><br><span class="line">test_seq = np.asarray(test_seq)</span><br><span class="line">test_seq = [np.asarray(seq) <span class="keyword">for</span> seq <span class="keyword">in</span> test_seq]</span><br><span class="line"></span><br><span class="line">test_label = readRDS(data_dir + <span class="string">&#x27;test_label.rds&#x27;</span>)</span><br><span class="line">test_label = np.asarray(test_label)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Multi-instance-data-preparation"><a href="#Multi-instance-data-preparation" class="headerlink" title="Multi-instance data preparation:"></a>Multi-instance data preparation:</h3><ul>
+<li> the train_seq, test_seq and valid_seq are all in token format (1,2,3,4)</li>
+<li>They need to undergo encoding and transform to the vector format</li>
+</ul>
+<p><strong>sliding window</strong>: instance_len = 40</p>
+<p><strong>Moving stride</strong>: instance_stride = 5</p>
+<p>Based on the experience in WSCNN, The number of instance per bag is [(l-c)/s]+1, where c and s are two hyper-parameters</p>
+<p><strong>instance sequence</strong>: [n*instance_stride, n*instance_stride+instance_len]</p>
+<p>For instance: 1st instance [0,40], 2nd instance [5,45]</p>
+<p>Since the token format is [1,2,3,4] and the encoding method was finished by using np.eye(4). The bag should minus one to ensure the range were in [0,1,2,3].</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># create a new direction for storing the multi-instance data</span></span><br><span class="line">target_dir = data_dir + <span class="string">&#x27;data_for_mil/&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># create a file directory directly by the following command</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(target_dir):</span><br><span class="line">    os.mkdir(target_dir)</span><br><span class="line"></span><br><span class="line"><span class="comment"># cut them into segments</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">embed</span>(<span class="params">sequence, instance_len, instance_stride</span>):</span></span><br><span class="line">    instance_num = <span class="built_in">int</span>((<span class="built_in">len</span>(sequence)-instance_len)/instance_stride) + <span class="number">1</span></span><br><span class="line">    bag = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(instance_num):</span><br><span class="line">        instance = sequence[i*instance_stride:i*instance_stride+instance_len]</span><br><span class="line">        bag.append(instance)</span><br><span class="line">    bag = np.stack(bag).astype(np.int32)</span><br><span class="line">    <span class="comment">## let numerical denoted onehot to vector format</span></span><br><span class="line">    one_hot_bag = np.eye(<span class="number">4</span>)[bag - <span class="number">1</span>].astype(np.float32) </span><br><span class="line">    <span class="keyword">return</span> one_hot_bag</span><br><span class="line"></span><br><span class="line"><span class="comment">## sliding window</span></span><br><span class="line">instance_len = <span class="number">40</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Moving stride</span></span><br><span class="line">instance_stride = <span class="number">5</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># length and strides could be simulated via cross validation</span></span><br><span class="line"></span><br><span class="line">train_bags = []</span><br><span class="line"><span class="keyword">for</span> seq <span class="keyword">in</span> train_seq:</span><br><span class="line">    ont_hot_bag = embed(seq, instance_len, instance_stride)</span><br><span class="line">    train_bags.append(ont_hot_bag)</span><br><span class="line"></span><br><span class="line">train_bags = np.asarray(train_bags)</span><br><span class="line"></span><br><span class="line">valid_bags = []</span><br><span class="line"><span class="keyword">for</span> seq <span class="keyword">in</span> valid_seq:</span><br><span class="line">    ont_hot_bag = embed(seq, instance_len, instance_stride)</span><br><span class="line">    valid_bags.append(ont_hot_bag)</span><br><span class="line"></span><br><span class="line">valid_bags = np.asarray(valid_bags)</span><br><span class="line"></span><br><span class="line">test_bags = []</span><br><span class="line"><span class="keyword">for</span> seq <span class="keyword">in</span> test_seq:</span><br><span class="line">    ont_hot_bag = embed(seq, instance_len, instance_stride)</span><br><span class="line">    test_bags.append(ont_hot_bag)</span><br><span class="line"></span><br><span class="line">test_bags = np.asarray(test_bags)</span><br><span class="line"></span><br><span class="line">np.save(target_dir + <span class="string">&#x27;train_data.npy&#x27;</span>, train_bags)</span><br><span class="line">np.save(target_dir + <span class="string">&#x27;valid_data.npy&#x27;</span>, valid_bags)</span><br><span class="line">np.save(target_dir + <span class="string">&#x27;test_data.npy&#x27;</span>, test_bags)</span><br><span class="line"></span><br><span class="line">np.save(target_dir + <span class="string">&#x27;train_label.npy&#x27;</span>, train_label.reshape(-<span class="number">1</span>, <span class="number">1</span>).astype(np.int32))</span><br><span class="line">np.save(target_dir + <span class="string">&#x27;valid_label.npy&#x27;</span>, valid_label.reshape(-<span class="number">1</span>, <span class="number">1</span>).astype(np.int32))</span><br><span class="line">np.save(target_dir + <span class="string">&#x27;test_label.npy&#x27;</span>, test_label.reshape(-<span class="number">1</span>, <span class="number">1</span>).astype(np.int32))</span><br><span class="line"></span><br><span class="line">print(<span class="string">&quot;tokens successfully transformed to npy format&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="Supplementary"><a href="#Supplementary" class="headerlink" title="Supplementary"></a>Supplementary</h3><p><strong><em>Note 1:</em></strong></p>
+<p>one_hot encoding: <strong>[[0,1,2,3]]</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">np.eye(<span class="number">4</span>)[[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>array([[<span class="number">0.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">1.</span>]])</span><br></pre></td></tr></table></figure>
+<p><strong><em>Note 2:</em></strong></p>
+<p>np.stack (<em>arrays**</em>,** <em>axis=0**</em>,** <em>out=None</em>): </p>
+<p>Join a sequence of arrays along a new axis.</p>
+<p>The <code>axis</code> parameter specifies the index of the new axis in the dimensions of the result. For example, if <code>axis=0</code> it will be the first dimension and if <code>axis=-1</code> it will be the last dimension.</p>
+<blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;arrays = [np.random.randn(<span class="number">3</span>, <span class="number">4</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)]</span><br><span class="line">&gt;&gt;&gt;&gt; np.stack(arrays, axis=<span class="number">0</span>).shape</span><br><span class="line">&gt;(<span class="number">10</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><strong><em>Note3:</em></strong></p>
+<p><code>numpy.append</code>(<em>arr</em>, <em>values</em>, <em>axis=None</em>)</p>
+<p>Append values to the end of an array.</p>
+<blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt;&gt; np.append([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [[<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>], [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]])</span><br><span class="line">&gt;array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, ..., <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>])</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><strong><em>Note4:</em></strong> why nay format </p>
+<p>The . <strong>npy format</strong> is the standard binary file format in NumPy for persisting a single arbitrary NumPy array on disk. The format stores all of the shape and dtype information necessary to reconstruct the array correctly even on another machine with a different architecture.</p>
+<p><a class="link"   href="https://numpy.org/devdocs/reference/generated/numpy.lib.format.html#:~:text=The%20.,machine%20with%20a%20different%20architecture" >numpy api explanation<i class="fas fa-external-link-alt"></i></a>.</p>
+<p><a class="link"   href="https://blog.csdn.net/wfei101/article/details/82077631" >csdn_explanation (chinese)<i class="fas fa-external-link-alt"></i></a></p>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>tutorial</tag>
+        <tag>Multi-instance learning</tag>
       </tags>
   </entry>
 </search>
