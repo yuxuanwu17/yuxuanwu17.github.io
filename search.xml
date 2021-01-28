@@ -1973,6 +1973,179 @@ Heart Not Failed       0.85      0.93      0.89        43
         <tag>conference</tag>
         <tag>deep learning</tag>
         <tag>RNA modification</tag>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Data preparation for multi-instance learning in m6a sequence data</title>
+    <url>/2021/01/28/multi-instance-learning-in-m6a-sequence-data/</url>
+    <content><![CDATA[<p>Sample preparation for the multi-instance learning.</p>
+<p>The whole script was finished by R</p>
+<h3 id="Load-the-necessary-libraries-and-import-the-data"><a href="#Load-the-necessary-libraries-and-import-the-data" class="headerlink" title="Load the necessary libraries and import the data"></a>Load the necessary libraries and import the data</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">library(GenomicRanges)</span><br><span class="line">library(Biostrings)</span><br><span class="line">library(BSgenome.Hsapiens.UCSC.hg19)</span><br><span class="line">library(dplyr)</span><br><span class="line">library(permute)</span><br><span class="line">library(ggplot2)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># whether to use the parallel calculation</span><br><span class="line"># library(doParallel)</span><br><span class="line"># cl &lt;- makePSOCKcluster(5)</span><br><span class="line"># registerDoParallel(cl)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># KSHV，RSV，WNV，ZIKV，hMPV</span><br><span class="line"># HCV, DENV, HIV-1 </span><br><span class="line">knitr::opts_knit$set(root.dir &#x3D; &#39;&#x2F;data&#x2F;Virus_m6A_driver&#39;)</span><br><span class="line">target_gene &lt;- &quot;HIV-1&quot;</span><br><span class="line"></span><br><span class="line">if (!dir.exists(paste0(&#39;&#x2F;home&#x2F;yuxuan&#x2F;FYP&#x2F;Virus_init_codes&#x2F;processed_data&#x2F;&#39;,target_gene)))&#123;</span><br><span class="line">  dir.create(paste0(&#39;&#x2F;home&#x2F;yuxuan&#x2F;FYP&#x2F;Virus_init_codes&#x2F;processed_data&#x2F;&#39;,target_gene))</span><br><span class="line">&#125;</span><br><span class="line">target_dir &lt;- paste0(&#39;&#x2F;home&#x2F;yuxuan&#x2F;FYP&#x2F;Virus_init_codes&#x2F;processed_data&#x2F;&#39;,target_gene,&quot;&#x2F;&quot;)</span><br></pre></td></tr></table></figure>
+<h4 id="Sample-preparation"><a href="#Sample-preparation" class="headerlink" title="Sample preparation:"></a>Sample preparation:</h4><ul>
+<li>In this case, HIV-1 virus would be selected as our target</li>
+</ul>
+<p><strong>Read the pos and neg samples</strong></p>
+<ul>
+<li>It is in Grange format, with standard names, ranges and strands. The other columns are meta-columns, storing some features of data.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pos_dir &lt;- paste0(&#39;&#x2F;data&#x2F;Virus_m6A_driver&#x2F;&#39;,target_gene,&#39;_positive.rds&#39;)</span><br><span class="line">pos_data &lt;- readRDS(pos_dir)</span><br><span class="line">neg_dir &lt;- paste0(&#39;&#x2F;data&#x2F;Virus_m6A_driver&#x2F;&#39;,target_gene,&#39;_negative.rds&#39;)</span><br><span class="line">neg_data &lt;- readRDS(neg_dir)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">head(pos_data)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting@master/image-20210128092240985.42ls9b2xba00.png" alt="image-20210128092240985"></p>
+<hr>
+<h2 id="R-How-to-segment-the-sequence-data-for-multi-instance-learning"><a href="#R-How-to-segment-the-sequence-data-for-multi-instance-learning" class="headerlink" title="R: How to segment the sequence data for multi-instance learning"></a>R: How to segment the sequence data for multi-instance learning</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">summary(width(pos_data))</span><br><span class="line">quantile(width(pos_data), 0.8)</span><br></pre></td></tr></table></figure>
+<p>Min.  1st Qu.   Median    Mean        3rd Qu.    Max.<br> 51          76     101              1537         201         147584  </p>
+<p>80%<br>422</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">summary(width(neg_data))</span><br></pre></td></tr></table></figure>
+<p>   Min. 1st Qu.  Median    Mean  3rd Qu.    Max.<br>      5     146           205       205         264         405 </p>
+<blockquote>
+<p>We can see that the maximum length for the positive data could be 147,584, while the maximum length for the negative sample could be 405, which is far more close</p>
+</blockquote>
+<blockquote>
+<p>The unequal length of the samples could lead to significant bias to the results;</p>
+<p>We therefore should try to cut the positive sequence length to minimize the bias.</p>
+<p>We notice that the 80% sample in this virus have a roughly similar width with the positive data, so in the following sample, I would still insist on this </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># change the seqnames to negative+number (neg1,neg2...)</span><br><span class="line">names(neg_data) &#x3D; paste(&#39;neg&#39;, c(1:length(neg_data)), sep&#x3D;&#39;&#39;)</span><br><span class="line"></span><br><span class="line"># used to set difference to exclude the selected names  </span><br></pre></td></tr></table></figure>
+
+
+<h4 id="Prepare-to-do-the-loop"><a href="#Prepare-to-do-the-loop" class="headerlink" title="Prepare to do the loop"></a>Prepare to do the loop</h4><hr>
+<p><strong>Noted that</strong>:</p>
+<ul>
+<li><p>In order to reduce the information loss in the sequence data. I therefore did not cut the sequence to ensure the equal length of the sequence. </p>
+</li>
+<li><p>But we need to ensure the length between positive and negative sample to be the same.</p>
+</li>
+<li><p>That is the reason I made a lot of effort to do the following loop, to obtain the different positive and negative samples, and their length are matched accordingly.</p>
+</li>
+</ul>
+<h5 id="Prepare-the-processed-positive-data-valid-pos"><a href="#Prepare-the-processed-positive-data-valid-pos" class="headerlink" title="Prepare the processed positive data (valid_pos)"></a>Prepare the processed positive data (valid_pos)</h5><ol>
+<li>Ensure the processed positive data sample are smaller than the maximum length of negative sample</li>
+<li>Sort the value in decreasing order</li>
+</ol>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">valid_pos &lt;- pos_data[width(pos_data) &lt;= <span class="built_in">max</span>(width(neg_data)),]</span><br><span class="line">sorted_valid_pos &lt;- valid_pos[order(width(valid_pos), decreasing=<span class="built_in">T</span>), ]</span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="Prepare-the-processed-negative-data"><a href="#Prepare-the-processed-negative-data" class="headerlink" title="Prepare the processed negative data"></a>Prepare the processed negative data</h5><figure class="highlight r"><table><tr><td class="code"><pre><span class="line">valid_neg &lt;- GRanges()</span><br><span class="line">exclude_names &lt;- <span class="built_in">c</span>() <span class="comment"># (save the already finished data name to this)</span></span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h4 id="Enter-the-for-loop"><a href="#Enter-the-for-loop" class="headerlink" title="Enter the for loop"></a>Enter the for loop</h4><p><strong>Goal:</strong> find the valid negative sample</p>
+<ul>
+<li>Obtain the unique width of sorted valid positive data, and use this as the loop variable ==w== </li>
+<li>Find the temporary positive <strong>(tmp_pos)</strong> and negative samples <strong>(tmp_neg)</strong> based on the selected width ==w== in previous step </li>
+<li>Return the selected number of tmp_pos and tmp_neg (<strong>num_pos/num_neg</strong>)</li>
+</ul>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">unique_width_pos &lt;- unique(width(sorted_valid_pos))</span><br><span class="line"><span class="keyword">for</span> (w <span class="keyword">in</span> unique_width_pos) &#123;</span><br><span class="line">  tmp_pos &lt;- sorted_valid_pos[width(sorted_valid_pos)==w,]</span><br><span class="line">  tmp_neg &lt;- neg_data[width(neg_data)==w,]</span><br><span class="line">  num_pos &lt;- <span class="built_in">length</span>(tmp_pos)</span><br><span class="line">  num_neg &lt;- <span class="built_in">length</span>(tmp_neg)</span><br><span class="line">  <span class="comment">## ... (not_finished)</span></span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h4 id="Two-situation-after-the-selected-temporary-positive-and-negative-sample"><a href="#Two-situation-after-the-selected-temporary-positive-and-negative-sample" class="headerlink" title="Two situation after the selected temporary positive and negative sample"></a>Two situation after the selected temporary positive and negative sample</h4><ol>
+<li><strong>Temporary negative sample &gt;&gt; tmp_pos (negative sample size is larger, resize the negative sample directly) (neg&gt;&gt;pos)</strong></li>
+</ol>
+<ul>
+<li>Return the names of selected temporary negative sample (neg1, neg2…)</li>
+<li>Use the returned name to compare with the names in exclude names </li>
+<li>Sample the names selected and return the picked names based on the number of temporary samples</li>
+<li>Add the picked names to the “exclude names”</li>
+<li>The next for loop is simply to extract the picked name sample and append to the final valid_neg sample</li>
+</ul>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (num_neg &gt;= num_pos) &#123;</span><br><span class="line">  valid_names &lt;- <span class="built_in">names</span>(tmp_neg)</span><br><span class="line">  valid_names &lt;- setdiff(valid_names, exclude_names)</span><br><span class="line">  picked_names &lt;- sample(valid_names, num_pos)</span><br><span class="line">  exclude_names &lt;- <span class="built_in">c</span>(exclude_names, picked_names)</span><br><span class="line">  <span class="keyword">for</span> (n <span class="keyword">in</span> picked_names) &#123;</span><br><span class="line">    valid_neg &lt;- append(valid_neg, tmp_neg[<span class="built_in">names</span>(tmp_neg)==n,])</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+
+<ol start="2">
+<li><strong>pos&gt;&gt;neg</strong><ul>
+<li>We have to increase the number of negative data.</li>
+<li>The negative data could be obtained via cutting other longer sequence</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>Append all the current temporary negative sample to the final valid negative sample</li>
+<li>Add to the exclude names, to update the exclude_names variable</li>
+<li>Find the number of sample difference between the tmp_pos &amp; tmp_neg and assign to num_res</li>
+<li>Find the original negative sample ahead (not tmp_neg), with the width larger than in this loop ==w== </li>
+<li>Same with the previous step, check whether the name is in the exclude names and select the picked names and add to the exclude names</li>
+<li><strong>the most important concepts are stated as follows (a for loop in picked names)</strong>:<ul>
+<li>I need to find the longer negative sequence to cut down segments and attached to the temporary negative samples</li>
+<li>Find the matched neg_data from the picked names called tmp_gr </li>
+<li>Calculate the width difference (width_diff) between the tmp_gr from original he neg_data and ==w== in the loop.</li>
+<li>Use sample function to randomly select a point, and consider this as the start and remove part of the sequence in the longer sequence</li>
+<li>Similarly, to minimize the influence, we would also cut another part from the behind.</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  &#125;else &#123;</span><br><span class="line">    valid_neg &lt;- append(valid_neg, tmp_neg)</span><br><span class="line">    exclude_names &lt;- c(exclude_names, names(tmp_neg))</span><br><span class="line">    num_res &lt;- num_pos - num_neg</span><br><span class="line">    valid_names &lt;- names(neg_data[width(neg_data) &gt; w,])</span><br><span class="line">    print(valid_names)</span><br><span class="line">    valid_names &lt;- setdiff(valid_names, exclude_names)</span><br><span class="line">    picked_names &lt;- sample(valid_names, num_res)</span><br><span class="line">    exclude_names &lt;- c(exclude_names, picked_names)</span><br><span class="line">    for (n in picked_names) &#123;</span><br><span class="line">      tmp_gr &lt;- neg_data[names(neg_data) &#x3D;&#x3D; n, ]</span><br><span class="line">      width_diff &lt;- width(tmp_gr) - w</span><br><span class="line">      start_remove &lt;- sample(c(1:width_diff), 1)</span><br><span class="line">      tmp_gr &lt;- resize(tmp_gr, width(tmp_gr) - start_remove, fix&#x3D;&#39;start&#39;)</span><br><span class="line">      tmp_gr &lt;- resize(tmp_gr, w, fix&#x3D;&#39;end&#39;)</span><br><span class="line">      names(tmp_gr) &lt;- n</span><br><span class="line">      valid_neg &lt;- append(valid_neg, tmp_gr)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>For now we finished the preparation of valid negative sample </p>
+<hr>
+<h3 id="Assign-the-labels-and-check-the-results"><a href="#Assign-the-labels-and-check-the-results" class="headerlink" title="Assign the labels and check the results"></a>Assign the labels and check the results</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pos_df &lt;- data.frame(&#39;width&#39;&#x3D;width(valid_pos), </span><br><span class="line">                     &#39;label&#39;&#x3D;rep(T, length(valid_pos)))</span><br><span class="line">summary(pos_df)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">neg_df &lt;- data.frame(&#39;width&#39;&#x3D;width(valid_neg), </span><br><span class="line">                     &#39;label&#39;&#x3D;rep(F, length(valid_neg)))</span><br><span class="line">summary(neg_df)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><figcaption><span>echo</span></figcaption><table><tr><td class="code"><pre><span class="line">ggplot(rbind(pos_df, neg_df), aes(x&#x3D;(width), color&#x3D;label, fill&#x3D;label)) +</span><br><span class="line">  geom_histogram(aes(y&#x3D;..density..), color&#x3D;&#39;black&#39;, fill&#x3D;&#39;white&#39;, bins&#x3D;30) +</span><br><span class="line">  geom_density(alpha&#x3D;0.4) + labs(x&#x3D;&#39;Peak Width&#39;, y&#x3D;&#39;Density&#39;) + ggtitle(&#39;Peak Width Distribution for 5hmC data&#39;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting@master/image-20210128140706795.6ol0ajyw9640.png" alt="image-20210128140706795"></p>
+<p>The correct way here is TRUE and False sample should be the same, and we can see the distribution of sample length</p>
+<h3 id="Save-the-data"><a href="#Save-the-data" class="headerlink" title="Save the data"></a>Save the data</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">saveRDS(valid_pos, paste(target_dir, &#39;picked_pos_gr.rds&#39;, sep&#x3D;&#39;&#39;))</span><br><span class="line">saveRDS(valid_neg, paste(target_dir, &#39;picked_neg_gr.rds&#39;, sep&#x3D;&#39;&#39;))</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pos_data &lt;- readRDS(paste(target_dir, &#39;picked_pos_gr.rds&#39;, sep&#x3D;&#39;&#39;))</span><br><span class="line">neg_data &lt;- readRDS(paste(target_dir, &#39;picked_neg_gr.rds&#39;, sep&#x3D;&#39;&#39;))</span><br><span class="line">pos_data$label &#x3D; rep(T, length(pos_data))</span><br><span class="line">neg_data$label &#x3D; rep(F, length(pos_data))</span><br></pre></td></tr></table></figure>
+<h3 id="Split-the-data-8-1-1"><a href="#Split-the-data-8-1-1" class="headerlink" title="Split the data (8:1:1)"></a>Split the data (8:1:1)</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pos_data &lt;- pos_data[order(width(pos_data)),]</span><br><span class="line">neg_data &lt;- neg_data[order(width(neg_data)),]</span><br><span class="line">split_idx &lt;- sample(1:3, size&#x3D;length(pos_data), prob&#x3D;c(0.8, 0.1, 0.1), replace&#x3D;T)</span><br><span class="line">train_pos &lt;- pos_data[split_idx&#x3D;&#x3D;1,]</span><br><span class="line">train_neg &lt;- neg_data[split_idx&#x3D;&#x3D;1,]</span><br><span class="line">valid_pos &lt;- pos_data[split_idx&#x3D;&#x3D;2,]</span><br><span class="line">valid_neg &lt;- neg_data[split_idx&#x3D;&#x3D;2,]</span><br><span class="line">test_pos &lt;- pos_data[split_idx&#x3D;&#x3D;3,]</span><br><span class="line">test_neg &lt;- neg_data[split_idx&#x3D;&#x3D;3,]</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">train_data &lt;- append(train_pos, train_neg)</span><br><span class="line">valid_data &lt;- append(valid_pos, valid_neg)</span><br><span class="line">test_data &lt;- append(test_pos, test_neg)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">saveRDS(train_data, paste(target_dir, &#39;train_data.rds&#39;, sep&#x3D;&#39;&#39;))</span><br><span class="line">saveRDS(valid_data, paste(target_dir, &#39;valid_data.rds&#39;, sep&#x3D;&#39;&#39;))</span><br><span class="line">saveRDS(test_data, paste(target_dir, &#39;test_data.rds&#39;, sep&#x3D;&#39;&#39;))</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">train_data &lt;- readRDS(paste(target_dir, &#39;train_data.rds&#39;, sep&#x3D;&#39;&#39;))</span><br><span class="line">valid_data &lt;- readRDS(paste(target_dir, &#39;valid_data.rds&#39;, sep&#x3D;&#39;&#39;))</span><br><span class="line">test_data &lt;- readRDS(paste(target_dir, &#39;test_data.rds&#39;, sep&#x3D;&#39;&#39;))</span><br></pre></td></tr></table></figure>
+<h3 id="String-to-token-function-to-transform-the-AGCT-to-token-format-1-2-3-4"><a href="#String-to-token-function-to-transform-the-AGCT-to-token-format-1-2-3-4" class="headerlink" title="String to token function to transform the AGCT to token format (1,2,3,4)"></a>String to token function to transform the AGCT to token format (1,2,3,4)</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">str2token &lt;- function(str_sequence) &#123;</span><br><span class="line">  splitted_seq &lt;- strsplit(str_sequence, &#39;&#39;)</span><br><span class="line">  token_seq &lt;- vector(mode&#x3D;&#39;list&#39;, length&#x3D;length(splitted_seq))</span><br><span class="line">  </span><br><span class="line">  for (idx in c(1:length(splitted_seq)))&#123;</span><br><span class="line">    token_seq[idx] &#x3D; list(as.integer(unlist(splitted_seq[idx]) &#x3D;&#x3D; &#39;A&#39;) +</span><br><span class="line">      2 * as.integer(unlist(splitted_seq[idx]) &#x3D;&#x3D; &#39;C&#39;) +</span><br><span class="line">      3 * as.integer(unlist(splitted_seq[idx]) &#x3D;&#x3D; &#39;G&#39;) +</span><br><span class="line">      4 * as.integer(unlist(splitted_seq[idx]) &#x3D;&#x3D; &#39;U&#39;))</span><br><span class="line">  &#125;</span><br><span class="line">  return(token_seq)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Transform-the-Grange-format-to-the-sequence-format"><a href="#Transform-the-Grange-format-to-the-sequence-format" class="headerlink" title="Transform the Grange format to the sequence format"></a>Transform the Grange format to the sequence format</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">train_label &lt;- train_data$label &#x3D;&#x3D; T</span><br><span class="line">train_seq &lt;- RNAStringSet(DNAStringSet(Views(Hsapiens, train_data)))</span><br><span class="line">train_seq &lt;- as.character(train_seq)</span><br><span class="line">train_seq &lt;- str2token(train_seq)</span><br><span class="line">train_shuffle_idx &lt;- shuffle(length(train_label))</span><br><span class="line">train_seq &lt;- train_seq[train_shuffle_idx]</span><br><span class="line">train_label &lt;- train_label[train_shuffle_idx]</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">valid_label &lt;- valid_data$label &#x3D;&#x3D; T</span><br><span class="line">valid_seq &lt;- RNAStringSet(DNAStringSet(Views(Hsapiens, valid_data)))</span><br><span class="line">valid_seq &lt;- as.character(valid_seq)</span><br><span class="line">valid_seq &lt;- str2token(valid_seq)</span><br><span class="line">valid_shuffle_idx &lt;- shuffle(length(valid_label))</span><br><span class="line">valid_seq &lt;- valid_seq[valid_shuffle_idx]</span><br><span class="line">valid_label &lt;- valid_label[valid_shuffle_idx]</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">## str2token transfer the character to numerical format</span><br><span class="line">test_label &lt;- test_data$label &#x3D;&#x3D; T</span><br><span class="line">test_seq &lt;- RNAStringSet(DNAStringSet(Views(Hsapiens, test_data)))</span><br><span class="line">test_seq &lt;- as.character(test_seq)</span><br><span class="line">test_seq &lt;- str2token(test_seq)</span><br><span class="line">test_shuffle_idx &lt;- shuffle(length(test_label))</span><br><span class="line">test_seq &lt;- test_seq[test_shuffle_idx]</span><br><span class="line">test_label &lt;- test_label[test_shuffle_idx]</span><br></pre></td></tr></table></figure>
+<h3 id="Save-with-the-rds-format"><a href="#Save-with-the-rds-format" class="headerlink" title="Save with the rds format"></a>Save with the rds format</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">saveRDS(train_seq, paste(target_dir, &#39;train_seq.rds&#39;, sep&#x3D;&#39;&#39;))</span><br><span class="line">saveRDS(valid_seq, paste(target_dir, &#39;valid_seq.rds&#39;, sep&#x3D;&#39;&#39;))</span><br><span class="line">saveRDS(test_seq, paste(target_dir, &#39;test_seq.rds&#39;, sep&#x3D;&#39;&#39;))</span><br><span class="line"></span><br><span class="line">saveRDS(train_label, paste(target_dir, &#39;train_label.rds&#39;, sep&#x3D;&#39;&#39;))</span><br><span class="line">saveRDS(valid_label, paste(target_dir, &#39;valid_label.rds&#39;, sep&#x3D;&#39;&#39;))</span><br><span class="line">saveRDS(test_label, paste(target_dir, &#39;test_label.rds&#39;, sep&#x3D;&#39;&#39;))</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Some-functions"><a href="#Some-functions" class="headerlink" title="Some functions:"></a>Some functions:</h3><p>- <code>Views()</code>: for extracting sequences underneath GRanges on <code>BSgenome</code> object.</p>
+<p>- <code>DNAStringSet()</code>: for the conversion of the BSgenome views into a set of DNA strings so that we could calculate their sequence content.</p>
+<p>- <code>letterFrequency()</code>: for the calculation of the proportion / frequency of nucleotides within XStringSet.</p>
+<p>- <code>setdiff(x,y)</code>: find the different element in vector x and vector y, but they could only retain the vector in X </p>
+<p>- <code>sample(x, n)</code>: X is the whole samples, and n is the number of sample to be selected </p>
+<p>- <code>resize(x, width, fix=&quot;start&quot;, use.names=TRUE, ...)</code>: the width of the resized or flanking regions; fix= is an anchor </p>
+]]></content>
+      <categories>
+        <category>FYP</category>
+      </categories>
+      <tags>
+        <tag>R</tag>
+        <tag>RNA modification</tag>
+        <tag>Multi-instance learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Meta analysis for knockdown of METTL3 or METTL14 affecting N6-methyladenosine methylation level</title>
+    <url>/2021/01/27/meta-analysis/</url>
+    <content><![CDATA[<h1 id="Meta-analysis-for-knockdown-of-METTL3-or-METTL14-affecting-N6-methyladenosine-methylation-level"><a href="#Meta-analysis-for-knockdown-of-METTL3-or-METTL14-affecting-N6-methyladenosine-methylation-level" class="headerlink" title="Meta-analysis for knockdown of METTL3 or METTL14 affecting N6-methyladenosine methylation level"></a>Meta-analysis for knockdown of METTL3 or METTL14 affecting N6-methyladenosine methylation level</h1><p>The full transcript could be accessed from <a class="link"   href="https://github.com/yuxuanwu17/meta_analysis/blob/master/Full_transcript/Meta_Analysis.docx" >https://github.com/yuxuanwu17/meta_analysis/blob/master/Full_transcript/Meta_Analysis.docx<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>N6-methyladenosine (m6A) is the most prevalent internal chemical modification present in multiple eukaryotic mRNAs, which is dynamically installed by methyltransferases (“writers”) and removed by demethylases (“erasers”). METTL3 and METTL14 are two typical m6A writers and several studies have found that knockdown or depletion of METTL3 and METTL14 genes influence the methylation level. A meta-analysis study was performed to assess the strength and quality of current evidence regarding to it and assess the how the knockdown of METTL3 or METTL14 affect the mRNA methylation level. Data was collected and classified into groups. Metafor, a R package was used to generate the Random-effects meta-analysis model and calculate the risk ratios (RRs) and 95% CIs. Since the heterogeneity of the overall data is extremely high (I2 &gt; 99%), specific samples were excluded to minimize the downgrade the heterogeneity to acceptable level. Three and two published trails for METTL3 and METTLE14 samples, respectively, were eligible for review and analysis due to the acceptable low heterogeneity of their combination (METTL3 (Q = 12.85, I2 = 37.8%) and METTL14 (Q = 45.48, I2 = 82.9%) ). The positive relationship between knockdown of METTL3/METTL14 and methylation level was successfully verified and the difference among cell lines and gene types was identified.</p>
+<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage:"></a>Usage:</h2><p>The full script was in final file. But due to the size limitation, I could not upload the data set, please email me if you need the data set</p>
+<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><h3 id="PRISMA-flowchart"><a href="#PRISMA-flowchart" class="headerlink" title="PRISMA flowchart"></a>PRISMA flowchart</h3><p>For this systematic review and meta-analysis, our discovery data cohort came from various databases including Cochrane library, EMBASE, and PubMed/MEDLINE from inception to Feb 20, 2020. Seventeen datasets of epitranscriptome-wide homo sapiens m6A sites under different cell lines screened by six different high-resolution profiling approaches were collected. Missing and ambiguous data were further ensured and validated by the original researchers (Figure 1). </p>
+<p><img src="https://github.com/yuxuanwu17/meta_analysis/blob/master/plot/prisma" alt="Alt text"></p>
+<p>Figure 1: PRISMA flowchart for inclusion or exclusion criteria in this meta-analysis We firstly retrieved our data (n=1555) from both GEO and GSA database. In this analysis, the primary focus was on Homo sapiens, we then exclude other unrelated species, like Mus musculus and Rattus norvegicus, our sample then restricted to 242. When explored in the full-text articles, we did not consider genes other than METTL3 or METTL14, therefore, genes like FTO, ALKBH5 and WTAP were excluded, and sample number was retained to 28. Owing to the fact that some experiments shared the same control group, we then eliminated the duplication and 17 samples remained. The remained samples were used to conduct the whole meta-analysis. </p>
+<hr>
+<h3 id="Forest-plot-of-the-basic-model"><a href="#Forest-plot-of-the-basic-model" class="headerlink" title="Forest plot of the basic model"></a>Forest plot of the basic model</h3><p><img src="https://github.com/yuxuanwu17/meta_analysis/blob/master/figure/WechatIMG26.jpeg" alt="Alt text"></p>
+<p>Figure 2. Forest plot of the basic model. This is a Random Effect model which accommodates differences in study sample. Q statistic is based on the chi-square distribution, most commonly testing heterogeneity. I2 index is the total variability in a set of effect sizes due to true heterogeneity. Log Risk Ratio is a measurement of effect size. </p>
+<hr>
+<h3 id="Baujat-plot-in-the-identification-of-heterogenity"><a href="#Baujat-plot-in-the-identification-of-heterogenity" class="headerlink" title="Baujat plot in the identification of heterogenity"></a>Baujat plot in the identification of heterogenity</h3><p><img src="https://github.com/yuxuanwu17/meta_analysis/blob/master/figure/WechatIMG30.png" alt="Alt text"></p>
+<p>Figure 3. The Baujat plot to identify studies contributing to heterogeneity. The study ID numbers represent eight studies, respectively.</p>
+<p>As shown in Figure 3, Baujat plot generated from the METTL3 study datasets identifies the influence on the overall result and the squared Pearson Residual of each study. As the 8th study is located in the top right quadrant, it has both a greater impact on the whole result and contributes most to heterogeneity; while other studies are near to the origin. Therefore, we keep all studies but the one far away on the top right. Similarly, we excluded the 4th study as it lies far top right in the Baujat plot of METTL14</p>
+<hr>
+<h3 id="Forest-plot-of-moderator-analysis"><a href="#Forest-plot-of-moderator-analysis" class="headerlink" title="Forest plot of moderator analysis"></a>Forest plot of moderator analysis</h3><p><img src="https://github.com/yuxuanwu17/meta_analysis/blob/master/figure/WechatIMG31.jpeg" alt="Alt text"></p>
+<p>Figure 4. Forest plot of moderator analysis.</p>
+<p>As shown in Figure 4, we can still conclude that there is a highly positive relationship (Log RR 5.66, 95% CI 5.31-6.02; p-value = 0.12) between the m6A methylation level and the knockdown of the METTL3 gene, although the p-value increases from &lt;0.01 to 0.12 meaning less confidence. The Log RR is adjusted from 6.93 to 5.66. The CI narrows down greatly and CI of each subgroup overlaps more than the basic model, reflecting less between-study variability. As for the METTL14 model, the positive relationship (Log RR 5.39, 95% CI 4.97-5.84; p-value &lt; 0.01) between the m6A methylation level and the absence of METTL14 gene shows similar Log RR with that of METTL3 meta-regression model. Importantly, we found no large heterogeneity or inconsistency of METTL 3 (Q(df = 8) = 12.85, I2 = 37.8%, tau2 = 0.0035) and METTL14 (Q(df = 9) = 45.48, I2= 82.9%, tau2 = 0.0140) among the studies. </p>
+<hr>
+<h3 id="Funnel-plot-to-investigate-the-possible-publication-bias"><a href="#Funnel-plot-to-investigate-the-possible-publication-bias" class="headerlink" title="Funnel plot to investigate the possible publication bias"></a>Funnel plot to investigate the possible publication bias</h3><p><img src="https://github.com/yuxuanwu17/meta_analysis/blob/master/figure/WechatIMG32.png" alt="Alt text"></p>
+<p>Figure 5. The Funnel plot.</p>
+<p>Publication bias, occurring in the selective publication of studies based on magnitude and direction of findings, poses a particular threat to the validity of meta-analysis. Here, we investigate possible publication bias by visual inspection of Funnel plots. If the effect size versus standard is broadly symmetrical, the publication bias is absent. As shown in Figure 5., the Funnel plot on the left shows the points of nine studies of METTL3 knockdown evenly fall on both sides of the summary effect size and the standard error is approximately 0.075 on average. However, the vertical line representing the summary of all the studies of METTL3 knockdown lies on the right of zero, around 1.73, suggests that there is a positive effect of publication bias on the summary effect size. As for the Funnel plot on the right, points of ten studies of METTL14 knockdown evenly fall on both sides of the summary effect size. The standard error is approximately 0.050 on average and the vertical line lies on the origin meaning no publication bias on the summary effect size.   </p>
+]]></content>
+      <categories>
+        <category>publications</category>
+      </categories>
+      <tags>
+        <tag>R</tag>
+        <tag>RNA modification</tag>
+        <tag>meta-analysis</tag>
       </tags>
   </entry>
 </search>
