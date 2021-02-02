@@ -2058,7 +2058,22 @@ Heart Not Failed       0.85      0.93      0.89        43
   <entry>
     <title>python 相关的知识和笔记链接</title>
     <url>/2021/01/28/python-%E7%9B%B8%E5%85%B3%E7%9A%84%E7%9F%A5%E8%AF%86%E5%92%8C%E7%AC%94%E8%AE%B0%E9%93%BE%E6%8E%A5/</url>
-    <content><![CDATA[<p>tf 里面的training=True</p>
+    <content><![CDATA[<p>Python learning: 入门大全</p>
+<p><a class="link"   href="https://apachecn.gitee.io/ailearning/#/" >https://apachecn.gitee.io/ailearning/#/<i class="fas fa-external-link-alt"></i></a></p>
+<h4 id="接受不定参数"><a href="#接受不定参数" class="headerlink" title="接受不定参数"></a>接受不定参数</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">x, *args</span>):</span></span><br><span class="line">    total = x</span><br><span class="line">    <span class="keyword">for</span> arg <span class="keyword">in</span> args:</span><br><span class="line">        total += arg</span><br><span class="line">    <span class="keyword">return</span> total</span><br></pre></td></tr></table></figure>
+<p>这里，<code>*args</code> 表示参数数目不定，可以看成一个元组，把第一个参数后面的参数当作元组中的元素。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(add(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>))</span><br><span class="line">print(add(<span class="number">1</span>, <span class="number">2</span>))</span><br><span class="line">----</span><br><span class="line">&gt;&gt;&gt;<span class="number">10</span></span><br><span class="line">&gt;&gt;&gt;<span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">x, **kwargs</span>):</span></span><br><span class="line">    total = x</span><br><span class="line">    <span class="keyword">for</span> arg, value <span class="keyword">in</span> kwargs.items():</span><br><span class="line">        <span class="built_in">print</span> <span class="string">&quot;adding &quot;</span>, arg</span><br><span class="line">        total += value</span><br><span class="line">    <span class="keyword">return</span> total</span><br></pre></td></tr></table></figure>
+<p>这里， <code>**kwargs</code> 表示参数数目不定，相当于一个字典，关键词和值对应于键值对。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span> add(<span class="number">10</span>, y=<span class="number">11</span>, z=<span class="number">12</span>, w=<span class="number">13</span>)</span><br><span class="line">----</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>adding  y</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>adding  z</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>adding  w</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">46</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">*args, **kwargs</span>):</span></span><br><span class="line">    <span class="built_in">print</span> args, kwargs</span><br><span class="line"></span><br><span class="line">foo(<span class="number">2</span>, <span class="number">3</span>, x=<span class="string">&#x27;bar&#x27;</span>, z=<span class="number">10</span>)</span><br><span class="line">-----</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>(<span class="number">2</span>, <span class="number">3</span>) &#123;<span class="string">&#x27;x&#x27;</span>: <span class="string">&#x27;bar&#x27;</span>, <span class="string">&#x27;z&#x27;</span>: <span class="number">10</span>&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>tf 里面的training=True</p>
 <p>Some neural network layers behave differently during training and inference, for example Dropout and BatchNormalization layers. For example</p>
 <ul>
 <li>During training, dropout will randomly drop out units and correspondingly scale up activations of the remaining units.</li>
