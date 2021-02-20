@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Welcome to my personal blogs">
+    <meta name="author" content="Yuxuan Wu">
+    
+    <title>
+        
+            (CSE201) Advanced Databases |
+        
+        Yuxuan Wu
+    </title>
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep coding, Keep hungry."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.3.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days age","week":"%s weeks age","month":"%s months age","year":"%s years age"};
+  </script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Yuxuan Wu
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content normal-code-theme">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">(CSE201) Advanced Databases</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Yuxuan Wu</span>
+                        <span class="level">Lv3</span>
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i> 2021-02-19 19:00:03
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Databases/">Databases</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/tags/MySQL/">MySQL</a>
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/notes/">notes</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i> <span>4.7k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i> <span>29 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h2><h3 id="Building-a-Database-High-Level"><a href="#Building-a-Database-High-Level" class="headerlink" title="Building a Database: High-Level"></a>Building a Database: High-Level</h3><ul>
+<li><p>Design conceptual schema using a data model.</p>
+<ul>
+<li> Design relational schema, e.g., student(sid, name)</li>
+</ul>
+</li>
+<li><p>Data Definition Language <strong>(DDL)</strong></p>
+<ul>
+<li>CREATE TABLE student (sid char(8) primary key, name varchar(32))</li>
+</ul>
+</li>
+<li><p>Data Manipulation Language <strong>(DML)</strong></p>
+<ul>
+<li>INSERT INTO student VALUES (‘00112233’, ‘Paul’)</li>
+</ul>
+</li>
+</ul>
+<h3 id="Access-Time"><a href="#Access-Time" class="headerlink" title="Access Time"></a>Access Time</h3><p>Access time is the time it takes from when a read or write a block request is issued to when data transfer begins (or ends).</p>
+<p><strong>Access time = Seek time + Rotational latency + (Transfer time)</strong></p>
+<ul>
+<li><p>Seek time – time it takes to position the arm over the right track.</p>
+<ul>
+<li>Average seek time is about <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.781ex" xmlns="http://www.w3.org/2000/svg" width="1.795ex" height="2.737ex" role="img" focusable="false" viewBox="0 -864.9 793.6 1209.9"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mfrac"><g data-mml-node="mn" transform="translate(220, 394) scale(0.707)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mn" transform="translate(220, -345) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g><rect width="553.6" height="60" x="120" y="220"></rect></g></g></g></svg></mjx-container> of the worst case seek time (e.g., from the innermost to the outermost)</li>
+</ul>
+</li>
+<li><p>Rotational latency – time it takes for the sector to be accessed to appear under the head.</p>
+<ul>
+<li>Average latency is 1/2 of the worst case latency (e.g., nearly 360 degree rotation)</li>
+</ul>
+</li>
+<li><p>Transfer time – time to actually read/write the data in the sector once the head is positioned, that is, the time for the disk to rotate over the sectors.</p>
+<ul>
+<li> In most cases, transfer time is much less than the seek time and rotational latency.</li>
+</ul>
+</li>
+</ul>
+<h3 id="Disk-Block"><a href="#Disk-Block" class="headerlink" title="Disk Block"></a>Disk Block</h3><ul>
+<li><p>A contiguous sequence of sectors from a single track</p>
+</li>
+<li><p>Data is transferred between disk and main memory in blocks</p>
+</li>
+<li><p>Sizes range from 512 bytes to several kilobytes</p>
+</li>
+</ul>
+<h3 id="Organization-of-Records-in-Files"><a href="#Organization-of-Records-in-Files" class="headerlink" title="Organization of Records in Files"></a>Organization of Records in Files</h3><p><strong>Heap</strong> – a record can be placed anywhere in the file where there is space</p>
+<p><strong>Sequential</strong> – store records in sequential order, based on the value of the search key of each record</p>
+<p><strong>Hashing</strong> – a hash function computed on some attribute of each record; the result specifies in which block of the file the record should be placed</p>
+<blockquote>
+<p>Records of each relation may be stored in a separate file. In a multi-table clustering file organization records of several different relations can be stored in the same file </p>
+</blockquote>
+<p>Motivation: store related records on the same block to minimize I/O</p>
+<p>![image-20210219194326826](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210219194326826.png)</p>
+<h2 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><p>Indexing mechanisms used to speed up access to the desired data.</p>
+<p><strong>Indexing</strong> is a <strong>data structure technique</strong> which allows you to <strong>quickly retrieve records from a database file</strong>. </p>
+<p>An Index is a small table having only two columns. </p>
+<ul>
+<li>The first column comprises a copy of the primary or candidate key of a table. </li>
+<li>Its second column contains a set of pointers for holding the address of the disk block where that specific key value stored.</li>
+</ul>
+<h3 id="Types-of-Indexing"><a href="#Types-of-Indexing" class="headerlink" title="Types of Indexing"></a>Types of Indexing</h3><p><img src="https://www.guru99.com/images/1/070119_0833_IndexinginD1.png" alt="img"></p>
+<h3 id="The-Structure-of-Index"><a href="#The-Structure-of-Index" class="headerlink" title="The Structure of Index"></a>The Structure of Index</h3><p><strong>Data file:</strong> collection of blocks holding records on disk</p>
+<p><strong>Index file:</strong> a data structure allowing the DBMS to find particular records in a data file more efficiently.</p>
+<ul>
+<li><p>An index file consists of records (called index entries) of the form:</p>
+<ul>
+<li><strong>Search-key - pointer</strong></li>
+</ul>
+</li>
+<li><p><strong>Search Key:</strong> one or set of attributes used to look up records in a file.</p>
+</li>
+</ul>
+<p><strong>Relationship</strong>: a <strong>search key K</strong> in the index file is associated with a <strong>pointer to a data-file record</strong> that has search key K.</p>
+<h3 id="Index-Techniques"><a href="#Index-Techniques" class="headerlink" title="Index Techniques"></a>Index Techniques</h3><ul>
+<li>Depending on the organisation of index file, an index can be:<ul>
+<li>an <strong>ordered Index</strong> where index entries <strong>are sorted on the search key value.</strong> (Primary indexing)</li>
+<li>a <strong>hashing Index</strong> where <strong>hashing technique</strong> is employed to organize index entries (Secondary indexing)</li>
+</ul>
+</li>
+</ul>
+<h4 id="Ordered-Indices-Primary-index"><a href="#Ordered-Indices-Primary-index" class="headerlink" title="Ordered Indices (Primary index)"></a>Ordered Indices (Primary index)</h4><ul>
+<li><p><strong>Dense index</strong>: index record appears for <strong>every search-key</strong> value in the file.</p>
+</li>
+<li><p><strong>Sparse Index:</strong> contains index records for <strong>only some</strong> search-key values.</p>
+</li>
+</ul>
+<h4 id="Dense-Index-vs-Sparse-Index"><a href="#Dense-Index-vs-Sparse-Index" class="headerlink" title="Dense Index vs. Sparse Index"></a>Dense Index vs. Sparse Index</h4><ul>
+<li><p>Index size</p>
+<ul>
+<li>Sparse index is smaller</li>
+</ul>
+</li>
+<li><p>Requirement on data file</p>
+<ul>
+<li>The data file must be sequential file</li>
+</ul>
+</li>
+<li><p>Lookup</p>
+<ul>
+<li>Sparse index is smaller and may fit in memory</li>
+<li>Dense index can directly tell if a record exists.</li>
+</ul>
+</li>
+<li><p>Update</p>
+<ul>
+<li>Sparse index requires less space and maintenance for insertion and deletion.</li>
+</ul>
+</li>
+<li><p>Good tradeoff: sparse index with an index entry for every block in file, corresponding to least search-keyvalue in the block.</p>
+</li>
+</ul>
+<h4 id="Dense-index-files"><a href="#Dense-index-files" class="headerlink" title="Dense index files"></a>Dense index files</h4><p>![image-20210219210300684](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210219210300684.png)</p>
+<h4 id="Sparse-index-files"><a href="#Sparse-index-files" class="headerlink" title="Sparse index files"></a>Sparse index files</h4><p>![image-20210219210345875](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210219210345875.png)</p>
+<h4 id="An-ordered-index-can-also-be"><a href="#An-ordered-index-can-also-be" class="headerlink" title="An ordered index can also be:"></a>An ordered index can also be:</h4><ul>
+<li><p><strong>Primary index:</strong> in a sequentially ordered file, the index whose search key specifies the sequential order of the file.</p>
+<ul>
+<li>Also called <strong>clustering index.</strong> The search key of a primary index is usually but not necessarily the primary key.</li>
+<li> Can be sparse</li>
+</ul>
+</li>
+<li><p><strong>Secondary index:</strong> an index whose search key specifies an order different from the sequential order of the file.</p>
+<ul>
+<li><p>Also called non-clustering index.</p>
+</li>
+<li><p>Can not be sparse</p>
+</li>
+</ul>
+</li>
+<li><p>Index-sequential file: ordered sequential file with a primary index.</p>
+</li>
+</ul>
+<p>![image-20210219211429706](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210219211429706.png)</p>
+<ul>
+<li>Index record points to a bucket that contains pointers to all the actual records with that particular search-key value.</li>
+<li>Secondary indices have to be dense</li>
+</ul>
+<h4 id="Primary-and-Secondary-Indices"><a href="#Primary-and-Secondary-Indices" class="headerlink" title="Primary and Secondary Indices"></a>Primary and Secondary Indices</h4><ul>
+<li><p>Indices offer substantial benefits when searching for records.</p>
+</li>
+<li><p>But: updating indices imposes overhead on database modification - when a file is modified, every index on the file must be updated,</p>
+</li>
+<li><p>Sequential scan using primary index is efficient</p>
+</li>
+<li><p>But a sequential scan using a secondary index is expensive</p>
+<ul>
+<li>Each record access may fetch a new block from disk    </li>
+<li>Block fetch requires about 5 to 10 milliseconds; versus about 100 nanoseconds for memory access</li>
+</ul>
+</li>
+</ul>
+<h4 id="Clustering-Index"><a href="#Clustering-Index" class="headerlink" title="Clustering Index"></a>Clustering Index</h4><p>In a clustered index, records themselves are stored in the Index and not pointers. Sometimes the Index is created on non-primary key columns which might not be unique for each record. In such a situation, you can group two or more columns to get the unique values and create an index which is called clustered Index. This also helps you to identify the record faster.</p>
+<p><strong>Example:</strong></p>
+<p>Let’s assume that a company recruited many employees in various departments. In this case, clustering indexing in DBMS should be created for all employees who belong to the same dept.</p>
+<p>It is considered in a single cluster, and index points point to the cluster as a whole. Here, Department _no is a non-unique key.</p>
+<h4 id="What-is-Multilevel-Index"><a href="#What-is-Multilevel-Index" class="headerlink" title="What is Multilevel Index?"></a>What is Multilevel Index?</h4><p>Multilevel Indexing in Database is created when a primary index does not fit in memory. In this type of indexing method, you can reduce the number of disk accesses to short any record and kept on a disk as a sequential file and create a sparse base on that file.</p>
+<p><a target="_blank" rel="noopener" href="https://www.guru99.com/images/1/070119_0833_IndexinginD5.png"><img src="https://www.guru99.com/images/1/070119_0833_IndexinginD5.png" alt="img"></a></p>
+<h4 id="B-Tree-Index"><a href="#B-Tree-Index" class="headerlink" title="B-Tree Index"></a>B-Tree Index</h4><p>B-tree index is the widely used data structures for tree based indexing in DBMS. It is a multilevel format of tree based indexing in DBMS technique which has balanced binary search trees. All leaf nodes of the B tree signify actual data pointers.</p>
+<p>Moreover, all leaf nodes are interlinked with a link list, which allows a B tree to support both random and sequential access.</p>
+<p><a target="_blank" rel="noopener" href="https://www.guru99.com/images/1/070119_0833_IndexinginD6.png"><img src="https://www.guru99.com/images/1/070119_0833_IndexinginD6.png" alt="img"></a></p>
+<ul>
+<li>Lead nodes must have between 2 and 4 values.</li>
+<li>Every path from the root to leaf are mostly on an equal length.</li>
+<li>Non-leaf nodes apart from the root node have between 3 and 5 children nodes.</li>
+<li>Every node which is not a root or a leaf has between n/2] and n children.</li>
+</ul>
+<h4 id="Index-Definition-in-SQL"><a href="#Index-Definition-in-SQL" class="headerlink" title="Index Definition in SQL"></a>Index Definition in SQL</h4><ul>
+<li>Create an index</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> index <span class="operator">&lt;</span>index<span class="operator">-</span>name<span class="operator">&gt;</span> <span class="keyword">on</span> <span class="operator">&lt;</span>relation<span class="operator">-</span>name<span class="operator">&gt;</span>(<span class="operator">&lt;</span>attribute<span class="operator">-</span>list<span class="operator">&gt;</span>)</span><br><span class="line"> </span><br><span class="line"> <span class="keyword">create</span> index b<span class="operator">-</span>index <span class="keyword">on</span> branch(branch_name)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>To drop an index</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">n <span class="keyword">drop</span> index <span class="operator">&lt;</span>index<span class="operator">-</span>name<span class="operator">&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Most database systems allow specification of type of index.</li>
+</ul>
+<h4 id="Advantages-of-Indexing"><a href="#Advantages-of-Indexing" class="headerlink" title="Advantages of Indexing"></a>Advantages of Indexing</h4><p>Important pros/ advantage of Indexing are:</p>
+<ul>
+<li>It helps you to reduce the total number of I/O operations needed to retrieve that data, so you don’t need to access a row in the database from an index structure.</li>
+<li>Offers Faster search and retrieval of data to users.</li>
+<li>Indexing also helps you to reduce tablespace as you don’t need to link to a row in a table, as there is no need to store the ROWID in the Index. Thus you will able to reduce the tablespace.</li>
+<li>You can’t sort data in the lead nodes as the value of the primary key classifies it.</li>
+</ul>
+<h4 id="Disadvantages-of-Indexing"><a href="#Disadvantages-of-Indexing" class="headerlink" title="Disadvantages of Indexing"></a>Disadvantages of Indexing</h4><p>Important drawbacks/cons of Indexing are:</p>
+<ul>
+<li>To perform the indexing database management system, you need a primary key on the table with a unique value.</li>
+<li>You can’t perform any other indexes in Database on the Indexed data.</li>
+<li>You are not allowed to partition an index-organized table.</li>
+<li>SQL Indexing Decrease performance in INSERT, DELETE, and UPDATE query.</li>
+</ul>
+<h4 id="Summary"><a href="#Summary" class="headerlink" title="Summary:"></a>Summary:</h4><ul>
+<li>Indexing is a small table which is consist of two columns.</li>
+<li>Two main types of indexing methods are 1)Primary Indexing 2) Secondary Indexing.</li>
+<li>Primary Index is an ordered file which is fixed length size with two fields.</li>
+<li>The primary Indexing is also further divided into two types 1)Dense Index 2)Sparse Index.</li>
+<li>In a dense index, a record is created for every search key valued in the database.</li>
+<li>A sparse indexing method helps you to resolve the issues of dense Indexing.</li>
+<li>The secondary Index in DBMS is an indexing method whose search key specifies an order different from the sequential order of the file.</li>
+<li>Clustering index is defined as an order data file.</li>
+<li>Multilevel Indexing is created when a primary index does not fit in memory.</li>
+<li>The biggest benefit of Indexing is that it helps you to reduce the total number of I/O operations needed to retrieve that data.</li>
+<li>The biggest drawback to performing the indexing database management system, you need a primary key on the table with a unique value.</li>
+</ul>
+<h3 id="B-tree-index"><a href="#B-tree-index" class="headerlink" title="B+ tree index"></a>B+ tree index</h3><p>B+-Tree is “short” and “Fat”:</p>
+<ul>
+<li><p>Disk-based: one node per block; large fan-out</p>
+</li>
+<li><p>Balanced (more or less): good performance guarantee</p>
+</li>
+</ul>
+<p><a class="link" target="_blank" rel="noopener" href="https://www.guru99.com/introduction-b-plus-tree.html">https://www.guru99.com/introduction-b-plus-tree.html<i class="fas fa-external-link-alt"></i></a></p>
+<h4 id="Rules-for-B-Tree"><a href="#Rules-for-B-Tree" class="headerlink" title="Rules for B+ Tree"></a>Rules for B+ Tree</h4><p>Here are essential rules for B+ Tree.</p>
+<ul>
+<li>Leaves are used to store data records.</li>
+<li>It stored in the internal nodes of the Tree.</li>
+<li>If a target key value is less than the internal node, then the point just to its left side is followed.</li>
+<li>If a target key value is greater than or equal to the internal node, then the point just to its right side is followed.</li>
+<li>The root has a minimum of two children.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>B + Tree</strong></th>
+<th><strong>B Tree</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Search keys can be repeated.</td>
+<td>Search keys cannot be redundant.</td>
+</tr>
+<tr>
+<td>Data is only saved on the leaf nodes.</td>
+<td>Both leaf nodes and internal nodes can store data</td>
+</tr>
+<tr>
+<td>Data stored on the leaf node makes the search more accurate and faster.</td>
+<td>Searching is slow due to data stored on Leaf and internal nodes.</td>
+</tr>
+<tr>
+<td>Deletion is not difficult as an element is only removed from a leaf node.</td>
+<td>Deletion of elements is a complicated and time-consuming process.</td>
+</tr>
+<tr>
+<td>Linked leaf nodes make the search efficient and quick.</td>
+<td>You cannot link leaf nodes.</td>
+</tr>
+</tbody></table>
+<p>In a B+-Tree:</p>
+<ul>
+<li><p>n is the number of pointers in a <strong>node</strong>; <strong>pointers</strong>: P1, P2, …Pn</p>
+</li>
+<li><p>Search keys: K1 &lt; K2 &lt; K3 &lt; . . . &lt; Kn–1</p>
+</li>
+<li><p>All paths (from root to leaf) have same length (<strong>balanced trees specific character</strong>)</p>
+</li>
+<li><p>Root must have at least two children</p>
+</li>
+<li><p>In each non-leaf node (inner node), more than half (≥⎡n/2⎤ ) pointers must be used</p>
+</li>
+<li><p>Each leaf node must contain at least ⎡(n-1)/2)⎤ keys</p>
+</li>
+</ul>
+<p>![image-20210219214406436](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210219214406436.png)</p>
+<p><strong>Example</strong></p>
+<p>![image-20210219214509314](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210219214509314.png)</p>
+<h4 id="Characters-of-the-B-trees"><a href="#Characters-of-the-B-trees" class="headerlink" title="Characters of the B+ trees"></a>Characters of the B+ trees</h4><ul>
+<li><p>Since the inner-node connections are done by pointers, “logically” close blocks need not be “physically” close.</p>
+</li>
+<li><p>The non-leaf levels of the B+-tree form <strong>a hierarchy of sparse indices.</strong></p>
+</li>
+<li><p>If there are K search-key values in the file </p>
+<ul>
+<li><p>The <strong>B+-tree height</strong> is no more than <strong>⎡log⎡n/2⎤(K)⎤</strong> .</p>
+</li>
+<li><p>Level below root has at least 2* ⎡n/2⎤ values</p>
+</li>
+<li><p>Next level has at least 2* ⎡n/2⎤ * ⎡n/2⎤ values</p>
+</li>
+</ul>
+</li>
+<li><p>Searching can be conducted efficiently</p>
+</li>
+<li><p>Insertion and deletion to the main file can be handled efficiently, as the index can be restructured in logarithmic time</p>
+</li>
+</ul>
+<h4 id="Search-operation"><a href="#Search-operation" class="headerlink" title="Search operation"></a>Search operation</h4><ul>
+<li>To find the required record, you need to execute the binary search on the available records in the Tree.</li>
+<li>In case of an exact match with the search key, the corresponding record is returned to the user.</li>
+<li>In case the exact key is not located by the search in the parent, current, or leaf node, then a “not found message” is displayed to the user.</li>
+<li>The search process can be re-run for better and more accurate results.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. Call the binary search method on the records in the B+ Tree.</span><br><span class="line">2. If the search parameters match the exact key</span><br><span class="line">           The accurate result is returned and displayed to the user</span><br><span class="line">         Else, if the node being searched is the current and the exact key is not found by the algorithm</span><br><span class="line">           Display the statement "Recordset cannot be found.</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="Procedure-in-updates-on-B-tree"><a href="#Procedure-in-updates-on-B-tree" class="headerlink" title="Procedure in updates on B+ tree"></a>Procedure in updates on B+ tree</h4><ol>
+<li><p>Find the leaf node in which the search-key value would appear</p>
+</li>
+<li><p>If the search-key value is already present in the leaf node</p>
+<p>2.1. Add record to the file</p>
+<p>2.2. If necessary add a pointer to the bucket.</p>
+</li>
+<li><p>If the search-key value is not present, then</p>
+<p>3.1. add the record to the main file (and create a bucket if necessary)</p>
+<p>3.2. If there is room in the leaf node, insert (key-value, pointer) pair in the leaf node</p>
+<p>3.3. Otherwise, split the node (along with the new (key-value, pointer) entry) </p>
+</li>
+<li><p>Splitting a leaf node:</p>
+<p>4.1.  take the n (search-key value, pointer) pairs (including the one being inserted) an in-memory area M <strong>in sorted order</strong>. Place the first ⎡n/2⎤ in the original node, and the rest in a new node.</p>
+<p>4.2. let the new node be p, and let k be the least key value in p. Insert (k,p) in the parent of the node being split.</p>
+<p>4.3. If the parent is full, split it and propagate the split further up. </p>
+</li>
+<li><p>Splitting of nodes proceeds upwards till a node that is not full is found.</p>
+<ul>
+<li>In the worst case the root node may be split increasing the height of the tree by 1</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://www.guru99.com/images/1/120319_1235_BTREESearc1.png" alt="img"></p>
+<p>![image-20210220082907159](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210220082907159.png)</p>
+<p>![image-20210220082923546](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210220082923546.png)</p>
+<h4 id="Delete-Operation"><a href="#Delete-Operation" class="headerlink" title="Delete Operation"></a>Delete Operation</h4><p>The complexity of the delete procedure in the B+ Tree surpasses that of the insert and search functionality.</p>
+<p>The following algorithm is applicable while deleting an element from the B+ Tree:</p>
+<ul>
+<li>Firstly, we need to locate a leaf entry in the Tree that is holding the key and pointer. , delete the leaf entry from the Tree if the Leaf fulfills the exact conditions of record deletion.</li>
+<li>In case the leaf node only meets the satisfactory factor of being half full, then the operation is completed; otherwise, the Leaf node has minimum entries and cannot be deleted.</li>
+<li>The other linked nodes on the right and left can vacate any entries then move them to the Leaf. If these criteria is not fulfilled, then they should combine the leaf node and its linked node in the tree hierarchy.</li>
+<li>Upon merging of leaf node with its neighbors on the right or left, entries of values in the leaf node or linked neighbor pointing to the top-level node are deleted.</li>
+</ul>
+<p><img src="https://www.guru99.com/images/1/120319_1235_BTREESearc2.png" alt="img"></p>
+<p>The example above illustrates the procedure to remove an element from the B+ Tree of a specific order.</p>
+<ul>
+<li>Firstly, the exact locations of the element to be deleted are identified in the Tree.</li>
+<li>Here the element to be deleted can only be accurately identified at the leaf level and not at the index placement. Hence, the element can be deleted without affecting the rules of deletion, which is the value of the bare-minimum key.</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.guru99.com/images/1/120319_1235_BTREESearc3.png"><img src="https://www.guru99.com/images/1/120319_1235_BTREESearc3.png" alt="img"></a></p>
+<ul>
+<li>In the above example, we have to delete 31 from the Tree.</li>
+<li>We need to locate the instances of 31 in Index and Leaf.</li>
+<li>We can see that 31 is available in both Index and Leaf node level. Hence, we delete it from both instances.</li>
+<li>But, we have to fill the index pointing to 42. We will now look at the right child under 25 and take the minimum value and place it as an index. So, 42 being the only value present, it will become the index.</li>
+</ul>
+<h4 id="Delete-Operation-Algorithm"><a href="#Delete-Operation-Algorithm" class="headerlink" title="Delete Operation Algorithm"></a>Delete Operation Algorithm</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">1) Start at the root and go up to leaf node containing the key K</span><br><span class="line">2) Find the node n on the path from the root to the leaf node containing K</span><br><span class="line">    A. If n is root, remove K</span><br><span class="line">         a. if root has more than one key, done</span><br><span class="line">         b. if root has only K</span><br><span class="line">            i) if any of its child nodes can lend a node</span><br><span class="line">               Borrow key from the child and adjust child links</span><br><span class="line">            ii) Otherwise merge the children nodes. It will be a new root</span><br><span class="line">         c. If n is an internal node, remove K</span><br><span class="line">            i) If n has at least ceil(m/2) keys, done!</span><br><span class="line">            ii) If n has less than ceil(m/2) keys,</span><br><span class="line">                If a sibling can lend a key,</span><br><span class="line">                Borrow key from the sibling and adjust keys in n and the parent node</span><br><span class="line">                    Adjust child links</span><br><span class="line">                Else</span><br><span class="line">                    Merge n with its sibling</span><br><span class="line">                    Adjust child links</span><br><span class="line">         d. If n is a leaf node, remove K</span><br><span class="line">            i) If n has at least ceil(M/2) elements, done!</span><br><span class="line">                In case the smallest key is deleted, push up the next key</span><br><span class="line">            ii) If n has less than ceil(m/2) elements</span><br><span class="line">            If the sibling can lend a key</span><br><span class="line">                Borrow key from a sibling and adjust keys in n and its parent node</span><br><span class="line">            Else</span><br><span class="line">                Merge n and its sibling</span><br><span class="line">                Adjust keys in the parent node</span><br></pre></td></tr></table></figure>
+<p><strong>Output</strong>:</p>
+<p>The Key “K” is deleted, and keys are borrowed from siblings for adjusting values in n and its parent nodes if needed.</p>
+<h4 id="Summary-1"><a href="#Summary-1" class="headerlink" title="Summary:"></a>Summary:</h4><ul>
+<li>B+ Tree is a self-balancing data structure for executing accurate and faster searching, inserting and deleting procedures on data</li>
+<li>We can easily retrieve complete data or partial data because going through the linked tree structure makes it efficient.</li>
+<li>The B+ tree structure grows and shrinks with an increase/decrease in the number of stored records.</li>
+<li>Storage of data on the leaf nodes and subsequent branching of internal nodes evidently shortens the tree height, which reduces the disk input and output operations, ultimately consuming much less space on the storage devices.</li>
+</ul>
+<h3 id="Hash-Index"><a href="#Hash-Index" class="headerlink" title="Hash Index"></a>Hash Index</h3><h4 id="What-is-Hashing-in-DBMS"><a href="#What-is-Hashing-in-DBMS" class="headerlink" title="What is Hashing in DBMS?"></a>What is Hashing in DBMS?</h4><ul>
+<li><p>In DBMS, hashing is a technique to directly search the location of desired data on the disk without using index structure. </p>
+</li>
+<li><p>Hashing method is used to index and retrieve items in a database as it is faster to search that specific item using the shorter hashed key instead of using its original value. </p>
+</li>
+<li><p>Data is stored in the form of data blocks whose address is generated by applying a hash function in the memory location where these records are stored known as a <strong>data block or data bucket</strong>.</p>
+</li>
+</ul>
+<h4 id="Why-do-we-need-Hashing"><a href="#Why-do-we-need-Hashing" class="headerlink" title="Why do we need Hashing?"></a>Why do we need Hashing?</h4><p>Here, are the situations in the DBMS where you need to apply the Hashing method:</p>
+<ul>
+<li>For a huge database structure, it’s tough to search all the index values through all its level and then you need to reach the destination data block to get the desired data.</li>
+<li>Hashing method is used to index and retrieve items in a database as it is faster to search that specific item using the shorter hashed key instead of using its original value.</li>
+<li>Hashing is an ideal method to calculate the direct location of a data record on the disk without using index structure.</li>
+<li>It is also a helpful technique for implementing dictionaries</li>
+</ul>
+<h4 id="Structure-of-Static-Hashing"><a href="#Structure-of-Static-Hashing" class="headerlink" title="Structure of Static Hashing"></a>Structure of Static Hashing</h4><ul>
+<li><p>A <strong>bucket</strong> is a unit of storage containing one or more records (a bucket is typically a disk block).</p>
+</li>
+<li><p><strong>Hash function h</strong> is a function from the set of all search-key values K to the set of all bucket addresses B.</p>
+</li>
+<li><p>Hash function is used to locate records for access, insertion as well as deletion.</p>
+</li>
+<li><p>Records with different search-key values may be mapped to the same bucket; thus entire bucket has to be searched sequentially to locate a record.</p>
+</li>
+</ul>
+<h4 id="Important-Terminologies-using-in-Hashing"><a href="#Important-Terminologies-using-in-Hashing" class="headerlink" title="Important Terminologies using in Hashing"></a>Important Terminologies using in Hashing</h4><p>Here, are important terminologies which are used in Hashing:</p>
+<ul>
+<li><strong>Data bucket</strong> – Data buckets are memory locations where the records are stored. It is also known as Unit Of Storage.</li>
+<li><strong>Key</strong>: A DBMS key is an attribute or set of an attribute which helps you to identify a row(tuple) in a relation(table). This allows you to find the relationship between two tables.</li>
+<li><strong>Hash function</strong>: A hash function, is a mapping function which maps all the set of search keys to the address where actual records are placed.</li>
+<li><strong>Linear Probing</strong> – Linear probing is a fixed interval between probes. In this method, the next available data block is used to enter the new record, instead of overwriting on the older record.</li>
+<li><strong>Quadratic probing</strong>- It helps you to determine the new bucket address. It helps you to add Interval between probes by adding the consecutive output of quadratic polynomial to starting value given by the original computation.</li>
+<li><strong>Hash index</strong> – It is an address of the data block. A hash function could be a simple mathematical function to even a complex mathematical function.</li>
+<li><strong>Double Hashing</strong> –Double hashing is a computer programming method used in hash tables to resolve the issues of has a collision.</li>
+<li><strong>Bucket Overflow</strong>: The condition of bucket-overflow is called collision. This is a fatal stage for any static has to function.</li>
+</ul>
+<p>There are mainly two types of SQL hashing methods:</p>
+<ol>
+<li>Static Hashing</li>
+<li>Dynamic Hashing</li>
+</ol>
+<h4 id="Static-Hashing"><a href="#Static-Hashing" class="headerlink" title="Static Hashing"></a>Static Hashing</h4><p>In the static hashing, the resultant data bucket address will always remain the same.</p>
+<p>Therefore, if you generate an address for say <strong>Student_ID = 10</strong> using hashing function <strong>mod(3)</strong>, the resultant bucket address will always be <strong>1</strong>. So, you will not see any change in the bucket address.</p>
+<p>Therefore, in this static hashing method, the number of data buckets in memory always remains constant.</p>
+<h4 id="Static-Hash-Functions"><a href="#Static-Hash-Functions" class="headerlink" title="Static Hash Functions"></a>Static Hash Functions</h4><ul>
+<li><strong>Inserting a record</strong>: When a new record requires to be inserted into the table, you can generate an address for the new record using its hash key. When the address is generated, the record is automatically stored in that location.</li>
+<li><strong>Searching</strong>: When you need to retrieve the record, the same hash function should be helpful to retrieve the address of the bucket where data should be stored.</li>
+<li><strong>Delete a record</strong>: Using the hash function, you can first fetch the record which is you wants to delete. Then you can remove the records for that address in memory.</li>
+</ul>
+<p>Static hashing is further divided into</p>
+<ol>
+<li>Open hashing</li>
+<li>Close hashing.</li>
+</ol>
+<h4 id="Open-Hashing"><a href="#Open-Hashing" class="headerlink" title="Open Hashing"></a>Open Hashing</h4><p>In Open hashing method, Instead of overwriting older one the next available data block is used to enter the new record, This method is also known as linear probing.</p>
+<p>For example, A2 is a new record which you wants to insert. The hash function generates address as 222. But it is already occupied by some other value. That’s why the system looks for the next data bucket 501 and assigns A2 to it.</p>
+<p><a target="_blank" rel="noopener" href="https://www.guru99.com/images/1/042919_0419_HashinginDB1.png"><img src="https://www.guru99.com/images/1/042919_0419_HashinginDB1.png" alt="img"></a>How Open Hash Works</p>
+<h4 id="Close-Hashing"><a href="#Close-Hashing" class="headerlink" title="Close Hashing"></a>Close Hashing</h4><p>In the close hashing method, when buckets are full, a new bucket is allocated for the same hash and result are linked after the previous one.</p>
+<h4 id="Dynamic-Hashing"><a href="#Dynamic-Hashing" class="headerlink" title="Dynamic Hashing"></a>Dynamic Hashing</h4><p>Dynamic hashing offers a mechanism in which data buckets are added and removed dynamically and on demand. In this hashing, the hash function helps you to create a large number of values.</p>
+<h4 id="Comparison-of-Ordered-Indexing-and-Hashing"><a href="#Comparison-of-Ordered-Indexing-and-Hashing" class="headerlink" title="Comparison of Ordered Indexing and Hashing"></a>Comparison of Ordered Indexing and Hashing</h4><table>
+<thead>
+<tr>
+<th><strong>Parameters</strong></th>
+<th><strong>Order Indexing</strong></th>
+<th><strong>Hashing</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Storing of address</td>
+<td>Addresses in the memory are sorted according to a key value called the primary key</td>
+<td>Addresses are always generated using a hash function on the key value.</td>
+</tr>
+<tr>
+<td>Performance</td>
+<td>It can decrease when the data increases in the hash file. As it stores the data in a sorted form when there is any (insert/delete/update) operation performed which decreases its performance.</td>
+<td>Performance of hashing will be best when there is a constant addition and deletion of data. However, when the database is huge, then hash file organization and its maintenance will be costlier.</td>
+</tr>
+<tr>
+<td>Use for</td>
+<td>Preferred for range retrieval of data- which means whenever there is retrieval data for a particular range, this method is an ideal option.</td>
+<td>This is an ideal method when you want to retrieve a particular record based on the search key. However, it will only perform well when the hash function is on the search key.</td>
+</tr>
+<tr>
+<td>Memory management</td>
+<td>There will be many unused data blocks because of the delete/update operation. These data blocks can’t be released for re-use. That’s why regular maintenance of the memory is required.</td>
+<td>In static and dynamic hashing methods, memory is always managed. Bucket overflow is also handled perfectly to extend static hashing.</td>
+</tr>
+</tbody></table>
+<h4 id="What-is-Collision-Bucket-Overflow"><a href="#What-is-Collision-Bucket-Overflow" class="headerlink" title="What is Collision (Bucket Overflow)?"></a>What is Collision (Bucket Overflow)?</h4><p>Hash collision is a state when the resultant hashes from two or more data in the data set, wrongly map the same place in the hash table.</p>
+<h4 id="Bucket-overflow-can-occur-because-of"><a href="#Bucket-overflow-can-occur-because-of" class="headerlink" title="Bucket overflow can occur because of"></a>Bucket overflow can occur because of</h4><ul>
+<li><p>Insufficient buckets</p>
+</li>
+<li><p>Skew in distribution of records. This can occur due to two reasons:</p>
+<ul>
+<li>multiple records have same search-key value</li>
+<li>chosen hash function produces non-uniform distribution of key value</li>
+</ul>
+</li>
+</ul>
+<p>Overflow chaining – the overflow buckets of a given bucket are chained together in a linked list.</p>
+<h4 id="Hash-Indices"><a href="#Hash-Indices" class="headerlink" title="Hash Indices"></a>Hash Indices</h4><ul>
+<li><p>Hashing can be used not only for file organization, but also for index-structure creation.</p>
+</li>
+<li><p>A hash index organizes the search keys, with their associated record pointers, into a hash file structure.</p>
+</li>
+<li><p>Strictly speaking, hash indices are always <strong>secondary indices</strong>.</p>
+</li>
+<li><p>We use the term hash index to refer to both secondary index structures and hash organized files.</p>
+</li>
+</ul>
+<h4 id="How-to-deal-with-Hashing-Collision"><a href="#How-to-deal-with-Hashing-Collision" class="headerlink" title="How to deal with Hashing Collision?"></a>How to deal with Hashing Collision?</h4><p>There are two technique which you can use to avoid a hash collision:</p>
+<ol>
+<li><strong>Rehashing</strong>: This method, invokes a secondary hash function, which is applied continuously until an empty slot is found, where a record should be placed.</li>
+<li><strong>Chaining</strong>: Chaining method builds a Linked list of items whose key hashes to the same value. This method requires an extra link field to each table position.</li>
+</ol>
+<h4 id="Deficiencies-of-Static-Hashing"><a href="#Deficiencies-of-Static-Hashing" class="headerlink" title="Deficiencies of Static Hashing"></a>Deficiencies of Static Hashing</h4><ul>
+<li><p>In static hashing, function h maps search-key values to a fixed set of B of bucket addresses. Databases grow or shrink with time.</p>
+<ul>
+<li>If initial number of buckets is too small, and file grows, performance will degrade due to too many overflows.</li>
+<li>If space is allocated for anticipated growth, a significant amount of space will be wasted initially (and buckets will be underfull).</li>
+<li>If database shrinks, again space will be wasted.</li>
+</ul>
+</li>
+<li><p>One solution: periodic re-organisation of the file with a new hash function</p>
+<ul>
+<li>Expensive, disrupts normal operations</li>
+</ul>
+</li>
+<li><p>Better solution: allow the number of buckets to be modified dynamically - Dynamic Hashing!</p>
+</li>
+</ul>
+<h4 id="Dynamic-Hashing-1"><a href="#Dynamic-Hashing-1" class="headerlink" title="Dynamic Hashing"></a>Dynamic Hashing</h4><ul>
+<li><p>Good for database that <strong>grows and shrinks in size</strong></p>
+</li>
+<li><p>Allows the hash function to be <strong>modified dynamically</strong></p>
+</li>
+<li><p><strong>Extendable hashing</strong> – one form of dynamic hashing</p>
+<ul>
+<li><p>Hash function generates values over a large range — typically b-bit integers, with b = 32.</p>
+</li>
+<li><p>At any time use only a prefix of the hash function to index into a table of bucket addresses.</p>
+</li>
+<li><p>Let the length of the prefix be i bits, 0 ≤ i ≤ 32.</p>
+</li>
+<li><p>Bucket address table size = 2i. Initially i = 0</p>
+</li>
+<li><p>Value of i grows and shrinks as the size of the database grows and shrinks.</p>
+</li>
+<li><p>Multiple entries in the bucket address table may point to the same bucket</p>
+</li>
+<li><p>Thus, actual number of buckets is &lt; 2i</p>
+</li>
+<li><p>The number of buckets also changes dynamically due to <strong>coalescing</strong> and <strong>splitting</strong> of buckets.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>![image-20210220111058629](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210220111058629.png)</p>
+<h4 id="Summary-2"><a href="#Summary-2" class="headerlink" title="Summary:"></a>Summary:</h4><ul>
+<li>In DBMS, hashing is a technique to directly search the location of desired data on the disk without using index structure.</li>
+<li>Hashing method is used to index and retrieve items in a database as it is faster to search that specific item using the shorter hashed key instead of using its original value.</li>
+<li>Data bucket, Key , Hash function, Linear Probing, Quadratic probing , Hash index, Double Hashing, Bucket Overflow are important terminologies used in hashing</li>
+<li>Two types of hashing methods are 1) static hashing 2) dynamic hashing</li>
+<li>In the static hashing, the resultant data bucket address will always remain the same.</li>
+<li>Dynamic hashing offers a mechanism in which data buckets are added and removed dynamically and on demand.</li>
+<li>In order Indexing addresses in the memory are sorted according to a critical value while in hashing addresses are always generated using a hash function on the key value.</li>
+<li>Hash collision is a state when the resultant hashes from two or more data in the data set, wrongly map the same place in the hash table.</li>
+<li>Rehashing and chaining are two methods which help you to avoid hashing collision.</li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：(CSE201) Advanced Databases</li>
+        <li>Post author：Yuxuan Wu</li>
+        <li>Create time：2021-02-19 19:00:03</li>
+        <li>
+            Post link：yuxuanwu17.github.io2021/02/19/2021-02-19-(CSE201)-Advanced-Databases/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/02/15/2021-02-15-MySQL/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">MySQL</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span> -
+            
+            2021 <i class="fas fa-heart icon-animate"></i> <a href="/">Yuxuan Wu</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count <span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a> | Theme <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.3.1</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Storage"><span class="nav-number">1.</span> <span class="nav-text">Storage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Building-a-Database-High-Level"><span class="nav-number">1.1.</span> <span class="nav-text">Building a Database: High-Level</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Access-Time"><span class="nav-number">1.2.</span> <span class="nav-text">Access Time</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Disk-Block"><span class="nav-number">1.3.</span> <span class="nav-text">Disk Block</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Organization-of-Records-in-Files"><span class="nav-number">1.4.</span> <span class="nav-text">Organization of Records in Files</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Index"><span class="nav-number">2.</span> <span class="nav-text">Index</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Types-of-Indexing"><span class="nav-number">2.1.</span> <span class="nav-text">Types of Indexing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Structure-of-Index"><span class="nav-number">2.2.</span> <span class="nav-text">The Structure of Index</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Index-Techniques"><span class="nav-number">2.3.</span> <span class="nav-text">Index Techniques</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Ordered-Indices-Primary-index"><span class="nav-number">2.3.1.</span> <span class="nav-text">Ordered Indices (Primary index)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dense-Index-vs-Sparse-Index"><span class="nav-number">2.3.2.</span> <span class="nav-text">Dense Index vs. Sparse Index</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dense-index-files"><span class="nav-number">2.3.3.</span> <span class="nav-text">Dense index files</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Sparse-index-files"><span class="nav-number">2.3.4.</span> <span class="nav-text">Sparse index files</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#An-ordered-index-can-also-be"><span class="nav-number">2.3.5.</span> <span class="nav-text">An ordered index can also be:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Primary-and-Secondary-Indices"><span class="nav-number">2.3.6.</span> <span class="nav-text">Primary and Secondary Indices</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Clustering-Index"><span class="nav-number">2.3.7.</span> <span class="nav-text">Clustering Index</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#What-is-Multilevel-Index"><span class="nav-number">2.3.8.</span> <span class="nav-text">What is Multilevel Index?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-Tree-Index"><span class="nav-number">2.3.9.</span> <span class="nav-text">B-Tree Index</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Index-Definition-in-SQL"><span class="nav-number">2.3.10.</span> <span class="nav-text">Index Definition in SQL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Advantages-of-Indexing"><span class="nav-number">2.3.11.</span> <span class="nav-text">Advantages of Indexing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Disadvantages-of-Indexing"><span class="nav-number">2.3.12.</span> <span class="nav-text">Disadvantages of Indexing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Summary"><span class="nav-number">2.3.13.</span> <span class="nav-text">Summary:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-tree-index"><span class="nav-number">2.4.</span> <span class="nav-text">B+ tree index</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Rules-for-B-Tree"><span class="nav-number">2.4.1.</span> <span class="nav-text">Rules for B+ Tree</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Characters-of-the-B-trees"><span class="nav-number">2.4.2.</span> <span class="nav-text">Characters of the B+ trees</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Search-operation"><span class="nav-number">2.4.3.</span> <span class="nav-text">Search operation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Procedure-in-updates-on-B-tree"><span class="nav-number">2.4.4.</span> <span class="nav-text">Procedure in updates on B+ tree</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Delete-Operation"><span class="nav-number">2.4.5.</span> <span class="nav-text">Delete Operation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Delete-Operation-Algorithm"><span class="nav-number">2.4.6.</span> <span class="nav-text">Delete Operation Algorithm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Summary-1"><span class="nav-number">2.4.7.</span> <span class="nav-text">Summary:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hash-Index"><span class="nav-number">2.5.</span> <span class="nav-text">Hash Index</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#What-is-Hashing-in-DBMS"><span class="nav-number">2.5.1.</span> <span class="nav-text">What is Hashing in DBMS?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Why-do-we-need-Hashing"><span class="nav-number">2.5.2.</span> <span class="nav-text">Why do we need Hashing?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Structure-of-Static-Hashing"><span class="nav-number">2.5.3.</span> <span class="nav-text">Structure of Static Hashing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Important-Terminologies-using-in-Hashing"><span class="nav-number">2.5.4.</span> <span class="nav-text">Important Terminologies using in Hashing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Static-Hashing"><span class="nav-number">2.5.5.</span> <span class="nav-text">Static Hashing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Static-Hash-Functions"><span class="nav-number">2.5.6.</span> <span class="nav-text">Static Hash Functions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Open-Hashing"><span class="nav-number">2.5.7.</span> <span class="nav-text">Open Hashing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Close-Hashing"><span class="nav-number">2.5.8.</span> <span class="nav-text">Close Hashing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dynamic-Hashing"><span class="nav-number">2.5.9.</span> <span class="nav-text">Dynamic Hashing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Comparison-of-Ordered-Indexing-and-Hashing"><span class="nav-number">2.5.10.</span> <span class="nav-text">Comparison of Ordered Indexing and Hashing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#What-is-Collision-Bucket-Overflow"><span class="nav-number">2.5.11.</span> <span class="nav-text">What is Collision (Bucket Overflow)?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bucket-overflow-can-occur-because-of"><span class="nav-number">2.5.12.</span> <span class="nav-text">Bucket overflow can occur because of</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hash-Indices"><span class="nav-number">2.5.13.</span> <span class="nav-text">Hash Indices</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#How-to-deal-with-Hashing-Collision"><span class="nav-number">2.5.14.</span> <span class="nav-text">How to deal with Hashing Collision?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Deficiencies-of-Static-Hashing"><span class="nav-number">2.5.15.</span> <span class="nav-text">Deficiencies of Static Hashing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dynamic-Hashing-1"><span class="nav-number">2.5.16.</span> <span class="nav-text">Dynamic Hashing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Summary-2"><span class="nav-number">2.5.17.</span> <span class="nav-text">Summary:</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

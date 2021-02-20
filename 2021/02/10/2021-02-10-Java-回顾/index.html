@@ -214,12 +214,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i> <span>7.5k Words</span>
+            <i class="fas fa-file-word"></i> <span>8k Words</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i> <span>32 Mins</span>
+            <i class="fas fa-clock"></i> <span>34 Mins</span>
         </span>
     
     
@@ -593,8 +593,31 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.oop.demo07;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="comment">//2 赋初始值</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 代码块（匿名）</span></span><br><span class="line">        System.out.println(<span class="string">&quot;代码快&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//1 </span></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="comment">// 静态代码块</span></span><br><span class="line">        System.out.println(<span class="string">&quot;静态代码块&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//3</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;构造方法 &quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Person person = <span class="keyword">new</span> Person();</span><br><span class="line">        Person person2 = <span class="keyword">new</span> Person();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
-
-
+<p>作者：愚公要移山<br>链接：<a class="link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/70110497" >https://zhuanlan.zhihu.com/p/70110497<i class="fas fa-external-link-alt"></i></a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<p><strong>Static 关键字</strong></p>
+<p><strong>（1）特点：</strong></p>
+<p>　　1、static是一个修饰符，用于修饰成员。（成员变量，成员函数）static修饰的成员变量 称之为静态变量或类变量。</p>
+<p>　　2、static修饰的成员被所有的对象共享。</p>
+<p>　　3、static优先于对象存在，因为static的成员随着类的加载就已经存在。</p>
+<p>　　4、static修饰的成员多了一种调用方式，可以直接被类名所调用，（类名.静态成员）。</p>
+<p>　　5、static修饰的数据是共享数据，对象中的存储的是特有的数据。</p>
+<p><strong>（2）成员变量和静态变量的区别：</strong></p>
+<p>　　1、生命周期的不同：</p>
+<p>　　　　成员变量随着对象的创建而存在随着对象的回收而释放。</p>
+<p>　　　　静态变量随着类的加载而存在随着类的消失而消失。</p>
+<p>　　2、调用方式不同：</p>
+<p>　　　　成员变量只能被对象调用。</p>
+<p>　　　　静态变量可以被对象调用，也可以用类名调用。（推荐用类名调用）</p>
+<p>　　3、别名不同：</p>
+<p>　　　　成员变量也称为实例变量。</p>
+<p>　　　　静态变量称为类变量。</p>
+<p>　　4、数据存储位置不同：</p>
+<p>　　　　成员变量数据存储在堆内存的对象中，所以也叫对象的特有数据。</p>
+<p>　　　　静态变量数据存储在方法区（共享数据区）的静态区，所以也叫对象的共享数据。</p>
+<p><strong>（3）静态使用时需要注意的事项：</strong></p>
+<p>　　1、静态方法只能访问静态成员。（非静态既可以访问静态，又可以访问非静态）</p>
+<p>　　2、静态方法中不可以使用this或者super关键字。</p>
+<p>　　3、主函数是静态的</p>
 <h3 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1. 不能new这个抽象类，只能靠子类去实现它：约束</span></span><br><span class="line"><span class="comment">//2. 抽象类中可以写普通的方法～</span></span><br><span class="line"><span class="comment">//3. 抽象方法必须在抽象类中～</span></span><br><span class="line"><span class="comment">// 抽象的抽象：约束</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 存在的意义，提高开发效率</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">package com.oop.demo08;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; abstract 抽象类：类 extends： 单继承 ～ 接口可以多继承 插座</span><br><span class="line">public abstract class Action &#123;</span><br><span class="line">    &#x2F;&#x2F; 约束～有人帮我吗实现～</span><br><span class="line">    &#x2F;&#x2F; abstract，抽象方法，只有方法名字，没有方法的实现！</span><br><span class="line">public abstract void doSomething();</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;1. 不能new这个抽象类，只能靠子类去实现它：约束</span><br><span class="line">&#x2F;&#x2F;2. 抽象类中可以写普通的方法～</span><br><span class="line">&#x2F;&#x2F;3. 抽象方法必须在抽象类中～</span><br><span class="line">&#x2F;&#x2F; 抽象的抽象：约束</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -674,10 +697,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/02/03/2021-02-03-Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+                           href="/2021/02/10/2021-02-10-Linux-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">Docker 常用命令</span>
+                                <span class="post-nav-title-item">Linux 文件系统</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">

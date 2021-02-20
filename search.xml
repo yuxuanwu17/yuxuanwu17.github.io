@@ -2653,8 +2653,31 @@ Heart Not Failed       0.85      0.93      0.89        43
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.oop.demo07;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="comment">//2 赋初始值</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 代码块（匿名）</span></span><br><span class="line">        System.out.println(<span class="string">&quot;代码快&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//1 </span></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="comment">// 静态代码块</span></span><br><span class="line">        System.out.println(<span class="string">&quot;静态代码块&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//3</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;构造方法 &quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Person person = <span class="keyword">new</span> Person();</span><br><span class="line">        Person person2 = <span class="keyword">new</span> Person();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
-
-
+<p>作者：愚公要移山<br>链接：<a class="link"   href="https://zhuanlan.zhihu.com/p/70110497" >https://zhuanlan.zhihu.com/p/70110497<i class="fas fa-external-link-alt"></i></a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<p><strong>Static 关键字</strong></p>
+<p><strong>（1）特点：</strong></p>
+<p>　　1、static是一个修饰符，用于修饰成员。（成员变量，成员函数）static修饰的成员变量 称之为静态变量或类变量。</p>
+<p>　　2、static修饰的成员被所有的对象共享。</p>
+<p>　　3、static优先于对象存在，因为static的成员随着类的加载就已经存在。</p>
+<p>　　4、static修饰的成员多了一种调用方式，可以直接被类名所调用，（类名.静态成员）。</p>
+<p>　　5、static修饰的数据是共享数据，对象中的存储的是特有的数据。</p>
+<p><strong>（2）成员变量和静态变量的区别：</strong></p>
+<p>　　1、生命周期的不同：</p>
+<p>　　　　成员变量随着对象的创建而存在随着对象的回收而释放。</p>
+<p>　　　　静态变量随着类的加载而存在随着类的消失而消失。</p>
+<p>　　2、调用方式不同：</p>
+<p>　　　　成员变量只能被对象调用。</p>
+<p>　　　　静态变量可以被对象调用，也可以用类名调用。（推荐用类名调用）</p>
+<p>　　3、别名不同：</p>
+<p>　　　　成员变量也称为实例变量。</p>
+<p>　　　　静态变量称为类变量。</p>
+<p>　　4、数据存储位置不同：</p>
+<p>　　　　成员变量数据存储在堆内存的对象中，所以也叫对象的特有数据。</p>
+<p>　　　　静态变量数据存储在方法区（共享数据区）的静态区，所以也叫对象的共享数据。</p>
+<p><strong>（3）静态使用时需要注意的事项：</strong></p>
+<p>　　1、静态方法只能访问静态成员。（非静态既可以访问静态，又可以访问非静态）</p>
+<p>　　2、静态方法中不可以使用this或者super关键字。</p>
+<p>　　3、主函数是静态的</p>
 <h3 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1. 不能new这个抽象类，只能靠子类去实现它：约束</span></span><br><span class="line"><span class="comment">//2. 抽象类中可以写普通的方法～</span></span><br><span class="line"><span class="comment">//3. 抽象方法必须在抽象类中～</span></span><br><span class="line"><span class="comment">// 抽象的抽象：约束</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 存在的意义，提高开发效率</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package com.oop.demo08;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; abstract 抽象类：类 extends： 单继承 ～ 接口可以多继承 插座</span><br><span class="line">public abstract class Action &#123;</span><br><span class="line">    &#x2F;&#x2F; 约束～有人帮我吗实现～</span><br><span class="line">    &#x2F;&#x2F; abstract，抽象方法，只有方法名字，没有方法的实现！</span><br><span class="line">public abstract void doSomething();</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;1. 不能new这个抽象类，只能靠子类去实现它：约束</span><br><span class="line">&#x2F;&#x2F;2. 抽象类中可以写普通的方法～</span><br><span class="line">&#x2F;&#x2F;3. 抽象方法必须在抽象类中～</span><br><span class="line">&#x2F;&#x2F; 抽象的抽象：约束</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -3714,11 +3737,1554 @@ Heart Not Failed       0.85      0.93      0.89        43
 <p><strong>池化技术：准备一些预先的资源，过来就连接提前准备好的</strong></p>
 ]]></content>
       <categories>
-        <category>Java</category>
+        <category>Databases</category>
       </categories>
       <tags>
         <tag>tutorial</tag>
+        <tag>Java</tag>
         <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(CSE201) Advanced Databases</title>
+    <url>/2021/02/19/2021-02-19-(CSE201)-Advanced-Databases/</url>
+    <content><![CDATA[<h2 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h2><h3 id="Building-a-Database-High-Level"><a href="#Building-a-Database-High-Level" class="headerlink" title="Building a Database: High-Level"></a>Building a Database: High-Level</h3><ul>
+<li><p>Design conceptual schema using a data model.</p>
+<ul>
+<li> Design relational schema, e.g., student(sid, name)</li>
+</ul>
+</li>
+<li><p>Data Definition Language <strong>(DDL)</strong></p>
+<ul>
+<li>CREATE TABLE student (sid char(8) primary key, name varchar(32))</li>
+</ul>
+</li>
+<li><p>Data Manipulation Language <strong>(DML)</strong></p>
+<ul>
+<li>INSERT INTO student VALUES (‘00112233’, ‘Paul’)</li>
+</ul>
+</li>
+</ul>
+<h3 id="Access-Time"><a href="#Access-Time" class="headerlink" title="Access Time"></a>Access Time</h3><p>Access time is the time it takes from when a read or write a block request is issued to when data transfer begins (or ends).</p>
+<p><strong>Access time = Seek time + Rotational latency + (Transfer time)</strong></p>
+<ul>
+<li><p>Seek time – time it takes to position the arm over the right track.</p>
+<ul>
+<li>Average seek time is about <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.781ex" xmlns="http://www.w3.org/2000/svg" width="1.795ex" height="2.737ex" role="img" focusable="false" viewBox="0 -864.9 793.6 1209.9"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mfrac"><g data-mml-node="mn" transform="translate(220, 394) scale(0.707)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mn" transform="translate(220, -345) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g><rect width="553.6" height="60" x="120" y="220"></rect></g></g></g></svg></mjx-container> of the worst case seek time (e.g., from the innermost to the outermost)</li>
+</ul>
+</li>
+<li><p>Rotational latency – time it takes for the sector to be accessed to appear under the head.</p>
+<ul>
+<li>Average latency is 1/2 of the worst case latency (e.g., nearly 360 degree rotation)</li>
+</ul>
+</li>
+<li><p>Transfer time – time to actually read/write the data in the sector once the head is positioned, that is, the time for the disk to rotate over the sectors.</p>
+<ul>
+<li> In most cases, transfer time is much less than the seek time and rotational latency.</li>
+</ul>
+</li>
+</ul>
+<h3 id="Disk-Block"><a href="#Disk-Block" class="headerlink" title="Disk Block"></a>Disk Block</h3><ul>
+<li><p>A contiguous sequence of sectors from a single track</p>
+</li>
+<li><p>Data is transferred between disk and main memory in blocks</p>
+</li>
+<li><p>Sizes range from 512 bytes to several kilobytes</p>
+</li>
+</ul>
+<h3 id="Organization-of-Records-in-Files"><a href="#Organization-of-Records-in-Files" class="headerlink" title="Organization of Records in Files"></a>Organization of Records in Files</h3><p><strong>Heap</strong> – a record can be placed anywhere in the file where there is space</p>
+<p><strong>Sequential</strong> – store records in sequential order, based on the value of the search key of each record</p>
+<p><strong>Hashing</strong> – a hash function computed on some attribute of each record; the result specifies in which block of the file the record should be placed</p>
+<blockquote>
+<p>Records of each relation may be stored in a separate file. In a multi-table clustering file organization records of several different relations can be stored in the same file </p>
+</blockquote>
+<p>Motivation: store related records on the same block to minimize I/O</p>
+<p>![image-20210219194326826](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210219194326826.png)</p>
+<h2 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h2><p>Indexing mechanisms used to speed up access to the desired data.</p>
+<p><strong>Indexing</strong> is a <strong>data structure technique</strong> which allows you to <strong>quickly retrieve records from a database file</strong>. </p>
+<p>An Index is a small table having only two columns. </p>
+<ul>
+<li>The first column comprises a copy of the primary or candidate key of a table. </li>
+<li>Its second column contains a set of pointers for holding the address of the disk block where that specific key value stored.</li>
+</ul>
+<h3 id="Types-of-Indexing"><a href="#Types-of-Indexing" class="headerlink" title="Types of Indexing"></a>Types of Indexing</h3><p><img src="https://www.guru99.com/images/1/070119_0833_IndexinginD1.png" alt="img"></p>
+<h3 id="The-Structure-of-Index"><a href="#The-Structure-of-Index" class="headerlink" title="The Structure of Index"></a>The Structure of Index</h3><p><strong>Data file:</strong> collection of blocks holding records on disk</p>
+<p><strong>Index file:</strong> a data structure allowing the DBMS to find particular records in a data file more efficiently.</p>
+<ul>
+<li><p>An index file consists of records (called index entries) of the form:</p>
+<ul>
+<li><strong>Search-key - pointer</strong></li>
+</ul>
+</li>
+<li><p><strong>Search Key:</strong> one or set of attributes used to look up records in a file.</p>
+</li>
+</ul>
+<p><strong>Relationship</strong>: a <strong>search key K</strong> in the index file is associated with a <strong>pointer to a data-file record</strong> that has search key K.</p>
+<h3 id="Index-Techniques"><a href="#Index-Techniques" class="headerlink" title="Index Techniques"></a>Index Techniques</h3><ul>
+<li>Depending on the organisation of index file, an index can be:<ul>
+<li>an <strong>ordered Index</strong> where index entries <strong>are sorted on the search key value.</strong> (Primary indexing)</li>
+<li>a <strong>hashing Index</strong> where <strong>hashing technique</strong> is employed to organize index entries (Secondary indexing)</li>
+</ul>
+</li>
+</ul>
+<h4 id="Ordered-Indices-Primary-index"><a href="#Ordered-Indices-Primary-index" class="headerlink" title="Ordered Indices (Primary index)"></a>Ordered Indices (Primary index)</h4><ul>
+<li><p><strong>Dense index</strong>: index record appears for <strong>every search-key</strong> value in the file.</p>
+</li>
+<li><p><strong>Sparse Index:</strong> contains index records for <strong>only some</strong> search-key values.</p>
+</li>
+</ul>
+<h4 id="Dense-Index-vs-Sparse-Index"><a href="#Dense-Index-vs-Sparse-Index" class="headerlink" title="Dense Index vs. Sparse Index"></a>Dense Index vs. Sparse Index</h4><ul>
+<li><p>Index size</p>
+<ul>
+<li>Sparse index is smaller</li>
+</ul>
+</li>
+<li><p>Requirement on data file</p>
+<ul>
+<li>The data file must be sequential file</li>
+</ul>
+</li>
+<li><p>Lookup</p>
+<ul>
+<li>Sparse index is smaller and may fit in memory</li>
+<li>Dense index can directly tell if a record exists.</li>
+</ul>
+</li>
+<li><p>Update</p>
+<ul>
+<li>Sparse index requires less space and maintenance for insertion and deletion.</li>
+</ul>
+</li>
+<li><p>Good tradeoff: sparse index with an index entry for every block in file, corresponding to least search-keyvalue in the block.</p>
+</li>
+</ul>
+<h4 id="Dense-index-files"><a href="#Dense-index-files" class="headerlink" title="Dense index files"></a>Dense index files</h4><p>![image-20210219210300684](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210219210300684.png)</p>
+<h4 id="Sparse-index-files"><a href="#Sparse-index-files" class="headerlink" title="Sparse index files"></a>Sparse index files</h4><p>![image-20210219210345875](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210219210345875.png)</p>
+<h4 id="An-ordered-index-can-also-be"><a href="#An-ordered-index-can-also-be" class="headerlink" title="An ordered index can also be:"></a>An ordered index can also be:</h4><ul>
+<li><p><strong>Primary index:</strong> in a sequentially ordered file, the index whose search key specifies the sequential order of the file.</p>
+<ul>
+<li>Also called <strong>clustering index.</strong> The search key of a primary index is usually but not necessarily the primary key.</li>
+<li> Can be sparse</li>
+</ul>
+</li>
+<li><p><strong>Secondary index:</strong> an index whose search key specifies an order different from the sequential order of the file.</p>
+<ul>
+<li><p>Also called non-clustering index.</p>
+</li>
+<li><p>Can not be sparse</p>
+</li>
+</ul>
+</li>
+<li><p>Index-sequential file: ordered sequential file with a primary index.</p>
+</li>
+</ul>
+<p>![image-20210219211429706](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210219211429706.png)</p>
+<ul>
+<li>Index record points to a bucket that contains pointers to all the actual records with that particular search-key value.</li>
+<li>Secondary indices have to be dense</li>
+</ul>
+<h4 id="Primary-and-Secondary-Indices"><a href="#Primary-and-Secondary-Indices" class="headerlink" title="Primary and Secondary Indices"></a>Primary and Secondary Indices</h4><ul>
+<li><p>Indices offer substantial benefits when searching for records.</p>
+</li>
+<li><p>But: updating indices imposes overhead on database modification - when a file is modified, every index on the file must be updated,</p>
+</li>
+<li><p>Sequential scan using primary index is efficient</p>
+</li>
+<li><p>But a sequential scan using a secondary index is expensive</p>
+<ul>
+<li>Each record access may fetch a new block from disk    </li>
+<li>Block fetch requires about 5 to 10 milliseconds; versus about 100 nanoseconds for memory access</li>
+</ul>
+</li>
+</ul>
+<h4 id="Clustering-Index"><a href="#Clustering-Index" class="headerlink" title="Clustering Index"></a>Clustering Index</h4><p>In a clustered index, records themselves are stored in the Index and not pointers. Sometimes the Index is created on non-primary key columns which might not be unique for each record. In such a situation, you can group two or more columns to get the unique values and create an index which is called clustered Index. This also helps you to identify the record faster.</p>
+<p><strong>Example:</strong></p>
+<p>Let’s assume that a company recruited many employees in various departments. In this case, clustering indexing in DBMS should be created for all employees who belong to the same dept.</p>
+<p>It is considered in a single cluster, and index points point to the cluster as a whole. Here, Department _no is a non-unique key.</p>
+<h4 id="What-is-Multilevel-Index"><a href="#What-is-Multilevel-Index" class="headerlink" title="What is Multilevel Index?"></a>What is Multilevel Index?</h4><p>Multilevel Indexing in Database is created when a primary index does not fit in memory. In this type of indexing method, you can reduce the number of disk accesses to short any record and kept on a disk as a sequential file and create a sparse base on that file.</p>
+<p><a href="https://www.guru99.com/images/1/070119_0833_IndexinginD5.png"><img src="https://www.guru99.com/images/1/070119_0833_IndexinginD5.png" alt="img"></a></p>
+<h4 id="B-Tree-Index"><a href="#B-Tree-Index" class="headerlink" title="B-Tree Index"></a>B-Tree Index</h4><p>B-tree index is the widely used data structures for tree based indexing in DBMS. It is a multilevel format of tree based indexing in DBMS technique which has balanced binary search trees. All leaf nodes of the B tree signify actual data pointers.</p>
+<p>Moreover, all leaf nodes are interlinked with a link list, which allows a B tree to support both random and sequential access.</p>
+<p><a href="https://www.guru99.com/images/1/070119_0833_IndexinginD6.png"><img src="https://www.guru99.com/images/1/070119_0833_IndexinginD6.png" alt="img"></a></p>
+<ul>
+<li>Lead nodes must have between 2 and 4 values.</li>
+<li>Every path from the root to leaf are mostly on an equal length.</li>
+<li>Non-leaf nodes apart from the root node have between 3 and 5 children nodes.</li>
+<li>Every node which is not a root or a leaf has between n/2] and n children.</li>
+</ul>
+<h4 id="Index-Definition-in-SQL"><a href="#Index-Definition-in-SQL" class="headerlink" title="Index Definition in SQL"></a>Index Definition in SQL</h4><ul>
+<li>Create an index</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> index <span class="operator">&lt;</span>index<span class="operator">-</span>name<span class="operator">&gt;</span> <span class="keyword">on</span> <span class="operator">&lt;</span>relation<span class="operator">-</span>name<span class="operator">&gt;</span>(<span class="operator">&lt;</span>attribute<span class="operator">-</span>list<span class="operator">&gt;</span>)</span><br><span class="line"> </span><br><span class="line"> <span class="keyword">create</span> index b<span class="operator">-</span>index <span class="keyword">on</span> branch(branch_name)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>To drop an index</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">n <span class="keyword">drop</span> index <span class="operator">&lt;</span>index<span class="operator">-</span>name<span class="operator">&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Most database systems allow specification of type of index.</li>
+</ul>
+<h4 id="Advantages-of-Indexing"><a href="#Advantages-of-Indexing" class="headerlink" title="Advantages of Indexing"></a>Advantages of Indexing</h4><p>Important pros/ advantage of Indexing are:</p>
+<ul>
+<li>It helps you to reduce the total number of I/O operations needed to retrieve that data, so you don’t need to access a row in the database from an index structure.</li>
+<li>Offers Faster search and retrieval of data to users.</li>
+<li>Indexing also helps you to reduce tablespace as you don’t need to link to a row in a table, as there is no need to store the ROWID in the Index. Thus you will able to reduce the tablespace.</li>
+<li>You can’t sort data in the lead nodes as the value of the primary key classifies it.</li>
+</ul>
+<h4 id="Disadvantages-of-Indexing"><a href="#Disadvantages-of-Indexing" class="headerlink" title="Disadvantages of Indexing"></a>Disadvantages of Indexing</h4><p>Important drawbacks/cons of Indexing are:</p>
+<ul>
+<li>To perform the indexing database management system, you need a primary key on the table with a unique value.</li>
+<li>You can’t perform any other indexes in Database on the Indexed data.</li>
+<li>You are not allowed to partition an index-organized table.</li>
+<li>SQL Indexing Decrease performance in INSERT, DELETE, and UPDATE query.</li>
+</ul>
+<h4 id="Summary"><a href="#Summary" class="headerlink" title="Summary:"></a>Summary:</h4><ul>
+<li>Indexing is a small table which is consist of two columns.</li>
+<li>Two main types of indexing methods are 1)Primary Indexing 2) Secondary Indexing.</li>
+<li>Primary Index is an ordered file which is fixed length size with two fields.</li>
+<li>The primary Indexing is also further divided into two types 1)Dense Index 2)Sparse Index.</li>
+<li>In a dense index, a record is created for every search key valued in the database.</li>
+<li>A sparse indexing method helps you to resolve the issues of dense Indexing.</li>
+<li>The secondary Index in DBMS is an indexing method whose search key specifies an order different from the sequential order of the file.</li>
+<li>Clustering index is defined as an order data file.</li>
+<li>Multilevel Indexing is created when a primary index does not fit in memory.</li>
+<li>The biggest benefit of Indexing is that it helps you to reduce the total number of I/O operations needed to retrieve that data.</li>
+<li>The biggest drawback to performing the indexing database management system, you need a primary key on the table with a unique value.</li>
+</ul>
+<h3 id="B-tree-index"><a href="#B-tree-index" class="headerlink" title="B+ tree index"></a>B+ tree index</h3><p>B+-Tree is “short” and “Fat”:</p>
+<ul>
+<li><p>Disk-based: one node per block; large fan-out</p>
+</li>
+<li><p>Balanced (more or less): good performance guarantee</p>
+</li>
+</ul>
+<p><a class="link" href="https://www.guru99.com/introduction-b-plus-tree.html">https://www.guru99.com/introduction-b-plus-tree.html<i class="fas fa-external-link-alt"></i></a></p>
+<h4 id="Rules-for-B-Tree"><a href="#Rules-for-B-Tree" class="headerlink" title="Rules for B+ Tree"></a>Rules for B+ Tree</h4><p>Here are essential rules for B+ Tree.</p>
+<ul>
+<li>Leaves are used to store data records.</li>
+<li>It stored in the internal nodes of the Tree.</li>
+<li>If a target key value is less than the internal node, then the point just to its left side is followed.</li>
+<li>If a target key value is greater than or equal to the internal node, then the point just to its right side is followed.</li>
+<li>The root has a minimum of two children.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>B + Tree</strong></th>
+<th><strong>B Tree</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Search keys can be repeated.</td>
+<td>Search keys cannot be redundant.</td>
+</tr>
+<tr>
+<td>Data is only saved on the leaf nodes.</td>
+<td>Both leaf nodes and internal nodes can store data</td>
+</tr>
+<tr>
+<td>Data stored on the leaf node makes the search more accurate and faster.</td>
+<td>Searching is slow due to data stored on Leaf and internal nodes.</td>
+</tr>
+<tr>
+<td>Deletion is not difficult as an element is only removed from a leaf node.</td>
+<td>Deletion of elements is a complicated and time-consuming process.</td>
+</tr>
+<tr>
+<td>Linked leaf nodes make the search efficient and quick.</td>
+<td>You cannot link leaf nodes.</td>
+</tr>
+</tbody></table>
+<p>In a B+-Tree:</p>
+<ul>
+<li><p>n is the number of pointers in a <strong>node</strong>; <strong>pointers</strong>: P1, P2, …Pn</p>
+</li>
+<li><p>Search keys: K1 &lt; K2 &lt; K3 &lt; . . . &lt; Kn–1</p>
+</li>
+<li><p>All paths (from root to leaf) have same length (<strong>balanced trees specific character</strong>)</p>
+</li>
+<li><p>Root must have at least two children</p>
+</li>
+<li><p>In each non-leaf node (inner node), more than half (≥⎡n/2⎤ ) pointers must be used</p>
+</li>
+<li><p>Each leaf node must contain at least ⎡(n-1)/2)⎤ keys</p>
+</li>
+</ul>
+<p>![image-20210219214406436](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210219214406436.png)</p>
+<p><strong>Example</strong></p>
+<p>![image-20210219214509314](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210219214509314.png)</p>
+<h4 id="Characters-of-the-B-trees"><a href="#Characters-of-the-B-trees" class="headerlink" title="Characters of the B+ trees"></a>Characters of the B+ trees</h4><ul>
+<li><p>Since the inner-node connections are done by pointers, “logically” close blocks need not be “physically” close.</p>
+</li>
+<li><p>The non-leaf levels of the B+-tree form <strong>a hierarchy of sparse indices.</strong></p>
+</li>
+<li><p>If there are K search-key values in the file </p>
+<ul>
+<li><p>The <strong>B+-tree height</strong> is no more than <strong>⎡log⎡n/2⎤(K)⎤</strong> .</p>
+</li>
+<li><p>Level below root has at least 2* ⎡n/2⎤ values</p>
+</li>
+<li><p>Next level has at least 2* ⎡n/2⎤ * ⎡n/2⎤ values</p>
+</li>
+</ul>
+</li>
+<li><p>Searching can be conducted efficiently</p>
+</li>
+<li><p>Insertion and deletion to the main file can be handled efficiently, as the index can be restructured in logarithmic time</p>
+</li>
+</ul>
+<h4 id="Search-operation"><a href="#Search-operation" class="headerlink" title="Search operation"></a>Search operation</h4><ul>
+<li>To find the required record, you need to execute the binary search on the available records in the Tree.</li>
+<li>In case of an exact match with the search key, the corresponding record is returned to the user.</li>
+<li>In case the exact key is not located by the search in the parent, current, or leaf node, then a “not found message” is displayed to the user.</li>
+<li>The search process can be re-run for better and more accurate results.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. Call the binary search method on the records in the B+ Tree.</span><br><span class="line">2. If the search parameters match the exact key</span><br><span class="line">           The accurate result is returned and displayed to the user</span><br><span class="line">         Else, if the node being searched is the current and the exact key is not found by the algorithm</span><br><span class="line">           Display the statement "Recordset cannot be found.</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="Procedure-in-updates-on-B-tree"><a href="#Procedure-in-updates-on-B-tree" class="headerlink" title="Procedure in updates on B+ tree"></a>Procedure in updates on B+ tree</h4><ol>
+<li><p>Find the leaf node in which the search-key value would appear</p>
+</li>
+<li><p>If the search-key value is already present in the leaf node</p>
+<p>2.1. Add record to the file</p>
+<p>2.2. If necessary add a pointer to the bucket.</p>
+</li>
+<li><p>If the search-key value is not present, then</p>
+<p>3.1. add the record to the main file (and create a bucket if necessary)</p>
+<p>3.2. If there is room in the leaf node, insert (key-value, pointer) pair in the leaf node</p>
+<p>3.3. Otherwise, split the node (along with the new (key-value, pointer) entry) </p>
+</li>
+<li><p>Splitting a leaf node:</p>
+<p>4.1.  take the n (search-key value, pointer) pairs (including the one being inserted) an in-memory area M <strong>in sorted order</strong>. Place the first ⎡n/2⎤ in the original node, and the rest in a new node.</p>
+<p>4.2. let the new node be p, and let k be the least key value in p. Insert (k,p) in the parent of the node being split.</p>
+<p>4.3. If the parent is full, split it and propagate the split further up. </p>
+</li>
+<li><p>Splitting of nodes proceeds upwards till a node that is not full is found.</p>
+<ul>
+<li>In the worst case the root node may be split increasing the height of the tree by 1</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://www.guru99.com/images/1/120319_1235_BTREESearc1.png" alt="img"></p>
+<p>![image-20210220082907159](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210220082907159.png)</p>
+<p>![image-20210220082923546](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210220082923546.png)</p>
+<h4 id="Delete-Operation"><a href="#Delete-Operation" class="headerlink" title="Delete Operation"></a>Delete Operation</h4><p>The complexity of the delete procedure in the B+ Tree surpasses that of the insert and search functionality.</p>
+<p>The following algorithm is applicable while deleting an element from the B+ Tree:</p>
+<ul>
+<li>Firstly, we need to locate a leaf entry in the Tree that is holding the key and pointer. , delete the leaf entry from the Tree if the Leaf fulfills the exact conditions of record deletion.</li>
+<li>In case the leaf node only meets the satisfactory factor of being half full, then the operation is completed; otherwise, the Leaf node has minimum entries and cannot be deleted.</li>
+<li>The other linked nodes on the right and left can vacate any entries then move them to the Leaf. If these criteria is not fulfilled, then they should combine the leaf node and its linked node in the tree hierarchy.</li>
+<li>Upon merging of leaf node with its neighbors on the right or left, entries of values in the leaf node or linked neighbor pointing to the top-level node are deleted.</li>
+</ul>
+<p><img src="https://www.guru99.com/images/1/120319_1235_BTREESearc2.png" alt="img"></p>
+<p>The example above illustrates the procedure to remove an element from the B+ Tree of a specific order.</p>
+<ul>
+<li>Firstly, the exact locations of the element to be deleted are identified in the Tree.</li>
+<li>Here the element to be deleted can only be accurately identified at the leaf level and not at the index placement. Hence, the element can be deleted without affecting the rules of deletion, which is the value of the bare-minimum key.</li>
+</ul>
+<p><a href="https://www.guru99.com/images/1/120319_1235_BTREESearc3.png"><img src="https://www.guru99.com/images/1/120319_1235_BTREESearc3.png" alt="img"></a></p>
+<ul>
+<li>In the above example, we have to delete 31 from the Tree.</li>
+<li>We need to locate the instances of 31 in Index and Leaf.</li>
+<li>We can see that 31 is available in both Index and Leaf node level. Hence, we delete it from both instances.</li>
+<li>But, we have to fill the index pointing to 42. We will now look at the right child under 25 and take the minimum value and place it as an index. So, 42 being the only value present, it will become the index.</li>
+</ul>
+<h4 id="Delete-Operation-Algorithm"><a href="#Delete-Operation-Algorithm" class="headerlink" title="Delete Operation Algorithm"></a>Delete Operation Algorithm</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1) Start at the root and go up to leaf node containing the key K</span><br><span class="line">2) Find the node n on the path from the root to the leaf node containing K</span><br><span class="line">    A. If n is root, remove K</span><br><span class="line">         a. if root has more than one key, done</span><br><span class="line">         b. if root has only K</span><br><span class="line">            i) if any of its child nodes can lend a node</span><br><span class="line">               Borrow key from the child and adjust child links</span><br><span class="line">            ii) Otherwise merge the children nodes. It will be a new root</span><br><span class="line">         c. If n is an internal node, remove K</span><br><span class="line">            i) If n has at least ceil(m/2) keys, done!</span><br><span class="line">            ii) If n has less than ceil(m/2) keys,</span><br><span class="line">                If a sibling can lend a key,</span><br><span class="line">                Borrow key from the sibling and adjust keys in n and the parent node</span><br><span class="line">                    Adjust child links</span><br><span class="line">                Else</span><br><span class="line">                    Merge n with its sibling</span><br><span class="line">                    Adjust child links</span><br><span class="line">         d. If n is a leaf node, remove K</span><br><span class="line">            i) If n has at least ceil(M/2) elements, done!</span><br><span class="line">                In case the smallest key is deleted, push up the next key</span><br><span class="line">            ii) If n has less than ceil(m/2) elements</span><br><span class="line">            If the sibling can lend a key</span><br><span class="line">                Borrow key from a sibling and adjust keys in n and its parent node</span><br><span class="line">            Else</span><br><span class="line">                Merge n and its sibling</span><br><span class="line">                Adjust keys in the parent node</span><br></pre></td></tr></table></figure>
+<p><strong>Output</strong>:</p>
+<p>The Key “K” is deleted, and keys are borrowed from siblings for adjusting values in n and its parent nodes if needed.</p>
+<h4 id="Summary-1"><a href="#Summary-1" class="headerlink" title="Summary:"></a>Summary:</h4><ul>
+<li>B+ Tree is a self-balancing data structure for executing accurate and faster searching, inserting and deleting procedures on data</li>
+<li>We can easily retrieve complete data or partial data because going through the linked tree structure makes it efficient.</li>
+<li>The B+ tree structure grows and shrinks with an increase/decrease in the number of stored records.</li>
+<li>Storage of data on the leaf nodes and subsequent branching of internal nodes evidently shortens the tree height, which reduces the disk input and output operations, ultimately consuming much less space on the storage devices.</li>
+</ul>
+<h3 id="Hash-Index"><a href="#Hash-Index" class="headerlink" title="Hash Index"></a>Hash Index</h3><h4 id="What-is-Hashing-in-DBMS"><a href="#What-is-Hashing-in-DBMS" class="headerlink" title="What is Hashing in DBMS?"></a>What is Hashing in DBMS?</h4><ul>
+<li><p>In DBMS, hashing is a technique to directly search the location of desired data on the disk without using index structure. </p>
+</li>
+<li><p>Hashing method is used to index and retrieve items in a database as it is faster to search that specific item using the shorter hashed key instead of using its original value. </p>
+</li>
+<li><p>Data is stored in the form of data blocks whose address is generated by applying a hash function in the memory location where these records are stored known as a <strong>data block or data bucket</strong>.</p>
+</li>
+</ul>
+<h4 id="Why-do-we-need-Hashing"><a href="#Why-do-we-need-Hashing" class="headerlink" title="Why do we need Hashing?"></a>Why do we need Hashing?</h4><p>Here, are the situations in the DBMS where you need to apply the Hashing method:</p>
+<ul>
+<li>For a huge database structure, it’s tough to search all the index values through all its level and then you need to reach the destination data block to get the desired data.</li>
+<li>Hashing method is used to index and retrieve items in a database as it is faster to search that specific item using the shorter hashed key instead of using its original value.</li>
+<li>Hashing is an ideal method to calculate the direct location of a data record on the disk without using index structure.</li>
+<li>It is also a helpful technique for implementing dictionaries</li>
+</ul>
+<h4 id="Structure-of-Static-Hashing"><a href="#Structure-of-Static-Hashing" class="headerlink" title="Structure of Static Hashing"></a>Structure of Static Hashing</h4><ul>
+<li><p>A <strong>bucket</strong> is a unit of storage containing one or more records (a bucket is typically a disk block).</p>
+</li>
+<li><p><strong>Hash function h</strong> is a function from the set of all search-key values K to the set of all bucket addresses B.</p>
+</li>
+<li><p>Hash function is used to locate records for access, insertion as well as deletion.</p>
+</li>
+<li><p>Records with different search-key values may be mapped to the same bucket; thus entire bucket has to be searched sequentially to locate a record.</p>
+</li>
+</ul>
+<h4 id="Important-Terminologies-using-in-Hashing"><a href="#Important-Terminologies-using-in-Hashing" class="headerlink" title="Important Terminologies using in Hashing"></a>Important Terminologies using in Hashing</h4><p>Here, are important terminologies which are used in Hashing:</p>
+<ul>
+<li><strong>Data bucket</strong> – Data buckets are memory locations where the records are stored. It is also known as Unit Of Storage.</li>
+<li><strong>Key</strong>: A DBMS key is an attribute or set of an attribute which helps you to identify a row(tuple) in a relation(table). This allows you to find the relationship between two tables.</li>
+<li><strong>Hash function</strong>: A hash function, is a mapping function which maps all the set of search keys to the address where actual records are placed.</li>
+<li><strong>Linear Probing</strong> – Linear probing is a fixed interval between probes. In this method, the next available data block is used to enter the new record, instead of overwriting on the older record.</li>
+<li><strong>Quadratic probing</strong>- It helps you to determine the new bucket address. It helps you to add Interval between probes by adding the consecutive output of quadratic polynomial to starting value given by the original computation.</li>
+<li><strong>Hash index</strong> – It is an address of the data block. A hash function could be a simple mathematical function to even a complex mathematical function.</li>
+<li><strong>Double Hashing</strong> –Double hashing is a computer programming method used in hash tables to resolve the issues of has a collision.</li>
+<li><strong>Bucket Overflow</strong>: The condition of bucket-overflow is called collision. This is a fatal stage for any static has to function.</li>
+</ul>
+<p>There are mainly two types of SQL hashing methods:</p>
+<ol>
+<li>Static Hashing</li>
+<li>Dynamic Hashing</li>
+</ol>
+<h4 id="Static-Hashing"><a href="#Static-Hashing" class="headerlink" title="Static Hashing"></a>Static Hashing</h4><p>In the static hashing, the resultant data bucket address will always remain the same.</p>
+<p>Therefore, if you generate an address for say <strong>Student_ID = 10</strong> using hashing function <strong>mod(3)</strong>, the resultant bucket address will always be <strong>1</strong>. So, you will not see any change in the bucket address.</p>
+<p>Therefore, in this static hashing method, the number of data buckets in memory always remains constant.</p>
+<h4 id="Static-Hash-Functions"><a href="#Static-Hash-Functions" class="headerlink" title="Static Hash Functions"></a>Static Hash Functions</h4><ul>
+<li><strong>Inserting a record</strong>: When a new record requires to be inserted into the table, you can generate an address for the new record using its hash key. When the address is generated, the record is automatically stored in that location.</li>
+<li><strong>Searching</strong>: When you need to retrieve the record, the same hash function should be helpful to retrieve the address of the bucket where data should be stored.</li>
+<li><strong>Delete a record</strong>: Using the hash function, you can first fetch the record which is you wants to delete. Then you can remove the records for that address in memory.</li>
+</ul>
+<p>Static hashing is further divided into</p>
+<ol>
+<li>Open hashing</li>
+<li>Close hashing.</li>
+</ol>
+<h4 id="Open-Hashing"><a href="#Open-Hashing" class="headerlink" title="Open Hashing"></a>Open Hashing</h4><p>In Open hashing method, Instead of overwriting older one the next available data block is used to enter the new record, This method is also known as linear probing.</p>
+<p>For example, A2 is a new record which you wants to insert. The hash function generates address as 222. But it is already occupied by some other value. That’s why the system looks for the next data bucket 501 and assigns A2 to it.</p>
+<p><a href="https://www.guru99.com/images/1/042919_0419_HashinginDB1.png"><img src="https://www.guru99.com/images/1/042919_0419_HashinginDB1.png" alt="img"></a>How Open Hash Works</p>
+<h4 id="Close-Hashing"><a href="#Close-Hashing" class="headerlink" title="Close Hashing"></a>Close Hashing</h4><p>In the close hashing method, when buckets are full, a new bucket is allocated for the same hash and result are linked after the previous one.</p>
+<h4 id="Dynamic-Hashing"><a href="#Dynamic-Hashing" class="headerlink" title="Dynamic Hashing"></a>Dynamic Hashing</h4><p>Dynamic hashing offers a mechanism in which data buckets are added and removed dynamically and on demand. In this hashing, the hash function helps you to create a large number of values.</p>
+<h4 id="Comparison-of-Ordered-Indexing-and-Hashing"><a href="#Comparison-of-Ordered-Indexing-and-Hashing" class="headerlink" title="Comparison of Ordered Indexing and Hashing"></a>Comparison of Ordered Indexing and Hashing</h4><table>
+<thead>
+<tr>
+<th><strong>Parameters</strong></th>
+<th><strong>Order Indexing</strong></th>
+<th><strong>Hashing</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Storing of address</td>
+<td>Addresses in the memory are sorted according to a key value called the primary key</td>
+<td>Addresses are always generated using a hash function on the key value.</td>
+</tr>
+<tr>
+<td>Performance</td>
+<td>It can decrease when the data increases in the hash file. As it stores the data in a sorted form when there is any (insert/delete/update) operation performed which decreases its performance.</td>
+<td>Performance of hashing will be best when there is a constant addition and deletion of data. However, when the database is huge, then hash file organization and its maintenance will be costlier.</td>
+</tr>
+<tr>
+<td>Use for</td>
+<td>Preferred for range retrieval of data- which means whenever there is retrieval data for a particular range, this method is an ideal option.</td>
+<td>This is an ideal method when you want to retrieve a particular record based on the search key. However, it will only perform well when the hash function is on the search key.</td>
+</tr>
+<tr>
+<td>Memory management</td>
+<td>There will be many unused data blocks because of the delete/update operation. These data blocks can’t be released for re-use. That’s why regular maintenance of the memory is required.</td>
+<td>In static and dynamic hashing methods, memory is always managed. Bucket overflow is also handled perfectly to extend static hashing.</td>
+</tr>
+</tbody></table>
+<h4 id="What-is-Collision-Bucket-Overflow"><a href="#What-is-Collision-Bucket-Overflow" class="headerlink" title="What is Collision (Bucket Overflow)?"></a>What is Collision (Bucket Overflow)?</h4><p>Hash collision is a state when the resultant hashes from two or more data in the data set, wrongly map the same place in the hash table.</p>
+<h4 id="Bucket-overflow-can-occur-because-of"><a href="#Bucket-overflow-can-occur-because-of" class="headerlink" title="Bucket overflow can occur because of"></a>Bucket overflow can occur because of</h4><ul>
+<li><p>Insufficient buckets</p>
+</li>
+<li><p>Skew in distribution of records. This can occur due to two reasons:</p>
+<ul>
+<li>multiple records have same search-key value</li>
+<li>chosen hash function produces non-uniform distribution of key value</li>
+</ul>
+</li>
+</ul>
+<p>Overflow chaining – the overflow buckets of a given bucket are chained together in a linked list.</p>
+<h4 id="Hash-Indices"><a href="#Hash-Indices" class="headerlink" title="Hash Indices"></a>Hash Indices</h4><ul>
+<li><p>Hashing can be used not only for file organization, but also for index-structure creation.</p>
+</li>
+<li><p>A hash index organizes the search keys, with their associated record pointers, into a hash file structure.</p>
+</li>
+<li><p>Strictly speaking, hash indices are always <strong>secondary indices</strong>.</p>
+</li>
+<li><p>We use the term hash index to refer to both secondary index structures and hash organized files.</p>
+</li>
+</ul>
+<h4 id="How-to-deal-with-Hashing-Collision"><a href="#How-to-deal-with-Hashing-Collision" class="headerlink" title="How to deal with Hashing Collision?"></a>How to deal with Hashing Collision?</h4><p>There are two technique which you can use to avoid a hash collision:</p>
+<ol>
+<li><strong>Rehashing</strong>: This method, invokes a secondary hash function, which is applied continuously until an empty slot is found, where a record should be placed.</li>
+<li><strong>Chaining</strong>: Chaining method builds a Linked list of items whose key hashes to the same value. This method requires an extra link field to each table position.</li>
+</ol>
+<h4 id="Deficiencies-of-Static-Hashing"><a href="#Deficiencies-of-Static-Hashing" class="headerlink" title="Deficiencies of Static Hashing"></a>Deficiencies of Static Hashing</h4><ul>
+<li><p>In static hashing, function h maps search-key values to a fixed set of B of bucket addresses. Databases grow or shrink with time.</p>
+<ul>
+<li>If initial number of buckets is too small, and file grows, performance will degrade due to too many overflows.</li>
+<li>If space is allocated for anticipated growth, a significant amount of space will be wasted initially (and buckets will be underfull).</li>
+<li>If database shrinks, again space will be wasted.</li>
+</ul>
+</li>
+<li><p>One solution: periodic re-organisation of the file with a new hash function</p>
+<ul>
+<li>Expensive, disrupts normal operations</li>
+</ul>
+</li>
+<li><p>Better solution: allow the number of buckets to be modified dynamically - Dynamic Hashing!</p>
+</li>
+</ul>
+<h4 id="Dynamic-Hashing-1"><a href="#Dynamic-Hashing-1" class="headerlink" title="Dynamic Hashing"></a>Dynamic Hashing</h4><ul>
+<li><p>Good for database that <strong>grows and shrinks in size</strong></p>
+</li>
+<li><p>Allows the hash function to be <strong>modified dynamically</strong></p>
+</li>
+<li><p><strong>Extendable hashing</strong> – one form of dynamic hashing</p>
+<ul>
+<li><p>Hash function generates values over a large range — typically b-bit integers, with b = 32.</p>
+</li>
+<li><p>At any time use only a prefix of the hash function to index into a table of bucket addresses.</p>
+</li>
+<li><p>Let the length of the prefix be i bits, 0 ≤ i ≤ 32.</p>
+</li>
+<li><p>Bucket address table size = 2i. Initially i = 0</p>
+</li>
+<li><p>Value of i grows and shrinks as the size of the database grows and shrinks.</p>
+</li>
+<li><p>Multiple entries in the bucket address table may point to the same bucket</p>
+</li>
+<li><p>Thus, actual number of buckets is &lt; 2i</p>
+</li>
+<li><p>The number of buckets also changes dynamically due to <strong>coalescing</strong> and <strong>splitting</strong> of buckets.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>![image-20210220111058629](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210220111058629.png)</p>
+<h4 id="Summary-2"><a href="#Summary-2" class="headerlink" title="Summary:"></a>Summary:</h4><ul>
+<li>In DBMS, hashing is a technique to directly search the location of desired data on the disk without using index structure.</li>
+<li>Hashing method is used to index and retrieve items in a database as it is faster to search that specific item using the shorter hashed key instead of using its original value.</li>
+<li>Data bucket, Key , Hash function, Linear Probing, Quadratic probing , Hash index, Double Hashing, Bucket Overflow are important terminologies used in hashing</li>
+<li>Two types of hashing methods are 1) static hashing 2) dynamic hashing</li>
+<li>In the static hashing, the resultant data bucket address will always remain the same.</li>
+<li>Dynamic hashing offers a mechanism in which data buckets are added and removed dynamically and on demand.</li>
+<li>In order Indexing addresses in the memory are sorted according to a critical value while in hashing addresses are always generated using a hash function on the key value.</li>
+<li>Hash collision is a state when the resultant hashes from two or more data in the data set, wrongly map the same place in the hash table.</li>
+<li>Rehashing and chaining are two methods which help you to avoid hashing collision.</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Databases</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+        <tag>notes</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux 文件系统</title>
+    <url>/2021/02/10/2021-02-10-Linux-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<h2 id="走进Linux系统"><a href="#走进Linux系统" class="headerlink" title="走进Linux系统"></a>走进Linux系统</h2><p><img src="https://media.geeksforgeeks.org/wp-content/uploads/linuxDir.jpg" alt="Image result for linux file system hierarchy"></p>
+<ul>
+<li><strong>/bin</strong>：bin是Binary的缩写, 这个目录存放着最经常使用的命令。</li>
+<li><strong>/boot：</strong> 这里存放的是启动Linux时使用的一些核心文件，包括一些连接文件以及镜像文件。 (不要动)</li>
+<li><strong>/dev ：</strong> dev是Device(设备)的缩写, 存放的是Linux的外部设备，在Linux中访问设备的方式和访问文件的方式是相同的。</li>
+<li>==<strong>/etc：</strong> 这个目录用来存放所有的系统管理所需要的配置文件和子目录。== </li>
+<li>==<strong>/home</strong>：用户的主目录，在Linux中，每个用户都有一个自己的目录，一般该目录名是以用户的账号命名的。==</li>
+<li><strong>/lib</strong>：这个目录里存放着系统最基本的动态连接共享库，其作用类似于Windows里的DLL文件。（不要动）</li>
+<li><strong>/lost+found</strong>：这个目录一般情况下是空的，当系统非法关机后，这里就存放了一些文件。（存放突然关机的文件）</li>
+<li><strong>/media</strong>：linux系统会自动识别一些设备，例如U盘、光驱等等，当识别后，linux会把识别的设备挂载到这个目录下。</li>
+<li><strong>/mnt</strong>：系统提供该目录是为了让用户临时挂载别的文件系统的，我们可以将光驱挂载在/mnt/上，然后进入该目录就可以查看光驱里的内容了。（我们会把一些本地文件挂载在这个目录下）</li>
+<li>==<strong>/opt</strong>：这是给主机额外安装软件所摆放的目录。比如你安装一个ORACLE数据库则就可以放到这个目录下。默认是空的。==</li>
+<li><strong>/proc</strong>：这个目录是一个虚拟的目录，它是系统内存的映射，我们可以通过直接访问这个目录来获取系统信息。（不用管）</li>
+<li><strong>/root</strong>：该目录为系统管理员，也称作超级权限者的用户主目录。</li>
+<li><strong>/sbin</strong>：s就是Super User的意思，这里存放的是系统管理员使用的系统管理程序。</li>
+<li><strong>/srv</strong>：该目录存放一些服务启动之后需要提取的数据。</li>
+<li><strong>/sys</strong>：这是linux2.6内核的一个很大的变化。该目录下安装了2.6内核中新出现的一个文件系统 sysfs 。</li>
+<li>==<strong>/tmp</strong>：这个目录是用来存放一些临时文件的。用完即丢的文件，可以放在这个目录下，安装包！==</li>
+<li>==<strong>/usr</strong>：这是一个非常重要的目录，用户的很多应用程序和文件都放在这个目录下，类似于windows下的program files目录。==</li>
+<li><strong>/usr/bin：</strong> 系统用户使用的应用程序。</li>
+<li><strong>/usr/sbin：</strong> （super）超级用户使用的比较高级的管理程序和系统守护程序。</li>
+<li><strong>/usr/src：</strong> 内核源代码默认的放置目录。</li>
+<li>==<strong>/var</strong>：这个目录中存放着在不断扩充着的东西，我们习惯将那些经常被修改的目录放在这个目录下。包括各种日志文件。==</li>
+<li><strong>/run</strong>：是一个临时文件系统，存储系统启动以来的信息。当系统重启时，这个目录下的文件应该被删掉或清除。</li>
+<li>==<strong>/www：存放服务器网站相关的资源，环境，网站的项目</strong>==</li>
+</ul>
+<h2 id="常用的基本命令"><a href="#常用的基本命令" class="headerlink" title="常用的基本命令"></a>常用的基本命令</h2><h3 id="目录管理"><a href="#目录管理" class="headerlink" title="目录管理"></a>目录管理</h3><blockquote>
+<p>绝对路径，相对路径</p>
+</blockquote>
+<p>绝对路径：/Users/yuxuan/Desktop/GraphProt2.pdf </p>
+<p>相对路径：在当前文件下的xxx.xx文件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd: 切换目录命令</span><br><span class="line"></span><br><span class="line">./ ：当前目录</span><br><span class="line"></span><br><span class="line">cd.. 返回上一级目录</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>ls(列出目录！)</p>
+</blockquote>
+<p>在Linux中ls是最常用的</p>
+<p>-a 参数：all，查看全部的文件，包括隐藏的文件</p>
+<p>-l 参数：列出所有的文件，包含文件的属性和权限，没有隐藏文件</p>
+<p>所有linux语句可以同时使用 (ls -al)</p>
+<blockquote>
+<p>cd 命令</p>
+</blockquote>
+<p>![image-20210210192207429](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210210192207429.png)</p>
+<blockquote>
+<p>mkdir 创建目录</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 创建多级目录</span></span><br><span class="line">mkdir -p test1/test2/test3</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>rmdir删除目录</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> rmdir 仅能删除空的目录，如果下面存在文件，需要先删除文件，递归删除多个目录 -p</span></span><br><span class="line">rmdir -p test1/test2/test3</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>cp (复制文件或者目录)</p>
+</blockquote>
+<p>cp 原来的地方 新的地方！</p>
+<blockquote>
+<p>rm(移除文件或者目录！ )</p>
+</blockquote>
+<p>-f 忽略不存在的文件，不会出现警告，强制删除</p>
+<p>-r 递归删除目录！</p>
+<p>-I 互动，删除询问是否删除</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">rm -rf / 系统中所有的文件都被删除了，删库跑路的操作</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>mv 移动文件或者目录！重命名文件</p>
+</blockquote>
+<p>-f 强制</p>
+<p>-u 只替换已经更新过的文件</p>
+<p>![image-20210210195051021](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210210195051021.png)</p>
+<h3 id="基本属性"><a href="#基本属性" class="headerlink" title="基本属性"></a>基本属性</h3><p>十个字母，1 类型</p>
+<blockquote>
+<p>看懂文件属性</p>
+</blockquote>
+<p>Linux系统是一种典型的多用户系统，不同的用户处于不同的地位，拥有不同的权限。为了保护系统的安全性，Linux系统对不同的用户访问同一文件（包括目录文件）的权限做了不同的规定。</p>
+<p>在Linux中我们可以使用<code>ll</code>或者<code>ls –l</code>命令来显示一个文件的属性以及文件所属的用户和组，如：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7JGpeIS4j9q3B4LQhsQkFiauXAQN0qOnVCYvj7Cm1oQbvexVDFqPhUIeTe83BdAHlXCJhGoNabSFKQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>实例中，boot文件的第一个属性用”d”表示。”d”在Linux中代表该文件是一个目录文件。</p>
+<p>在Linux中第一个字符代表这个文件是目录、文件或链接文件等等：</p>
+<ul>
+<li>==当为[ <strong>d</strong> ]则是目录==</li>
+<li>==当为[ <strong>-</strong> ]则是文件；==</li>
+<li>==若是[ <strong>l</strong> ]则表示为链接文档 ( link file )；==</li>
+<li>若是[ <strong>b</strong> ]则表示为装置文件里面的可供储存的接口设备 ( 可随机存取装置 )；</li>
+<li>若是[ <strong>c</strong> ]则表示为装置文件里面的串行端口设备，例如键盘、鼠标 ( 一次性读取装置 )。</li>
+</ul>
+<p>接下来的字符中，以三个为一组，且均为『rwx』 的三个参数的组合。</p>
+<p>其中，[ r ]代表可读(read)、[ w ]代表可写(write)、[ x ]代表可执行(execute)。</p>
+<p>要注意的是，这三个权限的位置不会改变，如果没有权限，就会出现减号[ - ]而已。</p>
+<p>每个文件的属性由左边第一部分的10个字符来确定（如下图）：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7JGpeIS4j9q3B4LQhsQkFiauEybzG2XIdlOMLyO13lMfPKUWRpGJGgyxCAJ9mics9dTZ1qrWDIvleYQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>从左至右用0-9这些数字来表示。</p>
+<p>第0位确定文件类型，第1-3位确定属主（该文件的所有者）拥有该文件的权限。第4-6位确定属组（所有者的同组用户）拥有该文件的权限，第7-9位确定其他用户拥有该文件的权限。</p>
+<p>其中：</p>
+<p>第1、4、7位表示读权限，如果用”r”字符表示，则有读权限，如果用”-“字符表示，则没有读权限；</p>
+<p>第2、5、8位表示写权限，如果用”w”字符表示，则有写权限，如果用”-“字符表示没有写权限；</p>
+<p>第3、6、9位表示可执行权限，如果用”x”字符表示，则有执行权限，如果用”-“字符表示，则没有执行权限。</p>
+<p>对于文件来说，它都有一个特定的所有者，也就是对该文件具有所有权的用户。</p>
+<p>同时，在Linux系统中，用户是按组分类的，一个用户属于一个或多个组。</p>
+<p>文件所有者以外的用户又可以分为文件所有者的同组用户和其他用户。</p>
+<p>因此，Linux系统按文件所有者、文件所有者同组用户和其他用户来规定了不同的文件访问权限。</p>
+<p>在以上实例中，boot 文件是一个目录文件，属主和属组都为 root。</p>
+<blockquote>
+<p>修改文件属性</p>
+</blockquote>
+<p><strong>1、chgrp：更改文件属组</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chgrp [-R] 属组名 文件名</span><br></pre></td></tr></table></figure>
+<p>-R：递归更改文件属组，就是在更改某个目录文件的属组时，如果加上-R的参数，那么该目录下的所有文件的属组都会更改。</p>
+<p><strong>2、chown：更改文件属主，也可以同时更改文件属组</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chown [–R] 属主名 文件名</span><br><span class="line">chown [-R] 属主名：属组名 文件名</span><br></pre></td></tr></table></figure>
+<p>==<strong>3、chmod：更改文件9个属性</strong>==</p>
+<p>你没有权限操作此文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chmod [-R] xyz 文件或目录</span><br></pre></td></tr></table></figure>
+<p>Linux文件属性有两种设置方法，一种是数字（常用的是数字），一种是符号。</p>
+<p>Linux文件的基本权限就有九个，分别是owner/group/others三种身份各有自己的read/write/execute权限。</p>
+<p>先复习一下刚刚上面提到的数据：文件的权限字符为：『-rwxrwxrwx』， 这九个权限是三个三个一组的！其中，我们可以使用数字来代表各个权限，各权限的分数对照表如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">r:4     w:2         x:1</span><br><span class="line"></span><br><span class="line">可读可写不可执行 rw- 6</span><br><span class="line">可读可写不可执行 rwx  7</span><br><span class="line"></span><br><span class="line">chmod 777 文件可读可写可执行</span><br></pre></td></tr></table></figure>
+<p>每种身份(owner/group/others)各自的三个权限(r/w/x)分数是需要累加的，例如当权限为：[-rwxrwx—] 分数则是：</p>
+<ul>
+<li>owner = rwx = 4+2+1 = 7</li>
+<li>group = rwx = 4+2+1 = 7</li>
+<li>others= — = 0+0+0 = 0</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chmod 770 filename</span><br></pre></td></tr></table></figure>
+<p>可以自己下去多进行测试！</p>
+<h3 id="文件内容查看"><a href="#文件内容查看" class="headerlink" title="文件内容查看"></a>文件内容查看</h3><blockquote>
+<p>概述</p>
+</blockquote>
+<p>我们会经常查看文件内容</p>
+<p>Linux系统中使用以下命令来查看文件的内容：</p>
+<ul>
+<li><p>==cat 由第一行开始显示文件内容，用来读文章，或者读取配置文件啊，都是用cat命令==</p>
+</li>
+<li><p>tac 从最后一行开始显示，可以看出 tac 是 cat 的倒着写！</p>
+</li>
+<li><p>==nl  显示的时候，顺道输出行号！ 看代码的时候希望带行号！常用==</p>
+<p>![image-20210210210000612](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210210210000612.png)</p>
+</li>
+<li><p>more 一页一页的显示文件内容 看余下内容的（空格代表翻页，enter代表向下看一行，：f看行号）</p>
+</li>
+<li><p>==less 与 more 类似，但是比 more 更好的是，他可以往前翻页！（空格翻页，上下键代表翻动页面，退出是q命令，查找字符串 /要查询的字符向下查询，向上查询用？n代表继续执行下一个，N向上寻找）==</p>
+</li>
+<li><p>head 只看头几行 -n 参数来看前面n行</p>
+</li>
+<li><p>tail 只看尾巴几行 -n 参数来看后面n行</p>
+</li>
+</ul>
+<p>你可以使用 *man [命令]*来查看各个命令的使用文档，如 ：man cp。</p>
+<p>网络配置目录：<code>cd /etc/sysconfig/network-scripts</code> <strong>（centos7）</strong></p>
+<p>![image-20210210205649801](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210210205649801.png)</p>
+<p>ifconfig 命令查看网络配置</p>
+<blockquote>
+<p>cat 由第一行开始显示文件内容</p>
+</blockquote>
+<p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cat [-AbEnTv]</span><br></pre></td></tr></table></figure>
+<p>选项与参数：</p>
+<ul>
+<li>-A ：相当於 -vET 的整合选项，可列出一些特殊字符而不是空白而已；</li>
+<li>-b ：列出行号，仅针对非空白行做行号显示，空白行不标行号！</li>
+<li>-E ：将结尾的断行字节 $ 显示出来；</li>
+<li>-n ：列印出行号，连同空白行也会有行号，与 -b 的选项不同；</li>
+<li>-T ：将 [tab] 按键以 ^I 显示出来；</li>
+<li>-v ：列出一些看不出来的特殊字符</li>
+</ul>
+<p>测试：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 查看网络配置: 文件地址 &#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;</span><br><span class="line">[root@kuangshen ~]# cat &#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;ifcfg-eth0</span><br><span class="line">DEVICE&#x3D;eth0</span><br><span class="line">BOOTPROTO&#x3D;dhcp</span><br><span class="line">ONBOOT&#x3D;yes</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>tac</p>
+</blockquote>
+<p>tac与cat命令刚好相反，文件内容从最后一行开始显示，可以看出 tac 是 cat 的倒着写！如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@kuangshen ~]# tac &#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;ifcfg-eth0</span><br><span class="line">ONBOOT&#x3D;yes</span><br><span class="line">BOOTPROTO&#x3D;dhcp</span><br><span class="line">DEVICE&#x3D;eth0</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>nl  显示行号</p>
+</blockquote>
+<p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">nl [-bnw] 文件</span><br></pre></td></tr></table></figure>
+<p>选项与参数：</p>
+<ul>
+<li>-b ：指定行号指定的方式，主要有两种：-b a ：表示不论是否为空行，也同样列出行号(类似 cat -n)；-b t ：如果有空行，空的那一行不要列出行号(默认值)；</li>
+<li>-n ：列出行号表示的方法，主要有三种：-n ln ：行号在荧幕的最左方显示；-n rn ：行号在自己栏位的最右方显示，且不加 0 ；-n rz ：行号在自己栏位的最右方显示，且加 0 ；</li>
+<li>-w ：行号栏位的占用的位数。</li>
+</ul>
+<p>测试：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@kuangshen ~]# nl &#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;ifcfg-eth0</span><br><span class="line">1DEVICE&#x3D;eth0</span><br><span class="line">2BOOTPROTO&#x3D;dhcp</span><br><span class="line">3ONBOOT&#x3D;yes</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>more  一页一页翻动</p>
+</blockquote>
+<p>在 more 这个程序的运行过程中，你有几个按键可以按的：</p>
+<ul>
+<li>空白键 (space)：代表向下翻一页；</li>
+<li>Enter   ：代表向下翻『一行』；</li>
+<li>/字串   ：代表在这个显示的内容当中，向下搜寻『字串』这个关键字；</li>
+<li>:f    ：立刻显示出档名以及目前显示的行数；</li>
+<li>q    ：代表立刻离开 more ，不再显示该文件内容。</li>
+<li>b 或 [ctrl]-b ：代表往回翻页，不过这动作只对文件有用，对管线无用。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@kuangshen etc]# more &#x2F;etc&#x2F;csh.login</span><br><span class="line">....(中间省略)....</span><br><span class="line">--More--(28%) # 重点在这一行喔！你的光标也会在这里等待你的命令</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>less  一页一页翻动，以下实例输出/etc/man.config文件的内容：</p>
+</blockquote>
+<p>less运行时可以输入的命令有：</p>
+<ul>
+<li>空白键  ：向下翻动一页；</li>
+<li>[pagedown]：向下翻动一页；</li>
+<li>[pageup] ：向上翻动一页；</li>
+<li>/字串  ：向下搜寻『字串』的功能；</li>
+<li>?字串  ：向上搜寻『字串』的功能；</li>
+<li>n   ：重复前一个搜寻 (与 / 或 ? 有关！)</li>
+<li>N   ：反向的重复前一个搜寻 (与 / 或 ? 有关！)</li>
+<li>q   ：离开 less 这个程序；</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@kuangshen etc]# more &#x2F;etc&#x2F;csh.login</span><br><span class="line">....(中间省略)....</span><br><span class="line">:   # 这里可以等待你输入命令！</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>head  取出文件前面几行</p>
+</blockquote>
+<p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">head [-n number] 文件</span><br></pre></td></tr></table></figure>
+<p>选项与参数：**-n** 后面接数字，代表显示几行的意思！</p>
+<p>默认的情况中，显示前面 10 行！若要显示前 20 行，就得要这样：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@kuangshen etc]# head -n 20 &#x2F;etc&#x2F;csh.login</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>tail  取出文件后面几行</p>
+</blockquote>
+<p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tail [-n number] 文件</span><br></pre></td></tr></table></figure>
+<p>选项与参数：</p>
+<ul>
+<li>-n ：后面接数字，代表显示几行的意思</li>
+</ul>
+<p>默认的情况中，显示最后 10 行！若要显示最后 20 行，就得要这样：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@kuangshen etc]# tail -n 20 &#x2F;etc&#x2F;csh.login</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>拓展：Linux 链接概念</p>
+</blockquote>
+<p>Linux 链接分两种，一种被称为硬链接（Hard Link），另一种被称为符号链接（Symbolic Link）。</p>
+<p>情况下，<strong>ln</strong> 命令产生硬链接。</p>
+<p><strong>硬连接</strong></p>
+<p>硬连接指通过索引节点来进行连接。在 Linux 的文件系统中，保存在磁盘分区中的文件不管是什么类型都给它分配一个编号，称为索引节点号(Inode Index)。在 Linux 中，多个文件名指向同一索引节点是存在的。比如：<strong>A 是 B 的硬链接（A 和 B 都是文件名），则 A 的目录项中的 inode 节点号与 B 的目录项中的 inode 节点号相同</strong>，即一个 inode 节点对应两个不同的文件名，两个文件名指向同一个文件，A 和 B 对文件系统来说是完全平等的。删除其中任何一个都不会影响另外一个的访问。==（允许一个文件含有多种路径）==</p>
+<p>硬连接的作用是允许一个文件拥有多个有效路径名，这样用户就可以建立硬连接到重要文件，以防止“误删”的功能。其原因如上所述，因为对应该目录的索引节点有一个以上的连接。只删除一个连接并不影响索引节点本身和其它的连接，只有当最后一个连接被删除后，文件的数据块及目录的连接才会被释放。也就是说，文件真正删除的条件是与之相关的所有硬连接文件均被删除。</p>
+<p><strong>软连接</strong></p>
+<p>另外一种连接称之为符号连接（Symbolic Link），也叫软连接。==软链接文件有类似于 Windows 的快捷方式。删除源文件，快捷方式也访问不了了==它实际上是一个特殊的文件。在符号连接中，文件实际上是一个文本文件，其中包含的有另一文件的位置信息。比如：A 是 B 的软链接（A 和 B 都是文件名），A 的目录项中的 inode 节点号与 B 的目录项中的 inode 节点号不相同，A 和 B 指向的是两个不同的 inode，继而指向两块不同的数据块。但是 A 的数据块中存放的只是 B 的路径名（可以根据这个找到 B 的目录项）。A 和 B 之间是“主从”关系，如果 B 被删除了，A 仍然存在（因为两个是不同的文件），但指向的是一个无效的链接。</p>
+<p><strong>测试：</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@kuangshen /]# cd /home</span><br><span class="line">[root@kuangshen home]# touch f1 # 创建一个测试文件f1</span><br><span class="line">[root@kuangshen home]# ls</span><br><span class="line">f1</span><br><span class="line">[root@kuangshen home]# ln f1 f2     # 创建f1的一个硬连接文件f2</span><br><span class="line">[root@kuangshen home]# ln -s f1 f3   # 创建f1的一个符号连接文件f3</span><br><span class="line">[root@kuangshen home]# ls -li       # -i参数显示文件的inode节点信息</span><br><span class="line">397247 -rw-r--r-- 2 root root     0 Mar 13 00:50 f1</span><br><span class="line">397247 -rw-r--r-- 2 root root     0 Mar 13 00:50 f2</span><br><span class="line">397248 lrwxrwxrwx 1 root root     2 Mar 13 00:50 f3 -&gt; f1</span><br></pre></td></tr></table></figure>
+<p>从上面的结果中可以看出，硬连接文件 f2 与原文件 f1 的 inode 节点相同，均为 397247，然而符号连接文件的 inode 节点不同。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">echo</span> 字符串输出 &gt;&gt; f1 输出到 f1文件</span></span><br><span class="line">[root@kuangshen home]# echo &quot;I am f1 file&quot; &gt;&gt;f1 # 给f1输入些字符</span><br><span class="line">[root@kuangshen home]# cat f1</span><br><span class="line">I am f1 file</span><br><span class="line">[root@kuangshen home]# cat f2</span><br><span class="line">I am f1 file</span><br><span class="line">[root@kuangshen home]# cat f3</span><br><span class="line">I am f1 file</span><br><span class="line">[root@kuangshen home]# rm -f f1</span><br><span class="line">[root@kuangshen home]# cat f2</span><br><span class="line">I am f1 file</span><br><span class="line">[root@kuangshen home]# cat f3</span><br><span class="line">cat: f3: No such file or directory</span><br></pre></td></tr></table></figure>
+<p>通过上面的测试可以看出：当删除原始文件 f1 后，硬连接 f2 不受影响，但是符号连接 f1 文件无效；</p>
+<p>依此您可以做一些相关的测试，可以得到以下全部结论：</p>
+<ul>
+<li>删除符号连接f3,对f1,f2无影响；</li>
+<li>删除硬连接f2，对f1,f3也无影响；</li>
+<li>删除原文件f1，对硬连接f2没有影响，导致符号连接f3失效；</li>
+<li>同时删除原文件f1,硬连接f2，整个文件会真正的被删除。</li>
+</ul>
+<h3 id="Vim-编辑器"><a href="#Vim-编辑器" class="headerlink" title="Vim 编辑器"></a>Vim 编辑器</h3><blockquote>
+<p>什么是Vim编辑器</p>
+</blockquote>
+<p>Vim 通过一些插件可以实现和IDE一样的功能</p>
+<p>Vim是从 vi 发展出来的一个文本编辑器。代码补完、编译及错误跳转等方便编程的功能特别丰富，在程序员中被广泛使用。尤其是在Linux环境中，必须要会使用Vim ==查看内容，编辑内容，保存内容！==</p>
+<p>简单的来说， vi 是老式的字处理器，不过功能已经很齐全了，但是还是有可以进步的地方。</p>
+<p>vim 则可以说是程序开发者的一项很好用的工具。</p>
+<p>所有的 Unix Like 系统都会内建 vi 文书编辑器，其他的文书编辑器则不一定会存在。</p>
+<p>连 vim 的官方网站 (<a class="link"   href="http://www.vim.org/" >http://www.vim.org<i class="fas fa-external-link-alt"></i></a>) 自己也说 vim 是一个程序开发工具而不是文字处理软件。</p>
+<p>vim 键盘图：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7L1I72C1HrwJ9bG6XAbVggM4RsQuEaoMI78gr3jGxkVH7ONWyDHmremOHiaUibc3sqPRfEuVuHqicfqA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<blockquote>
+<p>三种使用模式</p>
+</blockquote>
+<p>基本上 vi/vim 共分为三种模式，分别是<strong>命令模式（Command mode）</strong>，<strong>输入模式（Insert mode）</strong>和<strong>底线命令模式（Last line mode）</strong>。这三种模式的作用分别是：</p>
+<p><strong>命令模式：</strong></p>
+<p>用户刚刚启动 vi/vim，便进入了命令模式。</p>
+<p>此状态下敲击键盘动作会被Vim识别为命令，而非输入字符。比如我们此时按下i，并不会输入一个字符，i被当作了一个命令。</p>
+<p>以下是常用的几个命令：</p>
+<ul>
+<li><strong>i</strong> 切换到输入模式，以输入字符。</li>
+<li><strong>x</strong> 删除当前光标所在处的字符。</li>
+<li><strong>:</strong> 切换到底线命令模式，以在最底一行输入命令。</li>
+</ul>
+<p>若想要编辑文本：启动Vim，进入了命令模式，按下i，切换到输入模式。</p>
+<p>命令模式只有一些最基本的命令，因此仍要依靠底线命令模式输入更多命令。</p>
+<p><strong>输入模式：</strong></p>
+<p>在命令模式下按下i就进入了输入模式。</p>
+<p>在输入模式中，可以使用以下按键：</p>
+<ul>
+<li><strong>字符按键以及Shift组合</strong>，输入字符</li>
+<li><strong>ENTER</strong>，回车键，换行</li>
+<li><strong>BACK SPACE</strong>，退格键，删除光标前一个字符</li>
+<li><strong>DEL</strong>，删除键，删除光标后一个字符</li>
+<li><strong>方向键</strong>，在文本中移动光标</li>
+<li><strong>HOME</strong>/<strong>END</strong>，移动光标到行首/行尾</li>
+<li><strong>Page Up</strong>/<strong>Page Down</strong>，上/下翻页</li>
+<li><strong>Insert</strong>，切换光标为输入/替换模式，光标将变成竖线/下划线</li>
+<li><strong>ESC</strong>，退出输入模式，切换到命令模式</li>
+</ul>
+<p><strong>底线命令模式</strong></p>
+<p>在命令模式下按下:（英文冒号）就进入了底线命令模式。光标移动到了最底下，就可以在这里输入一些命令了</p>
+<p>底线命令模式可以输入单个或多个字符的命令，可用的命令非常多。</p>
+<p>在底线命令模式中，基本的命令有（已经省略了冒号）：</p>
+<ul>
+<li>q 退出程序</li>
+<li>w 保存文件</li>
+</ul>
+<p>按ESC键可随时退出底线命令模式。</p>
+<p>简单的说，我们可以将这三个模式想成底下的图标来表示：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7L1I72C1HrwJ9bG6XAbVggMIxVoDyQ4LWxSbHDjAYfHuId7xfHHichtqZK2ehsXvcC9KiaibPf68s9dg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<blockquote>
+<p>上手体验一下，在home目录下测试</p>
+</blockquote>
+<p>如果你想要使用 vi 来建立一个名为 kuangstudy.txt 的文件时，你可以这样做：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@kuangshen home]# vim kuangstudy.txt</span><br></pre></td></tr></table></figure>
+<p>然后就会进入文件</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7L1I72C1HrwJ9bG6XAbVggM4461hqusRbQZ32967zqUhChqXbCzJTN3I20RpiaVbFqWvHicvicc9icBUQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>按下 i 进入输入模式(也称为编辑模式)，开始编辑文字</strong></p>
+<p>在一般模式之中，只要按下 i, o, a 等字符就可以进入输入模式了！</p>
+<p>在编辑模式当中，你可以发现在左下角状态栏中会出现 –INSERT- 的字样，那就是可以输入任意字符的提示。</p>
+<p>这个时候，键盘上除了 <strong>Esc</strong> 这个按键之外，其他的按键都可以视作为一般的输入按钮了，所以你可以进行任何的编辑。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7L1I72C1HrwJ9bG6XAbVggMEarICtkr8ia1N6zqcuv3ROj1TBDoMicM5DoYzaGU29qQ2mbQhlBUbbww/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>按下 ESC 按钮回到一般模式</strong></p>
+<p>好了，假设我已经按照上面的样式给他编辑完毕了，那么应该要如何退出呢？是的！没错！就是给他按下 <strong>Esc</strong> 这个按钮即可！马上你就会发现画面左下角的 – INSERT – 不见了！</p>
+<p>在一般模式中按下 <strong>:wq</strong> 储存后离开 vim！</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7L1I72C1HrwJ9bG6XAbVggMeA5EoVUt4j2544oibjdoeRah06s2ALh1QDXwep41Mj4ZnhWyb6icdp0w/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>OK! 这样我们就成功创建了一个 kuangstudy.txt 的文件。</p>
+<blockquote>
+<p>Vim 按键说明</p>
+</blockquote>
+<p>除了上面简易范例的 i, Esc, :wq 之外，其实 vim 还有非常多的按键可以使用。</p>
+<p><strong>第一部分：一般模式可用的光标移动、复制粘贴、搜索替换等</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">移动光标的方法</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">h 或 向左箭头键(←)</td>
+<td>光标向左移动一个字符</td>
+</tr>
+<tr>
+<td align="left">j 或 向下箭头键(↓)</td>
+<td>光标向下移动一个字符</td>
+</tr>
+<tr>
+<td align="left">k 或 向上箭头键(↑)</td>
+<td>光标向上移动一个字符</td>
+</tr>
+<tr>
+<td align="left">l 或 向右箭头键(→)</td>
+<td>光标向右移动一个字符</td>
+</tr>
+<tr>
+<td align="left">[Ctrl] + [f]</td>
+<td>屏幕『向下』移动一页，相当于 [Page Down]按键 (常用)</td>
+</tr>
+<tr>
+<td align="left">[Ctrl] + [b]</td>
+<td>屏幕『向上』移动一页，相当于 [Page Up] 按键 (常用)</td>
+</tr>
+<tr>
+<td align="left">[Ctrl] + [d]</td>
+<td>屏幕『向下』移动半页</td>
+</tr>
+<tr>
+<td align="left">[Ctrl] + [u]</td>
+<td>屏幕『向上』移动半页</td>
+</tr>
+<tr>
+<td align="left">+</td>
+<td>光标移动到非空格符的下一行</td>
+</tr>
+<tr>
+<td align="left">-</td>
+<td>光标移动到非空格符的上一行</td>
+</tr>
+<tr>
+<td align="left">数字&lt; space&gt;</td>
+<td>那个 n 表示『数字』，例如 20 。按下数字后再按空格键，光标会向右移动这一行的 n 个字符。快捷切换光标</td>
+</tr>
+<tr>
+<td align="left">0 或功能键[Home]</td>
+<td>这是数字『 0 』：移动到这一行的最前面字符处 (常用)</td>
+</tr>
+<tr>
+<td align="left">$ 或功能键[End]</td>
+<td>移动到这一行的最后面字符处(常用)</td>
+</tr>
+<tr>
+<td align="left">H</td>
+<td>光标移动到这个屏幕的最上方那一行的第一个字符</td>
+</tr>
+<tr>
+<td align="left">M</td>
+<td>光标移动到这个屏幕的中央那一行的第一个字符</td>
+</tr>
+<tr>
+<td align="left">L</td>
+<td>光标移动到这个屏幕的最下方那一行的第一个字符</td>
+</tr>
+<tr>
+<td align="left">G</td>
+<td>移动到这个档案的最后一行(常用)</td>
+</tr>
+<tr>
+<td align="left">nG</td>
+<td>n 为数字。移动到这个档案的第 n 行。例如 20G 则会移动到这个档案的第 20 行(可配合 :set nu)</td>
+</tr>
+<tr>
+<td align="left">gg</td>
+<td>移动到这个档案的第一行，相当于 1G 啊！(常用)</td>
+</tr>
+<tr>
+<td align="left">n&lt; Enter&gt;</td>
+<td>n 为数字。光标向下移动 n 行(常用)</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">搜索替换</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">==/word==</td>
+<td>向光标之下寻找一个名称为 word 的字符串。例如要在档案内搜寻 vbird 这个字符串，就输入 /vbird 即可！(常用)</td>
+</tr>
+<tr>
+<td align="left">?word</td>
+<td>向光标之上寻找一个字符串名称为 word 的字符串。</td>
+</tr>
+<tr>
+<td align="left">n</td>
+<td>这个 n 是英文按键。代表重复前一个搜寻的动作。举例来说， 如果刚刚我们执行 /vbird 去向下搜寻 vbird 这个字符串，则按下 n 后，会向下继续搜寻下一个名称为 vbird 的字符串。如果是执行 ?vbird 的话，那么按下 n 则会向上继续搜寻名称为 vbird 的字符串！</td>
+</tr>
+<tr>
+<td align="left">N</td>
+<td>这个 N 是英文按键。与 n 刚好相反，为『反向』进行前一个搜寻动作。例如 /vbird 后，按下 N 则表示『向上』搜寻 vbird 。</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">删除、复制与粘贴</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">x, X</td>
+<td>在一行字当中，x 为向后删除一个字符 (相当于 [del] 按键)， X 为向前删除一个字符(相当于 [backspace] 亦即是退格键) (常用)</td>
+</tr>
+<tr>
+<td align="left">nx</td>
+<td>n 为数字，连续向后删除 n 个字符。举例来说，我要连续删除 10 个字符， 『10x』。</td>
+</tr>
+<tr>
+<td align="left">dd</td>
+<td>删除游标所在的那一整行(常用)</td>
+</tr>
+<tr>
+<td align="left">ndd</td>
+<td>n 为数字。删除光标所在的向下 n 行，例如 20dd 则是删除 20 行 (常用)</td>
+</tr>
+<tr>
+<td align="left">d1G</td>
+<td>删除光标所在到第一行的所有数据</td>
+</tr>
+<tr>
+<td align="left">dG</td>
+<td>删除光标所在到最后一行的所有数据</td>
+</tr>
+<tr>
+<td align="left">d$</td>
+<td>删除游标所在处，到该行的最后一个字符</td>
+</tr>
+<tr>
+<td align="left">d0</td>
+<td>那个是数字的 0 ，删除游标所在处，到该行的最前面一个字符</td>
+</tr>
+<tr>
+<td align="left">yy</td>
+<td>复制游标所在的那一行(常用)</td>
+</tr>
+<tr>
+<td align="left">nyy</td>
+<td>n 为数字。复制光标所在的向下 n 行，例如 20yy 则是复制 20 行(常用)</td>
+</tr>
+<tr>
+<td align="left">y1G</td>
+<td>复制游标所在行到第一行的所有数据</td>
+</tr>
+<tr>
+<td align="left">yG</td>
+<td>复制游标所在行到最后一行的所有数据</td>
+</tr>
+<tr>
+<td align="left">y0</td>
+<td>复制光标所在的那个字符到该行行首的所有数据</td>
+</tr>
+<tr>
+<td align="left">y$</td>
+<td>复制光标所在的那个字符到该行行尾的所有数据</td>
+</tr>
+<tr>
+<td align="left">p, P</td>
+<td>p 为将已复制的数据在光标下一行贴上，P 则为贴在游标上一行！举例来说，我目前光标在第 20 行，且已经复制了 10 行数据。则按下 p 后， 那 10 行数据会贴在原本的 20 行之后，亦即由 21 行开始贴。但如果是按下 P 呢？那么原本的第 20 行会被推到变成 30 行。(常用)</td>
+</tr>
+<tr>
+<td align="left">J</td>
+<td>将光标所在行与下一行的数据结合成同一行</td>
+</tr>
+<tr>
+<td align="left">c</td>
+<td>重复删除多个数据，例如向下删除 10 行，[ 10cj ]</td>
+</tr>
+<tr>
+<td align="left">u</td>
+<td>复原前一个动作。(常用)</td>
+</tr>
+<tr>
+<td align="left">[Ctrl]+r</td>
+<td>重做上一个动作。(常用)</td>
+</tr>
+</tbody></table>
+<p><strong>第二部分：一般模式切换到编辑模式的可用的按钮说明</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">进入输入或取代的编辑模式</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">i, I</td>
+<td>进入输入模式(Insert mode)：i 为『从目前光标所在处输入』， I 为『在目前所在行的第一个非空格符处开始输入』。(常用)</td>
+</tr>
+<tr>
+<td align="left">a, A</td>
+<td>进入输入模式(Insert mode)：a 为『从目前光标所在的下一个字符处开始输入』， A 为『从光标所在行的最后一个字符处开始输入』。(常用)</td>
+</tr>
+<tr>
+<td align="left">o, O</td>
+<td>进入输入模式(Insert mode)：这是英文字母 o 的大小写。o 为『在目前光标所在的下一行处输入新的一行』；O 为在目前光标所在处的上一行输入新的一行！(常用)</td>
+</tr>
+<tr>
+<td align="left">r, R</td>
+<td>进入取代模式(Replace mode)：r 只会取代光标所在的那一个字符一次；R会一直取代光标所在的文字，直到按下 ESC 为止；(常用)</td>
+</tr>
+<tr>
+<td align="left">[Esc]</td>
+<td>退出编辑模式，回到一般模式中(常用)</td>
+</tr>
+</tbody></table>
+<p><strong>第三部分：一般模式切换到指令行模式的可用的按钮说明</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">指令行的储存、离开等指令</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">:w</td>
+<td>将编辑的数据写入硬盘档案中(常用)</td>
+</tr>
+<tr>
+<td align="left">:w!</td>
+<td>若文件属性为『只读』时，强制写入该档案。不过，到底能不能写入， 还是跟你对该档案的档案权限有关啊！</td>
+</tr>
+<tr>
+<td align="left">:q</td>
+<td>离开 vi (常用)</td>
+</tr>
+<tr>
+<td align="left">:q!</td>
+<td>若曾修改过档案，又不想储存，使用 ! 为强制离开不储存档案。</td>
+</tr>
+<tr>
+<td align="left">注意一下啊，那个惊叹号 (!) 在 vi 当中，常常具有『强制』的意思～</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">:wq</td>
+<td>储存后离开，若为 :wq! 则为强制储存后离开 (常用)</td>
+</tr>
+<tr>
+<td align="left">ZZ</td>
+<td>这是大写的 Z 喔！若档案没有更动，则不储存离开，若档案已经被更动过，则储存后离开！</td>
+</tr>
+<tr>
+<td align="left">:w [filename]</td>
+<td>将编辑的数据储存成另一个档案（类似另存新档）</td>
+</tr>
+<tr>
+<td align="left">:r [filename]</td>
+<td>在编辑的数据中，读入另一个档案的数据。亦即将 『filename』 这个档案内容加到游标所在行后面</td>
+</tr>
+<tr>
+<td align="left">:n1,n2 w [filename]</td>
+<td>将 n1 到 n2 的内容储存成 filename 这个档案。</td>
+</tr>
+<tr>
+<td align="left">:! command</td>
+<td>暂时离开 vi 到指令行模式下执行 command 的显示结果！例如 『:! ls /home』即可在 vi 当中看 /home 底下以 ls 输出的档案信息！</td>
+</tr>
+<tr>
+<td align="left">==:set nu==设置行号，代码中经常使用！</td>
+<td>显示行号，设定之后，会在每一行的前缀显示该行的行号</td>
+</tr>
+<tr>
+<td align="left">:set nonu</td>
+<td>与 set nu 相反，为取消行号！</td>
+</tr>
+</tbody></table>
+<h3 id="账号管理"><a href="#账号管理" class="headerlink" title="账号管理"></a>账号管理</h3><blockquote>
+<p>简介</p>
+</blockquote>
+<p>Linux系统是一个多用户多任务的分时操作系统，任何一个要使用系统资源的用户，都必须首先向系统管理员申请一个账号，然后以这个账号的身份进入系统。</p>
+<p>用户的账号一方面可以帮助系统管理员对使用系统的用户进行跟踪，并控制他们对系统资源的访问；另一方面也可以帮助用户组织文件，并为用户提供安全性保护。</p>
+<p>每个用户账号都拥有一个唯一的用户名和各自的口令。</p>
+<p>用户在登录时键入正确的用户名和口令后，就能够进入系统和自己的主目录。</p>
+<p>实现用户账号的管理，要完成的工作主要有如下几个方面：</p>
+<ul>
+<li>用户账号的添加、删除与修改。</li>
+<li>用户口令的管理。</li>
+<li>用户组的管理。</li>
+</ul>
+<blockquote>
+<p>用户账号的管理</p>
+</blockquote>
+<p>用户账号的管理工作主要涉及到用户账号的添加、修改和删除。</p>
+<p>添加用户账号就是在系统中创建一个新账号，然后为新账号分配用户号、用户组、主目录和登录Shell等资源。</p>
+<blockquote>
+<p>添加账号 useradd</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">useradd 选项 用户名</span><br></pre></td></tr></table></figure>
+<p>参数说明：</p>
+<ul>
+<li><p>选项 :</p>
+</li>
+<li><ul>
+<li>-c comment 指定一段注释性描述。</li>
+<li>-d 目录 指定用户主目录，如果此目录不存在，则同时使用-m选项，可以创建主目录。</li>
+<li>-g 用户组 指定用户所属的用户组。</li>
+<li>-G 用户组，用户组 指定用户所属的附加组。</li>
+<li>==-m　使用者目录如不存在则自动建立。(自动创建这个用户的主目录 /home/qinjiang)==</li>
+<li>-s Shell文件 指定用户的登录Shell。</li>
+<li>-u 用户号 指定用户的用户号，如果同时有-o选项，则可以重复使用其他用户的标识号。</li>
+</ul>
+</li>
+<li><p>用户名 :</p>
+</li>
+<li><ul>
+<li>指定新账号的登录名。</li>
+</ul>
+</li>
+</ul>
+<p>测试：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 此命令创建了一个用户kuangshen，其中-m选项用来为登录名kuangshen产生一个主目录 /home/kuangshen</span></span><br><span class="line">[root@kuangshen home]# useradd -m kuangshen</span><br></pre></td></tr></table></figure>
+<p>增加用户账号就是在/etc/passwd文件中为新用户增加一条记录，同时更新其他系统文件如/etc/shadow, /etc/group等。</p>
+<p>理解一下本质：Linux 中一切皆文件</p>
+<blockquote>
+<p>Linux下如何切换用户</p>
+</blockquote>
+<p>1.切换用户的命令为：su username 【username是你的用户名哦】</p>
+<p>2.从普通用户切换到root用户，还可以使用命令：sudo su</p>
+<p>3.在终端输入exit或logout或使用快捷方式ctrl+d，可以退回到原来用户，其实ctrl+d也是执行的exit命令</p>
+<p>4.在切换用户时，如果想在切换用户之后使用新用户的工作环境，可以在su和username之间加-，例如：【su - root】</p>
+<p>$表示普通用户</p>
+<p>#表示超级用户，也就是root用户</p>
+<p>更改查看主机名：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hostname: 名字</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>删除帐号</p>
+</blockquote>
+<p>如果一个用户的账号不再使用，可以从系统中删除。</p>
+<p>删除用户账号就是要将/etc/passwd等系统文件中的该用户记录删除，必要时还删除用户的主目录。</p>
+<p>删除一个已有的用户账号使用userdel命令，其格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">userdel 选项 用户名</span><br></pre></td></tr></table></figure>
+<p>常用的选项是 <strong>-r</strong>，它的作用是把用户的主目录一起删除。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@kuangshen home]# userdel -r kuangshen</span><br></pre></td></tr></table></figure>
+<p>此命令删除用户kuangshen在系统文件中（主要是/etc/passwd, /etc/shadow, /etc/group等）的记录，同时删除用户的主目录。</p>
+<blockquote>
+<p>修改帐号</p>
+</blockquote>
+<p>修改用户账号就是根据实际情况更改用户的有关属性，如用户号、主目录、用户组、登录Shell等。</p>
+<p>修改已有用户的信息使用usermod命令，其格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">usermod 选项 用户名</span><br></pre></td></tr></table></figure>
+<p>常用的选项包括-c, -d, -m, -g, -G, -s, -u以及-o等，这些选项的意义与useradd命令中的选项一样，可以为用户指定新的资源值。</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># usermod -s &#x2F;bin&#x2F;ksh -d &#x2F;home&#x2F;z –g developer kuangshen</span><br></pre></td></tr></table></figure>
+<p>此命令将用户kuangshen的登录Shell修改为ksh，主目录改为/home/z，用户组改为developer。</p>
+<p>修改完毕之后查看配置文件即可</p>
+<blockquote>
+<p>用户口令的管理</p>
+</blockquote>
+<p>用户管理的一项重要内容是用户口令的管理。用户账号刚创建时没有口令，但是被系统锁定，无法使用，必须为其指定口令后才可以使用，即使是指定空口令。</p>
+<p>指定和修改用户口令的Shell命令是passwd。超级用户可以为自己和其他用户指定口令，普通用户只能用它修改自己的口令。</p>
+<p>命令的格式为：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">passwd 选项 用户名</span><br></pre></td></tr></table></figure>
+<p>可使用的选项：</p>
+<ul>
+<li>-l 锁定口令，即禁用账号。</li>
+<li>-u 口令解锁。</li>
+<li>-d 使账号无口令。(没有密码也无法成功)</li>
+<li>-f 强迫用户下次登录时修改口令。</li>
+</ul>
+<p>如果默认用户名，则修改当前用户的口令。</p>
+<p>例如，假设当前用户是kuangshen，则下面的命令修改该用户自己的口令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ passwd </span><br><span class="line">Old password:******</span><br><span class="line">New password:*******</span><br><span class="line">Re-enter new password:*******</span><br></pre></td></tr></table></figure>
+<p>如果是超级用户，可以用下列形式指定任何用户的口令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># passwd kuangshen</span><br><span class="line">New password:*******</span><br><span class="line">Re-enter new password:*******</span><br></pre></td></tr></table></figure>
+<p>普通用户修改自己的口令时，passwd命令会先询问原口令，验证后再要求用户输入两遍新口令，如果两次输入的口令一致，则将这个口令指定给用户；而超级用户为用户指定口令时，就不需要知道原口令。</p>
+<p>为了系统安全起见，用户应该选择比较复杂的口令，例如最好使用8位长的口令，口令中包含有大写、小写字母和数字，并且应该与姓名、生日等不相同。</p>
+<p>为用户指定空口令时，执行下列形式的命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># passwd -d kuangshen</span><br></pre></td></tr></table></figure>
+<p>此命令将用户 kuangshen的口令删除，这样用户 kuangshen下一次登录时，系统就不再允许该用户登录了。</p>
+<p>passwd 命令还可以用 -l(lock) 选项锁定某一用户，使其不能登录，例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># passwd -l kuangshen</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="用户组管理"><a href="#用户组管理" class="headerlink" title="用户组管理"></a>用户组管理</h3><p>每个用户都有一个用户组，系统可以对一个用户组中的所有用户进行集中管理。不同Linux 系统对用户组的规定有所不同，如Linux下的用户属于与它同名的用户组，这个用户组在创建用户时同时创建。</p>
+<p>用户组的管理涉及用户组的添加、删除和修改。组的增加、删除和修改实际上就是==对/etc/group文件的更新。==</p>
+<blockquote>
+<p>增加一个新的用户组使用groupadd命令</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">groupadd 选项 用户组</span><br></pre></td></tr></table></figure>
+<p>可以使用的选项有：</p>
+<ul>
+<li>-g GID 指定新用户组的组标识号（GID）。</li>
+<li>-o 一般与-g选项同时使用，表示新用户组的GID可以与系统已有用户组的GID相同。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@yuxuan ~]# groupadd kuangshen</span><br><span class="line">[root@yuxuan ~]# cat /etc/group</span><br></pre></td></tr></table></figure>
+<p>实例1：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># groupadd group1</span><br></pre></td></tr></table></figure>
+<p>此命令向系统中增加了一个新组group1，新组的组标识号是在当前已有的最大组标识号的基础上加1。</p>
+<p>实例2：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># groupadd -g 101 group2</span><br></pre></td></tr></table></figure>
+<p>此命令向系统中增加了一个新组group2，同时指定新组的组标识号是101。若不指定则自增1</p>
+<blockquote>
+<p>如果要删除一个已有的用户组，使用groupdel命令</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">groupdel 用户组</span><br></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># groupdel group1</span><br></pre></td></tr></table></figure>
+<p>此命令从系统中删除组group1。</p>
+<blockquote>
+<p>修改用户组的属性使用groupmod命令</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">groupmod 选项 用户组</span><br></pre></td></tr></table></figure>
+<p>常用的选项有：</p>
+<ul>
+<li>-g GID 为用户组指定新的组标识号。</li>
+<li>-o 与-g选项同时使用，用户组的新GID可以与系统已有用户组的GID相同。</li>
+<li>-n新用户组 将用户组的名字改为新名字</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 此命令将组group2的组标识号修改为102。</span><br><span class="line">groupmod -g 102 group2</span><br><span class="line"></span><br><span class="line"># 将组group2的标识号改为10000，组名修改为group3。</span><br><span class="line">groupmod –g 10000 -n group3 group2</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>切换组</p>
+</blockquote>
+<p>如果一个用户同时属于多个用户组，那么用户可以在用户组之间切换，以便具有其他用户组的权限。</p>
+<p>用户可以在登录后，使用命令newgrp切换到其他用户组，这个命令的参数就是目的用户组。例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ newgrp root</span><br></pre></td></tr></table></figure>
+<p>这条命令将当前用户切换到root用户组，前提条件是root用户组确实是该用户的主组或附加组。</p>
+<blockquote>
+<p>/etc/passwd</p>
+</blockquote>
+<p>完成用户管理的工作有许多种方法，但是每一种方法实际上都是对有关的系统文件进行修改。</p>
+<p>与用户和用户组相关的信息都存放在一些系统文件中，这些文件包括/etc/passwd, /etc/shadow, /etc/group等。</p>
+<p>下面分别介绍这些文件的内容。</p>
+<p><strong>/etc/passwd文件是用户管理工作涉及的最重要的一个文件。</strong></p>
+<p>Linux系统中的每个用户都在/etc/passwd文件中有一个对应的记录行，它记录了这个用户的一些基本属性。</p>
+<p>这个文件对所有用户都是可读的。它的内容类似下面的例子：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">＃ cat &#x2F;etc&#x2F;passwd</span><br><span class="line"></span><br><span class="line">root:x:0:0:Superuser:&#x2F;:</span><br><span class="line">daemon:x:1:1:System daemons:&#x2F;etc:</span><br><span class="line">bin:x:2:2:Owner of system commands:&#x2F;bin:</span><br><span class="line">sys:x:3:3:Owner of system files:&#x2F;usr&#x2F;sys:</span><br><span class="line">adm:x:4:4:System accounting:&#x2F;usr&#x2F;adm:</span><br><span class="line">uucp:x:5:5:UUCP administrator:&#x2F;usr&#x2F;lib&#x2F;uucp:</span><br><span class="line">auth:x:7:21:Authentication administrator:&#x2F;tcb&#x2F;files&#x2F;auth:</span><br><span class="line">cron:x:9:16:Cron daemon:&#x2F;usr&#x2F;spool&#x2F;cron:</span><br><span class="line">listen:x:37:4:Network daemon:&#x2F;usr&#x2F;net&#x2F;nls:</span><br><span class="line">lp:x:71:18:Printer administrator:&#x2F;usr&#x2F;spool&#x2F;lp:</span><br></pre></td></tr></table></figure>
+<p>从上面的例子我们可以看到，/etc/passwd中一行记录对应着一个用户，每行记录又被冒号(:)分隔为7个字段，其格式和具体含义如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">用户名:口令:用户标识号:组标识号:注释性描述:主目录:登录Shell</span><br></pre></td></tr></table></figure>
+<p>这个文件中的每一行都代表一个用户，我们可以从这里看出这个用户的主目录在哪里，可以看到属于哪一个组！</p>
+<p>登陆口令：/etc/shadow，保障我们密码的安全命令</p>
+<p>1）”用户名”是代表用户账号的字符串。</p>
+<p>通常长度不超过8个字符，并且由大小写字母和/或数字组成。登录名中不能有冒号(:)，因为冒号在这里是分隔符。</p>
+<p>为了兼容起见，登录名中最好不要包含点字符(.)，并且不使用连字符(-)和加号(+)打头。</p>
+<p>2）“口令”一些系统中，<strong>存放着加密后的用户口令字</strong>(不可见)。</p>
+<p>虽然这个字段存放的只是用户口令的加密串，不是明文，但是由于/etc/passwd文件对所有用户都可读，所以这仍是一个安全隐患。因此，现在许多Linux 系统（如SVR4）都使用了shadow技术，把真正的加密后的用户口令字存放到/etc/shadow文件中，而在/etc/passwd文件的口令字段中只存放一个特殊的字符，例如“x”或者“*”。</p>
+<p>3）“用户标识号”是一个整数，系统内部用它来标识用户。</p>
+<p>一般情况下它与用户名是一一对应的。如果几个用户名对应的用户标识号是一样的，系统内部将把它们视为同一个用户，但是它们可以有不同的口令、不同的主目录以及不同的登录Shell等。</p>
+<p>通常用户标识号的取值范围是0～65 535。0是超级用户root的标识号，1～99由系统保留，作为管理账号，普通用户的标识号从100开始。在Linux系统中，这个界限是500。</p>
+<p>4）“组标识号”字段记录的是用户所属的用户组。</p>
+<p>它对应着/etc/group文件中的一条记录。</p>
+<p>5)“注释性描述”字段记录着用户的一些个人情况。</p>
+<p>例如用户的真实姓名、电话、地址等，这个字段并没有什么实际的用途。在不同的Linux 系统中，这个字段的格式并没有统一。在许多Linux系统中，这个字段存放的是一段任意的注释性描述文字，用作finger命令的输出。</p>
+<p>6)“主目录”，也就是用户的起始工作目录。</p>
+<p>它是用户在登录到系统之后所处的目录。在大多数系统中，各用户的主目录都被组织在同一个特定的目录下，而用户主目录的名称就是该用户的登录名。各用户对自己的主目录有读、写、执行（搜索）权限，其他用户对此目录的访问权限则根据具体情况设置。</p>
+<p>7)用户登录后，要启动一个进程，负责将用户的操作传给内核，这个进程是用户登录到系统后运行的命令解释器或某个特定的程序，即Shell。</p>
+<p>Shell是用户与Linux系统之间的接口。Linux的Shell有许多种，每种都有不同的特点。常用的有sh(Bourne Shell), csh(C Shell), ksh(Korn Shell), tcsh(TENEX/TOPS-20 type C Shell), bash(Bourne Again Shell)等。</p>
+<p>系统管理员可以根据系统情况和用户习惯为用户指定某个Shell。如果不指定Shell，那么系统使用sh为默认的登录Shell，即这个字段的值为/bin/sh。</p>
+<p>用户的登录Shell也可以指定为某个特定的程序（此程序不是一个命令解释器）。</p>
+<p>利用这一特点，我们可以限制用户只能运行指定的应用程序，在该应用程序运行结束后，用户就自动退出了系统。有些Linux 系统要求只有那些在系统中登记了的程序才能出现在这个字段中。</p>
+<p>8)系统中有一类用户称为伪用户（pseudo users）。</p>
+<p>这些用户在/etc/passwd文件中也占有一条记录，但是不能登录，因为它们的登录Shell为空。它们的存在主要是方便系统管理，满足相应的系统进程对文件属主的要求。</p>
+<p>常见的伪用户如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">伪 用 户 含 义</span><br><span class="line">bin 拥有可执行的用户命令文件</span><br><span class="line">sys 拥有系统文件</span><br><span class="line">adm 拥有帐户文件</span><br><span class="line">uucp UUCP使用</span><br><span class="line">lp lp或lpd子系统使用</span><br><span class="line">nobody NFS使用</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>/etc/shadow</p>
+</blockquote>
+<p><strong>1、除了上面列出的伪用户外，还有许多标准的伪用户，例如：audit, cron, mail, usenet等，它们也都各自为相关的进程和文件所需要。</strong></p>
+<p>由于/etc/passwd文件是所有用户都可读的，如果用户的密码太简单或规律比较明显的话，一台普通的计算机就能够很容易地将它破解，因此对安全性要求较高的Linux系统都把加密后的口令字分离出来，单独存放在一个文件中，这个文件是/etc/shadow文件。有超级用户才拥有该文件读权限，这就保证了用户密码的安全性。</p>
+<p><strong>2、/etc/shadow中的记录行与/etc/passwd中的一一对应，它由pwconv命令根据/etc/passwd中的数据自动产生</strong></p>
+<p>它的文件格式与/etc/passwd类似，由若干个字段组成，字段之间用”:”隔开。这些字段是：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">登录名:加密口令:最后一次修改时间:最小时间间隔:最大时间间隔:警告时间:不活动时间:失效时间:标志</span><br></pre></td></tr></table></figure>
+<ol>
+<li>“登录名”是与/etc/passwd文件中的登录名相一致的用户账号</li>
+<li>“口令”字段存放的是加密后的用户口令字，长度为13个字符。如果为空，则对应用户没有口令，登录时不需要口令；如果含有不属于集合 { ./0-9A-Za-z }中的字符，则对应的用户不能登录。</li>
+<li>“最后一次修改时间”表示的是从某个时刻起，到用户最后一次修改口令时的天数。时间起点对不同的系统可能不一样。例如在SCO Linux 中，这个时间起点是1970年1月1日。</li>
+<li>“最小时间间隔”指的是两次修改口令之间所需的最小天数。</li>
+<li>“最大时间间隔”指的是口令保持有效的最大天数。</li>
+<li>“警告时间”字段表示的是从系统开始警告用户到用户密码正式失效之间的天数。</li>
+<li>“不活动时间”表示的是用户没有登录活动但账号仍能保持有效的最大天数。</li>
+<li>“失效时间”字段给出的是一个绝对的天数，如果使用了这个字段，那么就给出相应账号的生存期。期满后，该账号就不再是一个合法的账号，也就不能再用来登录了。</li>
+</ol>
+<blockquote>
+<p>/etc/group</p>
+</blockquote>
+<p>用户组的所有信息都存放在/etc/group文件中。</p>
+<p>将用户分组是Linux 系统中对用户进行管理及控制访问权限的一种手段。</p>
+<p>每个用户都属于某个用户组；一个组中可以有多个用户，一个用户也可以属于不同的组。</p>
+<p>当一个用户同时是多个组中的成员时，在/etc/passwd文件中记录的是用户所属的主组，也就是登录时所属的默认组，而其他组称为附加组。</p>
+<p>用户要访问属于附加组的文件时，必须首先使用newgrp命令使自己成为所要访问的组中的成员。</p>
+<p>用户组的所有信息都存放在/etc/group文件中。此文件的格式也类似于/etc/passwd文件，由冒号(:)隔开若干个字段，这些字段有：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">组名:口令:组标识号:组内用户列表</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>“组名”是用户组的名称，由字母或数字构成。与/etc/passwd中的登录名一样，组名不应重复。</p>
+</li>
+<li><p>“口令”字段存放的是用户组加密后的口令字。一般Linux 系统的用户组都没有口令，即这个字段一般为空，或者是*。</p>
+</li>
+<li><p>“组标识号”与用户标识号类似，也是一个整数，被系统内部用来标识组。</p>
+</li>
+<li><p>“组内用户列表”是属于这个组的所有用户的列表/b]，不同用户之间用逗号(,)分隔。这个用户组可能是用户的主组，也可能是附加组。</p>
+</li>
+</ol>
+<h3 id="磁盘管理"><a href="#磁盘管理" class="headerlink" title="磁盘管理"></a>磁盘管理</h3><blockquote>
+<p>概述</p>
+</blockquote>
+<p>Linux磁盘管理好坏直接关系到整个系统的性能问题。</p>
+<p>Linux磁盘管理常用命令为 df、du。</p>
+<ul>
+<li>df ：列出文件系统的整体磁盘使用量</li>
+<li>du：检查磁盘空间使用量</li>
+</ul>
+<blockquote>
+<p>df</p>
+</blockquote>
+<p>df命令参数功能：检查文件系统的磁盘空间占用情况。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。</p>
+<p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">df [-ahikHTm] [目录或文件名]</span><br></pre></td></tr></table></figure>
+<p>选项与参数：</p>
+<ul>
+<li>-a ：列出所有的文件系统，包括系统特有的 /proc 等文件系统；</li>
+<li>-k ：以 KBytes 的容量显示各文件系统；</li>
+<li>-m ：以 MBytes 的容量显示各文件系统；</li>
+<li>-h ：以人们较易阅读的 GBytes, MBytes, KBytes 等格式自行显示；</li>
+<li>-H ：以 M=1000K 取代 M=1024K 的进位方式；</li>
+<li>-T ：显示文件系统类型, 连同该 partition 的 filesystem 名称 (例如 ext3) 也列出；</li>
+<li>-i ：不用硬盘容量，而以 inode 的数量来显示</li>
+</ul>
+<p>测试：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 将系统内所有的文件系统列出来！</span><br><span class="line"># 在 Linux 底下如果 df 没有加任何选项</span><br><span class="line"># 那么默认会将系统内所有的 (不含特殊内存内的文件系统与 swap) 都以 1 Kbytes 的容量来列出来！</span><br><span class="line">[root@kuangshen &#x2F;]# df</span><br><span class="line">Filesystem     1K-blocks   Used Available Use% Mounted on</span><br><span class="line">devtmpfs          889100       0    889100   0% &#x2F;dev</span><br><span class="line">tmpfs             899460     704    898756   1% &#x2F;dev&#x2F;shm</span><br><span class="line">tmpfs             899460     496    898964   1% &#x2F;run</span><br><span class="line">tmpfs             899460       0    899460   0% &#x2F;sys&#x2F;fs&#x2F;cgroup</span><br><span class="line">&#x2F;dev&#x2F;vda1       41152812 6586736  32662368  17% &#x2F;</span><br><span class="line">tmpfs             179896       0    179896   0% &#x2F;run&#x2F;user&#x2F;0</span><br><span class="line"># 将容量结果以易读的容量格式显示出来</span><br><span class="line">[root@kuangshen &#x2F;]# df -h</span><br><span class="line">Filesystem     Size Used Avail Use% Mounted on</span><br><span class="line">devtmpfs       869M     0 869M   0% &#x2F;dev</span><br><span class="line">tmpfs           879M 708K 878M   1% &#x2F;dev&#x2F;shm</span><br><span class="line">tmpfs           879M 496K 878M   1% &#x2F;run</span><br><span class="line">tmpfs           879M     0 879M   0% &#x2F;sys&#x2F;fs&#x2F;cgroup</span><br><span class="line">&#x2F;dev&#x2F;vda1       40G  6.3G   32G  17% &#x2F;</span><br><span class="line">tmpfs           176M     0 176M   0% &#x2F;run&#x2F;user&#x2F;0</span><br><span class="line"># 将系统内的所有特殊文件格式及名称都列出来</span><br><span class="line">[root@kuangshen &#x2F;]# df -aT</span><br><span class="line">Filesystem     Type       1K-blocks   Used Available Use% Mounted on</span><br><span class="line">sysfs         sysfs               0       0         0    - &#x2F;sys</span><br><span class="line">proc           proc                0       0         0    - &#x2F;proc</span><br><span class="line">devtmpfs       devtmpfs       889100       0    889100   0% &#x2F;dev</span><br><span class="line">securityfs     securityfs          0       0         0    - &#x2F;sys&#x2F;kernel&#x2F;security</span><br><span class="line">tmpfs         tmpfs          899460     708    898752   1% &#x2F;dev&#x2F;shm</span><br><span class="line">devpts         devpts              0       0         0    - &#x2F;dev&#x2F;pts</span><br><span class="line">tmpfs         tmpfs          899460     496    898964   1% &#x2F;run</span><br><span class="line">tmpfs         tmpfs          899460       0    899460   0% &#x2F;sys&#x2F;fs&#x2F;cgroup</span><br><span class="line">cgroup         cgroup              0       0         0    - &#x2F;sys&#x2F;fs&#x2F;cgroup&#x2F;systemd</span><br><span class="line">pstore         pstore              0       0         0    - &#x2F;sys&#x2F;fs&#x2F;pstore</span><br><span class="line">cgroup         cgroup              0       0         0    - &#x2F;sys&#x2F;fs&#x2F;cgroup&#x2F;freezer</span><br><span class="line">cgroup         cgroup              0       0         0    - &#x2F;sys&#x2F;fs&#x2F;cgroup&#x2F;cpuset</span><br><span class="line">cgroup         cgroup              0       0         0    - &#x2F;sys&#x2F;fs&#x2F;cgroup&#x2F;hugetlb</span><br><span class="line">cgroup         cgroup              0       0         0    - &#x2F;sys&#x2F;fs&#x2F;cgroup&#x2F;blkio</span><br><span class="line">cgroup         cgroup              0       0         0    - &#x2F;sys&#x2F;fs&#x2F;cgroup&#x2F;net_cls,net_prio</span><br><span class="line">cgroup         cgroup              0       0         0    - &#x2F;sys&#x2F;fs&#x2F;cgroup&#x2F;memory</span><br><span class="line">cgroup         cgroup              0       0         0    - &#x2F;sys&#x2F;fs&#x2F;cgroup&#x2F;pids</span><br><span class="line">cgroup         cgroup              0       0         0    - &#x2F;sys&#x2F;fs&#x2F;cgroup&#x2F;cpu,cpuacct</span><br><span class="line">cgroup         cgroup              0       0         0    - &#x2F;sys&#x2F;fs&#x2F;cgroup&#x2F;devices</span><br><span class="line">cgroup         cgroup              0       0         0    - &#x2F;sys&#x2F;fs&#x2F;cgroup&#x2F;perf_event</span><br><span class="line">configfs       configfs            0       0         0    - &#x2F;sys&#x2F;kernel&#x2F;config</span><br><span class="line">&#x2F;dev&#x2F;vda1     ext4         41152812 6586748  32662356  17% &#x2F;</span><br><span class="line">systemd-1      -                   -       -         -    - &#x2F;proc&#x2F;sys&#x2F;fs&#x2F;binfmt_misc</span><br><span class="line">mqueue         mqueue              0       0         0    - &#x2F;dev&#x2F;mqueue</span><br><span class="line">debugfs       debugfs             0       0         0    - &#x2F;sys&#x2F;kernel&#x2F;debug</span><br><span class="line">hugetlbfs     hugetlbfs           0       0         0    - &#x2F;dev&#x2F;hugepages</span><br><span class="line">tmpfs         tmpfs          179896       0    179896   0% &#x2F;run&#x2F;user&#x2F;0</span><br><span class="line">binfmt_misc   binfmt_misc         0       0         0    - &#x2F;proc&#x2F;sys&#x2F;fs&#x2F;binfmt_misc</span><br><span class="line"># 将 &#x2F;etc 底下的可用的磁盘容量以易读的容量格式显示</span><br><span class="line"></span><br><span class="line">[root@kuangshen &#x2F;]# df -h &#x2F;etc</span><br><span class="line">Filesystem     Size Used Avail Use% Mounted on</span><br><span class="line">&#x2F;dev&#x2F;vda1       40G  6.3G   32G  17% &#x2F;</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>du</p>
+</blockquote>
+<p>Linux du命令也是查看使用空间的，但是与df命令不同的是Linux du命令是对文件和目录磁盘使用的空间的查看，还是和df命令有一些区别的，这里介绍Linux du命令。</p>
+<p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">du [-ahskm] 文件或目录名称</span><br></pre></td></tr></table></figure>
+<p>选项与参数：</p>
+<ul>
+<li>-a ：列出所有的文件与目录容量，因为默认仅统计目录底下的文件量而已。</li>
+<li>-h ：以人们较易读的容量格式 (G/M) 显示；</li>
+<li>-s ：列出总量而已，而不列出每个各别的目录占用容量；</li>
+<li>-S ：不包括子目录下的总计，与 -s 有点差别。</li>
+<li>-k ：以 KBytes 列出容量显示；</li>
+<li>-m ：以 MBytes 列出容量显示；</li>
+</ul>
+<p>测试：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 只列出当前目录下的所有文件夹容量（包括隐藏文件夹）:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 直接输入 du 没有加任何选项时，则 du 会分析当前所在目录的文件与目录所占用的硬盘空间。</span></span><br><span class="line">[root@kuangshen home]# du</span><br><span class="line">16./redis</span><br><span class="line">8./www/.oracle_jre_usage  # 包括隐藏文件的目录</span><br><span class="line">24./www</span><br><span class="line">48.                        # 这个目录(.)所占用的总量</span><br><span class="line"><span class="meta">#</span><span class="bash"> 将文件的容量也列出来</span></span><br><span class="line">[root@kuangshen home]# du -a</span><br><span class="line">4./redis/.bash_profile</span><br><span class="line">4./redis/.bash_logout    </span><br><span class="line">....中间省略....</span><br><span class="line">4./kuangstudy.txt # 有文件的列表了</span><br><span class="line">48.</span><br><span class="line"><span class="meta">#</span><span class="bash"> 检查根目录底下每个目录所占用的容量</span></span><br><span class="line">[root@kuangshen home]# du -sm /*</span><br><span class="line">0/bin</span><br><span class="line">146/boot</span><br><span class="line">.....中间省略....</span><br><span class="line">0/proc</span><br><span class="line">.....中间省略....</span><br><span class="line">1/tmp</span><br><span class="line">3026/usr  # 系统初期最大就是他了啦！因为很多用户文件都在这里面</span><br><span class="line">513/var</span><br><span class="line">2666/www</span><br></pre></td></tr></table></figure>
+<p>通配符 * 来代表每个目录。</p>
+<p>与 df 不一样的是，du 这个命令其实会直接到文件系统内去搜寻所有的文件数据。</p>
+<blockquote>
+<p>磁盘挂载与卸除（Mac也行）</p>
+</blockquote>
+<p>==根文件系统之外的其他文件要想能够被访问==，都必须通过“关联”至根文件系统上的某个目录来实现，此关联操作即为“挂载”，此目录即为“挂载点”,解除此关联关系的过程称之为“卸载”</p>
+<p>Linux 的磁盘挂载使用mount命令，卸载使用umount命令。</p>
+<p>磁盘挂载语法：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mount [-t 文件系统] [-L Label名] [-o 额外选项] [-n] 装置文件名 挂载点</span><br></pre></td></tr></table></figure>
+<p>测试：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 将 &#x2F;dev&#x2F;hdc6 挂载到 &#x2F;mnt&#x2F;hdc6 上面！</span><br><span class="line">[root@www ~]# mkdir &#x2F;mnt&#x2F;hdc6</span><br><span class="line">[root@www ~]# mount &#x2F;dev&#x2F;hdc6 &#x2F;mnt&#x2F;hdc6</span><br><span class="line">[root@www ~]# df</span><br><span class="line">Filesystem           1K-blocks     Used Available Use% Mounted on</span><br><span class="line">&#x2F;dev&#x2F;hdc6              1976312     42072   1833836   3% &#x2F;mnt&#x2F;hdc6</span><br></pre></td></tr></table></figure>
+<p>磁盘卸载命令 umount 语法：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">umount [-fn] 装置文件名或挂载点</span><br></pre></td></tr></table></figure>
+<p>选项与参数：</p>
+<ul>
+<li>-f ：强制卸除！可用在类似网络文件系统 (NFS) 无法读取到的情况下；</li>
+<li>-n ：不升级 /etc/mtab 情况下卸除。</li>
+</ul>
+<p>卸载/dev/hdc6</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@www ~]# umount &#x2F;dev&#x2F;hdc6</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h3><p>对于我们开发人员来说，其实Linux更多偏向于使用即可</p>
+<blockquote>
+<p>什么是进程</p>
+</blockquote>
+<ol>
+<li>在Linux中，每一个程序都是有自己的一个进程，每一个进程都有一个id号</li>
+<li>每一个进程，都会有一个父进程</li>
+<li>进程可以有两种存在方式：前台！后台运行</li>
+<li>一般的服务都是后台运行的，基本的程序都是前台运行的</li>
+</ol>
+<blockquote>
+<p>命令</p>
+</blockquote>
+<p><strong>ps</strong> 查看当前系统中正在执行的各种进程的信息</p>
+<p>ps-xx :</p>
+<ul>
+<li>-a 显示当前终端运行的所有进程信息 (当前的进程一个)</li>
+<li>-u 以用户的信息显示进程</li>
+<li>-x 显示后台运行进程的参数</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ps -aux 查看所有的进程</span></span><br><span class="line"></span><br><span class="line">ps -aux|grep mysql</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> | 在Linux中这个叫做管道符号 A｜B</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">grep 查找文件中符合条件的字符串！</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>ps -ef: 可以产看到父进程的信息</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ps -ef|grep mysql # 卡父进程我们一般可以通过目录树结构来查看</span><br><span class="line"></span><br><span class="line">pstree -pu</span><br><span class="line">		-p 显示父id</span><br><span class="line">		-u 显示用户组</span><br></pre></td></tr></table></figure>
+
+
+<p>结束进程：杀掉进程，等价于Windows结束任务！</p>
+<p>kill -9 进程的id</p>
+<p>但是，如果我们平时写的一个java死循环了，可以用这个删除</p>
+<h2 id="环境安装"><a href="#环境安装" class="headerlink" title="环境安装"></a>环境安装</h2><p>安装软件一般有三种方式：</p>
+<ul>
+<li>rpm (Jdk:在线发布一个SpringBoot的项目)</li>
+<li>解压缩（tomcat，启动并可以通过外网来进行访问，发布网站）</li>
+<li>yum在线安装（docker: 直接安装运行跑起来docker就可以）</li>
+</ul>
+<h3 id="jdk安装（rpm安装）"><a href="#jdk安装（rpm安装）" class="headerlink" title="jdk安装（rpm安装）"></a>jdk安装（rpm安装）</h3><p>1、rpm下载地址<a class="link"   href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" >http://www.oracle.com/technetwork/java/javase/downloads/index.html<i class="fas fa-external-link-alt"></i></a></p>
+<p>2、如果有安装openjdk 则卸载</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@kuangshen ~]# java -version</span><br><span class="line">java version &quot;1.8.0_121&quot;</span><br><span class="line">Java(TM) SE Runtime Environment (build 1.8.0_121-b13)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.121-b13, mixed mode)</span><br><span class="line"><span class="meta">#</span><span class="bash"> 检查</span></span><br><span class="line">[root@kuangshen ~]# rpm -qa|grep jdk</span><br><span class="line">jdk1.8.0_121-1.8.0_121-fcs.x86_64</span><br><span class="line"><span class="meta">#</span><span class="bash"> 卸载 -e --nodeps 强制删除</span></span><br><span class="line">[root@kuangshen ~]# rpm -e --nodeps jdk1.8.0_121-1.8.0_121-fcs.x86_64</span><br><span class="line">[root@kuangshen ~]# java -version</span><br><span class="line">-bash: /usr/bin/java: No such file or directory  # OK</span><br></pre></td></tr></table></figure>
+<p>3、安装JDK</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 安装java rpm</span><br><span class="line">[root@kuangshen kuangshen]# rpm -ivh jdk-8u221-linux-x64.rpm</span><br><span class="line"></span><br><span class="line"># 安装完成后配置环境变量 文件：&#x2F;etc&#x2F;profile</span><br><span class="line">JAVA_HOME&#x3D;&#x2F;usr&#x2F;java&#x2F;jdk1.8.0_221-amd64</span><br><span class="line">CLASSPATH&#x3D;%JAVA_HOME%&#x2F;lib:%JAVA_HOME%&#x2F;jre&#x2F;lib</span><br><span class="line">PATH&#x3D;$PATH:$JAVA_HOME&#x2F;bin:$JAVA_HOME&#x2F;jre&#x2F;bin</span><br><span class="line">export PATH CLASSPATH JAVA_HOME</span><br><span class="line"># 保存退出</span><br><span class="line"></span><br><span class="line"># 让新增的环境变量生效！</span><br><span class="line">source &#x2F;etc&#x2F;profile</span><br><span class="line"></span><br><span class="line"># 测试 java -version</span><br><span class="line">[root@kuangshen java]# java -version</span><br><span class="line">java version &quot;1.8.0_221&quot;</span><br><span class="line">Java(TM) SE Runtime Environment (build 1.8.0_221-b11)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.221-b11, mixed mode)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Tomcat安装（解压缩安装）"><a href="#Tomcat安装（解压缩安装）" class="headerlink" title="Tomcat安装（解压缩安装）"></a>Tomcat安装（解压缩安装）</h3><p>1、安装好了Java环境后我们可以测试下Tomcat！准备好Tomcat的安装包！</p>
+<p>2、将文件移动到/usr/tomcat/下，并解压！</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@kuangshen kuangshen]# mv apache-tomcat-9.0.22.tar.gz &#x2F;usr</span><br><span class="line">[root@kuangshen kuangshen]# cd &#x2F;usr</span><br><span class="line">[root@kuangshen usr]# ls</span><br><span class="line">apache-tomcat-9.0.22.tar.gz</span><br><span class="line">[root@kuangshen usr]# tar -zxvf apache-tomcat-9.0.22.tar.gz   # 解压</span><br></pre></td></tr></table></figure>
+<p>3、运行Tomcat，进入bin目录，和我们以前在Windows下看的都是一样的</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 执行：startup.sh --&gt;启动tomcat</span><br><span class="line"># 执行：shutdown.sh --&gt;关闭tomcat</span><br><span class="line">.&#x2F;startup.sh</span><br><span class="line">.&#x2F;shutdown.sh</span><br></pre></td></tr></table></figure>
+<p>4、确保Linux的防火墙端口是开启的，如果是阿里云，需要保证阿里云的安全组策略是开放的！</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 查看firewall服务状态</span><br><span class="line">systemctl status firewalld</span><br><span class="line"></span><br><span class="line"># 开启、重启、关闭、firewalld.service服务</span><br><span class="line"># 开启</span><br><span class="line">service firewalld start</span><br><span class="line"># 重启</span><br><span class="line">service firewalld restart</span><br><span class="line"># 关闭</span><br><span class="line">service firewalld stop</span><br><span class="line"></span><br><span class="line"># 查看防火墙规则</span><br><span class="line">firewall-cmd --list-all    # 查看全部信息</span><br><span class="line">firewall-cmd --list-ports  # 只看端口信息</span><br><span class="line"></span><br><span class="line"># 开启端口</span><br><span class="line">开端口命令：firewall-cmd --zone&#x3D;public --add-port&#x3D;80&#x2F;tcp --permanent</span><br><span class="line">重启防火墙：systemctl restart firewalld.service</span><br><span class="line"></span><br><span class="line">命令含义：</span><br><span class="line">--zone #作用域</span><br><span class="line">--add-port&#x3D;80&#x2F;tcp  #添加端口，格式为：端口&#x2F;通讯协议</span><br><span class="line">--permanent   #永久生效，没有此参数重启后失效</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="安装Docker（yum安装）"><a href="#安装Docker（yum安装）" class="headerlink" title="安装Docker（yum安装）"></a>安装Docker（yum安装）</h3><blockquote>
+<p>基于 CentOS 7 安装</p>
+</blockquote>
+<ol>
+<li><p>官网安装参考手册：<a class="link"   href="https://docs.docker.com/install/linux/docker-ce/centos/" >https://docs.docker.com/install/linux/docker-ce/centos/<i class="fas fa-external-link-alt"></i></a></p>
+</li>
+<li><p>确定你是CentOS7及以上版本</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@192 Desktop]# cat &#x2F;etc&#x2F;redhat-release</span><br><span class="line">CentOS Linux release 7.2.1511 (Core)</span><br></pre></td></tr></table></figure></li>
+<li><p>yum安装gcc相关（需要确保 虚拟机可以上外网 ）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum -y install gcc</span><br><span class="line">yum -y install gcc-c++</span><br></pre></td></tr></table></figure></li>
+<li><p>卸载旧版本</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum -y remove docker docker-common docker-selinux docker-engine</span><br><span class="line"># 官网版本</span><br><span class="line">yum remove docker \</span><br><span class="line">          docker-client \</span><br><span class="line">          docker-client-latest \</span><br><span class="line">          docker-common \</span><br><span class="line">          docker-latest \</span><br><span class="line">          docker-latest-logrotate \</span><br><span class="line">          docker-logrotate \</span><br><span class="line">          docker-engine</span><br></pre></td></tr></table></figure></li>
+<li><p>安装需要的软件包</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br></pre></td></tr></table></figure></li>
+<li><p>设置stable镜像仓库</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 错误</span><br><span class="line">yum-config-manager --add-repo https:&#x2F;&#x2F;download.docker.com&#x2F;linux&#x2F;centos&#x2F;docker-ce.repo</span><br><span class="line">## 报错</span><br><span class="line">[Errno 14] curl#35 - TCP connection reset by peer</span><br><span class="line">[Errno 12] curl#35 - Timeout</span><br><span class="line"></span><br><span class="line"># 正确推荐使用国内的</span><br><span class="line">yum-config-manager --add-repo http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;docker-ce&#x2F;linux&#x2F;centos&#x2F;docker-ce.repo</span><br></pre></td></tr></table></figure></li>
+<li><p>更新yum软件包索引</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum makecache fast</span><br></pre></td></tr></table></figure></li>
+<li><p>安装Docker CE</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum -y install docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure></li>
+<li><p>启动docker</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure></li>
+<li><p>测试</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker version</span><br><span class="line"></span><br><span class="line">docker run hello-world</span><br><span class="line"></span><br><span class="line">docker images</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<h3 id="宝塔面板安装"><a href="#宝塔面板安装" class="headerlink" title="宝塔面板安装"></a>宝塔面板安装</h3><p><a class="link"   href="https://www.bilibili.com/video/av91821322" >https://www.bilibili.com/video/av91821322<i class="fas fa-external-link-alt"></i></a></p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>tutorial</tag>
       </tags>
   </entry>
 </search>
