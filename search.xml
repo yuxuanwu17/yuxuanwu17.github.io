@@ -5365,41 +5365,6 @@ Heart Not Failed       0.85      0.93      0.89        43
       </tags>
   </entry>
   <entry>
-    <title>BIO312</title>
-    <url>/2021/02/24/2021-02-24-BIO312/</url>
-    <content><![CDATA[<p>Courseworks requirements</p>
-<p>Protocol</p>
-<p>columns</p>
-<p>Expected output</p>
-<p>Which columns</p>
-<p>Justification for choosing that column </p>
-<p>Expected output? Diagrams</p>
-<h3 id="Western-Blot"><a href="#Western-Blot" class="headerlink" title="Western Blot"></a>Western Blot</h3><p>a.k.a: immunoblotting</p>
-<ul>
-<li>Proteins first electrophoreses by SDS-PAGE</li>
-<li>Wet gel is placed against nitrocellulose</li>
-<li>In electrophoretic chamber: </li>
-</ul>
-<h3 id="Protein-identification"><a href="#Protein-identification" class="headerlink" title="Protein identification"></a>Protein identification</h3><h4 id="Edman-degradation"><a href="#Edman-degradation" class="headerlink" title="Edman degradation"></a>Edman degradation</h4><p>Sequence aa in a peptide. </p>
-<p>Amino-terminal residue is <strong>labeled</strong> and cleaved from the pipetted <strong>without disrupting the peptide bonds</strong> between other amino acid residues</p>
-<h4 id="Mass-Spectrometry"><a href="#Mass-Spectrometry" class="headerlink" title="Mass Spectrometry:"></a>Mass Spectrometry:</h4><p>Analytical techniques that measures the mass-to-charge ratio of charged particles, mass spectrometry is used for determining <strong>masses</strong> of particles and the <strong>elemental composition of a sample</strong> of molecules as well as for <strong>elucidating the chemical structure of molecules</strong> such as peptide</p>
-<h3 id="Protein-sequencing"><a href="#Protein-sequencing" class="headerlink" title="Protein sequencing"></a>Protein sequencing</h3><h4 id="Sanger-sequence-protein-identification"><a href="#Sanger-sequence-protein-identification" class="headerlink" title="Sanger sequence (protein identification)"></a>Sanger sequence (protein identification)</h4><h3 id="Cleavage-of-polypeptides-for-analysis"><a href="#Cleavage-of-polypeptides-for-analysis" class="headerlink" title="Cleavage of polypeptides for analysis"></a>Cleavage of polypeptides for analysis</h3><ol>
-<li>Strong acid - not sequence specific</li>
-<li>Sequence-specific proteolytic enzymes (proteases)</li>
-<li>Sequence-specific chemical cleavage (<strong>cyanogen</strong> bromide cleavage at <strong>methonine residues</strong>)</li>
-</ol>
-<p>Only used in the mutant protein that is not in the databases </p>
-<p>FPLC: </p>
-<p>HPLC: high pressure </p>
-]]></content>
-      <categories>
-        <category>Biology</category>
-      </categories>
-      <tags>
-        <tag>notes</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>m6A virus project related papers and notes</title>
     <url>/2021/02/21/m6a_virus/</url>
     <content><![CDATA[<h2 id="m6A-Atlas-1"><a href="#m6A-Atlas-1" class="headerlink" title="m6A-Atlas ^1"></a>m6A-Atlas <a href="%E6%9D%A5%E8%87%AA%E4%BA%8Ekunqi%E9%82%A3%E7%AF%87%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%96%87%E7%AB%A0">^1</a></h2><hr>
@@ -5792,6 +5757,127 @@ Heart Not Failed       0.85      0.93      0.89        43
       <tags>
         <tag>RNA modification</tag>
         <tag>Multi-instance learning</tag>
+        <tag>notes</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>BIO312</title>
+    <url>/2021/03/02/2021-03-02-BIO312/</url>
+    <content><![CDATA[<p>Courseworks requirements</p>
+<p>Protocol</p>
+<p>columns</p>
+<p>Expected output</p>
+<p>Which columns</p>
+<p>Justification for choosing that column </p>
+<p>Expected output? Diagrams</p>
+<h3 id="Protein-seperation"><a href="#Protein-seperation" class="headerlink" title="Protein seperation"></a>Protein seperation</h3><ol>
+<li><strong>SDS-PAGE:</strong> basis-molecular weight</li>
+<li><strong>Isoelectric focusing:</strong> electric charge difference</li>
+<li><strong>Chromatic methods-useful adjuncts to gel-based approaches</strong><ol>
+<li>HPLC - high performance liquid chromatography </li>
+<li>Thin-layer chromatography </li>
+</ol>
+</li>
+<li><strong>2D gel electrophoresis</strong><ul>
+<li>Powerful gel-based method commonly used to analyze complex samples</li>
+<li>To characterize full range of proteins in the sample, not just a few specific proteins</li>
+</ul>
+</li>
+</ol>
+<h3 id="SDS-PAGE"><a href="#SDS-PAGE" class="headerlink" title="SDS-PAGE:"></a>SDS-PAGE:</h3><ul>
+<li>Proteins are usually mixed with the detergent, SDS and a tracking dye to make the sample</li>
+<li>SDS binds to the protein and gives it size-dependent negative charge and gives it size-dependent negative charge and consistent hydrodynamic properties</li>
+</ul>
+<h3 id="Isoelectric-point-pi"><a href="#Isoelectric-point-pi" class="headerlink" title="Isoelectric point (pi)"></a>Isoelectric point (pi)</h3><ul>
+<li>ph at which molecule has net zero charge （determined using computer program for known sequence or empirically ）</li>
+</ul>
+<h3 id="Isoelectric-Focusing"><a href="#Isoelectric-Focusing" class="headerlink" title="Isoelectric Focusing"></a>Isoelectric Focusing</h3><p>Electrophoresis through polyacrylamide gel in which there is a pH gradient</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210302212707.png" alt="image-20210302212707320"></p>
+<h3 id="2D-gel"><a href="#2D-gel" class="headerlink" title="2D gel"></a>2D gel</h3><p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210302212808.png" alt="image-20210302212808199"></p>
+<h3 id="Western-Blot"><a href="#Western-Blot" class="headerlink" title="Western Blot"></a>Western Blot</h3><p>a.k.a: immunoblotting</p>
+<ul>
+<li>Proteins first electrophoreses by SDS-PAGE</li>
+<li>Wet gel is placed against nitrocellulose</li>
+<li>In electrophoretic chamber: </li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210302212907.png" alt="image-20210302212906975"></p>
+<blockquote>
+<p>Ammonium sulfate precipitation is one of the most commonly used methods for protein purification from a solution. In solution, proteins form hydrogen bonds with water molecules through their exposed polar and ionic groups. When high concentrations of small, highly charged ions such as ammonium sulfate are added, these groups compete with the proteins to bind to the water molecules. This removes the water molecules from the protein and decreases its solubility, resulting in precipitation. Critical factors that affect the concentration at which a particular protein will precipitate include: the number and position of polar groups, molecular weight of the protein, pH of the solution, and temperature at which the precipitation is performed. The concentration at which antibodies precipitate varies among species; most rabbit antibodies precipitate with a 40% saturated solution, whereas mouse antibodies require 45-50% saturation.</p>
+</blockquote>
+<blockquote>
+<p><strong>Protocol</strong></p>
+<ol>
+<li>Allow serum or ascitic fluid to thaw, determine total volume, and centrifuge at 3000g for 30 minutes.</li>
+<li>Transfer sample to a beaker containing a stir bar and place on a magnetic stirrer.</li>
+<li>While the sample is stirring, slowly add saturated ammonium sulfate to bring the final concentration to 50% saturation.<ol>
+<li>Volume of ammonium sulfate needed is equal to the volume of sample.</li>
+<li>Adding the ammonium sulfate very slowly ensures that local concentration around the site of addition does not exceed the desired salt concentration.</li>
+</ol>
+</li>
+<li>Once the total volume of ammonium sulfate is added, move beaker to 4°C for 6 hours or overnight.</li>
+<li>Transfer to conical tube and centrifuge the precipitate at 3000g for 30 minutes.</li>
+<li>Carefully remove and discard supernatant. Invert conical tube and drain well. For serum or ascites, resuspend pellet in 30%-50% of the starting volume in 1XPBS. For monoclonal antibody tissue culture supernatants, resuspend pellet in 10% of the starting volume in 1X PBS.</li>
+<li>Transfer antibody solution to dialysis tubing and dialyze versus three changes of 1XPBS/0.08% Sodium Azide. Be sure to allow enough space for expansion of the antibody solution during dialysis. Normally twice the re-suspended volume is sufficient.</li>
+<li>Remove antibody solution from the tubing and centrifuge to remove any remaining debris.</li>
+<li>Determine the concentration and store at -80°C for long-term storage.</li>
+</ol>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210302213429.png" alt="image-20210302213429785"></p>
+<h3 id="Protein-identification"><a href="#Protein-identification" class="headerlink" title="Protein identification"></a>Protein identification</h3><h4 id="Edman-degradation"><a href="#Edman-degradation" class="headerlink" title="Edman degradation"></a>Edman degradation</h4><p>Sequence aa in a peptide. </p>
+<p>Amino-terminal residue is <strong>labeled</strong> and cleaved from the pipetted <strong>without disrupting the peptide bonds</strong> between other amino acid residues</p>
+<h4 id="Mass-Spectrometry"><a href="#Mass-Spectrometry" class="headerlink" title="Mass Spectrometry:"></a>Mass Spectrometry:</h4><p>Analytical techniques that measures the mass-to-charge ratio of charged particles, mass spectrometry is used for determining <strong>masses</strong> of particles and the <strong>elemental composition of a sample</strong> of molecules as well as for <strong>elucidating the chemical structure of molecules</strong> such as peptide</p>
+<h3 id="Protein-sequencing"><a href="#Protein-sequencing" class="headerlink" title="Protein sequencing"></a>Protein sequencing</h3><h4 id="Sanger-sequence-protein-identification"><a href="#Sanger-sequence-protein-identification" class="headerlink" title="Sanger sequence (protein identification)"></a>Sanger sequence (protein identification)</h4><h3 id="Cleavage-of-polypeptides-for-analysis"><a href="#Cleavage-of-polypeptides-for-analysis" class="headerlink" title="Cleavage of polypeptides for analysis"></a>Cleavage of polypeptides for analysis</h3><ol>
+<li>Strong acid - not sequence specific</li>
+<li>Sequence-specific proteolytic enzymes (proteases)</li>
+<li>Sequence-specific chemical cleavage (<strong>cyanogen</strong> bromide cleavage at <strong>methonine residues</strong>)</li>
+</ol>
+<p>Only used in the mutant protein that is not in the databases </p>
+<p>FPLC: </p>
+<p>HPLC: high pressure </p>
+<hr>
+<h2 id="CW1"><a href="#CW1" class="headerlink" title="CW1"></a>CW1</h2><p>How would you design a purification regime, step-by-step, to isolate the mutant enzyme X from the liver of mouse “Y”?  Explain the rationale of your purification scheme. [<strong>60 marks</strong>] </p>
+<p><strong>Answer</strong>:</p>
+<p><code>step1:</code>  Since the provided raw sample is from the liver of mouse “Y”, which means the liver need to be smashed into the liquid format</p>
+<p><code>step2:</code> The smashed liver liquid are then processed in a high speed blender, breaking out the cell membranes and releasing the inside cell components.</p>
+<p><code>step3:</code>Owing to the fact that our target is to isolate the mutant enzyme, we need to utilize some filter papers to roughly filter out those target contents. </p>
+<p><code>step4: </code>Ammonium Sulfate precipitation method can be used to partially purify the mixture. According to the protocols, we need to slowly add saturated ammonium sulfate to bring the final concentration to 50% saturation, which means the total amount of ammonium sulfate should equal with the sample amount. Therefore, the ammonium sulfate should add into the samples gradually, in this case, the ideal percentage should be 10%, 20%…50%. But owing to the different condition, some bias may exist, therefore, 5 columens should be prepared to hold the precipitates under different ammonium sulfate percentage, each columns should be clearly labeled for convenience. Adding the ammonium sulfate very slowly ensures that local concentration around the site of addition does not exceed the desired salt concentration. The insoluble aggregates would be our products. </p>
+<p><code>Rational of step4</code>: The whole mechanisms behind this approach is the electrolyte-nonelectrolyte interaction.  In solution, proteins form hydrogen bonds with water molecules through their exposed polar and ionic groups. When high concentrations of small, highly charged ions such as ammonium sulfate are added, these groups compete with the proteins to bind to the water molecules. This removes the water molecules from the protein and decreases its solubility, resulting in precipitation. Critical factors that affect the concentration at which a particular protein will precipitate include: the number and position of polar groups, molecular weight of the protein, pH of the solution, and temperature at which the precipitation is performed.</p>
+<p><code>step5:</code> the isolated 5 samples are resuspended in the buffer to be active and soluble again. As suggested in the problems that the presence of enzyme X can be detected with radioassay by the capture of the released 14CO2. In this case, five samples are feed into substrates respectively and the sample whose generated CO2 can be detected by radioassay could be considered as the sample enzyme x. We denoted this sample as sample A. </p>
+<p><code>step6:</code>SDS-PAGE should be incorporated to test the sample A’s purity</p>
+<p><code>Rational of step6:</code>SDS-PAGE is an analytical technique to separate proteins based on their molecular weight. In SDS-PAGE, the use of sodium dodecyl sulfate (SDS, also known as sodium lauryl sulfate) and polyacrylamide gel largely eliminates the influence of the structure and charge, and proteins are separated solely based on polypeptide chain length. Therefore, it could be used to figure out the samples’ purity.</p>
+<p><code>step7</code>:  Dialysis technique should be included to perform purification  for samples containing macromolecules, in this case, enzymes. Some unnecessary salts in the previous steps could be removed.</p>
+<p><code>Rational of step7     </code>Dialysis is a separation technique that facilitates the removal of small, unwanted compounds from macromolecules in solution by selective and passive diffusion through a semi-permeable membrane. </p>
+<p><code>step8</code>: ion exchange chromatography should be utilized on sample A in the following step. Owing to the fact we have no idea about the pI (isoelectric point) of the protein, we need to include both anion and cation exchanger. In other words, the samples need to conduct the experiments twice.</p>
+<p>We should note that the tightly bound ones would be washed away by the high concentrated sodium chloride, the eluted samples should be collected by different tubes</p>
+<p>SDS-PAGE should be conducted to figure out the inside components.</p>
+<p><code>Rational of step8:</code></p>
+<p>The net surface charge of proteins varies according to the surrounding pH. The pH at which a protein has no net charge is called isoelectric point (pI). Above its isoelectric point (pI), a protein will bind to a positively charged anion exchanger. Below its pI, a protein will bind to a negatively charged cation exchanger.</p>
+<p>Proteins bind as they are loaded onto a column at low ionic strength. The conditions are then altered so that bound substances are desorbed differentially. Elution is usually performed by increasing salt concentration or changing pH in a gradient. Sodium chloride is usually considered as a suitable candidate to elute the bond ones gradually. By adjusting different concentration sodium chloride solution, we could obtain different protein samples. </p>
+<p><code>Step9</code> Repeat the step in step5 and denoted the target sample as sample B.</p>
+<p><code>step10:</code> Hydrophobic Interaction Chromatography (HIC) would be utilized on sample B to purify the enzyme X.</p>
+<p><code>Rational of step10</code>: it could separate the protein based on the hydrophobicity. In this type of chromatography, hydrophobic groups such as phenyl, octyl, or butyl, are attached to the stationary column. Proteins that pass through the column that have hydrophobic amino acid side chains on their surfaces are able to interact with and bind to the hydrophobic groups on the column. Finally, buffer need to be used to elute the rest proteins.</p>
+<p><code>step11</code>: Similarly,  repeat the step in step5 &amp; step6, and denoted the target sample as sample C </p>
+<p><code>step12</code>: Gel filtration chromatography should also be included on sample C to filter out the proteins based on their molecules weight. The technique is ideal for the final polishing steps in a purification when sample volumes have been reduced.</p>
+<p><code>Rational of step12</code> : The gel filtration chromatography is based on the molecular size and the hydrodynamic volume of the components. The molecules are separated by the differential exclusion or inclusion of solutes as they pass through the stationary phase containing heteroporous cross-linked polymeric gel or beads. Different permeation rates of the solute molecules cause them to sift in the interior of the gel particles. A column of the porous matrix is in equilibrium with the mobile phase for separation of the molecules. Large molecules are entirely excluded from the pores and come first in the effluent. Smaller molecules get distributed between the mobile phase and the outside of the sieve. Then, they pass through the column at a slower rate and appear later in the effluent.</p>
+<p><code>step13 </code>: Similarly,  repeat the step in step5 &amp; step6, and denoted the target sample as sample D</p>
+<p>Based on the previous 13 steps, we could successfully isolate the mutant enzyme X from the liver of mouse “Y”. For the protein identification, you could turn to 2D gel electrophoresis and mass spectrometry for more details. </p>
+<p><code>step14:</code>2D Gel Electrophoresis can be used to characterize the proteins in the remaining samples. </p>
+<p><code>Rational behind step14:</code> two dimensional gel electrophoresis could separate proteins based on pI in 1st dimension and operate proteins based on molecular weight in 2nd dimensions</p>
+<p><code>step15</code>: Search the online databases, hoping to find the similar results.</p>
+<hr>
+<p>Your partially purified sample exhibits very strong enzyme X activity in 14C assay but your SDS-PAGE looks like the example shown in the figure below: </p>
+<p>What strategies would you use to identify enzyme X from the mixture? Explain how you would carry out the experiment and the reasons of your strategies. [<strong>40 marks</strong>] </p>
+<p><strong>Answer:</strong></p>
+<p>As learnt from the lecture, there are two widely used methods in protein identification, Edman Degradation and Mass spectrometry.</p>
+<p>Edman degradation is the process of purifying protein by sequentially removing one residue at a time from the amino end of a peptide. Phenyl isothiocyanate is added to create a phenylthiocarbamoyl derivative with the N-terminal to remove only one residue at a time. The N-terminal is then cleaved under less harsh acidic conditions, creating a cyclic compound of phenylthiohydantoin PTH-amino acid. This does not damage the protein and leaves two constituents of the peptide.</p>
+<p>At the first step, the proteins need to be broken down to peptide fragments by the strong acid which could ensure their terminal would be blocked and cannot be sequenced. High pressure liquid chromatography (HPLC) would be employed to separate the peptides. The amino acid sequencing are then followed to conduct sequence alignment to match the known sequences in the database to identify the protein.</p>
+<p>The second choice would be the mass spectrometry. Mass spectrometry measures the mass-to-charge ratio of charged particles, mass spectrometry is used for determining masses of particles and the elemental composition of a sample of molecule as well as for elucidating the chemical structure of molecules such as peptides. </p>
+<p>As can be seen from the figure that, four bands, suggesting four proteins, have been got. With either Edman degradation or mass spectrometry, we could utilize the approaches like BLAST to align the sequence stored in database. Since enzyme X in this case still could not be determined, we could use the “process of elimination” to identify the other three proteins.</p>
+]]></content>
+      <categories>
+        <category>Biology</category>
+      </categories>
+      <tags>
         <tag>notes</tag>
       </tags>
   </entry>
