@@ -9,8 +9,6 @@
     
     <title>
         
-            Java web 入门到实战 |
-        
         Yuxuan Wu
     </title>
     <link rel="shortcut icon" href="/images/logo.svg">
@@ -64,7 +62,7 @@
                 <ul class="menu-list">
                     
                         <li class="menu-item">
-                            <a class=""
+                            <a class="active"
                                href="/"
                             >
                                 HOME
@@ -125,7 +123,7 @@
         <ul class="drawer-menu-list">
             
                 <li class="drawer-menu-item flex-center">
-                    <a class=""
+                    <a class="active"
                        href="/">HOME</a>
                 </li>
             
@@ -164,186 +162,84 @@
             <div class="main-content normal-code-theme">
 
                 
-                    <div class="fade-in-down-animation">
-    <div class="article-content-container">
-
-        <div class="article-title">
-            <span class="title-hover-animation">Java web 入门到实战</span>
-        </div>
-
+                    <div class="home-content-container fade-in-down-animation">
+    <ul class="home-article-list">
         
-            <div class="article-header">
-                <div class="avatar">
-                    <img src="/images/avatar.svg">
-                </div>
-                <div class="info">
-                    <div class="author">
-                        <span class="name">Yuxuan Wu</span>
-                        <span class="level">Lv4</span>
-                    </div>
-                    <div class="meta-info">
-                        <div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i> 2021-02-15 13:00:23
-    </span>
-    
-        <span class="article-categories article-meta-item">
-            <i class="fas fa-folder"></i>
-            <ul>
-                
-                    <li>
-                        <a href="/categories/Java/">Java</a>
-                    </li>
-                
-            </ul>
-        </span>
-    
-    
-        <span class="article-tags article-meta-item">
-            <i class="fas fa-tags"></i>
-            <ul>
-                
-                    <li>
-                        <a href="/tags/Java/">Java</a>
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/Web/">Web</a>
-                    </li>
-                
-            </ul>
-        </span>
-    
+            <li class="home-article-item">
 
-    
-    
-        <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i> <span>298 Words</span>
-        </span>
-    
-    
-        <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i> <span>1 Mins</span>
-        </span>
-    
-    
-        <span class="article-pv article-meta-item">
-            <i class="fas fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
-        </span>
-    
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2021/01/24/YuxuanWu-1716309-INT305-Report/">
+                        Heart failure detection by SVM-based machine learning model
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        Cardiovascular diseases (CVDs) are the number 1 cause of death globally, taking an estimated 17.9 million lives each year, wh...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i> <span class="home-article-date" data-date="Sun Jan 24 2021 21:11:26 GMT+0800">2021-01-24</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Python/">Python</a>
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/kaggle/">kaggle</a>
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/ML/">ML</a>
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/EDA/">EDA</a>
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2021/01/24/YuxuanWu-1716309-INT305-Report/">Read more <i class="fas fa-angle-right"></i></a>
 </div>
 
-                    </div>
-                </div>
-            </div>
+            </li>
         
-
-        <div class="article-content markdown-body">
-            <h2 id="Java-Web"><a href="#Java-Web" class="headerlink" title="Java Web"></a>Java Web</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>web开发：</p>
-<ul>
-<li>web, 网页的意思</li>
-<li>静态web<ul>
-<li>html, css</li>
-<li>提供给所有人看的数据始终不会发生变化！</li>
-</ul>
-</li>
-<li>动态web<ul>
-<li>提供给所有人看的数据始终会发生变化！每个人在不同的时间，不同的地点看到的信息各不相同</li>
-<li>技术栈：Servlet/JSP, ASP, PHP</li>
-</ul>
-</li>
-</ul>
-<p>在java中，动态web资源开发的技术统称JavaWeb；</p>
-<h3 id="web应用程序"><a href="#web应用程序" class="headerlink" title="web应用程序"></a>web应用程序</h3><p>Web应用程序：可以提供浏览器访问的程序</p>
-<ul>
-<li><p>a.html … 多个外部资源，这些web资源可以被外界所访问</p>
-</li>
-<li><p>你们能访问到任何一个页面或者资源，都存在于这个世界的某一个角落的计算机上</p>
-</li>
-<li><p>URL</p>
-</li>
-<li><p>这个统一的web资源会被放到同一个文件夹下，web应用程序—&gt;Tomcat：服务器</p>
-</li>
-<li><p>一个web应用有多个部分组成（静态web，动态web）</p>
-<ul>
-<li><p>html，css，js</p>
-</li>
-<li><p>jsp，servlet</p>
-</li>
-<li><p>java程序</p>
-</li>
-<li><p>jar包</p>
-</li>
-<li><p>配置文件（Properties）</p>
-</li>
-</ul>
-</li>
-</ul>
-<p>web应用程序编程完毕后，若想提供给外界进行访问：需要一个服务器来进行统一的管理</p>
-<h3 id="静态web"><a href="#静态web" class="headerlink" title="静态web"></a>静态web</h3><ul>
-<li>*.htm，*.html 这些都是网络的后缀，我们可以直接</li>
-</ul>
-<p><img src="https://tva1.sinaimg.cn/large/008eGmZEgy1gnw4rmk9l3j30so06mwfy.jpg" alt="image-20210222105555354"></p>
-
-        </div>
-
-        
-            <div class="post-copyright-info">
-                <div class="article-copyright-info-container">
-    <ul>
-        <li>Post title：Java web 入门到实战</li>
-        <li>Post author：Yuxuan Wu</li>
-        <li>Create time：2021-02-15 13:00:23</li>
-        <li>
-            Post link：yuxuanwu17.github.io2021/02/15/2021-02-15-Java-web-入门到实战/
-        </li>
-        <li>
-            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
-        </li>
     </ul>
+
+    <div class="home-paginator">
+        <div class="paginator">
+    
+        <a class="prev btn"
+           href="/page/3/"
+        >Prev</a>
+    
+
+    
 </div>
 
-            </div>
-        
-
-        
-            <div class="article-nav">
-                
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2021/02/15/2021-02-15-MySQL/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">MySQL</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
-                
-                    <div class="article-next">
-                        <a class="next"
-                           rel="next"
-                           href="/2021/02/10/2021-02-10-Java-%E5%9B%9E%E9%A1%BE/"
-                        >
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">JavaSE 回顾</span>
-                                <span class="post-nav-item">Next posts</span>
-                            </span>
-                            <span class="right arrow-icon flex-center">
-                              <i class="fas fa-chevron-right"></i>
-                            </span>
-                        </a>
-                    </div>
-                
-            </div>
-        
-
-        
     </div>
 </div>
 
@@ -387,23 +283,6 @@
         </div>
     </div>
 
-    
-        <div class="post-tools">
-            <div class="post-tools-container">
-    <ul class="tools-list">
-        <!-- TOC aside toggle -->
-        
-            <li class="tools-item page-aside-toggle">
-                <i class="fas fa-outdent"></i>
-            </li>
-        
-
-        <!-- go comment -->
-        
-    </ul>
-</div>
-
-        </div>
     
 
     <div class="right-bottom-side-tools">
@@ -451,14 +330,6 @@
     </div>
 
     
-        <aside class="page-aside">
-            <div class="post-toc-wrap">
-    <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-Web"><span class="nav-number">1.</span> <span class="nav-text">Java Web</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F"><span class="nav-number">1.2.</span> <span class="nav-text">web应用程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81web"><span class="nav-number">1.3.</span> <span class="nav-text">静态web</span></a></li></ol></li></ol>
-    </div>
-</div>
-        </aside>
-    
 
     <div class="image-viewer-container">
     <img src="">
@@ -501,6 +372,7 @@
 
 
 
+
 <script src="/js/utils.js"></script>
 
 <script src="/js/main.js"></script>
@@ -527,14 +399,6 @@
 
 
 <div class="post-scripts">
-    
-        
-<script src="/js/left-side-toggle.js"></script>
-
-<script src="/js/libs/anime.min.js"></script>
-
-<script src="/js/toc.js"></script>
-
     
 </div>
 
