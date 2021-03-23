@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Welcome to my personal blogs">
+    <meta name="author" content="Yuxuan Wu">
+    
+    <title>
+        
+            C# .net 的基础面试题 |
+        
+        Yuxuan Wu
+    </title>
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep coding, Keep hungry."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.3.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days age","week":"%s weeks age","month":"%s months age","year":"%s years age"};
+  </script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Yuxuan Wu
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content normal-code-theme">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">C# .net 的基础面试题</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Yuxuan Wu</span>
+                        <span class="level">Lv4</span>
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i> 2021-03-19 04:02:11
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/categories/C/">C#</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/tags/notes/">notes</a>
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/C/">C#</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i> <span>17.5k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i> <span>62 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p><strong>最近，整理了一份 c#、.net 基础面试题，其中多少引用了前辈们写的，也加了自己的理解。不对的地方，还请大家多多指正，共同进步，非常感谢！</strong></p>
+<p><strong>如有侵权请私信我。</strong><a class="link" target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/355257871">https://zhuanlan.zhihu.com/p/355257871<i class="fas fa-external-link-alt"></i></a></p>
+<hr>
+<p><strong><em>题目概要</em></strong></p>
+<p><strong>1、ASP.NET页面之间传值方式？</strong></p>
+<p><strong>2、如何理解装箱和拆箱？</strong></p>
+<p><strong>3、C#中什么是值类型与引用类型？</strong></p>
+<p><strong>4、请详述在C#中类(class)与结构(struct)的异同？</strong></p>
+<p><strong>5、virtual 和 abstract</strong></p>
+<p><strong>6、简述 private、 protected、 public、 internal 修饰符的访问权限。</strong></p>
+<p><strong>7、C#中堆和栈的区别？ 值类型 栈 引用类型 堆</strong></p>
+<p><strong>8、在ASP.NET中所有的自定义用户控件都必须继承自？</strong></p>
+<p><strong>10、GC（Garbage Collection）</strong></p>
+<p><strong>11、CLR（Common Language Runtime）</strong></p>
+<p><strong>12、静态构造函数</strong></p>
+<p><strong>13、文件I/O</strong></p>
+<p><strong>14、序列化与反序列化</strong></p>
+<p><strong>15、线程同步</strong></p>
+<p><strong>16、C#中 abstract class和interface有什么区别?</strong></p>
+<p><strong>17、using关键字的使用场景</strong></p>
+<p><strong>18、new关键字的使用场景</strong></p>
+<p><strong>19、委托与事件</strong></p>
+<p><strong>20、重载(overload)与重写(override)的区别</strong></p>
+<p><strong>21、return执行顺序</strong></p>
+<p><strong>22、switch(expression)</strong></p>
+<p><strong>23、反射Reflection</strong></p>
+<p><strong>24、property与attribute的区别</strong></p>
+<p><strong>25、（Class）和实例（Instance）</strong></p>
+<p><strong>26、类和类的实例有什么区别？</strong></p>
+<p><strong>27、C# 中static关键字的作用？</strong></p>
+<p><strong>28、C# 成员变量和成员函数前加static的作用？</strong></p>
+<p><strong>29、文件编码格式</strong></p>
+<p><strong>30、值传递与引用传递解释？</strong></p>
+<p><strong>31、参数传递 ref 与 out 的区别</strong></p>
+<p><strong>32、什么是内存泄漏？</strong></p>
+<p><strong>33、跨域</strong></p>
+<p><strong>34、ORM中的延迟加载与直接加载有什么异同？</strong></p>
+<p><strong>35、简述Func与Action的区别？</strong></p>
+<p><strong>36、能用foreach遍历访问的对象的要求？</strong></p>
+<p><strong>37、什么是泛型？</strong></p>
+<p><strong>38、Final</strong></p>
+<p><strong>39、数据库操作的相关类</strong></p>
+<p><strong>40、<a class="link" href="https://link.zhihu.com/?target=http://ADO.NET">http://ADO.NET<i class="fas fa-external-link-alt"></i></a> 五大对象</strong></p>
+<p><strong>41、C# DataTable和DataSet 区别？</strong></p>
+<p><strong>42、索引器（Indexers）</strong></p>
+<p><strong>43、POST和GET深入理解</strong></p>
+<p><strong>44、C#中用sealed修饰的类有什么特点？</strong></p>
+<p><strong>45、string和StringBuilder的区别,两者性能的比较？</strong></p>
+<p><strong>46、什么是扩展方法？</strong></p>
+<p><strong>47、C#可否对内存直接操作</strong></p>
+<p><strong>48、&amp;和&amp;&amp;区别</strong></p>
+<p><strong>49、as和is的区别</strong></p>
+<p><strong>50、什么是匿名类，有什么好处？</strong></p>
+<p><strong>51、什么是虚函数？什么是抽象函数？</strong></p>
+<p><strong>52、什么是托管和非托管？</strong></p>
+<p><strong>53、Lambda表达式？</strong></p>
+<p><strong>54、如何提高.NET的性能 ？</strong></p>
+<p><strong>55、EF</strong></p>
+<p><strong>56、如何解决数据并发问题？</strong></p>
+<p><strong>57、浅克隆与深克隆（浅拷贝与深拷贝）</strong></p>
+<p><strong>58、.NET、C#和<a class="link" href="https://link.zhihu.com/?target=http://ASP.NET">http://ASP.NET<i class="fas fa-external-link-alt"></i></a>，<a class="link" href="https://link.zhihu.com/?target=http://ASP.NET">http://ASP.NET<i class="fas fa-external-link-alt"></i></a> MVC 四者之间的区别</strong></p>
+<p><strong>59、MVC 和三层框架区别</strong></p>
+<p><strong>60、MVC 和三层框架区别 详细解释</strong></p>
+<p><strong>61、高内聚，低耦合。</strong></p>
+<p><strong>62、什么是WebService?</strong></p>
+<p><strong>63、什么是Web API？</strong></p>
+<p><strong>64、Web Service与Web API的关系？</strong></p>
+<p><strong>65、前后端分离</strong></p>
+<hr>
+<h3 id="1、ASP-NET页面之间传值方式？"><a href="#1、ASP-NET页面之间传值方式？" class="headerlink" title="1、ASP.NET页面之间传值方式？"></a><strong>1、ASP.NET页面之间传值方式？</strong></h3><ul>
+<li><p>Request.QueryString[“name”]</p>
+</li>
+<li><p>Request.Form(“name”)</p>
+</li>
+<li><p>Session</p>
+</li>
+<li><p>Cookie</p>
+</li>
+<li><p>Cache</p>
+</li>
+<li><p>Application</p>
+</li>
+<li><p>Server.Transfer</p>
+</li>
+<li><p>Database</p>
+</li>
+<li><p>HttpContext</p>
+</li>
+</ul>
+<h3 id="2、如何理解装箱和拆箱？"><a href="#2、如何理解装箱和拆箱？" class="headerlink" title="2、如何理解装箱和拆箱？"></a><strong>2、如何理解装箱和拆箱？</strong></h3><p>当一个值类型转换为对象类型时，则被称为 <strong>装箱</strong>；==(值-&gt;对象)==</p>
+<p>另一方面，当一个对象类型转换为值类型时，则被称为 <strong>拆箱</strong>。==（对象-&gt;值）==</p>
+<p><strong>C#显式转换和隐式转换？</strong></p>
+<p>类型转换从根本上说是类型铸造，或者说是把数据从一种类型转换为另一种类型。</p>
+<p>在 C# 中，类型铸造有两种形式：</p>
+<ul>
+<li><strong>隐式类型转换 - 这些转换是 C# 默认的以安全方式进行的转换, 不会导致数据丢失。例如，从小的整数类型转换为大的整数类型，从派生类转换为基类。</strong></li>
+<li><strong>显式类型转换 - 显式类型转换，即强制类型转换。显式转换需要强制转换运算符，而且强制转换会造成数据丢失。</strong></li>
+</ul>
+<p><strong>装、拆过程详解</strong>：</p>
+<p>装箱：对值类型在堆中分配一个对象实例，并将该值复制到新的对象中。</p>
+<p>（1）第一步：新分配托管堆内存(大小为值类型实例大小加上一个方法表指针。</p>
+<p>（2）第二步：将值类型的实例字段拷贝到新分配的内存中。</p>
+<p>（3）第三步：返回托管堆中新分配对象的地址。这个地址就是一个指向对象的引用了。</p>
+<p>拆箱：检查对象实例，确保它是给定值类型的一个装箱值。将该值从实例复制到值类型变量中。</p>
+<p>在装箱时是不需要显式的类型转换的，不过拆箱需要显式的类型转换。</p>
+<h3 id="3、C-中什么是值类型与引用类型？"><a href="#3、C-中什么是值类型与引用类型？" class="headerlink" title="3、C#中什么是值类型与引用类型？"></a><strong>3、C#中什么是值类型与引用类型？</strong></h3><p><strong>值类型</strong>：struct、enum、int、float、char、bool、decimal</p>
+<p><strong>引用类型</strong>：class、delegate、interface、array、object、string</p>
+<h3 id="4、请详述在C-中类-class-与结构-struct-的异同？"><a href="#4、请详述在C-中类-class-与结构-struct-的异同？" class="headerlink" title="4、请详述在C#中类(class)与结构(struct)的异同？"></a><strong>4、请详述在C#中类(class)与结构(struct)的异同？</strong></h3><p><strong>class：</strong>可以被实例化,属于引用类型，</p>
+<p><strong>可以实现接口和单继承其他类，还可以作为基类型，</strong></p>
+<p>分配在内存的<strong>堆</strong>上的。</p>
+<p><strong>堆（heap）</strong>也被称为优先队列，队列中允许的操作是 <strong>先进先出</strong>（FIFO），在队尾插入元素，在队头取出元素。而堆也是一样，在堆底插入元素，在堆顶取出元素。二叉树的衍生，有最小堆最大堆的两个概念，将根节点最大的堆叫做最大堆或大根堆，根节点最小的堆叫做最小堆或小根堆。常见的堆有二叉堆、斐波那契堆等。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210322213445.jpg" alt="img"></p>
+<p><strong>struct：</strong>属于值类型,</p>
+<p>不能作为基类型，但<strong>是可以实现接口，</strong></p>
+<p>不能声明默认构造函数，</p>
+<p>分配在内存的<strong>栈</strong>上的。</p>
+<p>栈（Stack）又名堆栈，作为一个 <strong>先进后出</strong> 的数据结构。（<strong>注意：这里的堆栈本身就是栈，只是换了个抽象的名字</strong>。）<br>它是一种运算受限的线性表。其限制是仅允许在表的一端进行插入和删除运算。这一端被称为栈顶，相对地，把另一端称为栈底。向一个栈插入新元素又称作进栈、入栈或压栈，它是把新元素放到栈顶元素的上面，使之成为新的栈顶元素；从一个栈删除元素又称作出栈或退栈，它是把栈顶元素删除掉，使其相邻的元素成为新的栈顶元素。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210322213421.jpg" alt="img"></p>
+<p>另外补充一个和堆栈比较相关的概念——队列</p>
+<img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210322214015.jpg" alt="img" style="zoom:50%;">
+
+
+
+<ul>
+<li>队列是一种特殊的线性表，特殊之处在于它只允许在表的前端（front）进行删除操作，而在表的后端（rear）进行插入操作，和栈一样，队列是一种操作受限制的线性表。进行插入操作的端称为队尾，进行删除操作的端称为队头。队列中没有元素时，称为空队列。</li>
+<li>队列采用 <strong>先进先出</strong> FIFO(first  in first  out)，新元素（等待进入队列的元素）总是被插入到链表的尾部，而读取的时候总是从链表的头部开始读取。每次读取一个元素，释放一个元素。所谓的动态创建，动态释放。因而也不存在溢出等问题。由于链表由结构体间接而成，遍历也方便。</li>
+</ul>
+<h3 id="5、virtual-和-abstract"><a href="#5、virtual-和-abstract" class="headerlink" title="5、virtual 和 abstract"></a><strong>5、virtual 和 abstract</strong></h3><p>virtual和abstract都是用来修饰<strong>父类的</strong>，通过覆盖父类的定义，让子类重新定义。</p>
+<h3 id="6、简述-private、-protected、-public、-internal-修饰符的访问权限。"><a href="#6、简述-private、-protected、-public、-internal-修饰符的访问权限。" class="headerlink" title="6、简述 private、 protected、 public、 internal 修饰符的访问权限。"></a><strong>6、简述 private、 protected、 public、 internal 修饰符的访问权限。</strong></h3><p><strong>private</strong> : 私有成员, 在类的内部才可以访问 ，也就是类内部的函数等成员可以访问。</p>
+<p><strong>protected</strong> : 保护成员，该类内部和继承类中可以访问。</p>
+<p><strong>public</strong> : 公共成员，完全公开，没有访问限制。</p>
+<p><strong>internal</strong>: 当前程序集内可以访问。</p>
+<p><strong>精简回答：</strong></p>
+<p>（1）public 公有访问，不受任何限制。</p>
+<p>（2）private 私有访问，只限于本类成员访问。</p>
+<p>（3）protected 保护访问，<strong>只限于本类和子类访问。</strong></p>
+<p>（4）internal 内部访问，只限于当前程序集内访问。</p>
+<h3 id="7、C-中堆和栈的区别？-值类型-栈-引用类型-堆-上学的时候常常讲"><a href="#7、C-中堆和栈的区别？-值类型-栈-引用类型-堆-上学的时候常常讲" class="headerlink" title="7、C#中堆和栈的区别？ 值类型 栈 引用类型 堆 上学的时候常常讲"></a><strong>7、C#中堆和栈的区别？</strong> 值类型 栈 引用类型 堆 上学的时候常常讲</h3><p><strong>栈：</strong>由编译器自动分配、释放。在函数体中定义的变量通常在栈上。</p>
+<p>堆：一般由程序员分配释放。用 new、malloc等分配内存函数分配得到的就是在堆上。</p>
+<p>存放在栈中时要管存储顺序，保持着<strong>先进后出</strong>的原则，他是一片连续的内存域，有系统自动分配和维护；</p>
+<p><strong>堆：</strong>是无序的，他是一片不连续的内存域，有用户自己来控制和释放，如果用户自己不释放的话，当内存达到一定的特定值时，通过垃圾回收器(GC)来回收。</p>
+<p>栈内存无需我们管理，也不受GC管理。当栈顶元素使用完毕，立马释放。而堆则需要GC清理。</p>
+<p><strong>补充</strong>：使用引用类型的时候，一般是对指针进行的操作而非引用类型对象本身。但是值类型则操作其本身</p>
+<h3 id="8、在ASP-NET中所有的自定义用户控件都必须继承自？"><a href="#8、在ASP-NET中所有的自定义用户控件都必须继承自？" class="headerlink" title="8、在ASP.NET中所有的自定义用户控件都必须继承自？"></a><strong>8、在ASP.NET中所有的自定义用户控件都必须继承自？</strong></h3><p>Control类</p>
+<h3 id="9、在-NET托管代码总我们不必担心内存泄漏，这是因为有了？"><a href="#9、在-NET托管代码总我们不必担心内存泄漏，这是因为有了？" class="headerlink" title="9、在.NET托管代码总我们不必担心内存泄漏，这是因为有了？"></a><strong>9、在.NET托管代码总我们不必担心内存泄漏，这是因为有了？</strong></h3><p>GC 垃圾收集器。</p>
+<h3 id="10、GC（Garbage-Collection）"><a href="#10、GC（Garbage-Collection）" class="headerlink" title="10、GC（Garbage Collection）"></a><strong>10、GC（Garbage Collection）</strong></h3><p>当程序需要更多的堆空间时，GC需要进行垃圾清理工作，暂停所有线程，找出所有无被引用的对象，进行清理，并通知栈中的指针重新指向地址排序后的对象。</p>
+<p>GC只能处理 <strong>托管内存资源</strong> 的释放，对于 <strong>非托管资源则</strong> 不能使用GC进行回收，必须由程序员<strong>手动回收</strong>。</p>
+<p>例如FileStream或SqlConnection需要调用Dispose进行资源的回收。</p>
+<p><strong>精简：</strong></p>
+<p>GC,垃圾回收器，用于自动回收托管堆中无效对象的内存，释放内存空间。</p>
+<h3 id="11、CLR（Common-Language-Runtime）"><a href="#11、CLR（Common-Language-Runtime）" class="headerlink" title="11、CLR（Common Language Runtime）"></a><strong>11、CLR（Common Language Runtime）</strong></h3><p>公共语言运行库，负责资源管理（包括内存分配、程序及加载、异常处理、线程同步、垃圾回收等），并保证应用和底层操作系统的分离。</p>
+<h3 id="12、静态构造函数"><a href="#12、静态构造函数" class="headerlink" title="12、静态构造函数"></a><strong>12、静态构造函数</strong></h3><p>最先被执行的构造函数，且在一个类里只允许有一个无参的静态构造函数</p>
+<p>执行顺序：静态变量&gt;静态构造函数&gt;实例变量&gt;实例构造函数</p>
+<h3 id="13、文件I-O"><a href="#13、文件I-O" class="headerlink" title="13、文件I/O"></a><strong>13、文件I/O</strong></h3><p>通过流的方式对文件进行读写操作</p>
+<p>（1）FileStream</p>
+<p>（2）StreamReader/StreamWriter</p>
+<h3 id="14、序列化与反序列化"><a href="#14、序列化与反序列化" class="headerlink" title="14、序列化与反序列化"></a><strong>14、序列化与反序列化</strong></h3><p>序列化：将对<strong>象状态转换为可保持或传输的格式的过程</strong>。将对象实例的字段及类的名称转换成字节流，然后把字节流写入数据流</p>
+<p>反序列化：将流转换为对象。</p>
+<p>这两个过程结合起来，可以轻松地存储和传输数据。</p>
+<h3 id="15、线程同步"><a href="#15、线程同步" class="headerlink" title="15、线程同步"></a><strong>15、线程同步</strong></h3><p>（1）方法一：阻塞（调用Sleep()或Join()）</p>
+<p>（2）方法二：加互斥锁lock</p>
+<p>（3）方法三：信号和句柄（AutoResetEvent/ManualResetEvent，调用Set()和WaitOne()）</p>
+<h3 id="16、C-中-abstract-class和interface有什么区别"><a href="#16、C-中-abstract-class和interface有什么区别" class="headerlink" title="16、C#中 abstract class和interface有什么区别?"></a><strong>16、C#中 abstract class和interface有什么区别?</strong></h3><p>相同点：</p>
+<p>（1）都可以被继承</p>
+<p>（2）都不能被实例化</p>
+<p>（3）都可以包含方法的声明</p>
+<p>不同点：</p>
+<p>（1）抽象类被子类继承；接口被类实现</p>
+<p>（2）抽象类只能被单个类继承；接口可继承接口，并可多继承接口</p>
+<p>（3）抽象基类可以定义字段、属性、方法实现；接口只能定义属性、索引器、事件、和方法声明，不能包含字段</p>
+<p>（4）抽象类可以做方法声明，也可做方法实现；接口只能做方法声明</p>
+<p>（5）<strong>具体派生类</strong>必须<strong>覆盖(override)**抽象基类的</strong>抽象方法**；派生类必须实现接口的所有方法</p>
+<p>（6）抽象类是一个不完整的类，需要进一步细化；接口是一个行为规范，必须按照规范来实现。</p>
+<p>（7）抽象类中的虚方法或抽象方法必须用public修饰；接口中的所有成员默认为public，不能有private修饰符</p>
+<p><strong>解释说明</strong></p>
+<p>abstract class</p>
+<p><strong>abstract 声明抽象类抽象方法，一个类中有抽象方法，那么这个类就是抽象类了。</strong>所谓的 抽象方法，就是不含主体 （即不提供实现方法），必须由继承者重写。因此，抽象类不可实例化，只能通过继承被子类重写。</p>
+<p>interface 声明接口，只提供一些方法规约， 接口是一个行为规范，必须按照规范来实现。</p>
+<p>在C#8之前的版本中不提供任何实现，在C#9版本也可以支持接口的实现；不能用public、abstract等修饰，无字段、常量，无构造函数</p>
+<p><strong>区别扩展：</strong></p>
+<p>1.interface中不能有字段，而abstract class可以有;</p>
+<p>2.interface中不能有public等修饰符，而abstract class 可以有。</p>
+<p>3.interface 可以实现多继承</p>
+<h3 id="17、using关键字的使用场景"><a href="#17、using关键字的使用场景" class="headerlink" title="17、using关键字的使用场景"></a><strong>17、using关键字的使用场景</strong></h3><p>（1）作为指令：用于导入其他命名空间中定义的类型或为命名空间创建别名 （<strong>引用命名空间</strong>）</p>
+<p>（2）作为语句：用于定义一个范围，在此范围的末尾将释放对象 （<strong>定义一个代码块</strong>）</p>
+<h3 id="18、new关键字的使用场景"><a href="#18、new关键字的使用场景" class="headerlink" title="18、new关键字的使用场景"></a><strong>18、new关键字的使用场景</strong></h3><p>运算符：创建对象实例</p>
+<p>修饰符：在派生类定义一个重名的方法，隐藏掉基类方法</p>
+<p>约束：泛型约束定义，约束可使用的泛型类型</p>
+<h3 id="19、委托与事件"><a href="#19、委托与事件" class="headerlink" title="19、委托与事件"></a><strong>19、委托与事件</strong></h3><p>委托可以把一个方法作为参数传入另一个方法，可以理解为指向一个函数的引用；事件是一种特殊的委托。</p>
+<p>比如：onclick事件中的参数就是一种方法。</p>
+<h3 id="20、重载-overload-与重写-override-的区别"><a href="#20、重载-overload-与重写-override-的区别" class="headerlink" title="20、重载(overload)与重写(override)的区别"></a><strong>20、重载(overload)与重写(override)的区别</strong></h3><p>重载：是<strong>方法的名称</strong>相同，参数或参数类型不同；重载是面向过程的概念。</p>
+<p>重写：是对基类中的虚方法进行重写。重写是面向对象的概念。</p>
+<h3 id="21、return执行顺序"><a href="#21、return执行顺序" class="headerlink" title="21、return执行顺序"></a><strong>21、return执行顺序</strong></h3><p>try{} 里有一个return语句，那么finally{} 里的code在return前执行。</p>
+<h3 id="22、switch-expression"><a href="#22、switch-expression" class="headerlink" title="22、switch(expression)"></a><strong>22、switch(expression)</strong></h3><p>其中expression支持任何数据类型，包括null。</p>
+<h3 id="23、反射Reflection"><a href="#23、反射Reflection" class="headerlink" title="23、反射Reflection"></a><strong>23、反射Reflection</strong></h3><p>动态获取程序集信息。</p>
+<p><strong>解释：</strong></p>
+<p>程序集包含模块，而模块又包括类型，类型下有成员，反射就是管理程序集，模块，类型的对象，它能够动态的创建类型的实例，设置现有对象的类型或者获取现有对象的类型，能调用类型的方法和访问类型的字段属性。</p>
+<p>它是在运行时创建和使用类型实例。</p>
+<p><strong>扩展：</strong></p>
+<p>typeof</p>
+<p>说反射之前，要先知道typeof这个关键字，它是反射的核心，typeof可以动态的获取某个类的类型信息，反射通过这些类型信息，就可以生成实例等一些操作。</p>
+<p>Reflection</p>
+<p>反射的命名空间位于System.Reflection</p>
+<h3 id="24、property与attribute的区别"><a href="#24、property与attribute的区别" class="headerlink" title="24、property与attribute的区别"></a><strong>24、property与attribute的区别</strong></h3><p>property是属性，用于存取类的字段；</p>
+<p>attribute是特性，用来标识类，方法等的附加性质。</p>
+<h3 id="25、（Class）和实例（Instance）"><a href="#25、（Class）和实例（Instance）" class="headerlink" title="25、（Class）和实例（Instance）"></a><strong>25、（Class）和实例（Instance）</strong></h3><p><strong>理解：</strong></p>
+<p>面向对象最重要的概念就是类（Class）和实例（Instance）</p>
+<p>牢记：类是抽象的模板</p>
+<p>比如 Student类，而实例是根据类创建出来的一个个具体的“对象”，每个对象都拥有相同的方法，但各自的数据可能不同。</p>
+<p><strong>类和类的实例有什么区别？</strong></p>
+<p>类是抽象概念，类的实例是具体的。</p>
+<p>比如 创建一个类名字叫“学生”，实例化一个学生“张三”，张三就是“学生类”的一个实例。</p>
+<p>比如创建类：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Student</span> <span class="comment">//创建一个学生类</span></span><br><span class="line">  </span><br><span class="line">{</span><br><span class="line"></span><br><span class="line">String name; <span class="comment">//学生有个属性，叫“姓名”</span></span><br><span class="line"></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">Student s = <span class="keyword">new</span> Student(); <span class="comment">//创建一个学生类的对象，也就是将类实例化</span></span><br><span class="line"></span><br><span class="line">s.name = <span class="string">"张三"</span>; <span class="comment">//将新创建的类的实例的属性“姓名”赋值为“张三”</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>类是创建实例的模板，而实例则是一个一个具体的对象，各个实例拥有的数据都互相独立，互不影响；</p>
+<p>方法就是与实例绑定的函数，和普通函数不同，方法可以直接访问实例的数据；</p>
+<h3 id="26、C-中static关键字的作用？"><a href="#26、C-中static关键字的作用？" class="headerlink" title="26、C# 中static关键字的作用？"></a><strong>26、C# 中static关键字的作用？</strong></h3><p>对类 有意义的 字段 和 方法 使用static关键字修饰，称为静态成员，通过类名加访问操作符“.”进行访问;</p>
+<p>对类的实例 有意义的 字段 和 方法 不加static关键字，称为非静态成员或实例成员。</p>
+<p>注: 静态字段在内存中只有一个拷贝，</p>
+<p>非静态字段则是在每个实例对象中拥有一个拷贝。</p>
+<p>而方法无论是否为静态，在内存中只会有一份拷贝，</p>
+<p>区别只是通过类名来访问还是通过实例名来访问。</p>
+<h3 id="27-C-成员变量和成员函数前加static的作用？"><a href="#27-C-成员变量和成员函数前加static的作用？" class="headerlink" title="27.C# 成员变量和成员函数前加static的作用？"></a><strong>27.C# 成员变量和成员函数前加static的作用？</strong></h3><p>它们被称为常成员变量和常成员函数，又称为类成员变量和类成员函数。 分别用来反映类的状态。</p>
+<p>比如类成员变量可以用来统计类实例的数量，类成员函数负责这种统计的动作。不用new</p>
+<h3 id="28、文件编码格式"><a href="#28、文件编码格式" class="headerlink" title="28、文件编码格式"></a><strong>28、文件编码格式</strong></h3><p>阶段一：ASCII</p>
+<p>阶段二：ANSI（本地化） 如：GBK、GB2312</p>
+<p>阶段三：UNICODE（国际化） 如：UTF-8</p>
+<h3 id="29、值传递与引用传递解释？"><a href="#29、值传递与引用传递解释？" class="headerlink" title="29、值传递与引用传递解释？"></a><strong>29、值传递与引用传递解释？</strong></h3><p>值传递时，系统首先为被调用方法的形参分配内存空间，并将<strong>实参的值</strong>按位置一一对应地复制<strong>给形参</strong>，此后，被调用方法中<strong>形参值得任何改变都不会影响到相应的实参</strong>；</p>
+<p>引用传递时，系统不是将实参本身的值复制后传递给形参，而是将其<strong>引用值（即地址值）</strong>传递给<strong>形参</strong>，因此，形参所引用的该地址上的变量与传递的实参相同，方法体内相应<strong>形参值得任何改变</strong>都<strong>将影响</strong>到作为<strong>引用传递的实参</strong>。</p>
+<p>简而言之，<strong>按值传递不是值参数是值类型，而是指形参变量会复制实参变量，也就是会在栈上多创建一个相同的变量。而按引用传递则不会。可以通过 ref 和 out 来决定参数是否按照引用传递。</strong></p>
+<p>浅显易懂解释：JAVA 方面的</p>
+<p>值传递： 值传递是对基本型变量而言的，传递的是一个变量的副本，改变副本不影响原变量。</p>
+<p>引用传递： 引用传递一般是对对象(引用)型变量而言的，传递的是该对象地址的一个副本，并不是原对象本身，所以引用对象进行操作时会改变原对象。</p>
+<p>来自 <a class="link" target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34955642/article/details/90032800">请你解释什么是值传递和引用传递?<i class="fas fa-external-link-alt"></i></a></p>
+<h3 id="30、参数传递-ref-与-out-的区别"><a href="#30、参数传递-ref-与-out-的区别" class="headerlink" title="30、参数传递 ref 与 out 的区别"></a><strong>30、参数传递 ref 与 out 的区别</strong></h3><p>（1）ref指定的参数 在函数调用时必须先初始化，而out不用</p>
+<p>（2）out指定的参数 在进入函数时会清空自己，因此必须在函数内部进行初始化赋值操作，而ref不用</p>
+<p>总结：ref可以把值传到方法里，也可以把值传到方法外；out只可以把值传到方法外</p>
+<p>注意：string作为特殊的引用类型，其操作是与值类型看齐的，若要将方法内对形参赋值后的结果传递出来，需要加上ref或out关键字。</p>
+<h3 id="31-什么是内存泄漏？"><a href="#31-什么是内存泄漏？" class="headerlink" title="31.什么是内存泄漏？"></a><strong>31.什么是内存泄漏？</strong></h3><p>答：一般我们所说的内存泄漏指的是堆内存的泄漏。</p>
+<p>堆内存是程序从堆中为其分配的，大小任意的，使用完后要显示释放内存。</p>
+<p>当应用程序用关键字new等创建对象时，就从堆中为它分配一块内存，使用完后程序调用free或者delete释放该内存，否则就说该内存就不能被使用，我们就说该内存被泄漏了。</p>
+<h3 id="32、跨域"><a href="#32、跨域" class="headerlink" title="32、跨域"></a><strong>32、跨域</strong></h3><p>跨域是指浏览器的不执行其他网站脚本的，由于浏览器的同源策略造成，是对JavaScript的一种安全限制。</p>
+<p>说白点理解，当你通过浏览器向其他服务器发送请求时，不是服务器不响应，而是服务器返回的结果被浏览器限制了。</p>
+<p><strong>同源策略的同源</strong></p>
+<p>同源指的是协议、域名、端口 都要保持一致。</p>
+<p><a class="link" href="https://link.zhihu.com/?target=http://www.123.com:8080/index.html">http://www.123.com:8080/index.html<i class="fas fa-external-link-alt"></i></a> （http协议，<a class="link" target="_blank" rel="noopener" href="http://www.123.com/">www.123.com<i class="fas fa-external-link-alt"></i></a> 域名、8080 端口 ，只要这三个有一项不一样的都是跨域，这里不一一举例子）</p>
+<p><a class="link" href="https://link.zhihu.com/?target=http://www.123.com:8080/matsh.html%EF%BC%88%E4%B8%8D%E8%B7%A8%E5%9F%9F%EF%BC%89">http://www.123.com:8080/matsh.html（不跨域）<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link" href="https://link.zhihu.com/?target=http://www.123.com:8081/matsh.html%EF%BC%88%E7%AB%AF%E5%8F%A3%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%8C%E8%B7%A8%E5%9F%9F%EF%BC%89">http://www.123.com:8081/matsh.html（端口不一样，跨域）<i class="fas fa-external-link-alt"></i></a></p>
+<p>注意：localhost 和127.0.0.1 虽然都指向本机，但也属于跨域。</p>
+<p><strong>跨域的解决方案</strong></p>
+<p>&gt;JSONP方式，只支持GET请求，不支持POST请求。</p>
+<p>&gt;反向代理，<strong>Nginx</strong></p>
+<p>&gt; 配置浏览器（我配置了谷歌，属性-&gt;目标&gt; 在后面追加 –args –disable-web-security –user-data-dir 注意有个空格）。设置成功打开浏览器是出现已栏提示证明已成功配置。</p>
+<p>来自 &lt;<a class="link" href="https://link.zhihu.com/?target=https://www.cnblogs.com/yflbk-2016/p/12603666.html">https://www.cnblogs.com/yflbk-2016/p/12603666.html<i class="fas fa-external-link-alt"></i></a>&gt;</p>
+<h3 id="33、ORM中的延迟加载与直接加载有什么异同？"><a href="#33、ORM中的延迟加载与直接加载有什么异同？" class="headerlink" title="33、ORM中的延迟加载与直接加载有什么异同？"></a><strong>33、ORM中的延迟加载与直接加载有什么异同？</strong></h3><p>延迟加载（Lazy Loading）只在真正需要进行数据操作的时候再进行加载数据，可以减少不必要的开销。</p>
+<h3 id="34、简述Func与Action的区别？"><a href="#34、简述Func与Action的区别？" class="headerlink" title="34、简述Func与Action的区别？"></a><strong>34、简述Func与Action的区别？</strong></h3><p>Func是有返回值的委托，Action是没有返回值的委托。</p>
+<h3 id="35、能用foreach遍历访问的对象的要求？"><a href="#35、能用foreach遍历访问的对象的要求？" class="headerlink" title="35、能用foreach遍历访问的对象的要求？"></a><strong>35、能用foreach遍历访问的对象的要求？</strong></h3><p>需要实现IEnumerable接口或声明GetEnumerator方法的类型。</p>
+<h3 id="36、什么是泛型？"><a href="#36、什么是泛型？" class="headerlink" title="36、什么是泛型？"></a><strong>36、什么是泛型？</strong></h3><p>即通过参数化类型来实现在同一份代码上操作多种数据类型。</p>
+<p>泛型就是不确定类型的，被调用时才指定类型的数据类型。</p>
+<p>来自 &lt;<a class="link" href="https://link.zhihu.com/?target=https://www.cnblogs.com/netchaozhuai/p/13395827.html">https://www.cnblogs.com/netchaozhuai/p/13395827.html<i class="fas fa-external-link-alt"></i></a>&gt;</p>
+<h3 id="37、Final"><a href="#37、Final" class="headerlink" title="37、Final"></a><strong>37、Final</strong></h3><p>final修饰符来限定变量、字段、方法和类。</p>
+<p>用于变量时，该变量只能赋值一次，不可修改；</p>
+<p>用于方法时，该方法不能被重写或隐藏；</p>
+<p>用于类时，该类不能被继承。</p>
+<p>来自 &lt;<a class="link" href="https://link.zhihu.com/?target=https://blog.csdn.net/weixin_34326179/article/details/90123166">https://blog.csdn.net/weixin_34326179/article/details/90123166<i class="fas fa-external-link-alt"></i></a>&gt;</p>
+<h3 id="38、数据库操作的相关类"><a href="#38、数据库操作的相关类" class="headerlink" title="38、数据库操作的相关类"></a><strong>38、数据库操作的相关类</strong></h3><p>特定类：Connection，Command，CommandBuilder，DataAdapter，DataReader，Parameter，Transaction</p>
+<p>共享类：DataSet，DataTable，DataRow，DataColumn，DataRealtion，Constraint，DataColumnMapping，DataTableMapping</p>
+<h3 id="39、http-ADO-NET-五大对象"><a href="#39、http-ADO-NET-五大对象" class="headerlink" title="39、http://ADO.NET 五大对象"></a><strong>39、<a class="link" target="_blank" rel="noopener" href="http://ado.net/">http://ADO.NET<i class="fas fa-external-link-alt"></i></a> 五大对象</strong></h3><p>（1）<strong>Connection</strong>：开启程序与数据库之间的连接。</p>
+<p>（2）<strong>Command</strong>：对数据库发送一些指令。例如增删改查等指令，以及调用存在数据库中的存储过程等。</p>
+<p>（3）<strong>DataAdapter</strong>：主要在数据源及DataSet 之间执行传输工作，通过Command 下达命令后，将取得的数据放进DataSet对象中。</p>
+<p>DataAdapter对象是用来读取数据库，可读取写入数据；但他占用内存比DataReader大，速度慢。</p>
+<p>（4）<strong>DataSet</strong>：这个对象可视为一个暂存区(Cache),可以把数据库中所查询到的数据保存起来，甚至可以将整个数据库显示出来，DataSet是放在内存中的。</p>
+<p>备注：将DataAdapter对象当做DataSet 对象与数据源间传输数据的桥梁。</p>
+<p>DataSet包含若干DataTable、DataTableTable包含若干DataRow。</p>
+<p>（5）<strong>DataReader</strong>：DataReader对象是用来读取数据库的最简单方式，只能读取，不能写入，并且是从头至尾往下读的，无法只读某条数据；但他占用内存小，速度快。</p>
+<p>总结：<a class="link" href="https://link.zhihu.com/?target=http://ADO.NET">http://ADO.NET<i class="fas fa-external-link-alt"></i></a> 使用Connection对象来连接数据库，使用Command或DataAdapter对象来执行SQL语句，并将执行的结果返回给DataReader或DataAdapter，然后再使用取得的DataReader或DataAdapter对象操作数据结果。</p>
+<p><strong>详细解释：</strong></p>
+<p>Connection：主要是开启程序和数据库之间的连接。没有利用连接对象将数据库打开，是无法从数据 库中取得数据的。Close和Dispose的区别，Close以后还可以Open，Dispose以后则不能再用。</p>
+<p>Command：主要可以用来对数据库发出一些指令，例如可以对数据库下达查询、新增、修改、删除数 据等指令，以及调用存在数据库中的存储过程等。这个对象是架构在Connection 对象上，也就是 Command： 对象是通过在Connection对象连接到数据源。</p>
+<p>DataAdapter：主要是在数据源以及DataSet 之间执行数据传输的工作，它可以透过Command 对象下 达命令后，并将取得的数据放入DataSet 对象中。这个对象是架构在Command对象上，并提供了许多 配合DataSet 使用的功能。</p>
+<p>DataSet：这个对象可以视为一个暂存区（Cache），可以把从数据库中所查询到的数据保留起来，甚 至可以将整个数据库显示出来，</p>
+<p>DataSet是放在内存中的。DataSet 的能力不只是可以储存多个Table 而 已，还可以透过DataAdapter对象取得一些例如主键等的数据表结构，并可以记录数据表间的关联。 DataSet 对象可以说是<a class="link" href="https://link.zhihu.com/?target=http://ADO.NET">http://ADO.NET<i class="fas fa-external-link-alt"></i></a> 中重量级的对象，这个对象架构在DataAdapter对象上，本身不具备和 数据源沟通的能力；也就是说我们是将DataAdapter对象当做DataSet 对象以及数据源间传输数据的桥 梁。DataSet包含若干DataTable、DataTableTable包含若干DataRow。</p>
+<p>DataReader：当我们只需要循序的读取数据而不需要其它操作时，可以使用DataReader 对象。 DataReader对象只是一次一次向下循序的读取数据源中的数据，这些数据是存在数据库服务器中的，而 不是一次性加载到程序的内存中的，只能（通过游标）读取当前行的数据，而且这些数据是只读的，并 不允许作其它的操作。因为DataReader 在读取数据的时候限制了每次只读取一条，而且只能只读，所 以使用起来不但节省资源而且效率很好。使用DataReader 对象除了效率较好之外，因为不用把数据全 部传回，故可以降低网络的负载。</p>
+<h3 id="40、C-DataTable和DataSet-区别？"><a href="#40、C-DataTable和DataSet-区别？" class="headerlink" title="40、C# DataTable和DataSet 区别？"></a><strong>40、C# DataTable和DataSet</strong> <strong>区别？</strong></h3><p>可以把DataTable和DataSet看做是数据容器，查询数据库后得到一些结果，放到这种容器里。</p>
+<p>为什么用容器？原因是，容器的功能强大，除了存数据，还可以有更大用途。</p>
+<p>举例：在一个c/s结构的桌面数据库系统里，你可以把前面存放查询结果的容器里的数据显示到你客户端界面上，用户在界面上对数据进行添加、删除、修改，你可以把用户的操作更新到容器，等用户操作完毕了，要求更新，然后你才把容器整个的数据变化更新到中心数据库，这样做的好处是什么？就是减少了数据库操作，客户端速度提高了，数据库压力减小了。</p>
+<p>DataSet可以比作一个内存中的数据库，DataTable是一个内存中的数据表，DataSet里可以存储多个DataTable。</p>
+<p>DataSet：数据集。一般包含多个DataTable，用的时候，dataset[“表名”]得到DataTable</p>
+<p>DataTable：数据表。</p>
+<h3 id="41、索引器（Indexers）"><a href="#41、索引器（Indexers）" class="headerlink" title="41、索引器（Indexers）"></a><strong>41、索引器（Indexers）</strong></h3><p>解释：C# 类的索引器（indexer）。简单说来，所谓索引器就是一类特殊的属性，通过它们你就可以像引用数组一样引用自己的类。</p>
+<p>显然，这一功能在创建集合类的场合特别有用，而在其他某些情况下，比如处理大型文件或者抽象某些有限资源等，能让类具有类似数组的行为当然也是非常有用的。</p>
+<p>无需显式指定类型或实例成员，即可设置或检索索引值。 索引器类似于<a class="link" href="https://link.zhihu.com/?target=https://docs.microsoft.com/zh-cn/dotnet/csharp/programming-guide/classes-and-structs/properties">属性<i class="fas fa-external-link-alt"></i></a>，不同之处在于它们的访问器需要使用参数。</p>
+<p>微软官网示例：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">SampleCollection</span>&lt;<span class="title">T</span>&gt;</span><br><span class="line"></span><br><span class="line">{</span><br><span class="line"></span><br><span class="line"><span class="comment">// Declare an array to store the data elements.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> T[] arr = <span class="keyword">new</span> T[<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Define the indexer to allow client code to use [] notation.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> T <span class="keyword">this</span>[<span class="built_in">int</span> i]</span><br><span class="line"></span><br><span class="line">{</span><br><span class="line"></span><br><span class="line"><span class="keyword">get</span> { <span class="keyword">return</span> arr[i]; }</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span> { arr[i] = <span class="keyword">value</span>; }</span><br><span class="line"></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title">Program</span></span><br><span class="line"></span><br><span class="line">{</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> stringCollection = <span class="keyword">new</span> SampleCollection&lt;<span class="built_in">string</span>&gt;();</span><br><span class="line"></span><br><span class="line">stringCollection[<span class="number">0</span>] = <span class="string">"Hello, World"</span>;</span><br><span class="line"></span><br><span class="line">Console.WriteLine(stringCollection[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<h3 id="42、POST和GET深入理解"><a href="#42、POST和GET深入理解" class="headerlink" title="42、POST和GET深入理解"></a><strong>42、POST和GET深入理解</strong></h3><p>\1. POST和GET都是向服务器提交数据，并且都会从服务器获取数据。</p>
+<p>\2. get是把参数数据队列加到提交表单的ACTION属性所指的URL中，值和表单内各个字段一一对应，在URL中可以看到。</p>
+<p>post是通过HTTP post机制，将表单内各个字段与其内容放置在HTML HEADER内一起传送到ACTION属性所指的URL地址。用户看不到这个过程。</p>
+<p>\3. 对于get方式，服务器端用Request.QueryString获取变量的值，对于post方式，服务器端用Request.Form获取提交的数据。</p>
+<p>\4. get传送的数据量较小，不能大于2KB。post传送的数据量较大，一般被默认为不受限制。但理论上，IIS4中最大量为80KB，IIS5中为100KB。</p>
+<p>\5. get安全性非常低，post安全性较高。但是执行效率却比Post方法好。</p>
+<p><strong>建议：</strong></p>
+<p>1、get方式的安全性较Post方式要差些，包含机密信息的话，建议用Post数据提交方式；</p>
+<p>2、在做数据查询时，建议用Get方式；而在做数据添加、修改或删除时，建议用Post方式；</p>
+<p><strong>区别：</strong></p>
+<p>1、传送方式：get通过地址栏传输，post通过报文传输。</p>
+<p>2、传送长度：get参数有长度限制（受限于url长度），而post无限制</p>
+<p>3、GET和POST还有一个重大区别，简单的说：</p>
+<p>GET产生一个TCP数据包；POST产生两个TCP数据包</p>
+<h3 id="43、C-中用sealed修饰的类有什么特点？"><a href="#43、C-中用sealed修饰的类有什么特点？" class="headerlink" title="43、C#中用sealed修饰的类有什么特点？"></a><strong>43、C#中用sealed修饰的类有什么特点？</strong></h3><p>密封，不能继承。</p>
+<h3 id="44、string和StringBuilder的区别-两者性能的比较？"><a href="#44、string和StringBuilder的区别-两者性能的比较？" class="headerlink" title="44、string和StringBuilder的区别,两者性能的比较？"></a><strong>44、string和StringBuilder的区别,两者性能的比较？</strong></h3><p>都是引用类型，</p>
+<p>分配再堆上 StringBuilder默认容量是16，可以允许扩充它所封装的字符串中字符的数量。</p>
+<p>每个StringBuffer对象都有 一定的缓冲区容量，当字符串大小没有超过容量时，不会分配新的容量，当字符串大小超过容量时，会自动增加容量。</p>
+<p>对于简单的字符串连接操作，在性能上stringbuilder不一定总是优于strin因为stringbulider对象的创建也消耗大量的性能。</p>
+<p>在字符串连接比较少的情况下，过度滥用stringbuilder会导致性能的浪费而非节约，只有大量无法预知次数的字符串操作才考虑stringbuilder的使用。</p>
+<p>从最后分析可以看出如果是相对较少的字符串拼接根本看不出太大差别。</p>
+<p>Stringbulider的使用，最好制定合适的容量值，否则优于默认值容量不足而频繁的进行内存分</p>
+<p><strong>补充：</strong></p>
+<p>string 每次内容发生变化，都会生成一个新对象，重新分配内存</p>
+<p>stringbuilder 每次操作都是对自身进行操作，而不是生成新的对象</p>
+<h3 id="45、什么是扩展方法？"><a href="#45、什么是扩展方法？" class="headerlink" title="45、什么是扩展方法？"></a><strong>45、什么是扩展方法？</strong></h3><p>一句话解释，扩展方法使你能够向现有类型“添加”方法，</p>
+<p>无需修改类型条件：按扩展方法必须满足的条件，</p>
+<p>1.必须要静态类中的静态方法</p>
+<p>2.第一个参数的类型是要扩展的类型，并且需要添加this关键字以标识其为扩展方法</p>
+<p><strong>建议：</strong>通常，只在不得已的情况下才实现扩展方法，并谨慎的实现</p>
+<p><strong>使用：</strong>不能通过类名调用，直接使用类型来调用</p>
+<h3 id="46、C-可否对内存直接操作"><a href="#46、C-可否对内存直接操作" class="headerlink" title="46、C#可否对内存直接操作"></a><strong>46、C#可否对内存直接操作</strong></h3><p>C#在unsafe 模式下可以使用指针对内存进行操作，但在托管模式下不可以使用指针，C#NET默认不运行 带指针的，需要设置下，选择项目右键-&gt;属性-&gt;选择生成-&gt;“允许不安全代码”打勾-&gt;保存</p>
+<h3 id="47、-amp-和-amp-amp-区别"><a href="#47、-amp-和-amp-amp-区别" class="headerlink" title="47、&和&&区别"></a><strong>47、&amp;和&amp;&amp;区别</strong></h3><p><strong>相同点</strong></p>
+<p>&amp;和&amp;&amp;都可作逻辑与的运算符，表示逻辑与（and），当运算符两边的表达式的结果都为true时，其结 果才为true，否则，只要有一方为false，则结果为false。（ps：当要用到逻辑与的时候&amp;是毫无意义， &amp;本身就不是干这个的）</p>
+<p><strong>不同点</strong></p>
+<p>if(loginUser!=null&amp;&amp;string.IsnullOrEmpty(loginUser.UserName)) &amp;&amp;具有短路的功能，即如果第一个表达式为false，则不再计算第二个表达式，对于上面的表达式，当 loginUser为null时，后面的表达式不会执行，所以不会出现NullPointerException如果将&amp;&amp;改为&amp;，则 会抛出NullPointerException异常。（ps：所以说当要用到逻辑与的时候&amp;是毫无意义的） &amp; 是用作位运算的。</p>
+<p><strong>总结</strong></p>
+<p>&amp;是位运算，返回结果是int类型 &amp;&amp;是逻辑运算，返回结果是bool类型。</p>
+<h3 id="48、as和is的区别"><a href="#48、as和is的区别" class="headerlink" title="48、as和is的区别"></a><strong>48、as和is的区别</strong></h3><p>as在转换的同时判断兼容性，如果无法进行转换，返回位null（没有产生新的对象），as转换是否成功 判断的依据是是否位null。</p>
+<p>is只是做类型兼容性判断，并不执行真正的类型转换，返回true或false，对象 为null也会返回false。</p>
+<p>as比is效率更高，as只需要做一次类型兼容检查。</p>
+<h3 id="49、什么是匿名类，有什么好处？"><a href="#49、什么是匿名类，有什么好处？" class="headerlink" title="49、什么是匿名类，有什么好处？"></a><strong>49、什么是匿名类，有什么好处？</strong></h3><p>不用定义、没有名字的类，使用一次便可丢弃。好处是简单、随意、临时的。</p>
+<h3 id="50、什么是虚函数？什么是抽象函数？"><a href="#50、什么是虚函数？什么是抽象函数？" class="headerlink" title="50、什么是虚函数？什么是抽象函数？"></a><strong>50、什么是虚函数？什么是抽象函数？</strong></h3><p>虚函数：没有实现的，可以由子类继承并重写的函数。</p>
+<p>抽象函数：规定其非虚子类必须实现的函数，必须被重写。</p>
+<h3 id="51、什么是托管和非托管？"><a href="#51、什么是托管和非托管？" class="headerlink" title="51、什么是托管和非托管？"></a><strong>51、什么是托管和非托管？</strong></h3><p><strong>托管代码：</strong>是由公共语言运行库（CLR）执行的代码，而不是由操作系统直接执行。有关内存管理（内存申请，内存释放，垃圾回收之类的）全部都是.net的CLR来管理。</p>
+<p><strong>非托管代码：</strong>直接编译成目标计算机码，由操作系统直接执行的代码，内存回收要继承IDisposable接口手动回收。</p>
+<h3 id="52、Lambda表达式？"><a href="#52、Lambda表达式？" class="headerlink" title="52、Lambda表达式？"></a><strong>52、Lambda表达式？</strong></h3><p>“Lambda表达式”是一个匿名函数，是一种高效的类似于函数式编程的表达式，Lambda简化了开发中需要编写的代码量。</p>
+<h3 id="53、如何提高-NET的性能-？"><a href="#53、如何提高-NET的性能-？" class="headerlink" title="53、如何提高.NET的性能 ？"></a><strong>53、如何提高.NET的性能 ？</strong></h3><p>1、使用异步方式调用Web服务和远程对象</p>
+<p><strong>解释：</strong>只要有可能就要避免在请求的处理过程中对Web服务和远程对象的同步调用，因为它占用的是的 <a class="link" href="https://link.zhihu.com/?target=http://ASP.NET">http://ASP.NET<i class="fas fa-external-link-alt"></i></a> 线程池中的工 作线程，这将直接影响Web服务器响应其它请求的能力。</p>
+<p>2、使用适当的Caching策略来提高性能</p>
+<p>3、判断字符串，不要用”” 比较。</p>
+<p>//避免 if(strABC!=null &amp;&amp; strABC!=””) {}</p>
+<p>//推荐 if(!strABC.IsNullOrEmpty) {}</p>
+<p>4、页面优化</p>
+<p>5、用完马上关闭数据库连接</p>
+<p>6、尽量使用存储过程，并优化查询语句</p>
+<p>7、只读数据访问用SqlDataReader，不要使用DataSet托管堆中</p>
+<h3 id="54、EF"><a href="#54、EF" class="headerlink" title="54、EF"></a><strong>54、EF</strong></h3><p>1、EF(Entity Framework)</p>
+<p>实体框架EF是<a class="link" href="https://link.zhihu.com/?target=http://ADO.NET">http://ADO.NET<i class="fas fa-external-link-alt"></i></a>中的一组支持开发面向数据的软件应用程序的技术，是微软的一个ORM框架。</p>
+<p>Database First</p>
+<p>Database First”模式我们称之为“数据库优先”，前提是你的应用已经有相应的数据库，你可以使用EF设计工具根据数据库生成数据数据类，你可以使用Visual Studio模型设计器修改这些模型之间对应关系。</p>
+<p>来自 &lt;<a class="link" href="https://link.zhihu.com/?target=https://blog.csdn.net/u011854789/article/details/72783902">https://blog.csdn.net/u011854789/article/details/72783902<i class="fas fa-external-link-alt"></i></a>&gt;</p>
+<p>Model First</p>
+<p>Model First我们称之为“模型优先”，这里的模型指的是“<a class="link" href="https://link.zhihu.com/?target=http://ADO.NET">http://ADO.NET<i class="fas fa-external-link-alt"></i></a> Entity Framework Data Model”，此时你的应用并没有设计相关数据库，在Visual Studio中我们通过设计对于的数据模型来生成数据库和数据类。</p>
+<p>来自 &lt;<a class="link" href="https://link.zhihu.com/?target=https://blog.csdn.net/u011854789/article/details/72783902">https://blog.csdn.net/u011854789/article/details/72783902<i class="fas fa-external-link-alt"></i></a>&gt;</p>
+<p>Code First</p>
+<p>Code First模式我们称之为“代码优先”模式，是从EF4.1开始新建加入的功能。使用Code First模式进行EF开发时开发人员只需要编写对应的数据类（其实就是领域模型的实现过程），然后自动生成数据库。这样设计的好处在于我们可以针对概念模型进行所有数据操作而不必关心数据的存储关系，使我们可以更加自然的采用面向对象的方式进行面向数据的应用程序开发。</p>
+<p>来自 &lt;<a class="link" href="https://link.zhihu.com/?target=https://blog.csdn.net/u011854789/article/details/72783902">https://blog.csdn.net/u011854789/article/details/72783902<i class="fas fa-external-link-alt"></i></a>&gt;</p>
+<p>2、什么是ORM?</p>
+<p>ORM指的是面向对象的对象模型和关系型数据库的数据结构之间的互相转换。</p>
+<p>(表实体跟表之间的相互转换)</p>
+<p>ORM框架有很多，EF框架是ORM框架的其中一种，是实现了ORM思想的框架。</p>
+<p>O=&gt;表实体</p>
+<p>M=&gt;映射关系</p>
+<p>R=&gt;数据库.表</p>
+<p>来自 &lt;<a class="link" href="https://link.zhihu.com/?target=https://blog.csdn.net/qq_35491254/article/details/52994136">https://blog.csdn.net/qq_35491254/article/details/52994136<i class="fas fa-external-link-alt"></i></a>&gt;</p>
+<h3 id="55、如何解决数据并发问题？"><a href="#55、如何解决数据并发问题？" class="headerlink" title="55、如何解决数据并发问题？"></a><strong>55、如何解决数据并发问题？</strong></h3><p><strong>一：并发操作出现的原因</strong></p>
+<p>原因：多个动作在一瞬间同时操作同一数据</p>
+<p>现象：</p>
+<ol>
+<li>多人在某一瞬间通过相同的方式操作同一条数据</li>
+<li>多人在某一瞬间通过不同的方式操作同一条数据</li>
+<li>在某一瞬间，同一动作，多次执行</li>
+</ol>
+<p><strong>二：并发举例及解决办法</strong></p>
+<p>针对上述的三种的情况，分别以实际情况进行举例。</p>
+<p>【多人在某一瞬间通过相同的方式操作同一条数据】</p>
+<p>1.某仓库系统有一品牌商品A，商品A在数据库中只允许存在一条记录，库存的数量是这条数据的一个字段，现有库存100件，在某一天到货了1000件。由于数量比较大，现在需要10名操作员去处理这1000件商品进行入库，操作的途径都是使用PDA扫描完成后进行入库。我们假设至少存在1名以上的操作员同时进行入库操作。这样就可以满足上述条件【多人在某一瞬间通过相同的方式操作同一条数据】。在这种情况下，如果不进行处理，就会导致数据错乱，错乱的原因简单说就是在双方写数据时没有获取到最新的数据库数据。</p>
+<p>解决方法：</p>
+<p>方法一： 加锁。加锁是比较常用的方法。从系统的架构上来说，锁被分为单机锁和分布式锁。如果系统只是部署在单一机器上，可以简单通过java提供的各种锁来进行操作。如果系统被部署在多台机器上，可以使用redis来实现分布式加锁。这两种加锁方式从某种意义上来说是悲观锁。上述的问题，我们可以使用商品的唯一属性，比如id或者商品的唯一条码来进行加锁。</p>
+<p>方法二：数据库乐观锁。数据库乐观锁几乎适用于所有的并发场景。使用方法：在数据库表中增加一个版本号字段，每一次更新和删除时把当前持有的对象版本号和数据库中最新的版本号进行比对，如果相同则验证通过，不然则操作失败。</p>
+<p>方法三：使用消息队列。这种方式在消息过多时，对库存的处理可能不会特别及时。由于库存一般是需要比较及时的可见，所以这种方式并不建议。</p>
+<p>【多人在某一瞬间通过不同的方式操作同一条数据】</p>
+<p>\2. 还是按照上述的背景来说。在这10名操作员进行入库的同时，还有至少1名操作员对A商品进行出库操作。我们假设入库时没有并发问题，但是其中一个入库和一个出库同时操作了A商品的库存，通过两种不同的方式对库存进行操作。如果不进行处理，库存也会出现数据错乱的问题。</p>
+<p>解决方法：</p>
+<p>方法一： 加锁。这个时候使用普通的单机锁已经没有意义了，可以使用分布式锁，依旧使用唯一属性来进行加锁，尽管方法不同，但关键的key是一样的，这样就可以锁住操作。</p>
+<p>方法二：数据库乐观锁。</p>
+<p>对于上述的问题，我扩展一下，如果是一批商品，你总不能一个一个进行加锁处理吧，那样效率也太低了。所以这种情况下，简单的加锁已经不能满足现在的需要了。所以数据库乐观锁又重新出现了。在批量更新时，发现其中任何一个商品的版本号不一致，立即报错回滚。</p>
+<p>【在某一瞬间，同一动作，多次执行】</p>
+<p>3.这一种情况属于请求重复提交，同样，如果没有进行处理，数据也会出现问题。</p>
+<p>一个用户在入库时重复提交了两次，这样在不考虑其它并发的影响下，库存中的数据会多增加一次，但在入库历史中却只能看见一次记录，这样肯定是不可接受的。</p>
+<p>解决方法：</p>
+<p>方法一：前台可以在按钮或链接第一次点击后立刻禁用。这样可以有效的解决绝大部分的问题。但是由于操作端千变万化，这种方式并不能够完全解决问题。</p>
+<p>方法二：后台生成一个随机数放在前台，前台在访问后台时，将随机数传输到后台进行验证，第一次验证通过即刻销毁, 随机数可以存在redis或session中，一般用于表单提交。但是这种方式还是存在缺陷，如果同一个页面有多个请求，一个随机数就完全不够用了。</p>
+<p>方法三：nginx可以控制ip在同一时间内对服务的访问频率。比如入库时，如果进行了多次点击，发送了多次请求，在这1秒中，系统只接收第一次请求。</p>
+<p><strong>三：总结</strong></p>
+<p>处理并发的最终原理其实就是：将用户的并行操作变成串行操作。</p>
+<p>在解决并发问题时，从操作端到服务端，再到数据库，都需要进行处理，层层过滤。</p>
+<p>前端：防止多次点击。</p>
+<p>服务端：对相同数据的操作写在同一个服务中。</p>
+<p>数据库：乐观锁一定要使用。有需要的话，数据库的联合唯一索引也要准备。</p>
+<p>来自 &lt;<a class="link" href="https://link.zhihu.com/?target=https://blog.csdn.net/love1793912554/article/details/92437035">https://blog.csdn.net/love1793912554/article/details/92437035<i class="fas fa-external-link-alt"></i></a>&gt;</p>
+<h3 id="56、-NET、C-和http-ASP-NET，http-ASP-NET-MVC-四者之间的区别"><a href="#56、-NET、C-和http-ASP-NET，http-ASP-NET-MVC-四者之间的区别" class="headerlink" title="56、.NET、C#和http://ASP.NET，http://ASP.NET MVC 四者之间的区别"></a><strong>56、.NET、C#和<a class="link" target="_blank" rel="noopener" href="http://asp.net,http//ASP.NET">http://ASP.NET，http://ASP.NET<i class="fas fa-external-link-alt"></i></a> MVC 四者之间的区别</strong></h3><p><strong>什么是.NET?</strong></p>
+<p>.NET是微软公司下的一个开发平台，.NET核心就是.NET Framwork（.NET框架）是.NET程序开发和运行的环境，在这个平台下可以用不同的语言进行开发。</p>
+<p>因为.NET是跨语言的一个平台。语言可以是C#,f#,j#,<a class="link" target="_blank" rel="noopener" href="http://vb.net等等./">http://vb.net等等。<i class="fas fa-external-link-alt"></i></a></p>
+<p>顺便说一下sum公司的JAVA和.NET不同的一点是java是跨平台的，不跨语言的。.NET跨平台仅限于安卓系统和IOS苹果系统。</p>
+<p><strong>1、.net框架的组成分为两部分：</strong></p>
+<p>CLR:公共语言运行时 （提供内在管理，代码安全性检测等功能）</p>
+<p>FLC:.NET框架类库,类库中有很多线程的资源可使用（比如：类，方法，属性）,提供大量应用类库，提高开发效率。</p>
+<p><strong>2、CLR的结构：</strong></p>
+<p>CTS:通用类型系统，将各种语言中的数据类型转换成统一的类型。</p>
+<p>CLS:通用语言规范，获取各种语言转换成统一的语法规范。</p>
+<p>JIT:实时编译器（即时编译器）用于将转换之后的语言编译为二进制语言，交给CPU执行。</p>
+<p><strong>3、NET运行机制流程：</strong></p>
+<p>各种语言（c#,F#,j#等对应的源程序）———&gt; 经过CTS，CLS第一次编译 ———&gt; 统一规范语言（中间语言）MSIL(.EXE,.DLL)</p>
+<p>———&gt; JIT第二次编译 ———&gt; 二进制语言 ———&gt; 运行在CPU中</p>
+<p>Java运行机制</p>
+<p>.java———&gt;编译———&gt;字节码文件（.CLASS）———&gt; jvm解释（jvm虚拟机）———&gt; 二进制语言———&gt;运行在CPU中</p>
+<p><strong>4.C#是一个.NET平台下的一个程序设计语言，只是一个语言，仅此而已。</strong></p>
+<p>程序设计语言是为了方便开发人员和计算机沟通的工具。</p>
+<p>程序设计语言是为了方便开发人员和计算机沟通的工具。</p>
+<p>ASP.NET是一个网站开发的技术，是.NET框架中的一个应用模型。（历史挺长远的）使用ASP.NET开发Web应用程序并维持其运行，比其他开发语言更加简单。</p>
+<p>与Java、PHP和Perl等高级技术相比，ASP.NET具有方便性、灵活性、生产效率高、安全性高及面向对象等优点，是目前主流的网络编程技术之一。</p>
+<p><strong>6.ASP.NET MVC</strong>，刚开始接触这个技术的时候我经常不理解他们的名字，我相信许多学ASP.NET开发人员开始接触MVC应该也和我一样产生很多为什么，也会误认为认为MVC与ASP.NET完全没有关系，是一个全新的Web开发，深入学习后我才知道事实上<strong>ASP.NET是创建WEB应用的框架</strong>而<strong>MVC</strong>是能够用更好的方法来<strong>组织并管理代码的</strong>一种更<strong>高级架构体系</strong>，所以可以称之为ASP.NET MVC。</p>
+<p>我们可将原来的ASP.NET称为 ASP.NET Webforms，新的MVC 称为ASP.NET MVC。</p>
+<p>MVC是软件架构的一种模式，可以说就相当于我们常说的设计模式吧。其中主要包括三个模块，顾名思义。</p>
+<p>就如MVC名字所显示的那样：</p>
+<p>模型（Model），视图（View），控制器（Controller）。</p>
+<p>mvc中的模型（Model）和视图（View ）是完全区别于三层架构中的模型（Model）和视图（View）的。</p>
+<p>MVC中<strong>模型（Model）</strong>的特点：</p>
+<p>①有对数据直接访问的权利，如：对数据库的访问；</p>
+<p>②模型（Model）“不依赖”视图（View）和控制器（Controller），即模型（Model）不关心它会被如何显示或者如何被操作；</p>
+<p>③模型（Model）中数据的变化一般会通过一种刷新机制被“公布”；</p>
+<p>④为了实现③中的“机制”用于监视此模型的视图必须事先在此模型上注册。从而，视图可以了解在数据模型上发生的改变。</p>
+<p><strong>视图（View），</strong>这里的视图基本跟三层中的视图一样，都是为了显示数据，没有程序上的逻辑。为了实现视图上数据的刷新，视图（View）需要访问它监视的模型（Model），所以应该事先在被它监视的数据那里进行注册。</p>
+<p><strong>控制器（Controller），</strong>这个概念是在三层中不存在的概念。它主要起到不同层面的组织作用，用于控制应用程序的流程。主要处理事件并作出相应操作。</p>
+<p>来自 <a class="link" href="https://link.zhihu.com/?target=https://www.cnblogs.com/wwym/p/5555772.html">https://www.cnblogs.com/wwym/p/5555772.html<i class="fas fa-external-link-alt"></i></a></p>
+<h3 id="58、MVC-和三层框架区别"><a href="#58、MVC-和三层框架区别" class="headerlink" title="58、MVC 和三层框架区别"></a><strong>58、MVC 和三层框架区别</strong></h3><p><strong>意思</strong></p>
+<p>M 即Model(模型层),主要负责处理业务逻辑以及数据库的交互</p>
+<p>V 即View(视图层),主要负责显示数据和提交数据</p>
+<p>C 即Controller(控制层),主要是永作辅助捕获请求并控制请求转发</p>
+<p>三层</p>
+<p>UI界面层</p>
+<p>BLL业务逻辑层</p>
+<p>DAL数据访问层</p>
+<p><strong>区别</strong></p>
+<p>三层是基于业务逻辑来分的，而MVC是基于页面来分的</p>
+<p>MVC模式是一种复合 设计模式，一种解决方案</p>
+<p>三层是种 软件架构，通过接口实现编程</p>
+<p>三层模式是体系结构模式，MVC是设计模式</p>
+<p>三层模式又可归于部署模式，MVC可归于表示模式</p>
+<p>来自 <a class="link" href="https://link.zhihu.com/?target=https://www.cnblogs.com/yellowwenhao/p/11542367.html">https://www.cnblogs.com/yellowwenhao/p/11542367.html<i class="fas fa-external-link-alt"></i></a></p>
+<h3 id="59、MVC-和三层框架区别-详细解释"><a href="#59、MVC-和三层框架区别-详细解释" class="headerlink" title="59、MVC 和三层框架区别 详细解释"></a><strong>59、MVC 和三层框架区别</strong> <strong>详细解释</strong></h3><p>三层架构是一个分层式的软件体系架构设计，它可适用于任何一个项目。</p>
+<p><strong>MVC是一个设计模式</strong>，它是根据项目的具体需求来决定是否适用于该项目。</p>
+<p>那么架构跟设计模式有什么区别呢？</p>
+<p>我们从接手一个项目开始，<strong>首先，我们需要进行架构设计，一般我们采用的就是分层式的架构设计，即我们的三层架构。</strong></p>
+<p>然后，在确定了架构以后，我们再根据项目的具体需求去考虑是否需要应用一些设计模式，比如是否应用我们的MVC模式，抽象工厂模式等等。（在这里我们看出，MVC与三层架构不是一个等级的，而与抽象工厂等设计模式才是一路的）</p>
+<p>最后，确定了模式以后，就是我们的一些具体的实现了。（当然一个项目不仅仅考虑这些问题，我只是为了说明两者的区别，将其他问题已省略）</p>
+<p>其次，它俩划分的层次不同。</p>
+<p>三层架构将整个项目划分为：表现层（UI）、业务逻辑层（BLL）、数据访问层（DAL）。</p>
+<p>MVC 是在三层UI层上 进一步划分 即Model（模型），View（视图），Controller（控制）。</p>
+<p><strong><em>区别与联系\</em></strong></p>
+<ul>
+<li><p><strong>字面解释</strong></p>
+<p>我们平常所说的V是UI，C是BLL，M是DAL的观点是错误的。</p>
+<p>而我们通常所见到的MVC一般也都是在应用三层架构的基础上，即将Model层再进行分层。</p>
+<p>而如果Model不再进行划分的话，那么使用MVC的意义也就不大了。</p>
+</li>
+<li><p><strong>各自目的</strong>:</p>
+<p>然后，它俩的目的着重点不同。</p>
+<p>三层架构的目的着重点是“高内聚，低耦合”，即解耦。</p>
+<p>MVC的目的则是实现Web系统的职能分工，即职责划分。</p>
+<p>其实职责划分也是解耦，但是三层侧重的是整体的一个解耦，而MVC侧重的是web系统的解耦，即侧重jsp和Servlet的一个解耦。</p>
+</li>
+</ul>
+<p><strong>为何我们会将其混为一谈？</strong></p>
+<p><strong>1.二者都是“三层”</strong></p>
+<p>这个原因是最容易迷惑我们初学者的，一个是UI,BLL,DAL，一个是View，Controller，Model，不都是三层吗？</p>
+<p>虽然都是“三层”（不一定是真的三层，还可以是多层），但是它们的划分的不一样。大家可从上面的图中看出不同。</p>
+<p><strong>2.MVC总是伴随着三层架构。</strong></p>
+<p>这个就是我在前面一再强调的，我们一般是在考虑使用（也可以不使用）了三层架构的基础上再根据具体需求决定是否需要使用MVC，于是我们常说的MVC中总是伴随着三层架构，所以大家总是会认为MVC就是三层架构，三层架构就是MVC，殊不知，它们二者是一起出现的。</p>
+<p><strong>3.都是在分层，即都是在解耦。</strong></p>
+<p>前面说它们目的的时候也说了，虽然它们的侧重点不同，但是它们的总体目的是一样的，都是为了解耦，对于初学者而言，是不知道这两个侧重点有何不同的。</p>
+<p>大家往往对它们的联系知道很多，不然也不会混为一谈，但是对它们的区别却知道较少，希望我上面讲解的它们两者之间的区别可以让大家对它们有些了解，如有写的不妥的地方，请指教。</p>
+<p>三层架构（3-tier application） 通常意义上的三层架构就是将整个业务应用划分为：</p>
+<p><strong>表现层（UI）、业务逻辑层（BLL）、数据访问层（DAL）。</strong></p>
+<p>区分层次的目的即为了“高内聚，低耦合”的思想。</p>
+<p>1、表现层（UI）：通俗讲就是展现给用户的界面，即用户在使用一个系统的时候他的所见所得。</p>
+<p>2、业务逻辑层（BLL）：针对具体问题的操作，也可以说是对数据层的操作，对数据业务逻辑处理。</p>
+<p>3、数据访问层（DAL）：该层所做事务直接操作数据库，针对数据的增添、删除、修改、更新、查找等。</p>
+<p><strong>MVC是 Model-View-Controller，严格说这三个加起来以后才是三层架构中的UI层。</strong></p>
+<p>也就是说，MVC把三层架构中的UI层再度进行了分化，分成了控制器、视图、实体三个部分。</p>
+<p>控制器完成页面逻辑，通过实体来与界面层完成通话；而C层直接与三层中的BLL进行对话。</p>
+<p>MVC可以是三层中的一个表现层框架，属于表现层。三层和MVC可以共存。</p>
+<p><strong>三层是基于业务逻辑来分的，而MVC是基于页面来分的。</strong></p>
+<p>MVC主要用于表现层，3层主要用于体系架构，3层一般是表现层、中间层、数据层，其中表现层又可以分成M、V、C，（Model View Controller）模型－视图－控制器</p>
+<p>MVC是表现层的架构，MVC的Model实际上是ViewModel，即供View进行展示的数据。 ViewModel不包含业务逻辑，也不包含数据读取。</p>
+<p>三层架构的分层模式是典型的上下关系，上层依赖于下层。</p>
+<p>但MVC作为表现模式是不存在上下关系的，而是相互协作关系。</p>
+<p>即使将MVC当作架构模式，也不是分层模式。MVC和三层架构基本没有可比性，是应用于不同领域的技术。</p>
+<p><a class="link" href="https://link.zhihu.com/?target=https://www.cnblogs.com/zdxster/p/5305155.html">https://www.cnblogs.com/zdxster/p/5305155.html<i class="fas fa-external-link-alt"></i></a></p>
+<h3 id="60、高内聚，低耦合。"><a href="#60、高内聚，低耦合。" class="headerlink" title="60、高内聚，低耦合。"></a><strong>60、高内聚，低耦合。</strong></h3><p>内聚关注 模块 内部元素 结合程度，</p>
+<p>耦合关注 模块 间 依赖程度。</p>
+<p>需要知道！！！</p>
+<p><strong>内聚性：</strong></p>
+<p>又称块内联系。</p>
+<p>指模块的功能强度的度量，即一个模块内部各个元素彼此结合的紧密程度的度量。若一个模块内各元素（语名之间、程序段之间）联系的越紧密，则它的内聚性就越高。</p>
+<p>所谓高内聚是指一个软件模块是由相关性很强的代码组成，只负责一项任务，也就是常说的单一责任原则。</p>
+<p><strong>耦合性：</strong></p>
+<p>也称块间联系。</p>
+<p>指软件系统结构中各模块间相互联系紧密程度的一种度量。模块之间联系越紧密，其耦合性就越强，模块的独立性则越差。模块间耦合高低取决于模块间接口的复杂性、调用的方式及传递的信息。</p>
+<p>对于低耦合，粗浅的理解是：一个完整的系统，模块与模块之间，尽可能的使其独立存在。也就是说，让每个模块，尽可能的独立完成某个特定的子功能。<strong>模块与模块之间的接口，尽量的少而简单。</strong>如果某两个模块间的关系比较复杂的话，最好首先考虑<strong>进一步的模块划分</strong>。这样有利于修改和组合。</p>
+<p>更深层次！！！</p>
+<p><strong>内聚</strong></p>
+<p>内聚有如下的种类，它们之间的内聚度由弱到强排列如下：</p>
+<p>一、偶然内聚：一个模块内的各处理元素之间没有任何联系，只是偶然地被凑到一起。这种模块也称为巧合内聚，内聚程度最低。</p>
+<p>二、逻辑内聚：这种模块把几种相关的功能组合在一起， 每次被调用时，由传送给模块参数来确定该模块应完成哪一种功能 。</p>
+<p>三、时间内聚：把需要同时执行的动作组合在一起形成的模块称为时间内聚模块。</p>
+<p>四、过程内聚：构件或者操作的组合方式是，允许在调用前面的构件或操作之后，马上调用后面的构件或操作，即使两者之间没有数据进行传递。简单的说就是如果一个模块内的处理元素是相关的，而且必须以特定次序执行则称为过程内聚。</p>
+<p>例如某要完成登录的功能，前一个功能判断网络状态，后一个执行登录操作，显然是按照特定次序执行的。</p>
+<p>五、通信内聚：指模块内所有处理元素都在同一个数据结构上操作或所有处理功能都通过公用数据而发生关联（有时称之为信息内聚）。即指模块内各个组成部分都使用相同的数据结构或产生相同的数据结构。</p>
+<p>六、顺序内聚：一个模块中各个处理元素和同一个功能密切相关，而且这些处理必须顺序执行，通常前一个处理元素的输出时后一个处理元素的输入。</p>
+<p>例如某要完成获取订单信息的功能，前一个功能获取用户信息，后一个执行计算均价操作，显然该模块内两部分紧密关联。</p>
+<p>顺序内聚的内聚度比较高，但缺点是不如功能内聚易于维护。</p>
+<p>七、功能内聚：模块内所有元素的各个组成部分全部都为完成同一个功能而存在，共同完成一个单一的功能，模块已不可再分。即模块仅包括为完成某个功能所必须的所有成分，这些成分紧密联系、缺一不可。</p>
+<p>功能内聚是最强的内聚，其优点是它的功能明确。判断一个模块是否功能内聚，一般从模块名称就能看出。如果模块名称只有一个动词和一个特定的目标（单数名词），一般来说就是功能内聚，如：“计算水费”、“计算产值”等模块。功能内聚一般出现在软件结构图的较低层次上。</p>
+<p>功能内聚模块的一个重要特点是：他是一个“暗盒”，对于该模块的调用者来说，只需要知道这个模块能做什么，而不需要知道这个模块是如何做的。</p>
+<h3 id="耦合"><a href="#耦合" class="headerlink" title="耦合"></a><strong>耦合</strong></h3><p>耦合可以分为以下几种，它们之间的耦合度由高到低排列如下：</p>
+<p>一、 内容耦合：一个模块直接访问另一模块的内容，则称这两个模块为内容耦合。</p>
+<p>若在程序中出现下列情况之一，则说明两个模块之间发生了内容耦合：</p>
+<p>\1. 一个模块直接访问另一个模块的内部数据。</p>
+<p>\2. 一个模块不通过正常入口而直接转入到另一个模块的内部。</p>
+<p>\3. 两个模块有一部分代码重叠（该部分代码具有一定的独立功能）。</p>
+<p>\4. 一个模块有多个入口。</p>
+<p>内容耦合可能在汇编语言中出现。大多数高级语言都已设计成不允许出现内容耦合。这种耦合的耦合性最强，模块独立性最弱。</p>
+<p>二、公共耦合：一组模块都访问同一个全局数据结构，则称之为公共耦合。公共数据环境可以是全局数据结构、共享的通信区、内存的公共覆盖区等。如果模块只是向公共数据环境输入数据，或是只从公共数据环境取出数据，这属于比较松散的公共耦合；如果模块既向公共数据环境输入数据又从公共数据环境取出数据，这属于较紧密的公共耦合。</p>
+<p>公共耦合会引起以下问题：</p>
+<p>\1. 无法控制各个模块对公共数据的存取，严重影响了软件模块的可靠性和适应性。</p>
+<p>\2. 使软件的可维护性变差。若一个模块修改了公共数据，则会影响相关模块。</p>
+<p>\3. 降低了软件的可理解性。不容易清楚知道哪些数据被哪些模块所共享，排错困难。</p>
+<p>一般地，仅当模块间共享的数据很多且通过参数传递很不方便时，才使用公共耦合。</p>
+<p>三、外部耦合：一组模块都访问同一全局简单变量，而且不通过参数表传递该全局变量的信息，则称之为外部耦合。</p>
+<p>四、控制耦合：模块之间传递的不是数据信息，而是控制信息例如标志、开关量等，一个模块控制了另一个模块的功能。</p>
+<p>五、标记耦合：调用模块和被调用模块之间传递数据结构而不是简单数据，同时也称作特征耦合。表就和的模块间传递的不是简单变量，而是像高级语言中的数据名、记录名和文件名等数据结果，这些名字即为标记，其实传递的是地址。</p>
+<p>六、数据耦合：调用模块和被调用模块之间只传递简单的数据项参数。相当于高级语言中的值传递。</p>
+<p>七、非直接耦合：两个模块之间没有直接关系，它们之间的联系完全是通过主模块的控制和调用来实现的。耦合度最弱，模块独立性最强。</p>
+<p><strong>分析</strong></p>
+<p><strong>高内聚，低耦合的系统有什么好处呢？</strong></p>
+<p>事实上，短期来看，并没有很明显的好处，甚至短期内会影响系统的开发进度，因为高内聚，低耦合的系统对开发设计人员提出了更高的要求。</p>
+<p>高内聚，低耦合的好处体现在<strong>系统持续发展的过程中</strong>，高内聚，低耦合的系统具有更好的<strong>重用性，维护性，扩展性</strong>，可以更高效的完成系统的维护开发，持续的<strong>支持业务的发展</strong>，而<strong>不会成为业务发展的障碍</strong>。</p>
+<p><strong>高内聚低耦合是否意味着内聚越高越好，耦合越低越好？</strong></p>
+<ol>
+<li>并不是内聚越高越好，耦合越低越好，真正好的设计是在高内聚和低耦合间进行平衡，也就是说高内聚和低耦合是冲突的。</li>
+<li>最强的内聚莫过于一个类只写一个函数，这样内聚性绝对是最高的。但这会带来一个<br>明显的问题：类的数量急剧增多，这样就导致了其它类的耦合特别多，于是整个设计就变成了“高内聚高耦合”了。由于高耦合，整个系统变动同样非常频繁。</li>
+<li>对于耦合来说，最弱的耦合是一个类将所有的函数都包含了，这样类完全不依赖其它类，耦合性是最低的。但这样会带来一个明显的问题：内聚性很低，于是整个设计就变成了“低耦合低内聚”了。由于低内聚，整个类的变动同样非常频繁。</li>
+<li>真正做到高内聚、低耦合是很难的，很多时候未必一定要这样，更多的时候“最适合”的才是最好的，不过、审时度势、融会贯通、人尽其才、物尽其用，才是设计的王道。</li>
+</ol>
+<p><strong>软件设计时，如何做好高内聚低耦合？</strong></p>
+<p>在模块划分时，要遵循“一个模块，一个功能”的原则，尽可能使模块达到功能内聚。</p>
+<p>耦合是影响软件复杂程度和设计质量的一个重要因素，为提高模块的独立性，应建立模块间尽可能松散的系统，在设计上我们应采用以下原则：若模块间必须存在耦合，应尽量使用数据耦合，少用控制耦合，慎用或有控制地使用公共耦合，并限制公共耦合的范围，尽量避免内容耦合。</p>
+<p>来自 &lt;<a class="link" href="https://link.zhihu.com/?target=https://blog.csdn.net/walid1992/article/details/73278304">https://blog.csdn.net/walid1992/article/details/73278304<i class="fas fa-external-link-alt"></i></a>&gt;</p>
+<h3 id="61、什么是ABP框架？"><a href="#61、什么是ABP框架？" class="headerlink" title="61、什么是ABP框架？"></a><strong>61、什么是ABP框架？</strong></h3><p>ABP框架全称为“<a class="link" href="https://link.zhihu.com/?target=http://ASP.NET">http://ASP.NET<i class="fas fa-external-link-alt"></i></a> Boilerplate Project”，中文翻译为“ <a class="link" href="https://link.zhihu.com/?target=http://ASP.NET">http://ASP.NET<i class="fas fa-external-link-alt"></i></a>样板项目”，诞生的主要目的就是为了让.NET程序员“秒变”架构师，将.NET企业级项目的主流开发技术、最先进的架构整合起来，让.NET工程师能够更快的开发出更好的项目。</p>
+<h3 id="62、什么是WebService"><a href="#62、什么是WebService" class="headerlink" title="62、什么是WebService?"></a><strong>62、什么是WebService?</strong></h3><p>WebService是一种跨编程语言和跨操作系统平台的远程调用技术。</p>
+<p>WebService是一个SOA（面向服务的编程）的架构，它是不依赖于语言，不依赖于平台，可以实现不同的语言间的相互调用，通过</p>
+<p>Internet进行基于Http协议的网络应用间的交互。</p>
+<h3 id="63、什么是Web-API？"><a href="#63、什么是Web-API？" class="headerlink" title="63、什么是Web API？"></a><strong>63、什么是Web API？</strong></h3><p>Web API是网络应用程序接口。</p>
+<p>包含了广泛的功能，网络应用通过API接口，可以实现存储服务、消息服务、计算服务等能力，利用这些能力可以进行开发出强大功能的web应用。</p>
+<h3 id="64、Web-Service与Web-API的关系？"><a href="#64、Web-Service与Web-API的关系？" class="headerlink" title="64、Web Service与Web API的关系？"></a><strong>64、Web Service与Web API的关系？</strong></h3><p>\1. webservice走HTTP协议和<a class="link" href="https://link.zhihu.com/?target=https://www.baidu.com/s?wd=80%E7%AB%AF%E5%8F%A3&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao">80端口<i class="fas fa-external-link-alt"></i></a>。WebService则类似于bs架构，只需要开发<a class="link" href="https://link.zhihu.com/?target=https://www.baidu.com/s?wd=%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao">服务器端<i class="fas fa-external-link-alt"></i></a>，不需要开发客户端，客户端只要遵循<a class="link" href="https://link.zhihu.com/?target=https://www.baidu.com/s?wd=soap%E5%8D%8F%E8%AE%AE&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao">soap协议<i class="fas fa-external-link-alt"></i></a>，就可以调用。</p>
+<p>\2. api，用的协议和端口，是根据开发人员定义的。 api类似于<a class="link" href="https://link.zhihu.com/?target=https://www.baidu.com/s?wd=cs%E6%9E%B6%E6%9E%84&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao">cs架构<i class="fas fa-external-link-alt"></i></a>，需要同时开发客户端API和<a class="link" href="https://link.zhihu.com/?target=https://www.baidu.com/s?wd=%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao">服务器端<i class="fas fa-external-link-alt"></i></a>程序。</p>
+<p>webapi用的是http协议，webservice用的是soap协议</p>
+<p>webapi无状态，相对webservice更轻量级。webapi支持如get,post等http操作</p>
+<p>http soap关系</p>
+<p>http:是一个客户端和服务器端请求和应答的标准（TCP）。http协议其目的是为了提供一种发布和接收htttp页面的方法</p>
+<p>一http协议的客户端与服务器的交互：由HTTP客户端发起一个请求，建立一个到服务器指定端口（默认是80端口）的TCP连接。HTTP服务器则在那个端口监听客户端发送过来的请求。一旦收到请求，服务器（向客户端）发回一个状态行，比如”HTTP/1.1 200 OK”，和（响应的）消息，消息的消息体可能是请求的文件、错误消息、或者其它一些信息。</p>
+<p>soap 协议：它描述了一种在分散或分布式的环境中如何交换信息的轻量级协议。soap在http协议的基础上，一个基于XML的协议。</p>
+<p>不同：都是底层的通信协议，请求包的格式不同而已，soap包是XML格式,http纯文本格式。</p>
+<p>关系：SOAP是个通信协议， SOAP在HTTP协议的基础上，把编写成XML的REQUEST参数, 放在HTTP BODY上提交个WEB SERVICE服务器(SERVLET，ASP什么的) 处理完成后，结果也写成XML作为RESPONSE送回用户端， 为了使用户端和WEB SERVICE可以相互对应，可以使用WSDL作为这种通信方式的描述文件，利用WSDL工具可以自动生成WS和用户端的框架文件，SOAP具备把复杂对象序列化捆绑到XML里去的能力。</p>
+<p>Web Service</p>
+<p>1、它是基于SOAP协议的，数据格式是XML</p>
+<p>2、只支持HTTP协议</p>
+<p>3、它不是开源的，但可以被任意一个了解XML的人使用</p>
+<p>4、它只能部署在IIS上</p>
+<p>WCF</p>
+<p>1、这个也是基于SOAP的，数据格式是XML</p>
+<p>2、这个是Web Service（ASMX）的进化版，可以支持各种各样的协议，像TCP，HTTP，HTTPS，Named Pipes, MSMQ.</p>
+<p>3、WCF的主要问题是，它配置起来特别的繁琐</p>
+<p>4、它不是开源的，但可以被任意一个了解XML的人使用</p>
+<p>5、它可以部署应用程序中或者IIS上或者Windows服务中</p>
+<p>Web API</p>
+<p>1、这是一个简单的构建HTTP服务的新框架</p>
+<p>2、在.net平台上Web API 是一个开源的、理想的、构建REST-ful 服务的技术</p>
+<p>3、不像WCF REST Service.它可以使用HTTP的全部特点（比如URIs、request/response头，缓存，版本控制，多种内容格式）</p>
+<p>4、它也支持MVC的特征，像路由、控制器、action、filter、模型绑定、控制反转（IOC）或依赖注入（DI），单元测试。这些可以使程序更简单、更健壮</p>
+<p>5、它可以部署在应用程序和IIS上</p>
+<p>6、这是一个轻量级的框架，并且对限制带宽的设备，比如智能手机等支持的很好</p>
+<p>7、Response可以被Web API的MediaTypeFormatter转换成Json、XML 或者任何你想转换的格式。</p>
+<p>技术这么多，我该选谁？</p>
+<p>1、当你想创建一个支持消息、消息队列、双工通信的服务时，你应该选择WCF</p>
+<p>2、当你想创建一个服务，可以用更快速的传输通道时，像TCP、NamedPipes或者甚至是UDP（在WCF4.5中）,在其他传输通道不可用的时候也可以支持HTTP。</p>
+<p>3、当你想创建一个基于HTTP的面向资源的服务并且可以使用HTTP的全部特征时（比如URIs、request/response头，缓存，版本控制，多种内容格式），你应该选择WebAPI</p>
+<p>4、当你想让你的服务用于浏览器、手机、iPhone和平板电脑时，你应该选择Web API</p>
+<p>来自 &lt;<a class="link" href="https://link.zhihu.com/?target=https://www.cnblogs.com/bolang100/p/10642419.html">https://www.cnblogs.com/bolang100/p/10642419.html<i class="fas fa-external-link-alt"></i></a>&gt;</p>
+<h3 id="65、前后端分离"><a href="#65、前后端分离" class="headerlink" title="65、前后端分离"></a><strong>65、前后端分离</strong></h3><p>首先什么是前后端分离？</p>
+<p>最核心的就是无论你后端换了什么语言，换了什么人去编写，换了什么样的服务器，只要你们定义的一个接口规则不变，然后不会影响到用户的使用，数据的一个展示。</p>
+<p>同时反过来也一样，无论你前端换了什么UI框架，欸，我今天用easyui，明天我用layui，后天我用bootstrap，你也能够根据定义的接口文档去展示相关数据和效果，那么就是前后端分离。</p>
+<p>说白了就是相互之间是独立的，这就是为什么有前后端分离这个观点出来，并且大家都认可不迟反对态度，恰恰就是说明前后端分离当中的两个字，“分离”</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：C# .net 的基础面试题</li>
+        <li>Post author：Yuxuan Wu</li>
+        <li>Create time：2021-03-19 04:02:11</li>
+        <li>
+            Post link：yuxuanwu17.github.io2021/03/19/2021-03-19-C#-.net-的基础面试题/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/03/21/2021-03-19-C_sharp-notes/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">C-sharp notes</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/03/18/2021-03-18-Visual-Studio-%E4%B8%AD%E7%9B%B8%E5%85%B3%E7%9A%84%E6%96%87%E4%BB%B6%E8%AF%86%E5%88%AB%E5%8F%8A%E5%85%B6%E7%94%A8%E9%80%94/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">C#下Visual Studio 中相关的文件识别及其用途</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span> -
+            
+            2021 <i class="fas fa-heart icon-animate"></i> <a href="/">Yuxuan Wu</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count <span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a> | Theme <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.3.1</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81ASP-NET%E9%A1%B5%E9%9D%A2%E4%B9%8B%E9%97%B4%E4%BC%A0%E5%80%BC%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">1、ASP.NET页面之间传值方式？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%A3%85%E7%AE%B1%E5%92%8C%E6%8B%86%E7%AE%B1%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">2、如何理解装箱和拆箱？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81C-%E4%B8%AD%E4%BB%80%E4%B9%88%E6%98%AF%E5%80%BC%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">3、C#中什么是值类型与引用类型？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81%E8%AF%B7%E8%AF%A6%E8%BF%B0%E5%9C%A8C-%E4%B8%AD%E7%B1%BB-class-%E4%B8%8E%E7%BB%93%E6%9E%84-struct-%E7%9A%84%E5%BC%82%E5%90%8C%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">4、请详述在C#中类(class)与结构(struct)的异同？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81virtual-%E5%92%8C-abstract"><span class="nav-number">5.</span> <span class="nav-text">5、virtual 和 abstract</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%E3%80%81%E7%AE%80%E8%BF%B0-private%E3%80%81-protected%E3%80%81-public%E3%80%81-internal-%E4%BF%AE%E9%A5%B0%E7%AC%A6%E7%9A%84%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E3%80%82"><span class="nav-number">6.</span> <span class="nav-text">6、简述 private、 protected、 public、 internal 修饰符的访问权限。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7%E3%80%81C-%E4%B8%AD%E5%A0%86%E5%92%8C%E6%A0%88%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F-%E5%80%BC%E7%B1%BB%E5%9E%8B-%E6%A0%88-%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B-%E5%A0%86-%E4%B8%8A%E5%AD%A6%E7%9A%84%E6%97%B6%E5%80%99%E5%B8%B8%E5%B8%B8%E8%AE%B2"><span class="nav-number">7.</span> <span class="nav-text">7、C#中堆和栈的区别？ 值类型 栈 引用类型 堆 上学的时候常常讲</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8%E3%80%81%E5%9C%A8ASP-NET%E4%B8%AD%E6%89%80%E6%9C%89%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E7%94%A8%E6%88%B7%E6%8E%A7%E4%BB%B6%E9%83%BD%E5%BF%85%E9%A1%BB%E7%BB%A7%E6%89%BF%E8%87%AA%EF%BC%9F"><span class="nav-number">8.</span> <span class="nav-text">8、在ASP.NET中所有的自定义用户控件都必须继承自？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9%E3%80%81%E5%9C%A8-NET%E6%89%98%E7%AE%A1%E4%BB%A3%E7%A0%81%E6%80%BB%E6%88%91%E4%BB%AC%E4%B8%8D%E5%BF%85%E6%8B%85%E5%BF%83%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%EF%BC%8C%E8%BF%99%E6%98%AF%E5%9B%A0%E4%B8%BA%E6%9C%89%E4%BA%86%EF%BC%9F"><span class="nav-number">9.</span> <span class="nav-text">9、在.NET托管代码总我们不必担心内存泄漏，这是因为有了？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10%E3%80%81GC%EF%BC%88Garbage-Collection%EF%BC%89"><span class="nav-number">10.</span> <span class="nav-text">10、GC（Garbage Collection）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11%E3%80%81CLR%EF%BC%88Common-Language-Runtime%EF%BC%89"><span class="nav-number">11.</span> <span class="nav-text">11、CLR（Common Language Runtime）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12%E3%80%81%E9%9D%99%E6%80%81%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">12.</span> <span class="nav-text">12、静态构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13%E3%80%81%E6%96%87%E4%BB%B6I-O"><span class="nav-number">13.</span> <span class="nav-text">13、文件I&#x2F;O</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14%E3%80%81%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-number">14.</span> <span class="nav-text">14、序列化与反序列化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15%E3%80%81%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5"><span class="nav-number">15.</span> <span class="nav-text">15、线程同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16%E3%80%81C-%E4%B8%AD-abstract-class%E5%92%8Cinterface%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="nav-number">16.</span> <span class="nav-text">16、C#中 abstract class和interface有什么区别?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17%E3%80%81using%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">17.</span> <span class="nav-text">17、using关键字的使用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18%E3%80%81new%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">18.</span> <span class="nav-text">18、new关键字的使用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19%E3%80%81%E5%A7%94%E6%89%98%E4%B8%8E%E4%BA%8B%E4%BB%B6"><span class="nav-number">19.</span> <span class="nav-text">19、委托与事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20%E3%80%81%E9%87%8D%E8%BD%BD-overload-%E4%B8%8E%E9%87%8D%E5%86%99-override-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">20.</span> <span class="nav-text">20、重载(overload)与重写(override)的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21%E3%80%81return%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-number">21.</span> <span class="nav-text">21、return执行顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22%E3%80%81switch-expression"><span class="nav-number">22.</span> <span class="nav-text">22、switch(expression)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#23%E3%80%81%E5%8F%8D%E5%B0%84Reflection"><span class="nav-number">23.</span> <span class="nav-text">23、反射Reflection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#24%E3%80%81property%E4%B8%8Eattribute%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">24.</span> <span class="nav-text">24、property与attribute的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#25%E3%80%81%EF%BC%88Class%EF%BC%89%E5%92%8C%E5%AE%9E%E4%BE%8B%EF%BC%88Instance%EF%BC%89"><span class="nav-number">25.</span> <span class="nav-text">25、（Class）和实例（Instance）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#26%E3%80%81C-%E4%B8%ADstatic%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%9C%E7%94%A8%EF%BC%9F"><span class="nav-number">26.</span> <span class="nav-text">26、C# 中static关键字的作用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#27-C-%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E5%92%8C%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E5%89%8D%E5%8A%A0static%E7%9A%84%E4%BD%9C%E7%94%A8%EF%BC%9F"><span class="nav-number">27.</span> <span class="nav-text">27.C# 成员变量和成员函数前加static的作用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#28%E3%80%81%E6%96%87%E4%BB%B6%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F"><span class="nav-number">28.</span> <span class="nav-text">28、文件编码格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#29%E3%80%81%E5%80%BC%E4%BC%A0%E9%80%92%E4%B8%8E%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92%E8%A7%A3%E9%87%8A%EF%BC%9F"><span class="nav-number">29.</span> <span class="nav-text">29、值传递与引用传递解释？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#30%E3%80%81%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92-ref-%E4%B8%8E-out-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">30.</span> <span class="nav-text">30、参数传递 ref 与 out 的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#31-%E4%BB%80%E4%B9%88%E6%98%AF%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%EF%BC%9F"><span class="nav-number">31.</span> <span class="nav-text">31.什么是内存泄漏？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#32%E3%80%81%E8%B7%A8%E5%9F%9F"><span class="nav-number">32.</span> <span class="nav-text">32、跨域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#33%E3%80%81ORM%E4%B8%AD%E7%9A%84%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD%E4%B8%8E%E7%9B%B4%E6%8E%A5%E5%8A%A0%E8%BD%BD%E6%9C%89%E4%BB%80%E4%B9%88%E5%BC%82%E5%90%8C%EF%BC%9F"><span class="nav-number">33.</span> <span class="nav-text">33、ORM中的延迟加载与直接加载有什么异同？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#34%E3%80%81%E7%AE%80%E8%BF%B0Func%E4%B8%8EAction%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">34.</span> <span class="nav-text">34、简述Func与Action的区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#35%E3%80%81%E8%83%BD%E7%94%A8foreach%E9%81%8D%E5%8E%86%E8%AE%BF%E9%97%AE%E7%9A%84%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%A6%81%E6%B1%82%EF%BC%9F"><span class="nav-number">35.</span> <span class="nav-text">35、能用foreach遍历访问的对象的要求？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#36%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E6%B3%9B%E5%9E%8B%EF%BC%9F"><span class="nav-number">36.</span> <span class="nav-text">36、什么是泛型？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#37%E3%80%81Final"><span class="nav-number">37.</span> <span class="nav-text">37、Final</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#38%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C%E7%9A%84%E7%9B%B8%E5%85%B3%E7%B1%BB"><span class="nav-number">38.</span> <span class="nav-text">38、数据库操作的相关类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#39%E3%80%81http-ADO-NET-%E4%BA%94%E5%A4%A7%E5%AF%B9%E8%B1%A1"><span class="nav-number">39.</span> <span class="nav-text">39、http:&#x2F;&#x2F;ADO.NET 五大对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#40%E3%80%81C-DataTable%E5%92%8CDataSet-%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">40.</span> <span class="nav-text">40、C# DataTable和DataSet 区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#41%E3%80%81%E7%B4%A2%E5%BC%95%E5%99%A8%EF%BC%88Indexers%EF%BC%89"><span class="nav-number">41.</span> <span class="nav-text">41、索引器（Indexers）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#42%E3%80%81POST%E5%92%8CGET%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3"><span class="nav-number">42.</span> <span class="nav-text">42、POST和GET深入理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#43%E3%80%81C-%E4%B8%AD%E7%94%A8sealed%E4%BF%AE%E9%A5%B0%E7%9A%84%E7%B1%BB%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9%EF%BC%9F"><span class="nav-number">43.</span> <span class="nav-text">43、C#中用sealed修饰的类有什么特点？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#44%E3%80%81string%E5%92%8CStringBuilder%E7%9A%84%E5%8C%BA%E5%88%AB-%E4%B8%A4%E8%80%85%E6%80%A7%E8%83%BD%E7%9A%84%E6%AF%94%E8%BE%83%EF%BC%9F"><span class="nav-number">44.</span> <span class="nav-text">44、string和StringBuilder的区别,两者性能的比较？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#45%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E6%89%A9%E5%B1%95%E6%96%B9%E6%B3%95%EF%BC%9F"><span class="nav-number">45.</span> <span class="nav-text">45、什么是扩展方法？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#46%E3%80%81C-%E5%8F%AF%E5%90%A6%E5%AF%B9%E5%86%85%E5%AD%98%E7%9B%B4%E6%8E%A5%E6%93%8D%E4%BD%9C"><span class="nav-number">46.</span> <span class="nav-text">46、C#可否对内存直接操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#47%E3%80%81-amp-%E5%92%8C-amp-amp-%E5%8C%BA%E5%88%AB"><span class="nav-number">47.</span> <span class="nav-text">47、&amp;和&amp;&amp;区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#48%E3%80%81as%E5%92%8Cis%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">48.</span> <span class="nav-text">48、as和is的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#49%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E5%8C%BF%E5%90%8D%E7%B1%BB%EF%BC%8C%E6%9C%89%E4%BB%80%E4%B9%88%E5%A5%BD%E5%A4%84%EF%BC%9F"><span class="nav-number">49.</span> <span class="nav-text">49、什么是匿名类，有什么好处？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#50%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E8%99%9A%E5%87%BD%E6%95%B0%EF%BC%9F%E4%BB%80%E4%B9%88%E6%98%AF%E6%8A%BD%E8%B1%A1%E5%87%BD%E6%95%B0%EF%BC%9F"><span class="nav-number">50.</span> <span class="nav-text">50、什么是虚函数？什么是抽象函数？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#51%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E6%89%98%E7%AE%A1%E5%92%8C%E9%9D%9E%E6%89%98%E7%AE%A1%EF%BC%9F"><span class="nav-number">51.</span> <span class="nav-text">51、什么是托管和非托管？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#52%E3%80%81Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%9F"><span class="nav-number">52.</span> <span class="nav-text">52、Lambda表达式？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#53%E3%80%81%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98-NET%E7%9A%84%E6%80%A7%E8%83%BD-%EF%BC%9F"><span class="nav-number">53.</span> <span class="nav-text">53、如何提高.NET的性能 ？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#54%E3%80%81EF"><span class="nav-number">54.</span> <span class="nav-text">54、EF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#55%E3%80%81%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E6%95%B0%E6%8D%AE%E5%B9%B6%E5%8F%91%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="nav-number">55.</span> <span class="nav-text">55、如何解决数据并发问题？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#56%E3%80%81-NET%E3%80%81C-%E5%92%8Chttp-ASP-NET%EF%BC%8Chttp-ASP-NET-MVC-%E5%9B%9B%E8%80%85%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">56.</span> <span class="nav-text">56、.NET、C#和http:&#x2F;&#x2F;ASP.NET，http:&#x2F;&#x2F;ASP.NET MVC 四者之间的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#58%E3%80%81MVC-%E5%92%8C%E4%B8%89%E5%B1%82%E6%A1%86%E6%9E%B6%E5%8C%BA%E5%88%AB"><span class="nav-number">57.</span> <span class="nav-text">58、MVC 和三层框架区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#59%E3%80%81MVC-%E5%92%8C%E4%B8%89%E5%B1%82%E6%A1%86%E6%9E%B6%E5%8C%BA%E5%88%AB-%E8%AF%A6%E7%BB%86%E8%A7%A3%E9%87%8A"><span class="nav-number">58.</span> <span class="nav-text">59、MVC 和三层框架区别 详细解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#60%E3%80%81%E9%AB%98%E5%86%85%E8%81%9A%EF%BC%8C%E4%BD%8E%E8%80%A6%E5%90%88%E3%80%82"><span class="nav-number">59.</span> <span class="nav-text">60、高内聚，低耦合。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%80%A6%E5%90%88"><span class="nav-number">60.</span> <span class="nav-text">耦合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#61%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFABP%E6%A1%86%E6%9E%B6%EF%BC%9F"><span class="nav-number">61.</span> <span class="nav-text">61、什么是ABP框架？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#62%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFWebService"><span class="nav-number">62.</span> <span class="nav-text">62、什么是WebService?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#63%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFWeb-API%EF%BC%9F"><span class="nav-number">63.</span> <span class="nav-text">63、什么是Web API？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#64%E3%80%81Web-Service%E4%B8%8EWeb-API%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%9F"><span class="nav-number">64.</span> <span class="nav-text">64、Web Service与Web API的关系？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#65%E3%80%81%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB"><span class="nav-number">65.</span> <span class="nav-text">65、前后端分离</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
