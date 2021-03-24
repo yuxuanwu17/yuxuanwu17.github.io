@@ -6582,7 +6582,7 @@ Heart Not Failed       0.85      0.93      0.89        43
 <p>来自 &lt;<a class="link" href="https://link.zhihu.com/?target=https://blog.csdn.net/weixin_34326179/article/details/90123166">https://blog.csdn.net/weixin_34326179/article/details/90123166<i class="fas fa-external-link-alt"></i></a>&gt;</p>
 <h3 id="38、数据库操作的相关类"><a href="#38、数据库操作的相关类" class="headerlink" title="38、数据库操作的相关类"></a><strong>38、数据库操作的相关类</strong></h3><p>特定类：Connection，Command，CommandBuilder，DataAdapter，DataReader，Parameter，Transaction</p>
 <p>共享类：DataSet，DataTable，DataRow，DataColumn，DataRealtion，Constraint，DataColumnMapping，DataTableMapping</p>
-<h3 id="39、http-ADO-NET-五大对象"><a href="#39、http-ADO-NET-五大对象" class="headerlink" title="39、http://ADO.NET 五大对象"></a><strong>39、<a class="link" href="http://ado.net/">http://ADO.NET<i class="fas fa-external-link-alt"></i></a> 五大对象</strong></h3><p>（1）<strong>Connection</strong>：开启程序与数据库之间的连接。</p>
+<h3 id="39、ADO-NET-五大对象"><a href="#39、ADO-NET-五大对象" class="headerlink" title="39、ADO.NET 五大对象"></a><strong>39、ADO.NET 五大对象</strong></h3><p>（1）<strong>Connection</strong>：开启程序与数据库之间的连接。</p>
 <p>（2）<strong>Command</strong>：对数据库发送一些指令。例如增删改查等指令，以及调用存在数据库中的存储过程等。</p>
 <p>（3）<strong>DataAdapter</strong>：主要在数据源及DataSet 之间执行传输工作，通过Command 下达命令后，将取得的数据放进DataSet对象中。</p>
 <p>DataAdapter对象是用来读取数据库，可读取写入数据；但他占用内存比DataReader大，速度慢。</p>
@@ -6598,12 +6598,24 @@ Heart Not Failed       0.85      0.93      0.89        43
 <p>DataSet：这个对象可以视为一个暂存区（Cache），可以把从数据库中所查询到的数据保留起来，甚 至可以将整个数据库显示出来，</p>
 <p>DataSet是放在内存中的。DataSet 的能力不只是可以储存多个Table 而 已，还可以透过DataAdapter对象取得一些例如主键等的数据表结构，并可以记录数据表间的关联。 DataSet 对象可以说是<a class="link" href="https://link.zhihu.com/?target=http://ADO.NET">http://ADO.NET<i class="fas fa-external-link-alt"></i></a> 中重量级的对象，这个对象架构在DataAdapter对象上，本身不具备和 数据源沟通的能力；也就是说我们是将DataAdapter对象当做DataSet 对象以及数据源间传输数据的桥 梁。DataSet包含若干DataTable、DataTableTable包含若干DataRow。</p>
 <p>DataReader：当我们只需要循序的读取数据而不需要其它操作时，可以使用DataReader 对象。 DataReader对象只是一次一次向下循序的读取数据源中的数据，这些数据是存在数据库服务器中的，而 不是一次性加载到程序的内存中的，只能（通过游标）读取当前行的数据，而且这些数据是只读的，并 不允许作其它的操作。因为DataReader 在读取数据的时候限制了每次只读取一条，而且只能只读，所 以使用起来不但节省资源而且效率很好。使用DataReader 对象除了效率较好之外，因为不用把数据全 部传回，故可以降低网络的负载。</p>
-<h3 id="40、C-DataTable和DataSet-区别？"><a href="#40、C-DataTable和DataSet-区别？" class="headerlink" title="40、C# DataTable和DataSet 区别？"></a><strong>40、C# DataTable和DataSet</strong> <strong>区别？</strong></h3><p>可以把DataTable和DataSet看做是数据容器，查询数据库后得到一些结果，放到这种容器里。</p>
+<h3 id="40、C-DataTable和DataSet-区别？"><a href="#40、C-DataTable和DataSet-区别？" class="headerlink" title="==40、C# DataTable和DataSet 区别？=="></a>==<strong>40、C# DataTable和DataSet</strong> <strong>区别？</strong>==</h3><p>可以把DataTable和DataSet看做是数据容器，查询数据库后得到一些结果，放到这种容器里。</p>
 <p>为什么用容器？原因是，容器的功能强大，除了存数据，还可以有更大用途。</p>
 <p>举例：在一个c/s结构的桌面数据库系统里，你可以把前面存放查询结果的容器里的数据显示到你客户端界面上，用户在界面上对数据进行添加、删除、修改，你可以把用户的操作更新到容器，等用户操作完毕了，要求更新，然后你才把容器整个的数据变化更新到中心数据库，这样做的好处是什么？就是减少了数据库操作，客户端速度提高了，数据库压力减小了。</p>
 <p>DataSet可以比作一个内存中的数据库，DataTable是一个内存中的数据表，DataSet里可以存储多个DataTable。</p>
 <p>DataSet：数据集。一般包含多个DataTable，用的时候，dataset[“表名”]得到DataTable</p>
 <p>DataTable：数据表。</p>
+<p><strong>DataSet对象中的Tables的用法</strong></p>
+<ul>
+<li><p>DataSet是一个数据集合，DataSet.Tables是一个存放Data Table的数组，当adapter.Fill(dataSet);</p>
+</li>
+<li><p>执行后，程序会通过SQL引擎返回一个结果集存放在内存中，这个结果集就是一个DataTable，并且这个DataTalbe会被添加到DataSet.Tables中，所以==dataSet.Tables[0]就是返回所要查询的结果集。==</p>
+</li>
+</ul>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> rid=table.Row[<span class="number">0</span>][<span class="string">"rid"</span>].ToString();   <span class="comment">//table.Rows[0]表示Table的第一行数据，table.Rows[0]["rid"].ToString()表示talbe中列rid的值，table的所有列式在SQL中所查询的所有列</span></span><br></pre></td></tr></table></figure>
+<p>一个DataSet中有很多DataTable，用DataTabeles表示，默认填充第一个，集DataTables[0]。</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line">table.Rows------表示所有行</span><br><span class="line"></span><br><span class="line">table.Rows[<span class="number">0</span>]--------第一行</span><br><span class="line"></span><br><span class="line">table.Row[<span class="number">0</span>][<span class="string">"rid"</span>]---------第一行名称为“rid”的列。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
 <h3 id="41、索引器（Indexers）"><a href="#41、索引器（Indexers）" class="headerlink" title="41、索引器（Indexers）"></a><strong>41、索引器（Indexers）</strong></h3><p>解释：C# 类的索引器（indexer）。简单说来，所谓索引器就是一类特殊的属性，通过它们你就可以像引用数组一样引用自己的类。</p>
 <p>显然，这一功能在创建集合类的场合特别有用，而在其他某些情况下，比如处理大型文件或者抽象某些有限资源等，能让类具有类似数组的行为当然也是非常有用的。</p>
 <p>无需显式指定类型或实例成员，即可设置或检索索引值。 索引器类似于<a class="link" href="https://link.zhihu.com/?target=https://docs.microsoft.com/zh-cn/dotnet/csharp/programming-guide/classes-and-structs/properties">属性<i class="fas fa-external-link-alt"></i></a>，不同之处在于它们的访问器需要使用参数。</p>
