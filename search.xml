@@ -6267,8 +6267,54 @@ Heart Not Failed       0.85      0.93      0.89        43
       </tags>
   </entry>
   <entry>
-    <title>C_sharp dotnet 的基础面试题</title>
-    <url>/2021/03/19/2021-03-19-C#-.net-%E7%9A%84%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%A2%98/</url>
+    <title>SQL where 1 = 1 用法</title>
+    <url>/2021/03/24/2021-03-24-SQL-where-1-=-1-%E7%94%A8%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="sql-where-1-1-规范代码"><a href="#sql-where-1-1-规范代码" class="headerlink" title="sql where 1=1 规范代码"></a>sql where 1=1 规范代码</h1><h3 id="在讲解这个问题的时候，首先来看一个例子。"><a href="#在讲解这个问题的时候，首先来看一个例子。" class="headerlink" title="在讲解这个问题的时候，首先来看一个例子。"></a>在讲解这个问题的时候，首先来看一个例子。</h3><p>看一下这两个句子：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> </span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>这两个 句子执行结果是一样一样的。而sql注入就是利用了这个原理 来进行破坏。比如：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> id<span class="operator">=</span><span class="string">&#x27;1000&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>如果允许用户输入的话，那么这个句子就成了：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> id<span class="operator">=</span><span class="string">&#x27;XXX&#x27;</span> <span class="keyword">or</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>这样的话，这个句子就是恒成立的了。</p>
+<ul>
+<li><p>上述1=1 的使用，会影响预先指定的查询结果，使得本来要查询的数据 失效。</p>
+</li>
+<li><p>where 1=1 这种写法 虽然给程序开发人员带来不便，还要避免sql注入的问题。      </p>
+</li>
+<li><p>但 “1=1” 这种写法 也会给程序编写增加了方便。</p>
+</li>
+</ul>
+<h2 id="1-1-可以很方便的规范语句"><a href="#1-1-可以很方便的规范语句" class="headerlink" title="1=1 可以很方便的规范语句"></a>1=1 可以很方便的规范语句</h2><p>对于组合查询的来说，因为查询比较模糊，而查询的where条件的个数也不确定。<br>一般这样的sql语句进行查询的时候：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">sql.append(<span class="string">&quot;select * from User&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (whereUser.getID()!=<span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">    sql.append(<span class="string">&quot; where ID=@id&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (whereUser.getName()!=<span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">    sql.append(<span class="string">&quot; and Name=@name&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (whereUser.getAddress()!=<span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">    sql.append(<span class="string">&quot; and Phone=@phone&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于上述这种写法，逻辑上感觉没有问题。但是如果whereUser里面的id为空。那么最后拼接出来得到的语句会成：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">User</span> <span class="keyword">and</span> Name<span class="operator">=</span><span class="string">&#x27;XXX&#x27;</span> <span class="keyword">and</span> Phone<span class="operator">=</span><span class="string">&#x27;XXX&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>这条语句 没有where关键字，肯定会报错的。但是如果说，既然条件个数未知，那么把where关键字放到 if外面去</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">sql.append(<span class="string">&quot;select * from User&quot;</span>);</span><br><span class="line">sql.append(<span class="string">&quot;where&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (whereUser.getID()!=<span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">    sql.append(<span class="string">&quot; ID=@id&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (whereUser.getName()!=<span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">    sql.append(<span class="string">&quot; and Name=@name&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (whereUser.getAddress()!=<span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">    sql.append(<span class="string">&quot; and Phone=@phone&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样写的话，如果三个条件都为空。则这是一条不带查询条件的查询。那么最后这条语句会被解析成：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">User</span> <span class="keyword">where</span>;</span><br></pre></td></tr></table></figure>
+<p>   这条语句，空有where关键字 没有条件，照样会报错的。</p>
+<p>   对于解决上述这种未知的问题，只能进行各种情况的判断进行拼接。当然可以用“where 1=1”进行代码的规范：</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">sql.append(&quot;select * from User where 1=1 &quot;);</span><br><span class="line">if (whereUser.getID()!=&quot;&quot;) &#123;</span><br><span class="line">    sql.append(&quot; and ID=@id&quot;);</span><br><span class="line">&#125;</span><br><span class="line">if (whereUser.getName()!=&quot;&quot;) &#123;</span><br><span class="line">    sql.append(&quot; and Name=@name&quot;);</span><br><span class="line">&#125;</span><br><span class="line">if (whereUser.getAddress()!=&quot;&quot;) &#123;</span><br><span class="line">    sql.append(&quot; and Phone=@phone&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于上述的这种写法，无论是否有条件 都是可以成立的。</p>
+<p>无条件的的时候：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">User</span> <span class="keyword">where</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<p>有条件的时候:</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">User</span> <span class="keyword">where</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> id<span class="operator">=</span><span class="string">&#x27;XX&#x27;</span> ……;</span><br></pre></td></tr></table></figure>
+<p>​       这样写的代码，会比 分情况判断的代码 更规范。对于以上的写法，并不是唯一的。也可以使 where ‘a’=’a’ 、’a’&lt;&gt;’b’等。</p>
+<p>版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。<br>本文链接：<a class="link"   href="https://blog.csdn.net/zc474235918/article/details/50544484" >https://blog.csdn.net/zc474235918/article/details/50544484<i class="fas fa-external-link-alt"></i></a><br>————————————————<br>版权声明：本文为CSDN博主「赵崇」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a class="link"   href="https://blog.csdn.net/zc474235918/article/details/50544484" >https://blog.csdn.net/zc474235918/article/details/50544484<i class="fas fa-external-link-alt"></i></a></p>
+]]></content>
+      <categories>
+        <category>Databases</category>
+      </categories>
+      <tags>
+        <tag>notes</tag>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C_sharp_dotnet的基础面试题</title>
+    <url>/2021/03/19/2021-03-19_C_sharp-dotnet-%E7%9A%84%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%A2%98/</url>
     <content><![CDATA[<p><strong>最近，整理了一份 c#、.net 基础面试题，其中多少引用了前辈们写的，也加了自己的理解。不对的地方，还请大家多多指正，共同进步，非常感谢！</strong></p>
 <p><strong>如有侵权请私信我。</strong><a class="link" href="https://zhuanlan.zhihu.com/p/355257871">https://zhuanlan.zhihu.com/p/355257871<i class="fas fa-external-link-alt"></i></a></p>
 <hr>
@@ -6886,52 +6932,6 @@ Heart Not Failed       0.85      0.93      0.89        43
       <tags>
         <tag>notes</tag>
         <tag>C#</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SQL where 1 = 1 用法</title>
-    <url>/2021/03/24/2021-03-24-SQL-where-1-=-1-%E7%94%A8%E6%B3%95/</url>
-    <content><![CDATA[<h1 id="sql-where-1-1-规范代码"><a href="#sql-where-1-1-规范代码" class="headerlink" title="sql where 1=1 规范代码"></a>sql where 1=1 规范代码</h1><h3 id="在讲解这个问题的时候，首先来看一个例子。"><a href="#在讲解这个问题的时候，首先来看一个例子。" class="headerlink" title="在讲解这个问题的时候，首先来看一个例子。"></a>在讲解这个问题的时候，首先来看一个例子。</h3><p>看一下这两个句子：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> </span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>这两个 句子执行结果是一样一样的。而sql注入就是利用了这个原理 来进行破坏。比如：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> id<span class="operator">=</span><span class="string">&#x27;1000&#x27;</span></span><br></pre></td></tr></table></figure>
-<p>如果允许用户输入的话，那么这个句子就成了：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> id<span class="operator">=</span><span class="string">&#x27;XXX&#x27;</span> <span class="keyword">or</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>这样的话，这个句子就是恒成立的了。</p>
-<ul>
-<li><p>上述1=1 的使用，会影响预先指定的查询结果，使得本来要查询的数据 失效。</p>
-</li>
-<li><p>where 1=1 这种写法 虽然给程序开发人员带来不便，还要避免sql注入的问题。      </p>
-</li>
-<li><p>但 “1=1” 这种写法 也会给程序编写增加了方便。</p>
-</li>
-</ul>
-<h2 id="1-1-可以很方便的规范语句"><a href="#1-1-可以很方便的规范语句" class="headerlink" title="1=1 可以很方便的规范语句"></a>1=1 可以很方便的规范语句</h2><p>对于组合查询的来说，因为查询比较模糊，而查询的where条件的个数也不确定。<br>一般这样的sql语句进行查询的时候：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">sql.append(<span class="string">&quot;select * from User&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (whereUser.getID()!=<span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">    sql.append(<span class="string">&quot; where ID=@id&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (whereUser.getName()!=<span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">    sql.append(<span class="string">&quot; and Name=@name&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (whereUser.getAddress()!=<span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">    sql.append(<span class="string">&quot; and Phone=@phone&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>对于上述这种写法，逻辑上感觉没有问题。但是如果whereUser里面的id为空。那么最后拼接出来得到的语句会成：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">User</span> <span class="keyword">and</span> Name<span class="operator">=</span><span class="string">&#x27;XXX&#x27;</span> <span class="keyword">and</span> Phone<span class="operator">=</span><span class="string">&#x27;XXX&#x27;</span></span><br></pre></td></tr></table></figure>
-<p>这条语句 没有where关键字，肯定会报错的。但是如果说，既然条件个数未知，那么把where关键字放到 if外面去</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">sql.append(<span class="string">&quot;select * from User&quot;</span>);</span><br><span class="line">sql.append(<span class="string">&quot;where&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (whereUser.getID()!=<span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">    sql.append(<span class="string">&quot; ID=@id&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (whereUser.getName()!=<span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">    sql.append(<span class="string">&quot; and Name=@name&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (whereUser.getAddress()!=<span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">    sql.append(<span class="string">&quot; and Phone=@phone&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这样写的话，如果三个条件都为空。则这是一条不带查询条件的查询。那么最后这条语句会被解析成：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">User</span> <span class="keyword">where</span>;</span><br></pre></td></tr></table></figure>
-<p>   这条语句，空有where关键字 没有条件，照样会报错的。</p>
-<p>   对于解决上述这种未知的问题，只能进行各种情况的判断进行拼接。当然可以用“where 1=1”进行代码的规范：</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">sql.append(&quot;select * from User where 1=1 &quot;);</span><br><span class="line">if (whereUser.getID()!=&quot;&quot;) &#123;</span><br><span class="line">    sql.append(&quot; and ID=@id&quot;);</span><br><span class="line">&#125;</span><br><span class="line">if (whereUser.getName()!=&quot;&quot;) &#123;</span><br><span class="line">    sql.append(&quot; and Name=@name&quot;);</span><br><span class="line">&#125;</span><br><span class="line">if (whereUser.getAddress()!=&quot;&quot;) &#123;</span><br><span class="line">    sql.append(&quot; and Phone=@phone&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>对于上述的这种写法，无论是否有条件 都是可以成立的。</p>
-<p>无条件的的时候：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">User</span> <span class="keyword">where</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
-<p>有条件的时候:</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">User</span> <span class="keyword">where</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span> <span class="keyword">and</span> id<span class="operator">=</span><span class="string">&#x27;XX&#x27;</span> ……;</span><br></pre></td></tr></table></figure>
-<p>​       这样写的代码，会比 分情况判断的代码 更规范。对于以上的写法，并不是唯一的。也可以使 where ‘a’=’a’ 、’a’&lt;&gt;’b’等。</p>
-<p>版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。<br>本文链接：<a class="link"   href="https://blog.csdn.net/zc474235918/article/details/50544484" >https://blog.csdn.net/zc474235918/article/details/50544484<i class="fas fa-external-link-alt"></i></a><br>————————————————<br>版权声明：本文为CSDN博主「赵崇」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a class="link"   href="https://blog.csdn.net/zc474235918/article/details/50544484" >https://blog.csdn.net/zc474235918/article/details/50544484<i class="fas fa-external-link-alt"></i></a></p>
-]]></content>
-      <categories>
-        <category>Databases</category>
-      </categories>
-      <tags>
-        <tag>notes</tag>
-        <tag>SQL</tag>
       </tags>
   </entry>
 </search>
