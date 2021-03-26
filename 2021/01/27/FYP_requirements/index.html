@@ -517,80 +517,11 @@
 
     
         <aside class="page-aside">
-            .post-toc-wrap {
-  width: 100%;
-  font-size: 0.92rem;
-  box-sizing: border-box;
-
-  .post-toc {
-
-    ol {
-      list-style: none;
-      margin: 0;
-      padding: 0 2px 12px 10px;
-      text-align: left;
-
-      &:last-child {
-        padding-bottom: 0;
-      }
-
-      > ol {
-        padding-left: 0;
-      }
-
-      a {
-        transition-property: all;
-        transition();
-      }
-    }
-
-
-    .nav-item {
-      line-height: 1.8;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-
-    .nav {
-      .nav-child {
-        display: hexo-config('toc.expand_all') ? block : none;
-      }
-
-      .active > .nav-child {
-        display: block;
-      }
-
-      .active-current > .nav-child {
-        display: block;
-
-        > .nav-item {
-          display: block;
-        }
-      }
-
-
-      .nav-number, .nav-text {
-        color: var(--default-text-color);
-      }
-
-      .active > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-
-      .active-current > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-    }
-  }
-}
-
-
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#General-requirements"><span class="nav-number">1.</span> <span class="nav-text">General requirements:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Contain-the-following-in-this-order"><span class="nav-number">2.</span> <span class="nav-text">Contain the following, in this order;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Details"><span class="nav-number">3.</span> <span class="nav-text">Details</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Components"><span class="nav-number">4.</span> <span class="nav-text">Components</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Title"><span class="nav-number">4.1.</span> <span class="nav-text">Title:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstracts"><span class="nav-number">4.2.</span> <span class="nav-text">Abstracts:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">4.3.</span> <span class="nav-text">Introduction:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Materials-and-Methods"><span class="nav-number">4.4.</span> <span class="nav-text">Materials and Methods:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Results"><span class="nav-number">4.5.</span> <span class="nav-text">Results</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tables-must"><span class="nav-number">4.6.</span> <span class="nav-text">Tables must:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Figures-must"><span class="nav-number">4.7.</span> <span class="nav-text">Figures must:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Figure-legends-must"><span class="nav-number">4.8.</span> <span class="nav-text">Figure legends must:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Discussion-should"><span class="nav-number">4.9.</span> <span class="nav-text">Discussion should:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Acknowledgments"><span class="nav-number">4.10.</span> <span class="nav-text">Acknowledgments:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference"><span class="nav-number">4.11.</span> <span class="nav-text">Reference:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Symbols-units-abbreviations"><span class="nav-number">4.12.</span> <span class="nav-text">Symbols, units, abbreviations:</span></a></li></ol></li></ol>
+    </div>
+</div>
         </aside>
     
 

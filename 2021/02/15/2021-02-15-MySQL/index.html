@@ -1422,80 +1422,11 @@
 
     
         <aside class="page-aside">
-            .post-toc-wrap {
-  width: 100%;
-  font-size: 0.92rem;
-  box-sizing: border-box;
-
-  .post-toc {
-
-    ol {
-      list-style: none;
-      margin: 0;
-      padding: 0 2px 12px 10px;
-      text-align: left;
-
-      &:last-child {
-        padding-bottom: 0;
-      }
-
-      > ol {
-        padding-left: 0;
-      }
-
-      a {
-        transition-property: all;
-        transition();
-      }
-    }
-
-
-    .nav-item {
-      line-height: 1.8;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-
-    .nav {
-      .nav-child {
-        display: hexo-config('toc.expand_all') ? block : none;
-      }
-
-      .active > .nav-child {
-        display: block;
-      }
-
-      .active-current > .nav-child {
-        display: block;
-
-        > .nav-item {
-          display: block;
-        }
-      }
-
-
-      .nav-number, .nav-text {
-        color: var(--default-text-color);
-      }
-
-      .active > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-
-      .active-current > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-    }
-  }
-}
-
-
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%88%9D%E5%A7%8BMySQL"><span class="nav-number">1.</span> <span class="nav-text">1.初始MySQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8A%E8%AF%BE%E8%A7%86%E9%A2%91%E5%90%8C%E6%AD%A5%E6%96%87%E6%A1%A3"><span class="nav-number">2.</span> <span class="nav-text">上课视频同步文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E8%AF%86MySQL"><span class="nav-number">3.</span> <span class="nav-text">初识MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E6%98%AFMAC%E7%B3%BB%E7%BB%9F%EF%BC%9A"><span class="nav-number">3.1.</span> <span class="nav-text">如果是MAC系统：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E5%8C%96%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5%E5%88%86%E7%B1%BB"><span class="nav-number">3.2.</span> <span class="nav-text">结构化查询语句分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="nav-number">3.3.</span> <span class="nav-text">数据库操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="nav-number">3.4.</span> <span class="nav-text">创建数据表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%80%BC%E5%92%8C%E5%88%97%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.5.</span> <span class="nav-text">数据值和列类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%AD%97%E6%AE%B5%E5%B1%9E%E6%80%A7"><span class="nav-number">3.6.</span> <span class="nav-text">数据字段属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.7.</span> <span class="nav-text">数据表的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">3.8.</span> <span class="nav-text">修改数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%96%E9%94%AE"><span class="nav-number">3.9.</span> <span class="nav-text">外键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DML%E8%AF%AD%E8%A8%80"><span class="nav-number">3.10.</span> <span class="nav-text">DML语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%95%B0%E6%8D%AE"><span class="nav-number">3.11.</span> <span class="nav-text">添加数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE"><span class="nav-number">3.12.</span> <span class="nav-text">修改数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="nav-number">3.13.</span> <span class="nav-text">删除数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DQL%E8%AF%AD%E8%A8%80"><span class="nav-number">3.14.</span> <span class="nav-text">DQL语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E6%9F%A5%E8%AF%A2%E5%AD%97%E6%AE%B5"><span class="nav-number">3.15.</span> <span class="nav-text">指定查询字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#where%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5"><span class="nav-number">3.16.</span> <span class="nav-text">where条件语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="nav-number">3.17.</span> <span class="nav-text">连接查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E5%92%8C%E5%88%86%E9%A1%B5"><span class="nav-number">3.18.</span> <span class="nav-text">排序和分页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="nav-number">3.19.</span> <span class="nav-text">子查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="nav-number">3.20.</span> <span class="nav-text">常用函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0"><span class="nav-number">3.21.</span> <span class="nav-text">聚合函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">3.22.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1-transaction"><span class="nav-number">4.</span> <span class="nav-text">事务(transaction)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1"><span class="nav-number">4.1.</span> <span class="nav-text">事务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95"><span class="nav-number">5.</span> <span class="nav-text">索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%9A"><span class="nav-number">5.1.</span> <span class="nav-text">索引的使用：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86"><span class="nav-number">5.2.</span> <span class="nav-text">用户管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL%E5%A4%87%E4%BB%BD"><span class="nav-number">5.3.</span> <span class="nav-text">MySQL备份</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%84%E8%8C%83%E5%8C%96%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1"><span class="nav-number">6.</span> <span class="nav-text">规范化数据库设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1"><span class="nav-number">6.1.</span> <span class="nav-text">为什么需要数据库设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E5%A4%A7%E8%8C%83%E5%BC%8F"><span class="nav-number">6.2.</span> <span class="nav-text">三大范式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JDBC%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="nav-number">6.3.</span> <span class="nav-text">JDBC（重点）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#10-1%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A9%B1%E5%8A%A8"><span class="nav-number">6.3.1.</span> <span class="nav-text">10.1数据库驱动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-2-JDBC"><span class="nav-number">6.3.2.</span> <span class="nav-text">10.2 JDBC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-3-%E7%AC%AC%E4%B8%80%E4%B8%AAjdbc-%E7%A8%8B%E5%BA%8F"><span class="nav-number">6.3.3.</span> <span class="nav-text">10.3 第一个jdbc 程序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#statement%E5%AF%B9%E8%B1%A1"><span class="nav-number">6.4.</span> <span class="nav-text">statement对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PreparedStatement%E5%AF%B9%E8%B1%A1"><span class="nav-number">6.5.</span> <span class="nav-text">PreparedStatement对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1-1"><span class="nav-number">6.6.</span> <span class="nav-text">事务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0-%EF%BC%88%E6%9A%82%E6%97%B6%E4%B8%8D%E5%AD%A6%E4%B9%A0%EF%BC%8C%E8%BF%87%E4%BA%8E%E9%9A%BE%EF%BC%8C%E4%BB%A5%E5%90%8E%E8%A1%A5%E4%B8%8A%EF%BC%89"><span class="nav-number">6.7.</span> <span class="nav-text">数据库连接池 （暂时不学习，过于难，以后补上）</span></a></li></ol></li></ol>
+    </div>
+</div>
         </aside>
     
 

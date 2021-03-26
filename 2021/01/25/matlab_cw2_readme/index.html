@@ -662,80 +662,11 @@ mjx-container[display="true"] + br {
 
     
         <aside class="page-aside">
-            .post-toc-wrap {
-  width: 100%;
-  font-size: 0.92rem;
-  box-sizing: border-box;
-
-  .post-toc {
-
-    ol {
-      list-style: none;
-      margin: 0;
-      padding: 0 2px 12px 10px;
-      text-align: left;
-
-      &:last-child {
-        padding-bottom: 0;
-      }
-
-      > ol {
-        padding-left: 0;
-      }
-
-      a {
-        transition-property: all;
-        transition();
-      }
-    }
-
-
-    .nav-item {
-      line-height: 1.8;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-
-    .nav {
-      .nav-child {
-        display: hexo-config('toc.expand_all') ? block : none;
-      }
-
-      .active > .nav-child {
-        display: block;
-      }
-
-      .active-current > .nav-child {
-        display: block;
-
-        > .nav-item {
-          display: block;
-        }
-      }
-
-
-      .nav-number, .nav-text {
-        color: var(--default-text-color);
-      }
-
-      .active > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-
-      .active-current > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-    }
-  }
-}
-
-
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Project-overview"><span class="nav-number">1.</span> <span class="nav-text">Project overview :</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Files-running-order"><span class="nav-number">2.</span> <span class="nav-text">Files running order</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Components-Scripts-inside-the-project"><span class="nav-number">3.</span> <span class="nav-text">Components&#x2F;Scripts inside the project</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-script-part"><span class="nav-number">4.</span> <span class="nav-text">The script part</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#figure-preprocessing-m"><span class="nav-number">4.1.</span> <span class="nav-text">figure_preprocessing.m</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#data-partition-m"><span class="nav-number">4.2.</span> <span class="nav-text">data_partition.m</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ass2-CNN-m"><span class="nav-number">4.3.</span> <span class="nav-text">ass2_CNN.m</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ass2-mlp-m"><span class="nav-number">4.4.</span> <span class="nav-text">ass2_mlp.m</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ass2-lvq-m"><span class="nav-number">4.5.</span> <span class="nav-text">ass2_lvq.m</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ass2-rbf-kmean-m"><span class="nav-number">4.6.</span> <span class="nav-text">ass2_rbf_kmean.m</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ass2-rbf-som-m"><span class="nav-number">4.7.</span> <span class="nav-text">ass2_rbf_som.m</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ass2-confusion-matrix-summary-m"><span class="nav-number">4.8.</span> <span class="nav-text">ass2_confusion_matrix_summary.m</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-function-part-assembled-function-for-reproduction"><span class="nav-number">5.</span> <span class="nav-text">The function part (assembled function for reproduction)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#getimdata-m"><span class="nav-number">5.1.</span> <span class="nav-text">getimdata.m</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getimdata2-m"><span class="nav-number">5.2.</span> <span class="nav-text">getimdata2.m</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RBF-training-kmeans-m"><span class="nav-number">5.3.</span> <span class="nav-text">RBF_training_kmeans.m</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RBF-training-som-m"><span class="nav-number">5.4.</span> <span class="nav-text">RBF_training_som.m</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RBF-predict-m"><span class="nav-number">5.5.</span> <span class="nav-text">RBF_predict.m</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getcls-m"><span class="nav-number">5.6.</span> <span class="nav-text">getcls.m</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rate-m"><span class="nav-number">5.7.</span> <span class="nav-text">rate.m</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Saved-parameters"><span class="nav-number">6.</span> <span class="nav-text">Saved parameters</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#train-test-data-mat"><span class="nav-number">6.1.</span> <span class="nav-text">train_test_data.mat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#som-net-data-mat"><span class="nav-number">6.2.</span> <span class="nav-text">som_net_data.mat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lvq-360-mat"><span class="nav-number">6.3.</span> <span class="nav-text">lvq_360.mat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lvq-24-mat"><span class="nav-number">6.4.</span> <span class="nav-text">lvq_24.mat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kmeans-plot-mat"><span class="nav-number">6.5.</span> <span class="nav-text">kmeans_plot.mat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Confusion-matrix-summary"><span class="nav-number">6.6.</span> <span class="nav-text">Confusion_matrix summary:</span></a></li></ol></li></ol>
+    </div>
+</div>
         </aside>
     
 

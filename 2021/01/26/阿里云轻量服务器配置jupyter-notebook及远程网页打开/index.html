@@ -468,80 +468,11 @@
 
     
         <aside class="page-aside">
-            .post-toc-wrap {
-  width: 100%;
-  font-size: 0.92rem;
-  box-sizing: border-box;
-
-  .post-toc {
-
-    ol {
-      list-style: none;
-      margin: 0;
-      padding: 0 2px 12px 10px;
-      text-align: left;
-
-      &:last-child {
-        padding-bottom: 0;
-      }
-
-      > ol {
-        padding-left: 0;
-      }
-
-      a {
-        transition-property: all;
-        transition();
-      }
-    }
-
-
-    .nav-item {
-      line-height: 1.8;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-
-    .nav {
-      .nav-child {
-        display: hexo-config('toc.expand_all') ? block : none;
-      }
-
-      .active > .nav-child {
-        display: block;
-      }
-
-      .active-current > .nav-child {
-        display: block;
-
-        > .nav-item {
-          display: block;
-        }
-      }
-
-
-      .nav-number, .nav-text {
-        color: var(--default-text-color);
-      }
-
-      .active > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-
-      .active-current > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-    }
-  }
-}
-
-
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85jupyter-notebook"><span class="nav-number">1.</span> <span class="nav-text">安装jupyter notebook</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E7%BC%96%E8%AF%91jupyter-%E7%9A%84config%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">开始编译jupyter 的config文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8jupyter-notebook"><span class="nav-number">3.</span> <span class="nav-text">启动jupyter notebook</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">连接浏览器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A%E6%98%A0%E5%B0%84ip%E5%88%B0%E6%9C%AC%E5%9C%B0"><span class="nav-number">5.</span> <span class="nav-text">方法二：映射ip到本地</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%EF%BC%8C%E5%A6%82%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%EF%BC%8C%E5%92%8Cjupyter-%E6%B2%A1%E6%9C%89%E5%A4%AA%E5%A4%A7%E5%85%B3%E7%B3%BB"><span class="nav-number">6.</span> <span class="nav-text">一些基本操作，如创建虚拟环境，和jupyter 没有太大关系</span></a></li></ol>
+    </div>
+</div>
         </aside>
     
 

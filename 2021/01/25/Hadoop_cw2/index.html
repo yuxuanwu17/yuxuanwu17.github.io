@@ -442,80 +442,11 @@
 
     
         <aside class="page-aside">
-            .post-toc-wrap {
-  width: 100%;
-  font-size: 0.92rem;
-  box-sizing: border-box;
-
-  .post-toc {
-
-    ol {
-      list-style: none;
-      margin: 0;
-      padding: 0 2px 12px 10px;
-      text-align: left;
-
-      &:last-child {
-        padding-bottom: 0;
-      }
-
-      > ol {
-        padding-left: 0;
-      }
-
-      a {
-        transition-property: all;
-        transition();
-      }
-    }
-
-
-    .nav-item {
-      line-height: 1.8;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-
-    .nav {
-      .nav-child {
-        display: hexo-config('toc.expand_all') ? block : none;
-      }
-
-      .active > .nav-child {
-        display: block;
-      }
-
-      .active-current > .nav-child {
-        display: block;
-
-        > .nav-item {
-          display: block;
-        }
-      }
-
-
-      .nav-number, .nav-text {
-        color: var(--default-text-color);
-      }
-
-      .active > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-
-      .active-current > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-    }
-  }
-}
-
-
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Calculate-the-bigram-frequency-and-return-the-Top-10"><span class="nav-number">1.</span> <span class="nav-text">1. Calculate the bigram frequency and return the Top 10</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#data-cleaning-part-single-world"><span class="nav-number">1.1.</span> <span class="nav-text">data cleaning part (single world)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bigram-extraction"><span class="nav-number">1.2.</span> <span class="nav-text">bigram extraction</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Return-the-line-containing-the-word-%E2%80%98torture%E2%80%99"><span class="nav-number">2.</span> <span class="nav-text">2. Return the line containing the word ‘torture’</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Results"><span class="nav-number">3.</span> <span class="nav-text">Results</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bigram-frequency"><span class="nav-number">3.1.</span> <span class="nav-text">bigram frequency</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lines-containing-%E2%80%9Ctorture%E2%80%9D"><span class="nav-number">3.2.</span> <span class="nav-text">lines containing “torture”</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code-resources"><span class="nav-number"></span> <span class="nav-text">Code resources</span></a>
+    </div>
+</div>
         </aside>
     
 

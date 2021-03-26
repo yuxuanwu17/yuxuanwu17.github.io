@@ -965,80 +965,11 @@ Heart Not Failed       0.85      0.93      0.89        43
 
     
         <aside class="page-aside">
-            .post-toc-wrap {
-  width: 100%;
-  font-size: 0.92rem;
-  box-sizing: border-box;
-
-  .post-toc {
-
-    ol {
-      list-style: none;
-      margin: 0;
-      padding: 0 2px 12px 10px;
-      text-align: left;
-
-      &:last-child {
-        padding-bottom: 0;
-      }
-
-      > ol {
-        padding-left: 0;
-      }
-
-      a {
-        transition-property: all;
-        transition();
-      }
-    }
-
-
-    .nav-item {
-      line-height: 1.8;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-
-    .nav {
-      .nav-child {
-        display: hexo-config('toc.expand_all') ? block : none;
-      }
-
-      .active > .nav-child {
-        display: block;
-      }
-
-      .active-current > .nav-child {
-        display: block;
-
-        > .nav-item {
-          display: block;
-        }
-      }
-
-
-      .nav-number, .nav-text {
-        color: var(--default-text-color);
-      }
-
-      .active > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-
-      .active-current > a {
-        .nav-number, .nav-text {
-          color: var(--primary-color);
-        }
-      }
-    }
-  }
-}
-
-
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Project-description-overview"><span class="nav-number">1.</span> <span class="nav-text">Project description (overview)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Related-work"><span class="nav-number"></span> <span class="nav-text">Related work</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Explorative-data-analysis-EDA-approach"><span class="nav-number">1.</span> <span class="nav-text">Explorative data analysis (EDA) approach</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Predictive-data-analysis-PDA-approach"><span class="nav-number">2.</span> <span class="nav-text">Predictive data analysis (PDA) approach</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-download"><span class="nav-number"></span> <span class="nav-text">Data download</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Libraries-used-in-this-project"><span class="nav-number"></span> <span class="nav-text">Libraries used in this project</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-formulation"><span class="nav-number"></span> <span class="nav-text">Problem formulation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Return-the-head-of-dataset-a-overview-of-inside-components"><span class="nav-number">1.</span> <span class="nav-text">Return the head of dataset (a overview of inside components)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Print-the-size-of-the-dataset"><span class="nav-number">2.</span> <span class="nav-text">Print the size of the dataset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Check-the-ratio-of-the-NaNs-for-each-column"><span class="nav-number">3.</span> <span class="nav-text">Check the ratio of the NaNs for each column</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dataset-description"><span class="nav-number">4.</span> <span class="nav-text">Dataset description</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Citation-or-Reference"><span class="nav-number">5.</span> <span class="nav-text">Citation or Reference</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Principle-components-analysis"><span class="nav-number">6.</span> <span class="nav-text">Principle components analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Correlation-analysis"><span class="nav-number">7.</span> <span class="nav-text">Correlation analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-partition"><span class="nav-number">8.</span> <span class="nav-text">Data partition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Feature-selection-feature-engineering"><span class="nav-number">9.</span> <span class="nav-text">Feature selection (feature engineering)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Visualized-the-learning-curve-after-feature-selection"><span class="nav-number">10.</span> <span class="nav-text">Visualized the learning curve after feature selection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Explorative-data-analysis-of-the-four-selected-features"><span class="nav-number">11.</span> <span class="nav-text">Explorative data analysis of the four selected features:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Specify-the-figure-size"><span class="nav-number">11.1.</span> <span class="nav-text">Specify the figure size</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Methods"><span class="nav-number"></span> <span class="nav-text">Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Python-library"><span class="nav-number">1.</span> <span class="nav-text">Python library</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Description-how-you-learned-the-predictor"><span class="nav-number"></span> <span class="nav-text">Description: how you learned the predictor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PCA-to-visualize-the-sample-distribution"><span class="nav-number">1.</span> <span class="nav-text">PCA to visualize the sample distribution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Machine-learning-algorithms-with-description"><span class="nav-number">2.</span> <span class="nav-text">Machine learning algorithms with description</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SVM-with-linear-kernel"><span class="nav-number">2.1.</span> <span class="nav-text">SVM with linear kernel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SVM-with-RBF-kernel"><span class="nav-number">2.2.</span> <span class="nav-text">SVM with RBF kernel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Evaluation-method"><span class="nav-number">2.3.</span> <span class="nav-text">Evaluation method</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiments-and-results"><span class="nav-number"></span> <span class="nav-text">Experiments and results</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Compare-the-efficacy-of-different-preprocessing-methods"><span class="nav-number">1.</span> <span class="nav-text">Compare the efficacy of different preprocessing methods</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Compare-the-model-performance-by-ten-fold-cross-validation-and-leave-one-out-method-in-model-evaluation"><span class="nav-number">2.</span> <span class="nav-text">Compare the model performance by ten-fold cross validation and leave-one-out method in model evaluation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Ten-fold-cross-validation-of-SVM"><span class="nav-number">2.1.</span> <span class="nav-text">Ten-fold cross validation of SVM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Leave-on-out-method-of-SVM"><span class="nav-number">2.2.</span> <span class="nav-text">Leave-on-out method of SVM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Comparison-of-the-two-methods"><span class="nav-number">2.3.</span> <span class="nav-text">Comparison of the two methods</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hyperparameters-tuning"><span class="nav-number">3.</span> <span class="nav-text">Hyperparameters tuning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Training-and-validation-loss"><span class="nav-number">4.</span> <span class="nav-text">Training and validation loss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Plot-the-confusion-matrix-plot"><span class="nav-number">5.</span> <span class="nav-text">Plot the confusion matrix plot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Evaluate-the-performance-of-the-final-selected-model-performance-with-respect-to-the-chosen-performance-matrix"><span class="nav-number">6.</span> <span class="nav-text">Evaluate the performance of the final selected model performance with respect to the chosen performance matrix</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Accuracy"><span class="nav-number">7.</span> <span class="nav-text">Accuracy:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Total"><span class="nav-number">8.</span> <span class="nav-text">Total:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Precision"><span class="nav-number">9.</span> <span class="nav-text">Precision:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Recall"><span class="nav-number">10.</span> <span class="nav-text">Recall:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ROC-curve"><span class="nav-number">11.</span> <span class="nav-text">ROC curve</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PR-curve"><span class="nav-number">12.</span> <span class="nav-text">PR-curve</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Summary-of-the-results"><span class="nav-number">13.</span> <span class="nav-text">Summary of the results</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-and-future-work"><span class="nav-number"></span> <span class="nav-text">Conclusion and future work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bibliography"><span class="nav-number"></span> <span class="nav-text">Bibliography</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Other-resources-to-download-the-code"><span class="nav-number"></span> <span class="nav-text">Other resources to download the code</span></a>
+    </div>
+</div>
         </aside>
     
 
