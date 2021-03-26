@@ -678,11 +678,80 @@
 
     
         <aside class="page-aside">
-            <div class="post-toc-wrap">
-    <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Import-the-libraries"><span class="nav-number">1.</span> <span class="nav-text">Import the libraries</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Load-the-data-and-return-the-head-of-data"><span class="nav-number">2.</span> <span class="nav-text">Load the data and return the head of data</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Check-whether-the-dataset-contains-the-missing-value"><span class="nav-number">3.</span> <span class="nav-text">Check whether the dataset contains the missing value</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Explore-the-data-and-some-clarification"><span class="nav-number">4.</span> <span class="nav-text">Explore the data and some clarification</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Explain-the-features"><span class="nav-number">4.1.</span> <span class="nav-text">Explain the features</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#X4046-X4225-X4770-stands-for-the-PLU-code"><span class="nav-number">4.2.</span> <span class="nav-text">X4046, X4225, X4770 stands for the PLU code</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploratory-Data-Analysis"><span class="nav-number">5.</span> <span class="nav-text">Exploratory Data Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Density-plot-of-the-difference-between-two-avocados"><span class="nav-number">5.1.</span> <span class="nav-text">Density plot of the difference between two avocados.</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-matrix-to-demonstrate-the-volume-of-conventional-and-organic-avocados"><span class="nav-number">6.</span> <span class="nav-text">Create a matrix to demonstrate the volume of conventional and organic avocados</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Compare-the-volume-of-each-avocado"><span class="nav-number">7.</span> <span class="nav-text">Compare the volume of each avocado</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Avocado-price-from-2015-2020"><span class="nav-number">8.</span> <span class="nav-text">Avocado price from 2015-2020</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Relationship-between-Prices-and-Total-on-either-conventional-or-organic-avocados"><span class="nav-number">9.</span> <span class="nav-text">Relationship between Prices and Total on either conventional or organic avocados</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Filter-the-data-into-two-categories-conventional-or-organic"><span class="nav-number">9.1.</span> <span class="nav-text">Filter the data into two categories, conventional or organic</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Monthly-avocados-price-in-either-conventional-or-organic-avocados"><span class="nav-number">9.2.</span> <span class="nav-text">Monthly avocados price in either conventional or organic avocados</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Patterns-among-the-years-in-each-month-Autoplot-library"><span class="nav-number">10.</span> <span class="nav-text">Patterns among the years in each month (Autoplot library)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Seasonal-patterns-analysis"><span class="nav-number">11.</span> <span class="nav-text">Seasonal patterns analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Seasonality-patterns"><span class="nav-number">12.</span> <span class="nav-text">Seasonality patterns</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Monthly-analysis"><span class="nav-number">12.1.</span> <span class="nav-text">Monthly analysis</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Seasonal-patterns"><span class="nav-number">12.2.</span> <span class="nav-text">Seasonal patterns</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Find-the-city-where-avocado%E2%80%99s-price-is-lowest"><span class="nav-number">13.</span> <span class="nav-text">Find the city where avocado’s price is lowest</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-future-price-prediction"><span class="nav-number">14.</span> <span class="nav-text">The future price prediction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Other-platforms"><span class="nav-number">15.</span> <span class="nav-text">Other platforms:</span></a></li></ol>
-    </div>
-</div>
+            .post-toc-wrap {
+  width: 100%;
+  font-size: 0.92rem;
+  box-sizing: border-box;
+
+  .post-toc {
+
+    ol {
+      list-style: none;
+      margin: 0;
+      padding: 0 2px 12px 10px;
+      text-align: left;
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+
+      > ol {
+        padding-left: 0;
+      }
+
+      a {
+        transition-property: all;
+        transition();
+      }
+    }
+
+
+    .nav-item {
+      line-height: 1.8;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+
+    .nav {
+      .nav-child {
+        display: hexo-config('toc.expand_all') ? block : none;
+      }
+
+      .active > .nav-child {
+        display: block;
+      }
+
+      .active-current > .nav-child {
+        display: block;
+
+        > .nav-item {
+          display: block;
+        }
+      }
+
+
+      .nav-number, .nav-text {
+        color: var(--default-text-color);
+      }
+
+      .active > a {
+        .nav-number, .nav-text {
+          color: var(--primary-color);
+        }
+      }
+
+      .active-current > a {
+        .nav-number, .nav-text {
+          color: var(--primary-color);
+        }
+      }
+    }
+  }
+}
+
+
         </aside>
     
 

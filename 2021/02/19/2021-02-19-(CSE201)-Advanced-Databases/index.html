@@ -1042,11 +1042,80 @@ mjx-container[display="true"] + br {
 
     
         <aside class="page-aside">
-            <div class="post-toc-wrap">
-    <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Storage"><span class="nav-number">1.</span> <span class="nav-text">Storage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Building-a-Database-High-Level"><span class="nav-number">1.1.</span> <span class="nav-text">Building a Database: High-Level</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Access-Time"><span class="nav-number">1.2.</span> <span class="nav-text">Access Time</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Disk-Block"><span class="nav-number">1.3.</span> <span class="nav-text">Disk Block</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Organization-of-Records-in-Files"><span class="nav-number">1.4.</span> <span class="nav-text">Organization of Records in Files</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Index"><span class="nav-number">2.</span> <span class="nav-text">Index</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Types-of-Indexing"><span class="nav-number">2.1.</span> <span class="nav-text">Types of Indexing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Structure-of-Index"><span class="nav-number">2.2.</span> <span class="nav-text">The Structure of Index</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Index-Techniques"><span class="nav-number">2.3.</span> <span class="nav-text">Index Techniques</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Ordered-Indices-Primary-index"><span class="nav-number">2.3.1.</span> <span class="nav-text">Ordered Indices (Primary index)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dense-Index-vs-Sparse-Index"><span class="nav-number">2.3.2.</span> <span class="nav-text">Dense Index vs. Sparse Index</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dense-index-files"><span class="nav-number">2.3.3.</span> <span class="nav-text">Dense index files</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Sparse-index-files"><span class="nav-number">2.3.4.</span> <span class="nav-text">Sparse index files</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#An-ordered-index-can-also-be"><span class="nav-number">2.3.5.</span> <span class="nav-text">An ordered index can also be:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Primary-and-Secondary-Indices"><span class="nav-number">2.3.6.</span> <span class="nav-text">Primary and Secondary Indices</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Clustering-Index"><span class="nav-number">2.3.7.</span> <span class="nav-text">Clustering Index</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#What-is-Multilevel-Index"><span class="nav-number">2.3.8.</span> <span class="nav-text">What is Multilevel Index?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-Tree-Index"><span class="nav-number">2.3.9.</span> <span class="nav-text">B-Tree Index</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Index-Definition-in-SQL"><span class="nav-number">2.3.10.</span> <span class="nav-text">Index Definition in SQL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Advantages-of-Indexing"><span class="nav-number">2.3.11.</span> <span class="nav-text">Advantages of Indexing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Disadvantages-of-Indexing"><span class="nav-number">2.3.12.</span> <span class="nav-text">Disadvantages of Indexing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Summary"><span class="nav-number">2.3.13.</span> <span class="nav-text">Summary:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-tree-index"><span class="nav-number">2.4.</span> <span class="nav-text">B+ tree index</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Rules-for-B-Tree"><span class="nav-number">2.4.1.</span> <span class="nav-text">Rules for B+ Tree</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Characters-of-the-B-trees"><span class="nav-number">2.4.2.</span> <span class="nav-text">Characters of the B+ trees</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Search-operation"><span class="nav-number">2.4.3.</span> <span class="nav-text">Search operation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Procedure-in-updates-on-B-tree"><span class="nav-number">2.4.4.</span> <span class="nav-text">Procedure in updates on B+ tree</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Delete-Operation"><span class="nav-number">2.4.5.</span> <span class="nav-text">Delete Operation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Delete-Operation-Algorithm"><span class="nav-number">2.4.6.</span> <span class="nav-text">Delete Operation Algorithm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Summary-1"><span class="nav-number">2.4.7.</span> <span class="nav-text">Summary:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hash-Index"><span class="nav-number">2.5.</span> <span class="nav-text">Hash Index</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#What-is-Hashing-in-DBMS"><span class="nav-number">2.5.1.</span> <span class="nav-text">What is Hashing in DBMS?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Why-do-we-need-Hashing"><span class="nav-number">2.5.2.</span> <span class="nav-text">Why do we need Hashing?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Structure-of-Static-Hashing"><span class="nav-number">2.5.3.</span> <span class="nav-text">Structure of Static Hashing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Important-Terminologies-using-in-Hashing"><span class="nav-number">2.5.4.</span> <span class="nav-text">Important Terminologies using in Hashing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Static-Hashing"><span class="nav-number">2.5.5.</span> <span class="nav-text">Static Hashing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Static-Hash-Functions"><span class="nav-number">2.5.6.</span> <span class="nav-text">Static Hash Functions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Open-Hashing"><span class="nav-number">2.5.7.</span> <span class="nav-text">Open Hashing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Close-Hashing"><span class="nav-number">2.5.8.</span> <span class="nav-text">Close Hashing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dynamic-Hashing"><span class="nav-number">2.5.9.</span> <span class="nav-text">Dynamic Hashing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Comparison-of-Ordered-Indexing-and-Hashing"><span class="nav-number">2.5.10.</span> <span class="nav-text">Comparison of Ordered Indexing and Hashing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#What-is-Collision-Bucket-Overflow"><span class="nav-number">2.5.11.</span> <span class="nav-text">What is Collision (Bucket Overflow)?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bucket-overflow-can-occur-because-of"><span class="nav-number">2.5.12.</span> <span class="nav-text">Bucket overflow can occur because of</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hash-Indices"><span class="nav-number">2.5.13.</span> <span class="nav-text">Hash Indices</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#How-to-deal-with-Hashing-Collision"><span class="nav-number">2.5.14.</span> <span class="nav-text">How to deal with Hashing Collision?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Deficiencies-of-Static-Hashing"><span class="nav-number">2.5.15.</span> <span class="nav-text">Deficiencies of Static Hashing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dynamic-Hashing-1"><span class="nav-number">2.5.16.</span> <span class="nav-text">Dynamic Hashing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Summary-2"><span class="nav-number">2.5.17.</span> <span class="nav-text">Summary:</span></a></li></ol></li></ol></li></ol>
-    </div>
-</div>
+            .post-toc-wrap {
+  width: 100%;
+  font-size: 0.92rem;
+  box-sizing: border-box;
+
+  .post-toc {
+
+    ol {
+      list-style: none;
+      margin: 0;
+      padding: 0 2px 12px 10px;
+      text-align: left;
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+
+      > ol {
+        padding-left: 0;
+      }
+
+      a {
+        transition-property: all;
+        transition();
+      }
+    }
+
+
+    .nav-item {
+      line-height: 1.8;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+
+    .nav {
+      .nav-child {
+        display: hexo-config('toc.expand_all') ? block : none;
+      }
+
+      .active > .nav-child {
+        display: block;
+      }
+
+      .active-current > .nav-child {
+        display: block;
+
+        > .nav-item {
+          display: block;
+        }
+      }
+
+
+      .nav-number, .nav-text {
+        color: var(--default-text-color);
+      }
+
+      .active > a {
+        .nav-number, .nav-text {
+          color: var(--primary-color);
+        }
+      }
+
+      .active-current > a {
+        .nav-number, .nav-text {
+          color: var(--primary-color);
+        }
+      }
+    }
+  }
+}
+
+
         </aside>
     
 

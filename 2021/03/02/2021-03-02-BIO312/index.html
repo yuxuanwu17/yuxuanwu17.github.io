@@ -630,11 +630,80 @@ mjx-container[display="true"] + br {
 
     
         <aside class="page-aside">
-            <div class="post-toc-wrap">
-    <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Protein-seperation"><span class="nav-number">1.</span> <span class="nav-text">Protein seperation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SDS-PAGE"><span class="nav-number">2.</span> <span class="nav-text">SDS-PAGE:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Isoelectric-point-pi"><span class="nav-number">3.</span> <span class="nav-text">Isoelectric point (pi)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Isoelectric-Focusing"><span class="nav-number">4.</span> <span class="nav-text">Isoelectric Focusing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2D-gel"><span class="nav-number">5.</span> <span class="nav-text">2D gel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Western-Blot"><span class="nav-number">6.</span> <span class="nav-text">Western Blot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Protein-identification"><span class="nav-number">7.</span> <span class="nav-text">Protein identification</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Edman-degradation"><span class="nav-number">7.1.</span> <span class="nav-text">Edman degradation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mass-Spectrometry"><span class="nav-number">7.2.</span> <span class="nav-text">Mass Spectrometry:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Protein-sequencing"><span class="nav-number">8.</span> <span class="nav-text">Protein sequencing</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Sanger-sequence-protein-identification"><span class="nav-number">8.1.</span> <span class="nav-text">Sanger sequence (protein identification)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cleavage-of-polypeptides-for-analysis"><span class="nav-number">9.</span> <span class="nav-text">Cleavage of polypeptides for analysis</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CW1"><span class="nav-number"></span> <span class="nav-text">CW1</span></a>
-    </div>
-</div>
+            .post-toc-wrap {
+  width: 100%;
+  font-size: 0.92rem;
+  box-sizing: border-box;
+
+  .post-toc {
+
+    ol {
+      list-style: none;
+      margin: 0;
+      padding: 0 2px 12px 10px;
+      text-align: left;
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+
+      > ol {
+        padding-left: 0;
+      }
+
+      a {
+        transition-property: all;
+        transition();
+      }
+    }
+
+
+    .nav-item {
+      line-height: 1.8;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+
+    .nav {
+      .nav-child {
+        display: hexo-config('toc.expand_all') ? block : none;
+      }
+
+      .active > .nav-child {
+        display: block;
+      }
+
+      .active-current > .nav-child {
+        display: block;
+
+        > .nav-item {
+          display: block;
+        }
+      }
+
+
+      .nav-number, .nav-text {
+        color: var(--default-text-color);
+      }
+
+      .active > a {
+        .nav-number, .nav-text {
+          color: var(--primary-color);
+        }
+      }
+
+      .active-current > a {
+        .nav-number, .nav-text {
+          color: var(--primary-color);
+        }
+      }
+    }
+  }
+}
+
+
         </aside>
     
 
