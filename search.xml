@@ -7067,4 +7067,44 @@ Heart Not Failed       0.85      0.93      0.89        43
         <tag>html</tag>
       </tags>
   </entry>
+  <entry>
+    <title>正则表达式 笔记</title>
+    <url>/2021/03/26/2021-03-26-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F-%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h2 id="正则表达式大全"><a href="#正则表达式大全" class="headerlink" title="正则表达式大全"></a>正则表达式大全</h2><p>\  Used to drop the special meaning of character following it (discussed below)</p>
+<p>[] Represent a character class</p>
+<p>^  Matches the beginning</p>
+<p>$  Matches the end</p>
+<p>.  Matches any character except newline</p>
+<p>?  Matches zero or one occurrence.</p>
+<p>|  Means OR (Matches with any of the characters separated by it.</p>
+<p>*  Any number of occurrences (including 0 occurrences)</p>
+<p>+  One or more occurrences</p>
+<p>{} Indicate number of occurrences of a preceding RE </p>
+<p>  to match.</p>
+<p>() Enclose a group of REs</p>
+<p>\d  Matches any decimal digit, this is equivalent to the set class [0-9].</p>
+<p>\D  Matches any non-digit character.</p>
+<p>\s  Matches any whitespace character.</p>
+<p>\S  Matches any non-whitespace character</p>
+<p>\w  Matches any alphanumeric character, this is equivalent to the class [a-zA-Z0-9_].</p>
+<p>\W  Matches any non-alphanumeric character. </p>
+<ul>
+<li>字符和.字符搭配可以匹配所有的字符. 匹配所有字符</li>
+<li>任何对象都可以被用来在if或者是while条件中检测真假。</li>
+</ul>
+<p>下面展示的是大多数内置的对象被认为是false的情形：</p>
+<p>constants defined to be false: None, False</p>
+<p>zero of any numeric type: 0, 0.0, 0j, Decimal(0), Fraction(0,1)</p>
+<p>empty sequences and collections: ‘’,(),[],{}, set(), range(0)</p>
+<p><strong>注意r里面的转义符号\这才是，巨坑</strong></p>
+<p><a class="link"   href="https://www.jianshu.com/p/d56afe14835b" >https://www.jianshu.com/p/d56afe14835b<i class="fas fa-external-link-alt"></i></a></p>
+]]></content>
+      <categories>
+        <category>Notes</category>
+      </categories>
+      <tags>
+        <tag>notes</tag>
+        <tag>regex</tag>
+      </tags>
+  </entry>
 </search>
