@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Welcome to my personal blogs">
+    <meta name="author" content="Yuxuan Wu">
+    
+    <title>
+        
+            RNAseq demo &amp; notes |
+        
+        Yuxuan Wu
+    </title>
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep coding, Keep hungry."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.3.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days age","week":"%s weeks age","month":"%s months age","year":"%s years age"};
+  </script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Yuxuan Wu
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content normal-code-theme">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">RNAseq demo &amp; notes</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Yuxuan Wu</span>
+                        <span class="level">Lv5</span>
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i> 2021-03-26 11:07:32
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/tags/RNA-modification/">RNA modification</a>
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/notes/">notes</a>
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/bash/">bash</a>
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/object-Object/">[object Object]</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i> <span>6.9k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i> <span>39 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="RNAseq"><a href="#RNAseq" class="headerlink" title="RNAseq"></a>RNAseq</h2><p>RNA-seq (RNA-sequencing) is a technique that can examine the quantity and sequences of RNA in a sample using next generation sequencing (NGS). It analyzes the transcriptome of gene expression patterns encoded within our RNA. </p>
+<h2 id="What-are-the-applications-of-RNA-seq"><a href="#What-are-the-applications-of-RNA-seq" class="headerlink" title="What are the applications of RNA-seq?"></a>What are the applications of RNA-seq?</h2><p>RNA-seq lets us investigate and discover the transcriptome, the total cellular content of RNAs including mRNA, rRNA and tRNA. Understanding the transcriptome is key if we are to connect the information on our genome with its functional protein expression. </p>
+<p>RNA-seq can tell us which genes are turned on in a cell, what their level of expression is, and at what times they are activated or shut off. This allows scientists to more deeply understand the biology of a cell and assess changes that may indicate disease. Some of the most popular techniques that use RNA-seq are transcriptional profiling, SNP identification, RNA editing and differential gene expression analysis.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210331171555.png" alt="RNA-seq Short Reads"></p>
+<blockquote>
+<p>Figure1: RNA-seq data uses uses short reads of mRNA which is free of intronic non-coding DNA. These reads must then be aligned back to the reference genome. </p>
+</blockquote>
+<p>This can give researchers vital information about the function of genes. For example, the transcriptome can highlight all the tissues in which a gene of unknown function is expressed, which might indicate what its role is. It also captures information about alternative splicing events (Figure 1), which produce different transcripts from one single gene sequence. These events would not be picked up by DNA sequencing. It can also identify post-transcriptional modifications that occur during mRNA processing such as polyadenylation and 5’ capping</p>
+<h2 id="How-does-RNA-seq-work"><a href="#How-does-RNA-seq-work" class="headerlink" title="How does RNA-seq work?"></a>How does RNA-seq work?</h2><p>Early RNA-seq techniques used Sanger sequencing technology, a technique that although innovative at the time, was also low-throughput, costly, and inaccurate. It is only recently, with the advent and proliferation of NGS technology, have we been able to fully take advantage of RNA-seq’s potential</p>
+<p>The first step in the technique involves converting the population of RNA to be sequenced into cDNA fragments (a cDNA library). This allows the RNA to be put into an NGS workflow. Adapters are then added to each end of the fragments. These adapters contain functional elements which permit sequencing; for example, the amplification element and the primary sequencing site. The cDNA library is then analyzed by NGS, producing short sequences which correspond to either one or both ends of the fragment. The depth to which the library is sequenced varies depending on techniques which the output data will be used for. The sequencing often follows either single-read or paired-end sequencing methods. Single-read sequencing is a cheaper and faster technique (for reference, about 1% of the cost of Sanger sequencing) that sequences the cDNA from just one end, whilst paired-end methods sequence from both ends, and are therefore more expensive and time-consuming5,6.             </p>
+<p>A further choice must be made between strand-specific and non-strand-specific protocols. The former method means the information about which DNA strand was transcribed is retained. The value of extra information obtained from strand-specific protocols make them the favorable option.</p>
+<p>These reads, of which there will be many millions by the end of the workflow, can then be aligned to a genome of reference and assembled to produce an RNA sequence map that spans the transcriptome7.</p>
+<p>The whole pipeline</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210403092100.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210403092928.jpg" alt="聊聊转录组测序——2.数据分析与解读（上）"></p>
+<h2 id="CHIP-mechanisms"><a href="#CHIP-mechanisms" class="headerlink" title="CHIP mechanisms"></a>CHIP mechanisms</h2><ul>
+<li><p><strong>C</strong>hromatin <strong>I</strong>mmuno<strong>P</strong>recipitation <strong>Seq</strong>uencing (ChIP-Seq)</p>
+</li>
+<li><p>An approach to ==detect specific DNA regions/sequences associated with a protein of interest, <em>in vivo</em>.==</p>
+</li>
+<li><p>Became a powerful tool to analyze protein/DNA interactions, furthermore to detect any signal/modification associated with DNA/Chromatin.</p>
+</li>
+</ul>
+<p>• Protein-DNA interactions</p>
+<p>• Chromatin States</p>
+<p>• Transcriptional regulation</p>
+<p>• DNA modifications (MeDIP)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210326233148.png" alt="image-20210326233143439"></p>
+<h3 id="ChIP"><a href="#ChIP" class="headerlink" title="ChIP"></a>ChIP</h3><p>•DNA and associated proteins on chromatin in living cells or tissues are crosslinked (this step is omitted in Native ChIP).</p>
+<p>•The DNA-protein complexes (chromatin-protein) are then sheared into ~500 bp DNA fragments by sonication or nuclease digestion.</p>
+<p>•Cross-linked DNA fragments associated with the protein(s) of interest are selectively immunoprecipitated from the cell debris using an appropriate protein-specific antibody.</p>
+<p>•The associated DNA fragments are purified and their sequence is determined. Enrichment of specific DNA sequences represents regions on the genome that the protein of interest is associated with in vivo.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210326233303.png" alt="image-20210326233303656"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210327085932.png" alt="image-20210327085931977"></p>
+<hr>
+<h2 id="NGS-flow-chart-amp-details"><a href="#NGS-flow-chart-amp-details" class="headerlink" title="NGS flow chart &amp; details"></a>NGS flow chart &amp; details</h2><p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210329113524.png" alt="image-20210329113524383"></p>
+<h3 id="FASTQ-format"><a href="#FASTQ-format" class="headerlink" title="FASTQ format"></a>FASTQ format</h3><p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210329113608.png" alt="image-20210329113608444"></p>
+<h3 id="SAM-format"><a href="#SAM-format" class="headerlink" title="SAM format:"></a>SAM format:</h3><ul>
+<li><strong>SAM</strong> stands for Sequence Alignment/Map format. It is a TAB-delimited text format consisting of a header section, which is optional, and an alignment section.</li>
+<li>Details: <a class="link"   target="_blank" rel="noopener" href="https://samtools.github.io/hts-specs/SAMv1.pdf" >https://<i class="fas fa-external-link-alt"></i></a><a class="link"   target="_blank" rel="noopener" href="https://samtools.github.io/hts-specs/SAMv1.pdf" >samtools.github.io/hts-specs/SAMv1.pdf<i class="fas fa-external-link-alt"></i></a> </li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210329113732.png" alt="image-20210329113732323"></p>
+<h3 id="NGS-reads-Alignment"><a href="#NGS-reads-Alignment" class="headerlink" title="NGS reads Alignment"></a>NGS reads Alignment</h3><p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210329113822.png" alt="image-20210329113822691"></p>
+<h3 id="Fasta-format"><a href="#Fasta-format" class="headerlink" title="Fasta format"></a>Fasta format</h3><ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/FASTA" >https://<i class="fas fa-external-link-alt"></i></a><a class="link"   target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/FASTA" >en.wikipedia.org/wiki/FASTA<i class="fas fa-external-link-alt"></i></a></li>
+<li>The first line in a FASTA file starts either with a “&gt;” (greater-than) symbol</li>
+<li>Following the initial line (used for a unique description of the sequence) is the actual sequence itself in standard one-letter code. </li>
+</ul>
+<h3 id="TDF-format"><a href="#TDF-format" class="headerlink" title="TDF format"></a>TDF format</h3><ul>
+<li>A tiled data file (TDF) file (.tdf) is a binary file that contains data that has been preprocessed for faster display in IGV. There are other alternative formats, including wig, bigwig, etc.</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210329114133.png" alt="image-20210329114133206"></p>
+<h3 id="FASTAQC-NGS-Data-Quality"><a href="#FASTAQC-NGS-Data-Quality" class="headerlink" title="FASTAQC- NGS Data Quality"></a>FASTAQC- NGS Data Quality</h3><p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210329114513.png" alt="image-20210329114513821"></p>
+<h3 id="如何阅读fastqc"><a href="#如何阅读fastqc" class="headerlink" title="如何阅读fastqc"></a>如何阅读fastqc</h3><p>非常详细</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/20731723" >https://zhuanlan.zhihu.com/p/20731723<i class="fas fa-external-link-alt"></i></a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210331144050.png" alt="image-20210331144050385"></p>
+<p>Two main problems we need to pay attention to:</p>
+<ul>
+<li>Base quality </li>
+<li>Adaptor </li>
+</ul>
+<h3 id="Data-format"><a href="#Data-format" class="headerlink" title="Data format:"></a>Data format:</h3><ul>
+<li><p>SRA: Sequencing data (compressed format)</p>
+</li>
+<li><p>FASTQ: Sequencing data</p>
+</li>
+<li><p>SAM: Aligned sequencing data </p>
+</li>
+<li><p>BAM: Aligned sequencing data (compressed format)</p>
+</li>
+<li><p>TDF: (Aligned) Tag density file for visualization of BAM</p>
+</li>
+<li><p>GTF: Gene annotation</p>
+</li>
+<li><p>BED: range format (chr1, 210-350). It can be used to store gene annotation, sequencing read alignment information, TF binding site information, etc.</p>
+</li>
+</ul>
+<hr>
+<h2 id="Key-Info-bash"><a href="#Key-Info-bash" class="headerlink" title="Key_Info.bash"></a><strong>Key_Info.bash</strong></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Project #2</span></span><br><span class="line"><span class="comment"># BIO405</span></span><br><span class="line"><span class="comment"># 2021-03-15 </span></span><br><span class="line"><span class="comment"># Bash Script</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># S1. make your working directory ##################################</span></span><br><span class="line"><span class="comment"># connect to the Linux server</span></span><br><span class="line"><span class="built_in">pwd</span> <span class="comment"># check where you are</span></span><br><span class="line">ls <span class="comment"># see what do you have</span></span><br><span class="line">mkdir ~/P2 <span class="comment"># make a folder for this project under your home directory ~</span></span><br><span class="line"><span class="comment"># &quot;~&quot; means your home directory on the linux server</span></span><br><span class="line">ls ~ <span class="comment"># to check whether you have the P2 folder generated under your home directory</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># S2. download one fastq data</span></span><br><span class="line"><span class="comment"># Alternative 1: https://www.ncbi.nlm.nih.gov/Traces/study/?acc=PRJNA486780&amp;o=acc_s%3Aa (used example)</span></span><br><span class="line"><span class="comment"># Alternative 2: https://www.ncbi.nlm.nih.gov/Traces/study/?acc=PRJNA403831&amp;o=acc_s%3Aa</span></span><br><span class="line"><span class="comment"># Most RNAseq datasets were deposited into GEO: https://www.ncbi.nlm.nih.gov/geo/</span></span><br><span class="line"><span class="comment"># try to find a dataset YOU are interested in. Download process can be done in parallel</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># download the fastq file</span></span><br><span class="line">mkdir ~/P2/fastq</span><br><span class="line">(nohup fastq-dump --split-3 -v SRR7721730 -O ~/P2/fastq &gt; ~/P2/sra/730.out)&amp;</span><br><span class="line">ls -l ~/P2/fastq <span class="comment"># check what you have now</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Explanations</span></span><br><span class="line"><span class="comment"># (nohup)&amp;: means run the command in background mode</span></span><br><span class="line"><span class="comment"># --splite-3: if datas are paired-end, they will be divided into two files</span></span><br><span class="line"><span class="comment"># SRRxxxxxx: the sample number in GEO</span></span><br><span class="line"><span class="comment"># -O: where to save the downloaded sample</span></span><br><span class="line"><span class="comment"># &gt; ~/P2/fastq/730.out: where to save the messages received while downloading the file</span></span><br><span class="line"></span><br><span class="line">ls -l ~/P2/fastq <span class="comment"># check what you have now</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Download-the-fastq-file"><a href="#Download-the-fastq-file" class="headerlink" title="Download the fastq file"></a>Download the fastq file</h3><p><strong>Explanations</strong></p>
+<ul>
+<li>(nohup)&amp;: means run the command in background mode</li>
+<li>–splite-3: if datas are paired-end, they will be divided into two files</li>
+<li>SRRxxxxxx: the sample number in GEO</li>
+<li> -O: where to save the downloaded sample</li>
+<li>&gt; ~/P2/fastq/730.out: where to save the messages received while downloading the file</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># S3. Top</span></span><br><span class="line">htop -u <span class="string">&quot;<span class="variable">$USER</span>&quot;</span> <span class="comment"># check the load of the server and the tasks you are running, if you see too many tasks are running, you should not submit additional jobs. </span></span><br><span class="line">q <span class="comment"># to quit from htop command</span></span><br><span class="line">killall -u <span class="string">&quot;<span class="variable">$USER</span>&quot;</span> <span class="comment"># to terminate all your running jobs </span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<h3 id="Quality-control"><a href="#Quality-control" class="headerlink" title="Quality control"></a>Quality control</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># S4. quality control ####################################</span></span><br><span class="line">mkdir ~/P2/fastqc_report</span><br><span class="line">fastqc -o ~/P2/fastqc_report -f fastq ~/P2/fastq/SRR7721730_1.fastq ~/P2/fastq/SRR7721730_2.fastq</span><br><span class="line"><span class="comment"># for paired end of data, you have to check the data quality of both reads</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># you could check the html file in the Rstudio </span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Obtain-the-index-for-alignment"><a href="#Obtain-the-index-for-alignment" class="headerlink" title="Obtain the index for alignment"></a>Obtain the index for alignment</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># S6. get the whole genome fasta</span></span><br><span class="line">mkdir ~/P2/index</span><br><span class="line"><span class="comment"># it takes a long time to download this genome annotation pacakge, so I have downloaded everything for you.</span></span><br><span class="line"><span class="comment"># all the genome annotation (human, mouse, etc) is available from: http://10.7.88.74/MyWeb/Genomes</span></span><br><span class="line">wget -O ~/P2/index/hg38.fa http://10.7.88.74/MyWeb/Genomes/hg38/genome.fa <span class="comment"># download genome</span></span><br><span class="line">wget -O ~/P2/index/hg38.gtf http://10.7.88.74/MyWeb/Genomes/hg38/genes.gtf <span class="comment"># download annotation</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># S7. get the index, needed for alignment </span></span><br><span class="line"><span class="comment"># hisat2-build hg38.fa hg38 </span></span><br><span class="line"><span class="comment"># build index, take a very long time</span></span><br><span class="line"><span class="comment"># with the assistance of index, we could increase the speed of query data</span></span><br><span class="line">(nohup hisat2-build ~/P2/index/hg38.fa ~/P2/index/hg38 &gt; ~/P2/index/index_message.out)&amp; <span class="comment"># let us do it in background mode</span></span><br><span class="line">ls -l ~/P2/index/ <span class="comment"># the index files are very larger</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="tophat-alignment"><a href="#tophat-alignment" class="headerlink" title="tophat alignment"></a>tophat alignment</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># S8. Align the fastq files to genome with tophat</span></span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line">mkdir ~/P2/bam <span class="comment"># make a folder to store aligned bam files</span></span><br><span class="line"></span><br><span class="line">(nohup hisat2 -x ~/P2/index/hg38 -1 ~/P2/fastq/SRR7721730_1.fastq -2 ~/P2/fastq/SRR7721730_2.fastq -S ~/P2/bam/SRR7721730.sam &gt; ~/P2/bam/hisat_730.out)&amp;</span><br><span class="line">head ~/P2/bam/SRR7721730/730.out <span class="comment"># check the summary result of alignment</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># covert to bam file to save space</span></span><br><span class="line">(nohup samtools view -S ~/P3/bam/SRR7721730.sam -b &gt; ~/P3/bam/SRR7721730.bam)&amp;</span><br><span class="line"></span><br><span class="line"><span class="comment"># sort alignment</span></span><br><span class="line">(nohup samtools sort ~/P3/bam/SRR7721730.bam -o ~/P3/bam/SRR7721730_sorted.bam)&amp; <span class="comment"># sort alignment</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># index all the bam files, which is required for visualization in IGV</span></span><br><span class="line">(nohup samtools index ~/P3/bam/SRR7721730_sorted.bam)&amp; <span class="comment"># a file with the same name and ended with &quot;.bai&quot; is generated. This is the index of a BAM file.</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="TDF-file-for-visualization-of-bam-files"><a href="#TDF-file-for-visualization-of-bam-files" class="headerlink" title="TDF file for visualization of bam files"></a>TDF file for visualization of bam files</h3><ul>
+<li>IGV browser, downloading it when required </li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> S9. prepare TDF file <span class="keyword">for</span> visualization of bam files</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> download the chromesome size file</span></span><br><span class="line">wget -O ~/P2/tdf/hg38.chrom.sizes http://10.7.88.74/MyWeb/Genomes/chrom.sizes/hg38.chrom.sizes # use a different genome size file if necessary</span><br><span class="line">mkdir ~/P2/tdf</span><br><span class="line">(nohup igvtools count -z 5 -w 10 -e 0 ~/P2/bam/SRR7721730_sorted.bam ~/P2/tdf/SRR7721730.tdf ~/P2/tdf/hg38.chrom.sizes &gt; ~/P2/tdf/igv_730.out)&amp;</span><br><span class="line">ls ~/P2/tdf</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> S10. genome browser</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> download IGV browser: http://software.broadinstitute.org/software/igv/download</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> use IGV to visualize the TDF files</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> use IGV to visualize the BAM files (with the .bai index file)</span></span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>use IGV to visualize the TDF files</li>
+<li>use IGV to visualize the BAM files (with the .bai index file)</li>
+</ul>
+<hr>
+<h2 id="RNAseq-data-analysis"><a href="#RNAseq-data-analysis" class="headerlink" title="RNAseq data analysis"></a>RNAseq data analysis</h2><h3 id="Data-preparation"><a href="#Data-preparation" class="headerlink" title="Data preparation"></a>Data preparation</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># RNAseq data analysis</span></span><br><span class="line"><span class="comment"># BIO316</span></span><br><span class="line"><span class="comment"># 2021-03-15</span></span><br><span class="line"><span class="comment"># Bash script</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># S1. make your working directory ##################################</span></span><br><span class="line"><span class="comment"># connect to the Linux server</span></span><br><span class="line"><span class="built_in">cd</span> ~ <span class="comment"># go to your home directory</span></span><br><span class="line">mkdir P3 <span class="comment"># or use whatever name you prefer</span></span><br><span class="line">ls <span class="comment"># check whether you have the new folder for project 3</span></span><br><span class="line"><span class="built_in">pwd</span> <span class="comment"># check your current working directory</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># S2. download the raw data in sra format ####################################</span></span><br><span class="line"><span class="comment"># Data from: https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE53794</span></span><br><span class="line">mkdir ~/P3/fastq <span class="comment"># make a new directory to store raw sequencing data in SRA format</span></span><br><span class="line">ls ~/P3/fastq <span class="comment"># nothing is inside</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># S3 download all the data in parellel</span></span><br><span class="line">(nohup fastq-dump --split-3 SRR1068226 -O ~/P3/fastq &gt; ~/P3/fastq/226.out)&amp;</span><br><span class="line">(nohup fastq-dump --split-3 SRR1068227 -O ~/P3/fastq &gt; ~/P3/fastq/227.out)&amp;</span><br><span class="line">(nohup fastq-dump --split-3 SRR1068228 -O ~/P3/fastq &gt; ~/P3/fastq/228.out)&amp;</span><br><span class="line">(nohup fastq-dump --split-3 SRR1068229 -O ~/P3/fastq &gt; ~/P3/fastq/229.out)&amp;</span><br><span class="line">(nohup fastq-dump --split-3 SRR1068230 -O ~/P3/fastq &gt; ~/P3/fastq/230.out)&amp;</span><br><span class="line">(nohup fastq-dump --split-3 SRR1068231 -O ~/P3/fastq &gt; ~/P3/fastq/231.out)&amp;</span><br><span class="line"></span><br><span class="line"><span class="comment"># the structure of this command is: (nohup command_to_be_executed &gt; text_log_file.out)&amp;</span></span><br><span class="line"><span class="comment">## --splite-3 for mate-pairs: biological reads satisfying dumping conditions are placed in files *_1.fastq and *_2.fastq.</span></span><br><span class="line"><span class="comment">## If only one biological read is present it is placed in *.fastq Biological reads and above are ignored.</span></span><br><span class="line"><span class="comment">## If the data is single-end, it will not save as two files.</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Syntax-explanation"><a href="#Syntax-explanation" class="headerlink" title="Syntax explanation"></a>Syntax explanation</h3><ul>
+<li>the structure of this command is: ==(nohup command_to_be_executed &gt; text_log_file.out)&amp;==</li>
+<li>==–splite-3 for mate-pairs: biological reads satisfying dumping conditions are placed in files *_1.fastq and *_2.fastq.==</li>
+<li>If only one biological read is present it is placed in *.fastq Biological reads and above are ignored.</li>
+<li>If the data is single-end, it will not save as two files.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line">top <span class="comment"># check the download process</span></span><br><span class="line">ps -u j <span class="comment"># check you on-going processes, replace &quot;j&quot; with your own user ID &quot;y18u1&quot;</span></span><br><span class="line">ls ~/P3/fastq <span class="comment"># check downloaded fastq files</span></span><br><span class="line">cat ~/P3/fastq/226.out <span class="comment"># check whether there is any error during the data downloading</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># S4. quality control ####################################</span></span><br><span class="line">mkdir ~/P3/report</span><br><span class="line">fastqc -o ~/P3/report -f fastq ~/P3/fastq/SRR1068226.fastq ~/P3/fastq/SRR1068227.fastq\</span><br><span class="line"> ~/P3/fastq/SRR1068228.fastq ~/P3/fastq/SRR1068229.fastq ~/P3/fastq/SRR1068230.fastq ~/P3/fastq/SRR1068231.fastq</span><br><span class="line"><span class="comment"># notice, &quot;\&quot; indicates the line is not over yet, continue in the next line. It is equivalent to the following:</span></span><br><span class="line"><span class="comment"># this is different from R, in which you can change the line after any meaningful unit.</span></span><br><span class="line">ls ~/P3/report <span class="comment"># check the generated fastqc reports, see whether everything is OK.</span></span><br><span class="line"><span class="comment"># you may have to trim the data if necessary</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># S5. copy the mouse genome information</span></span><br><span class="line">mkdir ~/P3/index</span><br><span class="line"><span class="comment"># it takes a long time to download this genome annotation pacakge, so I have downloaded everything for you.</span></span><br><span class="line"><span class="comment"># all the genome annotation (human, mouse, etc) is available from: http://10.7.88.74/MyWeb/Genomes</span></span><br><span class="line">wget -O ~/P3/index/mm9.fa http://10.7.88.74/MyWeb/Genomes/mm9/genome.fa</span><br><span class="line">wget -O ~/P3/index/mm9.gtf http://10.7.88.74/MyWeb/Genomes/mm9/genes.gtf</span><br><span class="line"></span><br><span class="line"><span class="comment"># S7. Build index, needed for alignment </span></span><br><span class="line">(nohup hisat2-build ~/P3/index/mm9.fa ~/P3/index/mm9 &gt; ~/P3/index/build_index.out)&amp; <span class="comment"># build index, take a very long time</span></span><br><span class="line">top <span class="comment"># check the progress</span></span><br><span class="line">cat ~/P3/index/build_index.out <span class="comment"># check the notifications</span></span><br><span class="line">ls -l ~/P3/index/ <span class="comment"># check the index. the index files are very larger </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># S8. Align the fastq files to genome with tophat</span></span><br><span class="line">mkdir ~/P3/bam <span class="comment"># make a folder to store aligned bam files</span></span><br><span class="line">(nohup hisat2 -x ~/P3/index/mm9 -U ~/P3/fastq/SRR1068226.fastq -S ~/P3/bam/SRR1068226.sam &gt; ~/P3/bam/226.out)&amp;</span><br><span class="line">(nohup hisat2 -x ~/P3/index/mm9 -U ~/P3/fastq/SRR1068227.fastq -S ~/P3/bam/SRR1068227.sam &gt; ~/P3/bam/227.out)&amp;</span><br><span class="line">(nohup hisat2 -x ~/P3/index/mm9 -U ~/P3/fastq/SRR1068228.fastq -S ~/P3/bam/SRR1068228.sam &gt; ~/P3/bam/228.out)&amp;</span><br><span class="line">(nohup hisat2 -x ~/P3/index/mm9 -U ~/P3/fastq/SRR1068229.fastq -S ~/P3/bam/SRR1068229.sam &gt; ~/P3/bam/229.out)&amp;</span><br><span class="line">(nohup hisat2 -x ~/P3/index/mm9 -U ~/P3/fastq/SRR1068230.fastq -S ~/P3/bam/SRR1068230.sam &gt; ~/P3/bam/230.out)&amp;</span><br><span class="line">(nohup hisat2 -x ~/P3/index/mm9 -U ~/P3/fastq/SRR1068231.fastq -S ~/P3/bam/SRR1068231.sam &gt; ~/P3/bam/231.out)&amp;</span><br><span class="line"><span class="comment"># for paired-end data, you can use below command</span></span><br><span class="line">(nohup hisat2 -x ~/P2/index/hg38 -1 ~/P2/fastq/SRR7721730_1.fastq -2 ~/P2/fastq/SRR7721730_2.fastq -S ~/P3/bam/SRR7721730.sam&gt; ~/P2/bam/hisat_730.out)&amp;</span><br><span class="line">top <span class="comment"># check the progress of all tasks</span></span><br><span class="line">cat ~/P3/bam/226.out <span class="comment"># check the alignment efficiency</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># conver to bam</span></span><br><span class="line">(nohup samtools view -S ~/P3/bam/SRR1068226.sam -b &gt; ~/P3/bam/SRR1068226.bam)&amp; <span class="comment"># covert to bam file to save space</span></span><br><span class="line">(nohup samtools view -S ~/P3/bam/SRR1068227.sam -b &gt; ~/P3/bam/SRR1068227.bam)&amp; <span class="comment"># covert to bam file to save space</span></span><br><span class="line">(nohup samtools view -S ~/P3/bam/SRR1068228.sam -b &gt; ~/P3/bam/SRR1068228.bam)&amp; <span class="comment"># covert to bam file to save space</span></span><br><span class="line">(nohup samtools view -S ~/P3/bam/SRR1068229.sam -b &gt; ~/P3/bam/SRR1068229.bam)&amp; <span class="comment"># covert to bam file to save space</span></span><br><span class="line">(nohup samtools view -S ~/P3/bam/SRR1068230.sam -b &gt; ~/P3/bam/SRR1068230.bam)&amp; <span class="comment"># covert to bam file to save space</span></span><br><span class="line">(nohup samtools view -S ~/P3/bam/SRR1068231.sam -b &gt; ~/P3/bam/SRR1068231.bam)&amp; <span class="comment"># covert to bam file to save space</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># sort alignment</span></span><br><span class="line">(nohup samtools sort ~/P3/bam/SRR1068226.bam -o ~/P3/bam/SRR1068226_sorted.bam)&amp; <span class="comment"># sort alignment</span></span><br><span class="line">(nohup samtools sort ~/P3/bam/SRR1068227.bam -o ~/P3/bam/SRR1068227_sorted.bam)&amp; <span class="comment"># sort alignment</span></span><br><span class="line">(nohup samtools sort ~/P3/bam/SRR1068228.bam -o ~/P3/bam/SRR1068228_sorted.bam)&amp; <span class="comment"># sort alignment</span></span><br><span class="line">(nohup samtools sort ~/P3/bam/SRR1068229.bam -o ~/P3/bam/SRR1068229_sorted.bam)&amp; <span class="comment"># sort alignment</span></span><br><span class="line">(nohup samtools sort ~/P3/bam/SRR1068230.bam -o ~/P3/bam/SRR1068230_sorted.bam)&amp; <span class="comment"># sort alignment</span></span><br><span class="line">(nohup samtools sort ~/P3/bam/SRR1068231.bam -o ~/P3/bam/SRR1068231_sorted.bam)&amp; <span class="comment"># sort alignment</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># index alignment</span></span><br><span class="line">(nohup samtools index ~/P3/bam/SRR1068226_sorted.bam)&amp; <span class="comment"># a file with the same name and ended with &quot;.bai&quot; is generated. This is the index of a BAM file.</span></span><br><span class="line">(nohup samtools index ~/P3/bam/SRR1068227_sorted.bam)&amp; <span class="comment"># a file with the same name and ended with &quot;.bai&quot; is generated. This is the index of a BAM file.</span></span><br><span class="line">(nohup samtools index ~/P3/bam/SRR1068228_sorted.bam)&amp; <span class="comment"># a file with the same name and ended with &quot;.bai&quot; is generated. This is the index of a BAM file.</span></span><br><span class="line">(nohup samtools index ~/P3/bam/SRR1068229_sorted.bam)&amp; <span class="comment"># a file with the same name and ended with &quot;.bai&quot; is generated. This is the index of a BAM file.</span></span><br><span class="line">(nohup samtools index ~/P3/bam/SRR1068230_sorted.bam)&amp; <span class="comment"># a file with the same name and ended with &quot;.bai&quot; is generated. This is the index of a BAM file.</span></span><br><span class="line">(nohup samtools index ~/P3/bam/SRR1068231_sorted.bam)&amp; <span class="comment"># a file with the same name and ended with &quot;.bai&quot; is generated. This is the index of a BAM file.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># S9. find transcribed regions of a single sample</span></span><br><span class="line">mkdir ~/P3/gtf</span><br><span class="line">(nohup cufflinks ~/P3/bam/SRR1068226_sorted.bam -o ~/P3/gtf/SRR1068226 &gt; ~/P3/gtf/cufflinks.out)&amp; <span class="comment"># reference-based transcriptome reconstruction</span></span><br><span class="line">head ~/P3/gtf/SRR1068226/transcripts.gtf</span><br><span class="line">cufflinks --<span class="built_in">help</span> <span class="comment"># check how to do reference-based transcriptome assembly</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># S10. visualization of bam files</span></span><br><span class="line"><span class="comment"># we use mm9 here, you may check the folder /home/jmeng/App/Genomes/chrom.sizes for other genome assembly numbers, such as, hg19 and mm10.</span></span><br><span class="line">mkdir ~/P3/tdf</span><br><span class="line">wget -O ~/P3/tdf/mm9.chrom.sizes http://10.7.88.74/MyWeb/Genomes/chrom.sizes/mm9.chrom.sizes  <span class="comment"># use a different genome size file if necessary</span></span><br><span class="line">(nohup igvtools count -z 5 -w 10 -e 0 ~/P3/bam/SRR1068226_sorted.bam ~/P3/tdf/SRR1068226.tdf ~/P3/tdf/mm9.chrom.sizes)&amp;</span><br><span class="line">(nohup igvtools count -z 5 -w 10 -e 0 ~/P3/bam/SRR1068226_sorted.bam ~/P3/tdf/SRR1068227.tdf ~/P3/tdf/mm9.chrom.sizes)&amp;</span><br><span class="line">(nohup igvtools count -z 5 -w 10 -e 0 ~/P3/bam/SRR1068226_sorted.bam ~/P3/tdf/SRR1068228.tdf ~/P3/tdf/mm9.chrom.sizes)&amp;</span><br><span class="line">(nohup igvtools count -z 5 -w 10 -e 0 ~/P3/bam/SRR1068226_sorted.bam ~/P3/tdf/SRR1068229.tdf ~/P3/tdf/mm9.chrom.sizes)&amp;</span><br><span class="line">(nohup igvtools count -z 5 -w 10 -e 0 ~/P3/bam/SRR1068226_sorted.bam ~/P3/tdf/SRR1068230.tdf ~/P3/tdf/mm9.chrom.sizes)&amp;</span><br><span class="line">(nohup igvtools count -z 5 -w 10 -e 0 ~/P3/bam/SRR1068226_sorted.bam ~/P3/tdf/SRR1068231.tdf ~/P3/tdf/mm9.chrom.sizes)&amp;</span><br><span class="line">ls tdf</span><br><span class="line"></span><br><span class="line"><span class="comment"># use IGV to visualize the TDF files</span></span><br><span class="line"><span class="comment"># compare /P3/tdf/SRR1068226.tdf with the gtf </span></span><br><span class="line"><span class="comment"># file generated ~/P3/gtf/SRR1068226/transcripts.gtf and with reference</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># S11. differential analysis with cuffdiff</span></span><br><span class="line"><span class="comment"># copy the gene annotation file mm9.gtf to the same directory, or you may provide a full path</span></span><br><span class="line"><span class="comment"># gene annotation GTF of mm9 and hg38 are available at directory: /home/j/BIO405/Genomes, choose the one you need:   </span></span><br><span class="line">mkdir ~/P3/DGE </span><br><span class="line">(nohup cuffdiff -o ~/P3/DGE -p 2 -L WT,CI994\</span><br><span class="line"> -b ~/P3/index/mm9.fa -u ~/P3/index/mm9.gtf\</span><br><span class="line"> ~/P3/bam/SRR1068226_sorted.bam,~/P3/bam/SRR1068227_sorted.bam,~/P3/bam/SRR1068228_sorted.bam\</span><br><span class="line"> ~/P3/bam/SRR1068229_sorted.bam,~/P3/bam/SRR1068230_sorted.bam,~/P3/bam/SRR1068231_sorted.bam\</span><br><span class="line"> &gt;  ~/P3/DGE/cuffdiff.out)&amp;</span><br><span class="line"><span class="comment"># the above step will take a long time, so let us do it in background mode</span></span><br><span class="line"></span><br><span class="line">ps -u <span class="variable">$USER</span></span><br><span class="line">ls ~/P3/DGE</span><br><span class="line">head ~/P3/DGE/cuffdiff.out</span><br><span class="line">head ~/P3/DGE/gene_exp.diff</span><br><span class="line"></span><br><span class="line"><span class="comment"># Use &quot;Cuffdiff&quot; to conduct differential expression analysis</span></span><br><span class="line"><span class="comment"># please check the meaning of &quot;-p 4&quot;, &quot;-L WT,CI994&quot;, &quot;-b ~/P3/index/mm9.fa&quot;, &quot;-u&quot; with the following command</span></span><br><span class="line">cuffdiff --<span class="built_in">help</span></span><br><span class="line"><span class="comment"># check the files generated in output folder DGE specified by &quot;-o ~/P3/DGE&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Chipseq-MACS2-bash"><a href="#Chipseq-MACS2-bash" class="headerlink" title="Chipseq_MACS2.bash"></a>Chipseq_MACS2.bash</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># S1. MACS2 peak calling from ChIP-seq data</span></span><br><span class="line"><span class="comment"># Download ChIPseq data</span></span><br><span class="line">mkdir ~/P4</span><br><span class="line">mkdir ~/P4/fastq</span><br><span class="line">mkdir ~/P4/index</span><br><span class="line">mkdir ~/P4/report</span><br><span class="line">mkdir ~/P4/bam</span><br><span class="line">mkdir ~/P4/tdf</span><br><span class="line">mkdir ~/P4/macs</span><br><span class="line"></span><br><span class="line"><span class="comment"># download the data from GEO</span></span><br><span class="line"><span class="comment"># please use the data of your interests in the assignment</span></span><br><span class="line"><span class="comment"># it is better to find a data set related to your master thesis</span></span><br><span class="line">(nohup fastq-dump SRR568477 -O ~/P4/fastq &gt; ~/P4/fastq/477.out)&amp;</span><br><span class="line">(nohup fastq-dump SRR1768320 -O ~/P4/fastq &gt; ~/P4/fastq/320.out)&amp;</span><br><span class="line"></span><br><span class="line"><span class="comment"># please note that</span></span><br><span class="line"><span class="comment"># if the sample use pair-end sequencing, if you should use &quot;fastq-dump --split-files ...&quot; and will get two fastq files.</span></span><br><span class="line"><span class="comment"># if the reads quality of your data is weird, it might because you have two reads cancatenated together.</span></span><br><span class="line"><span class="comment"># more reads are no pair-end, it means you will see &quot;--split-files&quot; more often in the future.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># check the data quality</span></span><br><span class="line">(nohup fastqc -o ~/P4/report -f fastq ~/P4/fastq/SRR568477.fastq &gt; ~/P4/report/fastqc_477.out)&amp; <span class="comment"># quality control</span></span><br><span class="line">(nohup fastqc -o ~/P4/report -f fastq ~/P4/fastq/SRR1768320.fastq &gt; ~/P4/report/fastqc_320.out)&amp; <span class="comment"># quality control</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># download the genome and annotation file</span></span><br><span class="line"><span class="comment"># it takes a long time to do that, so I have downloaded everything for you.</span></span><br><span class="line"><span class="comment"># all the genome annotation (human, mouse, etc) is available from: http://10.7.88.74/MyWeb/Genomes</span></span><br><span class="line">wget -O ~/P4/index/mm10.fa http://10.7.88.74/MyWeb/Genomes/mm10/genome.fa <span class="comment"># download the genome</span></span><br><span class="line">wget -O ~/P4/index/mm10.gtf http://10.7.88.74/MyWeb/Genomes/mm10/genes.gtf <span class="comment"># download the annotation</span></span><br><span class="line"><span class="comment"># If you need to work on other species, then you will have to find them from other places.</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># you should usually go through the following</span></span><br><span class="line"><span class="comment"># build index, needed for alignment </span></span><br><span class="line">(nohup hisat2-build ~/P4/index/mm10.fa ~/P4/index/mm10 &gt; ~/P3/index/build_index.out)&amp; <span class="comment"># build index, take a very long time</span></span><br><span class="line">top <span class="comment"># check the progress</span></span><br><span class="line">ps -u <span class="variable">$USER</span> <span class="comment"># check your on-going processes</span></span><br><span class="line">cat ~/P4/index/build_index.out <span class="comment"># check the notifications</span></span><br><span class="line">ls -l ~/P4/index/ <span class="comment"># check the index. the index files are very larger</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># alignment</span></span><br><span class="line">(nohup hisat2 -x ~/P4/index/mm10 -U ~/P4/fastq/SRR568477.fastq -S ~/P4/bam/SRR568477.sam &gt; ~/P4/bam/align_SRR568477.log)&amp; <span class="comment"># do alignment in background</span></span><br><span class="line">(nohup hisat2 -x ~/P4/index/mm10 -U ~/P4/fastq/SRR1768320.fastq -S ~/P4/bam/SRR1768320.sam &gt; ~/P4/bam/align_SRR1768320.log)&amp; <span class="comment"># do alignment in background</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># convert SAM to BAM</span></span><br><span class="line">(nohup samtools view -bS ~/P4/bam/SRR568477.sam -o ~/P4/bam/SRR568477.bam)&amp; <span class="comment"># convert sam to bam file</span></span><br><span class="line">(nohup samtools view -bS ~/P4/bam/SRR1768320.sam -o ~/P4/bam/SRR1768320.bam)&amp; <span class="comment"># convert sam to bam file</span></span><br><span class="line">ls -l ~/P4/bam/ <span class="comment"># check the size of files. BAM is a lot smaller than SAM</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># sort the alignments, which is needed for many tools</span></span><br><span class="line">(nohup samtools sort ~/P4/bam/SRR568477.bam -o ~/P4/bam/SRR568477_sorted.bam &gt; ~/P4/bam/sort_SRR568477.out)&amp; <span class="comment"># sort alignment by coordinates</span></span><br><span class="line">(nohup samtools sort ~/P4/bam/SRR1768320.bam  -o ~/P4/bam/SRR1768320_sorted.bam &gt; ~/P4/bam/sort_SRR1768320.out)&amp; <span class="comment"># sort alignment by coordinates</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># visualization</span></span><br><span class="line">wget -O ~/P4/tdf/mm10.chrom.sizes http://10.7.88.74/MyWeb/Genomes/chrom.sizes/mm10.chrom.sizes <span class="comment"># use a different genome size file if necessary</span></span><br><span class="line">(nohup igvtools count -z 5 -w 10 -e 0 ~/P4/bam/SRR568477_sorted.bam\</span><br><span class="line"> ~/P4/tdf/SRR568477.tdf ~/P4/tdf/mm10.chrom.sizes &gt; ~/P4/tdf/tdf_SRR568477.out)&amp; <span class="comment"># generated tdf </span></span><br><span class="line">(nohup igvtools count -z 5 -w 10 -e 0 ~/P4/bam/SRR1768320_sorted.bam\</span><br><span class="line"> ~/P4/tdf/SRR1768320.tdf ~/P4/tdf/mm10.chrom.sizes &gt; ~/P4/tdf/tdf_SRR1768320.out)&amp; <span class="comment"># generated tdf </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># peak calling</span></span><br><span class="line">(nohup macs2 callpeak -t ~/P4/bam/SRR568477_sorted.bam -c ~/P4/bam/SRR1768320_sorted.bam --outdir ~/P4/macs -n H3K4me3 -g mm -f BAM -q 0.01 &gt; ~/P4/macs/callpeak.out)&amp; <span class="comment"># peak calling</span></span><br><span class="line"><span class="comment"># load the .BED file in IGV</span></span><br><span class="line"><span class="comment"># compare the peaks called with tdf file and gene annotation information in IGV</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># motif finding</span></span><br><span class="line">(nohup bedtools getfasta -<span class="keyword">fi</span> ~/P4/index/mm10.fa -bed ~/P4/macs/H3K4me3_peaks.narrowPeak -fo ~/P4/macs/H3K4me3_region.fa &gt; ~/P4/macs/findmotif.out)&amp; <span class="comment"># extract sequence</span></span><br><span class="line"><span class="comment"># extract the sequence for motif finding: https://meme-suite.org/meme/tools/streme  </span></span><br><span class="line"><span class="comment"># if the file H3K4me3_region.fa is too large, you may use the first 10000 lines</span></span><br><span class="line"><span class="comment"># head -n 10000 ~/P4/macs/H3K4me3_region.fa &gt; ~/P4/macs/H3K4me3_region_top_10000.fa</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">### A little advanced bash programming.</span></span><br><span class="line"><span class="comment"># This part is not related to the ChIPseq data analysis practical session</span></span><br><span class="line"><span class="comment"># Use &quot;Ctrl + c&quot; to terminate a running job</span></span><br><span class="line"><span class="comment"># You can run tasks in the background. If the tasks are running the background, you can log out and leave with the tasks still running on the server.</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Sequence-data-analysis"><a href="#Sequence-data-analysis" class="headerlink" title="Sequence data analysis"></a>Sequence data analysis</h2><p>- Determination of binding sites from the sequence data is a challenge. Conceptually, genomic regions with an increased number of sequencing reads (tags) compared to control is considered to be a TFBS</p>
+<p>- Statistical filtering criteria is used to determine if these putative sites represent true binding sites.</p>
+<p> - After statistical analysis of binding sites a further analysis of data is required. These may include analysis of   location of binding, relative to transcription factor binding sites or potential nearby target genes. </p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210331160224.png" alt="image-20210331160224048"></p>
+<h2 id="cuffdiff-doc"><a href="#cuffdiff-doc" class="headerlink" title="cuffdiff doc"></a>cuffdiff doc</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">cuffdiff v2.2.1 ()</span><br><span class="line">-----------------------------</span><br><span class="line">Usage:   cuffdiff [options] &lt;transcripts.gtf&gt; &lt;sample1_hits.sam&gt; &lt;sample2_hits.sam&gt; [... sampleN_hits.sam]</span><br><span class="line">   Supply replicate SAMs as comma separated lists <span class="keyword">for</span> each condition: sample1_rep1.sam,sample1_rep2.sam,...sample1_repM.sam</span><br><span class="line">General Options:</span><br><span class="line">  -o/--output-dir              write all output files to this directory              [ default:     ./ ]</span><br><span class="line">  -L/--labels                  comma-separated list of condition labels</span><br><span class="line">  --FDR                        False discovery rate used <span class="keyword">in</span> testing                  [ default:   0.05 ]</span><br><span class="line">  -M/--mask-file               ignore all alignment within transcripts <span class="keyword">in</span> this file  [ default:   NULL ]</span><br><span class="line">  -C/--contrast-file           Perform the constrasts specified <span class="keyword">in</span> this file         [ default:   NULL ]</span><br><span class="line">  -b/--frag-bias-correct       use bias correction - reference fasta required        [ default:   NULL ]</span><br><span class="line">  -u/--multi-read-correct      use <span class="string">&#x27;rescue method&#x27;</span> <span class="keyword">for</span> multi-reads                   [ default:  FALSE ]</span><br><span class="line">  -p/--num-threads             number of threads used during quantification          [ default:      1 ]</span><br><span class="line">  --no-diff                    Don<span class="string">&#x27;t generate differential analysis files            [ default:  FALSE ]</span></span><br><span class="line"><span class="string">  --no-js-tests                Don&#x27;</span>t perform isoform switching tests                 [ default:  FALSE ]</span><br><span class="line">  -T/--time-series             treat samples as a time-series                        [ default:  FALSE ]</span><br><span class="line">  --library-type               Library prep used <span class="keyword">for</span> input reads                     [ default:  below ]</span><br><span class="line">  --dispersion-method          Method used to estimate dispersion models             [ default:  below ]</span><br><span class="line">  --library-norm-method        Method used to normalize library sizes                [ default:  below ]</span><br><span class="line"></span><br><span class="line">Advanced Options:</span><br><span class="line">  -m/--frag-len-mean           average fragment length (unpaired reads only)         [ default:    200 ]</span><br><span class="line">  -s/--frag-len-std-dev        fragment length std deviation (unpaired reads only)   [ default:     80 ]</span><br><span class="line">  -c/--min-alignment-count     minimum number of alignments <span class="keyword">in</span> a locus <span class="keyword">for</span> testing   [ default:   10 ]</span><br><span class="line">  --max-mle-iterations         maximum iterations allowed <span class="keyword">for</span> MLE calculation        [ default:   5000 ]</span><br><span class="line">  --compatible-hits-norm       count hits compatible with reference RNAs only        [ default:   TRUE ]</span><br><span class="line">  --total-hits-norm            count all hits <span class="keyword">for</span> normalization                      [ default:  FALSE ]</span><br><span class="line">  -v/--verbose                 log-friendly verbose processing (no progress bar)     [ default:  FALSE ]</span><br><span class="line">  -q/--quiet                   log-friendly quiet processing (no progress bar)       [ default:  FALSE ]</span><br><span class="line">  --seed                       value of random number generator seed                 [ default:      0 ]</span><br><span class="line">  --no-update-check            <span class="keyword">do</span> not contact server to check <span class="keyword">for</span> update availability[ default:  FALSE ]</span><br><span class="line">  --emit-count-tables          <span class="built_in">print</span> count tables used to fit overdispersion         [    DEPRECATED   ]</span><br><span class="line">  --max-bundle-frags           maximum fragments allowed <span class="keyword">in</span> a bundle before skipping [ default: 500000 ]</span><br><span class="line">  --num-frag-count-draws       Number of fragment generation samples                 [ default:    100 ]</span><br><span class="line">  --num-frag-assign-draws      Number of fragment assignment samples per generation  [ default:     50 ]</span><br><span class="line">  --max-frag-multihits         Maximum number of alignments allowed per fragment     [ default: unlim  ]</span><br><span class="line">  --min-outlier-p              Min replicate p value to admit <span class="keyword">for</span> testing            [    DEPRECATED   ]</span><br><span class="line">  --min-reps-for-js-test       Replicates needed <span class="keyword">for</span> relative isoform <span class="built_in">shift</span> testing  [ default:      3 ]</span><br><span class="line">  --no-effective-length-correction   No effective length correction                  [ default:  FALSE ]</span><br><span class="line">  --no-length-correction       No length correction                                  [ default:  FALSE ]</span><br><span class="line">  -N/--upper-quartile-norm     Deprecated, use --library-norm-method                 [    DEPRECATED   ]</span><br><span class="line">  --geometric-norm             Deprecated, use --library-norm-method                 [    DEPRECATED   ]</span><br><span class="line">  --raw-mapped-norm            Deprecated, use --library-norm-method                 [    DEPRECATED   ]</span><br><span class="line">  --poisson-dispersion         Deprecated, use --dispersion-method                   [    DEPRECATED   ]</span><br><span class="line"></span><br><span class="line">Debugging use only:</span><br><span class="line">  --read-skip-fraction         Skip a random subset of reads this size               [ default:    0.0 ]</span><br><span class="line">  --no-read-pairs              Break all <span class="built_in">read</span> pairs                                  [ default:  FALSE ]</span><br><span class="line">  --trim-read-length           Trim reads to be this long (keep 5<span class="string">&#x27; end)              [ default:   none ]</span></span><br><span class="line"><span class="string">  --no-scv-correction          Disable SCV correction                                [ default:  FALSE ]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Supported library types:</span></span><br><span class="line"><span class="string">	ff-firststrand</span></span><br><span class="line"><span class="string">	ff-secondstrand</span></span><br><span class="line"><span class="string">	ff-unstranded</span></span><br><span class="line"><span class="string">	fr-firststrand</span></span><br><span class="line"><span class="string">	fr-secondstrand</span></span><br><span class="line"><span class="string">	fr-unstranded (default)</span></span><br><span class="line"><span class="string">	transfrags</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Supported dispersion methods:</span></span><br><span class="line"><span class="string">	blind</span></span><br><span class="line"><span class="string">	per-condition</span></span><br><span class="line"><span class="string">	poisson</span></span><br><span class="line"><span class="string">	pooled (default)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Supported library normalization methods:</span></span><br><span class="line"><span class="string">	classic-fpkm</span></span><br><span class="line"><span class="string">	geometric (default)</span></span><br><span class="line"><span class="string">	geometric</span></span><br><span class="line"><span class="string">	quartile</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="cuffdiff-生成的文件"><a href="#cuffdiff-生成的文件" class="headerlink" title="cuffdiff 生成的文件"></a>cuffdiff 生成的文件</h3><p>==FPKM: isoform水平上的丰度, Fragments Per Kilobase of exon model per Million mapped fragments;==</p>
+<p>产生了一大堆文件，大致分为以下几类</p>
+<p>本次分析有3个样本每个样本两个重复，共6个文件</p>
+<p><strong>FPKM trcking files 计算的每个样本的FPKM值</strong></p>
+<p>其中又分为如下四种，下面的类似</p>
+<table>
+<thead>
+<tr>
+<th>isoforms.fpkm_tracking</th>
+<th>Transcript FPKMs</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>genes.fpkm_tracking</td>
+<td>Gene FPKMs. 因为一个基因可以有多个转录本，所以gene FPKM值是具有相同基因id的转录本的Fpkm值的总和</td>
+</tr>
+<tr>
+<td>cds.fpkm_tracking</td>
+<td>Coding sequence FPKMs. 具有相同蛋白id转录本fpkm值的总和</td>
+</tr>
+<tr>
+<td>tss_groups.fpkm_tracking</td>
+<td>Primary transcript FPKMs. 具有相同转录起始位点的转录本FPKM值的总和</td>
+</tr>
+</tbody></table>
+<h4 id="Differential-splicing-tests-splicing-diff"><a href="#Differential-splicing-tests-splicing-diff" class="headerlink" title="Differential splicing tests - splicing.diff"></a><strong>Differential splicing tests - splicing.diff</strong></h4><p><strong>对每个转录前体产生的可变剪接变体的数目</strong></p>
+<h4 id="Differential-coding-output-cds-diff"><a href="#Differential-coding-output-cds-diff" class="headerlink" title="Differential coding output - cds.diff"></a><strong>Differential coding output - cds.diff</strong></h4><p> 在这个文件中只记录了能产生多个CDS的基因的差异表达数</p>
+<h4 id="Differential-promoter-use-promoters-diff"><a href="#Differential-promoter-use-promoters-diff" class="headerlink" title="Differential promoter use - promoters.diff"></a><strong>Differential promoter use - promoters.diff</strong></h4><p><strong>在这个文件中只记录了能产生不同转录前体（i.e. muti-promoter genes）的基因的差异表达</strong></p>
+<h4 id="Read-group-info-read-groups-info"><a href="#Read-group-info-read-groups-info" class="headerlink" title="Read group info - read_groups.info"></a><strong>Read group info - read_groups.info</strong></h4><p><strong>记录了样本重复之间计算定量的一些信息</strong></p>
+<h2 id="cufflinks-doc"><a href="#cufflinks-doc" class="headerlink" title="cufflinks doc"></a>cufflinks doc</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">cufflinks: unrecognized option <span class="string">&#x27;--help&#x27;</span></span><br><span class="line">cufflinks v2.2.1</span><br><span class="line">linked against Boost version 106501</span><br><span class="line">-----------------------------</span><br><span class="line">Usage:   cufflinks [options] &lt;hits.sam&gt;</span><br><span class="line">General Options:</span><br><span class="line">  -o/--output-dir              write all output files to this directory              [ default:     ./ ]</span><br><span class="line">  -p/--num-threads             number of threads used during analysis                [ default:      1 ]</span><br><span class="line">  --seed                       value of random number generator seed                 [ default:      0 ]</span><br><span class="line">  -G/--GTF                     quantitate against reference transcript annotations                      </span><br><span class="line">  -g/--GTF-guide               use reference transcript annotation to guide assembly 提供GFF文件，以此来指导转录子组装(RABT assembly)。此时，输出结果会包含reference transcripts和novel genes and isforms。                    </span><br><span class="line">  -M/--mask-file               ignore all alignment within transcripts <span class="keyword">in</span> this file                     </span><br><span class="line">  -b/--frag-bias-correct       use bias correction - reference fasta required        [ default:   NULL ]</span><br><span class="line">  -u/--multi-read-correct      use <span class="string">&#x27;rescue method&#x27;</span> <span class="keyword">for</span> multi-reads (more accurate)   [ default:  FALSE ]</span><br><span class="line">  --library-type               library prep used <span class="keyword">for</span> input reads                     [ default:  below ]</span><br><span class="line">  --library-norm-method        Method used to normalize library sizes                [ default:  below ]</span><br><span class="line"></span><br><span class="line">Advanced Abundance Estimation Options:</span><br><span class="line">  -m/--frag-len-mean           average fragment length (unpaired reads only)         [ default:    200 ]</span><br><span class="line">  -s/--frag-len-std-dev        fragment length std deviation (unpaired reads only)   [ default:     80 ]</span><br><span class="line">  --max-mle-iterations         maximum iterations allowed <span class="keyword">for</span> MLE calculation        [ default:   5000 ]</span><br><span class="line">  --compatible-hits-norm       count hits compatible with reference RNAs only        [ default:  FALSE ]</span><br><span class="line">  --total-hits-norm            count all hits <span class="keyword">for</span> normalization                      [ default:  TRUE  ]</span><br><span class="line">  --num-frag-count-draws       Number of fragment generation samples                 [ default:    100 ]</span><br><span class="line">  --num-frag-assign-draws      Number of fragment assignment samples per generation  [ default:     50 ]</span><br><span class="line">  --max-frag-multihits         Maximum number of alignments allowed per fragment     [ default: unlim  ]</span><br><span class="line">  --no-effective-length-correction   No effective length correction                  [ default:  FALSE ]</span><br><span class="line">  --no-length-correction       No length correction                                  [ default:  FALSE ]</span><br><span class="line">  -N/--upper-quartile-norm     Deprecated, use --library-norm-method                 [    DEPRECATED   ]</span><br><span class="line">  --raw-mapped-norm            Deprecated, use --library-norm-method                 [    DEPRECATED   ]</span><br><span class="line"></span><br><span class="line">Advanced Assembly Options:</span><br><span class="line">  -L/--label                   assembled transcripts have this ID prefix             [ default:   CUFF ]</span><br><span class="line">  -F/--min-isoform-fraction    suppress transcripts below this abundance level       [ default:   0.10 ]</span><br><span class="line">  -j/--pre-mrna-fraction       suppress intra-intronic transcripts below this level  [ default:   0.15 ]</span><br><span class="line">  -I/--max-intron-length       ignore alignments with gaps longer than this          [ default: 300000 ]</span><br><span class="line">  -a/--junc-alpha              alpha <span class="keyword">for</span> junction binomial <span class="built_in">test</span> filter               [ default:  0.001 ]</span><br><span class="line">  -A/--small-anchor-fraction   percent <span class="built_in">read</span> overhang taken as <span class="string">&#x27;suspiciously small&#x27;</span>   [ default:   0.09 ]</span><br><span class="line">  --min-frags-per-transfrag    minimum number of fragments needed <span class="keyword">for</span> new transfrags [ default:     10 ]</span><br><span class="line">  --overhang-tolerance         number of terminal exon bp to tolerate <span class="keyword">in</span> introns     [ default:      8 ]</span><br><span class="line">  --max-bundle-length          maximum genomic length allowed <span class="keyword">for</span> a given bundle     [ default:3500000 ]</span><br><span class="line">  --max-bundle-frags           maximum fragments allowed <span class="keyword">in</span> a bundle before skipping [ default: 500000 ]</span><br><span class="line">  --min-intron-length          minimum intron size allowed <span class="keyword">in</span> genome                 [ default:     50 ]</span><br><span class="line">  --trim-3-avgcov-thresh       minimum avg coverage required to attempt 3<span class="string">&#x27; trimming  [ default:     10 ]</span></span><br><span class="line"><span class="string">  --trim-3-dropoff-frac        fraction of avg coverage below which to trim 3&#x27;</span> end   [ default:    0.1 ]</span><br><span class="line">  --max-multiread-fraction     maximum fraction of allowed multireads per transcript [ default:   0.75 ]</span><br><span class="line">  --overlap-radius             maximum gap size to fill between transfrags (<span class="keyword">in</span> bp)   [ default:     50 ]</span><br><span class="line"></span><br><span class="line">Advanced Reference Annotation Guided Assembly Options:</span><br><span class="line">  --no-faux-reads              <span class="built_in">disable</span> tiling by faux reads                          [ default:  FALSE ]</span><br><span class="line">  --3-overhang-tolerance       overhang allowed on 3<span class="string">&#x27; end when merging with reference[ default:    600 ]</span></span><br><span class="line"><span class="string">  --intron-overhang-tolerance  overhang allowed inside reference intron when merging [ default:     30 ]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Advanced Program Behavior Options:</span></span><br><span class="line"><span class="string">  -v/--verbose                 log-friendly verbose processing (no progress bar)     [ default:  FALSE ]</span></span><br><span class="line"><span class="string">  -q/--quiet                   log-friendly quiet processing (no progress bar)       [ default:  FALSE ]</span></span><br><span class="line"><span class="string">  --no-update-check            do not contact server to check for update availability[ default:  FALSE ]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Supported library types:</span></span><br><span class="line"><span class="string">	ff-firststrand</span></span><br><span class="line"><span class="string">	ff-secondstrand</span></span><br><span class="line"><span class="string">	ff-unstranded</span></span><br><span class="line"><span class="string">	fr-firststrand</span></span><br><span class="line"><span class="string">	fr-secondstrand</span></span><br><span class="line"><span class="string">	fr-unstranded (default)</span></span><br><span class="line"><span class="string">	transfrags</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Supported library normalization methods:</span></span><br><span class="line"><span class="string">	classic-fpkm</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Cufflinks的使用"><a href="#Cufflinks的使用" class="headerlink" title="Cufflinks的使用"></a>Cufflinks的使用</h3><h4 id="1-Cufflinks简介"><a href="#1-Cufflinks简介" class="headerlink" title="1. Cufflinks简介"></a>1. Cufflinks简介</h4><p>Cufflinks程序主要根据Tophat的比对结果，依托或不依托于参考基因组的GTF注释文件，计算出(各个gene的)isoform的FPKM值，并给出trascripts.gtf注释结果(组装出转录组)。</p>
+<p>注意：</p>
+<ol>
+<li><p>fragment的长度的估测，若为pair-end测序，则cufflinks自己会有一套算法，算出结果。若为single-end测序，则cufflinks默认的是高斯分布，或者你自己提供相关的参数设置。</p>
+</li>
+<li><p>cufflinks计算multi-mapped reads，一般a read map到10个位置，则每个位置记为10%。a read mapping to 10 positions will count as 10% of a read at each position.</p>
+</li>
+<li><p>一般不推荐用cufflinks拼接细菌的转录组，推荐 Glimmer。但是，若有注释文件，可以用cufflinks和cuffdiff来检测基因的表达和差异性。</p>
+</li>
+<li><p>cufflinks/cuffdiff不能计算出exon或splicing event的FPKM</p>
+</li>
+<li><p>cuffdiff处理时间序列data：采用参数-t</p>
+</li>
+<li><p>当你使用cufflinks时，在最后出现了99%，然后一直不动。因为cuffdiff需要更多的CPU来处理一些匹配很多reads的loci。而这些位点一般要等其他位点全部解决了后，才由cuffdiff来处理。可以用参数-M来提供相关的文件，过滤掉rRNA或者线粒体RNA。</p>
+</li>
+<li><p>当使用cufflinks或cuffdiff出现了“crash with a ‘bad_alloc’ error”，cuffdiff和cufflinks运行了很长时间才结束————这表明计算机拼接一个高表达的基因或定量分析一个高表达的基因，运行的内存使用玩尽了！解决方法：修改选项“-max-bundle-frags”，可以先尝试500000，若错误依旧在，可以继续下调！</p>
+</li>
+<li><p>cuffdiff报道的结果里面所有的基因和转录本的FPKM=0，这表明GTF中的染色体名字和BAM里的名字不匹配。</p>
+</li>
+<li><p>cuffdiff和cufflinks的缺点：存在一定的假基因和转录本（原因：测序深度，测序质量，测序样本的测序次数，以及注释的错误）</p>
+</li>
+<li><p>large fold change表达量不代表数据的明显性（这些基因的isform多或这些基因测序测到的少，整体较低的表达）。cuffdiff中明显表达倍数改变的基因，存在不确定性。</p>
+</li>
+<li><p>通过cufflinks产生的结果中transcript.gtf文件中cuff标识的转录本就是新的转录本。相应的，其他模块输出中CUFF标识代表着新的转录本。</p>
+</li>
+<li><p>若出现了如下错误：</p>
+</li>
+</ol>
+<blockquote>
+<p>You are using Cufflinks v2.2.1, which is the most recent release.<br>open: No such file or directory<br>File 30 doesn’t appear to be a valid BAM file, trying SAM…<br>Error: cannot open alignment file 30 for reading<br>这表明，你的参数有问题。例如“–min-intron-length”,你设置为了：“-min-intron-length”</p>
+</blockquote>
+<h3 id="Cufflinks输出结果"><a href="#Cufflinks输出结果" class="headerlink" title="Cufflinks输出结果"></a>Cufflinks输出结果</h3><ul>
+<li>cufflinks的输入文件是sam或bam格式。并且sam或bam格式的文件必须排好序。（The SAM file supplied to Cufflinks must be sorted by reference position.）</li>
+<li>Tophat的输出结果sam或bam已经排好了序。针对其他的未排序的sam或bam文件采用如下排序方式：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sort -k 3,3 -k 4,4n hits.sam &gt; hits.sam.sorted</span><br></pre></td></tr></table></figure>
+
+
+<ol>
+<li><h4 id="transcripts-gtf"><a href="#transcripts-gtf" class="headerlink" title="transcripts.gtf"></a>transcripts.gtf</h4></li>
+</ol>
+<p>该文件包含Cufflinks的组装结果isoforms。前7列为标准的GTF格式，最后一列为attributes。其每一列的意义：<br>列数   列的名称  例子         描述</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">1     序列名    chrX        染色体或contig名;</span><br><span class="line">2     来源      Cufflinks   产生该文件的程序名； </span><br><span class="line">3     类型      exon        记录的类型，一般是transcript或exon;</span><br><span class="line">4     起始      1           1-base的值; </span><br><span class="line">5     结束      1000        结束位置;</span><br><span class="line">6     得分      1000        ;</span><br><span class="line">7     链        +          Cufflinks猜测isoform来自参考序列的那一条链，一般是&#39;+&#39;,&#39;-&#39;或&#39;.&#39;;  </span><br><span class="line">8     frame    .           Cufflinks不去预测起始或终止密码子框的位置; </span><br><span class="line">9     attributes  ...      详见下</span><br><span class="line">每一个GTF记录包含如下attributes：</span><br><span class="line"></span><br><span class="line">gene_id          CUFF.1      Cufflinks的gene id;</span><br><span class="line">transcript_id    CUFF.1.1  Cufflinks的转录子 id;</span><br><span class="line">FPKM           101.267   isoform水平上的丰度, Fragments Per Kilobase of exon model per Million mapped fragments; </span><br><span class="line">frac           0.7647    保留着的一项，忽略即可，以后可能会取消这个; </span><br><span class="line">conf_lo        0.07      isoform丰度的95%置信区间的下边界，即 下边界值 &#x3D; FPKM * ( 1.0 - conf_lo );</span><br><span class="line">conf_hi        0.1102    isoform丰度的95%置信区间的上边界，即 上边界值 &#x3D; FPKM * ( 1.0 + conf_hi );</span><br><span class="line">cov            100.765   计算整个transcript上read的覆盖度; </span><br><span class="line">full_read_support   yes  当使用 RABT assembly 时，该选项报告所有的introns和exons是否完全被reads所覆盖</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><h4 id="isoforms-fpkm-tracking"><a href="#isoforms-fpkm-tracking" class="headerlink" title="isoforms.fpkm_tracking"></a>isoforms.fpkm_tracking</h4></li>
+</ol>
+<p>isoforms(可以理解为gene的各个外显子)的fpkm计算结果</p>
+<ol start="3">
+<li><h4 id="genes-fpkm-tracking"><a href="#genes-fpkm-tracking" class="headerlink" title="genes.fpkm_tracking"></a>genes.fpkm_tracking</h4></li>
+</ol>
+<p>gene的fpkm计算结果</p>
+<p>在R里面接着处理：</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://www.jianshu.com/p/47b5ea646932" >https://www.jianshu.com/p/47b5ea646932<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="igv-tools"><a href="#igv-tools" class="headerlink" title="igv tools"></a>igv tools</h2><h4 id="什么是IGV"><a href="#什么是IGV" class="headerlink" title="什么是IGV"></a>什么是IGV</h4><p>它是一款本地的探索基因组数据的可视化浏览器，有多个系统版本，支持多种不同类型的输入格式，包括芯片测序、二代测序、基因组注释文件等。推荐使用BAM与SAM格式，主要格式见下表</p>
+<p>GTF 文件可以直接拖入igv中进行可视化</p>
+<table>
+<thead>
+<tr>
+<th>数据来源</th>
+<th>文件格式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>序列比对</td>
+<td>SAM/BAM</td>
+</tr>
+<tr>
+<td>显示覆盖率</td>
+<td>TDF</td>
+</tr>
+<tr>
+<td>拷贝数</td>
+<td>SNP、CN</td>
+</tr>
+<tr>
+<td>基因表达</td>
+<td>GCT、RES</td>
+</tr>
+<tr>
+<td>基因注释</td>
+<td>GFF3/GTF、BED</td>
+</tr>
+<tr>
+<td>突变数据</td>
+<td>MUT</td>
+</tr>
+<tr>
+<td>追踪参考基因组覆盖度、测序深度（UCSC）</td>
+<td>WIG、BW</td>
+</tr>
+</tbody></table>
+<p><strong>这里推荐生信星球，所有和生物信息相关，测序相关的都可以在这里找到</strong></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://www.jieandze1314.com/" >https://www.jieandze1314.com/<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://www.jieandze1314.com/post/cnposts/3/" >https://www.jieandze1314.com/post/cnposts/3/<i class="fas fa-external-link-alt"></i></a></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：RNAseq demo &amp; notes</li>
+        <li>Post author：Yuxuan Wu</li>
+        <li>Create time：2021-03-26 11:07:32</li>
+        <li>
+            Post link：yuxuanwu17.github.io2021/03/26/2021-03-26-RNAseq-demo-&amp;-notes/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/03/26/2021-03-26-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F-%E7%AC%94%E8%AE%B0/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">正则表达式 笔记</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/03/26/2021-03-26-Beanstalkd-%E7%AC%94%E8%AE%B0/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Beanstalkd 笔记</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span> -
+            
+            2021 <i class="fas fa-heart icon-animate"></i> <a href="/">Yuxuan Wu</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count <span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a> | Theme <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.3.1</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#RNAseq"><span class="nav-number">1.</span> <span class="nav-text">RNAseq</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What-are-the-applications-of-RNA-seq"><span class="nav-number">2.</span> <span class="nav-text">What are the applications of RNA-seq?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-does-RNA-seq-work"><span class="nav-number">3.</span> <span class="nav-text">How does RNA-seq work?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CHIP-mechanisms"><span class="nav-number">4.</span> <span class="nav-text">CHIP mechanisms</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ChIP"><span class="nav-number">4.1.</span> <span class="nav-text">ChIP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NGS-flow-chart-amp-details"><span class="nav-number">5.</span> <span class="nav-text">NGS flow chart &amp; details</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FASTQ-format"><span class="nav-number">5.1.</span> <span class="nav-text">FASTQ format</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SAM-format"><span class="nav-number">5.2.</span> <span class="nav-text">SAM format:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NGS-reads-Alignment"><span class="nav-number">5.3.</span> <span class="nav-text">NGS reads Alignment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fasta-format"><span class="nav-number">5.4.</span> <span class="nav-text">Fasta format</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TDF-format"><span class="nav-number">5.5.</span> <span class="nav-text">TDF format</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FASTAQC-NGS-Data-Quality"><span class="nav-number">5.6.</span> <span class="nav-text">FASTAQC- NGS Data Quality</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BBfastqc"><span class="nav-number">5.7.</span> <span class="nav-text">如何阅读fastqc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-format"><span class="nav-number">5.8.</span> <span class="nav-text">Data format:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Key-Info-bash"><span class="nav-number">6.</span> <span class="nav-text">Key_Info.bash</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Download-the-fastq-file"><span class="nav-number">6.1.</span> <span class="nav-text">Download the fastq file</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Quality-control"><span class="nav-number">6.2.</span> <span class="nav-text">Quality control</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Obtain-the-index-for-alignment"><span class="nav-number">6.3.</span> <span class="nav-text">Obtain the index for alignment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tophat-alignment"><span class="nav-number">6.4.</span> <span class="nav-text">tophat alignment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TDF-file-for-visualization-of-bam-files"><span class="nav-number">6.5.</span> <span class="nav-text">TDF file for visualization of bam files</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RNAseq-data-analysis"><span class="nav-number">7.</span> <span class="nav-text">RNAseq data analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-preparation"><span class="nav-number">7.1.</span> <span class="nav-text">Data preparation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Syntax-explanation"><span class="nav-number">7.2.</span> <span class="nav-text">Syntax explanation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chipseq-MACS2-bash"><span class="nav-number">8.</span> <span class="nav-text">Chipseq_MACS2.bash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sequence-data-analysis"><span class="nav-number">9.</span> <span class="nav-text">Sequence data analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cuffdiff-doc"><span class="nav-number">10.</span> <span class="nav-text">cuffdiff doc</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cuffdiff-%E7%94%9F%E6%88%90%E7%9A%84%E6%96%87%E4%BB%B6"><span class="nav-number">10.1.</span> <span class="nav-text">cuffdiff 生成的文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Differential-splicing-tests-splicing-diff"><span class="nav-number">10.1.1.</span> <span class="nav-text">Differential splicing tests - splicing.diff</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Differential-coding-output-cds-diff"><span class="nav-number">10.1.2.</span> <span class="nav-text">Differential coding output - cds.diff</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Differential-promoter-use-promoters-diff"><span class="nav-number">10.1.3.</span> <span class="nav-text">Differential promoter use - promoters.diff</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Read-group-info-read-groups-info"><span class="nav-number">10.1.4.</span> <span class="nav-text">Read group info - read_groups.info</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cufflinks-doc"><span class="nav-number">11.</span> <span class="nav-text">cufflinks doc</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Cufflinks%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">11.1.</span> <span class="nav-text">Cufflinks的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Cufflinks%E7%AE%80%E4%BB%8B"><span class="nav-number">11.1.1.</span> <span class="nav-text">1. Cufflinks简介</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cufflinks%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C"><span class="nav-number">11.2.</span> <span class="nav-text">Cufflinks输出结果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#transcripts-gtf"><span class="nav-number">11.2.1.</span> <span class="nav-text">transcripts.gtf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#isoforms-fpkm-tracking"><span class="nav-number">11.2.2.</span> <span class="nav-text">isoforms.fpkm_tracking</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#genes-fpkm-tracking"><span class="nav-number">11.2.3.</span> <span class="nav-text">genes.fpkm_tracking</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#igv-tools"><span class="nav-number">12.</span> <span class="nav-text">igv tools</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFIGV"><span class="nav-number">12.0.1.</span> <span class="nav-text">什么是IGV</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
