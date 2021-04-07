@@ -9106,7 +9106,7 @@ Here is a picture with more possibilities:
 <li>@import是css2.1特有的</li>
 </ul>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--导入样式--&gt;</span>   </span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">   <span class="keyword">@import</span> url(<span class="string">&quot;css/style.css&quot;</span>);</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>link 和 import语法结构不同，前者<link> 是html标签，只能放入html源代码中使用，后者可以看作CSS样式，作用是引用CSS样式功能，import在html使用的时候需要<style type="text/css">标签，同时可以直接@import url(css文件地址)</p>
+<p>link 和 import语法结构不同，前者&lt;link&gt; 是html标签，只能放入html源代码中使用，后者可以看作CSS样式，作用是引用CSS样式功能，import在html使用的时候需要&lt;style type=”text/css”&gt;标签，同时可以直接@import url(css文件地址)</p>
 <h2 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h2><p>作用：选择页面上的某一个或者某一类的元素</p>
 <h3 id="基本选择器"><a href="#基本选择器" class="headerlink" title="基本选择器"></a>基本选择器</h3><ol>
 <li>标签选择器：选择一类标签 标签.{}</li>
