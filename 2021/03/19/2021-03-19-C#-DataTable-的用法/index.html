@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Welcome to my personal blogs">
+    <meta name="author" content="Yuxuan Wu">
+    
+    <title>
+        
+            C# DataTable 的用法 |
+        
+        Yuxuan Wu
+    </title>
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep coding, Keep hungry."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.3.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days age","week":"%s weeks age","month":"%s months age","year":"%s years age"};
+  </script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Yuxuan Wu
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content normal-code-theme">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">C# DataTable 的用法</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Yuxuan Wu</span>
+                        <span class="level">Lv5</span>
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i> 2021-03-19 16:42:24
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/categories/C/">C#</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/tags/notes/">notes</a>
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/C/">C#</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i> <span>1.5k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i> <span>6 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>在项目中经常用到DataTable,如果DataTable使用得当，不仅能使程序简洁实用，而且能够提高性能，达到事半功倍的效果，现对DataTable的使用技巧进行一下总结。 </p>
+<h2 id="DataTable-简介"><a href="#DataTable-简介" class="headerlink" title="DataTable 简介"></a>DataTable 简介</h2><h3 id="1-构造函数"><a href="#1-构造函数" class="headerlink" title="(1)构造函数"></a>(1)构造函数</h3><p><code>DataTable()</code>  不带参数初始化DataTable类的新实例</p>
+<p><code>DataTable (string tableName)</code> 用指定的表名初始化DataTable类的新实例。 </p>
+<p><code>DataTable (string tableName, string tableNamespace)</code> 用指定的表名和命名空间初始化DataTable类的新实例。 </p>
+<h3 id="2-常用属性"><a href="#2-常用属性" class="headerlink" title="(2) 常用属性"></a>(2) 常用属性</h3><p>CaseSensitive  指示表中的字符串比较是否区分大小写。<br>ChildRelations  获取此DataTable的子关系的集合。<br>Columns       获取属于该表的列的集合。<br>Constraints    获取由该表维护的约束的集合。<br>DataSet       获取此表所属的DataSet。<br>DefaultView    获取可能包括筛选视图或游标位置的表的自定义视图。<br>HasErrors     获取一个值，该值指示该表所属的DataSet的任何表的任何行中是否有错误。<br>MinimumCapacity 获取或设置该表最初的起始大小。该表中行的最初起始大小。默认值为50。<br>Rows         获取属于该表的行的集合。<br>TableName   获取或设置DataTable的名称。 </p>
+<h3 id="3-常用方法"><a href="#3-常用方法" class="headerlink" title="(3)常用方法"></a>(3)常用方法</h3><p>AcceptChanges()  提交自上次调用AcceptChanges()以来对该表进行的所有更改。<br>BeginInit()     开始初始化在窗体上使用或由另一个组件使用的DataTable。初始化发生在运行时。<br>Clear()       清除所有数据的DataTable。<br>Clone()       克隆DataTable的结构，包括所有DataTable架构和约束。<br>EndInit()      结束在窗体上使用或由另一个组件使用的DataTable的初始化。初始化发生在运行时。<br>ImportRow(DataRow row)  将DataRow复制到DataTable中，保留任何属性设置以及初始值和当前值。<br>Merge(DataTable table) 将指定的DataTable与当前的DataTable合并。<br>NewRow()     创建与该表具有相同架构的新DataRow。</p>
+<h2 id="二、DataTable-使用技巧"><a href="#二、DataTable-使用技巧" class="headerlink" title="二、DataTable 使用技巧"></a>二、DataTable 使用技巧</h2><p>   （1）Create a DataTable</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DataTable dt = <span class="keyword">new</span> DataTable(<span class="string">"Table_AX"</span>); </span><br></pre></td></tr></table></figure>
+<p>   （2）Add columns for DataTable</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Method 1</span></span><br><span class="line"> dt.Columns.Add(<span class="string">"column0"</span>, System.Type.GetType(<span class="string">"System.String"</span>));</span><br><span class="line"> <span class="comment">//Method 2</span></span><br><span class="line"> DataColumn dc = <span class="keyword">new</span> DataColumn(<span class="string">"column1"</span>, System.Type.GetType(<span class="string">"System.Boolean"</span>));</span><br><span class="line"> dt.Columns.Add(dc); </span><br></pre></td></tr></table></figure>
+<p>​    （3）Add rows for DataTable</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Initialize the row</span></span><br><span class="line">    DataRow dr = dt.NewRow();</span><br><span class="line">    dr[<span class="string">"column0"</span>] = <span class="string">"AX"</span>;</span><br><span class="line">    dr[<span class="string">"column1"</span>] = <span class="literal">true</span>;</span><br><span class="line">    dt.Rows.Add(dr);</span><br><span class="line">    <span class="comment">//Doesn't initialize the row</span></span><br><span class="line">    DataRow dr1 = dt.NewRow();</span><br><span class="line">    dt.Rows.Add(dr1); </span><br></pre></td></tr></table></figure>
+<p>​    （4）Select row</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Search the second row 如果没有赋值,则用is null来select</span></span><br><span class="line"> DataRow[] drs = dt.Select(<span class="string">"column1 is null"</span>);</span><br><span class="line"> DataRow[] drss = dt.Select(<span class="string">"column0 = 'AX'"</span>); </span><br></pre></td></tr></table></figure>
+<p>​    （5）Copy DataTable include data</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DataTable dtNew = dt.Copy(); </span><br></pre></td></tr></table></figure>
+<p>​    （6）Copy DataTable only scheme​</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DataTable dtOnlyScheme = dt.Clone(); </span><br></pre></td></tr></table></figure>
+<p>​    （7）Operate one row </p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//对dt的操作</span></span><br><span class="line">    <span class="comment">//Method 1</span></span><br><span class="line">    DataRow drOperate = dt.Rows[<span class="number">0</span>];</span><br><span class="line">    drOperate[<span class="string">"column0"</span>] = <span class="string">"AXzhz"</span>;</span><br><span class="line">    drOperate[<span class="string">"column1"</span>] = <span class="literal">false</span>;</span><br><span class="line">    <span class="comment">//Method 2</span></span><br><span class="line">    drOperate[<span class="number">0</span>] = <span class="string">"AXzhz"</span>;</span><br><span class="line">    drOperate[<span class="number">1</span>] = <span class="literal">false</span>;</span><br><span class="line">    <span class="comment">//Method 3</span></span><br><span class="line">    dt.Rows[<span class="number">0</span>][<span class="string">"column0"</span>] = <span class="string">"AXzhz"</span>;</span><br><span class="line">    dt.Rows[<span class="number">0</span>][<span class="string">"column1"</span>] = <span class="literal">false</span>;</span><br><span class="line">    <span class="comment">//Method 4</span></span><br><span class="line">    dt.Rows[<span class="number">0</span>][<span class="number">0</span>] = <span class="string">"AXzhz"</span>;</span><br><span class="line">    dt.Rows[<span class="number">0</span>][<span class="number">1</span>] = <span class="literal">false</span>; </span><br></pre></td></tr></table></figure>
+<p>​    （8）Evaluate another DataTable’s row to current Datatable</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dtOnlyScheme.Rows.Add(dt.Rows[<span class="number">0</span>].ItemArray);   </span><br></pre></td></tr></table></figure>
+<p>（9）Convert to string  </p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">System.IO.StringWriter sw = <span class="keyword">new</span> System.IO.StringWriter();</span><br><span class="line">System.Xml.XmlTextWriter xw = <span class="keyword">new</span> System.Xml.XmlTextWriter(sw);</span><br><span class="line">dt.WriteXml(xw);</span><br><span class="line"><span class="built_in">string</span> s = sw.ToString();</span><br></pre></td></tr></table></figure>
+<p>​    （10）Filter DataTable</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dt.DefaultView.RowFilter = <span class="string">"column1 &lt;&gt; true"</span>;</span><br><span class="line">dt.DefaultView.RowFilter = <span class="string">"column1 = true"</span>;</span><br></pre></td></tr></table></figure>
+<p>​    （11）Sort row</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dt.DefaultView.Sort = <span class="string">"ID ,Name ASC"</span>;</span><br><span class="line">dt=dt.DefaultView.ToTable();</span><br></pre></td></tr></table></figure>
+<p>​     （12）Bind DataTable</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//绑定的其实是DefaultView</span></span><br><span class="line">gvTestDataTable.DataSource = dt;</span><br><span class="line">gvTestDataTable.DataBind();</span><br></pre></td></tr></table></figure>
+<p>​     （13）judge the DataTable’s Column name is a string</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//判断一个字符串是否为DataTable的列名</span></span><br><span class="line">dtInfo.Columns.Contains(<span class="string">"AX"</span>);</span><br></pre></td></tr></table></figure>
+<p>​     （14）DataTable convert to XML and XML convert to DataTable</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">Page_Load</span>(<span class="params"><span class="built_in">object</span> sender, EventArgs e</span>)</span></span><br><span class="line"><span class="function"></span>     {</span><br><span class="line">       DataTable dt_AX = <span class="keyword">new</span> DataTable();</span><br><span class="line">       <span class="comment">//dt_AX.Columns.Add("Sex", typeof(System.Boolean));</span></span><br><span class="line">       <span class="comment">//DataRow dr = dt_AX.NewRow();</span></span><br><span class="line">       <span class="comment">//dr["Sex"] = true;</span></span><br><span class="line">       <span class="comment">//dt_AX.Rows.Add(dr);</span></span><br><span class="line">       <span class="built_in">string</span> xml=ConvertBetweenDataTableAndXML_AX(dt_AX);</span><br><span class="line">       DataTable dt = ConvertBetweenDataTableAndXML_AX(xml);</span><br><span class="line">     }</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="built_in">string</span> <span class="title">ConvertBetweenDataTableAndXML_AX</span>(<span class="params">DataTable dtNeedCoveret</span>)</span></span><br><span class="line"><span class="function"></span>    {</span><br><span class="line">       System.IO.TextWriter tw = <span class="keyword">new</span> System.IO.StringWriter();</span><br><span class="line">      <span class="comment">//if TableName is empty, WriteXml() will throw Exception.         </span></span><br><span class="line"></span><br><span class="line">dtNeedCoveret.TableName=dtNeedCoveret.TableName.Length==<span class="number">0</span>?<span class="string">"Table_AX"</span>:dtNeedCoveret.TableName;</span><br><span class="line">       dtNeedCoveret.WriteXml(tw);</span><br><span class="line">       dtNeedCoveret.WriteXmlSchema(tw);</span><br><span class="line">       <span class="keyword">return</span> tw.ToString();</span><br><span class="line">    }</span><br><span class="line">     <span class="function"><span class="keyword">public</span> DataTable <span class="title">ConvertBetweenDataTableAndXML_AX</span>(<span class="params"><span class="built_in">string</span> xml</span>)</span></span><br><span class="line"><span class="function"></span>    {</span><br><span class="line">       System.IO.TextReader trDataTable = <span class="keyword">new</span> System.IO.StringReader(xml.Substring(<span class="number">0</span>, xml.IndexOf(<span class="string">"&lt;?xml"</span>)));</span><br><span class="line">       System.IO.TextReader trSchema = <span class="keyword">new</span> System.IO.StringReader(xml.Substring(xml.IndexOf(<span class="string">"&lt;?xml"</span>)));</span><br><span class="line">       DataTable dtReturn = <span class="keyword">new</span> DataTable();</span><br><span class="line">       dtReturn.ReadXmlSchema(trSchema);</span><br><span class="line">       dtReturn.ReadXml(trDataTable);</span><br><span class="line">       <span class="keyword">return</span> dtReturn;</span><br><span class="line">    }</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="三、DataTable-Select-筛选数据"><a href="#三、DataTable-Select-筛选数据" class="headerlink" title="三、DataTable.Select() 筛选数据"></a>三、DataTable.Select() 筛选数据</h2><p>有时候我们需要对数据表进行筛选，微软为我们封装了一个公共方法， DataTable.Select()，其用法如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Select()</span><br><span class="line"></span><br><span class="line">Select(<span class="built_in">string</span> filterExpression)</span><br><span class="line"></span><br><span class="line">Select(<span class="built_in">string</span> filterExpression, <span class="built_in">string</span> sort)</span><br><span class="line"></span><br><span class="line">Select(string filterExpression,string sort, DataViewRowState record States)</span><br></pre></td></tr></table></figure>
+<p>1） <code>Select()</code>——获取所有 System.Data.DataRow 对象的数组；</p>
+<p>2） <code>Select(string filterExpression)</code>——按照主键顺序（如果没有主键，则按照添加顺序）获取与筛选条件相匹配的所有 System.Data.DataRow 对象的数组；</p>
+<p>3） <code>Select(string filterExpression, string sort)</code>——获取按照指定的排序顺序且与筛选条件相匹配的所有System.Data.DataRow 对象的数组；</p>
+<p>4） <code>Select(string filterExpression, string sort, DataViewRowState recordStates)</code>——获取与排序顺序中的筛选器以及指定的状态相匹配的所有。</p>
+<h3 id="举例说明："><a href="#举例说明：" class="headerlink" title="==举例说明：=="></a>==举例说明：==</h3><p>有一个用户表，名称为 dtUsers，有id、姓名name、性别sex、年龄age</p>
+<p>1.筛选所有的用户  </p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DataRow[] drs1 = dtUsers.Select();</span><br></pre></td></tr></table></figure>
+<p>2.筛选所有性别为男的用户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DataRow[] drs2 =dtUsers.Select("sex = '男' ");</span><br></pre></td></tr></table></figure>
+<p>3.筛选所有性别为男且年龄在18岁以上的用户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DataRow[] drs3 =dtUsers.Select("sex = '男' and age &gt;= 18");</span><br></pre></td></tr></table></figure>
+<p>4.筛选所有性别为男或者年龄在18岁以上的用户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DataRow[] drs4 =dtUsers.Select("sex = '男' or age &gt;= 18");</span><br></pre></td></tr></table></figure>
+<p>5.筛选所有姓“夏”的用户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DataRow[] drs5 =dtUsers.Select("name like '夏%'");</span><br></pre></td></tr></table></figure>
+<p>6.筛选所有18岁以上的用户且按从大到小的顺序排序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DataRow[] drs5 =dtUsers.Select("age &gt;=18","age desc");</span><br></pre></td></tr></table></figure>
+<p>7.上面最后一种用法没试过，有机会再列举出来。</p>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a><strong>注意事项</strong></h3><p>1.上面的Select操作是不区分大小写的（表字段不敏感，如pl-sql语法），如果需要区分大小写，需要将DataTable的caseSensitive属性设为true，例如上表的</p>
+<p>dtUsers.CaseSensitive = true;//区分大小写</p>
+<p>2.今天做开发发现一个问题，那边是对空白符的筛选无效，即dt.Select(“colnume = ‘’ “);经过调试后发现是因为我的数据源是从数据库中查询的，如下（表名dtOriginal）：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210414084308.jpg" alt="img"></p>
+<p>我在对PRODUCTUNIT列进行筛选的时候，第一行的“制作一部”筛选出了结果，而后面4行并没有，因为是数据类型的问题——</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210414084308.jpg" alt="img"></p>
+<p>解决办法有两种，一种是把所有的空白单元格替换成空格字符 ‘’，一种是在数据库查询的时候用decode()函数进行替换，例如SELECT DECODE(列名,NULL,’’,’列本身’) FROM 表名(用replace函数在数据库中替换NULL是无效的)。</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：C# DataTable 的用法</li>
+        <li>Post author：Yuxuan Wu</li>
+        <li>Create time：2021-03-19 16:42:24</li>
+        <li>
+            Post link：yuxuanwu17.github.io2021/03/19/2021-03-19-C#-DataTable-的用法/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/03/21/2021-03-19-C#-notes/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">C# notes</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/03/19/2021-03-19-C#-dotnet-%E7%9A%84%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%A2%98/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">C# dotnet的基础面试题</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span> -
+            
+            2021 <i class="fas fa-heart icon-animate"></i> <a href="/">Yuxuan Wu</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count <span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a> | Theme <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.3.1</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DataTable-%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">DataTable 简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">(1)构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7"><span class="nav-number">1.2.</span> <span class="nav-text">(2) 常用属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">(3)常用方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81DataTable-%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7"><span class="nav-number">2.</span> <span class="nav-text">二、DataTable 使用技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81DataTable-Select-%E7%AD%9B%E9%80%89%E6%95%B0%E6%8D%AE"><span class="nav-number">3.</span> <span class="nav-text">三、DataTable.Select() 筛选数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B%E8%AF%B4%E6%98%8E%EF%BC%9A"><span class="nav-number">3.1.</span> <span class="nav-text">&#x3D;&#x3D;举例说明：&#x3D;&#x3D;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">3.2.</span> <span class="nav-text">注意事项</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
