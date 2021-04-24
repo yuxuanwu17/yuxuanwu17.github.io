@@ -13499,4 +13499,47 @@ Here is a picture with more possibilities:
         <tag>notes</tag>
       </tags>
   </entry>
+  <entry>
+    <title>System.out.println 流程详细解释</title>
+    <url>/2021/04/24/2021-04-24-System.out.println-%E6%B5%81%E7%A8%8B%E8%AF%A6%E7%BB%86%E8%A7%A3%E9%87%8A/</url>
+    <content><![CDATA[<p>在java中，最经常使用的是<code>System.out.println()</code> 来进行打印输出</p>
+<p>println方法会自动调用toString方法，如果不重写方法，直接对一个对象进行打印，一定会输出对象的类型+@+内存地址值</p>
+<p><code>具体过程：</code></p>
+<p>println首先调用的是对象的valueOf方法，而valueOf方法则是调用了对象的toString()方法，toString()方法原来是返回对象的格式化信息的，所以如果不重写toString()，那么就会打印这串字符的哈希值，重写的话就能把重写后的格式打印出来。</p>
+<p>参考链接<br>println()源码：这个也解释了为什么println后面要换行，因为不只是print(x),还有一个newLine方法，用锁锁起来</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Prints an Object and then terminate the line.  This method calls</span></span><br><span class="line"><span class="comment"> * at first String.valueOf(x) to get the printed object&#x27;s string value,</span></span><br><span class="line"><span class="comment"> * then behaves as</span></span><br><span class="line"><span class="comment"> * though it invokes &#123;<span class="doctag">@link</span> #print(String)&#125; and then</span></span><br><span class="line"><span class="comment"> * &#123;<span class="doctag">@link</span> #println()&#125;.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> x  The &#123;<span class="doctag">@code</span> Object&#125; to be printed.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">println</span><span class="params">(Object x)</span> </span>&#123;</span><br><span class="line">    String s = String.valueOf(x);</span><br><span class="line">    <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">        print(s);</span><br><span class="line">        newLine();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>我们继续看print()的源代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">    write(String.valueOf(s));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p><code>String.valueOf()源码：</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Returns the string representation of the &#123;<span class="doctag">@code</span> Object&#125; argument.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>   obj   an &#123;<span class="doctag">@code</span> Object&#125;.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span>  if the argument is &#123;<span class="doctag">@code</span> null&#125;, then a string equal to</span></span><br><span class="line"><span class="comment"> *          &#123;<span class="doctag">@code</span> &quot;null&quot;&#125;; otherwise, the value of</span></span><br><span class="line"><span class="comment"> *          &#123;<span class="doctag">@code</span> obj.toString()&#125; is returned.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@see</span>     java.lang.Object#toString()</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">valueOf</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (obj == <span class="keyword">null</span>) ? <span class="string">&quot;null&quot;</span> : obj.toString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里<code>obj.toString</code>会调用toString()的方法</p>
+<p>注意：这里return的时候还运用到了三元运算符的知识</p>
+<p><code>x?y:z</code>如果x==true，则结果为y，否则结果为z</p>
+<p><code>return (obj == null) ? &quot;null&quot; : obj.toString();</code>可以被理解为如果obj为空，那么结果就输出null字符串，否则钓鱼obj的toString 方法来打印</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> operator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo08</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//x?y:z</span></span><br><span class="line">        <span class="comment">//如果x==true，则结果为y，否则结果为z</span></span><br><span class="line">        <span class="keyword">int</span> score = <span class="number">80</span>;</span><br><span class="line">        String type = score &lt; <span class="number">60</span> ? <span class="string">&quot;不及格&quot;</span>:<span class="string">&quot;及格&quot;</span>; <span class="comment">//必须掌握，让代码更加精简，且容易掌握</span></span><br><span class="line">        System.out.println(type);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+<p><code>toString（）</code>源码：</p>
+<p>官方文档建议每一个子类都重写这个toString 方法：It is recommended that all subclasses override this method.</p>
+<p>如果直接打印一个对象，发现并不是对象的类型+@+内存地址值，则其内部方法一定已经重写过toString()方法过了</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Returns a string representation of the object. In general, the</span></span><br><span class="line"><span class="comment"> * &#123;<span class="doctag">@code</span> toString&#125; method returns a string that</span></span><br><span class="line"><span class="comment"> * &quot;textually represents&quot; this object. The result should</span></span><br><span class="line"><span class="comment"> * be a concise but informative representation that is easy for a</span></span><br><span class="line"><span class="comment"> * person to read.</span></span><br><span class="line"><span class="comment"> * It is recommended that all subclasses override this method.</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * The &#123;<span class="doctag">@code</span> toString&#125; method for class &#123;<span class="doctag">@code</span> Object&#125;</span></span><br><span class="line"><span class="comment"> * returns a string consisting of the name of the class of which the</span></span><br><span class="line"><span class="comment"> * object is an instance, the at-sign character `&#123;<span class="doctag">@code</span> @&#125;&#x27;, and</span></span><br><span class="line"><span class="comment"> * the unsigned hexadecimal representation of the hash code of the</span></span><br><span class="line"><span class="comment"> * object. In other words, this method returns a string equal to the</span></span><br><span class="line"><span class="comment"> * value of:</span></span><br><span class="line"><span class="comment"> * &lt;blockquote&gt;</span></span><br><span class="line"><span class="comment"> * &lt;pre&gt;</span></span><br><span class="line"><span class="comment"> * getClass().getName() + &#x27;@&#x27; + Integer.toHexString(hashCode())</span></span><br><span class="line"><span class="comment"> * &lt;/pre&gt;&lt;/blockquote&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span>  a string representation of the object.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> getClass().getName() + <span class="string">&quot;@&quot;</span> + Integer.toHexString(hashCode());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>notes</tag>
+      </tags>
+  </entry>
 </search>
