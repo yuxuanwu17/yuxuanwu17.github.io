@@ -14463,7 +14463,7 @@ var reg = /正则表达式/; //推荐使用这种用法
       <tags>
         <tag>notes</tag>
         <tag>xml</tag>
-        <tag>soup</tag>
+        <tag>jsoup</tag>
       </tags>
   </entry>
 </search>
