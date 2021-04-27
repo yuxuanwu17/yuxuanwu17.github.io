@@ -14868,4 +14868,159 @@ var reg = /正则表达式/; //推荐使用这种用法
         <tag>jQuery</tag>
       </tags>
   </entry>
+  <entry>
+    <title>biotechnology presentation</title>
+    <url>/2021/03/10/2021-03-10-BIO304-biotechnology-presentation/</url>
+    <content><![CDATA[<ol>
+<li>Give an introduction to enable the audience to follow the rest of your presentation</li>
+<li>Explain the purpose (<strong>scientific question</strong>) of the research in the paper.</li>
+<li>Briefly highlight one or two key <strong>approaches</strong>.</li>
+<li>Explain the <strong>key findings</strong> of the paper</li>
+<li>Discuss the ethical issues involved</li>
+</ol>
+<p>==Maximum 20 pages==</p>
+<ul>
+<li><p>Find and digest information about a <strong>biotechnological</strong>/ <strong>ethical</strong> issue </p>
+</li>
+<li><p><strong>Form an opinion</strong> on the biotechnological / ethical issue and be able to provide arguments to defend your stance</p>
+</li>
+<li><p><strong>Explain</strong> the technology and illustrate your opinion in a 10’ presentation </p>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210310210817.png" alt="image-20210310210811681"></p>
+<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>Genetic diseases of blood cells are prime candidates for treatment through ex vivo gene editing of CD34+ hematopoietic stem/progenitor cells (HSPCs)</p>
+<p><strong>Mechanisms:</strong></p>
+<p>SCD is caused by a single-nucleotide polymorphism (SNP) in the seventh codon of the gene for <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.439ex" xmlns="http://www.w3.org/2000/svg" width="1.281ex" height="2.034ex" role="img" focusable="false" viewBox="0 -705 566 899"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D6FD" d="M29 -194Q23 -188 23 -186Q23 -183 102 134T186 465Q208 533 243 584T309 658Q365 705 429 705H431Q493 705 533 667T573 570Q573 465 469 396L482 383Q533 332 533 252Q533 139 448 65T257 -10Q227 -10 203 -2T165 17T143 40T131 59T126 65L62 -188Q60 -194 42 -194H29ZM353 431Q392 431 427 419L432 422Q436 426 439 429T449 439T461 453T472 471T484 495T493 524T501 560Q503 569 503 593Q503 611 502 616Q487 667 426 667Q384 667 347 643T286 582T247 514T224 455Q219 439 186 308T152 168Q151 163 151 147Q151 99 173 68Q204 26 260 26Q302 26 349 51T425 137Q441 171 449 214T457 279Q457 337 422 372Q380 358 347 358H337Q258 358 258 389Q258 396 261 403Q275 431 353 431Z"></path></g></g></g></svg></mjx-container>-globin (HBB), one of two globins that make up the major adult form of hemoglobin</p>
+<h3 id="Existing-treatment"><a href="#Existing-treatment" class="headerlink" title="Existing treatment"></a>Existing treatment</h3><p><strong>RBDs are produced from the bone marrow and hematopoietic stem cell</strong></p>
+<p><strong>RBCs are produced from repopulating hematopoietic stem cells (HSCs) in the bone marrow (BM),</strong> and allogeneic hematopoietic cell transplantation (HCT) from an unaffected human lymphocyte antigen (HLA).matched donor is currently the only lasting cure for SCD</p>
+<h4 id="Problems"><a href="#Problems" class="headerlink" title="Problems:"></a>Problems:</h4><ul>
+<li>Difficulty in identifying donors</li>
+<li>Toxicity of the transplant regimen </li>
+<li>Graft-versus-host disease</li>
+</ul>
+<h3 id="What-they-did"><a href="#What-they-did" class="headerlink" title="What they did"></a>What they did</h3><p>hematopoietic stem/progenitor cells (HSPCs)</p>
+<p>We <strong>optimize</strong> design and delivery parameters of a <strong>ribonucleo protein (RNP) complex comprising Cas9  protein</strong> and <strong>unmodified single guide RNA</strong>, together with a single-stranded DNA <strong>oligonucleotide donor (ssODN),</strong> to enable efficient replacement of the SCD mutation in human HSPC</p>
+<p>ex vivo treated human HSPCs maintain SCD gene edits throughout ==16 weeks== at a level likely to have clinical benefit.</p>
+<p>During gene editing, a targeted nuclease creates a double-strand break (DSB) that can be repaired by one of two mechanisms: </p>
+<p><strong>error-prone non-homologous end joining (NHEJ)</strong> that results in ==genomic insertions and deletions (indels)== not specific.</p>
+<p> ==templated homology-directed repair== (HDR) to precisely insert, delete, or replace a genomic sequence</p>
+<p>The recent development of CRISPR-Cas9, a programmable RNA-guided DNA endonuclease, has ignited an explosion of interest in gene editing to cure many genetic disorders, including SCD.Guided by a single guide RNA (sgRNA), the Cas9 nuclease can be programmed to cut a target locus within the genome, allowing rapid iteration and optimization not possible with other gene editing approaches </p>
+<h4 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h4><ol>
+<li><p>an erythroleukemia cell line to explore a panel of Cas9 RNPs that cut near the SCD mutation </p>
+</li>
+<li><p>RNPs to develop ex vivo editing methods in human HSPCs, achieving up to 33% sequence replacement</p>
+</li>
+<li><p>We demonstrate efficient correction of the sickle mutation in SCD HSPCs, with corresponding production of WT adult hemoglobin (HbA) RNA and protein in edited, differentiated erythroblasts.</p>
+</li>
+<li><p>After the edited human HSPCs are engrafted in immunocompromised mice, sequence replacement at the SCD locus is retained 4 months after engraftment at levels likely to have clinical benefit.</p>
+</li>
+</ol>
+<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><ul>
+<li>We chose to use inexpensive, commercially available ssODNs and co-delivered these with Cas9 RNP by electroporation. Under this condition, quickly iterate combinations of sgRNA, HDR donor, and editing conditions.</li>
+<li>Two key restrictions when designing sgRNAs and ssODNs for HDR experiments: <ul>
+<li>the distance between the sgRNA recognition site and the mutation</li>
+<li>the ability to silently ablate the sgRNA protospacer adjacent motif (PAM).<ul>
+<li>ensures that Cas9 cannot recut corrected alleles, thus preventing the introduction of indels into the corrected allele</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Find the most active sgRNAs compatible with SCD editing</p>
+<p>we identified targets in the first exon of theHBB gene and tested six of them for which the PAM could be silently mutated (G3, G5, G10, G11,G17, and G18) and one for which it could not (G7) (Fig. 1A)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210312164613.png" alt="image-20210312164612985"></p>
+<p>Editing the SCDSNP in K562 cells. (A) Schematic depicting the experimental approach to editing in K562 cells. A panel of 10 sgRNAs that cut within 100 base pairs (bp) of the SCD SNP was selected. A WT-to-SCD edit was programmed by an ssDNA template (T1) bearing silent PAM mutations for the sgRNAs, which also introduces an sfc I restriction site.</p>
+<p>T7 endonuclease 1 assay depicting indel formation in pools of cells edited by candidate RNPs.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210312165638.png" alt="image-20210312165637965"></p>
+<p>(C) Editing of candidate sgRNAs detected by Sfc I digestion. G5, G10, and a truncated variant, trG10, efficiently edit in K562 cells. </p>
+<p>(D) Gene modification of select sgRNAs and templates at the SCD SNP, assessed by NGS. See fig. S1 for definitions of donors T1 and T2. Data are the average of three biological replicates, and error bars indicate SD.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210312165941.png" alt="image-20210312165941781"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210312200352.png" alt="image-20210312200352097"></p>
+<p>FigA: (CD45+) Substantial numbers of hematopoietic cells were detectable in BM of all injected mice at 16 weeks</p>
+<p>Genotyping of edited HSPCs was performed by NGS immediately after editing and before injection (Fig. 4B) and from mice at weeks 8 (blood) and 16 (BM and spleen脾脏) (Fig. 4, C and D). The input populations had 55 ± 19% indel alleles and 11.8 ± 3.7%HDR alleles (mean ± SD) (Fig. 4B).</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210313103011.png" alt="image-20210313103011191"></p>
+<p>To selectively interrogate editing in viable cells, we used NGS to assay HSPCs cultured under erythroid expansion conditions for 7 days after editing (erythroidexpanded), along with edited HSPCs cultured for only 2 days (unexpanded).</p>
+<p>We observed appreciable initial levels of editing at the sickle SNP inHSPCs, with HDR rates between 6 and 11% (Fig. 2, A and B). After 5 days of erythroid expansion, HDR rates increased, with up to 33% editing at both high and low doses of RNP (150 and 75 pmol, respectively)</p>
+<p>Total editing (%HDR + %NHEJ) in expanded HSPCs was between 66 and 72%, indicating good delivery of the trG10 RNP to HSPCs. In general, higher editing was accompanied by some reduction in viability, as measured by fewer cells remaining after treatment, particularly at a high, 150 pmol dose of RNP</p>
+<hr>
+<p>NGS analysis revealed consistently high levels of indel alleles after 16 weeks</p>
+<p>After 14 days of growth, 96 edited clones were individually genotyped by multiplexed NGS (Table 1). In this experiment, 21% of alleles were HDR. However, these alleles were spread among 32% of the cells. This increased prevalence of edited cells relative to edited alleles is predicted by the independent assortment of alleles within a population (although we observed that homozygous genotypeswere still overrepresented relative to a prediction based on random assortment)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210313094143.png" alt="image-20210313094143326"></p>
+<p>In this model, edited human stem cells must engraft in the mouse and persist over several months for them to be observed in subsequent experiments</p>
+<p>After 16weeks, progenitor cells should be lost from the system, and human cells in the BM should be derived from long-term repopulating stem cells within the initial HSPC population</p>
+<h2 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h2><ul>
+<li>Unlike gene therapy using integrating viral vectors, wherein regulation of the introduced gene may be compromised and endogenous genes may be disrupted, gene editing corrects the disease mutation <strong>at the endogenous locus</strong></li>
+<li>No need to introduce a nonnative selection marker</li>
+<li>edits do not typically confer a selective advantage in the target cell compartment, as is the case for correction of the HBB sickle mutation in BM stem cells</li>
+</ul>
+<p>We used K562 cells to iterate combinations of Cas9 RNPs and ssODNs that edit the HBB gene and then applied these reagents to human HSPCs. </p>
+<p>These reagents efficiently induce HDR-mediated editing of the SCD mutation in HSPCs <strong>with minimal genic off-target activity.</strong></p>
+<p>we found no apparent decrease in off-target activity compared to the full-length guide, possibly due to the extremely high homology between the on- and off-target sites. RNP delivery has been associated with reduced off-target effects</p>
+<p>this modality could allow efficient editing of disease mutations in HSPCs using full-length unmodified sgRNAs such as G10</p>
+<p>To reduce off-target activity, we tested several recently characterized high-fidelity Cas9 variants as RNPs, but chose to pursue WT Cas9 due to their reduced on-target activity</p>
+<p>the co-delivered RNP/ssODN approach described here is nonviral, modular, and readily optimized</p>
+<p>However, HDR was still diminished relative to the input CD34+ populations. Reductions in HDR frequency during long-term engraftment have been observed previously and remain a major impediment to bringingHDR-based therapies to the clinic (14, 15, 21). It may be thatHDR-editedHSCs do not engraft as well as unedited cells, that theHDRdonors are themselves toxic, or that HSCs are intrinsically more difficult to edit than other CD34+ cells</p>
+<p>Corrected SCD HSPCs produced greatly reduced sickle and increased WT hemoglobin protein and b-globin mRNA</p>
+<h2 id="Limitation"><a href="#Limitation" class="headerlink" title="Limitation"></a>Limitation</h2><ol>
+<li>it is possible that the allelic correction frequency we observed in the HSPC population will ameliorate but not eliminate the clinical expression of SCD. </li>
+<li>it is still an intensive procedure, requiring myeloablative conditioning, which can have serious side effects.</li>
+<li>clinical translation of an HSCT-based therapy is not feasible in developing countries, where SCD is most prevalent. We anticipate that further developments will address these remaining issues</li>
+</ol>
+<p>Ethical problems</p>
+<ul>
+<li>But a capability for making precise changes to the human genome raises all kinds of difficult questions about how far we should go with it</li>
+<li>Should genome engineering be restricted to the avoidance of genetic disease, or might it be justified for genetic enhancement</li>
+<li>How can we distinguish one from the other</li>
+<li>Where are the limits on the possible or permissible – giving us infrared vision, say, or tolerance to extreme cold, or the ability to photosynthesise?</li>
+<li> Should we use Crispr on the human germline, so that modifications are inherited by future generations?</li>
+</ul>
+<p>The last issue has become particularly explosive since the revelation that Crispr was used in 2018 by Chinese biologist He Jiankui to modify twin embryos used for IVF, resulting in the birth of two girls allegedly containing alleles that would confer protection from infection by HIV. It wasn’t just that He bypassed ethical regulations, nor even that he chose to use germline editing for pre-emptive protection. It was also that he did the job rather poorly and without any clear evidence that the procedure was safe.</p>
+<hr>
+<ul>
+<li><p>inheritable modifications</p>
+</li>
+<li><p>it is not necessarily as accurate as it is sometimes portrayed</p>
+</li>
+<li><p>lead to off-target modifications, the health consequences of which are unknown and unpredictable</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>worldwide legislation should be prepared</p>
+</li>
+<li><p>CRISPR-Cas9 should be allowed for use in the creation of human disease models, and in understanding the development and molecular mechanisms of diseases</p>
+</li>
+<li><p>Should be prohibitive for the purposes of eugenics or enhancement.</p>
+</li>
+<li><p>Heredity problems</p>
+</li>
+</ul>
+<h2 id="presentation-script"><a href="#presentation-script" class="headerlink" title="presentation script"></a>presentation script</h2><p>Hello everyone, my name is yuxuan wu and thank you for the time in listening my presentation. Today my topic is about genome editing by Crisper technique, specifically the sickle cell mutation treatment in human adult hematopoietic stem cells. </p>
+<p>Here is a brief outline of my whole presentation. I would firstly give you some background information about this diseases over the world so you could easily catch up. Then I would analyze the mechanisms about the sickle cell diseases and the newly raised heated technique Crispr , for instance, how they originated and how they worked. Then I would focus on the paper I selected to let you guys know some advancement in this areas. Additionally, since the crispr technique involves the edit of genetic materials, which means some ethical problems might raised and I would discuss this point later    </p>
+<p>Now we move on the first part, introduction part. As can be seen from here that the sickle cell diseases is a group of blood disorders typically inherited from a person’s parents, which means it is closely related to heredity. To be more specific, the mutation occurs in chromosome 11 that results in an abnormality in the oxygen-carrying protein hemoglobin found in the red blood cell. The abnormal cell would feature in a sickle-like shape. Generally speaking, the disease would typically begin around 5 to 6 month which could results severe symptoms like early death, bacterial infection and stroke. The average life expectancy in the developed world is 40 to 60 years old. However, for people in developing world, where most cases occurred, that would lead to an early death, or infant death.</p>
+<p>2min</p>
+<p>Here I would introduce the mechanisms behind the SCD. As I mentioned before, this is a genetic diseases caused by the base substitution, leading to production of abnormal hemoglobin S. As a result, the capacity for carrying oxygen would be decreased significantly, causing the vaso-occlusion and the severe symptoms. </p>
+<p>This slide is a more vivid example with clear annotation. Figure A shows the normal red blood cells passing the vessel. We could see that the normal cells could pass the cross-section without any difficulty while in sickled red blood cells, they would block the vessels and cause severe negative effects. </p>
+<p>In order to cure this diseases, novel approaches like crispr technique started to play a significant role. This technique is a gene editing approach to enable efficient replacement of the SCD mutation. Here, the abnormal cells would have a markedly shorter life span in circulation compared to the wild type, which means the low levels of genotypic correction are predicted to generate a clinical benefit. </p>
+<p>4 min</p>
+<hr>
+<p>Now, we finally moved to the paper part to present a novel method to cure the disease. Here I demonstrate the whole pipeline. They firstly design a programmable RNA-guided DNA endonuclease and edit the target cells ex vivo. One of the key features in crispr was its precision, the designed RNA-guided DNA would find the SCD mutation site and correct it. The corrected cell would cultivate to erythroblasts <code>[ɪˈrɪθrə(ʊ)blæst]</code>, which is a stage in the development of the red blood cells. The next step would be the comparison between the wild type to check its correction efficiency. Once checked, engraft the samples in the immunocompromised mice for four months. After four months, the mice would sacrifice to check the efficacy of this technique.  </p>
+<p>Here is the results and discussion part. These are the two figures that compare the cell condition under two days cultivation and seven days cultivation. Two terminologies were extremely important here, HDR and Indels, both representing the modification in the sequence, but HDR rate is the precisely modification while Indels are not. We could observe that the initial HDR level would be around 6% to 11%, after 5 days of cultivation, HDR rates increased, with up to 33% editing under different conditions. Total editing (%HDR + %NHEJ) in 7 days cultivation was around 70%, indicating good delivery of ribonucleous proteins. </p>
+<p>6min (5:30min)</p>
+<hr>
+<p>Now we could engraft the successfully cultivated cells in the immunocomprised mice. The paper made great efforts to ensure the low off-target activities, but considering the time limit, I therefore would not include this part. Here I would explain some abbreviations that HSPC was stand for the     hematopoietic stem/progenitor cells (HSPCs). From figure A, it is clear that the mice injected with modified HSPC could have a higher percentage compared to those uninjected mice.Therefore, the figure suggested that the mice injected hematopoietic stem cells with corrected SCD mutation produced greatly reduced sickle and increased wild type, normal hemoglobin. Furthermore, the Next generation sequence techniques revealed the consistently high levels of indel alleles even after 16 weeks, suggesting possible clinical benefits. </p>
+<p>Several limitation could still occurred in this experiment. Firstly, the allelic correction frequency would ameliorate, or in other words, the performance would diminish and could not last permanently. Secondly, the crispr technique is still an intensive procedure, which can have unknown side effects. Thirdly, the clinical translation of HSCT-based therapy is not feasible in most developing countries, while these places are SCD most prevalent. ==(Hematopoietic stem cell transplantation (<strong>HSCT</strong>) )==</p>
+<p><code>7:30</code></p>
+<p>Next part would be ethical problems related to this technique, especially the treatment including the modification of genetic materials. Several questions need to be answered if we would like to step further. For instance, how far should we go with it? Should genome engineering be restricted to the avoidance of genetic disease? Might it be justified for genetic enhancement? Should we use Crispr on the human germline, so that modifications are inherited by future generations?</p>
+<p>But at the time we could not even answer the previous problems, He jiankui conducted an astonishing experiments. He modified the twin embryos used for the protected from infection by HIV, but the safety of this experiment could not be ensured. Additionally, the high potential of the off-target modification made these twins suffer from unknown and unpredictable health consequences. Furthermore, we got no ideas about whether the modification would be inheritable or not.</p>
+<p>Here is my personal view about the ethical problems. I divided into two sections, either is applicable or prohibitive. We should publish restricted worldwide legislation to ensure the monitor of experiments which could have high potential of unethical problems. We could allow the creation of human diseases models and use the technique to elucidate the molecular mechanisms of diseases. These three points are applicable and the following three points should be prohibited strictly. For instance, the breeding of the human species, the germ-line editing in heredity non target genetic mutations. And the last point is definitely not allowed, that is to create weapons, that will cause disasters to human beings all over the world</p>
+<p>This is the reference I used in this presentation. That’s all for my whole presentation, thank you for listening. </p>
+]]></content>
+      <categories>
+        <category>Biology</category>
+      </categories>
+      <tags>
+        <tag>notes</tag>
+      </tags>
+  </entry>
 </search>
