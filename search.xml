@@ -485,8 +485,8 @@
       </categories>
       <tags>
         <tag>Hadoop</tag>
-        <tag>IntelliJ IDEA</tag>
         <tag>maven</tag>
+        <tag>IDEA</tag>
       </tags>
   </entry>
   <entry>
@@ -2293,7 +2293,7 @@ Heart Not Failed       0.85      0.93      0.89        43
       </tags>
   </entry>
   <entry>
-    <title>JavaSE 回顾</title>
+    <title>Java基础知识 回顾</title>
     <url>/2021/02/10/2021-02-10-Java-%E5%9B%9E%E9%A1%BE/</url>
     <content><![CDATA[<h1 id="JAVA-基础知识复习"><a href="#JAVA-基础知识复习" class="headerlink" title="JAVA 基础知识复习"></a>JAVA 基础知识复习</h1><p>视频地址：</p>
 <p><a class="link"   href="https://www.bilibili.com/video/BV12J41137hu?t=2607&amp;p=80" >https://www.bilibili.com/video/BV12J41137hu?t=2607&amp;p=80<i class="fas fa-external-link-alt"></i></a></p>
@@ -2919,9 +2919,12 @@ Heart Not Failed       0.85      0.93      0.89        43
 <li>若子类与基类不在同一包中，那么在子类中，子类实例可以访问其从基类继承而来的protected方法，而不能访问基类实例的protected方法</li>
 </ul>
 ]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
       <tags>
         <tag>tutorial</tag>
-        <tag>[object Object]</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
