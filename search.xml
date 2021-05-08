@@ -1647,7 +1647,64 @@ Heart Not Failed       0.85      0.93      0.89        43
   <entry>
     <title>FYP check lists</title>
     <url>/2021/01/27/FYP_requirements/</url>
-    <content><![CDATA[<h2 id="General-requirements"><a href="#General-requirements" class="headerlink" title="General requirements:"></a>General requirements:</h2><p>Maximum word length (excluding abstract, figure legends, reference list and appendices) <strong>5000 words.</strong></p>
+    <content><![CDATA[<h2 id="Presentation"><a href="#Presentation" class="headerlink" title="Presentation"></a>Presentation</h2><ul>
+<li>10 minutes talk </li>
+<li>Answer audience questions 5 minutes </li>
+</ul>
+<h3 id="Judgement"><a href="#Judgement" class="headerlink" title="Judgement"></a>Judgement</h3><ul>
+<li>Timing </li>
+<li>delivery</li>
+<li>Organization </li>
+<li>Content quality of visual aids</li>
+<li>Use of visual aids </li>
+<li>Response to questions</li>
+</ul>
+<h3 id="Structure-of-the-FYP-talk"><a href="#Structure-of-the-FYP-talk" class="headerlink" title="Structure of the FYP talk"></a>Structure of the FYP talk</h3><ul>
+<li>Introduction </li>
+<li>Hypothesis (Motivation / Biological questions)<ul>
+<li>Objectives and project outlines</li>
+</ul>
+</li>
+<li>Results (including methods and interpretation)</li>
+<li>Conclusion and summary (including a “big picture” of the research field)</li>
+<li>Acknowledgement </li>
+</ul>
+<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><ul>
+<li>Greeting audience</li>
+<li>Introduce the topic</li>
+<li>Provide relevant background information (<code>add the citation</code>)</li>
+</ul>
+<h3 id="Hypothesis-Biological-questions"><a href="#Hypothesis-Biological-questions" class="headerlink" title="Hypothesis (Biological questions)"></a>Hypothesis (Biological questions)</h3><ul>
+<li>Logical and reasonable flow from your introduction</li>
+<li>Clearly state the hypothesis you will talking about </li>
+</ul>
+<h3 id="Objectives-and-project-outline"><a href="#Objectives-and-project-outline" class="headerlink" title="Objectives and project outline"></a>Objectives and project outline</h3><ul>
+<li>Outline the project and the methods involved</li>
+</ul>
+<h3 id="Results-including-methods-and-interpretation"><a href="#Results-including-methods-and-interpretation" class="headerlink" title="Results (including methods and interpretation)"></a>Results (including methods and interpretation)</h3><ul>
+<li>Explain purpose and methodology used</li>
+<li>Make an appropriate conclusion</li>
+<li>Logical connection to the next result slide</li>
+<li>Be concise</li>
+</ul>
+<h3 id="Conclusion-and-summary"><a href="#Conclusion-and-summary" class="headerlink" title="Conclusion and summary"></a>Conclusion and summary</h3><ul>
+<li>Summarize your findings</li>
+<li>Make appropriate concluding remarks</li>
+<li>Refer to the significance in the context of the research field</li>
+<li>Provide a working model based on your results</li>
+</ul>
+<h3 id="Acknowledgement"><a href="#Acknowledgement" class="headerlink" title="Acknowledgement"></a>Acknowledgement</h3><ul>
+<li>Acknowledge peoples involved in the project</li>
+<li>Acknowledge funding bodies </li>
+</ul>
+<h3 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q &amp; A"></a>Q &amp; A</h3><p>Always repeat the question</p>
+<ol>
+<li>For you to make sure you understood it</li>
+<li>For audience to make sure they heard it</li>
+</ol>
+<p>Don’t be afraid of saying “I don’t know”</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210508140629.png" alt="image-20210508140629779"></p>
+<h2 id="General-requirements"><a href="#General-requirements" class="headerlink" title="General requirements:"></a>General requirements:</h2><p>Maximum word length (excluding abstract, figure legends, reference list and appendices) <strong>5000 words.</strong></p>
 <p><strong>Double spaced</strong></p>
 <p><strong>Font 12 point, black</strong></p>
 <p><strong>Binding/e-versions</strong> (must be as described below)</p>
@@ -1695,7 +1752,7 @@ Heart Not Failed       0.85      0.93      0.89        43
 </ol>
 <hr>
 <h2 id="Components"><a href="#Components" class="headerlink" title="Components"></a>Components</h2><h3 id="Title"><a href="#Title" class="headerlink" title="Title:"></a>Title:</h3><ul>
-<li><input disabled="" type="checkbox"> Choose a title that is concise but informative</li>
+<li><input checked="" disabled="" type="checkbox"> Choose a title that is concise but informative</li>
 <li><input disabled="" type="checkbox"> Ideally it should describe the work performed and findings but not be dramatic</li>
 </ul>
 <h3 id="Abstracts"><a href="#Abstracts" class="headerlink" title="Abstracts:"></a>Abstracts:</h3><ul>
@@ -1704,7 +1761,7 @@ Heart Not Failed       0.85      0.93      0.89        43
 <li><input disabled="" type="checkbox"> Should not include references</li>
 <li><input disabled="" type="checkbox"> Should condense the aims, observations, findings and main conclusions</li>
 </ul>
-<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction:"></a>Introduction:</h3><ul>
+<h3 id="Introduction-1"><a href="#Introduction-1" class="headerlink" title="Introduction:"></a>Introduction:</h3><ul>
 <li><input disabled="" type="checkbox"> Provide background (e.g. literature, preliminary data) to the field of study</li>
 <li><input disabled="" type="checkbox"> State the purpose of the work e.g., the scientific hypothesis</li>
 <li><input disabled="" type="checkbox"> Provide the rationale for the approach taken</li>
