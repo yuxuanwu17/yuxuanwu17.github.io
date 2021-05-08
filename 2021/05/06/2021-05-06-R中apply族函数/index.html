@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Welcome to my personal blogs">
+    <meta name="author" content="Yuxuan Wu">
+    
+    <title>
+        
+            R中apply族函数 |
+        
+        Yuxuan Wu
+    </title>
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep coding, Keep hungry."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.3.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days age","week":"%s weeks age","month":"%s months age","year":"%s years age"};
+  </script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Yuxuan Wu
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content normal-code-theme">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">R中apply族函数</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Yuxuan Wu</span>
+                        <span class="level">Lv7</span>
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i> 2021-05-06 16:40:35
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/categories/R/">R</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/tags/R/">R</a>
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/notes/">notes</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i> <span>2.4k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i> <span>10 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>在R语言中，apply系列函数的基本作用是对<code>数组（array，可以是多维）</code>或者<code>列表（list）</code>按照元素或元素构成的子集合进行迭代，并将当前元素或子集合作为参数调用某个指定函数。apply族函数分别有apply函数，tapply函数，lapply函数，mapply函数。每一个函数都有自己的特点，在处理不同类型的数据可以选用相对应的函数。</p>
+<h2 id="R-原生英文解释（Apply）"><a href="#R-原生英文解释（Apply）" class="headerlink" title="R 原生英文解释（Apply）"></a>R 原生英文解释（Apply）</h2><p>Apply Functions Over Array Margins：</p>
+<h4 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h4><p>Returns a vector or array or list of values obtained by applying a function to margins of an array or matrix.</p>
+<h4 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h4><p><code>apply(X, MARGIN, FUN, ...)</code></p>
+<h4 id="Arguments"><a href="#Arguments" class="headerlink" title="Arguments"></a>Arguments</h4><blockquote>
+<p>x:</p>
+</blockquote>
+<p>an array, including a matrix.</p>
+<blockquote>
+<p>MARGIN:</p>
+</blockquote>
+<p>a vector giving the subscripts which the function will be applied over. E.g., for a matrix <strong>1 indicates rows</strong>, <strong>2 indicates columns</strong>, c(1, 2) indicates rows and columns. Where X has named dimnames, it can be a character vector selecting dimension names.</p>
+<blockquote>
+<p>FUN:</p>
+</blockquote>
+<p>the function to be applied: see ‘Details’. In the case of functions like +, %*%, etc., the function name must be backquoted or quoted.<br>…<br>optional arguments to FUN.</p>
+<h2 id="apply函数（vector）"><a href="#apply函数（vector）" class="headerlink" title="apply函数（vector）"></a>apply函数（vector）</h2><blockquote>
+<p>apply函数只能用于处理矩阵类型的数据，也就是说所有的数据必须是同一类型。因此要使用apply函数的话，需要将数据类型转换成矩阵类型。</p>
+</blockquote>
+<p>apply函数一般有三个参数，第一个参数代表矩阵对象，第二个参数代表要操作矩阵的维度，1表示对行进行处理，2表示对列进行处理。第三个参数就是处理数据的函数。apply会分别一行或一列处理该矩阵的数据。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">a&lt;-matrix(<span class="number">1</span>:<span class="number">12</span>,nrow=<span class="number">3</span>)</span><br><span class="line">a</span><br><span class="line"><span class="comment">#求每列的平均值</span></span><br><span class="line">apply(a,<span class="number">2</span>,mean)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">其中a是一个<span class="number">3</span>*<span class="number">4</span>的矩阵，如下。运行结果为 <span class="number">2</span>  <span class="number">5</span>  <span class="number">8</span> <span class="number">11</span></span><br><span class="line"></span><br><span class="line">		  [,<span class="number">1</span>] [,<span class="number">2</span>] [,<span class="number">3</span>] [,<span class="number">4</span>]</span><br><span class="line">[<span class="number">1</span>,]    <span class="number">1</span>    <span class="number">4</span>    <span class="number">7</span>   <span class="number">10</span></span><br><span class="line">[<span class="number">2</span>,]    <span class="number">2</span>    <span class="number">5</span>    <span class="number">8</span>   <span class="number">11</span></span><br><span class="line">[<span class="number">3</span>,]    <span class="number">3</span>    <span class="number">6</span>    <span class="number">9</span>   <span class="number">12</span></span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li><p>使用colMeans()，rowMeans( )，对矩阵的列和行分别求平均值，</p>
+</li>
+<li><p>rowSums( ),colSums(),，对矩阵的列和行分别求和。</p>
+</li>
+</ul>
+<blockquote>
+<p> 如果数据中NA，那么在求行列的平均值或和的时候，NA所在的行列的计算结果也为NA。</p>
+</blockquote>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apply(a,<span class="number">1</span>,mean,na.rm=<span class="literal">TRUE</span>)</span><br></pre></td></tr></table></figure>
+<p>这样的话，它会自动忽略NA，只计算其他不是NA的值。rowMeans( )中也可以添加na.rm=TRUE参数。效果相同。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#矩阵中添加了一个na</span></span><br><span class="line">a[<span class="number">2</span>,<span class="number">1</span>]&lt;-<span class="literal">NA</span></span><br><span class="line"><span class="comment">#不计算NA存在的那一行或那一列</span></span><br><span class="line">apply(a,<span class="number">1</span>,mean)这个时候矩阵为</span><br><span class="line"></span><br><span class="line">			 [,<span class="number">1</span>] [,<span class="number">2</span>] [,<span class="number">3</span>] [,<span class="number">4</span>]</span><br><span class="line">[<span class="number">1</span>,]    <span class="number">1</span>    <span class="number">4</span>    <span class="number">7</span>   <span class="number">10</span></span><br><span class="line">[<span class="number">2</span>,]   <span class="literal">NA</span>    <span class="number">5</span>    <span class="number">8</span>   <span class="number">11</span></span><br><span class="line">[<span class="number">3</span>,]    <span class="number">3</span>    <span class="number">6</span>    <span class="number">9</span>   <span class="number">12</span></span><br><span class="line"></span><br><span class="line">结果为[<span class="number">1</span>] <span class="number">5.5</span>  <span class="literal">NA</span> <span class="number">7.5</span>。如果代码写成下面这个样子</span><br><span class="line"></span><br><span class="line">apply(a,<span class="number">1</span>,mean,na.rm=<span class="literal">TRUE</span>)</span><br><span class="line">结果为 <span class="number">5.5</span> <span class="number">8.0</span> <span class="number">7.5</span> </span><br></pre></td></tr></table></figure>
+
+
+<h2 id="lapply和sapply函数"><a href="#lapply和sapply函数" class="headerlink" title="lapply和sapply函数"></a>lapply和sapply函数</h2><p>lapply和sapply函数可以用于处理列表数据和向量数据（vector/list）</p>
+<p>lapply函数得到处理得到的数据类型是列表，</p>
+<p>而sapply函数得到处理的数据类型是向量。</p>
+<p>这两个函数除了在返回值类型不同外，其他方面基本完全一样。</p>
+<h2 id="关于R语言的list数据格式"><a href="#关于R语言的list数据格式" class="headerlink" title="关于R语言的list数据格式"></a>关于R语言的list数据格式</h2><p>R中列表(list)类型来保存不同类型的数据。 一个主要目的是提供R分析结果输出包装： 输出一个变量， 这个变量包括回归系数、预测值、残差、检验结果等等一系列不能放到规则形状数据结构中的内容。 实际上，数据框也是列表的一种， 但是数据框要求各列等长， 而列表不要求。</p>
+<p>列表可以有多个元素， 但是与向量不同的是， 列表的不同元素的类型可以不同， 比如， 一个元素是数值型向量， 一个元素是字符串， 一个元素是标量， 一个元素是另一个列表。</p>
+<p>定义列表用函数<code>list()</code>, 如</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">rec &lt;- <span class="built_in">list</span>(name=<span class="string">&quot;李明&quot;</span>, age=<span class="number">30</span>,</span><br><span class="line">           scores=<span class="built_in">c</span>(<span class="number">85</span>, <span class="number">76</span>, <span class="number">90</span>))</span><br><span class="line">rec</span><br><span class="line"><span class="comment">## $name</span></span><br><span class="line"><span class="comment">## [1] &quot;李明&quot;</span></span><br><span class="line"><span class="comment">## </span></span><br><span class="line"><span class="comment">## $age</span></span><br><span class="line"><span class="comment">## [1] 30</span></span><br><span class="line"><span class="comment">## </span></span><br><span class="line"><span class="comment">## $scores</span></span><br><span class="line"><span class="comment">## [1] 85 76 90</span></span><br></pre></td></tr></table></figure>
+<p>用<code>typeof()</code>函数判断一个列表， 返回结果为<code>list</code>。 可以用<code>is.list()</code>函数判断某个对象是否列表类型。</p>
+<h2 id="列表元素访问"><a href="#列表元素访问" class="headerlink" title="列表元素访问"></a>列表元素访问</h2><p>列表的一个元素也可以称为列表的一个“变量”， 单个列表元素必须用两重方括号格式访问，如</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rec[[<span class="number">3</span>]]</span><br><span class="line"><span class="comment">## [1] 85 76 90</span></span><br><span class="line">rec[[<span class="number">3</span>]][<span class="number">2</span>]</span><br><span class="line"><span class="comment">## [1] 76</span></span><br><span class="line">rec[[<span class="string">&quot;age&quot;</span>]]</span><br><span class="line"><span class="comment">## [1] 30</span></span><br></pre></td></tr></table></figure>
+
+
+<p>列表的单个元素也可以用<code>$</code>格式访问，如</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rec$age</span><br><span class="line"><span class="comment">## [1] 30</span></span><br></pre></td></tr></table></figure>
+<p>如果使用单重方括号对列表取子集， 结果还是列表而不是列表元素，如</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rec[<span class="number">3</span>]</span><br><span class="line"><span class="comment">## $scores</span></span><br><span class="line"><span class="comment">## [1] 85 76 90</span></span><br><span class="line"><span class="built_in">is.list</span>(rec[<span class="number">3</span>])</span><br><span class="line"><span class="comment">## [1] TRUE</span></span><br></pre></td></tr></table></figure>
+
+
+<p>列表一般都应该有元素名， 元素名可以看成是变量名， 列表中的每个元素看成一个变量。 用<code>names()</code>函数查看和修改元素名。 如</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">names</span>(rec)</span><br><span class="line"><span class="comment">## [1] &quot;name&quot;   &quot;age&quot;    &quot;scores&quot;</span></span><br><span class="line"><span class="built_in">names</span>(rec)[<span class="built_in">names</span>(rec)==<span class="string">&quot;scores&quot;</span>] &lt;- <span class="string">&quot;三科分数&quot;</span></span><br><span class="line"><span class="built_in">names</span>(rec)</span><br><span class="line"><span class="comment">## [1] &quot;name&quot;     &quot;age&quot;      &quot;三科分数&quot;</span></span><br><span class="line">rec[[<span class="string">&quot;三科分数&quot;</span>]]</span><br><span class="line"><span class="comment">## [1] 85 76 90</span></span><br></pre></td></tr></table></figure>
+
+
+<p>可以修改列表元素内容。 如</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">rec[[<span class="string">&quot;三科分数&quot;</span>]][<span class="number">2</span>] &lt;- <span class="number">0</span></span><br><span class="line">print(rec)</span><br><span class="line"><span class="comment">## $name</span></span><br><span class="line"><span class="comment">## [1] &quot;李明&quot;</span></span><br><span class="line"><span class="comment">## </span></span><br><span class="line"><span class="comment">## $age</span></span><br><span class="line"><span class="comment">## [1] 30</span></span><br><span class="line"><span class="comment">## </span></span><br><span class="line"><span class="comment">## $三科分数</span></span><br><span class="line"><span class="comment">## [1] 85  0 90</span></span><br></pre></td></tr></table></figure>
+
+
+<p>直接给列表不存在的元素名定义元素值就添加了新元素， 而且不同于使用向量，对于列表而言这是很正常的做法，比如</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">rec[[<span class="string">&quot;身高&quot;</span>]] &lt;- <span class="number">178</span></span><br><span class="line">print(rec)</span><br><span class="line"><span class="comment">## $name</span></span><br><span class="line"><span class="comment">## [1] &quot;李明&quot;</span></span><br><span class="line"><span class="comment">## </span></span><br><span class="line"><span class="comment">## $age</span></span><br><span class="line"><span class="comment">## [1] 30</span></span><br><span class="line"><span class="comment">## </span></span><br><span class="line"><span class="comment">## $三科分数</span></span><br><span class="line"><span class="comment">## [1] 85  0 90</span></span><br><span class="line"><span class="comment">## </span></span><br><span class="line"><span class="comment">## $身高</span></span><br><span class="line"><span class="comment">## [1] 178</span></span><br></pre></td></tr></table></figure>
+
+
+<p>把某个列表元素赋值为<code>NULL</code>就删掉这个元素。 如</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">rec[[<span class="string">&quot;age&quot;</span>]] &lt;- <span class="literal">NULL</span></span><br><span class="line">print(rec)</span><br><span class="line"><span class="comment">## $name</span></span><br><span class="line"><span class="comment">## [1] &quot;李明&quot;</span></span><br><span class="line"><span class="comment">## </span></span><br><span class="line"><span class="comment">## $三科分数</span></span><br><span class="line"><span class="comment">## [1] 85  0 90</span></span><br><span class="line"><span class="comment">## </span></span><br><span class="line"><span class="comment">## $身高</span></span><br><span class="line"><span class="comment">## [1] 178</span></span><br></pre></td></tr></table></figure>
+<p>在<code>list()</code>函数中允许定义元素为<code>NULL</code>，这样的元素是存在的，如：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">li &lt;- <span class="built_in">list</span>(a=<span class="number">120</span>, b=<span class="string">&quot;F&quot;</span>, <span class="built_in">c</span>=<span class="literal">NULL</span>); li</span><br><span class="line"><span class="comment">## $a</span></span><br><span class="line"><span class="comment">## [1] 120</span></span><br><span class="line"><span class="comment">## </span></span><br><span class="line"><span class="comment">## $b</span></span><br><span class="line"><span class="comment">## [1] &quot;F&quot;</span></span><br><span class="line"><span class="comment">## </span></span><br><span class="line"><span class="comment">## $c</span></span><br><span class="line"><span class="comment">## NULL</span></span><br></pre></td></tr></table></figure>
+<p>但是，要把已经存在的元素修改为NULL值而不是删除此元素， 或者给列表增加一个取值为NULL的元素， 这时需要用单重的方括号取子集， 这样的子集会保持其列表类型， 给这样的子列表赋值为<code>list(NULL)</code>，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">li[&quot;b&quot;] &lt;- list(NULL)</span><br><span class="line">li[&quot;d&quot;] &lt;- list(NULL)</span><br><span class="line">li</span><br><span class="line">## $a</span><br><span class="line">## [1] 120</span><br><span class="line">## </span><br><span class="line">## $b</span><br><span class="line">## NULL</span><br><span class="line">## </span><br><span class="line">## $c</span><br><span class="line">## NULL</span><br><span class="line">## </span><br><span class="line">## $d</span><br><span class="line">## NULL</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="列表类型转换"><a href="#列表类型转换" class="headerlink" title="列表类型转换"></a>列表类型转换</h3><p>用<code>as.list()</code>把一个其它类型的对象转换成列表； 用<code>unlist()</code>函数把列表转换成基本向量。如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">li1 &lt;- as.list(1:3)</span><br><span class="line">li1</span><br><span class="line">## [[1]]</span><br><span class="line">## [1] 1</span><br><span class="line">## </span><br><span class="line">## [[2]]</span><br><span class="line">## [1] 2</span><br><span class="line">## </span><br><span class="line">## [[3]]</span><br><span class="line">## [1] 3</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">li2 &lt;- <span class="built_in">list</span>(x=<span class="number">1</span>, y=<span class="built_in">c</span>(<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line">unlist(li2)</span><br><span class="line"><span class="comment">##  x y1 y2 </span></span><br><span class="line"><span class="comment">##  1  2  3</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="返回列表的函数示例–strsplit"><a href="#返回列表的函数示例–strsplit" class="headerlink" title="返回列表的函数示例–strsplit()"></a>返回列表的函数示例–<code>strsplit()</code></h3><p><code>strsplit()</code>输入一个字符型向量并指定一个分隔符， 返回一个项数与字符型向量元素个数相同的列表， 列表每项对应于字符型向量中一个元素的拆分结果。 如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">x &lt;- c(&quot;10, 8, 7&quot;, &quot;5, 2, 2&quot;, &quot;3, 7, 8&quot;, &quot;8, 8, 9&quot;)</span><br><span class="line">res &lt;- strsplit(x, &quot;,&quot;); res</span><br><span class="line">## [[1]]</span><br><span class="line">## [1] &quot;10&quot; &quot; 8&quot; &quot; 7&quot;</span><br><span class="line">## </span><br><span class="line">## [[2]]</span><br><span class="line">## [1] &quot;5&quot;  &quot; 2&quot; &quot; 2&quot;</span><br><span class="line">## </span><br><span class="line">## [[3]]</span><br><span class="line">## [1] &quot;3&quot;  &quot; 7&quot; &quot; 8&quot;</span><br><span class="line">## </span><br><span class="line">## [[4]]</span><br><span class="line">## [1] &quot;8&quot;  &quot; 8&quot; &quot; 9&quot;</span><br></pre></td></tr></table></figure>
+<p>为了把拆分结果进一步转换成一个数值型矩阵， 可以使用<code>sapply()</code>函数如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">t(sapply(res, as.numeric))</span><br><span class="line">##      [,1] [,2] [,3]</span><br><span class="line">## [1,]   10    8    7</span><br><span class="line">## [2,]    5    2    2</span><br><span class="line">## [3,]    3    7    8</span><br><span class="line">## [4,]    8    8    9</span><br></pre></td></tr></table></figure>
+<p><code>sapply()</code>函数是apply类函数之一， 稍后再详细进行讲解。</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/prog-type-list.html#p-t-list-as" >https://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/prog-type-list.html#p-t-list-as<i class="fas fa-external-link-alt"></i></a></p>
+<p><code>Test Demo</code></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">```&#123;r&#125;</span><br><span class="line">x &lt;- list(a = 1:10, beta = exp(-3:3), logic = c(TRUE,FALSE,FALSE,TRUE))</span><br><span class="line">x</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">```&#123;r&#125;</span><br><span class="line"># compute the list mean for each list element</span><br><span class="line">lapply(x, mean)</span><br><span class="line">```</span><br><span class="line">```&#123;r&#125;</span><br><span class="line">x &lt;- c(&quot;10, 8, 7&quot;, &quot;5, 2, 2&quot;, &quot;3, 7, 8&quot;, &quot;8, 8, 9&quot;)</span><br><span class="line">res &lt;- strsplit(x, &quot;,&quot;); res</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">```&#123;r&#125;</span><br><span class="line">t(sapply(res, as.numeric))</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">```&#123;r&#125;</span><br><span class="line">sapply(res, as.numeric)</span><br><span class="line">```</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="tapply函数"><a href="#tapply函数" class="headerlink" title="tapply函数"></a>tapply函数</h2><ul>
+<li>它通常会有三个参数，第一个参数代表数据，第二个参数表示如何对数据进行分组操作，第三个参数指定每一个分组内应用什么函数。也就是说tapply函数就是把数据按照一定方式分成不同的组，再在每一组数据内进行某种运算。</li>
+</ul>
+<h2 id="mapply函数"><a href="#mapply函数" class="headerlink" title="mapply函数"></a>mapply函数</h2><ul>
+<li>mapply函数主要是对多个列表或者向量参数使用函数</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210506203056.png" alt="image-20210506203056252"></p>
+<p>————————————————<br>版权声明：本文为CSDN博主「王亨」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/wzgl__wh/article/details/52207233" >https://blog.csdn.net/wzgl__wh/article/details/52207233<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="demo-in-DEP"><a href="#demo-in-DEP" class="headerlink" title="demo in DEP"></a>demo in DEP</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># DEP analysis</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## obtain the p value by two sided t-test</span></span><br><span class="line"><span class="comment">## The results obtained from the t.test was a list containing 10 variables</span></span><br><span class="line"><span class="comment">## pvalue is the combined list, having 3061 lists, each is denoted as the gene-symble, could be accessed by &#x27;$&#x27;</span></span><br><span class="line"><span class="comment">## a typical sample to obtain the p value of each gene is: e.g.A5PF59&#x27;s p-value:</span></span><br><span class="line"><span class="comment">## &quot;pvalue$A5PF59$p.value&quot;</span></span><br><span class="line"><span class="comment">## To obtain the actual value is as.numeric(unlist(lapply(pvalue, function(x) x$p.value)))</span></span><br><span class="line"></span><br><span class="line">pvalue &lt;- apply(P_D[, <span class="built_in">c</span>(<span class="number">1</span>:<span class="number">30</span>)], <span class="number">1</span>, <span class="keyword">function</span>(x) &#123;</span><br><span class="line">a &lt;- factor(<span class="built_in">c</span>(<span class="built_in">rep</span>(<span class="string">&quot;Distal&quot;</span>, <span class="number">15</span>), <span class="built_in">rep</span>(<span class="string">&quot;Proximal&quot;</span>, <span class="number">15</span>)))</span><br><span class="line">t.test(x~a, var.equal = <span class="built_in">T</span>, alternative = <span class="string">&quot;two.sided&quot;</span>, conf.level = <span class="number">0.95</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">## create the dataset called result_t.test, 3 columns included</span></span><br><span class="line"><span class="comment"># - gene_symbol</span></span><br><span class="line"><span class="comment"># - Pvalue</span></span><br><span class="line"><span class="comment"># - log2FC</span></span><br><span class="line"></span><br><span class="line">result_t.test &lt;- data.frame(gene_symbol=protein$Gene.Name,</span><br><span class="line">Pvalue = <span class="built_in">as.numeric</span>(unlist(lapply(pvalue, <span class="keyword">function</span>(x) x$p.value))),</span><br><span class="line">log2FC = log2(<span class="built_in">as.numeric</span>(unlist(lapply(pvalue,</span><br><span class="line"><span class="keyword">function</span>(x) x$estimate[<span class="number">1</span>]/x$estimate[<span class="number">2</span>]))))</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">rownames(result_t.test) &lt;- rownames(protein)</span><br><span class="line"></span><br><span class="line"><span class="comment"># obtain the FDR</span></span><br><span class="line">t.test_fdr &lt;- p.adjust(result_t.test$Pvalue, method = <span class="string">&#x27;fdr&#x27;</span>)</span><br><span class="line">result_t.test_fdr &lt;- cbind(result_t.test, t.test_fdr)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Filtering the canditate under criteria</span></span><br><span class="line">dep &lt;- result_t.test_fdr[result_t.test_fdr$t.test_fdr &lt; <span class="number">0.05</span> &amp; <span class="built_in">abs</span>(result_t.test_fdr$log2FC) &gt; <span class="number">1</span>, ]</span><br><span class="line"><span class="comment"># order the returned sample based on absolute fold change value</span></span><br><span class="line">dep1 &lt;- dep[order(<span class="built_in">abs</span>(dep$log2FC), decreasing=<span class="built_in">T</span>),]</span><br><span class="line">write.table(dep1, file = <span class="string">&#x27;dep_fdr_raw.txt&#x27;</span>, sep = <span class="string">&#x27;\t&#x27;</span>,<span class="built_in">quote</span> = <span class="built_in">F</span>, row.names = <span class="built_in">F</span>)</span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：R中apply族函数</li>
+        <li>Post author：Yuxuan Wu</li>
+        <li>Create time：2021-05-06 16:40:35</li>
+        <li>
+            Post link：yuxuanwu17.github.io2021/05/06/2021-05-06-R中apply族函数/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/05/05/2021-05-04-Servlet&amp;HTTP&amp;Request%E7%AC%94%E8%AE%B0/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Servlet&amp;HTTP&amp;Request笔记</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span> -
+            
+            2021 <i class="fas fa-heart icon-animate"></i> <a href="/">Yuxuan Wu</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count <span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a> | Theme <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.3.1</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#R-%E5%8E%9F%E7%94%9F%E8%8B%B1%E6%96%87%E8%A7%A3%E9%87%8A%EF%BC%88Apply%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">R 原生英文解释（Apply）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Description"><span class="nav-number">2.0.1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Usage"><span class="nav-number">2.0.2.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Arguments"><span class="nav-number">2.0.3.</span> <span class="nav-text">Arguments</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#apply%E5%87%BD%E6%95%B0%EF%BC%88vector%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">apply函数（vector）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lapply%E5%92%8Csapply%E5%87%BD%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">lapply和sapply函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8ER%E8%AF%AD%E8%A8%80%E7%9A%84list%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F"><span class="nav-number">5.</span> <span class="nav-text">关于R语言的list数据格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E5%85%83%E7%B4%A0%E8%AE%BF%E9%97%AE"><span class="nav-number">6.</span> <span class="nav-text">列表元素访问</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">6.1.</span> <span class="nav-text">列表类型转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E5%88%97%E8%A1%A8%E7%9A%84%E5%87%BD%E6%95%B0%E7%A4%BA%E4%BE%8B%E2%80%93strsplit"><span class="nav-number">6.2.</span> <span class="nav-text">返回列表的函数示例–strsplit()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tapply%E5%87%BD%E6%95%B0"><span class="nav-number">7.</span> <span class="nav-text">tapply函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mapply%E5%87%BD%E6%95%B0"><span class="nav-number">8.</span> <span class="nav-text">mapply函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#demo-in-DEP"><span class="nav-number">9.</span> <span class="nav-text">demo in DEP</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
