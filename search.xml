@@ -16813,4 +16813,189 @@ var reg = /正则表达式/; //推荐使用这种用法
         <tag>notes</tag>
       </tags>
   </entry>
+  <entry>
+    <title>PROTEOMICS DATA ANALYSIS</title>
+    <url>/2021/05/01/2021-05-01-PROTEOMICS-DATA-ANALYSIS/</url>
+    <content><![CDATA[<p>[toc]</p>
+<h1 id="Workflow"><a href="#Workflow" class="headerlink" title="Workflow"></a>Workflow</h1><p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210508102044.png" alt="image-20210508102044747"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210508101336.png" alt="image-20210508101335927"></p>
+<h2 id="Contents"><a href="#Contents" class="headerlink" title="Contents"></a>Contents</h2><ul>
+<li><p>Differentially expressed proteins and representation</p>
+</li>
+<li><p>Gene Ontology based Functional annotation by Blast2GO</p>
+</li>
+<li><p>KEGG based Pathway annotation by KOALA</p>
+</li>
+<li><p>IntAct based Interaction networks by CytoScape</p>
+</li>
+</ul>
+<h2 id="DEPs-amp-REPRESENTATION"><a href="#DEPs-amp-REPRESENTATION" class="headerlink" title="DEPs &amp; REPRESENTATION"></a>DEPs &amp; REPRESENTATION</h2><ul>
+<li><p>DEPS</p>
+</li>
+<li><p>VOLCANO PLOT</p>
+</li>
+<li><p>HIERARCHICAL CLUSTERING</p>
+</li>
+</ul>
+<h3 id="Terminalogies"><a href="#Terminalogies" class="headerlink" title="Terminalogies"></a>Terminalogies</h3><p><code>Fold change</code></p>
+<ul>
+<li><p>A measure describing how much a quantity changes between groups</p>
+</li>
+<li><p>Fold change (Treatment/Control) = Average (Treatment) / Average (Control)</p>
+</li>
+</ul>
+<p><code>Significance level</code></p>
+<ul>
+<li><p>Student’s <em>t</em>-test</p>
+</li>
+<li><p>One-way Analysis of Variance (ANOVA)</p>
+</li>
+<li><p>False Discovery Rate (FDR)</p>
+</li>
+</ul>
+<h3 id="DEPs-steps"><a href="#DEPs-steps" class="headerlink" title="DEPs steps"></a>DEPs steps</h3><ol>
+<li>Download BIO316_L4.xlsx on LMO. This is a a real set of data from a LC-MS/MS based proteomic experiment, pre-processed by Proteome DiscovererTM, with quantitative profile for each of the identified proteins.</li>
+</ol>
+<blockquote>
+<p>A = Control Group, B = Treatment Group, Organism = Mouse</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210501132800.png" alt="image-20210501132800307"></p>
+<p>The explanation of each column and its function</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210506204024.png" alt="image-20210506204024196"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210506204115.png" alt="image-20210506204115484"></p>
+<ol start="2">
+<li>Calculate the <strong>Fold Change</strong> for each protein.</li>
+</ol>
+<ul>
+<li><p>Fold Change (B vs A) = Average(B) / Average(A)</p>
+</li>
+<li><p>In this case, for the first protein Q6IME9, use the Excel imbedded function:</p>
+</li>
+</ul>
+<p><code>=AVERAGE(N2:P2)/AVERAGE(K2:M2)</code></p>
+<ol start="3">
+<li>Evaluate the significance (<strong>P-value</strong>) of difference between group A and B by student’s <em>t</em>-test.</li>
+</ol>
+<ul>
+<li><p>Assumingly the expression intensities of each protein follow a normal distribution</p>
+</li>
+<li><p>Assumingly the variances of the two groups are equal</p>
+</li>
+<li><p>In this case, for the first protein Q6IME9, use the Excel imbedded function:</p>
+</li>
+<li><p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210501132911.png" alt="image-20210501132911381"></p>
+</li>
+</ul>
+<blockquote>
+<p> <strong>Student’s t-test:</strong></p>
+<p> determine if the means of two sets of data are significantly different from each other.</p>
+</blockquote>
+<blockquote>
+<p><strong>ANOVA</strong>:</p>
+<p>provides a statistical test of whether the <strong>population means of several groups are equal</strong>, and therefore generalizes the <em>t</em>-test to <strong>more than two groups</strong>. ANOVA is useful for comparing three or more group means for statistical significance.</p>
+</blockquote>
+<blockquote>
+<p>FDR (<strong>false discovery rate</strong>):</p>
+<p>a method of conceptualizing the rate of type I errors in null hypothesis testing when conducting multiple comparisons</p>
+<ul>
+<li>FDR = Q-value = corrected p-value</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210508104637.png" alt="image-20210508104637032"></p>
+</blockquote>
+<blockquote>
+<p>p-value：衡量一次检验假阳性率的指标（False positive rate） ；<br> q value：衡量错误发现率的指标（False discovery rate，简称FDR，所有检验中假阳性的概率）。即使用Q value的这个参 数预估FDR。Q value 需要利用公式从p value 校正计算后得到，所以Q value 通常又被称为adjusted p value。所以一般情况下：我们可以认为Q value = FDR = adjusted p value，即三者是一个东西，虽然有些定义上的细微区别，但是问题也不大。</p>
+<p>作者：caokai001<br>链接：<a class="link"   href="https://www.jianshu.com/p/949626b18e69" >https://www.jianshu.com/p/949626b18e69<i class="fas fa-external-link-alt"></i></a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+</blockquote>
+<ol start="4">
+<li>Derivate the differentially expressed proteins.</li>
+</ol>
+<ul>
+<li><p>Fold Change &gt;= 1.2 (up-regulated) or &lt;= 1/1.2 (0.833333, down-regulated)</p>
+</li>
+<li><p>P-value &lt; 0.05</p>
+</li>
+<li><p>This results in 275 proteins up-regulated and 146 down-regulated in Group B relative to A.</p>
+</li>
+</ul>
+<blockquote>
+<p>‼️There is no golden standard for Fold Change setting. Usually, for iTRAQ, it is ideal to set the Fold Change cut-off to be above 1.5 folds (e.g. 1.5 folds, 2.0 folds). 1.2 folds is the minimum threshold recognized by peers.</p>
+<p>‼️Ideally, the t-test P-value should be adjusted by Benjamini-Hochberg method. But only very few DEPs will be derived with FDR &lt; 0.05. </p>
+</blockquote>
+<h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips:"></a>Tips:</h3><ul>
+<li>DEP mainly calculates two parameters: fold change &amp; p values</li>
+<li>Derive the differentially expressed proteins based on the fold change &amp; p-values obtained in previous steps</li>
+<li>Determine and label the gene name in either up-regulated or down-regulated</li>
+<li>Fold Change &gt;= 1.2 (up-regulated) or &lt;= 1/1.2 (0.833333, down-regulated) P-value &lt; 0.05</li>
+</ul>
+<h3 id="Select-significant-genes-gene-expression-profiling-experiments"><a href="#Select-significant-genes-gene-expression-profiling-experiments" class="headerlink" title="Select significant genes ( gene expression profiling experiments)"></a>Select significant genes ( gene expression profiling experiments)</h3><p><code>common objective</code> :</p>
+<p>identify those genes that exhibit differential expression (an increased or decreased steady state abundance) under a particular treatment relative to the expression levels of those genes in the control samples</p>
+<ul>
+<li>genes exhibiting a relative<code>fold change</code>greater than some arbitrary cutoff</li>
+</ul>
+<h3 id="GO-amp-KEGG"><a href="#GO-amp-KEGG" class="headerlink" title="GO&amp;KEGG"></a>GO&amp;KEGG</h3><p><code>KEGG</code> (<a class="link"   href="https://www.kegg.jp/kegg/pathway.html" >https://www.kegg.jp/kegg/pathway.html<i class="fas fa-external-link-alt"></i></a>) is a **database resource **for understanding high-level functions and utilities of the biological system, such as the cell, the organism and the ecosystem, from molecular-level information, especially large-scale molecular datasets generated by genome sequencing and other high-throughput experimental technologies.</p>
+<p><code>GO</code>:a major bioinformatics initiative to <code>unify</code> the representation of gene and gene product attributes across all species</p>
+<ol>
+<li>maintain and develop its controlled vocabulary of gene and gene product attributes</li>
+<li>annotate genes and gene products, and assimilate and disseminate annotation data;</li>
+<li>provide tools for easy access to all aspects of the data provided by the project</li>
+<li>enable functional interpretation of experimental data using the GO</li>
+</ol>
+<p>Enrichment module gives you the answer of which pathways, diseases, and GO terms is statistically significant associated with the genes/proteins you just input.</p>
+<h3 id="Volcano-Plot"><a href="#Volcano-Plot" class="headerlink" title="Volcano Plot"></a>Volcano Plot</h3><p>a volcano plot is a type of scatter-plot that is used to quickly ==identify changes in large data sets composed of <strong>replicate</strong> data==.</p>
+<ul>
+<li>plots <code>significance</code> versus <code>fold-change</code> on the y and x axes, respectively</li>
+</ul>
+<p>A volcano plot combines:</p>
+<ul>
+<li>a measure of statistical significance from a statistical test (e.g., a P-value from an ANOVA model)</li>
+<li> the magnitude of the change, enabling quick visual identification of those data-points (genes, etc.) that display large magnitude changes that are also statistically significant. (Fold change)</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210506132329.png" alt="image-20210506132329236"></p>
+<p>values that display <code>large magnitude fold changes</code> (hence being left or right of center) as well as high statistical significance (hence being toward the top).</p>
+<h3 id="Functional-annotation"><a href="#Functional-annotation" class="headerlink" title="Functional annotation"></a>Functional annotation</h3><p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210509114336.png" alt="image-20210509114336277"></p>
+<h2 id="Demo-in-labs"><a href="#Demo-in-labs" class="headerlink" title="Demo in labs"></a>Demo in labs</h2><p><strong>Essay 1:</strong> Given a set of proteins, briefly describe the steps for conducting GO annotation by Blast2GO. (20 points) Interpret the significance and potential application of GO annotation. (20 points) Use your own words (a maximum of 500 words).</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210506133508.png" alt="image-20210506133508471"></p>
+<ol>
+<li>To provide knowledge of roles in biological processes, molecular functions and cellular components for each target protein.</li>
+<li>To provide knowledge of significantly altered biological processes, molecular functions and cellular components and associated target proteins.</li>
+</ol>
+<ul>
+<li><p>­DAVID</p>
+</li>
+<li><p>­Blast2GO</p>
+</li>
+</ul>
+<ol start="3">
+<li><p>Similarity – at least 30%</p>
+</li>
+<li><p>GO evidence codes - to indicate how the annotation to a particular term is supported</p>
+<ul>
+<li>­experimental evidence</li>
+<li>­phylogenetic evidence</li>
+<li>­computational evidence</li>
+<li>­author statements</li>
+<li>­curatorial statements </li>
+<li>­automatically generated annotations</li>
+</ul>
+</li>
+</ol>
+<p><strong>Essay 2:</strong> Given a set of proteins, briefly describe the steps for conducting KEGG based pathway annotation by KOALA. (20 points) Interpret the significance and potential application of KEGG annotation. (20 points) Use your own words (a maximum of 500 words).</p>
+<p><code>pathway annotation</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210506133602.png" alt="image-20210506133602204"></p>
+<ol>
+<li><p>To provide knowledge of roles in biological pathways for each target protein.</p>
+</li>
+<li><p>To provide knowledge of significantly altered biological pathways and associated target proteins.</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Bioinformatics</category>
+      </categories>
+      <tags>
+        <tag>R</tag>
+        <tag>RNA modification</tag>
+        <tag>notes</tag>
+      </tags>
+  </entry>
 </search>
