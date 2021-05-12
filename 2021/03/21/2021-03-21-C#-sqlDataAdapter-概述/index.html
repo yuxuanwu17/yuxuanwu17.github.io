@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Welcome to my personal blogs">
+    <meta name="author" content="Yuxuan Wu">
+    
+    <title>
+        
+            C# sqlDataAdapter 概述 |
+        
+        Yuxuan Wu
+    </title>
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep coding, Keep hungry."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.3.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days age","week":"%s weeks age","month":"%s months age","year":"%s years age"};
+  </script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Yuxuan Wu
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content normal-code-theme">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">C# sqlDataAdapter 概述</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Yuxuan Wu</span>
+                        <span class="level">Lv8</span>
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i> 2021-03-21 09:20:10
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/categories/C/">C#</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/tags/notes/">notes</a>
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/C/">C#</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i> <span>1.8k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i> <span>7 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="SqlDataAdapter概述"><a href="#SqlDataAdapter概述" class="headerlink" title="SqlDataAdapter概述"></a>SqlDataAdapter概述</h1><p>SqlDataAdapter是 DataSet和 SQL Server之间的桥接器，用于检索和保存数据。SqlDataAdapter通过对数据源使用适当的Transact-SQL语句映射 Fill（它可更改DataSet中的数据以匹配数据源中的数据）和 Update（它可更改数据源中的数据以匹配 DataSet中的数据）来提供这一桥接。当SqlDataAdapter填充 DataSet时，它为返回的数据创建必需的表和列（如果这些表和列尚不存在）。</p>
+<h2 id="创建SqlDataAdapter对象："><a href="#创建SqlDataAdapter对象：" class="headerlink" title="创建SqlDataAdapter对象："></a>创建SqlDataAdapter对象：</h2><p>我们可以通过以下三种方法来创建SqlDataAdapter对象：</p>
+<h3 id="1、通过连接字符串和查询语句"><a href="#1、通过连接字符串和查询语句" class="headerlink" title="1、通过连接字符串和查询语句"></a>1、通过连接字符串和查询语句</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> strConn=<span class="string">&quot;uid=账号;pwd=密码;database=数据库;server=服务器&quot;</span>;<span class="comment">//SQL Server链接字符串</span></span><br><span class="line">strSql=<span class="string">&quot;SELECT * FROM 表名&quot;</span>;</span><br><span class="line"> </span><br><span class="line">SqlDataAdapter da=<span class="keyword">new</span> SqlDataAdapter(strSql,strConn);</span><br><span class="line">DataSet ds=<span class="keyword">new</span> DataSet();<span class="comment">//创建DataSet实例</span></span><br><span class="line">da.Fill(ds,<span class="string">&quot;自定义虚拟表名&quot;</span>);<span class="comment">//使用DataAdapter的Fill方法(填充)，调用SELECT命令</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>这种方法有一个潜在的缺陷。假设应用程序中需要多个SqlDataAdapter对象，用这种方式来创建的话，会导致创建每个SqlDataAdapter时，都同时创建一个新的SqlConnection对象，方法二可以解决这个问题</p>
+<h3 id="2、通过查询语句和SqlConnection对象来创建"><a href="#2、通过查询语句和SqlConnection对象来创建" class="headerlink" title="2、通过查询语句和SqlConnection对象来创建"></a>2、通过查询语句和SqlConnection对象来创建</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> strConn=<span class="string">&quot;uid=账号;pwd=密码;database=数据库;server=服务器&quot;</span>;<span class="comment">//SQL Server链接字符串</span></span><br><span class="line"> SqlConnection conn=<span class="keyword">new</span> SqlConnection(strConn);</span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span> strSql=<span class="string">&quot;SELECT * FROM 表名&quot;</span>;</span><br><span class="line"> SqlDataAdapter da = <span class="keyword">new</span> SqlDataAdapter(strSql, conn);</span><br><span class="line">DataSet ds=<span class="keyword">new</span> DataSet();<span class="comment">//创建DataSet实例</span></span><br><span class="line">da.Fill(ds,<span class="string">&quot;自定义虚拟表名&quot;</span>);<span class="comment">//使用DataAdapter的Fill方法(填充)，调用SELECT命令</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="3、通过SqlCommand对象来创建"><a href="#3、通过SqlCommand对象来创建" class="headerlink" title="3、通过SqlCommand对象来创建"></a>3、通过SqlCommand对象来创建</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> strConn=<span class="string">&quot;uid=账号;pwd=密码;database=数据库;server=服务器&quot;</span>;<span class="comment">//SQL Server链接字符串  </span></span><br><span class="line">SqlConnection connSql=<span class="keyword">new</span> SqlConnection (strConn); <span class="comment">//Sql链接类的实例化  </span></span><br><span class="line">connSql.Open ();<span class="comment">//打开数据库  </span></span><br><span class="line"><span class="comment">//使用SqlDataAdapter时没有必要从Connection.open()打开，  </span></span><br><span class="line"><span class="comment">//SqlDataAdapter会自动打开关闭它。  </span></span><br><span class="line"><span class="built_in">string</span> strSql = <span class="string">&quot;SELECT * FROM 表名&quot;</span>; <span class="comment">//要执行的SQL语句  </span></span><br><span class="line">SqlCommand cmd=<span class="keyword">new</span> SqlCommand(strSql,connsql);</span><br><span class="line">SqlDataAdapter da=<span class="keyword">new</span> SqlDataAdapter(cmd); <span class="comment">//创建DataAdapter数据适配器实例  </span></span><br><span class="line">DataSet ds=<span class="keyword">new</span> DataSet();<span class="comment">//创建DataSet实例  </span></span><br><span class="line">da.Fill(ds,<span class="string">&quot;自定义虚拟表名&quot;</span>);<span class="comment">//使用DataAdapter的Fill方法(填充)，调用SELECT命令  </span></span><br><span class="line">ConnSql.Close ();<span class="comment">//关闭数据库 </span></span><br></pre></td></tr></table></figure>
+<p>SqlDataAdapter da=new SqlDataAdapter(strSQL,ConnSql); //创建DataAdapter数据适配器实例DataSet ds=new DataSet();//创建DataSet实例da.Fill(ds,”自定义虚拟表名”);//使用DataAdapter的Fill方法(填充)，调用SELECT命令ConnSql.Close ();//关闭数据库<br>注意</p>
+<p>如果只需要执行SQL语句或SP，就没必要用到DataAdapter ，直接用SqlCommand的Execute系列方法就可以了。sqlDataadapter的作用是实现Dataset和DB之间的桥梁：比如将对DataSet的修改更新到数据库。</p>
+<p>SqlDataAdapter的UpdateCommand的执行机制是：当调用SqlDataAdapter.Update()时，检查DataSet中的所有行，然后对每一个修改过的Row执行SqlDataAdapter.UpdateCommand ，也就是说如果未修改DataSet中的数据，SqlDataAdapter.UpdateCommand不会执行。</p>
+<h2 id="使用要点"><a href="#使用要点" class="headerlink" title="使用要点"></a>使用要点</h2><p>1、SqlDataAdapter内部通过SqlDataReader获取数据，而默认情况下SqlDataReader不能获知其查询语句对应的数据库表名，</p>
+<p>所以下面的代码：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> strConn = <span class="string">&quot;uid=账号;pwd=密码;database=数据库;server=服务器&quot;</span>;<span class="comment">//SQL Server链接字符串  </span></span><br><span class="line">strSql=<span class="string">&quot;SELECT * FROM 表名&quot;</span>;  </span><br><span class="line"></span><br><span class="line">SqlDataAdapter da = <span class="keyword">new</span> SqlDataAdapter(strSql,strConn);</span><br><span class="line">DataSet ds = <span class="keyword">new</span> DataSet();</span><br><span class="line">da.Fill(ds);</span><br></pre></td></tr></table></figure>
+
+<p>会在DataSet中创建一个新的DataTable，这个新的DataTable会拥有名为CustomerID和CompanyName 列，但是DataTable对象的名称是Table，而不是我们希望的Customers。</p>
+<p>这个问题，可以通过添加TableMapping来解决： </p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> strConn=<span class="string">&quot;uid=账号;pwd=密码;database=数据库;server=服务器&quot;</span>;<span class="comment">//SQL Server链接字符串  </span></span><br><span class="line">strSql=<span class="string">&quot;SELECT * FROM 表名&quot;</span>;  </span><br><span class="line"></span><br><span class="line">SqlDataAdapter da=<span class="keyword">new</span> SqlDataAdapter(strSQL,strConn);</span><br><span class="line">da.TableMappings.Add(<span class="string">&quot;Table&quot;</span>，<span class="string">&quot;Customers&quot;</span>);	 <span class="comment">// 设置对象名称</span></span><br><span class="line">DataSet ds=<span class="keyword">new</span> DataSet();</span><br><span class="line">da.Fill(ds);</span><br></pre></td></tr></table></figure>
+<p>其实最简洁的方法是通过使用 Fill 方法的重载，通过指定 DataTable ，像这样：<br>SqlDataAdapter.Fill(DataSet,”MyTableName”);</p>
+<p>这样就可以不必使用TableMappings集合。</p>
+<p>2、在使用Fill方式时，可以指定DataTable，而不是DataSet：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> strConn=<span class="string">&quot;uid=账号;pwd=密码;database=数据库;server=服务器&quot;</span>;<span class="comment">//SQL Server链接字符串  </span></span><br><span class="line">strSql=<span class="string">&quot;SELECT * FROM 表名&quot;</span>;  </span><br><span class="line"></span><br><span class="line">SqlDataAdapter da = <span class="keyword">new</span> SqlDataAdapter(strSql, strConn);</span><br><span class="line">DataTable tbl=<span class="keyword">new</span> DataTable( );</span><br><span class="line">da.Fill(tbl);</span><br></pre></td></tr></table></figure>
+<p>3、注意打开和关闭连接的处理</p>
+<p>在调用SqlCommand对象执行sql命令之前，需要保证与该对象关联的SqlConnection对象时打开的，否则SqlCommand的方法执行时将引发一个异常，但是我们在上面的代码中看到，SqlDataAdapter没有这样的要求。</p>
+<p>如果调用SqlDataAdapter的Fill方法，并且其SelectCommand属性的SqlConnection是关闭状态，则SqlDataAdapter会自动打开它，然后提交查询，获取结果，最后关闭连接。如果在调用Fill方法前，SqlConnection是打开的，则查询执行完毕后，SqlConnection还将是打开的，也就是说SqlDataAdapter会保证SqlConnection的状态恢复到原来的情形。</p>
+<p>这有时会导致性能问题，需要注意，例如下面的代码：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> strConn=<span class="string">&quot;uid=账号;pwd=密码;database=数据库;server=服务器&quot;</span>;<span class="comment">//SQL Server链接字符串  </span></span><br><span class="line">SqlConnection conn=<span class="keyword">new</span> SqlConnection(strConn);</span><br><span class="line">SqlDataAdapter daCustomers,daOrders;</span><br><span class="line"></span><br><span class="line">strSql=<span class="string">&quot;SELECT * FROM Customers&quot;</span>;</span><br><span class="line"> daCustomers = <span class="keyword">new</span> SqlDataAdapter(strSql, conn);</span><br><span class="line"></span><br><span class="line">strSql=<span class="string">&quot;SELECT * FROM Orders&quot;</span>;</span><br><span class="line"> daOrders=<span class="keyword">new</span> SqlDataAdapter(strSql, conn);</span><br><span class="line"></span><br><span class="line">DataSet ds=<span class="keyword">new</span> DataSet();</span><br><span class="line"></span><br><span class="line">daCustomers.Fill(ds,<span class="string">&quot;Customers&quot;</span>);</span><br><span class="line"> daOrders.Fill(ds,<span class="string">&quot;Orders&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>以上代码会导致连接被打开和关闭两次，在调用Fill方法时各一次。为了避免打开和关闭SqlConnection对象，在调用SqlDataAdapter对象的Fill方法之前，我们可以先打开SqlConnection对象，如果希望之后关闭连接，我们可以再调用Close方法，就像这样：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cn.Open();</span><br><span class="line"></span><br><span class="line">daCustomers.Fill(ds,<span class="string">&quot;Customers&quot;</span>);</span><br><span class="line"> daOrders.Fill(ds,<span class="string">&quot;Orders&quot;</span>);</span><br><span class="line"></span><br><span class="line">cn.Close();</span><br></pre></td></tr></table></figure>
+
+
+
+<p>4、多次调用Fill方法需要注意数据重复和有效更新数据的问题</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> strConn=<span class="string">&quot;uid=账号;pwd=密码;database=数据库;server=服务器&quot;</span>;<span class="comment">//SQL Server链接字符串  </span></span><br><span class="line"> strSql=<span class="string">&quot;SELECT * FROM Customers&quot;</span>;</span><br><span class="line"></span><br><span class="line">SqlDataAdapter da=<span class="keyword">new</span> SqlDataAdapter(strSql, strConn);</span><br><span class="line"> DataSet ds=<span class="keyword">new</span> DataSet();</span><br><span class="line"> da.Fill(ds,<span class="string">&quot;Customers&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//…….</span></span><br><span class="line"></span><br><span class="line">da.Fill(ds,<span class="string">&quot;Customers&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>我们分析上面的代码，通过两次调用Fill方法，SqlDataAdapter执行两次查询，并两次将查询结果保存到DataSet中，第一次调用在DataSet中创建了一个名为Customers的新表。第二次调用Fill方法将查询的结果追加到DataSet中的同一个表中，因此，每个客户的信息将在DataSet中出现两次！当然，如果数据库管理员对Customers表定义了主键，则SqlDataAdapter在天成DataTable时，会判断重复行，并自动丢弃掉旧的值。</p>
+<p>考虑一下，假定一个特定客户在第一次调用Fill方法时，存储于数据库中，那么SqlDataAdapter会将其添加到新建的DataTable中。如果后来这个客户被删除了，那么第二次调用Fill方法时，SqlDataAdapter将不会在查询结果中找到该客户信息，但是它也不会将客户信息从DataSet中删除。这就导致了数据更新的问题。</p>
+<p>所以推荐的做法是，在调用Fill方法前，先删除本地DataSet中缓存的数据!</p>
+<p>————————————————<br>版权声明：本文为CSDN博主「CHENG Jian」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/gatieme/article/details/20695853" >https://blog.csdn.net/gatieme/article/details/20695853<i class="fas fa-external-link-alt"></i></a></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：C# sqlDataAdapter 概述</li>
+        <li>Post author：Yuxuan Wu</li>
+        <li>Create time：2021-03-21 09:20:10</li>
+        <li>
+            Post link：yuxuanwu17.github.io2021/03/21/2021-03-21-C#-sqlDataAdapter-概述/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/03/21/2021-03-19-Csharp-notes/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">C# notes</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/03/19/2021-03-19-Csharp-DataTable-%E7%9A%84%E7%94%A8%E6%B3%95/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">C# DataTable 的用法</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span> -
+            
+            2021 <i class="fas fa-heart icon-animate"></i> <a href="/">Yuxuan Wu</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count <span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a> | Theme <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.3.1</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SqlDataAdapter%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">SqlDataAdapter概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BASqlDataAdapter%E5%AF%B9%E8%B1%A1%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">创建SqlDataAdapter对象：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E9%80%9A%E8%BF%87%E8%BF%9E%E6%8E%A5%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8C%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.1.1.</span> <span class="nav-text">1、通过连接字符串和查询语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E9%80%9A%E8%BF%87%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5%E5%92%8CSqlConnection%E5%AF%B9%E8%B1%A1%E6%9D%A5%E5%88%9B%E5%BB%BA"><span class="nav-number">1.1.2.</span> <span class="nav-text">2、通过查询语句和SqlConnection对象来创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E9%80%9A%E8%BF%87SqlCommand%E5%AF%B9%E8%B1%A1%E6%9D%A5%E5%88%9B%E5%BB%BA"><span class="nav-number">1.1.3.</span> <span class="nav-text">3、通过SqlCommand对象来创建</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%A6%81%E7%82%B9"><span class="nav-number">1.2.</span> <span class="nav-text">使用要点</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

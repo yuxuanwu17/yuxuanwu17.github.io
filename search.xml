@@ -9693,40 +9693,38 @@ var reg = /正则表达式/; //推荐使用这种用法
 <li>protected——成员只能由类或派生类中的代码访问。</li>
 </ul>
 <h2 id="C-网页web开发-ASP-NET"><a href="#C-网页web开发-ASP-NET" class="headerlink" title="C#网页web开发(ASP.NET)"></a>C#网页web开发(ASP.NET)</h2><ul>
-<li><p>C/S（Client/Server）结构：</p>
+<li><p><code>C/S（Client/Server）结构：</code></p>
 <p>即大家熟知的客户机和服务器结构，在特定的应用中无论是Client端还是Server端都需要特定的软件支持。一般就是那种需要下载不同版本的安装包，在PC机安装，比如：QQ，360安全卫士等。</p>
 </li>
-<li><p>B/S（Browser/Server）结构：</p>
+<li><p><code>B/S（Browser/Server）结构：</code></p>
 <p>即浏览器和服务器结构，在这种结构下，用户工作界面是通过www浏览器来实现，极少部分事物逻辑在前端实现，主要事物逻辑在服务器端实现，比如我们的网站，网络办公等。</p>
 </li>
 </ul>
-<p>==预备知识：==</p>
-<p>ASP.NET并不是一门编程语言，而是一个统一的Web开发模型，她支持可视化的方式创建企业级网站，ASP.NET是.NET Framework的一部分，在ASP.NET中可以利用.NET Framework中的类进行编程，在ASP.NET 中可以用VB.NET、C#、JScript.NET等编程语言来开发web应用程序。    </p>
+<h3 id="预备知识："><a href="#预备知识：" class="headerlink" title="预备知识："></a>预备知识：</h3><p>ASP.NET并不是一门编程语言，而是一个<code>统一的Web开发模型</code>，她支持可视化的方式创建企业级网站，ASP.NET是.NET Framework的一部分，在ASP.NET中可以利用.NET Framework中的类进行编程，在ASP.NET 中可以用VB.NET、C#、JScript.NET等编程语言来开发web应用程序。    </p>
 <p><strong>WebApplication:</strong> (Web应用程序)是新的网站类型，但是在WebSite（网站)下代码不分命名空间，不利于工程化开发，CS代码修改后不需要重启，代码出错不易察觉，但是可以把WebSite程序转化为WebApplication,在WebSite上点击右键可以有转化为WebApplication的功能，记住，要想调试必须是在Debug的模式下才会有断点生效，并且F12转到定义，然后可以跟进和步过，调试是开发的关键,Session是针对不同的浏览器进程相关，Application是针对所有的应用程序相关，&lt;%  中间包含C#代码在HTML里面 %&gt;  &lt;%=中间放动态的表达式%&gt;</p>
 <p><strong>静态网页</strong>：就是服务器向浏览器发送单纯的Html语言（只包含具有在客户端执行的代码），速度很快，但是维护不方便</p>
 <p><strong>动态网页</strong>：包含有在Web服务器端执行的代码，然后就是把这一堆都发送给浏览器，又因为浏览器只认识html（还有js脚本等）,所以只能解析html，是在服务器动态组成html</p>
-<p><strong>名词解释</strong>：<br><strong>IIS</strong>： Internet information server</p>
+<p><strong>名词解释</strong>：<br><strong>IIS</strong>：Internet information server</p>
 <p><strong>CGI</strong>: common Getway interface,通用网关接口</p>
 <p><strong>CGI</strong>（Computer Graphics Interface) 计算机图形接口标准</p>
-<p>==1. 解释一种错误的认识==<br>其实在空间里拉过来的控件是完全一样的，就是在自己写的html的内容，因为服务器端的语言是asp的语言，要经过服务器解析为html,所以这里的使用方式和html是完全一样的，这里面的Botton和你托的控件是完全一样的，而浏览器只认html,和脚本，这里只是要翻译而已，这里明确的就是可以完全按照html的语法进行写，在一般的控件后的属性只要加个<input  id = "abc" type ="button" runat = "server"> 这样就是说明为服务器语言，</p>
+<h3 id="解释一种错误的认识"><a href="#解释一种错误的认识" class="headerlink" title="解释一种错误的认识"></a>解释一种错误的认识</h3><p>其实在空间里拉过来的控件是完全一样的，就是在自己写的html的内容，因为服务器端的语言是asp的语言，要经过服务器解析为html,所以这里的使用方式和html是完全一样的，这里面的Botton和你托的控件是完全一样的，而浏览器只认html,和脚本，这里只是要翻译而已，这里明确的就是可以完全按照html的语法进行写，在一般的控件后的属性只要加个&lt;input  id = “abc” type =”button” runat = “server”&gt; 这样就是说明为服务器语言，</p>
 <p><strong>asp语言的是解释性的语言（脚本）</strong>，不利于工程化开发,只有运行到该页的时候才报错，使用webApplication和webSite修改的aspx都不需要重启、大规模的网站一般使用webApplication，并且在VS里还有个在网站上点击右键，有使website转换为webApplication的功能</p>
-<p>==2. 简单的服务器-浏览器交互模式：==</p>
-<p>1.提交到服务器的表单元素一定要有name属性，如：</p>
+<h3 id="简单的服务器-浏览器交互模式"><a href="#简单的服务器-浏览器交互模式" class="headerlink" title="简单的服务器-浏览器交互模式:"></a>简单的服务器-浏览器交互模式:</h3><p>1.提交到服务器的表单元素一定要有name属性，如：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;Text1&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;UserName&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;Submit1&quot;</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;提交&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-<p>2.提交页面的制作过程为：在网站下添加新项-&gt;添加一般应用程序-&gt;.ashx页面的出现-&gt;ProcessRequest事件里写代码 ProcessRequest事件是对所有的Http请求做的处理，</p>
+<p>2.提交页面的制作过程为：在<code>网站下添加新项</code>-&gt;<code>添加一般应用程序</code>-&gt;<code>.ashx页面的出现</code>-&gt;<code>ProcessRequest事件</code>里写代码 ProcessRequest事件是对所有的Http请求做的处理，</p>
 <blockquote>
 <p>服务器和浏览器的交互要有三个阶段，请求-&gt;处理-&gt;响应</p>
 </blockquote>
-<p>3.首先再建立一个html页面，在你想要提交的表单里添加 name属性啊，在form的action=”aaa.aspx”;就是要提交请求的页面，也可以的任意.aspx页面，在不是使用type = “submit”属性提交的情况下<br>可以使用 在form里添加 runat = “server” 并且  form 的 id = “form1” οnclick=”document.getElementById(‘form1’).submit()” type = “button” 使button的样子也可以提交表单，呵呵</p>
-<p>4.在ProcessRequst事件中具体的方法是，先判断是否是由表单提交过来的，简单的方法就是在form里建立一个<input type = "hidden" value ="true" name = "ispostback"> 就是一个隐藏的控件，在浏览器端不可见，呵呵，为的就是看看是否是由本页提交过来的；</p>
-<p>5.先获取该字段用 string ispostback = context.Request[“ispostback”];<br>再用if判断就行了，几个常用的方法有：</p>
-<p>string 模版全路径 = context.Server.MapPath(“moban.htm”);</p>
-<p>string content = System.IO.File.ReadAllText(模版全路径); //因为这里本来就是字符串了，所以就<br>//不用再加双引号了哈</p>
+<p>3.首先再建立一个html页面，在你想要提交的表单里添加 name属性啊，在form的action=”aaa.aspx”;就是要提交请求的页面，也可以的任意.aspx页面，在不是使用type = “submit”属性提交的情况下<br>可以使用 在form里添加 runat = “server” 并且  form 的 <code>id = &quot;form1&quot; οnclick=&quot;document.getElementById(‘form1’).submit()&quot;</code> type = “button” 使button的样子也可以提交表单，呵呵</p>
+<p>4.在ProcessRequst事件中具体的方法是，先判断是否是由表单提交过来的，简单的方法就是在form里建立一个&lt;input type = “hidden” value =”true” name = “ispostback”&gt; 就是一个隐藏的控件，在浏览器端不可见，呵呵，为的就是看看是否是由本页提交过来的；</p>
+<p>5.先获取该字段用 <code>string ispostback = context.Request[&quot;ispostback&quot;];</code><br>再用if判断就行了，几个常用的方法有：</p>
+<p><code>string 模版全路径 = context.Server.MapPath(&quot;moban.html&quot;);</code></p>
+<p><code>string content = System.IO.File.ReadAllText(模版全路径);</code> //因为这里本来就是字符串了，所以就<br>//不用再加双引号了哈</p>
 <p>content.Replace(“@num”,number);//表示将本地模版的num的值变为number，现在还没有写回去，在这里的content是获得本地一个相同模版的全路径下的所有文本内容，则会使下面的替换成为可能，步骤是先将读取的本地模版字符串信息里的@变量替换为需要的字符串，然后再用context.Response.Write(content);将修改后的信息的完整页面写回请求页面</p>
-<p>string fullpath = context.Server.MapPath(“aaa.htm”); //获得文件全路径</p>
-<p>string content = System.IO.File.ReadAllText(fullpath); //读取文件路径下的文件内容</p>
-<p>context.Response.Write(content);//向页面写东西，也可以理解为响应</p>
-<p>content = content.Replace(“@value”,number); //用number的值替换@value<br>注意是在html 中有 &lt; input type = “text” value = “@value”&gt;的前提下</p>
+<p><code>string fullpath = context.Server.MapPath(&quot;aaa.htm&quot;);</code> //获得文件全路径</p>
+<p><code>string content = System.IO.File.ReadAllText(fullpath);</code> //读取文件路径下的文件内容</p>
+<p><code>context.Response.Write(content);</code>//向页面写东西，也可以理解为响应</p>
+<p><code>content = content.Replace(&quot;@value&quot;,number);</code> //用number的值替换@value<br>注意是在html 中有 &lt; input type = “text” value = “@value”&gt;的前提下</p>
 <p>具体代码如下：<br>    在.ashx的页面：</p>
 <figure class="highlight c#"><table><tr><td class="code"><pre><span class="line">&lt;%@ WebHandler Language=<span class="string">&quot;C#&quot;</span> Class=<span class="string">&quot;IncValue1&quot;</span> %&gt;</span><br><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Web;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">IncValue1</span> : <span class="title">IHttpHandler</span> &#123;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ProcessRequest</span> (<span class="params">HttpContext context</span>)</span> &#123;</span><br><span class="line">    context.Response.ContentType = <span class="string">&quot;text/html&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">string</span> ispostback = context.Request[<span class="string">&quot;ispostback&quot;</span>];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">string</span> number = context.Request[<span class="string">&quot;number&quot;</span>];</span><br><span class="line">    <span class="keyword">if</span> (ispostback == <span class="string">&quot;true&quot;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">int</span> i = Convert.ToInt32(number);</span><br><span class="line"></span><br><span class="line">      i++;</span><br><span class="line">      number = i.ToString();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      number = <span class="string">&quot;0&quot;</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">string</span> fullpath = context.Server.MapPath(<span class="string">&quot;IncValue1.htm&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">string</span> content = System.IO.File.ReadAllText(fullpath);</span><br><span class="line"></span><br><span class="line">    content = content.Replace(<span class="string">&quot;@value&quot;</span>,number);</span><br><span class="line"></span><br><span class="line">    context.Response.Write(content);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="built_in">bool</span> IsReusable &#123;</span><br><span class="line">    <span class="keyword">get</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -9735,42 +9733,30 @@ var reg = /正则表达式/; //推荐使用这种用法
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--要记住的是，在表单里面只有key和value能提交到服务器，这里的Key就是name,这里的value就是Value,就是说在页面上的数据必须设置name和value属性，才能交给服务器，呵呵--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span> =<span class="string">&quot;IncValue1.ashx&quot;</span> <span class="attr">id</span> = <span class="string">&quot;form1&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span> = <span class="string">&quot;hidden&quot;</span> <span class="attr">value</span> =<span class="string">&quot;true&quot;</span> <span class="attr">name</span> =<span class="string">&quot;ispostback&quot;</span> /&gt;</span></span><br><span class="line">    姓名：<span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;Text1&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;number&quot;</span> <span class="attr">value</span> = <span class="string">&quot;@value&quot;</span> /&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;Submit1&quot;</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;自增&quot;</span> <span class="attr">onclick</span> =<span class="string">&quot;document.getElementById(&#x27;form1&#x27;).submit()&quot;</span> /&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">        <span class="comment">&lt;!-- 如果是type = &quot;button&quot; ,则不会自动提交表单，需要自己写代码--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 
-<h3 id="C-Instance"><a href="#C-Instance" class="headerlink" title="C# Instance"></a>C# Instance</h3><p><a class="link"   href="https://hackernoon.com/c-static-vs-instance-classes-and-methods-50fe8987b231" >https://hackernoon.com/c-static-vs-instance-classes-and-methods-50fe8987b231<i class="fas fa-external-link-alt"></i></a></p>
-<h4 id="summary"><a href="#summary" class="headerlink" title="summary"></a>summary</h4><ul>
-<li>Non-static (“regular”) classes can be instantiated.</li>
-<li>Static classes cannot be instantiated.</li>
-<li>Non-static classes can have instance methods <em>and</em> static methods.</li>
-<li>Static classes can only have static methods.</li>
-<li>Instance methods must be called on the instances of the class, not the class itself.</li>
-<li>Static methods must be called on the class itself, not on the instances of the class.</li>
-</ul>
-<h4 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h4><p><strong>Static vs Non-Static Classes and Static vs Instance Methods</strong></p>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Static Class</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title">exampleStaticClass</span></span><br><span class="line">&#123;&#125;</span><br><span class="line"><span class="comment">// Static Method</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">int</span> <span class="title">exampleStaticMethod</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<p><strong>static keywords differentiates it from an instance method or class</strong></p>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Class </span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">exampleClass</span></span><br><span class="line">&#123;&#125;</span><br><span class="line"><span class="comment">// Instance Method</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> instance <span class="built_in">int</span> <span class="title">exampleInstanceMethod</span> (<span class="params"></span>) </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<p>Classes are always classes that can be instantiated (non-static) unless specified to be static classes.</p>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Defining the (non-static) class</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">exampleClass</span></span><br><span class="line">&#123;&#125;</span><br><span class="line"><span class="comment">// Creating an instance of the class</span></span><br><span class="line">exampleClass myNewInstance = <span class="keyword">new</span> exampleClass();</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h4><p>Methods that are declared using the static keyword will allow you to call that method onto a static class itself, versus onto the <em>instance</em> of a class.</p>
-<p>if your method was declared using the instance keyword you would be able to apply that method to <em>only</em> instantiated objects of that class and not onto the class itself.</p>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Declaring a static class</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title">exampleStaticClass</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Declaring a static method</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> str <span class="title">exampleStaticMethod</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        Console.WriteLine(<span class="string">&quot;Static Methods are allowed in static classes.&quot;</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Declaring a instance method</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> str <span class="title">exampleInstanceMethod</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Console.WriteLine(<span class="string">&quot;Instance Methods are not allowed in static classes&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Calling the methods on the class.</span></span><br><span class="line">exampleStaticClass.exampleStaticMethod(); <span class="comment">// Would work</span></span><br><span class="line">exampleStaticClass.exampleInstanceMethod(); <span class="comment">// Would not work</span></span><br></pre></td></tr></table></figure>
-<p>Not only that, but while non-static classes may contain both static and instance methods, static classes are <em>only</em> allowed to have static methods.</p>
-<p>However, those static methods inside the instance class can not be called on the instance but only on the class itself.</p>
-<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Declaring a (non-static) class</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">exampleClass</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Declaring a static method</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> str <span class="title">exampleStaticMethod</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        Console.WriteLine(<span class="string">&quot;Static Methods are allowed in both non-static and static classes.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">// Declaring a instance method</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> str <span class="title">exampleInstanceMethod</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        Console.WriteLine(<span class="string">&quot;Instance Methods are allowed only in non-static classes&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Creating an instance of the class</span></span><br><span class="line">exampleClass myNewInstance = <span class="keyword">new</span> exampleClass();</span><br><span class="line"><span class="comment">// Calling the methods on the instance of the class.</span></span><br><span class="line">myNewInstance.exampleInstanceMethod(); <span class="comment">// Would work</span></span><br><span class="line">myNewInstance.exampleStaticMethod(); <span class="comment">// Would not work</span></span><br><span class="line"><span class="comment">// Calling the static method on the instance class itself (not the instance of the class but the class itself)</span></span><br><span class="line">exampleClass.exampleStaticMethod(); <span class="comment">// Would work</span></span><br></pre></td></tr></table></figure>
-
-
-<h2 id="C-知识图谱大全"><a href="#C-知识图谱大全" class="headerlink" title="C#知识图谱大全"></a>C#知识图谱大全</h2><p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210320093707.png" alt="C#语法知识1"></p>
+<h3 id="ashx文件和HttpHandler"><a href="#ashx文件和HttpHandler" class="headerlink" title="ashx文件和HttpHandler"></a>ashx文件和HttpHandler</h3><p><strong>什么是HttpHandler</strong></p>
+<p>HttpHandler是一个HTTP请求的真正处理中心，也正是在这个HttpHandler容器中，ASP.NET Framework才真正地对客户端请求的<strong>服务器</strong>页面做出编译和执行，并将处理过后的信息附加在HTTP请求信息流中再次返回到HttpModule中。</p>
+<p><strong>IHttpHandler是什么</strong></p>
+<p>IHttpHandler定义了如果要实现一个HTTP请求的处理所必需实现的一些系统约定。HttpHandler与HttpModule不同，一旦定义了自己的HttpHandler类，那么它对系统的HttpHandler的关系将是“覆盖”关系。</p>
+<p><strong>IHttpHandler如何处理HTTP请求</strong></p>
+<p>当一个HTTP请求经同HttpModule容器传递到HttpHandler容器中时，ASP.NET Framework会调用HttpHandler的ProcessRequest成员方法来对这个HTTP请求进行真正的处理。以一个ASPX页面为例，正是在这里一个ASPX页面才被系统处理解析，并将处理完成的结果继续经由HttpModule传递下去，直至到达客户端。</p>
+<p>对于ASPX页面，ASP.NET Framework在默认情况下是交给System.Web.UI.PageHandlerFactory这个HttpHandlerFactory来处理的。所谓一个HttpHandlerFactory，所谓一个HttpHandlerFactory，是指当一个HTTP请求到达这个HttpHandler Factory时，HttpHandlerFactory会提供出一个HttpHandler容器，交由这个HttpHandler容器来处理这个HTTP请求。</p>
+<p>一个HTTP请求都是最终交给一个HttpHandler容器中的ProcessRequest方法来处理的。</p>
+<p><code>HttpModule：</code>Http模块，可以在页面处理前后、应用程序初始化、出错等时候加入自己的事件处理程序<br><code>HttpHandler：</code>Http处理程序，处理页面请求<br><code>HttpHandlerFactory：</code>用来创建Http处理程序，创建的同时可以附加自己的事件处理程序</p>
+<p><a class="link"   href="https://www.cnblogs.com/DSC1991/p/8674960.html" >https://www.cnblogs.com/DSC1991/p/8674960.html<i class="fas fa-external-link-alt"></i></a></p>
+<p><code>ashx：</code>.ashx 文件用于写web handler的。.ashx文件与.aspx文件类似，可以通过它来调用HttpHandler类，它免去了普通.aspx页面的控件解析以及页面处理的过程。其实就是带HTML和C#的混合文件。</p>
+<p><code>.ashx文件</code>适合产生供浏览器处理的、不需要回发处理的数据格式，例如用于生成动态图片、动态文本等内容。</p>
+<h3 id="Ajax回调函数"><a href="#Ajax回调函数" class="headerlink" title="Ajax回调函数"></a>Ajax回调函数</h3><p>如果要处理 $.ajax() 得到的数据，则需要使用回调函数：beforeSend、error、dataFilter、success、complete。</p>
+<p><strong>beforeSend</strong></p>
+<p>在发送请求之前调用，并且传入一个 XMLHttpRequest 作为参数。</p>
+<p><strong>error</strong></p>
+<p>在请求出错时调用。传入 XMLHttpRequest 对象，描述错误类型的字符串以及一个异常对象（如果有的话）</p>
+<p><strong>dataFilter</strong></p>
+<p>在请求成功之后调用。传入返回的数据以及 “dataType” 参数的值。并且必须返回新的数据（可能是处理过的）传递给 success 回调函数。</p>
+<p><strong>success</strong></p>
+<p>当请求之后调用。传入返回后的数据，以及包含成功代码的字符串。</p>
+<p><strong>complete</strong></p>
+<p>当请求完成之后调用这个函数，无论成功或失败。传入 XMLHttpRequest 对象，以及一个包含成功或错误代码的字符串。</p>
+<h2 id="C-图谱"><a href="#C-图谱" class="headerlink" title="C# 图谱"></a>C# 图谱</h2><p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210320093707.png" alt="C#语法知识1"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210320093715.png" alt="C#语法知识2"></p>
 ]]></content>
       <categories>
@@ -9852,6 +9838,7 @@ var reg = /正则表达式/; //推荐使用这种用法
 <p><strong>63、什么是Web API？</strong></p>
 <p><strong>64、Web Service与Web API的关系？</strong></p>
 <p><strong>65、前后端分离</strong></p>
+<p><strong>66、{ get; set; }写法</strong></p>
 <hr>
 <h3 id="1、ASP-NET页面之间传值方式？"><a href="#1、ASP-NET页面之间传值方式？" class="headerlink" title="1、ASP.NET页面之间传值方式？"></a><strong>1、ASP.NET页面之间传值方式？</strong></h3><ul>
 <li><p>Request.QueryString[“name”]</p>
@@ -10406,6 +10393,9 @@ var reg = /正则表达式/; //推荐使用这种用法
 <p>最核心的就是无论你后端换了什么语言，换了什么人去编写，换了什么样的服务器，只要你们定义的一个接口规则不变，然后不会影响到用户的使用，数据的一个展示。</p>
 <p>同时反过来也一样，无论你前端换了什么UI框架，欸，我今天用easyui，明天我用layui，后天我用bootstrap，你也能够根据定义的接口文档去展示相关数据和效果，那么就是前后端分离。</p>
 <p>说白了就是相互之间是独立的，这就是为什么有前后端分离这个观点出来，并且大家都认可不迟反对态度，恰恰就是说明前后端分离当中的两个字，“分离”</p>
+<h3 id="66、-get-set-写法"><a href="#66、-get-set-写法" class="headerlink" title="66、{ get; set; }写法"></a>66、{ get; set; }写法</h3><p>代表，属性xxx 可以 是获取或设置。<br>如果是 仅是 set 则只能设置，反之亦然。<br>老版本的.net framework 对于属性，不能省略，必须这样做：</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="built_in">int</span> adminID = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">public</span> AdminID</span><br><span class="line">{</span><br><span class="line"> <span class="keyword">get</span>{<span class="keyword">return</span> adminID;}</span><br><span class="line"> <span class="keyword">set</span>{adminID=<span class="keyword">value</span>;}</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>而现在的版本可以省略，仅仅需要:<br>public AdminID<code>{get;set;}</code> 其代表的意义是一样的，就是定义类 Admin 的属性 AdminID</p>
 ]]></content>
       <categories>
         <category>C#</category>
@@ -17219,6 +17209,75 @@ var reg = /正则表达式/; //推荐使用这种用法
 <p>参考资料:<br><a class="link"   href="https://link.jianshu.com/?t=http://datatables.club/reference/option/columns.render.html" >http://datatables.club/reference/option/columns.render.html<i class="fas fa-external-link-alt"></i></a><br><a class="link"   href="https://link.jianshu.com/?t=http://datatables.club/manual/daily/2016/04/25/option-columns-render1.html" >http://datatables.club/manual/daily/2016/04/25/option-columns-render1.html<i class="fas fa-external-link-alt"></i></a><br><a class="link"   href="https://link.jianshu.com/?t=http://datatables.club/manual/daily/2016/04/26/option-columns-render2.html" >http://datatables.club/manual/daily/2016/04/26/option-columns-render2.html<i class="fas fa-external-link-alt"></i></a><br><a class="link"   href="https://link.jianshu.com/?t=http://datatables.club/manual/daily/2016/04/27/option-columns-render3.html" >http://datatables.club/manual/daily/2016/04/27/option-columns-render3.html<i class="fas fa-external-link-alt"></i></a><br><a class="link"   href="https://link.jianshu.com/?t=http://datatables.club/manual/daily/2016/04/28/option-columns-render4.html" >http://datatables.club/manual/daily/2016/04/28/option-columns-render4.html<i class="fas fa-external-link-alt"></i></a></p>
 </blockquote>
 <p>作者：co可丁<br>链接：<a class="link"   href="https://www.jianshu.com/p/579e6664c226" >https://www.jianshu.com/p/579e6664c226<i class="fas fa-external-link-alt"></i></a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>notes</tag>
+        <tag>web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C# sqlDataAdapter 概述</title>
+    <url>/2021/03/21/2021-03-21-C#-sqlDataAdapter-%E6%A6%82%E8%BF%B0/</url>
+    <content><![CDATA[<h1 id="SqlDataAdapter概述"><a href="#SqlDataAdapter概述" class="headerlink" title="SqlDataAdapter概述"></a>SqlDataAdapter概述</h1><p>SqlDataAdapter是 DataSet和 SQL Server之间的桥接器，用于检索和保存数据。SqlDataAdapter通过对数据源使用适当的Transact-SQL语句映射 Fill（它可更改DataSet中的数据以匹配数据源中的数据）和 Update（它可更改数据源中的数据以匹配 DataSet中的数据）来提供这一桥接。当SqlDataAdapter填充 DataSet时，它为返回的数据创建必需的表和列（如果这些表和列尚不存在）。</p>
+<h2 id="创建SqlDataAdapter对象："><a href="#创建SqlDataAdapter对象：" class="headerlink" title="创建SqlDataAdapter对象："></a>创建SqlDataAdapter对象：</h2><p>我们可以通过以下三种方法来创建SqlDataAdapter对象：</p>
+<h3 id="1、通过连接字符串和查询语句"><a href="#1、通过连接字符串和查询语句" class="headerlink" title="1、通过连接字符串和查询语句"></a>1、通过连接字符串和查询语句</h3><figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> strConn=<span class="string">&quot;uid=账号;pwd=密码;database=数据库;server=服务器&quot;</span>;<span class="comment">//SQL Server链接字符串</span></span><br><span class="line">strSql=<span class="string">&quot;SELECT * FROM 表名&quot;</span>;</span><br><span class="line"> </span><br><span class="line">SqlDataAdapter da=<span class="keyword">new</span> SqlDataAdapter(strSql,strConn);</span><br><span class="line">DataSet ds=<span class="keyword">new</span> DataSet();<span class="comment">//创建DataSet实例</span></span><br><span class="line">da.Fill(ds,<span class="string">&quot;自定义虚拟表名&quot;</span>);<span class="comment">//使用DataAdapter的Fill方法(填充)，调用SELECT命令</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>这种方法有一个潜在的缺陷。假设应用程序中需要多个SqlDataAdapter对象，用这种方式来创建的话，会导致创建每个SqlDataAdapter时，都同时创建一个新的SqlConnection对象，方法二可以解决这个问题</p>
+<h3 id="2、通过查询语句和SqlConnection对象来创建"><a href="#2、通过查询语句和SqlConnection对象来创建" class="headerlink" title="2、通过查询语句和SqlConnection对象来创建"></a>2、通过查询语句和SqlConnection对象来创建</h3><figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> strConn=<span class="string">&quot;uid=账号;pwd=密码;database=数据库;server=服务器&quot;</span>;<span class="comment">//SQL Server链接字符串</span></span><br><span class="line"> SqlConnection conn=<span class="keyword">new</span> SqlConnection(strConn);</span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span> strSql=<span class="string">&quot;SELECT * FROM 表名&quot;</span>;</span><br><span class="line"> SqlDataAdapter da = <span class="keyword">new</span> SqlDataAdapter(strSql, conn);</span><br><span class="line">DataSet ds=<span class="keyword">new</span> DataSet();<span class="comment">//创建DataSet实例</span></span><br><span class="line">da.Fill(ds,<span class="string">&quot;自定义虚拟表名&quot;</span>);<span class="comment">//使用DataAdapter的Fill方法(填充)，调用SELECT命令</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="3、通过SqlCommand对象来创建"><a href="#3、通过SqlCommand对象来创建" class="headerlink" title="3、通过SqlCommand对象来创建"></a>3、通过SqlCommand对象来创建</h3><figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> strConn=<span class="string">&quot;uid=账号;pwd=密码;database=数据库;server=服务器&quot;</span>;<span class="comment">//SQL Server链接字符串  </span></span><br><span class="line">SqlConnection connSql=<span class="keyword">new</span> SqlConnection (strConn); <span class="comment">//Sql链接类的实例化  </span></span><br><span class="line">connSql.Open ();<span class="comment">//打开数据库  </span></span><br><span class="line"><span class="comment">//使用SqlDataAdapter时没有必要从Connection.open()打开，  </span></span><br><span class="line"><span class="comment">//SqlDataAdapter会自动打开关闭它。  </span></span><br><span class="line"><span class="built_in">string</span> strSql = <span class="string">&quot;SELECT * FROM 表名&quot;</span>; <span class="comment">//要执行的SQL语句  </span></span><br><span class="line">SqlCommand cmd=<span class="keyword">new</span> SqlCommand(strSql,connsql);</span><br><span class="line">SqlDataAdapter da=<span class="keyword">new</span> SqlDataAdapter(cmd); <span class="comment">//创建DataAdapter数据适配器实例  </span></span><br><span class="line">DataSet ds=<span class="keyword">new</span> DataSet();<span class="comment">//创建DataSet实例  </span></span><br><span class="line">da.Fill(ds,<span class="string">&quot;自定义虚拟表名&quot;</span>);<span class="comment">//使用DataAdapter的Fill方法(填充)，调用SELECT命令  </span></span><br><span class="line">ConnSql.Close ();<span class="comment">//关闭数据库 </span></span><br></pre></td></tr></table></figure>
+<p>SqlDataAdapter da=new SqlDataAdapter(strSQL,ConnSql); //创建DataAdapter数据适配器实例DataSet ds=new DataSet();//创建DataSet实例da.Fill(ds,”自定义虚拟表名”);//使用DataAdapter的Fill方法(填充)，调用SELECT命令ConnSql.Close ();//关闭数据库<br>注意</p>
+<p>如果只需要执行SQL语句或SP，就没必要用到DataAdapter ，直接用SqlCommand的Execute系列方法就可以了。sqlDataadapter的作用是实现Dataset和DB之间的桥梁：比如将对DataSet的修改更新到数据库。</p>
+<p>SqlDataAdapter的UpdateCommand的执行机制是：当调用SqlDataAdapter.Update()时，检查DataSet中的所有行，然后对每一个修改过的Row执行SqlDataAdapter.UpdateCommand ，也就是说如果未修改DataSet中的数据，SqlDataAdapter.UpdateCommand不会执行。</p>
+<h2 id="使用要点"><a href="#使用要点" class="headerlink" title="使用要点"></a>使用要点</h2><p>1、SqlDataAdapter内部通过SqlDataReader获取数据，而默认情况下SqlDataReader不能获知其查询语句对应的数据库表名，</p>
+<p>所以下面的代码：</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> strConn = <span class="string">&quot;uid=账号;pwd=密码;database=数据库;server=服务器&quot;</span>;<span class="comment">//SQL Server链接字符串  </span></span><br><span class="line">strSql=<span class="string">&quot;SELECT * FROM 表名&quot;</span>;  </span><br><span class="line"></span><br><span class="line">SqlDataAdapter da = <span class="keyword">new</span> SqlDataAdapter(strSql,strConn);</span><br><span class="line">DataSet ds = <span class="keyword">new</span> DataSet();</span><br><span class="line">da.Fill(ds);</span><br></pre></td></tr></table></figure>
+
+<p>会在DataSet中创建一个新的DataTable，这个新的DataTable会拥有名为CustomerID和CompanyName 列，但是DataTable对象的名称是Table，而不是我们希望的Customers。</p>
+<p>这个问题，可以通过添加TableMapping来解决： </p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> strConn=<span class="string">&quot;uid=账号;pwd=密码;database=数据库;server=服务器&quot;</span>;<span class="comment">//SQL Server链接字符串  </span></span><br><span class="line">strSql=<span class="string">&quot;SELECT * FROM 表名&quot;</span>;  </span><br><span class="line"></span><br><span class="line">SqlDataAdapter da=<span class="keyword">new</span> SqlDataAdapter(strSQL,strConn);</span><br><span class="line">da.TableMappings.Add(<span class="string">&quot;Table&quot;</span>，<span class="string">&quot;Customers&quot;</span>);	 <span class="comment">// 设置对象名称</span></span><br><span class="line">DataSet ds=<span class="keyword">new</span> DataSet();</span><br><span class="line">da.Fill(ds);</span><br></pre></td></tr></table></figure>
+<p>其实最简洁的方法是通过使用 Fill 方法的重载，通过指定 DataTable ，像这样：<br>SqlDataAdapter.Fill(DataSet,”MyTableName”);</p>
+<p>这样就可以不必使用TableMappings集合。</p>
+<p>2、在使用Fill方式时，可以指定DataTable，而不是DataSet：</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> strConn=<span class="string">&quot;uid=账号;pwd=密码;database=数据库;server=服务器&quot;</span>;<span class="comment">//SQL Server链接字符串  </span></span><br><span class="line">strSql=<span class="string">&quot;SELECT * FROM 表名&quot;</span>;  </span><br><span class="line"></span><br><span class="line">SqlDataAdapter da = <span class="keyword">new</span> SqlDataAdapter(strSql, strConn);</span><br><span class="line">DataTable tbl=<span class="keyword">new</span> DataTable( );</span><br><span class="line">da.Fill(tbl);</span><br></pre></td></tr></table></figure>
+<p>3、注意打开和关闭连接的处理</p>
+<p>在调用SqlCommand对象执行sql命令之前，需要保证与该对象关联的SqlConnection对象时打开的，否则SqlCommand的方法执行时将引发一个异常，但是我们在上面的代码中看到，SqlDataAdapter没有这样的要求。</p>
+<p>如果调用SqlDataAdapter的Fill方法，并且其SelectCommand属性的SqlConnection是关闭状态，则SqlDataAdapter会自动打开它，然后提交查询，获取结果，最后关闭连接。如果在调用Fill方法前，SqlConnection是打开的，则查询执行完毕后，SqlConnection还将是打开的，也就是说SqlDataAdapter会保证SqlConnection的状态恢复到原来的情形。</p>
+<p>这有时会导致性能问题，需要注意，例如下面的代码：</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> strConn=<span class="string">&quot;uid=账号;pwd=密码;database=数据库;server=服务器&quot;</span>;<span class="comment">//SQL Server链接字符串  </span></span><br><span class="line">SqlConnection conn=<span class="keyword">new</span> SqlConnection(strConn);</span><br><span class="line">SqlDataAdapter daCustomers,daOrders;</span><br><span class="line"></span><br><span class="line">strSql=<span class="string">&quot;SELECT * FROM Customers&quot;</span>;</span><br><span class="line"> daCustomers = <span class="keyword">new</span> SqlDataAdapter(strSql, conn);</span><br><span class="line"></span><br><span class="line">strSql=<span class="string">&quot;SELECT * FROM Orders&quot;</span>;</span><br><span class="line"> daOrders=<span class="keyword">new</span> SqlDataAdapter(strSql, conn);</span><br><span class="line"></span><br><span class="line">DataSet ds=<span class="keyword">new</span> DataSet();</span><br><span class="line"></span><br><span class="line">daCustomers.Fill(ds,<span class="string">&quot;Customers&quot;</span>);</span><br><span class="line"> daOrders.Fill(ds,<span class="string">&quot;Orders&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>以上代码会导致连接被打开和关闭两次，在调用Fill方法时各一次。为了避免打开和关闭SqlConnection对象，在调用SqlDataAdapter对象的Fill方法之前，我们可以先打开SqlConnection对象，如果希望之后关闭连接，我们可以再调用Close方法，就像这样：</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line">cn.Open();</span><br><span class="line"></span><br><span class="line">daCustomers.Fill(ds,<span class="string">&quot;Customers&quot;</span>);</span><br><span class="line"> daOrders.Fill(ds,<span class="string">&quot;Orders&quot;</span>);</span><br><span class="line"></span><br><span class="line">cn.Close();</span><br></pre></td></tr></table></figure>
+
+
+
+<p>4、多次调用Fill方法需要注意数据重复和有效更新数据的问题</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="built_in">string</span> strConn=<span class="string">&quot;uid=账号;pwd=密码;database=数据库;server=服务器&quot;</span>;<span class="comment">//SQL Server链接字符串  </span></span><br><span class="line"> strSql=<span class="string">&quot;SELECT * FROM Customers&quot;</span>;</span><br><span class="line"></span><br><span class="line">SqlDataAdapter da=<span class="keyword">new</span> SqlDataAdapter(strSql, strConn);</span><br><span class="line"> DataSet ds=<span class="keyword">new</span> DataSet();</span><br><span class="line"> da.Fill(ds,<span class="string">&quot;Customers&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//…….</span></span><br><span class="line"></span><br><span class="line">da.Fill(ds,<span class="string">&quot;Customers&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>我们分析上面的代码，通过两次调用Fill方法，SqlDataAdapter执行两次查询，并两次将查询结果保存到DataSet中，第一次调用在DataSet中创建了一个名为Customers的新表。第二次调用Fill方法将查询的结果追加到DataSet中的同一个表中，因此，每个客户的信息将在DataSet中出现两次！当然，如果数据库管理员对Customers表定义了主键，则SqlDataAdapter在天成DataTable时，会判断重复行，并自动丢弃掉旧的值。</p>
+<p>考虑一下，假定一个特定客户在第一次调用Fill方法时，存储于数据库中，那么SqlDataAdapter会将其添加到新建的DataTable中。如果后来这个客户被删除了，那么第二次调用Fill方法时，SqlDataAdapter将不会在查询结果中找到该客户信息，但是它也不会将客户信息从DataSet中删除。这就导致了数据更新的问题。</p>
+<p>所以推荐的做法是，在调用Fill方法前，先删除本地DataSet中缓存的数据!</p>
+<p>————————————————<br>版权声明：本文为CSDN博主「CHENG Jian」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a class="link"   href="https://blog.csdn.net/gatieme/article/details/20695853" >https://blog.csdn.net/gatieme/article/details/20695853<i class="fas fa-external-link-alt"></i></a></p>
+]]></content>
+      <categories>
+        <category>C#</category>
+      </categories>
+      <tags>
+        <tag>notes</tag>
+        <tag>C#</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>前端学习路径</title>
+    <url>/2021/05/12/2021-05-12-%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84/</url>
+    <content><![CDATA[<h2 id="前端路径"><a href="#前端路径" class="headerlink" title="前端路径"></a>前端路径</h2><p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210414113103.png" alt="image-20210414113103813"></p>
 ]]></content>
       <categories>
         <category>web</category>
