@@ -17369,4 +17369,136 @@ var reg = /正则表达式/; //推荐使用这种用法
         <tag>C#</tag>
       </tags>
   </entry>
+  <entry>
+    <title>BIO312 cw1</title>
+    <url>/2021/03/10/2021-03-10-BIO312-cw1/</url>
+    <content><![CDATA[<ul>
+<li><input disabled="" type="checkbox"> 研究tutorial2 的Tandem MS-Sequence Confirmation<ul>
+<li><input disabled="" type="checkbox"> 看视频</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"> 还是需要研究Mass spectrometry</li>
+</ul>
+<h2 id="Proteomics-workflow"><a href="#Proteomics-workflow" class="headerlink" title="Proteomics workflow"></a>Proteomics workflow</h2><p>1.Extract proteins from sample</p>
+<p>2.Separate proteins (various techniques)</p>
+<p>3.Digest proteins into <strong>peptides</strong></p>
+<p>4.Separate peptides (various techniques)</p>
+<p>5.Analyse peptides by mass spectrometry (MS)</p>
+<p> e.g. known masses of peptides or masses of peptide fragments</p>
+<p>6.Database search to identify peptides (and hence protein)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210510213403.png" alt="image-20210510213403656"></p>
+<p><strong>Proteomics</strong></p>
+<ol>
+<li>Complex mixtures</li>
+<li>Partial sequence analysis</li>
+<li>Emphasis in identification by database matching</li>
+<li>Systems biology</li>
+<li><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210511154351.png" alt="image-20210511154351114"></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210510213558.png" alt="image-20210510213558015"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210510213704.png" alt="image-20210510213704538"></p>
+<h2 id="Mass-Spectrometry"><a href="#Mass-Spectrometry" class="headerlink" title="Mass Spectrometry"></a>Mass Spectrometry</h2><p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210511155353.png" alt="image-20210511155353628"></p>
+<h3 id="Mass-Spectrometry-based-Protein-Identification"><a href="#Mass-Spectrometry-based-Protein-Identification" class="headerlink" title="Mass Spectrometry-based Protein Identification"></a>Mass Spectrometry-based Protein Identification</h3><ul>
+<li>A mass spectrum of the resulting digest products produces a “peptide map”or a “peptide fingerprint”.</li>
+</ul>
+<blockquote>
+<p>The measured masses can be compared to theoretical peptide maps derived from database sequences for identification. There are a few choices of mass analysis that can be selected from this point, depending on available instrumentation and other factors. The resulting peptide fragments can be subjected to <code>MALDI-MS</code> or ESI-MSanalysis.</p>
+</blockquote>
+<ul>
+<li>For example, a small aliquot of the digest solution can be directly analyzed by MALDI-MS to obtain a peptide map. The resulting sequence coverage (relative to the entire protein sequence) displayed from the total number of tryptic peptides observed in the MALDI mass spectrum can be quite high, i.e., greater than 80% of the sequence, although it can vary considerably depending on the protein, sample amount, etc. The measured molecular weights of the peptide fragments along with the specificity of the enzyme employed can be searched and compared against protein sequence databasesusing a number of searching algorithms available either commercially or on the Internet.</li>
+</ul>
+<h3 id="Task1"><a href="#Task1" class="headerlink" title="Task1"></a>Task1</h3><p>What is a proteome and how is the link between an organism’s genome and a proteome? (10 marks)</p>
+<blockquote>
+<p>Proteome represents the proteins catalogue of all proteins in a cell tissue or body fluid. Transcriptome, which is the RNA catalogue of all mRNA expressed in a cell or tissue,  is the link between an organisms genome and proteome.</p>
+</blockquote>
+<h3 id="Task2"><a href="#Task2" class="headerlink" title="Task2"></a>Task2</h3><p>An investigator brought a purified peptide to the Proteomics Core Lab for <code>MALDI-MS analysis</code> for quality control purpose. The peptide was dissolved in a buffer containing 10mM Tris-HCl, pH 7.5, 250mM NaCl, and trace amount of NP40. The theoretical molecular weight of the peptide should be 1571.5Da. However, the MALDI-MS spectrum showed two major peaks, one at m/z=1572.6, and another at m/z=1594.6. <em>Did the investigator have the right peptide</em>? If yes, is the peptide relatively pure? Explain why. (10 marks)</p>
+<p>Theoretical: 1571</p>
+<p>Results: 1572.6; 1594.6</p>
+<blockquote>
+<p>The investigator could have the right, pure peptide, but require further sequence analysis confirmation. The possible reasons for the situation could from two aspects. One is the difference in digestion efficiency, some peptide may suffer from different lysing rate and therefore the different peak; another one could be the situation that some peptide might be ionized during MALDI process, leading to the different major peaks. Based on the previous analysis, we could not jump to the conclusion, further analysis would be required. </p>
+</blockquote>
+<p><strong>MALDI-MS</strong>:</p>
+<p>==Matrix-Assisted Laser Desorption/Ionization (MALDI)==</p>
+<blockquote>
+<p>可能的答案：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210511161610.png" alt="image-20210511161610177"></p>
+</blockquote>
+<p> <img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210511160231.png" alt="image-20210511160231258"></p>
+<p> <img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210511160342.png" alt="image-20210511160342659"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210511160929.png" alt="image-20210511160929119"></p>
+<h3 id="Task3"><a href="#Task3" class="headerlink" title="Task3"></a>Task3</h3><p>BRCA1 is a breast cancer related protein. However, in many breast cancer <code>biomarker discovery studies</code>, BRCA1 cannot be identified by general shotgun <code>LC/MS-based proteomics approaches</code> which use <code>RP-LC</code> to separate tryptic peptides. Its abundance in cancer cells should be sufficient enough to be detected by the currently available mass spectrometers such as Orbitrap FusionTM. <strong><em>Please describe the most likely reason for the failure of its detection (please keep your answers within one-page limit). (20 marks)</em></strong></p>
+<p><strong><em>Why LC/MS-based proteomics approaches which use RP-LC to separate tryptic peptides failed?</em></strong></p>
+<p>==RP-LC:== reversed phase</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210511165137.png" alt="image-20210511165137759"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210511165252.png" alt="image-20210511165252077"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210511170237.png" alt="image-20210511170237116"></p>
+<blockquote>
+<p>Bottom-Up: sequence tryptic fragments of larger proteins</p>
+<ul>
+<li>Easier to analyze larger or hydrophobic proteins</li>
+<li>Potential for MALDI MS/MS</li>
+<li>Analysis of proteins from their derived peptides in complex biological systems</li>
+<li>LC-MS/MS (generally OrbitrapMS) is the technique of choice</li>
+</ul>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210513133608.png" alt="image-20210513133608349"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210513133724.png" alt="image-20210513133724701"></p>
+<p>网络上的消息</p>
+<blockquote>
+<p>Phowever, identification of clinical biomarkers remains one of the most challenging applications [33]. Current biomarkers or biomarker candidates struggle with <strong>limited reliability and proper validation as well as with limited sensitivity and specificity</strong> [32].</p>
+<p>There are several important factors to be considered in the search for a biomarker [54]. First of all, </p>
+<ul>
+<li><p>tissues as samples are not easily accessible, and, as they are composed of different cells, they are also very heterogeneous, an issue being addressed with labour intensive laser capture microdissection.</p>
+</li>
+<li><p>its complexity, time consumption, the need for educating the personnel, the costs associated with purchase of equipment, and last but not least, the availability of tissue samples. In clinical diagnosis there has always been a tendency to use most easily accessible specimens for diagnostic procedures, such as blood, saliva, urine, and faeces. </p>
+</li>
+<li><p>dynamic complexity and are dependent on patient and environmental characteristics. </p>
+</li>
+<li><p>collecting the proper number of patients for biomarker validation can also pose a problem. </p>
+</li>
+<li><p>And finally, it is becoming obvious that a single biomarker is not enough for accurate screening or diagnostic purposes; </p>
+</li>
+<li><p>rather a panel of proteins will be necessary</p>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>Global LC-MS/MS-based proteomics suffers inherent problems of:</p>
+<p><strong>quantification accuracy</strong> and <strong>reproducibility</strong> (i.e., missing data in samples with low-abundance proteins that fail to be identified) in large-scale studies due to the stochastic sampling nature of shotgun MS/MS</p>
+</blockquote>
+<blockquote>
+<p><strong>Reversed-Phase Liquid Chromatography</strong></p>
+<p>Reversed-Phase Liquid Chromatography (RPLC) is one of the High Pressure Liquid Chromatography or “HPLC” approaches, which are now for commercial reasons often alluded to as High <em>Performance</em> Liquid Chromatography. </p>
+<p>RPLC is especially useful in the separation and purification of proteins. To that effect columns are used which are packed with, e.g., porous glass beads that are made <strong>hydrophobic</strong> by treating them with octadecyl (C18) groups.</p>
+<p> In water such C18-coated beads bind hydrophobically to all but the most hydrophilic proteins.</p>
+<p> For the subsequent elution of the bound proteins one <em>decreases</em> the hydrophobizing capability of the aqueous medium by the admixture of <strong>water-miscible organic solvents with much lower AB values</strong> than the 51 mJ/m2 of water, such as methanol, ethanol, ethylene glycol, or acetonitrile.</p>
+</blockquote>
+<p>正儿八经的answer</p>
+<blockquote>
+<p>RP-LC, the abbreviation of Reversed-Phase Liquid Chromatography, is especially useful in the separation and purification of proteins. The hydrophobic porous beads with octadecyl (C18) groups could bind hydrophobically to all but the most hydrophilic proteins, enabling the separation of proteins. </p>
+<p>As mentioned in the questions that BRCA1could not be identified by general shotgun LC/MS-based proteomics approaches which use RP-LC to separate tryptic peptides, but work in the mass spectrometers. Therefore, I could hypothesis that the most likely reason could related to the hydrophobicity of BRCA1 biomarker.  </p>
+<p>Current biomarkers identification struggled with limited reliability and proper validation as well as with limited sensitivity and specificity. Since biomarkers are highly dependent on environmental characteristics, which could be easily influenced by surrounding environment</p>
+</blockquote>
+<hr>
+<p>建议使用的table</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210512213855.png" alt="image-20210512213855882"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210512214022.png" alt="image-20210512214022555"></p>
+<p>Peak: molecular weight to the ions</p>
+<blockquote>
+<p>为什么会有peak 高低</p>
+</blockquote>
+<ol>
+<li>Digestion efficiency for some peptide lysing</li>
+<li>Ionize of each protein </li>
+</ol>
+<p>可能是问题2的答案</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210512220229.png" alt="image-20210512220229106"></p>
+<p>y ions 从右往左数，需要先加上一个18，最后加上1</p>
+<p>b ions 从左往右数，需要先加上1，最后加上18</p>
+]]></content>
+      <tags>
+        <tag>notes</tag>
+        <tag>[object Object]</tag>
+      </tags>
+  </entry>
 </search>
