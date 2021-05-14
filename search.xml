@@ -17496,9 +17496,11 @@ var reg = /正则表达式/; //推荐使用这种用法
 <p>y ions 从右往左数，需要先加上一个18，最后加上1</p>
 <p>b ions 从左往右数，需要先加上1，最后加上18</p>
 ]]></content>
+      <categories>
+        <category>Biology</category>
+      </categories>
       <tags>
         <tag>notes</tag>
-        <tag>[object Object]</tag>
       </tags>
   </entry>
 </search>
