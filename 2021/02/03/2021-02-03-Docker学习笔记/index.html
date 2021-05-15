@@ -218,12 +218,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i> <span>6.4k Words</span>
+            <i class="fas fa-file-word"></i> <span>6.1k Words</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i> <span>30 Mins</span>
+            <i class="fas fa-clock"></i> <span>28 Mins</span>
         </span>
     
     
@@ -337,19 +337,19 @@
 </blockquote>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker run it -v 主机目录：容器内目录 </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 测试</span></span><br><span class="line">[root@iz2zeihuhu3ktzymn2ydktz ~]# docker run -it -v /home/ceshi:/home centos /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动起来时候我们可以通过docker inspect 容器id</span></span><br></pre></td></tr></table></figure>
 <p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting@master/image-20210208145811062.285i4khdc6v4.png" alt="image-20210208145811062"></p>
-<p>测试文件的同步<br>![image-20210208150358364](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210208150358364.png)</p>
+<p>测试文件的同步<br><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210515124945.png" alt="未上传image-20210208150358364"></p>
 <p>再来测试！</p>
 <ol>
 <li>停止容器</li>
 <li>宿主上修改文件</li>
 <li>启动容器</li>
-<li>容器内的数据依旧是同步的<br>![image-20210208150718065](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210208150718065.png)<br>好处：我们以后修改只需要在本地修改即可，容器内会自动同步</li>
+<li>容器内的数据依旧是同步的<br><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210515124956.png" alt="image-20210208150718065"><br>好处：我们以后修改只需要在本地修改即可，容器内会自动同步</li>
 </ol>
 <h2 id="实战：安装MySQL"><a href="#实战：安装MySQL" class="headerlink" title="实战：安装MySQL"></a>实战：安装MySQL</h2><p>思考：MySQL的数据持久化的问题！</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 获取镜像</span></span><br><span class="line">[root@iz2zeihuhu3ktzymn2ydktz ~]# docker pull mysql:5.7</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 运行容器，需要做数据挂载！<span class="comment"># 安装启动MySQL，是需要配置密码的，这是需要注意的点！</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 官方测试：$ docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动我们的</span></span><br><span class="line">-d 后台运行</span><br><span class="line">-p 端口映射</span><br><span class="line">-v 卷挂载</span><br><span class="line">-e 环境配置</span><br><span class="line">--name 容器名字</span><br><span class="line">[root@iz2zeihuhu3ktzymn2ydktz ~]# docker run -d -p 3310:3306 -v /home/mysql/conf:/etc/mysql/conf.d -v /home/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 --name mysql01 mysql:5.7</span><br><span class="line">ea2605d0b4c8430d5bde02507eb0a6fcca465bea38a53d39cc410b81d085e94c</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 在启动成功之后用sql来连接测试一下</span></span><br></pre></td></tr></table></figure>
-<p>![image-20210209093855179](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210209093855179.png)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210515125001.png" alt="image-20210209093855179"></p>
 <h3 id="具名和匿名挂载"><a href="#具名和匿名挂载" class="headerlink" title="具名和匿名挂载"></a>具名和匿名挂载</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 匿名挂载</span></span><br><span class="line">-v 容器内路径！</span><br><span class="line">docker run -d -p --name nginx01 -v /etc/nginx nginx</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看所有卷的挂载</span></span><br><span class="line">[root@iz2zeihuhu3ktzymn2ydktz data]# docker volume ls </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 这里发现这就是匿名挂载，我们在 -v 只写了容器内的路径，没有写容器外的路径</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 具名挂载</span></span><br><span class="line">[root@iz2zeihuhu3ktzymn2ydktz ~]# docker run -d -P --name nginx02 -v juming-nginx:/etc/nginx nginx</span><br><span class="line">232b88ac37f15545fb57bfdaa9583681732723b0026fedf09cb1c5bb90d64f81</span><br><span class="line">[root@iz2zeihuhu3ktzymn2ydktz ~]# docker volume ls</span><br><span class="line">DRIVER    VOLUME NAME</span><br><span class="line">local     65f13884504c84967e02fe6ab7ce9cc2cd4c4b93ae2bcd6f1707b8f2cd727a4c</span><br><span class="line">local     c702e26bf7cb663e1f748ba6ede1e6d475242362414a45df5b6778cef6b6ea65</span><br><span class="line">local     juming-nginx</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 通过 -v 卷名：容器内路径</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看一下这个卷</span></span><br></pre></td></tr></table></figure>
-<p>![image-20210209142244746](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210209142244746.png)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210515125008.png" alt="image-20210209142244746"></p>
 <p>所有的docker容器内的卷，在没有指定目录的情况下都是在<code>/var/lib/docker/volumes/xxxx/_data</code></p>
 <p>我们可以通过具名挂载可以方便的找到我们一个卷，大多数情况下我们正在使用<code>具名挂载</code></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 如何确定具体使用的是具名挂载还是匿名挂载，还是指定路径挂载</span></span><br><span class="line">-v 容器内路径 # 匿名挂载</span><br><span class="line">-v 卷名：容器内路径 # 具名挂载</span><br><span class="line">-v /宿主机路径：：容器内路径 # 指定路径挂载</span><br></pre></td></tr></table></figure>
@@ -361,26 +361,26 @@
 
 <h2 id="初识DockerFile-（之前应用commit）"><a href="#初识DockerFile-（之前应用commit）" class="headerlink" title="初识DockerFile （之前应用commit）"></a>初识DockerFile （之前应用commit）</h2><p>Docker file 就是用来构建docker镜像的构建文件！命令脚本！先体验一下！通过这个脚本可以来生成镜像，镜像是一层层，脚本是一个个的命令</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 创建一个dockerfile 文件，名字可以随机，建议Dockerfile</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 文件中的内容 指令（大写）参数</span></span><br><span class="line">FROM centos</span><br><span class="line"></span><br><span class="line">VOLUME [&quot;volume01&quot;,&quot;volume02&quot;] </span><br><span class="line"></span><br><span class="line">CMD echo &quot;----end----&quot;</span><br><span class="line"></span><br><span class="line">CMD /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 这里每个命令，都是镜像的一层</span></span><br></pre></td></tr></table></figure>
-<p>![image-20210210124525345](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210210124525345.png)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210515125013.png" alt="image-20210210124525345"></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 进入我们自己写的镜像</span></span><br></pre></td></tr></table></figure>
-<p>![image-20210210124734642](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210210124734642.png)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210515125017.png" alt="image-20210210124734642"></p>
 <p>这个卷一定有一个外面的目录进行同步 </p>
-<p>![image-20210210125015723](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210210125015723.png)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210515125054.png" alt="image-20210210125015723"></p>
 <p>查看一下卷挂载的路径</p>
-<p>![image-20210210125354820](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210210125354820.png)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210515125021.png" alt="image-20210210125354820"></p>
 <p>查看一下卷挂载的路径</p>
 <p>这种方式我们未来使用的非常多，因为我们通常会构建自己的镜像！</p>
 <p>假设构建镜像时候没有用挂载卷，需要手动镜像挂载 -v 卷名：容器内路径</p>
 <h3 id="数据卷容器"><a href="#数据卷容器" class="headerlink" title="数据卷容器"></a>数据卷容器</h3><p>多个mysql同步数据！</p>
-<p>![image-20210210130120145](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210210130120145.png)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210515125059.png" alt="image-20210210130120145"></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 启动3个容器，通过我们刚才自己写的镜像启动</span></span><br></pre></td></tr></table></figure>
 
 
-<p>![image-20210210130253083](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210210130253083.png)</p>
-<p>![image-20210210132156865](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210210132156865.png)</p>
-<p>![image-20210210132419006](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210210132419006.png)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210515125028.png" alt="image-20210210130253083"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210515125033.png" alt="image-20210210132156865"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210515125038.png" alt="image-20210210132419006"></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 测试，可以删除docker01，查看一下docker02和03 是否可以访问这个文件</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>![image-20210210133618358](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210210133618358.png)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210515124751.png" alt="image-20210210133618358"></p>
 <p>多个mysql实现数据共享</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@iz2zeihuhu3ktzymn2ydktz ~]# docker run -d -p 3310:3306 -v /etc/mysql/conf.d -v /var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 --name mysql101 mysql:5.7</span><br><span class="line"></span><br><span class="line">[root@iz2zeihuhu3ktzymn2ydktz ~]# docker run -d -p 3310:3306 -e MYSQL_ROOT_PASSWORD=123456 --name mysql02 volumes-from mysql01 mysql:5.7</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">这个时候，可以实现两个容器数据同步！</span></span><br></pre></td></tr></table></figure>
 <p>结论：</p>
@@ -395,8 +395,8 @@
 <li>docker push  发布镜像（DockerHub，阿里云镜像仓库）</li>
 </ol>
 <p>查看一下官方文档是怎么做的？</p>
-<p>![image-20210210143314581](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210210143314581.png)</p>
-<p>![image-20210210143355014](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210210143355014.png)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210515124825.png" alt="image-20210210143314581"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210515124821.png" alt="image-20210210143355014"></p>
 <p>很多官方镜像都是基础包，很多功能都没有，我们通常会自己搭建自己的镜像</p>
 <p>官方既然可以制作镜像</p>
 <h3 id="Dockerfile-构建过程"><a href="#Dockerfile-构建过程" class="headerlink" title="Dockerfile 构建过程"></a>Dockerfile 构建过程</h3><p><strong>基础知识</strong></p>
@@ -406,7 +406,7 @@
 <li># 表示注视</li>
 <li>每一个指令都会穿件提交一个新的镜像层并且提交</li>
 </ol>
-<p>![image-20210210143907254](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210210143907254.png)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210515124803.png" alt="image-20210210143907254"></p>
 <p>dockerfile 是面向开发的，我们以后要发布项目，做镜像，都要编写dockerfile文件，这个文件十分简单</p>
 <p>docker镜像逐渐成为企业交付的标准，必须要掌握</p>
 <p>步骤：开发，部署，运维。。。缺一不可</p>
@@ -417,7 +417,7 @@
  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">FROM # 基础镜像，一切从这里开始构建</span><br><span class="line">MAINTAINER # 镜像是谁写的，姓名+邮箱</span><br><span class="line">RUN # 镜像构建的时候需要运行的命令</span><br><span class="line">ADD # 步骤，tomcat镜像，这个tomcat压缩包！添加内容</span><br><span class="line">WORKDIR # 镜像的工作目录 /bin/bash</span><br><span class="line">VOLUME # 挂载的目录</span><br><span class="line">EXPOSE # 端口配置暴露</span><br><span class="line">CMD # 指定这个容器启动的时候需要运行的命令,只有最后一个会生效，可以被替代 cmd echo </span><br><span class="line">ENTRYPOINT # 指定这个容器启动的时候需要运行的命令，可以追加命令 cmd echo </span><br><span class="line">ONBUILD # 当构建一个被继承的DockerFile 这个时候就会运行ONBUILD的指令，触发指令</span><br><span class="line">COPY # 类似ADD，将我们文件拷贝到镜像中</span><br><span class="line">ENV # 构建的时候环境变量 mysql 用户名</span><br></pre></td></tr></table></figure>
 
 
-<p>![image-20210210145653097](/Users/yuxuan/Library/Application Support/typora-user-images/image-20210210145653097.png)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210515124758.png" alt="image-20210210145653097"></p>
 <h2 id="Docker网络"><a href="#Docker网络" class="headerlink" title="Docker网络"></a>Docker网络</h2><p>Docker Swarm</p>
 
         </div>
