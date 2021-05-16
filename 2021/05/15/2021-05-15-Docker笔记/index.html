@@ -9,7 +9,7 @@
     
     <title>
         
-            Linux htop 详解 |
+            Docker笔记 |
         
         Yuxuan Wu
     </title>
@@ -168,7 +168,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">Linux htop 详解</span>
+            <span class="title-hover-animation">Docker笔记</span>
         </div>
 
         
@@ -184,7 +184,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i> 2021-01-25 21:22:06
+        <i class="fas fa-edit"></i> 2021-05-15 20:32:33
     </span>
     
         <span class="article-categories article-meta-item">
@@ -204,11 +204,11 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/Linux/">Linux</a>
+                        <a href="/tags/tutorial/">tutorial</a>
                     </li>
                 
                     <li>
-                        | <a href="/tags/tutorial/">tutorial</a>
+                        | <a href="/tags/Docker/">Docker</a>
                     </li>
                 
             </ul>
@@ -218,12 +218,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i> <span>1.2k Words</span>
+            <i class="fas fa-file-word"></i> <span>438 Words</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i> <span>4 Mins</span>
+            <i class="fas fa-clock"></i> <span>2 Mins</span>
         </span>
     
     
@@ -239,93 +239,31 @@
         
 
         <div class="article-content markdown-body">
-            <p>之前在学校实验室工作的时候，接触的第一个命令就是htop。之前就是觉得这个花花绿绿的界面很有趣（牛逼），如下图，常常在女朋友面前故作牛逼的打开（<em>实际就看看我的程序在不在跑，虚伪的不行🤪</em>）</p>
-<p><img src="https://pic1.zhimg.com/v2-317c74bdfc0734f88813c5fe532d3220_b.png" alt="img"></p>
-<p>为了以后装逼更有资本，我觉得得仔细弄清楚这些值到底是干什么的</p>
-<p>本篇文章参考</p>
-<p>Understanding Output of htop Command - Linux Togetherlinuxtogether.org</p>
-<h3 id="htop是top的升级版-允许用户监视系统上运行的进程及其完整的命令行"><a href="#htop是top的升级版-允许用户监视系统上运行的进程及其完整的命令行" class="headerlink" title="htop是top的升级版,允许用户监视系统上运行的进程及其完整的命令行"></a>htop是top的升级版,允许用户监视系统上运行的进程及其完整的命令行</h3><ol>
-<li>系统不会自带，若是Ubuntu，sudo apt, 若是Centos， yum 可以安装。根据不过系统来进行安装</li>
-<li>支持用户交互，可以通过鼠标来kill进程而不用通过输入其PID，支持用鼠标上下拖动，且不同的颜色代表不同的意思。</li>
-<li>允许用户根据CPU，内存和时间间隔对进程进行排序</li>
-</ol>
-<h3 id="htop-的安装"><a href="#htop-的安装" class="headerlink" title="htop 的安装"></a>htop 的安装</h3><p>Ubuntu 安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install htop</span><br></pre></td></tr></table></figure>
-<p>CentOS 安装</p>
-<p><a class="link"   target="_blank" rel="noopener" href="http://www.vue5.com/centos/23046.html" >http://www.vue5.com/centos/23046.html<i class="fas fa-external-link-alt"></i></a></p>
-<p><strong>基本的概念</strong></p>
-<p>tasks/process 进程， thread 线程相关的知识可以从下面的链接学习</p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://www.zhihu.com/question/307100151/answer/894486042" >如何理解：程序、进程、线程、并发、并行、高并发？<i class="fas fa-external-link-alt"></i></a></p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/125716637" >宇宙之一粟：为什么校招面试中“线程与进程的区别”老是被问到?我该如何回答？<i class="fas fa-external-link-alt"></i></a></p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/difference-between-process-and-thread/" >Difference between Process and Thread - GeeksforGeeks<i class="fas fa-external-link-alt"></i></a></p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/82746153" >什么是虚拟内存(Virtual Memory)?<i class="fas fa-external-link-alt"></i></a></p>
-<p><img src="https://pic2.zhimg.com/v2-f876d2e42e8d5e1110f22f7198fcc591_b.png" alt="img"></p>
-<h3 id="红色边框"><a href="#红色边框" class="headerlink" title="红色边框"></a>红色边框</h3><p><em>数字1，2，3，4分别代表CPU处理器/核，上图是一个四核的处理器</em></p>
-<h3 id="灰色边框（progress-bar）"><a href="#灰色边框（progress-bar）" class="headerlink" title="灰色边框（progress bar）"></a>灰色边框（progress bar）</h3><p><em>每一个CPU的总用量情况，注意这条上面会有不同的颜色：</em></p>
-<ol>
-<li>蓝色：显示低优先级(low priority)进程使用的CPU百分比。 </li>
-<li>绿色：显示用于普通用户(user)拥有的进程的CPU百分比。 </li>
-<li>红色：显示系统进程(kernel threads)使用的CPU百分比。</li>
-<li>橙色：显示IRQ时间使用的CPU百分比。</li>
-<li>洋红色(Magenta)：显示Soft IRQ时间消耗的CPU百分比。</li>
-<li>灰色：显示IO等待时间消耗的CPU百分比。</li>
-<li>青色：显示窃取时间(Steal time)消耗的CPU百分比。</li>
-</ol>
-<h3 id="黄色边框"><a href="#黄色边框" class="headerlink" title="黄色边框"></a>黄色边框</h3><p><em>提供了内存（Memory）和交换（Swap）使用情况。 类似于CPU中的进度条，内存监视也包含具有多种颜色的进度条：</em></p>
-<ol>
-<li>绿色：显示内存页面占用的RAM百分比</li>
-<li>蓝色：显示缓冲区页面占用的RAM百分比</li>
-<li>橙色：显示缓存页面占用的RAM百分比</li>
-</ol>
-<p><img src="https://pic1.zhimg.com/v2-e9a5539a25c37421fc429424aab510b8_b.png" alt="img"></p>
-<h3 id="蓝色边框"><a href="#蓝色边框" class="headerlink" title="蓝色边框"></a>蓝色边框</h3><ul>
-<li><p><strong>第一行 (Tasks, thr, running)</strong></p>
-</li>
-<li><p>参考上面的屏幕截图，我们在计算机上运行的106个任务(tasks)被分解为113个线程(thread)，其中只有1个进程处于运行(running)状态。</p>
-</li>
-<li><p>任务(tasks)是打开的进程总数的代表，但并不是每个打开的进程都在不断消耗CPU。 每个进程都处于几种状态</p>
-</li>
-<li><p>R: Running：表示进程(process)正在使用CPU</p>
-</li>
-<li><p>S: Sleeping: 通常进程在大多数时间都处于睡眠状态，并以固定的时间间隔执行小检查，或者等待用户输入后再返回运行状态。</p>
-</li>
-<li><p>T/S: Traced/Stoped: 表示进程正在处于暂停的状态</p>
-</li>
-<li><p>Z:Zombie or defunct:已完成执行但在进程表中仍具有条目的进程。</p>
-</li>
-<li><p><strong>第二行  Load Average</strong></p>
-</li>
-<li><p>三个值是指系统在最后1分钟，最近5分钟和最后15分钟的平均负载 (0.21,0.19,0.15)</p>
-</li>
-<li><p><strong>第三行 Uptime</strong></p>
-</li>
-<li><p>表示这个系统一共运行了多长的时间，这里一共运行了78天</p>
-</li>
-</ul>
-<h3 id="下半部分"><a href="#下半部分" class="headerlink" title="下半部分"></a>下半部分</h3><p><img src="https://pic2.zhimg.com/v2-dd7ca8f231cfa317243987fd4bf02189_b.png" alt="img"></p>
-<ul>
-<li>PID – 描述进程的ID号</li>
-<li>USER – 描述进程的所有者（谁跑的）</li>
-<li>PRI – 描述Linux内核查看的进程优先级</li>
-<li>NI – 描述由用户或root重置的进程优先级</li>
-<li>VIR – 它描述进程正在使用的虚拟内存 （virtual memory）</li>
-<li>RES – 描述进程正在消耗的物理内存（physical memory）</li>
-<li>SHR – 描述进程正在使用的共享内存（shared memory）</li>
-<li>S – 描述流程的当前状态 (state)</li>
-<li>CPU％ – 描述每个进程消耗的CPU百分比</li>
-<li>MEM％ – 描述每个进程消耗的内存百分比</li>
-<li>TIME+ – 显示自流程开始执行以来的时间</li>
-<li>Command –它与每个进程并行显示完整的命令执行 (比如/usr/lib/R)</li>
-</ul>
-<hr>
-<h3 id="一些快捷键"><a href="#一些快捷键" class="headerlink" title="一些快捷键"></a>一些快捷键</h3><p>u – 用于显示特定用户拥有的所有进程。</p>
-<p>P –用于基于高CPU消耗对进程进行排序。</p>
-<p>M –用于基于高内存消耗对进程进行排序。</p>
-<p>T –用于根据时间段对过程进行排序。</p>
-<p>h –用于打开帮助窗口并查看此处未提及的更多快捷方式。</p>
-<p><strong>帮助： htop -h</strong></p>
-<p><strong>更细致的解释：man htop</strong></p>
-<p><img src="https://pic1.zhimg.com/v2-3aece676cc1a36e4ea439e75ce81b238_b.png" alt="img"></p>
+            <h2 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h2><h3 id="下载centos镜像"><a href="#下载centos镜像" class="headerlink" title="下载centos镜像"></a>下载centos镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull centos</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h2><h3 id="创建一个基于centos的容器"><a href="#创建一个基于centos的容器" class="headerlink" title="创建一个基于centos的容器"></a>创建一个基于centos的容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">docker run -it centos /bin/bash </span><br><span class="line"></span><br><span class="line">--name=<span class="string">&quot;Name&quot;</span> <span class="comment">#容器名字 tomcat01, tomcat02, 用来区分容器</span></span><br><span class="line">-d 						<span class="comment">#后台方式进行运行</span></span><br><span class="line">-it 					<span class="comment">#使用交互方式运行，进入容器查看内容</span></span><br><span class="line">-p 						<span class="comment">#指定容器的端口 -p 8080：8080</span></span><br><span class="line">	-p ip: 主机端口：容器端口</span><br><span class="line">	-p 主机端：容器端口（常用）</span><br><span class="line">	-p 容器端口</span><br><span class="line">-P						<span class="comment">#随机指定端口</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="退出容器"><a href="#退出容器" class="headerlink" title="退出容器"></a>退出容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exit</span> <span class="comment">#直接停止容器并且退出,这个容器里的所有东西都没有了，千万不要用这个</span></span><br><span class="line">Ctrl + P + Q <span class="comment"># 容器不停止退出</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="查看运行中的容器"><a href="#查看运行中的容器" class="headerlink" title="查看运行中的容器"></a>查看运行中的容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看运行中的容器</span></span><br><span class="line">docker ps</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入当前正在运行的容器</span></span><br><span class="line">docker attach + id </span><br><span class="line"><span class="comment"># docker attach b79d6a880f02</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="下载相关的工具"><a href="#下载相关的工具" class="headerlink" title="下载相关的工具"></a>下载相关的工具</h2><h3 id="htop"><a href="#htop" class="headerlink" title="htop"></a>htop</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum -y install epel-release</span><br><span class="line">yum -y update</span><br><span class="line">yum -y install htop</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="wget"><a href="#wget" class="headerlink" title="wget"></a>wget</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install wget</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install vim</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#下载</span></span><br><span class="line">wget https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-linux-x64-14_jan_2020.tar.gz</span><br><span class="line"><span class="comment">#解压</span></span><br><span class="line">tar -zxvf openjdk-8u41-b04-linux-x64-14_jan_2020.tar.gz</span><br><span class="line"><span class="comment">#配置java环境</span></span><br><span class="line">mv java-se-8u41-ri/ /usr/java8</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export JAVA_HOME=/usr/java8&#x27;</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export PATH=$PATH:$JAVA_HOME/bin&#x27;</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Hadoop"><a href="#Hadoop" class="headerlink" title="Hadoop"></a>Hadoop</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 借助清华源下载Hadoop</span></span><br><span class="line"><span class="comment"># 如果链接失效，去下面的链接找不同的版本</span></span><br><span class="line"><span class="comment"># https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/</span></span><br><span class="line">wget https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-3.2.2/hadoop-3.2.2.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压和移动</span></span><br><span class="line">tar -zxvf hadoop-3.2.2.tar.gz -C /opt/</span><br><span class="line">mv /opt/hadoop-3.2.2 /opt/hadoop</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置地址</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export HADOOP_HOME=/opt/hadoop/&#x27;</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export PATH=$PATH:$HADOOP_HOME/bin&#x27;</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export PATH=$PATH:$HADOOP_HOME/sbin&#x27;</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置yarn和Hadoop</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;export JAVA_HOME=/usr/java8&quot;</span> &gt;&gt; /opt/hadoop/etc/hadoop/yarn-env.sh</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;export JAVA_HOME=/usr/java8&quot;</span> &gt;&gt; /opt/hadoop/etc/hadoop/hadoop-env.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看Hadoop version</span></span><br><span class="line">hadoop version</span><br></pre></td></tr></table></figure>
 
         </div>
 
@@ -333,11 +271,11 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>Post title：Linux htop 详解</li>
+        <li>Post title：Docker笔记</li>
         <li>Post author：Yuxuan Wu</li>
-        <li>Create time：2021-01-25 21:22:06</li>
+        <li>Create time：2021-05-15 20:32:33</li>
         <li>
-            Post link：yuxuanwu17.github.io2021/01/25/Linux_htop/
+            Post link：yuxuanwu17.github.io2021/05/15/2021-05-15-Docker笔记/
         </li>
         <li>
             Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
@@ -351,29 +289,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2021/01/25/MATLAB%E5%9B%BE%E7%89%87%E6%8F%90%E5%8F%96%E4%B8%8E%E5%88%86%E6%9E%90/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">基于MATLAB的图片提取和分析</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/01/25/matlab_cw2_readme/"
+                           href="/2021/05/14/2021-05-14-csharp%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">MATLAB based neural network for image classification</span>
+                                <span class="post-nav-title-item">c#单例模式</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -496,7 +419,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#htop%E6%98%AFtop%E7%9A%84%E5%8D%87%E7%BA%A7%E7%89%88-%E5%85%81%E8%AE%B8%E7%94%A8%E6%88%B7%E7%9B%91%E8%A7%86%E7%B3%BB%E7%BB%9F%E4%B8%8A%E8%BF%90%E8%A1%8C%E7%9A%84%E8%BF%9B%E7%A8%8B%E5%8F%8A%E5%85%B6%E5%AE%8C%E6%95%B4%E7%9A%84%E5%91%BD%E4%BB%A4%E8%A1%8C"><span class="nav-number">1.</span> <span class="nav-text">htop是top的升级版,允许用户监视系统上运行的进程及其完整的命令行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#htop-%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">htop 的安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%A2%E8%89%B2%E8%BE%B9%E6%A1%86"><span class="nav-number">3.</span> <span class="nav-text">红色边框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%81%B0%E8%89%B2%E8%BE%B9%E6%A1%86%EF%BC%88progress-bar%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">灰色边框（progress bar）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BB%84%E8%89%B2%E8%BE%B9%E6%A1%86"><span class="nav-number">5.</span> <span class="nav-text">黄色边框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%93%9D%E8%89%B2%E8%BE%B9%E6%A1%86"><span class="nav-number">6.</span> <span class="nav-text">蓝色边框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E5%8D%8A%E9%83%A8%E5%88%86"><span class="nav-number">7.</span> <span class="nav-text">下半部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">8.</span> <span class="nav-text">一些快捷键</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%95%9C%E5%83%8F"><span class="nav-number">1.</span> <span class="nav-text">镜像</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BDcentos%E9%95%9C%E5%83%8F"><span class="nav-number">1.1.</span> <span class="nav-text">下载centos镜像</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8Ecentos%E7%9A%84%E5%AE%B9%E5%99%A8"><span class="nav-number">2.1.</span> <span class="nav-text">创建一个基于centos的容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%80%E5%87%BA%E5%AE%B9%E5%99%A8"><span class="nav-number">2.2.</span> <span class="nav-text">退出容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E8%BF%90%E8%A1%8C%E4%B8%AD%E7%9A%84%E5%AE%B9%E5%99%A8"><span class="nav-number">2.3.</span> <span class="nav-text">查看运行中的容器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E7%9B%B8%E5%85%B3%E7%9A%84%E5%B7%A5%E5%85%B7"><span class="nav-number">3.</span> <span class="nav-text">下载相关的工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#htop"><span class="nav-number">3.1.</span> <span class="nav-text">htop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wget"><span class="nav-number">3.2.</span> <span class="nav-text">wget</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vim"><span class="nav-number">3.3.</span> <span class="nav-text">vim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java"><span class="nav-number">3.4.</span> <span class="nav-text">Java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hadoop"><span class="nav-number">3.5.</span> <span class="nav-text">Hadoop</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>
