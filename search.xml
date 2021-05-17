@@ -17132,7 +17132,7 @@ var reg = /正则表达式/; //推荐使用这种用法
 <p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210506132329.png" alt="image-20210506132329236"></p>
 <p>values that display <code>large magnitude fold changes</code> (hence being left or right of center) as well as high statistical significance (hence being toward the top).</p>
 <h3 id="Functional-annotation"><a href="#Functional-annotation" class="headerlink" title="Functional annotation"></a>Functional annotation</h3><p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210509114336.png" alt="image-20210509114336277"></p>
-<h2 id="Demo-in-labs"><a href="#Demo-in-labs" class="headerlink" title="Demo in labs"></a>Demo in labs</h2><p><strong>Essay 1:</strong> Given a set of proteins, briefly describe the steps for conducting GO annotation by Blast2GO. (20 points) Interpret the significance and potential application of GO annotation. (20 points) Use your own words (a maximum of 500 words).</p>
+<h2 id="Proteomics-Data-anlysis"><a href="#Proteomics-Data-anlysis" class="headerlink" title="Proteomics Data anlysis"></a>Proteomics Data anlysis</h2><p><strong>Essay 1:</strong> Given a set of proteins, briefly describe the steps for conducting GO annotation by Blast2GO. (20 points) Interpret the significance and potential application of GO annotation. (20 points) Use your own words (a maximum of 500 words).</p>
 <p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210506133508.png" alt="image-20210506133508471"></p>
 <ol>
 <li>To provide knowledge of roles in biological processes, molecular functions and cellular components for each target protein.</li>
@@ -17167,6 +17167,135 @@ var reg = /正则表达式/; //推荐使用这种用法
 <li><p>To provide knowledge of significantly altered biological pathways and associated target proteins.</p>
 </li>
 </ol>
+<h2 id="Metabolomics-Data-Analysis"><a href="#Metabolomics-Data-Analysis" class="headerlink" title="Metabolomics Data Analysis"></a>Metabolomics Data Analysis</h2><p><strong>Problem Scenario</strong></p>
+<p>The example used is compound concentration data obtained by targeted (i.e. quantitative) metabolic profiling of 1H NMR spectra of urine samples collected from 57 cancer patients. </p>
+<p>There are two groups of patients </p>
+<p>– <strong>Cachexia (Y)</strong> refers to the group with <code>significant skeletal muscle loss</code>; </p>
+<p>– <strong>Cachexia (N)</strong> refers to the group with <code>no obvious</code> skeletal muscle <code>loss</code>. </p>
+<p>Cachexia is defined as the loss of weight, muscle atrophy, fatigue, weakness and significant loss of appetite in someone who is not actively trying to lose weight. </p>
+<p>Cachexia is often seen in end-stage cancer, and in that context is called “cancer cachexia”. </p>
+<p>The exact mechanism behind cachexia is poorly understood, but there is probably a role for inflammatory cytokines, such as tumor necrosis factor-alpha (TNF-α) - which is also nicknamed cachexin, Interferon gamma (IFNγ), and Interleukin 6 (IL-6). </p>
+<p>The goal here is, by using methods provided ==in MetaboAnalyst==, to <strong>identify metabolites</strong> that are significantly different between these two groups of cancer patients (cachexic vs. non-cachexic). <strong>These metabolites could serve as potential early-stage biomarkers for detecting cachexia and for exploring its underlying metabolic basis</strong>. The data file is ready on ICE.</p>
+<hr>
+<h3 id="Statistical-Analysis"><a href="#Statistical-Analysis" class="headerlink" title="Statistical Analysis"></a>Statistical Analysis</h3><p>A wide array of commonly used statistical and machine learning methods are available: </p>
+<ul>
+<li>univariate: <ul>
+<li>fold change, </li>
+<li>t-test,</li>
+<li>volcano plot,</li>
+<li>ANOVA, </li>
+<li>correlation analysis;</li>
+</ul>
+</li>
+<li>multivariate:<ul>
+<li>principal component analysis (PCA), </li>
+<li>partial least squares-discriminant analysis (PLS-DA) </li>
+<li>orthogonal partial least squares-discriminant analysis (OPLS-DA)</li>
+<li>high-dimensional feature selection - significance analysis of microarrays (and metabolites) (SAM) </li>
+<li>empirical Bayesian analysis of microarrays (and metabolites) (EBAM)</li>
+<li>clustering - dendrogram, heatmap, K-means, and self organizing map (SOM))</li>
+<li>supervised classification - random forests and support vector machine (SVM).</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="Task-1-Data-processing-and-normalization-Lab-demo"><a href="#Task-1-Data-processing-and-normalization-Lab-demo" class="headerlink" title="Task 1: Data processing and normalization (Lab demo)"></a><strong>Task 1:</strong> Data processing and normalization (Lab demo)</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210514192847.png" alt="image-20210514192847714"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210514192918.png" alt="image-20210514192918723"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210514192954.png" alt="image-20210514192954791"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210514193154.png" alt="image-20210514193154720"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210514193222.png" alt="image-20210514193222520"></p>
+<p><code>Row-wise normalization</code>: aims to normalize each sample (row) so that they are comparable to each other</p>
+<p><code>column wise normalization</code> aims to make each feature much more comparable in magnitude to each other</p>
+<h3 id="Task1-Data-processing-and-normalization-15-points"><a href="#Task1-Data-processing-and-normalization-15-points" class="headerlink" title="Task1 Data processing and normalization (15 points)."></a>Task1 Data processing and normalization (15 points).</h3><ol>
+<li>Check the data format and upload the data to MataboAnalyst. Check the data integrity (this step will be launched automatically) and briefly describe your findings. if missing values are detected, replace the zero values with a small positive value (half of the minimum positive number detected in the data), otherwise, skip this step and proceed to the normalization step (5 points).</li>
+</ol>
+<blockquote>
+<p>The data integrity check run automatically and the result is shown below. For lists of concentrations the data integrity check will assess the content (look for consistent formatting and the presence of two groups), determine whether the data is paired or determine if negative numbers exists. In this case, no missing values were identified in the data. Since zero values may cause some algorithms not to work properly, MetaboAnalyst will replace these values with a small positive value (the half of the minimum positive number detected in the data).</p>
+</blockquote>
+<p><code>notes</code></p>
+<ol>
+<li>Assess the content<ol>
+<li> determine whether the data is paired </li>
+<li> determine if negative numbers exists</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210514192705.png" alt="image-20210514192705637"></p>
+<ol start="2">
+<li>Normalize to a reference sample (refer to the lab notes for the general rule of reference sample selection) and choose “Log normalization” for data transformation. Compare the distribution of normalized and original concentrations (5 points). Briefly describe the outcome and the purpose of data normalization (5 points).</li>
+</ol>
+<blockquote>
+<p>The distribution of normalized and original concentrations is shown below. A general rule of reference sample selection in normalization is to choose a sample in the control group with the fewest missing values. In this case, NETCR_005_V1 was used as the reference sample for row-wise normalization. </p>
+<p>The internal data structure is transformed now to a table with each row representing a urine sample (from a patient) and each column representing a feature (a compound with a concentration). Row-wise normalization and column-wise normalization are often applied sequentially to reduce systematic variance and to improve the performance for downstream statistical analysis. Row-wise normalization aims to normalize each sample (row) so that that they are comparable to each other. In contrast to row-wise normalization, column-wise normalization aims to make each feature (column) more comparable in magnitude to each other.</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210514204227.png" alt="image-20210514204227302"></p>
+<hr>
+<h3 id="Task-2-Identification-of-significantly-different-metabolites-50-points"><a href="#Task-2-Identification-of-significantly-different-metabolites-50-points" class="headerlink" title="Task 2: Identification of significantly different metabolites (50 points)."></a><strong>Task 2:</strong> Identification of significantly different metabolites (50 points).</h3><ol>
+<li>Use <strong>a Volcano Plot</strong> to <strong>compare the size of the fold change and statistical significance level of metabolites</strong> between the two sample groups. Use <strong>a fold change threshold 1.5 and adjusted P-value threshold 0.1.</strong> Save your results and briefly interpret your findings (10 points).</li>
+</ol>
+<h4 id="Volcano-plot"><a href="#Volcano-plot" class="headerlink" title="Volcano plot"></a>Volcano plot</h4><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210514204341.png" alt="image-20210514204341514"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210514204401.png" alt="image-20210514204401313"></p>
+<blockquote>
+<p> Volcano Plot is a commonly used univariate analysis method that is often first used to obtain an overview of the data or a rough ranking of potentially important features. Volcano plots are used to compare the size of the fold change to the statistical significance level. The X axis plots the fold change between the two groups (on a log scale), while the Y axis represents the p-value for a t-test of differences between samples (on a negative log scale). As a result, seven metabolites were identified as significantly different between the two groups by Volcano Plot analysis (see the table below). </p>
+</blockquote>
+<hr>
+<h3 id="PLS-DA-lab-explanation"><a href="#PLS-DA-lab-explanation" class="headerlink" title="PLS-DA(lab explanation)"></a>PLS-DA(lab explanation)</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210515112747.png" alt="image-20210515112747153"></p>
+<hr>
+<ol start="2">
+<li>Perform <code>Partial-Least Squares Discriminant Analysis (PLS-DA)</code> as a more sophisticated way of detecting more candidates. Save your results and interpret your findings (10 points). Compare the difference between the Volcano Plot method and <strong>PLS-DA (10 points).</strong></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210514204524.png" alt="image-20210514204524882"></p>
+<blockquote>
+<p>In PLS-DA, Variable Importance in Projection or VIP score is <strong>a weighted sum of squares</strong> of the PLS loadings. </p>
+<ul>
+<li>The weights are based on the amount of explained Y-variance in each dimension.</li>
+<li>VIP indicates the importance of the variable to the whole model.</li>
+<li> In many studies VIP values &gt;2.0 are selected and used for further data analysis, but this cut-off depends on the number of variables used.</li>
+<li> A more relaxed VIP cutoff of around 1.0 can be used if only a small number of variables (e.g. &lt;100) are involved in the study.</li>
+<li>As a result, four metabolites, <strong>Acetone (VIP=2.5062), Creatine (VIP=2.3263), Succinate (VIP=2.2816) and Uracil (VIP=2.0946)</strong>, were identified as significantly different between the two groups by PLS-DA. </li>
+</ul>
+<p>Univariate </p>
+<ul>
+<li><p>Univariate analyses are often first used to obtain an overview of the data or a rough ranking of potentially important - features before applying more sophisticated data analysis tools. </p>
+</li>
+<li><p>Univariate analysis examines each variable separately without taking into account the effect of multiple comparisons.</p>
+</li>
+<li><p>As a supervised method, PLS-DA can perform both classification and feature selection. The algorithm uses cross-validation to select an optimal number of components for classification.</p>
+</li>
+</ul>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210514204723.png" alt="image-20210514204723166"></p>
+<hr>
+<h3 id="SAM-lab-explanation"><a href="#SAM-lab-explanation" class="headerlink" title="SAM (lab explanation)"></a>SAM (lab explanation)</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210515113331.png" alt="image-20210515113331667"></p>
+<hr>
+<ol start="3">
+<li>Try another approach, Significance Analysis of Microarray (SAM), to select significant features that distinguish between cachexic and non-cachexic patients (10 points). Briefly describe how SAM works (10 points).</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210514204800.png" alt="image-20210514204800554"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210514205002.png" alt="image-20210514205002317"></p>
+<blockquote>
+<p>SAM is designed to address False Discovery Rate (FDR) problems when running multiple tests on high-dimensional data. It first assigns a significance score to each variable based on its change relative to the standard deviation of repeated measurements. Then it chooses variables with scores greater than an adjustable threshold and compares their relative difference to the distribution estimated by random permutations of the class labels. For each threshold, a certain proportion of the variables in the permutation set will be found to be significant by chance. This number is used to calculate the FDR.</p>
+</blockquote>
+<h3 id="MetaboAnalyst-tips"><a href="#MetaboAnalyst-tips" class="headerlink" title="MetaboAnalyst tips"></a><strong>MetaboAnalyst</strong> tips</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210515113725.png" alt="image-20210515113725922"></p>
+<p><strong>Task 3:</strong> Consensus results and functional analysis (15 points).</p>
+<ol>
+<li>Find metabolite candidates consistently identified by all the three approaches and interpret the results (10 points).</li>
+</ol>
+<blockquote>
+<p>As shown in the Venn diagram, 3 metabolites were consistently identified by all the three approaches including <strong>Uracil, Acetone</strong> and <strong>Succinate.</strong> </p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210515122115.png" alt="image-20210515122115397"></p>
+</blockquote>
+<ol start="2">
+<li>For the consensus results, identify their biological function(s) and possible roles in pathways using MetaboAnalyst Pathway Analysis (<a class="link"   href="https://www.metaboanalyst.ca/faces/upload/PathUploadView.xhtml" >https://www.metaboanalyst.ca/faces/upload/PathUploadView.xhtml<i class="fas fa-external-link-alt"></i></a> (10 points).</li>
+</ol>
+<blockquote>
+<p>By searching Pathway Analysis for Uracil, Acetone and Succinate, cross-links to HMDB, KEGG and PubChem are shown below.</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210515122157.png" alt="image-20210515122157093"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210515122213.png" alt="img">Take <strong>Uracil</strong> as example, by checking the information from HMDB (Uracil HMDB ID: 0000300), we can find that Uracil serves as allosteric regulator and coenzyme for many important biochemical reactions. It is also involved in the biosynthesis of polysaccharides and the transportation of sugars containing aldehydes. Uracil is found to be associated with argininemia and carbamoyl phosphate synthetase deficiency, which are inborn errors of metabolism.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210515122255.png" alt="image-20210515122255505"></p>
+<p>Besides, Uracil plays roles in Pyrimidine metabolism, beta-Alanine metabolism and Pantothenate and CoA biosynthesis processes. </p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210515122305.png" alt="image-20210515122305756"></p>
 ]]></content>
       <categories>
         <category>Bioinformatics</category>
