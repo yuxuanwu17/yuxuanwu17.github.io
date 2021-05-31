@@ -6124,7 +6124,7 @@ Heart Not Failed       0.85      0.93      0.89        43
 <li>ph at which molecule has net zero charge （determined using computer program for known sequence or empirically ）</li>
 </ul>
 <h3 id="Isoelectric-Focusing"><a href="#Isoelectric-Focusing" class="headerlink" title="Isoelectric Focusing"></a>Isoelectric Focusing</h3><p>Electrophoresis through polyacrylamide gel in which there is a pH gradient</p>
-<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210302212707.png" alt="image-20210302212707320"></p>
+<p>![image-20210302212707320`](<a class="link" href="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210302212707.png">https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210302212707.png<i class="fas fa-external-link-alt"></i></a>)</p>
 <h3 id="2D-gel"><a href="#2D-gel" class="headerlink" title="2D gel"></a>2D gel</h3><p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210302212808.png" alt="image-20210302212808199"></p>
 <h3 id="Western-Blot"><a href="#Western-Blot" class="headerlink" title="Western Blot"></a>Western Blot</h3><p>a.k.a: immunoblotting</p>
 <ul>
@@ -6330,7 +6330,30 @@ Heart Not Failed       0.85      0.93      0.89        43
 <p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210525220949.png" alt="image-20210525220948934"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210525221041.png" alt="image-20210525221041197"></p>
 <h3 id="Protein-melting-thermal-shift"><a href="#Protein-melting-thermal-shift" class="headerlink" title="Protein melting (thermal shift)"></a>Protein melting (thermal shift)</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210525221117.png" alt="image-20210525221117616"></p>
-<h2 id="Lecture-11-SPR"><a href="#Lecture-11-SPR" class="headerlink" title="Lecture 11 SPR"></a>Lecture 11 SPR</h2><h2 id="Lecture-12-Crystallography"><a href="#Lecture-12-Crystallography" class="headerlink" title="Lecture 12 Crystallography"></a>Lecture 12 Crystallography</h2><h3 id="Whole-process"><a href="#Whole-process" class="headerlink" title="Whole process"></a>Whole process</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210524083431.png" alt="image-20210524083431460"></p>
+<h2 id="Lecture-11-SPR"><a href="#Lecture-11-SPR" class="headerlink" title="Lecture 11 SPR"></a>Lecture 11 SPR</h2><h3 id="Surface-Plasmon-Resonance"><a href="#Surface-Plasmon-Resonance" class="headerlink" title="Surface Plasmon Resonance"></a>Surface Plasmon Resonance</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210528105445.png" alt="image-20210528105445039"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210528105559.png" alt="image-20210528105559842"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210528110144.png" alt="image-20210528110144896"></p>
+<h3 id="pros-amp-cons"><a href="#pros-amp-cons" class="headerlink" title="pros & cons"></a>pros &amp; cons</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210528110232.png" alt="image-20210528110232662"></p>
+<h3 id="Tutorial"><a href="#Tutorial" class="headerlink" title="Tutorial"></a>Tutorial</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210528110725.png" alt="image-20210528110725405"></p>
+<p>Inhibitaor A has a low ki value</p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210528112625.png" alt="image-20210528112625677"></p>
+<p><code>Question (a)</code></p>
+<p>The bigger the molecule binding to the chip, the higher the shift of response you will see in the signal. </p>
+<p>A: 1000 response unit – antibody</p>
+<p>B: small molecular inhibitor </p>
+<p><code>Question (b)</code></p>
+<p>For antibody, it takes a long time (configuration and takes to time to stable for binding)</p>
+<p>For small molecular, immediately (can go straight to the molecule site, when you wash it, everything come out, nothing changed in the conformation of the size)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210528113746.png" alt="image-20210528113746160"></p>
+<p>a) lower kD value means higher affinity</p>
+<blockquote>
+<p>Which one is better in drug design ?</p>
+</blockquote>
+<p>A long type binding, bind very tightly and let drug stay in the body for a long time. Avoid take pill regularly (short term problem)</p>
+<p>But based on the profile of the drug design, you have take care of the drug significantly</p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210528114811.png" alt="image-20210528114811051   "></p>
+<p>The answer should be Ms</p>
+<h2 id="Lecture-12-Crystallography"><a href="#Lecture-12-Crystallography" class="headerlink" title="Lecture 12 Crystallography"></a>Lecture 12 Crystallography</h2><h3 id="Whole-process"><a href="#Whole-process" class="headerlink" title="Whole process"></a>Whole process</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210524083431.png" alt="image-20210524083431460"></p>
 <h3 id="X-ray-diffraction-of-a-crystal"><a href="#X-ray-diffraction-of-a-crystal" class="headerlink" title="X-ray diffraction of a crystal"></a>X-ray diffraction of a crystal</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210524083522.png" alt="image-20210524083522318"></p>
 <h3 id="Raw-data"><a href="#Raw-data" class="headerlink" title="Raw data"></a>Raw data</h3><p>Every atom in a unit cell contributes to every reflection in the diffraction pattern.</p>
 <p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210524083728.png" alt="image-20210524083727937"></p>
@@ -6477,6 +6500,28 @@ Heart Not Failed       0.85      0.93      0.89        43
 <p>B: y has more structure compared to x since absence of ATP, the kinase is a random coil and with the inclusion of ATP, protein turn to a secondary structure. </p>
 <p>x: background high </p>
 <p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210525203347.PNG" alt="IMG_0420"></p>
+<h2 id="Lecture-16-Modelling"><a href="#Lecture-16-Modelling" class="headerlink" title="Lecture 16 Modelling"></a>Lecture 16 Modelling</h2><h3 id="Homology-Modelling-of-Proteins"><a href="#Homology-Modelling-of-Proteins" class="headerlink" title="Homology Modelling of Proteins"></a>Homology Modelling of Proteins</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210528194258.png" alt="image-20210528194258663"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210528194450.png" alt="image-20210528194449958"></p>
+<h2 id="Lecture-17-ITC"><a href="#Lecture-17-ITC" class="headerlink" title="Lecture 17 ITC"></a>Lecture 17 ITC</h2><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210530185132.png" alt="image-20210530185132466"></p>
+<h3 id="Isothermal-Titration-Calorimetry"><a href="#Isothermal-Titration-Calorimetry" class="headerlink" title="Isothermal Titration Calorimetry"></a>Isothermal Titration Calorimetry</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210530190205.png" alt="image-20210530190205232"></p>
+<h3 id="What-is-ITC"><a href="#What-is-ITC" class="headerlink" title="What is ITC"></a>What is ITC</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210530190231.png" alt="image-20210530190231383"></p>
+<ul>
+<li>ITC could quantify the number of protein (molarity and number)</li>
+</ul>
+<blockquote>
+<p>Kb tell how tight the protein bind</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210530190253.png" alt="image-20210530190253415"></p>
+<h3 id="ITC-“thermogram”-Thermodynamic-measurements"><a href="#ITC-“thermogram”-Thermodynamic-measurements" class="headerlink" title="ITC “thermogram”: Thermodynamic measurements"></a>ITC “thermogram”: Thermodynamic measurements</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210530190427.png" alt="image-20210530190427895"></p>
+<h3 id="C-value"><a href="#C-value" class="headerlink" title="C-value"></a>C-value</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210530190650.png" alt="image-20210530190650312"></p>
+<h3 id="Stoichiometry"><a href="#Stoichiometry" class="headerlink" title="Stoichiometry"></a>Stoichiometry</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210530191006.png" alt="image-20210530191005933"></p>
+<h3 id="ITC-be-used-for"><a href="#ITC-be-used-for" class="headerlink" title="ITC be used for"></a>ITC be used for</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210530191404.png" alt="image-20210530191404064"></p>
+<p>ITC compared with SPR: </p>
+<ul>
+<li>bind molecular, do not consider the steric hinderance (no such problem)</li>
+<li>Direct information (1 to 1) while SPR is not direct</li>
+<li>Can be reused; recover your protein in a cheaper way </li>
+</ul>
 <h2 id="Tutorial-for-final-paper"><a href="#Tutorial-for-final-paper" class="headerlink" title="Tutorial for final paper"></a><code>Tutorial for final paper</code></h2><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210524221949.png" alt="image-20210524221949150"></p>
 <p>What does <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex" xmlns="http://www.w3.org/2000/svg" width="1.448ex" height="1.025ex" role="img" focusable="false" viewBox="0 -442 640 453"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D6FC" d="M34 156Q34 270 120 356T309 442Q379 442 421 402T478 304Q484 275 485 237V208Q534 282 560 374Q564 388 566 390T582 393Q603 393 603 385Q603 376 594 346T558 261T497 161L486 147L487 123Q489 67 495 47T514 26Q528 28 540 37T557 60Q559 67 562 68T577 70Q597 70 597 62Q597 56 591 43Q579 19 556 5T512 -10H505Q438 -10 414 62L411 69L400 61Q390 53 370 41T325 18T267 -2T203 -11Q124 -11 79 39T34 156ZM208 26Q257 26 306 47T379 90L403 112Q401 255 396 290Q382 405 304 405Q235 405 183 332Q156 292 139 224T121 120Q121 71 146 49T208 26Z"></path></g></g></g></svg></mjx-container>-helix A shows a high protection at &lt;1 ms during refolding imply? </p>
 <blockquote>
@@ -6497,6 +6542,23 @@ Heart Not Failed       0.85      0.93      0.89        43
 <p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210525201634.png" alt="image-20210525201634649"></p>
 <h3 id="Concepts-of-thermal-shift-CD"><a href="#Concepts-of-thermal-shift-CD" class="headerlink" title="Concepts of thermal shift + CD"></a>Concepts of thermal shift + CD</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210525203347.PNG" alt="IMG_0420"></p>
 <h3 id="concepts-of-SPR-kon-kof-kd"><a href="#concepts-of-SPR-kon-kof-kd" class="headerlink" title="concepts of SPR: kon; kof; kd"></a>concepts of SPR: kon; kof; kd</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210525205400.png" alt="image-20210525205400376"></p>
+<p><code>sensorgram</code></p>
+<p>The difference in the binding and the affinity between these two ligands. Kon, Koff, How to define Kd</p>
+<p>左图1: slow binder with high affinity </p>
+<p>右图：quick binder （通过陡然的上升）but with very lousy background, low affinity (通过右图的右半部分的悬崖式的断层)</p>
+<p>kD depends on the calculation <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.357ex" xmlns="http://www.w3.org/2000/svg" width="3.028ex" height="1.927ex" role="img" focusable="false" viewBox="0 -694 1338.2 851.8"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D458" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"></path></g><g data-mml-node="TeXAtom" transform="translate(521, -150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D45C" d="M201 -11Q126 -11 80 38T34 156Q34 221 64 279T146 380Q222 441 301 441Q333 441 341 440Q354 437 367 433T402 417T438 387T464 338T476 268Q476 161 390 75T201 -11ZM121 120Q121 70 147 48T206 26Q250 26 289 58T351 142Q360 163 374 216T388 308Q388 352 370 375Q346 405 306 405Q243 405 195 347Q158 303 140 230T121 120Z"></path></g><g data-mml-node="mi" transform="translate(485, 0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g></g></g></g></g></svg></mjx-container></p>
+<h3 id="Relate-SPR-to-ITC"><a href="#Relate-SPR-to-ITC" class="headerlink" title="Relate SPR to ITC"></a>Relate SPR to ITC</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210531083723.png" alt="image-20210531083723550"></p>
+<blockquote>
+<p>ANSWER:</p>
+<p><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.339ex" xmlns="http://www.w3.org/2000/svg" width="3.359ex" height="1.885ex" role="img" focusable="false" viewBox="0 -683 1484.5 833"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D43E" d="M285 628Q285 635 228 637Q205 637 198 638T191 647Q191 649 193 661Q199 681 203 682Q205 683 214 683H219Q260 681 355 681Q389 681 418 681T463 682T483 682Q500 682 500 674Q500 669 497 660Q496 658 496 654T495 648T493 644T490 641T486 639T479 638T470 637T456 637Q416 636 405 634T387 623L306 305Q307 305 490 449T678 597Q692 611 692 620Q692 635 667 637Q651 637 651 648Q651 650 654 662T659 677Q662 682 676 682Q680 682 711 681T791 680Q814 680 839 681T869 682Q889 682 889 672Q889 650 881 642Q878 637 862 637Q787 632 726 586Q710 576 656 534T556 455L509 418L518 396Q527 374 546 329T581 244Q656 67 661 61Q663 59 666 57Q680 47 717 46H738Q744 38 744 37T741 19Q737 6 731 0H720Q680 3 625 3Q503 3 488 0H478Q472 6 472 9T474 27Q478 40 480 43T491 46H494Q544 46 544 71Q544 75 517 141T485 216L427 354L359 301L291 248L268 155Q245 63 245 58Q245 51 253 49T303 46H334Q340 37 340 35Q340 19 333 5Q328 0 317 0Q314 0 280 1T180 2Q118 2 85 2T49 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Z"></path></g><g data-mml-node="mi" transform="translate(849, -150) scale(0.707)"><path data-c="1D437" d="M287 628Q287 635 230 637Q207 637 200 638T193 647Q193 655 197 667T204 682Q206 683 403 683Q570 682 590 682T630 676Q702 659 752 597T803 431Q803 275 696 151T444 3L430 1L236 0H125H72Q48 0 41 2T33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM703 469Q703 507 692 537T666 584T629 613T590 629T555 636Q553 636 541 636T512 636T479 637H436Q392 637 386 627Q384 623 313 339T242 52Q242 48 253 48T330 47Q335 47 349 47T373 46Q499 46 581 128Q617 164 640 212T683 339T703 469Z"></path></g></g></g></g></svg></mjx-container> The lower the value, the higher the affinity; so the left figure could be A</p>
+<p>The right figure which has low affinity binder could be figure B or C</p>
+</blockquote>
+<blockquote>
+<p>Comparison between ITC and SPR</p>
+<p>Biophysical techniques such as Isothermal Calorimetry (ITC), and Surface Plasmon Resonance are used to thermodynamically and kinetically characterize the binding mechanism of the protein-ligand or protein-protein interactions, </p>
+<p><strong>ITC</strong> measures the heat released or absorbed during the protein-ligand interactions, whereas, <strong>SPR</strong> measures the change in reflective angle of the incident light caused by surface waves called ‘Plasmon Polaritons. Since plasmon polaritons, are sensitive to binding events occurring on a surface, it proportionally affects the angle of the reflected light </p>
+</blockquote>
+<h3 id="Concepts-of-thermal-shift-vs-binding-affinities"><a href="#Concepts-of-thermal-shift-vs-binding-affinities" class="headerlink" title="Concepts of thermal shift vs binding affinities"></a>Concepts of thermal shift vs binding affinities</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210531085158.png" alt="image-20210531085158750"></p>
 <hr>
 <h2 id="CW1"><a href="#CW1" class="headerlink" title="CW1"></a>CW1</h2><h3 id="Requirements-1"><a href="#Requirements-1" class="headerlink" title="Requirements"></a>Requirements</h3><p>Courseworks requirements</p>
 <p>Protocol</p>
@@ -17758,8 +17820,45 @@ var reg = /正则表达式/; //推荐使用这种用法
       </tags>
   </entry>
   <entry>
-    <title>BIO312 cw1</title>
-    <url>/2021/03/10/2021-03-10-BIO312-cw1/</url>
+    <title>Docker实战</title>
+    <url>/2021/05/15/2021-05-15-Docker%E5%AE%9E%E6%88%98/</url>
+    <content><![CDATA[<h2 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h2><h3 id="下载centos镜像"><a href="#下载centos镜像" class="headerlink" title="下载centos镜像"></a>下载centos镜像</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull centos</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h2><h3 id="创建一个基于centos的容器"><a href="#创建一个基于centos的容器" class="headerlink" title="创建一个基于centos的容器"></a>创建一个基于centos的容器</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -it centos /bin/bash </span><br><span class="line"></span><br><span class="line">--name=<span class="string">&quot;Name&quot;</span> <span class="comment">#容器名字 tomcat01, tomcat02, 用来区分容器</span></span><br><span class="line">-d 						<span class="comment">#后台方式进行运行</span></span><br><span class="line">-it 					<span class="comment">#使用交互方式运行，进入容器查看内容</span></span><br><span class="line">-p 						<span class="comment">#指定容器的端口 -p 8080：8080</span></span><br><span class="line">	-p ip: 主机端口：容器端口</span><br><span class="line">	-p 主机端：容器端口（常用）</span><br><span class="line">	-p 容器端口</span><br><span class="line">-P						<span class="comment">#随机指定端口</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="退出容器"><a href="#退出容器" class="headerlink" title="退出容器"></a>退出容器</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">exit</span> <span class="comment">#直接停止容器并且退出,这个容器里的所有东西都没有了，千万不要用这个</span></span><br><span class="line">Ctrl + P + Q <span class="comment"># 容器不停止退出</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="查看运行中的容器"><a href="#查看运行中的容器" class="headerlink" title="查看运行中的容器"></a>查看运行中的容器</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看运行中的容器</span></span><br><span class="line">docker ps</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入当前正在运行的容器</span></span><br><span class="line">docker attach + id </span><br><span class="line"><span class="comment"># docker attach b79d6a880f02</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="下载相关的工具"><a href="#下载相关的工具" class="headerlink" title="下载相关的工具"></a>下载相关的工具</h2><h3 id="htop"><a href="#htop" class="headerlink" title="htop"></a>htop</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install epel-release</span><br><span class="line">yum -y update</span><br><span class="line">yum -y install htop</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="wget"><a href="#wget" class="headerlink" title="wget"></a>wget</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install wget</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install vim</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#下载</span></span><br><span class="line">wget https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-linux-x64-14_jan_2020.tar.gz</span><br><span class="line"><span class="comment">#解压</span></span><br><span class="line">tar -zxvf openjdk-8u41-b04-linux-x64-14_jan_2020.tar.gz</span><br><span class="line"><span class="comment">#配置java环境</span></span><br><span class="line">mv java-se-8u41-ri/ /usr/java8</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export JAVA_HOME=/usr/java8&#x27;</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export PATH=$PATH:$JAVA_HOME/bin&#x27;</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Hadoop"><a href="#Hadoop" class="headerlink" title="Hadoop"></a>Hadoop</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 借助清华源下载Hadoop</span></span><br><span class="line"><span class="comment"># 如果链接失效，去下面的链接找不同的版本</span></span><br><span class="line"><span class="comment"># https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/</span></span><br><span class="line">wget https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-3.2.2/hadoop-3.2.2.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压和移动</span></span><br><span class="line">tar -zxvf hadoop-3.2.2.tar.gz -C /opt/</span><br><span class="line">mv /opt/hadoop-3.2.2 /opt/hadoop</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置地址</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export HADOOP_HOME=/opt/hadoop/&#x27;</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export PATH=$PATH:$HADOOP_HOME/bin&#x27;</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export PATH=$PATH:$HADOOP_HOME/sbin&#x27;</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置yarn和Hadoop</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;export JAVA_HOME=/usr/java8&quot;</span> &gt;&gt; /opt/hadoop/etc/hadoop/yarn-env.sh</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;export JAVA_HOME=/usr/java8&quot;</span> &gt;&gt; /opt/hadoop/etc/hadoop/hadoop-env.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看Hadoop version</span></span><br><span class="line">hadoop version</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>tutorial</tag>
+        <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>BIO312 Wang Mu&#39;s CW</title>
+    <url>/2021/03/10/BIO312%20Wang%20Mu&#39;s%20CW/</url>
     <content><![CDATA[<ul>
 <li><input disabled="" type="checkbox"> 研究tutorial2 的Tandem MS-Sequence Confirmation<ul>
 <li><input disabled="" type="checkbox"> 看视频</li>
@@ -17795,7 +17894,7 @@ var reg = /正则表达式/; //推荐使用这种用法
 <ul>
 <li>For example, a small aliquot of the digest solution can be directly analyzed by MALDI-MS to obtain a peptide map. The resulting sequence coverage (relative to the entire protein sequence) displayed from the total number of tryptic peptides observed in the MALDI mass spectrum can be quite high, i.e., greater than 80% of the sequence, although it can vary considerably depending on the protein, sample amount, etc. The measured molecular weights of the peptide fragments along with the specificity of the enzyme employed can be searched and compared against protein sequence databasesusing a number of searching algorithms available either commercially or on the Internet.</li>
 </ul>
-<h3 id="Task1"><a href="#Task1" class="headerlink" title="Task1"></a>Task1</h3><p>What is a proteome and how is the link between an organism’s genome and a proteome? (10 marks)</p>
+<h2 id="cw1"><a href="#cw1" class="headerlink" title="cw1"></a>cw1</h2><h3 id="Task1"><a href="#Task1" class="headerlink" title="Task1"></a>Task1</h3><p>What is a proteome and how is the link between an organism’s genome and a proteome? (10 marks)</p>
 <blockquote>
 <p>Proteome represents the proteins catalogue of all proteins in a cell tissue or body fluid. Transcriptome, which is the RNA catalogue of all mRNA expressed in a cell or tissue,  is the link between an organisms genome and proteome.</p>
 </blockquote>
@@ -17883,49 +17982,32 @@ var reg = /正则表达式/; //推荐使用这种用法
 <p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210512220229.png" alt="image-20210512220229106"></p>
 <p>y ions 从右往左数，需要先加上一个18，最后加上1</p>
 <p>b ions 从左往右数，需要先加上1，最后加上18</p>
+<h2 id="cw2"><a href="#cw2" class="headerlink" title="cw2"></a>cw2</h2><ol>
+<li>A redox protein can form many <strong>disulfide bonds</strong> that are regulatory to its activity. Identification of the <strong>disulfide bonds</strong> and cysteine residues involved in forming them could be a challenging task. <code>Mutational analysis</code> (e.g. changing cys to ala) has been the most investigators’ choice. But this method can be very labor-intensive. With the development in ==mass spectrometry==, a mass spec-based disulfide bond determination has become more and more popular. For protein identification using MS, disulfide bonds are normally reduced first and then alkylated (to prevent reforming of disulfide bonds). <strong>However, this procedure will not allow for identification of the cysteines involved in disulfide bond formation.</strong> Propose a method to <code>identify the cysteines involved in disulfide bond </code>formation using <code>mass spec</code> as the analytical tool. (20 marks)</li>
+</ol>
+<hr>
+<ul>
+<li>Mass spectrometry </li>
+<li>Identify the cysteines involved in disulfide bond </li>
+</ul>
+<hr>
+<hr>
+<ol start="2">
+<li>You have just joined a biotechnology company and have been told to work on the BSc protein, which is a regulatory protein of therapeutic interest. Specifically, your task is to discover proteins whose cellular levels are influenced by the BSc protein. Describe a mass spec-based proteomic approaches you would use to identify such proteins [20 marks]. </li>
+</ol>
+<hr>
+<ul>
+<li>BSc protein (a regulatory protein of therapeutic interest)</li>
+<li>discover proteins whose <code>cellular levels</code> are influenced by the BSc protein</li>
+<li>mass spec-based proteomic approaches <code>identify</code></li>
+</ul>
+<hr>
 ]]></content>
       <categories>
         <category>Biology</category>
       </categories>
       <tags>
         <tag>notes</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Docker实战</title>
-    <url>/2021/05/15/2021-05-15-Docker%E5%AE%9E%E6%88%98/</url>
-    <content><![CDATA[<h2 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h2><h3 id="下载centos镜像"><a href="#下载centos镜像" class="headerlink" title="下载centos镜像"></a>下载centos镜像</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull centos</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h2><h3 id="创建一个基于centos的容器"><a href="#创建一个基于centos的容器" class="headerlink" title="创建一个基于centos的容器"></a>创建一个基于centos的容器</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -it centos /bin/bash </span><br><span class="line"></span><br><span class="line">--name=<span class="string">&quot;Name&quot;</span> <span class="comment">#容器名字 tomcat01, tomcat02, 用来区分容器</span></span><br><span class="line">-d 						<span class="comment">#后台方式进行运行</span></span><br><span class="line">-it 					<span class="comment">#使用交互方式运行，进入容器查看内容</span></span><br><span class="line">-p 						<span class="comment">#指定容器的端口 -p 8080：8080</span></span><br><span class="line">	-p ip: 主机端口：容器端口</span><br><span class="line">	-p 主机端：容器端口（常用）</span><br><span class="line">	-p 容器端口</span><br><span class="line">-P						<span class="comment">#随机指定端口</span></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="退出容器"><a href="#退出容器" class="headerlink" title="退出容器"></a>退出容器</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">exit</span> <span class="comment">#直接停止容器并且退出,这个容器里的所有东西都没有了，千万不要用这个</span></span><br><span class="line">Ctrl + P + Q <span class="comment"># 容器不停止退出</span></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="查看运行中的容器"><a href="#查看运行中的容器" class="headerlink" title="查看运行中的容器"></a>查看运行中的容器</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看运行中的容器</span></span><br><span class="line">docker ps</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入当前正在运行的容器</span></span><br><span class="line">docker attach + id </span><br><span class="line"><span class="comment"># docker attach b79d6a880f02</span></span><br></pre></td></tr></table></figure>
-
-
-<h2 id="下载相关的工具"><a href="#下载相关的工具" class="headerlink" title="下载相关的工具"></a>下载相关的工具</h2><h3 id="htop"><a href="#htop" class="headerlink" title="htop"></a>htop</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install epel-release</span><br><span class="line">yum -y update</span><br><span class="line">yum -y install htop</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="wget"><a href="#wget" class="headerlink" title="wget"></a>wget</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install wget</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install vim</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#下载</span></span><br><span class="line">wget https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-linux-x64-14_jan_2020.tar.gz</span><br><span class="line"><span class="comment">#解压</span></span><br><span class="line">tar -zxvf openjdk-8u41-b04-linux-x64-14_jan_2020.tar.gz</span><br><span class="line"><span class="comment">#配置java环境</span></span><br><span class="line">mv java-se-8u41-ri/ /usr/java8</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export JAVA_HOME=/usr/java8&#x27;</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export PATH=$PATH:$JAVA_HOME/bin&#x27;</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Hadoop"><a href="#Hadoop" class="headerlink" title="Hadoop"></a>Hadoop</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 借助清华源下载Hadoop</span></span><br><span class="line"><span class="comment"># 如果链接失效，去下面的链接找不同的版本</span></span><br><span class="line"><span class="comment"># https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/</span></span><br><span class="line">wget https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-3.2.2/hadoop-3.2.2.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压和移动</span></span><br><span class="line">tar -zxvf hadoop-3.2.2.tar.gz -C /opt/</span><br><span class="line">mv /opt/hadoop-3.2.2 /opt/hadoop</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置地址</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export HADOOP_HOME=/opt/hadoop/&#x27;</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export PATH=$PATH:$HADOOP_HOME/bin&#x27;</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export PATH=$PATH:$HADOOP_HOME/sbin&#x27;</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置yarn和Hadoop</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;export JAVA_HOME=/usr/java8&quot;</span> &gt;&gt; /opt/hadoop/etc/hadoop/yarn-env.sh</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;export JAVA_HOME=/usr/java8&quot;</span> &gt;&gt; /opt/hadoop/etc/hadoop/hadoop-env.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看Hadoop version</span></span><br><span class="line">hadoop version</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>tutorial</tag>
-        <tag>Docker</tag>
       </tags>
   </entry>
 </search>
