@@ -9,7 +9,7 @@
     
     <title>
         
-            Docker实战 |
+            BIO304 review |
         
         Yuxuan Wu
     </title>
@@ -168,7 +168,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">Docker实战</span>
+            <span class="title-hover-animation">BIO304 review</span>
         </div>
 
         
@@ -184,7 +184,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i> 2021-05-15 20:32:33
+        <i class="fas fa-edit"></i> 2021-06-01 20:31:02
     </span>
     
         <span class="article-categories article-meta-item">
@@ -192,7 +192,7 @@
             <ul>
                 
                     <li>
-                        <a href="/categories/Linux/">Linux</a>
+                        <a href="/categories/Biology/">Biology</a>
                     </li>
                 
             </ul>
@@ -204,11 +204,7 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/tutorial/">tutorial</a>
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/Docker/">Docker</a>
+                        <a href="/tags/notes/">notes</a>
                     </li>
                 
             </ul>
@@ -218,12 +214,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i> <span>438 Words</span>
+            <i class="fas fa-file-word"></i> <span>71 Words</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i> <span>2 Mins</span>
+            <i class="fas fa-clock"></i> <span>1 Mins</span>
         </span>
     
     
@@ -239,31 +235,36 @@
         
 
         <div class="article-content markdown-body">
-            <h2 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h2><h3 id="下载centos镜像"><a href="#下载centos镜像" class="headerlink" title="下载centos镜像"></a>下载centos镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull centos</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h2><h3 id="创建一个基于centos的容器"><a href="#创建一个基于centos的容器" class="headerlink" title="创建一个基于centos的容器"></a>创建一个基于centos的容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">docker run -it centos /bin/bash </span><br><span class="line"></span><br><span class="line">--name=<span class="string">&quot;Name&quot;</span> <span class="comment">#容器名字 tomcat01, tomcat02, 用来区分容器</span></span><br><span class="line">-d 						<span class="comment">#后台方式进行运行</span></span><br><span class="line">-it 					<span class="comment">#使用交互方式运行，进入容器查看内容</span></span><br><span class="line">-p 						<span class="comment">#指定容器的端口 -p 8080：8080</span></span><br><span class="line">	-p ip: 主机端口：容器端口</span><br><span class="line">	-p 主机端：容器端口（常用）</span><br><span class="line">	-p 容器端口</span><br><span class="line">-P						<span class="comment">#随机指定端口</span></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="退出容器"><a href="#退出容器" class="headerlink" title="退出容器"></a>退出容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exit</span> <span class="comment">#直接停止容器并且退出,这个容器里的所有东西都没有了，千万不要用这个</span></span><br><span class="line">Ctrl + P + Q <span class="comment"># 容器不停止退出</span></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="查看运行中的容器"><a href="#查看运行中的容器" class="headerlink" title="查看运行中的容器"></a>查看运行中的容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看运行中的容器</span></span><br><span class="line">docker ps</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入当前正在运行的容器</span></span><br><span class="line">docker attach + id </span><br><span class="line"><span class="comment"># docker attach b79d6a880f02</span></span><br></pre></td></tr></table></figure>
-
-
-<h2 id="下载相关的工具"><a href="#下载相关的工具" class="headerlink" title="下载相关的工具"></a>下载相关的工具</h2><h3 id="htop"><a href="#htop" class="headerlink" title="htop"></a>htop</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum -y install epel-release</span><br><span class="line">yum -y update</span><br><span class="line">yum -y install htop</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="wget"><a href="#wget" class="headerlink" title="wget"></a>wget</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install wget</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install vim</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#下载</span></span><br><span class="line">wget https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b04-linux-x64-14_jan_2020.tar.gz</span><br><span class="line"><span class="comment">#解压</span></span><br><span class="line">tar -zxvf openjdk-8u41-b04-linux-x64-14_jan_2020.tar.gz</span><br><span class="line"><span class="comment">#配置java环境</span></span><br><span class="line">mv java-se-8u41-ri/ /usr/java8</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export JAVA_HOME=/usr/java8&#x27;</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export PATH=$PATH:$JAVA_HOME/bin&#x27;</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Hadoop"><a href="#Hadoop" class="headerlink" title="Hadoop"></a>Hadoop</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 借助清华源下载Hadoop</span></span><br><span class="line"><span class="comment"># 如果链接失效，去下面的链接找不同的版本</span></span><br><span class="line"><span class="comment"># https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/</span></span><br><span class="line">wget https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-3.2.2/hadoop-3.2.2.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压和移动</span></span><br><span class="line">tar -zxvf hadoop-3.2.2.tar.gz -C /opt/</span><br><span class="line">mv /opt/hadoop-3.2.2 /opt/hadoop</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置地址</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export HADOOP_HOME=/opt/hadoop/&#x27;</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export PATH=$PATH:$HADOOP_HOME/bin&#x27;</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export PATH=$PATH:$HADOOP_HOME/sbin&#x27;</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置yarn和Hadoop</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;export JAVA_HOME=/usr/java8&quot;</span> &gt;&gt; /opt/hadoop/etc/hadoop/yarn-env.sh</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;export JAVA_HOME=/usr/java8&quot;</span> &gt;&gt; /opt/hadoop/etc/hadoop/hadoop-env.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看Hadoop version</span></span><br><span class="line">hadoop version</span><br></pre></td></tr></table></figure>
+            <h2 id="Ethics"><a href="#Ethics" class="headerlink" title="Ethics"></a>Ethics</h2><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210601203254.png" alt="image-20210601203254587"></p>
+<h2 id="Regulation"><a href="#Regulation" class="headerlink" title="Regulation"></a>Regulation</h2><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210601210228.png" alt="image-20210601210228822"></p>
+<h2 id="Economics"><a href="#Economics" class="headerlink" title="Economics"></a>Economics</h2><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210601231751.png" alt="image-20210601231751567"></p>
+<h2 id="Patents"><a href="#Patents" class="headerlink" title="Patents"></a>Patents</h2><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210601232836.png" alt="image-20210601232836569"></p>
+<h2 id="Antibiotics-and-metagenomics"><a href="#Antibiotics-and-metagenomics" class="headerlink" title="Antibiotics and metagenomics"></a>Antibiotics and metagenomics</h2><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210602092243.png" alt="image-20210602092242958"></p>
+<h2 id="CRISPR"><a href="#CRISPR" class="headerlink" title="CRISPR"></a>CRISPR</h2><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210602093927.png" alt="image-20210602093927416"></p>
+<h3 id="CRISPR-CAS-IS-AN-ADAPTIVE-IMMUNE-SYSTEM-IN-BACTERIA"><a href="#CRISPR-CAS-IS-AN-ADAPTIVE-IMMUNE-SYSTEM-IN-BACTERIA" class="headerlink" title="CRISPR/CAS IS AN ADAPTIVE IMMUNE SYSTEM IN BACTERIA"></a>CRISPR/CAS IS AN ADAPTIVE IMMUNE SYSTEM IN BACTERIA</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210602094518.png" alt="image-20210602094518350"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210602094825.png" alt="image-20210602094825248"></p>
+<h3 id="Exploiting-the-mechanisms"><a href="#Exploiting-the-mechanisms" class="headerlink" title="Exploiting the mechanisms"></a>Exploiting the mechanisms</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210602094916.png" alt="image-20210602094916728"></p>
+<h3 id="CRISPR-array"><a href="#CRISPR-array" class="headerlink" title="CRISPR array"></a>CRISPR array</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210602094939.png" alt="image-20210602094939504"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210602094952.png" alt="image-20210602094952280"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210602101244.png" alt="image-20210602101244250"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210602101852.png" alt="image-20210602101852854"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210602102034.png" alt="image-20210602102034126"></p>
+<h3 id="Single-guide-RNA-Cas9-complex-hybridized-to-target-sequence"><a href="#Single-guide-RNA-Cas9-complex-hybridized-to-target-sequence" class="headerlink" title="Single-guide RNA-Cas9 complex hybridized to target sequence"></a>Single-guide RNA-Cas9 complex hybridized to target sequence</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210602102550.png" alt="image-20210602102550729"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210602102647.png" alt="image-20210602102647898"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210602103847.png" alt="image-20210602103847910"></p>
+<h3 id="Repair-of-DSB-HDR"><a href="#Repair-of-DSB-HDR" class="headerlink" title="Repair of DSB:HDR"></a>Repair of DSB:HDR</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210602121308.png" alt="image-20210602121308596"></p>
+<h3 id="Repair-of-DSB-NHEJ"><a href="#Repair-of-DSB-NHEJ" class="headerlink" title="Repair of DSB: NHEJ"></a>Repair of DSB: NHEJ</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210602122311.png" alt="image-20210602122311063"></p>
+<h3 id="Summary-of-CRISPR-Cas9"><a href="#Summary-of-CRISPR-Cas9" class="headerlink" title="Summary of CRISPR/Cas9"></a>Summary of CRISPR/Cas9</h3><p><a class="link"   target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=MnYppmstxIs" >https://www.youtube.com/watch?v=MnYppmstxIs<i class="fas fa-external-link-alt"></i></a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210602122426.png" alt="image-20210602122426384"></p>
+<h2 id="Stem-cellls"><a href="#Stem-cellls" class="headerlink" title="Stem cellls"></a>Stem cellls</h2><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210604113014.png" alt="image-20210604113014697"></p>
+<h3 id="stem-cells"><a href="#stem-cells" class="headerlink" title="stem cells"></a>stem cells</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210604120141.png" alt="image-20210604120141483"></p>
+<h3 id="Stem-cell-classes"><a href="#Stem-cell-classes" class="headerlink" title="Stem cell classes"></a>Stem cell classes</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210604120248.png" alt="image-20210604120248630"></p>
+<h3 id="ESC"><a href="#ESC" class="headerlink" title="ESC"></a>ESC</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210604120440.png" alt="image-20210604120440811"></p>
+<h3 id="Disadvantage-of-ESC"><a href="#Disadvantage-of-ESC" class="headerlink" title="Disadvantage of ESC"></a>Disadvantage of ESC</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210604120458.png" alt="image-20210604120458664"></p>
+<h3 id="Disadvantages-of-iSPC"><a href="#Disadvantages-of-iSPC" class="headerlink" title="Disadvantages of iSPC"></a>Disadvantages of iSPC</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210604120921.png" alt="image-20210604120921519"></p>
+<h3 id="Hematopoietic-Stem-cells-HSCs"><a href="#Hematopoietic-Stem-cells-HSCs" class="headerlink" title="Hematopoietic Stem cells (HSCs)"></a>Hematopoietic Stem cells (HSCs)</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210604121003.png" alt="image-20210604121003225"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210604121105.png" alt="image-20210604121105116"></p>
+<h2 id="GM-food-and-animals"><a href="#GM-food-and-animals" class="headerlink" title="GM food and animals"></a>GM food and animals</h2><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210604121129.png" alt="image-20210604121129272"></p>
 
         </div>
 
@@ -271,11 +272,11 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>Post title：Docker实战</li>
+        <li>Post title：BIO304 review</li>
         <li>Post author：Yuxuan Wu</li>
-        <li>Create time：2021-05-15 20:32:33</li>
+        <li>Create time：2021-06-01 20:31:02</li>
         <li>
-            Post link：yuxuanwu17.github.io2021/05/15/2021-05-15-Docker实战/
+            Post link：yuxuanwu17.github.io2021/06/01/2021-06-01-BIO304-review/
         </li>
         <li>
             Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
@@ -289,29 +290,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2021/06/01/2021-06-01-BIO304-review/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">BIO304 review</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/05/14/2021-05-14-csharp%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"
+                           href="/2021/05/15/2021-05-15-Docker%E5%AE%9E%E6%88%98/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">c#单例模式</span>
+                                <span class="post-nav-title-item">Docker实战</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -434,7 +420,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%95%9C%E5%83%8F"><span class="nav-number">1.</span> <span class="nav-text">镜像</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BDcentos%E9%95%9C%E5%83%8F"><span class="nav-number">1.1.</span> <span class="nav-text">下载centos镜像</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8Ecentos%E7%9A%84%E5%AE%B9%E5%99%A8"><span class="nav-number">2.1.</span> <span class="nav-text">创建一个基于centos的容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%80%E5%87%BA%E5%AE%B9%E5%99%A8"><span class="nav-number">2.2.</span> <span class="nav-text">退出容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E8%BF%90%E8%A1%8C%E4%B8%AD%E7%9A%84%E5%AE%B9%E5%99%A8"><span class="nav-number">2.3.</span> <span class="nav-text">查看运行中的容器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E7%9B%B8%E5%85%B3%E7%9A%84%E5%B7%A5%E5%85%B7"><span class="nav-number">3.</span> <span class="nav-text">下载相关的工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#htop"><span class="nav-number">3.1.</span> <span class="nav-text">htop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wget"><span class="nav-number">3.2.</span> <span class="nav-text">wget</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vim"><span class="nav-number">3.3.</span> <span class="nav-text">vim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java"><span class="nav-number">3.4.</span> <span class="nav-text">Java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hadoop"><span class="nav-number">3.5.</span> <span class="nav-text">Hadoop</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ethics"><span class="nav-number">1.</span> <span class="nav-text">Ethics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Regulation"><span class="nav-number">2.</span> <span class="nav-text">Regulation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Economics"><span class="nav-number">3.</span> <span class="nav-text">Economics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Patents"><span class="nav-number">4.</span> <span class="nav-text">Patents</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Antibiotics-and-metagenomics"><span class="nav-number">5.</span> <span class="nav-text">Antibiotics and metagenomics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CRISPR"><span class="nav-number">6.</span> <span class="nav-text">CRISPR</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CRISPR-CAS-IS-AN-ADAPTIVE-IMMUNE-SYSTEM-IN-BACTERIA"><span class="nav-number">6.1.</span> <span class="nav-text">CRISPR&#x2F;CAS IS AN ADAPTIVE IMMUNE SYSTEM IN BACTERIA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploiting-the-mechanisms"><span class="nav-number">6.2.</span> <span class="nav-text">Exploiting the mechanisms</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CRISPR-array"><span class="nav-number">6.3.</span> <span class="nav-text">CRISPR array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Single-guide-RNA-Cas9-complex-hybridized-to-target-sequence"><span class="nav-number">6.4.</span> <span class="nav-text">Single-guide RNA-Cas9 complex hybridized to target sequence</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Repair-of-DSB-HDR"><span class="nav-number">6.5.</span> <span class="nav-text">Repair of DSB:HDR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Repair-of-DSB-NHEJ"><span class="nav-number">6.6.</span> <span class="nav-text">Repair of DSB: NHEJ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Summary-of-CRISPR-Cas9"><span class="nav-number">6.7.</span> <span class="nav-text">Summary of CRISPR&#x2F;Cas9</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stem-cellls"><span class="nav-number">7.</span> <span class="nav-text">Stem cellls</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#stem-cells"><span class="nav-number">7.1.</span> <span class="nav-text">stem cells</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stem-cell-classes"><span class="nav-number">7.2.</span> <span class="nav-text">Stem cell classes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ESC"><span class="nav-number">7.3.</span> <span class="nav-text">ESC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Disadvantage-of-ESC"><span class="nav-number">7.4.</span> <span class="nav-text">Disadvantage of ESC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Disadvantages-of-iSPC"><span class="nav-number">7.5.</span> <span class="nav-text">Disadvantages of iSPC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hematopoietic-Stem-cells-HSCs"><span class="nav-number">7.6.</span> <span class="nav-text">Hematopoietic Stem cells (HSCs)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GM-food-and-animals"><span class="nav-number">8.</span> <span class="nav-text">GM food and animals</span></a></li></ol>
     </div>
 </div>
         </aside>
