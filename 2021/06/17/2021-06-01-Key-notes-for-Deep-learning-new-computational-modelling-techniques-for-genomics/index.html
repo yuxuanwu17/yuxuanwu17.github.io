@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Welcome to my personal blogs">
+    <meta name="author" content="Yuxuan Wu">
+    
+    <title>
+        
+            Key notes for Deep learning in new computational modeling techniques for genomics |
+        
+        Yuxuan Wu
+    </title>
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep coding, Keep hungry."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.3.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days age","week":"%s weeks age","month":"%s months age","year":"%s years age"};
+  </script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Yuxuan Wu
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content normal-code-theme">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Key notes for Deep learning in new computational modeling techniques for genomics</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Yuxuan Wu</span>
+                        <span class="level">Lv8</span>
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i> 2021-06-17 18:37:02
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Bioinformatics/">Bioinformatics</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/tags/notes/">notes</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i> <span>1.7k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i> <span>10 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p><strong>Cross-linking immunoprecipitation</strong> (<strong>CLIP</strong>) is a method used in molecular biology that combines UV cross-linking with immunoprecipitation in order to analyze protein interactions with RNA or to precisely locate RNA modifications (e.g. m6A). CLIP-based techniques can be used to map RNA binding protein binding sites or RNA modification sites of interest on a genome-wide scale, thereby increasing the understanding of post-transcriptional regulatory networks.</p>
+<p><strong>Feature</strong></p>
+<p>An individual, measurable property or characteristic of a phenomenon being observed.</p>
+<p><strong>Handcrafted features</strong></p>
+<p>Features derived from raw data (or other features) using manually specified rules. Unlike learned features, they are specified upfront and do not change during model training. For example, the GC content is a handcrafted feature of a DNA sequence.</p>
+<p><strong>End-to-end models</strong></p>
+<p>Machine learning models that embed the entire data-processing pipeline to transform raw input data into predictions without requiring a preprocessing step.</p>
+<p><strong>Deep neural networks</strong></p>
+<p>A wide class of machine learning models with a design that is loosely based on biological neural networks.</p>
+<p><strong>Fully connected</strong></p>
+<p>Referring to a layer that performs an affine transformation of a vector followed by application of an activation function to each value.</p>
+<p><strong>Convolutional</strong></p>
+<p>Referring to a neural network layer that processes data stored in <em>n</em>-dimensional arrays, such as images. The same fully connected layer is applied to multiple local patches of the input array. When applied to DNA sequences, a convolutional layer can be interpreted as a set of position weight matrices scanned across the sequence.</p>
+<p><strong>Recurrent</strong></p>
+<p>Referring to a neural network layer that processes sequential data. The same neural network is applied at each step of the sequence and updates a memory variable that is provided for the next step.</p>
+<p><strong>Graph convolutional</strong></p>
+<p>Referring to neural networks that process graph-structured data; they generalize convolution beyond regular structures, such as DNA sequences and images, to graphs with arbitrary structures. The same neural network is applied to each node and edge in the graph.</p>
+<p><strong>Autoencoders</strong></p>
+<p>Unsupervised neural networks trained to reconstruct the input. One or more bottleneck layers have lower dimensionality than the input, which leads to compression of data and forces the autoencoder to extract useful features and omit unimportant features in the reconstruction.</p>
+<p><strong>Generative adversarial networks</strong></p>
+<p>(GANs). Unsupervised learning models that aim to generate data points that are indistinguishable from the observed ones.</p>
+<p><strong>Target</strong></p>
+<p>The desired output used to train a supervised model.</p>
+<p><strong>Loss function</strong></p>
+<p>A function that is optimized during training to fit machine learning model parameters. In the simplest case, it measures the discrepancy between predictions and observations. In the case of quantitative predictions such as regression, mean-squared error loss is frequently used, and for binary classification, the binary cross-entropy, also called logistic loss, is typically used.</p>
+<p><strong><em>k\</em>-mer</strong></p>
+<p>Character sequence of a certain length. For instance, a dinucleotide is a <em>k</em>-mer for which <em>k</em> = 2.</p>
+<p><strong>Logistic regression</strong></p>
+<p>A supervised learning algorithm that predicts the log-odds of a binary output to be of the positive class as a weighted sum of the input features. Transformation of the log-odds with the sigmoid activation function leads to predicted probabilities.</p>
+<p><strong>Sigmoid function</strong></p>
+<p>A function that maps real numbers to [0,1], defined as 1/(1 + e −x).</p>
+<p><strong>Activation function</strong></p>
+<p>A function applied to an intermediate value <em>x</em> within a neural network. Activation functions are usually nonlinear yet very simple, such as the rectified-linear unit or the sigmoid function.</p>
+<p><strong>Regularization</strong></p>
+<p>A strategy to prevent overfitting that is typically achieved by constraining the model parameters during training by modifying the loss function or the parameter optimization procedure. For example, the so-called L2 regularization adds the sum of the squares of the model parameters to the loss function to penalize large model parameters.</p>
+<p><strong>Hidden layers</strong></p>
+<p>Layers are a list of artificial neurons that collectively represents a function that take as input an array of real numbers and returns an array of real numbers corresponding to neuron activations. Hidden layers are between the input and output layers.</p>
+<p><strong>Rectified-linear unit</strong></p>
+<p>(ReLU). Widely used activation function defined as max(0, <em>x</em>).</p>
+<p><strong>Neuron</strong></p>
+<p>The elementary unit of a neural network. An artificial neuron aggregates the inputs from other neurons and emits an output called activation. Inputs and activations of artificial neurons are real numbers. The activation of an artificial neuron is computed by applying a nonlinear activation function to a weighted sum of its inputs.</p>
+<p><strong>Linear regression</strong></p>
+<p>A supervised learning algorithm that predicts the output as a weighted sum of the input features.</p>
+<p><strong>Decision trees</strong></p>
+<p>Supervised learning algorithms in which the prediction is made by making a series of decisions of type ‘is feature <em>i</em> larger than <em>x</em>’ (internal nodes of the tree) and then predicting a constant value for all points satisfying the same decisions series (leaf nodes).</p>
+<p><strong>Random forests</strong></p>
+<p>Supervised learning algorithms that train and average the predictions of many decision trees.</p>
+<p><strong>Gradient-boosted decision trees</strong></p>
+<p>Supervised learning algorithms that train multiple decision trees in a sequential manner; at each time step, a new decision tree is trained on the residual or pseudo-residual of the previous decision tree.</p>
+<p><strong>Position weight matrix</strong></p>
+<p>(PWM). A commonly used representation of sequence motifs in biological sequences. It is based on nucleotide frequencies of aligned sequences at each position and can be used for identifying transcription factor binding sites from DNA sequence.</p>
+<p><strong>Overfitting</strong></p>
+<p>The scenario in which the model fits the training set very well but does not generalize well to unseen data. Very flexible models with many free parameters are prone to overfitting, whereas models with many fewer parameters than the training data do not overfit.</p>
+<p><strong>Filters = kernel</strong> </p>
+<p>Parameters of a convolutional layer. In the first layer of a sequence-based convolutional network, they can be interpreted as position weight matrices.</p>
+<p><strong>Pooling operation</strong></p>
+<p>A function that replaces the output at a certain location with a summary statistic of the nearby outputs. For example, the max pooling operation reports the maximum output within a rectangular neighbourhood.</p>
+<p><strong>Channel</strong></p>
+<p>An axis other than one of the positional axes. For images, the channel axis encodes different colours (such as red, green and blue), for one-hot-encoded sequences (A: [1, 0, 0, 0], C: [0, 1, 0, 0] and so on), it denotes the bases (A, C, G and T), and for the output of the convolutions, it corresponds to the outputs of different filters.</p>
+<p><strong>Dilated convolutions</strong></p>
+<p>Filters that skip some values in the input layers. Typically, each subsequent convolutional layer increases the dilation by a factor of two, thus achieving an exponentially increasing receptive field with each additional layer.</p>
+<p><strong>Receptive field</strong></p>
+<p>The region of the input that affects the output of a convolutional neuron.</p>
+<p><strong>Memory</strong></p>
+<p>An array that stores the information of the patterns observed in the sequence elements previously processed by a recurrent neural network.</p>
+<p><strong>Feature importance scores</strong></p>
+<p>The quantification values of the contributions of features to a current model prediction. The simplest way to obtain this score is to perturb the feature value and measure the change in the model prediction: the larger the change found, the more important the feature is.</p>
+<p><strong>Backpropagation</strong></p>
+<p>An algorithm for computing gradients of neural networks. Gradients with respect to the loss function are used to update the neural network parameters during training.</p>
+<p><strong>Saliency maps</strong></p>
+<p>Feature importance scores defined as the gradient absolute values of the model output with respect to the model input.</p>
+<p><strong>Input-masked gradients</strong></p>
+<p>Feature importance scores defined as the gradient of the model output with respect to the model input multiplied by the input values.</p>
+<p><strong>Automatic differentiation</strong></p>
+<p>A set of techniques, which consist of a sequence of elementary arithmetic operations, used to automatically differentiate a computer program.</p>
+<p><strong>Model architecture</strong></p>
+<p>The structure of a neural network independent of its parameter values. Important aspects of model architecture are the types of layers, their dimensions and how they are connected to each other.</p>
+<p><strong><em>k\</em>-means</strong></p>
+<p>An unsupervised method for partitioning the observations into clusters by alternating between refining cluster centroids and updating cluster assignments of observations.</p>
+<p><strong>Principal component analysis</strong></p>
+<p>An unsupervised learning algorithm that linearly projects data from a high-dimensional space to a lower-dimensional space while retaining as much variance as possible.</p>
+<p><strong>t-Distributed stochastic neighbour embedding</strong></p>
+<p>(t-SNE). An unsupervised learning algorithm that projects data from a high-dimensional space to a lower-dimensional space (typically 2D or 3D) in a nonlinear fashion while trying to preserve the distances between points.</p>
+<p><strong>Latent variable models</strong></p>
+<p>Unsupervised models describing the observed distribution by imposing latent (unobserved) variables for each data point. The simplest example is the mixture of Gaussian values.</p>
+<p><strong>Bottleneck layer</strong></p>
+<p>A neural network layer that contains fewer neurons than previous and subsequent layers.</p>
+<p><strong>Generative models</strong></p>
+<p>Models able to generate points from the desired distribution. Deep generative models are often implemented by a neural network that transforms samples from a standard distribution (normal and uniform) into samples from a complex distribution (gene expression levels or sequences that encode a splice site).</p>
+<p><strong>Hyperparameters</strong></p>
+<p>Parameters specifying the model or the training procedure that are not optimized by the learning algorithm (for example, by the stochastic gradient descent algorithm). Examples of hyperparameters are the number of layers, regularization strength, batch size and the optimization step size.</p>
+<p><strong>one</strong> <strong>epoch</strong> = one forward pass and one backward pass of <em>all</em> the training examples</p>
+<p><strong>batch size</strong> = the number of training examples in one forward/backward pass. The higher the batch size, the more memory space you’ll need.</p>
+<p><strong>number of</strong> <strong>iterations</strong> = number of passes, each pass using [batch size] number of examples. To be clear, one pass = one forward pass + one backward pass (we do not count the forward pass and backward pass as two different passes).</p>
+<p><strong>dropout:</strong> to further reduce the likelihood of overfitting, a drop layer is added to the end. A fraction of the input units is randomly set to 0 (also called dropout rate). e.g the rate = 0.5, which means 50% of the neurons are less likely to influence each other since any of them might drop out at random. The network becomes less sensitive to smaller variations in the data</p>
+<p><strong>dense:</strong> The last layer is a fully connected layer (Dense in keras). It uses a Softmax activation function to produce a probability distribution over the n output classes</p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210617183237.png" alt="image-20210617183237133"></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：Key notes for Deep learning in new computational modeling techniques for genomics</li>
+        <li>Post author：Yuxuan Wu</li>
+        <li>Create time：2021-06-17 18:37:02</li>
+        <li>
+            Post link：yuxuanwu17.github.io2021/06/17/2021-06-01-Key-notes-for-Deep-learning-new-computational-modelling-techniques-for-genomics/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/06/01/2021-06-01-BIO304-review/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">BIO304 review</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span> -
+            
+            2021 <i class="fas fa-heart icon-animate"></i> <a href="/">Yuxuan Wu</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count <span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a> | Theme <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.3.1</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
