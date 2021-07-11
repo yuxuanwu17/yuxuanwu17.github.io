@@ -9,7 +9,7 @@
     
     <title>
         
-            1.两数之和 |
+            121. 买卖股票的最佳时机 |
         
         Yuxuan Wu
     </title>
@@ -168,7 +168,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">1.两数之和</span>
+            <span class="title-hover-animation">121. 买卖股票的最佳时机</span>
         </div>
 
         
@@ -184,7 +184,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i> 2021-07-06 19:03:23
+        <i class="fas fa-edit"></i> 2021-07-11 10:04:23
     </span>
     
         <span class="article-categories article-meta-item">
@@ -208,7 +208,7 @@
                     </li>
                 
                     <li>
-                        | <a href="/tags/HashSet/">HashSet</a>
+                        | <a href="/tags/dp/">dp</a>
                     </li>
                 
             </ul>
@@ -218,12 +218,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i> <span>259 Words</span>
+            <i class="fas fa-file-word"></i> <span>522 Words</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i> <span>1 Mins</span>
+            <i class="fas fa-clock"></i> <span>2 Mins</span>
         </span>
     
     
@@ -239,29 +239,28 @@
         
 
         <div class="article-content markdown-body">
-            <h2 id="1-两数之和"><a href="#1-两数之和" class="headerlink" title="1. 两数之和"></a><a class="link"   target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/two-sum/" >1. 两数之和<i class="fas fa-external-link-alt"></i></a></h2><p>给定一个整数数组 <code>nums</code> 和一个整数目标值 <code>target</code>，请你在该数组中找出 <strong>和为目标值</strong> <em><code>target</code></em> 的那 <strong>两个</strong> 整数，并返回它们的数组下标。</p>
-<p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</p>
-<p>你可以按任意顺序返回答案。</p>
+            <h2 id="121-买卖股票的最佳时机"><a href="#121-买卖股票的最佳时机" class="headerlink" title="121. 买卖股票的最佳时机"></a><a class="link"   target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/" >121. 买卖股票的最佳时机<i class="fas fa-external-link-alt"></i></a></h2><p>给定一个数组 <code>prices</code> ，它的第 <code>i</code> 个元素 <code>prices[i]</code> 表示一支给定股票第 <code>i</code> 天的价格。</p>
+<p>你只能选择 <strong>某一天</strong> 买入这只股票，并选择在 <strong>未来的某一个不同的日子</strong> 卖出该股票。设计一个算法来计算你所能获取的最大利润。</p>
+<p>返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回 <code>0</code> 。</p>
 <p><strong>示例 1：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums &#x3D; [2,7,11,15], target &#x3D; 9</span><br><span class="line">输出：[0,1]</span><br><span class="line">解释：因为 nums[0] + nums[1] &#x3D;&#x3D; 9 ，返回 [0, 1] 。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：[7,1,5,3,6,4]</span><br><span class="line">输出：5</span><br><span class="line">解释：在第 2 天（股票价格 &#x3D; 1）的时候买入，在第 5 天（股票价格 &#x3D; 6）的时候卖出，最大利润 &#x3D; 6-1 &#x3D; 5 。</span><br><span class="line">     注意利润不能是 7-1 &#x3D; 6, 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票。</span><br></pre></td></tr></table></figure>
 <p><strong>示例 2：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums &#x3D; [3,2,4], target &#x3D; 6</span><br><span class="line">输出：[1,2]</span><br></pre></td></tr></table></figure>
-<p><strong>示例 3：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums &#x3D; [3,3], target &#x3D; 6</span><br><span class="line">输出：[0,1]</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：prices &#x3D; [7,6,4,3,1]</span><br><span class="line">输出：0</span><br><span class="line">解释：在这种情况下, 没有交易完成, 所以最大利润为 0。</span><br></pre></td></tr></table></figure>
 
 
-<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] twoSum(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 1. 定义一个HashMap, 因为需要同时储存值和index</span></span><br><span class="line">    HashMap&lt;Integer, Integer&gt; hashMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//2. 循环</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (hashMap.containsKey(target - nums[i])) &#123;</span><br><span class="line">            <span class="keyword">int</span> value1 = i;</span><br><span class="line">            <span class="keyword">int</span> value2 = hashMap.get(target - nums[i]);</span><br><span class="line">            <span class="keyword">int</span>[] ans = &#123;value1, value2&#125;;</span><br><span class="line">            <span class="keyword">return</span> ans;</span><br><span class="line">        &#125;</span><br><span class="line">        hashMap.put(nums[i], i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="dp1"><a href="#dp1" class="headerlink" title="dp1"></a>dp1</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 输入：[7,1,5,3,6,4]</span></span><br><span class="line"><span class="comment">     * 输出：5</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * ======</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * 记录【今天之前买入的最小值】</span></span><br><span class="line"><span class="comment">     * 计算【今天之前最小值买入，今天卖出的获利】，也即【今天卖出的最大获利】</span></span><br><span class="line"><span class="comment">     * 比较【每天的最大获利】，取最大值即可</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> min = prices[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> price : prices) &#123;</span><br><span class="line">        <span class="comment">// 今天之前买入的最小值</span></span><br><span class="line">        min = Math.min(min, price);</span><br><span class="line">        <span class="comment">// 今天的最大获利，price-min</span></span><br><span class="line">        <span class="comment">// 比较每天的最大获利</span></span><br><span class="line">        max = Math.max(max, price-min);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="dp2"><a href="#dp2" class="headerlink" title="dp2"></a>dp2</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">     <span class="comment">/* 和最大子序列和相似</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * 1。 找到前一天能获得的最大利润(最小值是0)</span></span><br><span class="line"><span class="comment">     * 2。 今天的利润差</span></span><br><span class="line"><span class="comment">     * 3。 比较</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = prices.length;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 前一天卖出可以获得的最大利润</span></span><br><span class="line">        <span class="keyword">int</span> pre = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; len; i++) &#123;</span><br><span class="line">            <span class="comment">// 利润差</span></span><br><span class="line">            <span class="keyword">int</span> diff = prices[i] - prices[i - <span class="number">1</span>];</span><br><span class="line">           <span class="comment">// 状态转移方程：第i天卖出可以获得的最大利润 = 第i-1天卖出的最大利润 + 利润差</span></span><br><span class="line">            pre = Math.max(pre + diff, <span class="number">0</span>);</span><br><span class="line">            res = Math.max(res, pre);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         </div>
 
         
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>Post title：1.两数之和</li>
+        <li>Post title：121. 买卖股票的最佳时机</li>
         <li>Post author：Yuxuan Wu</li>
-        <li>Create time：2021-07-06 19:03:23</li>
+        <li>Create time：2021-07-11 10:04:23</li>
         <li>
-            Post link：yuxuanwu17.github.io2021/07/06/2021-07-06-1.两数之和/
+            Post link：yuxuanwu17.github.io2021/07/11/2021-07-11-121.-买卖股票的最佳时机/
         </li>
         <li>
             Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
@@ -278,13 +277,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2021/07/11/2021-07-11-121.-%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/"
+                           href="/2021/07/11/2021-07-11-21.-%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">121. 买卖股票的最佳时机</span>
+                                <span class="post-nav-title-item">21. 合并两个有序链表</span>
                                 <span class="post-nav-item">Prev posts</span>
                             </span>
                         </a>
@@ -294,10 +293,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/07/06/2021-07-06-88.-%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84/"
+                           href="/2021/07/06/2021-07-06-1.%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">88. 合并两个有序数组</span>
+                                <span class="post-nav-title-item">1.两数之和</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -420,7 +419,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C"><span class="nav-number">1.</span> <span class="nav-text">1. 两数之和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3"><span class="nav-number">2.</span> <span class="nav-text">题解</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#121-%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA"><span class="nav-number">1.</span> <span class="nav-text">121. 买卖股票的最佳时机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dp1"><span class="nav-number">2.</span> <span class="nav-text">dp1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dp2"><span class="nav-number">3.</span> <span class="nav-text">dp2</span></a></li></ol>
     </div>
 </div>
         </aside>
