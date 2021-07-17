@@ -9,7 +9,7 @@
     
     <title>
         
-            二分查找 |
+            二分查找（binary search） |
         
         Yuxuan Wu
     </title>
@@ -168,7 +168,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">二分查找</span>
+            <span class="title-hover-animation">二分查找（binary search）</span>
         </div>
 
         
@@ -179,7 +179,7 @@
                 <div class="info">
                     <div class="author">
                         <span class="name">Yuxuan Wu</span>
-                        <span class="level">Lv10</span>
+                        <span class="level">Lv11</span>
                     </div>
                     <div class="meta-info">
                         <div class="article-meta-info">
@@ -218,12 +218,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i> <span>950 Words</span>
+            <i class="fas fa-file-word"></i> <span>1.5k Words</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i> <span>4 Mins</span>
+            <i class="fas fa-clock"></i> <span>6 Mins</span>
         </span>
     
     
@@ -239,7 +239,28 @@
         
 
         <div class="article-content markdown-body">
-            <h2 id="704-二分查找"><a href="#704-二分查找" class="headerlink" title="704. 二分查找"></a><a class="link"   target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/binary-search/" >704. 二分查找<i class="fas fa-external-link-alt"></i></a></h2><p>给定一个 <code>n</code> 个元素有序的（升序）整型数组 <code>nums</code> 和一个目标值 <code>target</code> ，写一个函数搜索 <code>nums</code> 中的 <code>target</code>，如果目标值存在返回下标，否则返回 <code>-1</code>。</p>
+            <h2 id="Binary-Search两大基本原则"><a href="#Binary-Search两大基本原则" class="headerlink" title="Binary Search两大基本原则"></a>Binary Search两大基本原则</h2><ol>
+<li>每次都要缩减搜索区域</li>
+<li>每次缩减不能排除潜在的答案</li>
+</ol>
+<h3 id="三大模版"><a href="#三大模版" class="headerlink" title="三大模版"></a>三大模版</h3><ul>
+<li>找一个准确值<ul>
+<li>循环条件是left&lt;=right</li>
+<li>缩减搜索空间 left = mid+1， right=mid-1</li>
+</ul>
+</li>
+<li>找一个模糊值（比4大的最小数）<ul>
+<li>循环条件：left&lt;right</li>
+<li>缩减搜索空间：left = mid, right= mid-1 </li>
+</ul>
+</li>
+<li>万用型<ul>
+<li>循环条件 left &lt; right - 1</li>
+<li>缩减搜索空间：left = mid, right = mid</li>
+</ul>
+</li>
+</ul>
+<h2 id="704-二分查找"><a href="#704-二分查找" class="headerlink" title="704. 二分查找"></a><a class="link"   target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/binary-search/" >704. 二分查找<i class="fas fa-external-link-alt"></i></a></h2><p>给定一个 <code>n</code> 个元素有序的（升序）整型数组 <code>nums</code> 和一个目标值 <code>target</code> ，写一个函数搜索 <code>nums</code> 中的 <code>target</code>，如果目标值存在返回下标，否则返回 <code>-1</code>。</p>
 <p><strong>示例 1:</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: nums &#x3D; [-1,0,3,5,9,12], target &#x3D; 9</span><br><span class="line">输出: 4</span><br><span class="line">解释: 9 出现在 nums 中并且下标为 4</span><br></pre></td></tr></table></figure>
 <p><strong>示例 2:</strong></p>
@@ -252,9 +273,39 @@
 <li><code>n</code> 将在 <code>[1, 10000]</code>之间。</li>
 <li><code>nums</code> 的每个元素都将在 <code>[-9999, 9999]</code>之间。</li>
 </ol>
-<h3 id="方法1-双指针"><a href="#方法1-双指针" class="headerlink" title="方法1:双指针"></a>方法1:双指针</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">search</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = nums.length-<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(left&lt;=right)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[left]==target) <span class="keyword">return</span> left;</span><br><span class="line">            <span class="keyword">if</span>(nums[right]==target) <span class="keyword">return</span> right;</span><br><span class="line">            left++;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="278-第一个错误的版本"><a href="#278-第一个错误的版本" class="headerlink" title="278. 第一个错误的版本"></a><a class="link"   target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/first-bad-version/" >278. 第一个错误的版本<i class="fas fa-external-link-alt"></i></a></h2><p>难度简单338</p>
-<p>你是产品经理，目前正在带领一个团队开发新的产品。不幸的是，你的产品的最新版本没有通过质量检测。由于每个版本都是基于之前的版本开发的，所以错误的版本之后的所有版本都是错的。</p>
+<h3 id="方法1-双指针一般查找，时间复杂度还是O-n"><a href="#方法1-双指针一般查找，时间复杂度还是O-n" class="headerlink" title="方法1:双指针一般查找，时间复杂度还是O(n)"></a>方法1:双指针一般查找，时间复杂度还是O(n)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">search</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = nums.length-<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(left&lt;=right)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[left]==target) <span class="keyword">return</span> left;</span><br><span class="line">            <span class="keyword">if</span>(nums[right]==target) <span class="keyword">return</span> right;</span><br><span class="line">            left++;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="方法2：二分查找"><a href="#方法2：二分查找" class="headerlink" title="方法2：二分查找"></a>方法2：二分查找</h3><p>伪代码如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210714091055.png" alt="image-20210714091055281"></p>
+<ul>
+<li>确定双指针的起点位置，注意这个算法的设计较为不一样</li>
+<li>左节点为-1，右节点为N</li>
+<li>循环的终止条件是<code>l+1!=r</code></li>
+<li>这里的二分查找是将左右两边分为红色和蓝色的区域</li>
+<li>先选择pivot number，m <ul>
+<li>同时注意int 是向下取整的</li>
+</ul>
+</li>
+<li>然后判断落点是在蓝色区间还是红色区间，</li>
+<li>然后将对应的左节点或者右节点变为m</li>
+<li>最后需要根据实际情况来判断返回的是l还是r</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210714101531.png" alt="image-20210714101531521"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> sorting;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BinarySearch</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> right = nums.length;</span><br><span class="line">        <span class="keyword">while</span> (left + <span class="number">1</span> != right) &#123;</span><br><span class="line">            <span class="keyword">int</span> m = (left + right) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (nums[m] &lt; target) &#123;</span><br><span class="line">                left = m;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                right = m;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 这里存在一个如果他不存在的情况，需要考虑</span></span><br><span class="line">        <span class="keyword">if</span> (right == nums.length || nums[right] != target) <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> right;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>拓展和使用：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210714103541.png" alt="image-20210714103541557"></p>
+<p>注意，变化的是IsBlue的条件，根据要求来变化要求</p>
+</blockquote>
+<h3 id="方法三（二分查找的另一种方式）"><a href="#方法三（二分查找的另一种方式）" class="headerlink" title="方法三（二分查找的另一种方式）"></a>方法三（二分查找的另一种方式）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">binarySearch2</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>, right = nums.length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (nums[mid] &lt; target) &#123;</span><br><span class="line">            left = mid+<span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; target) &#123;</span><br><span class="line">            right = mid-<span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> mid;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里需要注意的几个细节！</p>
+<ul>
+<li>left &lt;= right 注意是等于号，否则会死循环，就因为int是向下取整，所以一直卡着</li>
+<li>注意这里需要保证每次的更新都是下一位，一定需要+1 / -1 </li>
+<li>和上一种方法不一样的是，上面的判断条件是left!=right+1</li>
+</ul>
+<h2 id="278-第一个错误的版本"><a href="#278-第一个错误的版本" class="headerlink" title="278. 第一个错误的版本"></a><a class="link"   target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/first-bad-version/" >278. 第一个错误的版本<i class="fas fa-external-link-alt"></i></a></h2><p>你是产品经理，目前正在带领一个团队开发新的产品。不幸的是，你的产品的最新版本没有通过质量检测。由于每个版本都是基于之前的版本开发的，所以错误的版本之后的所有版本都是错的。</p>
 <p>假设你有 <code>n</code> 个版本 <code>[1, 2, ..., n]</code>，你想找出导致之后所有版本出错的第一个错误的版本。</p>
 <p>你可以通过调用 <code>bool isBadVersion(version)</code> 接口来判断版本号 <code>version</code> 是否在单元测试中出错。实现一个函数来查找第一个错误的版本。你应该尽量减少对调用 API 的次数。</p>
 <p><strong>示例 1：</strong></p>
@@ -289,7 +340,7 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>Post title：二分查找</li>
+        <li>Post title：二分查找（binary search）</li>
         <li>Post author：Yuxuan Wu</li>
         <li>Create time：2021-07-04 18:58:23</li>
         <li>
@@ -452,7 +503,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#704-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE"><span class="nav-number">1.</span> <span class="nav-text">704. 二分查找</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%951-%E5%8F%8C%E6%8C%87%E9%92%88"><span class="nav-number">1.1.</span> <span class="nav-text">方法1:双指针</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#278-%E7%AC%AC%E4%B8%80%E4%B8%AA%E9%94%99%E8%AF%AF%E7%9A%84%E7%89%88%E6%9C%AC"><span class="nav-number">2.</span> <span class="nav-text">278. 第一个错误的版本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%EF%BC%8C%E5%87%8F%E5%B0%91%E6%9F%A5%E8%AF%A2%E6%AC%A1%E6%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text">二分查找，减少查询次数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#35-%E6%90%9C%E7%B4%A2%E6%8F%92%E5%85%A5%E4%BD%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">35. 搜索插入位置</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Search%E4%B8%A4%E5%A4%A7%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99"><span class="nav-number">1.</span> <span class="nav-text">Binary Search两大基本原则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E5%A4%A7%E6%A8%A1%E7%89%88"><span class="nav-number">1.1.</span> <span class="nav-text">三大模版</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#704-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE"><span class="nav-number">2.</span> <span class="nav-text">704. 二分查找</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%951-%E5%8F%8C%E6%8C%87%E9%92%88%E4%B8%80%E8%88%AC%E6%9F%A5%E6%89%BE%EF%BC%8C%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E8%BF%98%E6%98%AFO-n"><span class="nav-number">2.1.</span> <span class="nav-text">方法1:双指针一般查找，时间复杂度还是O(n)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%952%EF%BC%9A%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE"><span class="nav-number">2.2.</span> <span class="nav-text">方法2：二分查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%89%EF%BC%88%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%9A%84%E5%8F%A6%E4%B8%80%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">方法三（二分查找的另一种方式）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#278-%E7%AC%AC%E4%B8%80%E4%B8%AA%E9%94%99%E8%AF%AF%E7%9A%84%E7%89%88%E6%9C%AC"><span class="nav-number">3.</span> <span class="nav-text">278. 第一个错误的版本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%EF%BC%8C%E5%87%8F%E5%B0%91%E6%9F%A5%E8%AF%A2%E6%AC%A1%E6%95%B0"><span class="nav-number">3.1.</span> <span class="nav-text">二分查找，减少查询次数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#35-%E6%90%9C%E7%B4%A2%E6%8F%92%E5%85%A5%E4%BD%8D%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">35. 搜索插入位置</span></a></li></ol>
     </div>
 </div>
         </aside>
