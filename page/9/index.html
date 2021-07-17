@@ -28,7 +28,124 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
 
 
 <body>
@@ -170,301 +287,6 @@
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2021/01/31/nba%E4%BC%A4%E7%97%85%E5%88%86%E6%9E%90/">
-                        NBA kaggle analysis
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        本文参考，并将其延伸至2018-2020 赛季。全文用rmd 完成，ggplot2为主要做图工具。主要想研究下各个球队和伤病之间的关系
-https://www.kaggle.com/jaseziv83/extensive-nba-injuries-d...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i> <span class="home-article-date" data-date="Sun Jan 31 2021 15:01:35 GMT+0800">2021-01-31</span></span>
-        
-            <span class="home-article-category"><i class="fas fa-folder"></i>
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/R/">R</a>
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/kaggle/">kaggle</a>
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/EDA/">EDA</a>
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/R/">R</a>
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2021/01/31/nba%E4%BC%A4%E7%97%85%E5%88%86%E6%9E%90/">Read more <i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/01/29/performance_exp/">
-                        performance explanation
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        In this case, we read the saved model weights and conduct the test data performance evaluation. 
-Notes:
-The results returned ...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i> <span class="home-article-date" data-date="Fri Jan 29 2021 12:44:35 GMT+0800">2021-01-29</span></span>
-        
-            <span class="home-article-category"><i class="fas fa-folder"></i>
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/FYP/">FYP</a>
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/tutorial/">tutorial</a>
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/Multi-instance-learning/">Multi-instance learning</a>
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2021/01/29/performance_exp/">Read more <i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/01/29/WeakRM_WeakRMLSTM_exp/">
-                        WeakRM &amp; WeakRMLSTM model explanation
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        SummaryThis python file used tensorflow to build the weakly-supervised learning 
-
-WeakRM1234567891011121314151617181920212223...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i> <span class="home-article-date" data-date="Fri Jan 29 2021 08:07:35 GMT+0800">2021-01-29</span></span>
-        
-            <span class="home-article-category"><i class="fas fa-folder"></i>
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/FYP/">FYP</a>
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/tutorial/">tutorial</a>
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/Multi-instance-learning/">Multi-instance learning</a>
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2021/01/29/WeakRM_WeakRMLSTM_exp/">Read more <i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/01/28/token2npy/">
-                        token2npy explanation
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        Summary
-This python file was to read the processed data from RDS file and conduct the embedding.
-
-In this case, instance leng...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i> <span class="home-article-date" data-date="Thu Jan 28 2021 20:07:21 GMT+0800">2021-01-28</span></span>
-        
-            <span class="home-article-category"><i class="fas fa-folder"></i>
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/FYP/">FYP</a>
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/tutorial/">tutorial</a>
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/Multi-instance-learning/">Multi-instance learning</a>
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2021/01/28/token2npy/">Read more <i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/01/28/python-%E7%9B%B8%E5%85%B3%E7%9A%84%E7%9F%A5%E8%AF%86%E5%92%8C%E7%AC%94%E8%AE%B0%E9%93%BE%E6%8E%A5/">
-                        python 相关的知识和笔记链接
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        Python learning: 入门大全
-https://apachecn.gitee.io/ailearning/#/
-接受不定参数12345def add(x, *args):    total = x    for arg in args: ...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i> <span class="home-article-date" data-date="Thu Jan 28 2021 14:57:29 GMT+0800">2021-01-28</span></span>
-        
-            <span class="home-article-category"><i class="fas fa-folder"></i>
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/Python/">Python</a>
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/tutorial/">tutorial</a>
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2021/01/28/python-%E7%9B%B8%E5%85%B3%E7%9A%84%E7%9F%A5%E8%AF%86%E5%92%8C%E7%AC%94%E8%AE%B0%E9%93%BE%E6%8E%A5/">Read more <i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
                     <a href="/2021/01/28/matlab_links/">
                         matlab相关的知识
                     </a>
@@ -511,125 +333,6 @@ https://blog.csdn.net/shengchaohua163/art...
     </div>
 
     <a href="/2021/01/28/matlab_links/">Read more <i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/01/28/multi-instance-learning-in-m6a-sequence-data/">
-                        Data preparation for multi-instance learning in m6a sequence data
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        Summary
-Sample preparation for the multi-instance learning.
-
-The whole script was finished by R
-
-Ensure the equal peak width ...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i> <span class="home-article-date" data-date="Thu Jan 28 2021 14:22:26 GMT+0800">2021-01-28</span></span>
-        
-            <span class="home-article-category"><i class="fas fa-folder"></i>
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/FYP/">FYP</a>
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/R/">R</a>
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/RNA-modification/">RNA modification</a>
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/Multi-instance-learning/">Multi-instance learning</a>
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2021/01/28/multi-instance-learning-in-m6a-sequence-data/">Read more <i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/01/27/FYP_requirements/">
-                        FYP check lists
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        PresentationPresentation scriptHello everyone, my name is yuxuan wu and thank you for the time in listening my presentation. ...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i> <span class="home-article-date" data-date="Wed Jan 27 2021 09:27:01 GMT+0800">2021-01-27</span></span>
-        
-            <span class="home-article-category"><i class="fas fa-folder"></i>
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/FYP/">FYP</a>
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/to-do-list/">to-do-list</a>
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2021/01/27/FYP_requirements/">Read more <i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -760,6 +463,444 @@ loner：阿里云Hadoop第二弹（运行WordCount）
     </div>
 
     <a href="/2021/01/26/Hadoop-%E5%9C%A8mac%E6%9C%AC%E5%9C%B0%E7%9A%84%E9%85%8D%E7%BD%AE/">Read more <i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2021/01/26/%E4%BB%8E%E9%98%BF%E9%87%8C%E4%BA%91%E8%BD%BB%E9%87%8F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85Hadoop%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
+                        从阿里云轻量服务器安装Hadoop及环境配置
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        知乎首次写文章，恳请大家多多担待
+本人是一名大四生物信息的学生，在大数据课上，老师需要我们配置Hadoop去处理一些东西。网上的一些教程互相冲突，记录一下这个从头可以完全运行成功的教程
+
+购买服务器
+
+因为本人使用的仍然是14年的MBP，怕随随便便装...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i> <span class="home-article-date" data-date="Tue Jan 26 2021 09:35:27 GMT+0800">2021-01-26</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Hadoop/">Hadoop</a>
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/Hadoop/">Hadoop</a>
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/tutorial/">tutorial</a>
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/cloud-server/">cloud server</a>
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2021/01/26/%E4%BB%8E%E9%98%BF%E9%87%8C%E4%BA%91%E8%BD%BB%E9%87%8F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85Hadoop%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">Read more <i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2021/01/26/macOS%E4%BD%BF%E7%94%A8IntelliJ-IDEA%E8%BF%9E%E6%8E%A5%E6%9C%AC%E5%9C%B0Hadoop/">
+                        macOS:使用IntelliJ IDEA连接本地Hadoop
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        本文的所有操作是建立在本地已经配置好Hadoop和java环境的基础上，若未完成，请去这个链接先学习好
+loner：Hadoop 在mac本地的配置
+本文参考博客
+macOS：使用IntelliJ IDEA远程连接Hadoop
+首先使用intelli...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i> <span class="home-article-date" data-date="Tue Jan 26 2021 08:44:27 GMT+0800">2021-01-26</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Hadoop/">Hadoop</a>
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/tutorial/">tutorial</a>
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/macOS/">macOS</a>
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2021/01/26/macOS%E4%BD%BF%E7%94%A8IntelliJ-IDEA%E8%BF%9E%E6%8E%A5%E6%9C%AC%E5%9C%B0Hadoop/">Read more <i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2021/01/26/sklearn%E9%87%8CLinearSVC%E4%B8%8ESVC%E5%8C%BA%E5%88%AB/">
+                        sklearn里LinearSVC与SVC区别
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        这里综合了stackoverflow上的一位发言和另一位知乎用户的文章，链接在下方：
+What is the difference between LinearSVC and SVC(kernel=”linear”)?
+baiziyu：sklearn...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i> <span class="home-article-date" data-date="Tue Jan 26 2021 08:32:27 GMT+0800">2021-01-26</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Python/">Python</a>
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/ML/">ML</a>
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/sklearn/">sklearn</a>
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2021/01/26/sklearn%E9%87%8CLinearSVC%E4%B8%8ESVC%E5%8C%BA%E5%88%AB/">Read more <i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2021/01/26/%E9%98%BF%E9%87%8C%E4%BA%91%E8%BD%BB%E9%87%8F%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AEjupyter-notebook%E5%8F%8A%E8%BF%9C%E7%A8%8B%E7%BD%91%E9%A1%B5%E6%89%93%E5%BC%80/">
+                        阿里云轻量服务器配置jupyter notebook及远程网页打开
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        具体阿里云服务器的参数和购买可以参考我上一篇专栏
+loner：从阿里云轻量服务器安装Hadoop及环境配置
+首先保证你的服务器上安装成功 Anaconda，具体教程可以参考如下链接
+寐语：Linux-Centos7下安装Anaconda（2019年新...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i> <span class="home-article-date" data-date="Tue Jan 26 2021 08:32:27 GMT+0800">2021-01-26</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Python/">Python</a>
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/tutorial/">tutorial</a>
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/Jupyter-notebook/">Jupyter_notebook</a>
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/cloud-server/">cloud server</a>
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2021/01/26/%E9%98%BF%E9%87%8C%E4%BA%91%E8%BD%BB%E9%87%8F%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AEjupyter-notebook%E5%8F%8A%E8%BF%9C%E7%A8%8B%E7%BD%91%E9%A1%B5%E6%89%93%E5%BC%80/">Read more <i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2021/01/26/IntelliJ-IDEA-%E8%B0%83%E8%AF%95%E9%85%8D%E7%BD%AEHadoop/">
+                        IntelliJ IDEA 调试配置Hadoop
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        本文是目前为止最简单，也不需要配Hadoop环境之类的教程，但是如果是xjtlu的小伙伴，可能就不太合适，因为老师好像是要求写出hdfs的操作的代码的，这儿可以参考阿里云第二弹。
+loner：从阿里云轻量服务器安装Hadoop及环境配置
+我们今天这篇...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i> <span class="home-article-date" data-date="Tue Jan 26 2021 08:32:27 GMT+0800">2021-01-26</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Hadoop/">Hadoop</a>
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/Hadoop/">Hadoop</a>
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/maven/">maven</a>
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/IDEA/">IDEA</a>
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2021/01/26/IntelliJ-IDEA-%E8%B0%83%E8%AF%95%E9%85%8D%E7%BD%AEHadoop/">Read more <i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2021/01/25/2015-2020-%E7%BE%8E%E5%9B%BD%E5%B8%82%E5%9C%BA%E7%89%9B%E6%B2%B9%E6%9E%9C%E4%BB%B7%E6%A0%BC%E5%88%86%E6%9E%90%E5%92%8C%E9%A2%84%E6%B5%8B/">
+                        2015-2020 美国市场牛油果价格分析和预测
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        作为一位牛油果资深爱好者，苦于牛油果价格实在太贵，Sam 店一个品相俱佳的大果要8块钱，鲜果一号之类等其他精品水果店居然有的要卖到10+一个，还是中果，硬邦邦，不怎么好吃的那种，简直黑心。
+同时呢，作为一位申请美帝研究生的大四狗，我严肃认真地要把牛油...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i> <span class="home-article-date" data-date="Mon Jan 25 2021 21:57:06 GMT+0800">2021-01-25</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/R/">R</a>
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/kaggle/">kaggle</a>
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/EDA/">EDA</a>
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/R/">R</a>
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2021/01/25/2015-2020-%E7%BE%8E%E5%9B%BD%E5%B8%82%E5%9C%BA%E7%89%9B%E6%B2%B9%E6%9E%9C%E4%BB%B7%E6%A0%BC%E5%88%86%E6%9E%90%E5%92%8C%E9%A2%84%E6%B5%8B/">Read more <i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2021/01/25/MATLAB%E5%9B%BE%E7%89%87%E6%8F%90%E5%8F%96%E4%B8%8E%E5%88%86%E6%9E%90/">
+                        基于MATLAB的图片提取和分析
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        完成学校Matlab作业后的一些总结，数据可以从我的GitHub账户下载。作为一名Matlab的初学者，请多多海涵
+数据在此
+数据是来自车牌号图片（冷知识：I,O天生是在车牌里不出现的）。一共24个文件夹，每个文件夹里有100张图片，所以一共有240...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i> <span class="home-article-date" data-date="Mon Jan 25 2021 21:37:06 GMT+0800">2021-01-25</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Matlab/">Matlab</a>
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/Matlab/">Matlab</a>
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/tutorial/">tutorial</a>
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2021/01/25/MATLAB%E5%9B%BE%E7%89%87%E6%8F%90%E5%8F%96%E4%B8%8E%E5%88%86%E6%9E%90/">Read more <i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
