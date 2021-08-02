@@ -355,8 +355,7 @@
 </li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210702121112.bmp" alt="SQL分类"></p>
-<h2 id="DDL-操作数据库、表"><a href="#DDL-操作数据库、表" class="headerlink" title="DDL:操作数据库、表"></a>DDL:操作数据库、表</h2><ol>
-<li><p>操作数据库：<code>CRUD</code></p>
+<h2 id="DDL-操作数据库、表"><a href="#DDL-操作数据库、表" class="headerlink" title="DDL:操作数据库、表"></a>DDL:操作数据库、表</h2><p>操作数据库：<code>CRUD</code></p>
 <ol>
 <li><p>C(Create):创建</p>
 <ul>
@@ -386,20 +385,59 @@
 <ul>
 <li><p>查询所有数据库的名称:</p>
 <ul>
-<li><p><code>show databases;</code></p>
+<li><code>show databases;</code></li>
+</ul>
 </li>
-<li><pre><code>mysql&gt; show databases;
-+--------------------+
-| Database           |
-+--------------------+
-| information_schema |
-| mysql              |
-| performance_schema |
-| sys                |
-+--------------------+
-4 rows in set (0.00 sec)
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">			</span><br><span class="line">		* 查询某个数据库的&#96;字符集&#96;:查询某个数据库的创建语句(UTF-8)</span><br><span class="line">			* show create database 数据库名称;</span><br><span class="line">	3. U(Update):修改</span><br><span class="line">		* 修改数据库的字符集</span><br><span class="line">			* alter database 数据库名称 character set 字符集名称;</span><br><span class="line">	4. D(Delete):删除</span><br><span class="line">		* 删除数据库</span><br><span class="line">			* drop database 数据库名称;</span><br><span class="line">		* 判断数据库存在，存在再删除</span><br><span class="line">			* drop database if exists 数据库名称;</span><br><span class="line">	5. 使用数据库</span><br><span class="line">		* 查询当前正在使用的数据库名称</span><br><span class="line">			* select database();</span><br><span class="line">		* 使用数据库</span><br><span class="line">			* use 数据库名称;</span><br><span class="line">	</span><br><span class="line">2. 操作表</span><br><span class="line">	1. C(Create):创建</span><br><span class="line">		1. 语法：</span><br><span class="line">			</span><br><span class="line">			&#96;&#96;&#96;sql</span><br><span class="line">			create table 表名(</span><br><span class="line">				列名1 数据类型1,</span><br><span class="line">				列名2 数据类型2,</span><br><span class="line">				....</span><br><span class="line">				列名n 数据类型n</span><br><span class="line">			);</span><br></pre></td></tr></table></figure></code></pre>
+<li><p>查询某个数据库的<code>字符集</code>:查询某个数据库的创建语句(UTF-8)</p>
+<ul>
+<li>show create database 数据库名称;</li>
+</ul>
 </li>
+</ul>
+</li>
+<li><p>U(Update):修改</p>
+<ul>
+<li>修改数据库的字符集<ul>
+<li>alter database 数据库名称 character set 字符集名称;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>D(Delete):删除</p>
+<ul>
+<li>删除数据库<ul>
+<li>drop database 数据库名称;</li>
+</ul>
+</li>
+<li>判断数据库存在，存在再删除<ul>
+<li>drop database if exists 数据库名称;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li>使用数据库</li>
+</ol>
+<ul>
+<li>查询当前正在使用的数据库名称<ul>
+<li>select database();</li>
+</ul>
+</li>
+<li>使用数据库<ul>
+<li>use 数据库名称;</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li><p>操作表</p>
+</li>
+<li><p>C(Create):创建</p>
+<ol>
+<li><p>语法：</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> 表名(</span><br><span class="line">	列名<span class="number">1</span> 数据类型<span class="number">1</span>,</span><br><span class="line">	列名<span class="number">2</span> 数据类型<span class="number">2</span>,</span><br><span class="line">	....</span><br><span class="line">	列名n 数据类型n</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<ul>
 <li><p>注意：最后一列，不需要加逗号（,）</p>
 </li>
 <li><p>数据库类型：</p>
@@ -432,14 +470,14 @@
 </ul>
 </li>
 </ol>
-</li>
-</ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">create table student(</span><br><span class="line">       id int,</span><br><span class="line">       name varchar(32),</span><br><span class="line">       age int ,</span><br><span class="line">       score double(4,1),</span><br><span class="line">       birthday date,</span><br><span class="line">       insert_time timestamp</span><br><span class="line">     )</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 </ol>
 </li>
 <li><p>R(Retrieve)：查询</p>
+</li>
+</ol>
 <ul>
 <li>查询某个数据库中所有的表名称<ul>
 <li>show tables;</li>
@@ -450,25 +488,34 @@
 </ul>
 </li>
 </ul>
-</li>
+<ol start="3">
 <li><p>U(Update):修改</p>
-<ol>
-<li>修改表名<br> alter table 表名 rename to 新的表名;</li>
-<li>修改表的字符集<br> alter table 表名 character set 字符集名称;</li>
-<li>添加一列<br> alter table 表名 add 列名 数据类型;</li>
-<li>修改列名称 类型<br> alter table 表名 change 列名 新列别 新数据类型;<br> alter table 表名 modify 列名 新数据类型;</li>
-<li>删除列<br> alter table 表名 drop 列名;</li>
-</ol>
+</li>
+<li><p>修改表名</p>
+<p> alter table 表名 rename to 新的表名;</p>
+</li>
+<li><p>修改表的字符集</p>
+<p> alter table 表名 character set 字符集名称;</p>
+</li>
+<li><p>添加一列</p>
+<p> alter table 表名 add 列名 数据类型;</p>
+</li>
+<li><p>修改列名称 类型</p>
+<p> alter table 表名 change 列名 新列别 新数据类型;<br> alter table 表名 modify 列名 新数据类型;</p>
+</li>
+<li><p>删除列</p>
+<p> alter table 表名 drop 列名;</p>
 </li>
 <li><p>D(Delete):删除</p>
-<ul>
-<li>drop table 表名;</li>
-<li>drop table  if exists 表名 ;</li>
-</ul>
 </li>
 </ol>
 <ul>
-<li>客户端图形化工具：SQLYog</li>
+<li><p>drop table 表名;</p>
+</li>
+<li><p>drop table  if exists 表名 ;</p>
+</li>
+<li><p>客户端图形化工具：SQLYog</p>
+</li>
 </ul>
 <h2 id="DML：增删改表中数据"><a href="#DML：增删改表中数据" class="headerlink" title="DML：增删改表中数据"></a>DML：增删改表中数据</h2><ol>
 <li><p>添加数据：</p>
@@ -531,37 +578,38 @@
 </li>
 </ol>
 <ol start="2">
-<li><p>基础查询</p>
-<ol>
-<li><p>多个字段的查询<br> select 字段名1，字段名2… from 表名；</p>
-<ul>
+<li>基础查询<ol>
+<li>多个字段的查询<br> select 字段名1，字段名2… from 表名；<ul>
 <li>注意：<ul>
 <li>如果查询所有字段，则可以使用*来替代字段列表。</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p>去除重复：</p>
-<ul>
+<li>去除重复：<ul>
 <li>distinct (查找出来的数据集完全一致 （AB和AC不算重复）)</li>
 </ul>
 </li>
-<li><p>计算列</p>
-<ul>
-<li><p>一般可以使用四则运算计算一些列的值。（一般只会进行数值型的计算）</p>
-</li>
-<li><p>```mysql<br>select name, math, english, math+english from student;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* &#96;ifnull(表达式1,表达式2)：&#96;null参与的运算，计算结果都为null</span><br><span class="line">	</span><br><span class="line">	* 表达式1：哪个字段需要判断是否为null</span><br><span class="line">	* 如果该字段为null后的替换值。</span><br><span class="line">	</span><br><span class="line">	&#96;&#96;&#96;mysql</span><br><span class="line">	select name, math, english, math+IFNULL(english,0) from student;</span><br></pre></td></tr></table></figure></li>
+<li>计算列<ul>
+<li>一般可以使用四则运算计算一些列的值。（一般只会进行数值型的计算）</li>
 </ul>
 </li>
-<li><p>起别名：</p>
+</ol>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select name, math, english, math+english from student;</span><br></pre></td></tr></table></figure>
+
+
+<p><code>ifnull(表达式1,表达式2)：</code>null参与的运算，计算结果都为null</p>
+<ul>
+<li>表达式1：哪个字段需要判断是否为null</li>
+<li>如果该字段为null后的替换值。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select name, math, english, math+IFNULL(english,0) from student;</span><br></pre></td></tr></table></figure>
+<p>起别名：</p>
 <ul>
 <li>as：as也可以省略</li>
 </ul>
-</li>
-</ol>
-</li>
-</ol>
 <ol start="3">
 <li><p>条件查询</p>
 <ol>
@@ -623,19 +671,32 @@
 </ul>
 </li>
 </ol>
-<pre><code>    * ```mysql
-      select * from student order by math ASC, english ASC
-      <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">		</span><br><span class="line">		  </span><br><span class="line">	</span><br><span class="line">2. 聚合函数：将一列数据作为一个整体，**进行纵向的计算。**</span><br><span class="line">	1. count：计算个数</span><br><span class="line">		1. 一般选择非空的列：主键</span><br><span class="line">		</span><br><span class="line">		2. count(*)(这条数据只要有一列不为null，则这个数据就会被纳入进去)</span><br><span class="line">		</span><br><span class="line">		3. &#96;&#96;&#96;mysql</span><br><span class="line">		   select count(name) from student</span><br></pre></td></tr></table></figure>
-2. max：计算最大值
-3. min：计算最小值
-4. sum：计算和
-5. avg：计算平均值
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from student order by math ASC, english ASC</span><br></pre></td></tr></table></figure>
 
-* **注意：聚合函数的计算，排除null值**。
-    解决方案：
-          1. 选择不包含非空的列进行计算
 
-  ​        2. IFNULL函数</code></pre>
+<ol>
+<li><p>聚合函数：将一列数据作为一个整体，<strong>进行纵向的计算。</strong></p>
+</li>
+<li><p>count：计算个数</p>
+<ol>
+<li><p>一般选择非空的列：主键</p>
+</li>
+<li><p>count(*)(这条数据只要有一列不为null，则这个数据就会被纳入进去)</p>
+</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select count(name) from student</span><br></pre></td></tr></table></figure>
+<p>max：计算最大值</p>
+<p>min：计算最小值</p>
+<p>sum：计算和</p>
+<p>avg：计算平均值</p>
+<ul>
+<li><p><strong>注意：聚合函数的计算，排除null值</strong>。<br>  解决方案：</p>
+<pre><code>    1. 选择不包含非空的列进行计算</code></pre>
+<p>​        2. IFNULL函数</p>
+</li>
+</ul>
 <ol start="3">
 <li><p>分组查询:</p>
 <ol>
@@ -743,26 +804,25 @@
 </ul>
 <pre><code>4. 创建完表后，添加主键
 
-    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE stu MODIFY id INT PRIMARY KEY;</span><br></pre></td></tr></table></figure>
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE stu MODIFY id INT PRIMARY KEY;</span><br></pre></td></tr></table></figure></code></pre>
+<p>自动增长(只和上一条数据有关,通常和主键连起来使用)：</p>
+<ol>
+<li><p> 概念：如果某一列是数值类型的，使用 auto_increment 可以来完成值得自动增长</p>
+</li>
+<li><p>在创建表时，添加主键约束，并且完成主键自增长</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create table stu(</span><br><span class="line">id int primary key auto_increment,-- 给id添加主键约束</span><br><span class="line">name varchar(20)</span><br><span class="line">);			</span><br></pre></td></tr></table></figure></li>
+<li><p>删除自动增长</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE stu MODIFY id INT;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>添加自动增长</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE stu MODIFY id INT AUTO_INCREMENT;</span><br></pre></td></tr></table></figure>
 
 
-
-5. 自动增长(只和上一条数据有关,通常和主键连起来使用)：
-    1.  概念：如果某一列是数值类型的，使用 auto_increment 可以来完成值得自动增长
-
-    2. 在创建表时，添加主键约束，并且完成主键自增长
-
-      <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create table stu(</span><br><span class="line">id int primary key auto_increment,-- 给id添加主键约束</span><br><span class="line">name varchar(20)</span><br><span class="line">);			</span><br></pre></td></tr></table></figure>
-      3. 删除自动增长
-
-    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE stu MODIFY id INT;</span><br></pre></td></tr></table></figure>
-
-
-    4. 添加自动增长
-
-    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE stu MODIFY id INT AUTO_INCREMENT;</span><br></pre></td></tr></table></figure></code></pre>
-<ul>
-<li><p>外键约束：foreign key,<strong>让表于表产生关系</strong>，从而保证数据的正确性。</p>
+<p>外键约束：foreign key,<strong>让表于表产生关系</strong>，从而保证数据的正确性。</p>
 <ol>
 <li><p>在创建表时，可以添加外键</p>
 <ul>
@@ -775,30 +835,37 @@
 </ul>
 </li>
 </ol>
+<ol start="2">
+<li><p>删除外键</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名 DROP FOREIGN KEY 外键名称;</span><br></pre></td></tr></table></figure>
+
+
+
 </li>
-</ul>
-<pre><code>2. 删除外键
-
-    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名 DROP FOREIGN KEY 外键名称;</span><br></pre></td></tr></table></figure>
-
-
-
-3. 创建表之后，添加外键
-
-    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名 ADD CONSTRAINT 外键名称 FOREIGN KEY (外键字段名称) REFERENCES 主表名称(主表列名称);</span><br></pre></td></tr></table></figure>
+</ol>
+<ol start="3">
+<li><p>创建表之后，添加外键</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名 ADD CONSTRAINT 外键名称 FOREIGN KEY (外键字段名称) REFERENCES 主表名称(主表列名称);</span><br></pre></td></tr></table></figure>
 
 
 
-4. 级联操作
-    1. 添加级联操作
+</li>
+</ol>
+<ol start="4">
+<li><p>级联操作</p>
+<ol>
+<li><p>添加级联操作</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">语法：ALTER TABLE 表名 ADD CONSTRAINT 外键名称 </span><br><span class="line">		FOREIGN KEY (外键字段名称) REFERENCES 主表名称(主表列名称) ON UPDATE CASCADE ON DELETE CASCADE  ;</span><br></pre></td></tr></table></figure>
 
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">语法：ALTER TABLE 表名 ADD CONSTRAINT 外键名称 </span><br><span class="line">		FOREIGN KEY (外键字段名称) REFERENCES 主表名称(主表列名称) ON UPDATE CASCADE ON DELETE CASCADE  ;</span><br></pre></td></tr></table></figure>
 
 
-
-    2. 分类：
-        1. 级联更新：ON UPDATE CASCADE 
-        2. 级联删除：ON DELETE CASCADE </code></pre>
+</li>
+</ol>
+</li>
+</ol>
+<pre><code>2. 分类：
+    1. 级联更新：ON UPDATE CASCADE 
+    2. 级联删除：ON DELETE CASCADE </code></pre>
 <h2 id="数据库的设计"><a href="#数据库的设计" class="headerlink" title="数据库的设计"></a>数据库的设计</h2><ol>
 <li><p>多表之间的关系</p>
 <ol>
