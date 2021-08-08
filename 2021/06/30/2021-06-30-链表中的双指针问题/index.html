@@ -218,12 +218,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i> <span>603 Words</span>
+            <i class="fas fa-file-word"></i> <span>964 Words</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i> <span>2 Mins</span>
+            <i class="fas fa-clock"></i> <span>3 Mins</span>
         </span>
     
     
@@ -252,6 +252,21 @@
 <li>仔细定义循环的结束条件。</li>
 </ol>
 <p>运行几个示例，以确保你的结束条件不会导致无限循环。在定义结束条件时，你必须考虑我们的第一点提示。</p>
+<h1 id="链表中的快慢指针"><a href="#链表中的快慢指针" class="headerlink" title="链表中的快慢指针"></a>链表中的快慢指针</h1><p>现在提一个问题，我们如何获取链表的中间节点。<br> 这个很简单，size除以2，就是中间节点的index，然后就从头节点开始遍历，轻松搞定？<br> 不是这样的。<br> size只在<code>LinkedList</code>容器中有，如果这是链表，哪里有size。<br> 那怎么办？<br> 那我们先把整个链表都遍历一遍，获取链表的size，然后size除以2，再遍历一遍。这样的话，我们需要的遍历次数是</p>
+<p>$\frac{\text{size}}{2}+2\text{size}$​​</p>
+<p>现在，我们换一个思路。我们先用一个两倍速度的快指针遍历一遍，比如需要遍历N次，然后在用慢指针遍历N次。这样慢指针是不是恰好在中间的位置。这样的话，我们需要的遍历次数是</p>
+<p>$\frac{\text{size}}{2} + \frac{\text{size}}{2}$​</p>
+<p>大致思路就是这样的。有几个细节还需要捋一捋。<br><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210802184947.jpg" alt="快慢指针"></p>
+<p>这里解释一下：</p>
+<ul>
+<li>只要快指针还能往下走，就继续往下走。<ul>
+<li>所以在图中偶数次的情况，fastTimes = 2</li>
+<li>所以在图中奇数次的情况，fastTImes = 3</li>
+</ul>
+</li>
+<li>当快指针遍历结束时，其next节点不为空，说明有链表的size是偶数个，这时候中间节点有两个</li>
+<li>当快指针遍历结束时，其next节点为空，说明链表的size是奇数个，这时候中间节点只有一个</li>
+</ul>
 <h3 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p>空间复杂度分析容易。如果只使用指针，而不使用任何其他额外的空间，那么空间复杂度将是 O(1)。但是，时间复杂度的分析比较困难。为了得到答案，我们需要分析运行循环的次数。</p>
 <p>在前面的查找循环示例中，假设我们每次移动较快的指针 2 步，每次移动较慢的指针 1 步。</p>
 <p>如果没有循环，快指针需要 N/2 次才能到达链表的末尾，其中 N 是链表的长度。<br>如果存在循环，则快指针需要 M 次才能赶上慢指针，其中 M 是列表中循环的长度。<br>显然，M &lt;= N 。所以我们将循环运行 N 次。对于每次循环，我们只需要常量级的时间。因此，该算法的时间复杂度总共为 O(N)。</p>
@@ -427,7 +442,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93-%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%8F%8C%E6%8C%87%E9%92%88"><span class="nav-number">1.</span> <span class="nav-text">小结 - 链表中的双指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E7%A4%BA"><span class="nav-number">1.1.</span> <span class="nav-text">提示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="nav-number">1.2.</span> <span class="nav-text">复杂度分析</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93-%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%8F%8C%E6%8C%87%E9%92%88"><span class="nav-number">1.</span> <span class="nav-text">小结 - 链表中的双指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E7%A4%BA"><span class="nav-number">1.1.</span> <span class="nav-text">提示</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88"><span class="nav-number"></span> <span class="nav-text">链表中的快慢指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="nav-number">0.1.</span> <span class="nav-text">复杂度分析</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>

@@ -219,7 +219,7 @@
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i> <span>7 Mins</span>
+            <i class="fas fa-clock"></i> <span>6 Mins</span>
         </span>
     
     
@@ -235,9 +235,7 @@
         
 
         <div class="article-content markdown-body">
-            <p>Python learning: 入门大全</p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://apachecn.gitee.io/ailearning/#/" >https://apachecn.gitee.io/ailearning/#/<i class="fas fa-external-link-alt"></i></a></p>
-<h4 id="接受不定参数"><a href="#接受不定参数" class="headerlink" title="接受不定参数"></a>接受不定参数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">x, *args</span>):</span></span><br><span class="line">    total = x</span><br><span class="line">    <span class="keyword">for</span> arg <span class="keyword">in</span> args:</span><br><span class="line">        total += arg</span><br><span class="line">    <span class="keyword">return</span> total</span><br></pre></td></tr></table></figure>
+            <h2 id="接受不定参数"><a href="#接受不定参数" class="headerlink" title="接受不定参数"></a>接受不定参数</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">x, *args</span>):</span></span><br><span class="line">    total = x</span><br><span class="line">    <span class="keyword">for</span> arg <span class="keyword">in</span> args:</span><br><span class="line">        total += arg</span><br><span class="line">    <span class="keyword">return</span> total</span><br></pre></td></tr></table></figure>
 <p>这里，<code>*args</code> 表示参数数目不定，可以看成一个元组，把第一个参数后面的参数当作元组中的元素。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">print(add(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>))</span><br><span class="line">print(add(<span class="number">1</span>, <span class="number">2</span>))</span><br><span class="line">----</span><br><span class="line">&gt;&gt;&gt;<span class="number">10</span></span><br><span class="line">&gt;&gt;&gt;<span class="number">3</span></span><br></pre></td></tr></table></figure>
 
@@ -250,42 +248,34 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">*args, **kwargs</span>):</span></span><br><span class="line">    <span class="built_in">print</span> args, kwargs</span><br><span class="line"></span><br><span class="line">foo(<span class="number">2</span>, <span class="number">3</span>, x=<span class="string">&#x27;bar&#x27;</span>, z=<span class="number">10</span>)</span><br><span class="line">-----</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>(<span class="number">2</span>, <span class="number">3</span>) &#123;<span class="string">&#x27;x&#x27;</span>: <span class="string">&#x27;bar&#x27;</span>, <span class="string">&#x27;z&#x27;</span>: <span class="number">10</span>&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
-<p>tf 里面的training=True</p>
-<p>Some neural network layers behave differently during training and inference, for example Dropout and BatchNormalization layers. For example</p>
+<h2 id="tf-里面的training-True"><a href="#tf-里面的training-True" class="headerlink" title="tf 里面的training=True"></a>tf 里面的training=True</h2><p>Some neural network layers behave differently during training and inference, for example Dropout and BatchNormalization layers. For example</p>
 <ul>
 <li>During training, dropout will randomly drop out units and correspondingly scale up activations of the remaining units.</li>
 <li>During inference, it does nothing (since you usually don’t want the randomness of dropping out units here).</li>
 </ul>
 <p>The training argument lets the layer know which of the two “paths” it should take. If you set this incorrectly, your network might not behave as expected.</p>
-<p>pycharm的奇技淫巧</p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://www.zhihu.com/question/37787004" >https://www.zhihu.com/question/37787004<i class="fas fa-external-link-alt"></i></a></p>
-<p>为什么要做归一化处理</p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/TF6d9NRz0lDFQeC_K3CVaw" >https://mp.weixin.qq.com/s/TF6d9NRz0lDFQeC_K3CVaw<i class="fas fa-external-link-alt"></i></a></p>
-<p>npy 格式的好处</p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://towardsdatascience.com/what-is-npy-files-and-why-you-should-use-them-603373c78883" >https://towardsdatascience.com/what-is-npy-files-and-why-you-should-use-them-603373c78883<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="pycharm的奇技淫巧"><a href="#pycharm的奇技淫巧" class="headerlink" title="pycharm的奇技淫巧"></a>pycharm的奇技淫巧</h2><p><a class="link"   target="_blank" rel="noopener" href="https://www.zhihu.com/question/37787004" >https://www.zhihu.com/question/37787004<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="为什么要做归一化处理"><a href="#为什么要做归一化处理" class="headerlink" title="为什么要做归一化处理"></a>为什么要做归一化处理</h2><p><a class="link"   target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/TF6d9NRz0lDFQeC_K3CVaw" >https://mp.weixin.qq.com/s/TF6d9NRz0lDFQeC_K3CVaw<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="npy-格式的好处"><a href="#npy-格式的好处" class="headerlink" title="npy 格式的好处"></a>npy 格式的好处</h2><p><a class="link"   target="_blank" rel="noopener" href="https://towardsdatascience.com/what-is-npy-files-and-why-you-should-use-them-603373c78883" >https://towardsdatascience.com/what-is-npy-files-and-why-you-should-use-them-603373c78883<i class="fas fa-external-link-alt"></i></a></p>
 <ol>
 <li>不用reshape了，什么格式保存，什么格式读取</li>
 <li>storage比较小</li>
 <li>Read的速度比较快</li>
 </ol>
-<p>pickle data</p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/understanding-python-pickling-example/" >https://www.geeksforgeeks.org/understanding-python-pickling-example/<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="pickle-data"><a href="#pickle-data" class="headerlink" title="pickle data"></a>pickle data</h2><p><a class="link"   target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/understanding-python-pickling-example/" >https://www.geeksforgeeks.org/understanding-python-pickling-example/<i class="fas fa-external-link-alt"></i></a></p>
 <p><a class="link"   target="_blank" rel="noopener" href="https://www.zhihu.com/search?type=content&amp;q=Pickling" >https://www.zhihu.com/search?type=content&amp;q=Pickling<i class="fas fa-external-link-alt"></i></a></p>
 <p>答：Pickle模块读入任何Python对象，将它们转换成字符串，然后使用dump函数将其转储到一个文件中——这个过程叫做pickling。反之从存储的字符串文件中提取原始Python对象的过程，叫做unpickling。    allow_pickle = True文件传输的过程中可能会有压缩，true则表示压缩后文件不变</p>
-<p>Python的面试</p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/41962762" >https://zhuanlan.zhihu.com/p/41962762<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="Python的面试"><a href="#Python的面试" class="headerlink" title="Python的面试"></a>Python的面试</h2><p><a class="link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/41962762" >https://zhuanlan.zhihu.com/p/41962762<i class="fas fa-external-link-alt"></i></a></p>
 <p><strong>1.这两个参数是什么意思:*args,\</strong>kwargs？我们为什么要使用它们?**</p>
 <p>答:如果我们不确定往一个函数中传入多少参数，或者我们希望以元组(tuple)或者列表(list)的形式传参数的时候，我们可以使用*args(单星号).如果我们不知道往函数中传递多少个关键词参数或者想传入字典的值作为关键词参数的时候我们可以使用**kwargs(双星号),args,kwargs两个标识符是约定俗成的用法。</p>
 <p>lists are mutable while tuple are not </p>
 <p><strong>这个就非常的好，解释kargs and args</strong></p>
 <p><a class="link"   target="_blank" rel="noopener" href="https://realpython.com/python-kwargs-and-args/" >https://realpython.com/python-kwargs-and-args/<i class="fas fa-external-link-alt"></i></a></p>
 <p><a class="link"   target="_blank" rel="noopener" href="https://www.jianshu.com/p/592cf526b1e6" >https://www.jianshu.com/p/592cf526b1e6<i class="fas fa-external-link-alt"></i></a></p>
-<p>Python 的iteration 这个模块的用法</p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://www.zhihu.com/search?type=content&amp;q=itertools" >https://www.zhihu.com/search?type=content&amp;q=itertools<i class="fas fa-external-link-alt"></i></a></p>
-<p><strong>Itertools.zip_longest()</strong></p>
+<h2 id="Python-的iteration-这个模块的用法"><a href="#Python-的iteration-这个模块的用法" class="headerlink" title="Python 的iteration 这个模块的用法"></a>Python 的iteration 这个模块的用法</h2><p><a class="link"   target="_blank" rel="noopener" href="https://www.zhihu.com/search?type=content&amp;q=itertools" >https://www.zhihu.com/search?type=content&amp;q=itertools<i class="fas fa-external-link-alt"></i></a></p>
+<p> <strong>Itertools.zip_longest()</strong></p>
 <p>This iterator falls under the category of <a class="link"   target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/python-itertools/#terminate" >Terminating Iterators<i class="fas fa-external-link-alt"></i></a>. It prints the values of iterables alternatively in sequence. If one of the iterables is printed fully, the remaining values are filled by the values assigned to fillvalue parameter.</p>
-<p>Python新手常见的坑</p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/81012511" >https://zhuanlan.zhihu.com/p/81012511<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="Python新手常见的坑"><a href="#Python新手常见的坑" class="headerlink" title="Python新手常见的坑"></a>Python新手常见的坑</h2><p><a class="link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/81012511" >https://zhuanlan.zhihu.com/p/81012511<i class="fas fa-external-link-alt"></i></a></p>
 <p><strong>Tf.function 装饰器的玩意</strong> </p>
 <table>
 <thead>
@@ -519,7 +509,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A5%E5%8F%97%E4%B8%8D%E5%AE%9A%E5%8F%82%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">接受不定参数</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%8F%97%E4%B8%8D%E5%AE%9A%E5%8F%82%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">接受不定参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tf-%E9%87%8C%E9%9D%A2%E7%9A%84training-True"><span class="nav-number">2.</span> <span class="nav-text">tf 里面的training&#x3D;True</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pycharm%E7%9A%84%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7"><span class="nav-number">3.</span> <span class="nav-text">pycharm的奇技淫巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%81%9A%E5%BD%92%E4%B8%80%E5%8C%96%E5%A4%84%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">为什么要做归一化处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#npy-%E6%A0%BC%E5%BC%8F%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="nav-number">5.</span> <span class="nav-text">npy 格式的好处</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pickle-data"><span class="nav-number">6.</span> <span class="nav-text">pickle data</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python%E7%9A%84%E9%9D%A2%E8%AF%95"><span class="nav-number">7.</span> <span class="nav-text">Python的面试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-%E7%9A%84iteration-%E8%BF%99%E4%B8%AA%E6%A8%A1%E5%9D%97%E7%9A%84%E7%94%A8%E6%B3%95"><span class="nav-number">8.</span> <span class="nav-text">Python 的iteration 这个模块的用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python%E6%96%B0%E6%89%8B%E5%B8%B8%E8%A7%81%E7%9A%84%E5%9D%91"><span class="nav-number">9.</span> <span class="nav-text">Python新手常见的坑</span></a></li></ol>
     </div>
 </div>
         </aside>

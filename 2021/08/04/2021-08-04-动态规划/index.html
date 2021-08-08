@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Welcome to my personal blogs">
+    <meta name="author" content="Yuxuan Wu">
+    
+    <title>
+        
+            动态规划 |
+        
+        Yuxuan Wu
+    </title>
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep coding, Keep hungry."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.3.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days age","week":"%s weeks age","month":"%s months age","year":"%s years age"};
+  </script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Yuxuan Wu
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content normal-code-theme">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">动态规划</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Yuxuan Wu</span>
+                        <span class="level">Lv11</span>
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i> 2021-08-04 18:54:23
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Algorithms/">Algorithms</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/tags/algorithms/">algorithms</a>
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/dp/">dp</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i> <span>5.7k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i> <span>24 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="动态规划框架思想"><a href="#动态规划框架思想" class="headerlink" title="动态规划框架思想"></a>动态规划框架思想</h1><p><strong>首先，动态规划问题的一般形式就是求最值</strong>。</p>
+<blockquote>
+<p>比如说让你求<strong>最长</strong>递增子序列呀，<strong>最小</strong>编辑距离呀等等。</p>
+</blockquote>
+<p>核心问题是:<strong>求解动态规划的核心问题是穷举</strong>。</p>
+<h2 id="动态规划三大要素"><a href="#动态规划三大要素" class="headerlink" title="动态规划三大要素"></a>动态规划三大要素</h2><ol>
+<li><p><strong>存在「重叠子问题」</strong>，如果暴力穷举的话效率会极其低下，所以需要<code>「备忘录」</code>或者<code>「DP table」</code>来优化穷举过程，避免不必要的计算。</p>
+</li>
+<li><p>动态规划问题一定会<strong>具备「最优子结构」</strong>，才能通过子问题的最值得到原问题的最值。</p>
+</li>
+<li><p>只有列出<strong>正确的「状态转移方程」</strong>，才能正确地穷举。</p>
+</li>
+</ol>
+<h2 id="框架明确"><a href="#框架明确" class="headerlink" title="框架明确"></a>框架明确</h2><p><strong>明确 base case -&gt; 明确「状态」-&gt; 明确「选择」 -&gt; 定义 dp 数组/函数的含义</strong>。</p>
+<ol>
+<li>明确base case</li>
+<li>明确状态，进行状态转移</li>
+<li>明确选择的方式</li>
+<li>定义dp数组/函数的含义</li>
+</ol>
+<p>按上面的套路走，最后的结果就可以套这个框架：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 初始化 base case</span><br><span class="line">dp[0][0][...] &#x3D; base</span><br><span class="line"># 进行状态转移</span><br><span class="line">for 状态1 in 状态1的所有取值：</span><br><span class="line">    for 状态2 in 状态2的所有取值：</span><br><span class="line">        for ...</span><br><span class="line">            dp[状态1][状态2][...] &#x3D; 求最值(选择1，选择2...)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<p><strong>第一步要明确两点，「状态」和「选择」</strong>。</p>
+<p>先说状态，如何才能描述一个问题局面？只要给几个物品和一个背包的容量限制，就形成了一个背包问题呀。<strong>所以状态有两个，就是「背包的容量」和「可选择的物品」</strong>。</p>
+<p>再说选择，也很容易想到啊，对于每件物品，你能选择什么？<strong>选择就是「装进背包」或者「不装进背包」嘛</strong>。</p>
+<p>明白了状态和选择，动态规划问题基本上就解决了，只要往这个框架套就完事儿了：</p>
+<p><strong>第二步要明确</strong> <strong><code>dp</code></strong> <strong>数组的定义</strong>。</p>
+<p>首先看看刚才找到的「状态」，有两个，也就是说我们需要一个二维 <code>dp</code> 数组。</p>
+<p><code>dp[i][w]</code> 的定义如下：对于前 <code>i</code> 个物品，当前背包的容量为 <code>w</code>，这种情况下可以装的最大价值是 <code>dp[i][w]</code>。</p>
+<h1 id="算法实战"><a href="#算法实战" class="headerlink" title="算法实战"></a>算法实战</h1><h2 id="斐波那契数列"><a href="#斐波那契数列" class="headerlink" title="斐波那契数列"></a>斐波那契数列</h2><h3 id="暴力递归"><a href="#暴力递归" class="headerlink" title="暴力递归"></a>暴力递归</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fib</span><span class="params">(<span class="keyword">int</span> N)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (N == <span class="number">1</span> || N == <span class="number">2</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> fib(N - <span class="number">1</span>) + fib(N - <span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210804185840.png" alt="image-20210804185821731"></p>
+<p>PS：但凡遇到需要递归的问题，最好都画出递归树，这对你分析算法的复杂度，寻找算法低效的原因都有巨大帮助。</p>
+<p><strong>递归算法的时间复杂度怎么计算？就是用子问题个数乘以解决一个子问题需要的时间。</strong></p>
+<p>首先计算子问题个数，即递归树中节点的总数。显然二叉树节点总数为指数级别，所以子问题个数为 O(2^n)。</p>
+<p>然后计算解决一个子问题的时间，在本算法中，没有循环，只有 <code>f(n - 1) + f(n - 2)</code> 一个加法操作，时间为 O(1)。</p>
+<p>所以，这个算法的时间复杂度为二者相乘，即 O(2^n)，指数级别，爆炸。</p>
+<blockquote>
+<p>递归函数调用的次数*递归函数本身的复杂度</p>
+</blockquote>
+<h3 id="带备忘录的递归"><a href="#带备忘录的递归" class="headerlink" title="带备忘录的递归"></a>带备忘录的递归</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210804191034.png" alt="image-20210804191034029"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210804191531.png" alt="image-20210804191531040"></p>
+<p>一般使用一个数组充当这个「备忘录」，当然你也可以使用哈希表（字典），思想都是一样的。</p>
+<p>俗称<code>剪枝</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fib_memo</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] memo = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">return</span> helper(memo, n);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">helper</span><span class="params">(<span class="keyword">int</span>[] memo, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 备忘录全部初始化为0</span></span><br><span class="line">    <span class="keyword">if</span> (memo[n] != <span class="number">0</span>) <span class="keyword">return</span> memo[n];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// base case</span></span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span> || n == <span class="number">1</span>) <span class="keyword">return</span> n;</span><br><span class="line"></span><br><span class="line">    memo[n] = helper(memo, n - <span class="number">1</span>) + helper(memo, n - <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> memo[n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意备忘录是申请一个N+1 长度的数组</p>
+<p>因为我们要操作memo的索引是从0开始的，所以为了保证最后边界的合法性，一定是从N+1开始的</p>
+<blockquote>
+<p>Python 解法</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fib</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; int:</span></span><br><span class="line">    memo = (n + <span class="number">1</span>) * [<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">helper</span>(<span class="params">memo: List[<span class="built_in">int</span>], n: <span class="built_in">int</span></span>) -&gt; int:</span></span><br><span class="line">        <span class="comment"># memo</span></span><br><span class="line">        <span class="keyword">if</span> memo[n] != <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> memo[n]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># base case</span></span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">1</span> <span class="keyword">or</span> n == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> n</span><br><span class="line"></span><br><span class="line">        memo[n] = helper(memo, n - <span class="number">1</span>) + helper(memo, n - <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> memo[n]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> helper(memo, n)</span><br></pre></td></tr></table></figure>
+<h3 id="dp-数组的迭代解法"><a href="#dp-数组的迭代解法" class="headerlink" title="dp 数组的迭代解法"></a>dp 数组的迭代解法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fib_bottom_to_up</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    dp[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        dp[i] = dp[i - <span class="number">1</span>] + dp[i - <span class="number">2</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> dp[n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fib2</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; int:</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">0</span>: <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    dp = (n + <span class="number">1</span>) * [<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    dp[<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">    dp[<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, n + <span class="number">1</span>):</span><br><span class="line">        dp[i] = dp[i - <span class="number">1</span>] + dp[i - <span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> dp[n]</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210804192136.png" alt="image-20210804192136731"></p>
+<h3 id="进一步优化-状态压缩"><a href="#进一步优化-状态压缩" class="headerlink" title="进一步优化(状态压缩)"></a>进一步优化(状态压缩)</h3><p>状态转移方程</p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210804193031.png" alt="image-20210804193031196"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fib_dp</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n &lt;= <span class="number">2</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> n1 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> n2 = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        sum = n1 + n2;</span><br><span class="line">        n1 = n2;</span><br><span class="line">        n2 = sum;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fib</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n &lt; <span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">2</span> || n == <span class="number">1</span>) </span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> prev = <span class="number">1</span>, curr = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">3</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> sum = prev + curr;</span><br><span class="line">        prev = curr;</span><br><span class="line">        curr = sum;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> curr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>这个技巧就是所谓的「<strong>状态压缩</strong>」，如果我们发现每次状态转移只需要 DP table 中的一部分，那么可以尝试用状态压缩来缩小 DP table 的大小，只记录必要的数据，上述例子就相当于把DP table 的大小从 <code>n</code> 缩小到 2。后续的动态规划章节中我们还会看到这样的例子，一般来说是把一个二维的 DP table 压缩成一维，即把空间复杂度从 O(n^2) 压缩到 O(n)。</p>
+<h2 id="凑零钱问题"><a href="#凑零钱问题" class="headerlink" title="凑零钱问题"></a>凑零钱问题</h2><p>给你一个整数数组 <code>coins</code> ，表示不同面额的硬币；以及一个整数 <code>amount</code> ，表示总金额。</p>
+<p>计算并返回可以凑成总金额所需的 <strong>最少的硬币个数</strong> 。如果没有任何一种硬币组合能组成总金额，返回 <code>-1</code> 。</p>
+<p>你可以认为每种硬币的数量是无限的。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：coins &#x3D; [1, 2, 5], amount &#x3D; 11</span><br><span class="line">输出：3 </span><br><span class="line">解释：11 &#x3D; 5 + 5 + 1</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：coins &#x3D; [2], amount &#x3D; 3</span><br><span class="line">输出：-1</span><br></pre></td></tr></table></figure>
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：coins &#x3D; [1], amount &#x3D; 0</span><br><span class="line">输出：0</span><br></pre></td></tr></table></figure>
+<p><strong>示例 4：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：coins &#x3D; [1], amount &#x3D; 1</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure>
+<p><strong>示例 5：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：coins &#x3D; [1], amount &#x3D; 2</span><br><span class="line">输出：2</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="暴力递归-带备忘录的"><a href="#暴力递归-带备忘录的" class="headerlink" title="暴力递归(带备忘录的)"></a>暴力递归(带备忘录的)</h3><p>首先，这个问题是动态规划问题，因为它具有「最优子结构」的。<strong>要符合「最优子结构」，子问题间必须互相独立</strong>。啥叫<code>相互独立</code>？你肯定不想看数学证明，我用一个直观的例子来讲解。</p>
+<p>为什么说它符合最优子结构呢？比如你想求 <code>amount = 11</code> 时的最少硬币数（原问题），如果你知道凑出 <code>amount = 10</code> 的最少硬币数（子问题），你只需要把子问题的答案加一（再选一枚面值为 1 的硬币）就是原问题的答案。因为硬币的数量是没有限制的，所以子问题之间没有相互制，是互相独立的。</p>
+<p>那么，既然知道了这是个动态规划问题，就要思考<strong>如何列出正确的状态转移方程</strong>？</p>
+<p>1、<strong>确定 base case</strong>，这个很简单，显然目标金额 <code>amount</code> 为 0 时算法返回 0，因为不需要任何硬币就已经凑出目标金额了。</p>
+<p>2、<strong>确定「状态」，也就是原问题和子问题中会变化的变量</strong>。由于硬币数量无限，硬币的面额也是题目给定的，只有目标金额会不断地向 base case 靠近，所以唯一的「状态」就是目标金额 <code>amount</code>。</p>
+<p>3、<strong>确定「选择」，也就是导致「状态」产生变化的行为</strong>。目标金额为什么变化呢，因为你在选择硬币，你每选择一枚硬币，就相当于减少了目标金额。所以说所有硬币的面值，就是你的「选择」。</p>
+<p>4、<strong>明确</strong> <strong><code>dp</code></strong> <strong>函数/数组的定义</strong>。我们这里讲的是自顶向下的解法，所以会有一个递归的 <code>dp</code> 函数，一般来说函数的参数就是状态转移中会变化的量，也就是上面说到的「状态」；函数的返回值就是题目要求我们计算的量。就本题来说，状态只有一个，即「目标金额」，题目要求我们计算凑出目标金额所需的最少硬币数量。所以我们可以这样定义 <code>dp</code> 函数：</p>
+<p><code>dp(n)</code> 的定义：输入一个目标金额 <code>n</code>，返回凑出目标金额 <code>n</code> 的最少硬币数量。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210804202433.png" alt="image-20210804202433043"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210806085054.png" alt="image-20210804202500030"></p>
+<p><strong>递归算法的时间复杂度分析：子问题总数 x 每个子问题的时间</strong>。</p>
+<p>子问题总数为递归树节点个数，这个比较难看出来，是 O(n^k)，总之是指数级别的。每个子问题中含有一个 for 循环，复杂度为 O(k)。所以总时间复杂度为 O(k * n^k)，指数级别。</p>
+<p><code>Java</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> [] memo;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">coinChange</span><span class="params">(<span class="keyword">int</span>[] coins, <span class="keyword">int</span> amount)</span> </span>&#123;</span><br><span class="line">    memo = <span class="keyword">new</span> <span class="keyword">int</span>[amount+<span class="number">1</span>];</span><br><span class="line">    Arrays.fill(memo,-<span class="number">666</span>);</span><br><span class="line">    <span class="keyword">return</span> helper(coins, amount);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">helper</span><span class="params">(<span class="keyword">int</span>[] coins, <span class="keyword">int</span> amount)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (amount==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (amount&lt;<span class="number">0</span>) <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (memo[amount]!=-<span class="number">666</span>) <span class="keyword">return</span> memo[amount];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> res = Integer.MAX_VALUE;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> coin: coins)&#123;</span><br><span class="line">        <span class="keyword">int</span> subProblem = helper(coins,amount-coin);</span><br><span class="line">        <span class="keyword">if</span>(subProblem==-<span class="number">1</span>) <span class="keyword">continue</span>;</span><br><span class="line">        res = Math.min(res,subProblem+<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    memo[amount] = res==Integer.MAX_VALUE?-<span class="number">1</span>:res;</span><br><span class="line">    <span class="keyword">return</span>  memo[amount];</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>Python</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">coinChange</span>(<span class="params">self, coins: List[<span class="built_in">int</span>], amount: <span class="built_in">int</span></span>) -&gt; int:</span></span><br><span class="line">        memo = (amount + <span class="number">1</span>) * [-<span class="number">666</span>]</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">helper</span>(<span class="params">coins: List[<span class="built_in">int</span>], amount: <span class="built_in">int</span></span>) -&gt; int:</span></span><br><span class="line">            <span class="comment"># base case</span></span><br><span class="line">            <span class="keyword">if</span> amount == <span class="number">0</span>: <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">            <span class="keyword">if</span> amount &lt; <span class="number">0</span>: <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">            <span class="comment"># memo iteration</span></span><br><span class="line">            <span class="keyword">if</span> memo[amount] != -<span class="number">666</span>: <span class="keyword">return</span> memo[amount]</span><br><span class="line"></span><br><span class="line">            res = sys.maxsize</span><br><span class="line">            <span class="keyword">for</span> coin <span class="keyword">in</span> coins:</span><br><span class="line">                subProblems = helper(coins, amount - coin)</span><br><span class="line">                <span class="keyword">if</span> subProblems &lt; <span class="number">0</span>: <span class="keyword">continue</span></span><br><span class="line">                res = <span class="built_in">min</span>(res, subProblems + <span class="number">1</span>)</span><br><span class="line">            </span><br><span class="line">            memo[amount] = -<span class="number">1</span> <span class="keyword">if</span> res == sys.maxsize <span class="keyword">else</span> res</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> memo[amount]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> helper(coins, amount)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">coinChange</span>(<span class="params">coins: List[<span class="built_in">int</span>], amount: <span class="built_in">int</span></span>):</span></span><br><span class="line">    <span class="comment"># 备忘录</span></span><br><span class="line">    memo = <span class="built_in">dict</span>()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dp</span>(<span class="params">n</span>):</span></span><br><span class="line">        <span class="comment"># 查备忘录，避免重复计算</span></span><br><span class="line">        <span class="keyword">if</span> n <span class="keyword">in</span> memo: <span class="keyword">return</span> memo[n]</span><br><span class="line">        <span class="comment"># base case</span></span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">0</span>: <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> n &lt; <span class="number">0</span>: <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">        res = <span class="built_in">float</span>(<span class="string">&#x27;INF&#x27;</span>)</span><br><span class="line">        <span class="keyword">for</span> coin <span class="keyword">in</span> coins:</span><br><span class="line">            subproblem = dp(n - coin)</span><br><span class="line">            <span class="keyword">if</span> subproblem == -<span class="number">1</span>: <span class="keyword">continue</span></span><br><span class="line">            res = <span class="built_in">min</span>(res, <span class="number">1</span> + subproblem)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 记入备忘录</span></span><br><span class="line">        memo[n] = res <span class="keyword">if</span> res != <span class="built_in">float</span>(<span class="string">&#x27;INF&#x27;</span>) <span class="keyword">else</span> -<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> memo[n]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> dp(amount)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="dp-数组的迭代解法-1"><a href="#dp-数组的迭代解法-1" class="headerlink" title="dp 数组的迭代解法"></a><strong>dp 数组的迭代解法</strong></h3><p>当然，我们也可以自底向上使用 dp table 来消除重叠子问题，关于「状态」「选择」和 base case 与之前没有区别，<code>dp</code> 数组的定义和刚才 <code>dp</code> 函数类似，也是把「状态」，也就是目标金额作为变量。不过 <code>dp</code> 函数体现在函数参数，而 <code>dp</code> 数组体现在数组索引：</p>
+<p><strong><code>dp</code></strong> <strong>数组的定义：当目标金额为</strong> <strong><code>i</code></strong> <strong>时，至少需要</strong> <strong><code>dp[i]</code></strong> <strong>枚硬币凑出</strong>。</p>
+<p>根据我们文章开头给出的动态规划代码框架可以写出如下解法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">coinChange</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; coins, <span class="keyword">int</span> amount)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 数组大小为 amount + 1，初始值也为 amount + 1</span></span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">dp</span><span class="params">(amount + <span class="number">1</span>, amount + <span class="number">1</span>)</span></span>;</span><br><span class="line">    <span class="comment">// base case</span></span><br><span class="line">    dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 外层 for 循环在遍历所有状态的所有取值</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; dp.size(); i++) &#123;</span><br><span class="line">        <span class="comment">// 内层 for 循环在求所有选择的最小值</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> coin : coins) &#123;</span><br><span class="line">            <span class="comment">// 子问题无解，跳过</span></span><br><span class="line">            <span class="keyword">if</span> (i - coin &lt; <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">            dp[i] = min(dp[i], <span class="number">1</span> + dp[i - coin]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (dp[amount] == amount + <span class="number">1</span>) ? -<span class="number">1</span> : dp[amount];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210806085105.png" alt="image-20210806083216220"></p>
+<p>PS：为啥 <code>dp</code> 数组初始化为 <code>amount + 1</code> 呢，因为凑成 <code>amount</code> 金额的硬币数最多只可能等于 <code>amount</code>（全用 1 元面值的硬币），所以初始化为 <code>amount + 1</code> 就相当于初始化为正无穷，便于后续取最小值。</p>
+<h2 id="72-编辑距离"><a href="#72-编辑距离" class="headerlink" title="72. 编辑距离"></a><a class="link"   target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/edit-distance/" >72. 编辑距离<i class="fas fa-external-link-alt"></i></a></h2><p>给你两个单词 word1 和 word2，请你计算出将 word1 转换成 word2 所使用的最少操作数 。</p>
+<p>你可以对一个单词进行如下三种操作：</p>
+<p>插入一个字符<br>删除一个字符<br>替换一个字符</p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：word1 &#x3D; &quot;horse&quot;, word2 &#x3D; &quot;ros&quot;</span><br><span class="line">输出：3</span><br><span class="line">解释：</span><br><span class="line">horse -&gt; rorse (将 &#39;h&#39; 替换为 &#39;r&#39;)</span><br><span class="line">rorse -&gt; rose (删除 &#39;r&#39;)</span><br><span class="line">rose -&gt; ros (删除 &#39;e&#39;)</span><br></pre></td></tr></table></figure>
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入：word1 &#x3D; &quot;intention&quot;, word2 &#x3D; &quot;execution&quot;</span><br><span class="line">输出：5</span><br><span class="line">解释：</span><br><span class="line">intention -&gt; inention (删除 &#39;t&#39;)</span><br><span class="line">inention -&gt; enention (将 &#39;i&#39; 替换为 &#39;e&#39;)</span><br><span class="line">enention -&gt; exention (将 &#39;n&#39; 替换为 &#39;x&#39;)</span><br><span class="line">exention -&gt; exection (将 &#39;n&#39; 替换为 &#39;c&#39;)</span><br><span class="line">exection -&gt; execution (插入 &#39;u&#39;)</span><br></pre></td></tr></table></figure>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p><a class="link"   target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAxODQxMDM0Mw==&amp;mid=2247484484&amp;idx=1&amp;sn=74594297022c84952162a68b7f739133&amp;chksm=9bd7fa4caca0735a1364dd13901311ecd6ec4913c8db05a1ff6cae8f069627eebe8d651bbeb1&amp;scene=21#wechat_redirect" >https://mp.weixin.qq.com/s?__biz=MzAxODQxMDM0Mw==&amp;mid=2247484484&amp;idx=1&amp;sn=74594297022c84952162a68b7f739133&amp;chksm=9bd7fa4caca0735a1364dd13901311ecd6ec4913c8db05a1ff6cae8f069627eebe8d651bbeb1&amp;scene=21#wechat_redirect<i class="fas fa-external-link-alt"></i></a></p>
+<p><strong>解决两个字符串的动态规划问题，一般都是用两个指针<code>i,j</code>分别指向两个字符串的最后，然后一步步往前走，缩小问题的规模</strong>。</p>
+<h3 id="递归解法："><a href="#递归解法：" class="headerlink" title="递归解法："></a>递归解法：</h3><p>先梳理一下之前的思路：</p>
+<p>base case 是<code>i</code>走完<code>s1</code>或<code>j</code>走完<code>s2</code>，可以直接返回另一个字符串剩下的长度。</p>
+<p>对于每对儿字符<code>s1[i]</code>和<code>s2[j]</code>，可以有四种操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">if s1[i] &#x3D;&#x3D; s2[j]:</span><br><span class="line">    啥都别做（skip）</span><br><span class="line">    i, j 同时向前移动</span><br><span class="line">else:</span><br><span class="line">    三选一：</span><br><span class="line">        插入（insert）</span><br><span class="line">        删除（delete）</span><br><span class="line">        替换（replace）</span><br></pre></td></tr></table></figure>
+<p>有这个框架，问题就已经解决了。读者也许会问，这个「三选一」到底该怎么选择呢？很简单，全试一遍，哪个操作最后得到的编辑距离最小，就选谁。这里需要递归技巧，理解需要点技巧，先看下代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">minDistance</span>(<span class="params">self, s1: <span class="built_in">str</span>, s2: <span class="built_in">str</span></span>) -&gt; int:</span></span><br><span class="line">        memo = <span class="built_in">dict</span>()</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">dp</span>(<span class="params">i, j</span>):</span></span><br><span class="line">            <span class="comment"># base case</span></span><br><span class="line">            <span class="keyword">if</span> i == -<span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> j + <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> j == -<span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> i + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (i, j) <span class="keyword">in</span> memo:</span><br><span class="line">                <span class="keyword">return</span> memo[(i, j)]</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> s1[i] == s2[j]:</span><br><span class="line">                memo[(i, j)] = dp(i - <span class="number">1</span>, j - <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                memo[(i, j)] = <span class="built_in">min</span>(</span><br><span class="line">                    dp(i, j - <span class="number">1</span>) + <span class="number">1</span>,</span><br><span class="line">                    dp(i - <span class="number">1</span>, j) + <span class="number">1</span>,</span><br><span class="line">                    dp(i - <span class="number">1</span>, j - <span class="number">1</span>) + <span class="number">1</span></span><br><span class="line">                )</span><br><span class="line">            <span class="keyword">return</span> memo[(i, j)]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dp(<span class="built_in">len</span>(s1) - <span class="number">1</span>, <span class="built_in">len</span>(s2) - <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    sol = Solution</span><br><span class="line">    sol.minDistance(sol, <span class="string">&quot;horse&quot;</span>, <span class="string">&quot;ros&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+<p><code>一些细节问题</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> s1[i] == s2[j]:</span><br><span class="line">    <span class="keyword">return</span> dp(i - <span class="number">1</span>, j - <span class="number">1</span>)  <span class="comment"># 啥都不做</span></span><br><span class="line"><span class="comment"># 解释：</span></span><br><span class="line"><span class="comment"># 本来就相等，不需要任何操作</span></span><br><span class="line"><span class="comment"># s1[0..i] 和 s2[0..j] 的最小编辑距离等于</span></span><br><span class="line"><span class="comment"># s1[0..i-1] 和 s2[0..j-1] 的最小编辑距离</span></span><br><span class="line"><span class="comment"># 也就是说 dp(i, j) 等于 dp(i-1, j-1)</span></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dp(i, j - <span class="number">1</span>) + <span class="number">1</span>,    <span class="comment"># 插入</span></span><br><span class="line"><span class="comment"># 解释：</span></span><br><span class="line"><span class="comment"># 我直接在 s1[i] 插入一个和 s2[j] 一样的字符</span></span><br><span class="line"><span class="comment"># 那么 s2[j] 就被匹配了，前移 j，继续跟 i 对比</span></span><br><span class="line"><span class="comment"># 别忘了操作数加一</span></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dp(i - <span class="number">1</span>, j) + <span class="number">1</span>,    <span class="comment"># 删除</span></span><br><span class="line"><span class="comment"># 解释：</span></span><br><span class="line"><span class="comment"># 我直接把 s[i] 这个字符删掉</span></span><br><span class="line"><span class="comment"># 前移 i，继续跟 j 对比</span></span><br><span class="line"><span class="comment"># 操作数加一</span></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dp(i - <span class="number">1</span>, j - <span class="number">1</span>) + <span class="number">1</span> <span class="comment"># 替换</span></span><br><span class="line"><span class="comment"># 解释：</span></span><br><span class="line"><span class="comment"># 我直接把 s1[i] 替换成 s2[j]，这样它俩就匹配了</span></span><br><span class="line"><span class="comment"># 同时前移 i，j 继续对比</span></span><br><span class="line"><span class="comment"># 操作数加一</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Dp-Table-方法"><a href="#Dp-Table-方法" class="headerlink" title="Dp Table 方法"></a>Dp Table 方法</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210807144459.png" alt="image-20210807144459103"></p>
+<p>有了之前递归解法的铺垫，应该很容易理解。dp 函数的 base case 是<code>i,j</code>等于 -1，而数组索引至少是 0，所以 dp 数组会偏移一位，<code>dp[..][0]</code>和<code>dp[0][..]</code>对应 base case。。</p>
+<p>既然 dp 数组和递归 dp 函数含义一样，也就可以直接套用之前的思路写代码，<strong>唯一不同的是，DP table 是自底向上求解，递归解法是自顶向下求解</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> dp;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MinDistance</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minDistance</span><span class="params">(String s1, String s2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = s1.length();</span><br><span class="line">        <span class="keyword">int</span> n = s2.length();</span><br><span class="line">        <span class="comment">// dp[i][j] 用来存储s1[0...i-1] 变成s2[0..j-1]的最小距离</span></span><br><span class="line">        <span class="comment">// 因为索引不能为-1，为非法，所以为0</span></span><br><span class="line">        <span class="keyword">int</span> dp[][] = <span class="keyword">new</span> <span class="keyword">int</span>[m + <span class="number">1</span>][n + <span class="number">1</span>];</span><br><span class="line">        <span class="comment">// base case</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++) &#123;</span><br><span class="line">            dp[i][<span class="number">0</span>] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">            dp[<span class="number">0</span>][j] = j;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (s1.charAt(i - <span class="number">1</span>) == s2.charAt(j - <span class="number">1</span>)) &#123;</span><br><span class="line">                    dp[i][j] = dp[i - <span class="number">1</span>][j - <span class="number">1</span>];</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    dp[i][j] = min(</span><br><span class="line">                            dp[i - <span class="number">1</span>][j - <span class="number">1</span>] + <span class="number">1</span>,</span><br><span class="line">                            dp[i - <span class="number">1</span>][j] + <span class="number">1</span>,</span><br><span class="line">                            dp[i][j - <span class="number">1</span>] + <span class="number">1</span></span><br><span class="line">                    );</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dp[m][n];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">min</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Math.min(a, Math.min(b, c));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210807144601.png" alt="image-20210807144601077"></p>
+<h2 id="0-1-背包问题"><a href="#0-1-背包问题" class="headerlink" title="0,1 背包问题"></a>0,1 背包问题</h2><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210807153233.png" alt="image-20210807153232924"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210807153313.png" alt="image-20210807153313294"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> dp;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Knapsack</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> w   背包的容量</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> n   物品的个数</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> wt  物品i的重量是wt[i]</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> val 物品的价值是val[i]</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">knapsack</span><span class="params">(<span class="keyword">int</span> w, <span class="keyword">int</span> n, <span class="keyword">int</span>[] wt, <span class="keyword">int</span>[] val)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// dp[i][w] 在前 i 个物品的时候，当背包的容量为w的时候，</span></span><br><span class="line">        <span class="comment">// 可以装的最大价值是</span></span><br><span class="line">        <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>][w + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= w; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (j - wt[i-<span class="number">1</span>] &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                    dp[i][j] = dp[i - <span class="number">1</span>][j];</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    dp[i][j] = Math.max(</span><br><span class="line">                            dp[i - <span class="number">1</span>][j - wt[i - <span class="number">1</span>]] + val[i - <span class="number">1</span>],</span><br><span class="line">                            dp[i - <span class="number">1</span>][j]</span><br><span class="line">                    );</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n][w];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">knapsack2</span><span class="params">(<span class="keyword">int</span> W, <span class="keyword">int</span> N, <span class="keyword">int</span>[] wt, <span class="keyword">int</span>[] val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[N + <span class="number">1</span>][W + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> w = <span class="number">1</span>; w &lt;= W; w++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (w - wt[i-<span class="number">1</span>] &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                    dp[i][w] = dp[i - <span class="number">1</span>][w];</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    dp[i][w] = Math.max(</span><br><span class="line">                            dp[i - <span class="number">1</span>][w],</span><br><span class="line">                            dp[i - <span class="number">1</span>][w - wt[i-<span class="number">1</span>]] + val[i - <span class="number">1</span>]</span><br><span class="line">                    );</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dp[N][W] ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Knapsack knapsack = <span class="keyword">new</span> Knapsack();</span><br><span class="line">        <span class="keyword">int</span>[] wt = &#123;<span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span>[] val = &#123;<span class="number">4</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line">        System.out.println(knapsack.knapsack2(<span class="number">4</span>, <span class="number">3</span>, wt, val));</span><br><span class="line">        System.out.println(knapsack.knapsack(<span class="number">4</span>, <span class="number">3</span>, wt, val));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="518-零钱兑换-II"><a href="#518-零钱兑换-II" class="headerlink" title="518. 零钱兑换 II"></a><a class="link"   target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/coin-change-2/" >518. 零钱兑换 II<i class="fas fa-external-link-alt"></i></a></h2><p>难度中等572</p>
+<p>给你一个整数数组 <code>coins</code> 表示不同面额的硬币，另给一个整数 <code>amount</code> 表示总金额。</p>
+<p>请你计算并返回可以凑成总金额的硬币组合数。如果任何硬币组合都无法凑出总金额，返回 <code>0</code> 。</p>
+<p>假设每一种面额的硬币有无限个。 </p>
+<p>题目数据保证结果符合 32 位带符号整数。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入：amount &#x3D; 5, coins &#x3D; [1, 2, 5]</span><br><span class="line">输出：4</span><br><span class="line">解释：有四种方式可以凑成总金额：</span><br><span class="line">5&#x3D;5</span><br><span class="line">5&#x3D;2+2+1</span><br><span class="line">5&#x3D;2+1+1+1</span><br><span class="line">5&#x3D;1+1+1+1+1</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：amount &#x3D; 3, coins &#x3D; [2]</span><br><span class="line">输出：0</span><br><span class="line">解释：只用面额 2 的硬币不能凑成总金额 3 。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：amount &#x3D; 10, coins &#x3D; [10] </span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p><strong>第一步要明确两点，「状态」和「选择」</strong>。</p>
+<p>状态有两个，就是「背包的容量」和「可选择的物品」，选择就是「装进背包」或者「不装进背包」嘛，背包问题的套路都是这样。</p>
+<p>明白了状态和选择，动态规划问题基本上就解决了，只要往这个框架套就完事儿了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for 状态1 in 状态1的所有取值：</span><br><span class="line">    for 状态2 in 状态2的所有取值：</span><br><span class="line">        for ...</span><br><span class="line">            dp[状态1][状态2][...] &#x3D; 计算(选择1，选择2...)</span><br></pre></td></tr></table></figure>
+<p><strong>第二步要明确</strong> <strong><code>dp</code></strong> <strong>数组的定义</strong>。</p>
+<p>首先看看刚才找到的「状态」，有两个，也就是说我们需要一个二维 <code>dp</code> 数组。</p>
+<p><code>dp[i][j]</code> 的定义如下：</p>
+<p>若只使用前 <code>i</code> 个物品（可以重复使用），当背包容量为 <code>j</code> 时，有 <code>dp[i][j]</code> 种方法可以装满背包。</p>
+<p>换句话说，翻译回我们题目的意思就是：</p>
+<p><strong>若只使用</strong> <strong><code>coins</code></strong> <strong>中的前</strong> <strong><code>i</code></strong> <strong>个硬币的面值，若想凑出金额</strong> <strong><code>j</code>**</strong>，有** <strong><code>dp[i][j]</code></strong> <strong>种凑法</strong>。</p>
+<p>经过以上的定义，可以得到：</p>
+<p>base case 为 <code>dp[0][..] = 0， dp[..][0] = 1</code>。因为如果不使用任何硬币面值，就无法凑出任何金额；如果凑出的目标金额为 0，那么“无为而治”就是唯一的一种凑法。</p>
+<p>我们最终想得到的答案就是 <code>dp[N][amount]</code>，其中 <code>N</code> 为 <code>coins</code> 数组的大小。</p>
+<p>大致的伪码思路如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">int dp[N+1][amount+1]</span><br><span class="line">dp[0][..] &#x3D; 0</span><br><span class="line">dp[..][0] &#x3D; 1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">for i in [1..N]:</span><br><span class="line">    for j in [1..amount]:</span><br><span class="line">        把物品 i 装进背包,</span><br><span class="line">        不把物品 i 装进背包</span><br><span class="line">return dp[N][amount]</span><br></pre></td></tr></table></figure>
+<p><strong>第三步，根据「选择」，思考状态转移的逻辑</strong>。</p>
+<p>注意，我们这个问题的特殊点在于物品的数量是无限的，所以这里和之前写的 <a href="">0-1 背包问题</a> 文章有所不同。</p>
+<p><strong>如果你不把这第</strong> <strong><code>i</code></strong> <strong>个物品装入背包</strong>，也就是说你不使用 <code>coins[i]</code> 这个面值的硬币，那么凑出面额 <code>j</code> 的方法数 <code>dp[i][j]</code> 应该等于 <code>dp[i-1][j]</code>，继承之前的结果。</p>
+<p><strong>如果你把这第</strong> <strong><code>i</code></strong> <strong>个物品装入了背包</strong>，也就是说你使用 <code>coins[i]</code> 这个面值的硬币，那么 <code>dp[i][j]</code> 应该等于 <code>dp[i][j-coins[i-1]]</code>。</p>
+<p>首先由于 <code>i</code> 是从 1 开始的，所以 <code>coins</code> 的索引是 <code>i-1</code> 时表示第 <code>i</code> 个硬币的面值。</p>
+<p><code>dp[i][j-coins[i-1]]</code> 也不难理解，如果你决定使用这个面值的硬币，那么就应该关注如何凑出金额 <code>j - coins[i-1]</code>。</p>
+<p>比如说，你想用面值为 2 的硬币凑出金额 5，那么如果你知道了凑出金额 3 的方法，再加上一枚面额为 2 的硬币，不就可以凑出 5 了嘛。</p>
+<p><strong>综上就是两种选择，而我们想求的</strong> <strong><code>dp[i][j]</code></strong> <strong>是「共有多少种凑法」，所以</strong> <strong><code>dp[i][j]</code></strong> <strong>的值应该是以上两种选择的结果之和</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">for (int i &#x3D; 1; i &lt;&#x3D; n; i++) &#123;</span><br><span class="line">    for (int j &#x3D; 1; j &lt;&#x3D; amount; j++) &#123;</span><br><span class="line">        if (j - coins[i-1] &gt;&#x3D; 0)</span><br><span class="line">            dp[i][j] &#x3D; dp[i - 1][j] </span><br><span class="line">                     + dp[i][j-coins[i-1]];</span><br><span class="line">return dp[N][W]</span><br></pre></td></tr></table></figure>
+<p>PS：有的读者在这里可能会有疑问，不是说可以重复使用硬币吗？那么如果我确定「使用第 <code>i</code> 个面值的硬币」，我怎么确定这个面值的硬币被使用了多少枚？简单的一个 <code>dp[i][j-coins[i-1]]</code> 可以包含重复使用第 <code>i</code> 个硬币的情况吗？</p>
+<p>对于这个问题，建议你再仔回头细阅读一下我们对 <code>dp</code> 数组的定义，然后把这个定义代入 <code>dp[i][j-coins[i-1]]</code> 看看：</p>
+<p>若只使用前 <code>i</code> 个物品（可以重复使用），当背包容量为 <code>j-coins[i-1]</code> 时，有 <code>dp[i][j-coins[i-1]]</code> 种方法可以装满背包。</p>
+<p>看到了吗，<code>dp[i][j-coins[i-1]]</code> 也是允许你使用第 <code>i</code> 个硬币的，所以说已经包含了重复使用硬币的情况，你一百个放心。</p>
+<p><strong>最后一步，把伪码翻译成代码，处理一些边界情况</strong>。</p>
+<p>我用 Java 写的代码，把上面的思路完全翻译了一遍，并且处理了一些边界问题：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> amount, <span class="keyword">int</span>[] coins)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// dp table dp[i][amount]</span></span><br><span class="line">    <span class="comment">// use or not use?</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> N = coins.length;</span><br><span class="line">    <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[N+<span class="number">1</span>][amount+<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// base case</span></span><br><span class="line">    <span class="comment">// amount = 0, return 1</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=N;i++)&#123;</span><br><span class="line">        dp[i][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i =<span class="number">1</span>; i&lt;=N;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j&lt;= amount;j++)&#123;</span><br><span class="line">            <span class="keyword">if</span> (j - coins[i-<span class="number">1</span>]&gt;=<span class="number">0</span>)&#123;</span><br><span class="line">                dp[i][j] = dp[i-<span class="number">1</span>][j]+dp[i][j-coins[i-<span class="number">1</span>]];</span><br><span class="line">            &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">                dp[i][j] = dp[i-<span class="number">1</span>][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> dp[N][amount];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>而且，我们通过观察可以发现，<code>dp</code> 数组的转移只和 <code>dp[i][..]</code> 和 <code>dp[i-1][..]</code> 有关，所以可以压缩状态，进一步降低算法的空间复杂度：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> amount, <span class="keyword">int</span>[] coins)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = coins.length;</span><br><span class="line">    <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[amount + <span class="number">1</span>];</span><br><span class="line">    dp[<span class="number">0</span>] = <span class="number">1</span>; <span class="comment">// base case</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= amount; j++)</span><br><span class="line">            <span class="keyword">if</span> (j - coins[i] &gt;= <span class="number">0</span>)</span><br><span class="line">                dp[j] = dp[j] + dp[j-coins[i]];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> dp[amount];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个解法和之前的思路完全相同，将二维 <code>dp</code> 数组压缩为一维，时间复杂度 O(N*amount)，空间复杂度 O(amount)。</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：动态规划</li>
+        <li>Post author：Yuxuan Wu</li>
+        <li>Create time：2021-08-04 18:54:23</li>
+        <li>
+            Post link：yuxuanwu17.github.io2021/08/04/2021-08-04-动态规划/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/07/15/2021-07-15-%E4%BA%8C%E5%8F%89%E6%A0%91/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">二叉树</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span> -
+            
+            2021 <i class="fas fa-heart icon-animate"></i> <a href="/">Yuxuan Wu</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count <span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a> | Theme <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.3.1</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%A1%86%E6%9E%B6%E6%80%9D%E6%83%B3"><span class="nav-number">1.</span> <span class="nav-text">动态规划框架思想</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B8%89%E5%A4%A7%E8%A6%81%E7%B4%A0"><span class="nav-number">1.1.</span> <span class="nav-text">动态规划三大要素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A1%86%E6%9E%B6%E6%98%8E%E7%A1%AE"><span class="nav-number">1.2.</span> <span class="nav-text">框架明确</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%AE%9E%E6%88%98"><span class="nav-number">2.</span> <span class="nav-text">算法实战</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97"><span class="nav-number">2.1.</span> <span class="nav-text">斐波那契数列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9A%B4%E5%8A%9B%E9%80%92%E5%BD%92"><span class="nav-number">2.1.1.</span> <span class="nav-text">暴力递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%A6%E5%A4%87%E5%BF%98%E5%BD%95%E7%9A%84%E9%80%92%E5%BD%92"><span class="nav-number">2.1.2.</span> <span class="nav-text">带备忘录的递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dp-%E6%95%B0%E7%BB%84%E7%9A%84%E8%BF%AD%E4%BB%A3%E8%A7%A3%E6%B3%95"><span class="nav-number">2.1.3.</span> <span class="nav-text">dp 数组的迭代解法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E4%B8%80%E6%AD%A5%E4%BC%98%E5%8C%96-%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9"><span class="nav-number">2.1.4.</span> <span class="nav-text">进一步优化(状态压缩)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%91%E9%9B%B6%E9%92%B1%E9%97%AE%E9%A2%98"><span class="nav-number">2.2.</span> <span class="nav-text">凑零钱问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9A%B4%E5%8A%9B%E9%80%92%E5%BD%92-%E5%B8%A6%E5%A4%87%E5%BF%98%E5%BD%95%E7%9A%84"><span class="nav-number">2.2.1.</span> <span class="nav-text">暴力递归(带备忘录的)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dp-%E6%95%B0%E7%BB%84%E7%9A%84%E8%BF%AD%E4%BB%A3%E8%A7%A3%E6%B3%95-1"><span class="nav-number">2.2.2.</span> <span class="nav-text">dp 数组的迭代解法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#72-%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB"><span class="nav-number">2.3.</span> <span class="nav-text">72. 编辑距离</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">2.3.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E8%A7%A3%E6%B3%95%EF%BC%9A"><span class="nav-number">2.3.2.</span> <span class="nav-text">递归解法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dp-Table-%E6%96%B9%E6%B3%95"><span class="nav-number">2.3.3.</span> <span class="nav-text">Dp Table 方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0-1-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98"><span class="nav-number">2.4.</span> <span class="nav-text">0,1 背包问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#518-%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2-II"><span class="nav-number">2.5.</span> <span class="nav-text">518. 零钱兑换 II</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="nav-number">2.5.1.</span> <span class="nav-text">解题思路</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
