@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Welcome to my personal blogs">
+    <meta name="author" content="Yuxuan Wu">
+    
+    <title>
+        
+            买卖股票的最佳时机问题汇总 |
+        
+        Yuxuan Wu
+    </title>
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep coding, Keep hungry."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.3.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days age","week":"%s weeks age","month":"%s months age","year":"%s years age"};
+  </script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Yuxuan Wu
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content normal-code-theme">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">买卖股票的最佳时机问题汇总</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Yuxuan Wu</span>
+                        <span class="level">Lv11</span>
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i> 2021-07-11 10:04:23
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Algorithms/">Algorithms</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/tags/leetcode/">leetcode</a>
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/dp/">dp</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i> <span>3.2k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i> <span>13 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="核心框架"><a href="#核心框架" class="headerlink" title="核心框架"></a>核心框架</h1><h2 id="一、穷举法"><a href="#一、穷举法" class="headerlink" title="一、穷举法"></a>一、穷举法</h2><p>一般dp的状态选择方程为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for 状态1 in 状态1的所有取值：</span><br><span class="line">    for 状态2 in 状态2的所有取值：</span><br><span class="line">        for ...</span><br><span class="line">            dp[状态1][状态2][...] &#x3D; 择优(选择1，选择2...)</span><br></pre></td></tr></table></figure>
+<p>买卖股票的这类问题，通常有三种选择：</p>
+<p><strong>每天都有三种「选择」</strong>：</p>
+<p>买入、卖出、无操作，我们用 <code>buy</code>, <code>sell</code>, <code>rest</code> 表示这三种选择。</p>
+<p>但问题是，并不是每天都可以任意选择这三种选择的，因为 <code>sell</code> 必须在 <code>buy</code> 之后，<code>buy</code> 必须在 <code>sell</code> 之后。那么 <code>rest</code> 操作还应该分两种状态，一种是 <code>buy</code> 之后的 <code>rest</code>（持有了股票），一种是 <code>sell</code> 之后的 <code>rest</code>（没有持有股票）。而且别忘了，我们还有交易次数 <code>k</code> 的限制，就是说你 <code>buy</code> 还只能在 <code>k &gt; 0</code> 的前提下操作。</p>
+<blockquote>
+<p>即之前说的 <code>rest</code> 的状态，我们不妨用 1 表示持有，0 表示没有持有</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">dp[i][k][0 or 1]</span><br><span class="line">0 &lt;&#x3D; i &lt;&#x3D; n-1, 1 &lt;&#x3D; k &lt;&#x3D; K</span><br><span class="line">n 为天数，大 K 为最多交易数</span><br><span class="line">此问题共 n × K × 2 种状态，全部穷举就能搞定。</span><br><span class="line"></span><br><span class="line">for 0 &lt;&#x3D; i &lt; n:</span><br><span class="line">    for 1 &lt;&#x3D; k &lt;&#x3D; K:</span><br><span class="line">        for s in &#123;0, 1&#125;:</span><br><span class="line">            dp[i][k][s] &#x3D; max(&#96;buy&#96;, &#96;sell&#96;, &#96;rest&#96;)</span><br></pre></td></tr></table></figure>
+
+
+<p>比如说 <code>dp[3][2][1]</code> 的含义就是：今天是第三天，我现在手上持有着股票，至今最多进行 2 次交易。</p>
+<p><code>dp[2][3][0]</code> 的含义：今天是第二天，我现在手上没有持有股票，至今最多进行 3 次交易。</p>
+<blockquote>
+<p>最终答案是：</p>
+<p>dp[n - 1][K][0]</p>
+<p>即最后一天，最多允许 <code>K</code> 次交易，最多获得多少利润</p>
+<p>最后一定是0，也就是手上不持有股票</p>
+</blockquote>
+<h2 id="二、状态转移框架"><a href="#二、状态转移框架" class="headerlink" title="二、状态转移框架"></a>二、状态转移框架</h2><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210810133703.png" alt="image-20210810133703555"></p>
+<p>手中不持有股票【0】</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dp[i][k][0] &#x3D; max(dp[i-1][k][0], dp[i-1][k][1] + prices[i])</span><br><span class="line">              max(   选择 &#96;rest&#96;  ,             选择 &#96;sell&#96;      )</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>要么是我昨天就没有持有，然后今天选择 <code>rest</code>，所以我今天还是没有持有(<code>dp[i-1][k][0]</code>)；</p>
+<p>要么是我昨天持有股票，但是今天我 <code>sell</code> 了，所以我今天没有持有股票了(<code>dp[i-1][k][1] + prices[i]</code>)。</p>
+</blockquote>
+<p>手中持有股票【1】</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dp[i][k][1] &#x3D; max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i])</span><br><span class="line">              max(   选择 &#96;rest&#96;  ,           选择 &#96;buy&#96;         )</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>要么我昨天就持有着股票，然后今天选择 <code>rest</code>，所以我今天还持有着股票；</p>
+<p>要么我昨天本没有持有，但今天我选择 <code>buy</code>，所以今天我就持有股票了。</p>
+</blockquote>
+<p>如果 <code>buy</code>，就要从利润中减去 prices[i]</p>
+<p>如果 <code>sell</code>，就要给利润增加 prices[i]。</p>
+<p>今天的最大利润就是这两种可能选择中较大的那个。</p>
+<p>而且注意 k 的限制，我们在选择 <code>buy</code> 的时候，把 k 减小了 1，很好理解吧，当然你也可以在 <code>sell</code> 的时候减 1，一样的。</p>
+<h2 id="Base-case"><a href="#Base-case" class="headerlink" title="Base case"></a>Base case</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">dp[-1][k][0] &#x3D; 0</span><br><span class="line">解释：因为 i 是从 0 开始的，所以 i &#x3D; -1 意味着还没有开始，这时候的利润当然是 0 。</span><br><span class="line">dp[-1][k][1] &#x3D; -infinity</span><br><span class="line">解释：还没开始的时候，是不可能持有股票的。</span><br><span class="line">因为我们的算法要求一个最大值，所以初始值设为一个最小值，方便取最大值。</span><br><span class="line">dp[i][0][0] &#x3D; 0</span><br><span class="line">解释：因为 k 是从 1 开始的，所以 k &#x3D; 0 意味着根本不允许交易，这时候利润当然是 0 。</span><br><span class="line">dp[i][0][1] &#x3D; -infinity</span><br><span class="line">解释：不允许交易的情况下，是不可能持有股票的。</span><br><span class="line">因为我们的算法要求一个最大值，所以初始值设为一个最小值，方便取最大值。</span><br></pre></td></tr></table></figure>
+
+
+<p><code>精简版</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">base case：</span><br><span class="line">dp[-1][k][0] &#x3D; dp[i][0][0] &#x3D; 0</span><br><span class="line">dp[-1][k][1] &#x3D; dp[i][0][1] &#x3D; -infinity</span><br><span class="line"></span><br><span class="line">状态转移方程：</span><br><span class="line">dp[i][k][0] &#x3D; max(dp[i-1][k][0], dp[i-1][k][1] + prices[i])</span><br><span class="line">dp[i][k][1] &#x3D; max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i])</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="算法实战"><a href="#算法实战" class="headerlink" title="算法实战"></a>算法实战</h1><h2 id="121-买卖股票的最佳时机"><a href="#121-买卖股票的最佳时机" class="headerlink" title="121. 买卖股票的最佳时机"></a><a class="link"   target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/" >121. 买卖股票的最佳时机<i class="fas fa-external-link-alt"></i></a></h2><p>给定一个数组 <code>prices</code> ，它的第 <code>i</code> 个元素 <code>prices[i]</code> 表示一支给定股票第 <code>i</code> 天的价格。</p>
+<p>你只能选择 <strong>某一天</strong> 买入这只股票，并选择在 <strong>未来的某一个不同的日子</strong> 卖出该股票。设计一个算法来计算你所能获取的最大利润。</p>
+<p>返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回 <code>0</code> 。</p>
+<p> <strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：[7,1,5,3,6,4]</span><br><span class="line">输出：5</span><br><span class="line">解释：在第 2 天（股票价格 &#x3D; 1）的时候买入，在第 5 天（股票价格 &#x3D; 6）的时候卖出，最大利润 &#x3D; 6-1 &#x3D; 5 。</span><br><span class="line">     注意利润不能是 7-1 &#x3D; 6, 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：prices &#x3D; [7,6,4,3,1]</span><br><span class="line">输出：0</span><br><span class="line">解释：在这种情况下, 没有交易完成, 所以最大利润为 0。</span><br></pre></td></tr></table></figure>
+<h3 id="框架实战"><a href="#框架实战" class="headerlink" title="框架实战"></a>框架实战</h3><p><code>此处k=1</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">dp[i][1][0] &#x3D; max(dp[i-1][1][0], dp[i-1][1][1] + prices[i])</span><br><span class="line">dp[i][1][1] &#x3D; max(dp[i-1][1][1], dp[i-1][0][0] - prices[i]) </span><br><span class="line">            &#x3D; max(dp[i-1][1][1], -prices[i])</span><br><span class="line">解释：k &#x3D; 0 的 base case，所以 dp[i-1][0][0] &#x3D; 0。</span><br><span class="line"></span><br><span class="line">现在发现 k 都是 1，不会改变，即 k 对状态转移已经没有影响了。</span><br><span class="line">可以进行进一步化简去掉所有 k：</span><br><span class="line">dp[i][0] &#x3D; max(dp[i-1][0], dp[i-1][1] + prices[i])</span><br><span class="line">dp[i][1] &#x3D; max(dp[i-1][1], -prices[i])</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (i - <span class="number">1</span> == -<span class="number">1</span>) &#123;</span><br><span class="line">        dp[i][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 解释：</span></span><br><span class="line">        <span class="comment">//   dp[i][0] </span></span><br><span class="line">        <span class="comment">// = max(dp[-1][0], dp[-1][1] + prices[i])</span></span><br><span class="line">        <span class="comment">// = max(0, -infinity + prices[i]) = 0</span></span><br><span class="line">        dp[i][<span class="number">1</span>] = -prices[i];</span><br><span class="line">        <span class="comment">//解释：</span></span><br><span class="line">        <span class="comment">//   dp[i][1] </span></span><br><span class="line">        <span class="comment">// = max(dp[-1][1], dp[-1][0] - prices[i])</span></span><br><span class="line">        <span class="comment">// = max(-infinity, 0 - prices[i]) </span></span><br><span class="line">        <span class="comment">// = -prices[i]</span></span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    dp[i][<span class="number">0</span>] = Math.max(dp[i-<span class="number">1</span>][<span class="number">0</span>], dp[i-<span class="number">1</span>][<span class="number">1</span>] + prices[i]);</span><br><span class="line">    dp[i][<span class="number">1</span>] = Math.max(dp[i-<span class="number">1</span>][<span class="number">1</span>], -prices[i]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> dp[n - <span class="number">1</span>][<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
+<p>第一题就解决了，但是这样处理 base case 很麻烦，而且注意一下状态转移方程，新状态只和相邻的一个状态有关，其实不用整个 <code>dp</code> 数组，只需要一个变量储存相邻的那个状态就足够了，这样可以把空间复杂度降到 O(1):</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// k == 1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxProfit_k_1</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = prices.length;</span><br><span class="line">    <span class="comment">// base case: dp[-1][0] = 0, dp[-1][1] = -infinity</span></span><br><span class="line">    <span class="keyword">int</span> dp_i_0 = <span class="number">0</span>, dp_i_1 = Integer.MIN_VALUE;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="comment">// dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i])</span></span><br><span class="line">        dp_i_0 = Math.max(dp_i_0, dp_i_1 + prices[i]);</span><br><span class="line">        <span class="comment">// dp[i][1] = max(dp[i-1][1], -prices[i])</span></span><br><span class="line">        dp_i_1 = Math.max(dp_i_1, -prices[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp_i_0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="dp1"><a href="#dp1" class="headerlink" title="dp1"></a>dp1</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 输入：[7,1,5,3,6,4]</span></span><br><span class="line"><span class="comment">     * 输出：5</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * ======</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * 记录【今天之前买入的最小值】</span></span><br><span class="line"><span class="comment">     * 计算【今天之前最小值买入，今天卖出的获利】，也即【今天卖出的最大获利】</span></span><br><span class="line"><span class="comment">     * 比较【每天的最大获利】，取最大值即可</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> min = prices[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> price : prices) &#123;</span><br><span class="line">        <span class="comment">// 今天之前买入的最小值</span></span><br><span class="line">        min = Math.min(min, price);</span><br><span class="line">        <span class="comment">// 今天的最大获利，price-min</span></span><br><span class="line">        <span class="comment">// 比较每天的最大获利</span></span><br><span class="line">        max = Math.max(max, price-min);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="dp2"><a href="#dp2" class="headerlink" title="dp2"></a>dp2</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">     <span class="comment">/* 和最大子序列和相似</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * 1。 找到前一天能获得的最大利润(最小值是0)</span></span><br><span class="line"><span class="comment">     * 2。 今天的利润差</span></span><br><span class="line"><span class="comment">     * 3。 比较</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = prices.length;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 前一天卖出可以获得的最大利润</span></span><br><span class="line">        <span class="keyword">int</span> pre = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; len; i++) &#123;</span><br><span class="line">            <span class="comment">// 利润差</span></span><br><span class="line">            <span class="keyword">int</span> diff = prices[i] - prices[i - <span class="number">1</span>];</span><br><span class="line">           <span class="comment">// 状态转移方程：第i天卖出可以获得的最大利润 = 第i-1天卖出的最大利润 + 利润差</span></span><br><span class="line">            pre = Math.max(pre + diff, <span class="number">0</span>);</span><br><span class="line">            res = Math.max(res, pre);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="122-买卖股票的最佳时机-II"><a href="#122-买卖股票的最佳时机-II" class="headerlink" title="122. 买卖股票的最佳时机 II"></a><a class="link"   target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/" >122. 买卖股票的最佳时机 II<i class="fas fa-external-link-alt"></i></a></h2><p>给定一个数组 <code>prices</code> ，其中 <code>prices[i]</code> 是一支给定股票第 <code>i</code> 天的价格。</p>
+<p>设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。</p>
+<p><strong>注意：</strong>你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: prices &#x3D; [7,1,5,3,6,4]</span><br><span class="line">输出: 7</span><br><span class="line">解释: 在第 2 天（股票价格 &#x3D; 1）的时候买入，在第 3 天（股票价格 &#x3D; 5）的时候卖出, 这笔交易所能获得利润 &#x3D; 5-1 &#x3D; 4 。</span><br><span class="line">     随后，在第 4 天（股票价格 &#x3D; 3）的时候买入，在第 5 天（股票价格 &#x3D; 6）的时候卖出, 这笔交易所能获得利润 &#x3D; 6-3 &#x3D; 3 。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: prices &#x3D; [1,2,3,4,5]</span><br><span class="line">输出: 4</span><br><span class="line">解释: 在第 1 天（股票价格 &#x3D; 1）的时候买入，在第 5 天 （股票价格 &#x3D; 5）的时候卖出, 这笔交易所能获得利润 &#x3D; 5-1 &#x3D; 4 。</span><br><span class="line">     注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: prices &#x3D; [7,6,4,3,1]</span><br><span class="line">输出: 0</span><br><span class="line">解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。</span><br></pre></td></tr></table></figure>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>与121题不同的是，这里不限制交易次数，也就是k=Infinity</p>
+<p><code> [k] = inifity = [k-1]</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dp[i][k][0] &#x3D; dp[i-1][k][1]+price[i], dp[i-1][k][0]</span><br><span class="line">dp[i][k][1] &#x3D; dp[i-1][k-1][0]-price[i], dp[i-1][k][1]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">dp[i][0] &#x3D; dp[i-1][1]+price[i], dp[i-1][0]</span><br><span class="line">dp[i][1] &#x3D; dp[i-1][0]-price[i], dp[i-1][1]</span><br></pre></td></tr></table></figure>
+
+
+<p>此时我们需要一个temp变量来储存上一次的值</p>
+<p><code>dp[i][0]</code>在还没有改变前原先的值是<code>dp[i][1]</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxProfit_k_inf</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = prices.length;</span><br><span class="line">    <span class="keyword">int</span> dp_i_0 = <span class="number">0</span>, dp_i_1 = Integer.MIN_VALUE;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> temp = dp_i_0;</span><br><span class="line">        dp_i_0 = Math.max(dp_i_0, dp_i_1 + prices[i]);</span><br><span class="line">        dp_i_1 = Math.max(dp_i_1, temp - prices[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp_i_0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="309-最佳买卖股票时机含冷冻期"><a href="#309-最佳买卖股票时机含冷冻期" class="headerlink" title="309. 最佳买卖股票时机含冷冻期"></a><a class="link"   target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/" >309. 最佳买卖股票时机含冷冻期<i class="fas fa-external-link-alt"></i></a></h2><p>给定一个整数数组，其中第 <em>i</em> 个元素代表了第 <em>i</em> 天的股票价格 。</p>
+<p>设计一个算法计算出最大利润。在满足以下约束条件下，你可以尽可能地完成更多的交易（多次买卖一支股票）:</p>
+<ul>
+<li>你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。</li>
+<li>卖出股票后，你无法在第二天买入股票 (即冷冻期为 1 天)。</li>
+</ul>
+<p><strong>示例:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [1,2,3,0,2]</span><br><span class="line">输出: 3 </span><br><span class="line">解释: 对应的交易状态为: [买入, 卖出, 冷冻期, 买入, 卖出]</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>每次 <code>sell</code> 之后要等一天才能继续交易。只要把这个特点融入上一题的状态转移方程即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dp[i][0] &#x3D; max(dp[i-1][0], dp[i-1][1] + prices[i])</span><br><span class="line">dp[i][1] &#x3D; max(dp[i-1][1], dp[i-2][0] - prices[i])</span><br><span class="line">解释：第 i 天选择 &#96;buy&#96; 的时候，要从 i-2 的状态转移，而不是 i-1 。</span><br></pre></td></tr></table></figure>
+
+
+<p>需要多出一个变量来储存，达成k=2的目的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = prices.length;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> dp_i_0 = <span class="number">0</span>, dp_i_1 = Integer.MIN_VALUE;</span><br><span class="line">    <span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;n;i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> dp_pre_0 = dp_i_0;</span><br><span class="line">        dp_i_0 = Math.max(dp_i_0,dp_i_1+prices[i]);</span><br><span class="line">        dp_i_1 = Math.max(dp_i_1,temp-prices[i]);</span><br><span class="line">        temp = dp_pre_0;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp_i_0;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="714-买卖股票的最佳时机含手续费"><a href="#714-买卖股票的最佳时机含手续费" class="headerlink" title="714. 买卖股票的最佳时机含手续费"></a><a class="link"   target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/" >714. 买卖股票的最佳时机含手续费<i class="fas fa-external-link-alt"></i></a></h2><p>难度中等527</p>
+<p>给定一个整数数组 <code>prices</code>，其中第 <code>i</code> 个元素代表了第 <code>i</code> 天的股票价格 ；整数 <code>fee</code> 代表了交易股票的手续费用。</p>
+<p>你可以无限次地完成交易，但是你每笔交易都需要付手续费。如果你已经购买了一个股票，在卖出它之前你就不能再继续购买股票了。</p>
+<p>返回获得利润的最大值。</p>
+<p><strong>注意：</strong>这里的一笔交易指买入持有并卖出股票的整个过程，每笔交易你只需要为支付一次手续费。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入：prices &#x3D; [1, 3, 2, 8, 4, 9], fee &#x3D; 2</span><br><span class="line">输出：8</span><br><span class="line">解释：能够达到的最大利润:  </span><br><span class="line">在此处买入 prices[0] &#x3D; 1</span><br><span class="line">在此处卖出 prices[3] &#x3D; 8</span><br><span class="line">在此处买入 prices[4] &#x3D; 4</span><br><span class="line">在此处卖出 prices[5] &#x3D; 9</span><br><span class="line">总利润: ((8 - 1) - 2) + ((9 - 4) - 2) &#x3D; 8</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：prices &#x3D; [1,3,7,5,10,3], fee &#x3D; 3</span><br><span class="line">输出：6</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><p>这里和122思路几乎一样，只需要再买入后加上手续费，就可以得到正确答案，这里同样也是不限制交易次数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices, <span class="keyword">int</span> fee)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = prices.length;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> dp_i_0 = <span class="number">0</span>; </span><br><span class="line">    <span class="keyword">int</span> dp_i_1 = Integer.MIN_VALUE;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;n;i++)&#123;</span><br><span class="line">        dp_i_0 = Math.max(dp_i_0,dp_i_1+prices[i]);</span><br><span class="line">        dp_i_1 = Math.max(dp_i_1,dp_i_0-prices[i]-fee);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> dp_i_0;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：买卖股票的最佳时机问题汇总</li>
+        <li>Post author：Yuxuan Wu</li>
+        <li>Create time：2021-07-11 10:04:23</li>
+        <li>
+            Post link：yuxuanwu17.github.io2021/07/11/2021-07-11-买卖股票的最佳时机问题集合/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/07/11/2021-07-11-21.-%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">21. 合并两个有序链表</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/07/10/350.%20%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E4%BA%A4%E9%9B%86%20II/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">350. 两个数组的交集 II</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span> -
+            
+            2021 <i class="fas fa-heart icon-animate"></i> <a href="/">Yuxuan Wu</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count <span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a> | Theme <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.3.1</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%A1%86%E6%9E%B6"><span class="nav-number">1.</span> <span class="nav-text">核心框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%A9%B7%E4%B8%BE%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">一、穷举法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E6%A1%86%E6%9E%B6"><span class="nav-number">1.2.</span> <span class="nav-text">二、状态转移框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Base-case"><span class="nav-number">1.3.</span> <span class="nav-text">Base case</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%AE%9E%E6%88%98"><span class="nav-number">2.</span> <span class="nav-text">算法实战</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#121-%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA"><span class="nav-number">2.1.</span> <span class="nav-text">121. 买卖股票的最佳时机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A1%86%E6%9E%B6%E5%AE%9E%E6%88%98"><span class="nav-number">2.1.1.</span> <span class="nav-text">框架实战</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dp1"><span class="nav-number">2.1.2.</span> <span class="nav-text">dp1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dp2"><span class="nav-number">2.1.3.</span> <span class="nav-text">dp2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#122-%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA-II"><span class="nav-number">2.2.</span> <span class="nav-text">122. 买卖股票的最佳时机 II</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.2.1.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%9E%90"><span class="nav-number">2.2.2.</span> <span class="nav-text">分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#309-%E6%9C%80%E4%BD%B3%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E6%97%B6%E6%9C%BA%E5%90%AB%E5%86%B7%E5%86%BB%E6%9C%9F"><span class="nav-number">2.3.</span> <span class="nav-text">309. 最佳买卖股票时机含冷冻期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">2.3.1.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#714-%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA%E5%90%AB%E6%89%8B%E7%BB%AD%E8%B4%B9"><span class="nav-number">2.4.</span> <span class="nav-text">714. 买卖股票的最佳时机含手续费</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF%EF%BC%9A"><span class="nav-number">2.4.1.</span> <span class="nav-text">思路：</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
