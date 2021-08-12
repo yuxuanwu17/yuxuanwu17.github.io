@@ -28,7 +28,124 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
 
 
 <body>
@@ -164,119 +281,6 @@
                 
                     <div class="home-content-container fade-in-down-animation">
     <ul class="home-article-list">
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/07/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-day01/">
-                        Day01 设计模式概述
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        1、设计模式概述
-1.1 软件设计模式的产生背景“设计模式”最初并不是出现在软件设计中，而是被用于建筑领域的设计中。
-1977年美国著名建筑大师、加利福尼亚大学伯克利分校环境结构中心主任克里斯托夫·亚历山大（Christopher Alexander...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i> <span class="home-article-date" data-date="Wed Jul 07 2021 08:42:10 GMT+0800">2021-07-07</span></span>
-        
-            <span class="home-article-category"><i class="fas fa-folder"></i>
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/Design-Pattern/">Design_Pattern</a>
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/notes/">notes</a>
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2021/07/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-day01/">Read more <i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/07/06/2021-07-06-1.%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/">
-                        1.两数之和
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        1. 两数之和给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target 的那 两个 整数，并返回它们的数组下标。
-你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。
-你可以...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i> <span class="home-article-date" data-date="Tue Jul 06 2021 19:03:23 GMT+0800">2021-07-06</span></span>
-        
-            <span class="home-article-category"><i class="fas fa-folder"></i>
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/Algorithms/">Algorithms</a>
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/leetcode/">leetcode</a>
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/HashSet/">HashSet</a>
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2021/07/06/2021-07-06-1.%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/">Read more <i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
         
             <li class="home-article-item">
 
@@ -796,6 +800,121 @@ SQL
     </div>
 
     <a href="/2021/06/30/2021-06-30-%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%8F%8C%E6%8C%87%E9%92%88%E9%97%AE%E9%A2%98/">Read more <i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2021/06/29/2021-06-29-Java-%E4%B8%AD%E2%80%9Cwhile-(n--0)%E2%80%9D-%E5%92%8C-%E2%80%9Cwhile-(n!-=0)%E2%80%9D%E5%8C%BA%E5%88%AB/">
+                        Java 中“while (n--&gt;0)” 和 “while (n! =0)”区别
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        “While(n- -&gt;0)” 使用后缀递减运算符
+在“while()”块中可以或不能有更新语句，因为每次循环运行时都会获取“n”，例子如下
+1234int n = 4;while (n-- &gt; 0)&#123;  System.out....
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i> <span class="home-article-date" data-date="Tue Jun 29 2021 18:42:23 GMT+0800">2021-06-29</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Java/">Java</a>
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/tutorial/">tutorial</a>
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2021/06/29/2021-06-29-Java-%E4%B8%AD%E2%80%9Cwhile-(n--0)%E2%80%9D-%E5%92%8C-%E2%80%9Cwhile-(n!-=0)%E2%80%9D%E5%8C%BA%E5%88%AB/">Read more <i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2021/06/22/2021-06-22-%E9%93%BE%E8%A1%A8%E9%9B%86%E5%90%88/">
+                        链表集合
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        设计链表单链表设计链表的实现。您可以选择使用单链表或双链表。
+
+
+单链表中的节点应该具有两个属性：val 和 next。val 是当前节点的值，next 是指向下一个节点的指针/引用。
+双向链表，则还需要一个属性 prev 以指示链表中的上一个节点。...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i> <span class="home-article-date" data-date="Tue Jun 22 2021 09:18:13 GMT+0800">2021-06-22</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/Algorithms/">Algorithms</a>
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/leetcode/">leetcode</a>
+                        </li>
+                    
+                        <li>
+                            | 
+                            <a href="/tags/LinkedList/">LinkedList</a>
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2021/06/22/2021-06-22-%E9%93%BE%E8%A1%A8%E9%9B%86%E5%90%88/">Read more <i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
