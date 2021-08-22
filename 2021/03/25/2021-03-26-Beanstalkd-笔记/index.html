@@ -1,0 +1,2036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Welcome to my personal blogs">
+    <meta name="author" content="Yuxuan Wu">
+    
+    <title>
+        
+            Beanstalkd 笔记 |
+        
+        Yuxuan Wu
+    </title>
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep coding, Keep hungry."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.3.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days age","week":"%s weeks age","month":"%s months age","year":"%s years age"};
+  </script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Yuxuan Wu
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content normal-code-theme">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Beanstalkd 笔记</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Yuxuan Wu</span>
+                        <span class="level">Lv11</span>
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i> 2021-03-25 20:07:32
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Linux/">Linux</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/tags/notes/">notes</a>
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Beanstalkd/">Beanstalkd</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i> <span>15k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i> <span>59 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="一、-Beanstalkd-是什么"><a href="#一、-Beanstalkd-是什么" class="headerlink" title="一、  Beanstalkd 是什么"></a>一、  Beanstalkd 是什么</h2><p>Beanstalkd，一个高性能、轻量级的分布式内存队列系统，后台异步执行</p>
+<h2 id="二、-Beanstalkd-特性"><a href="#二、-Beanstalkd-特性" class="headerlink" title="二、  Beanstalkd 特性"></a>二、  Beanstalkd 特性</h2><ol>
+<li><h4 id="优先级（priority）"><a href="#优先级（priority）" class="headerlink" title="优先级（priority）"></a>优先级（priority）</h4></li>
+</ol>
+<p>注：优先级就意味 支持任务插队（数字越小，优先级越高，0的优先级最高）</p>
+<ol start="2">
+<li><h4 id="延迟（delay）"><a href="#延迟（delay）" class="headerlink" title="延迟（delay）"></a>延迟（delay）</h4></li>
+</ol>
+<p>注：延迟意味着可以定义任务什么时间才开始被消费，也就实现了定时任务（比如为了增加网站活跃性，增加定时评论，定时点赞功能）</p>
+<ol start="3">
+<li><h4 id="持久化（persistent-data）"><a href="#持久化（persistent-data）" class="headerlink" title="持久化（persistent data）"></a>持久化（persistent data）</h4></li>
+</ol>
+<p>注：Beanstalkd 支持定时将文件刷到日志文件里，即使beanstalkd宕机，重启之后仍然可以找回文件</p>
+<ol start="4">
+<li><h4 id="预留（buried）"><a href="#预留（buried）" class="headerlink" title="预留（buried）"></a>预留（buried）</h4></li>
+</ol>
+<p>注：Beanstalkd支持把一个任务设置为预留，这样，消费者就无法取出这个任务了，等合适的时机再把这个任务拿出来消费</p>
+<ol start="5">
+<li><h4 id="任务超时重发（time-to-run）"><a href="#任务超时重发（time-to-run）" class="headerlink" title="任务超时重发（time-to-run）"></a>任务超时重发（time-to-run）</h4></li>
+</ol>
+<p>注：消费者必须在指定的时间内处理完这个任务，否则就认为消费者处理失败，任务会被重新放到队列，等待消费</p>
+<ol start="6">
+<li><h4 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h4></li>
+</ol>
+<p>注：beanstalkd 的分布式，需要通过客户端自己实现。即，比如你有10台消息队列服务器，此时，你需要全部部署上beanstalkd，并且自己编写分布式的中间代码</p>
+<h2 id="三、-管道（tube）与任务（job）"><a href="#三、-管道（tube）与任务（job）" class="headerlink" title="三、 管道（tube）与任务（job）"></a>三、 管道（tube）与任务（job）</h2><p>注：生产者生产任务，并根据业务需求将任务放到不同管道中，比如和注册有关的任务放到注册管道中，和订单有关的放到订单管道中</p>
+<p>注：任务从进入管道到离开管道一共有5个状态（ready，delayed，reserved，buried，delete）</p>
+<p>生产者-&gt; 管道（tube）-&gt;任务（job）-&gt; 消费者</p>
+<p>Job: 一个需要异步处理的任务，需要放在一个tube中</p>
+<p>tube：一个有名字的队列，用来存储同一类型的job，可以创建多个管道</p>
+<p>producer: job 的生产者</p>
+<p>consumer：job的消费者</p>
+<p>简单流程：由producer产生的一个任务job, 并且将job推进到一个tube中，然后投consumer从tube中取出执行</p>
+<h3 id="具体流程"><a href="#具体流程" class="headerlink" title="具体流程"></a>具体流程</h3><ol>
+<li>生产者将任务放到管道中，任务的状态可以是ready（表示任务已经准备好，随时可以被消费者读取），也可以是delayed（任务在被生产者放入管道时，设置了延迟，比如设置了5s延迟，意味着5s之后，这个任务才会变成ready状态，才可以被消费者读取）</li>
+<li>消费者消费任务（消费者将处于ready状态的任务读出来后，被读取处理的任务状态变为reserved）</li>
+<li>消费者处理完任务后，任务的状态可能是delete（删除，处理成功），可能是buried（预留，意味着先把任务放一边，等待条件成熟还要用），可能是ready，也可能是delayed，需要根据具体业务场景自己进行判断定义</li>
+</ol>
+<h2 id="四、Beanstalkd-消息队列"><a href="#四、Beanstalkd-消息队列" class="headerlink" title="四、Beanstalkd 消息队列"></a>四、Beanstalkd 消息队列</h2><p>Beanstalked是一个轻量级的 高性能的分布式内存队列</p>
+<pre><code>常用的队列服务 RabbitMQ、kafka
+
+队列的特性是：先进先出
+
+队里的应用场景
+    1、异步处理(最重要): 比如说注册时对与注册成功之后可以立即返回注册成功页面，之后将客户的端口监听队列 达到异步的效果 提高整体的响应速度
+    2、系统解耦
+    3、定时任务：对于新上线的产品，可以运用beanstalkd来做马甲，增添定时的内容发表及点赞
+
+运行模式：生产者与消费者 
+
+Beanstalked特性：
+        1.优先级(priority)插队、
+        2.延迟(delay)定时任务或指定时间之后才可以读取队列
+        3.持久化(persistent data)-》通过beanlog日志文件存储信息
+        4.预留(buried)可以将某个数据设置成预留 等到时机成熟时再拿出
+        5.任务超时重发(time-to-run)消费者必须在指定的时间之内处理完这个业务 否则就人物消费者处理失败了
+
+Beanstalked的核心元素：    
+        1.tube(管道)：就好比排队的通道 beanstalked可以创建多个管道 进而可以定义不同管道的应用场景 和 特性。
+        2.job（任务）
+
+Beanstalked的任务状态：
+    小结：任务在进入管道到离开管道一共有五个状态
+
+
+   put            reserve               delete
+  -----&gt; [READY] ---------&gt; [RESERVED] --------&gt; *poof*
+
+
+
+Here is a picture with more possibilities:
+
+
+
+   put with delay               release with delay
+  ----------------&gt; [DELAYED] &lt;------------.
+                        |                   |
+                        | (time passes)     |
+                        |                   |
+   put                  v     reserve       |       delete
+  -----------------&gt; [READY] ---------&gt; [RESERVED] --------&gt; *poof*
+                       ^  ^                |  |
+                       |   \  release      |  |
+                       |    `-------------&#39;   |
+                       |                      |
+                       | kick                 |
+                       |                      |
+                       |       bury           |
+                    [BURIED] &lt;---------------&#39;
+                       |
+                       |  delete
+                        `--------&gt; *poof*
+
+
+    释义：
+        ready      是准备好了随时可以给消费者读取
+        delayed 是延迟的 在放入管道时就有延时的秒数
+        delete    是删除
+        buried    是预留 待条件成熟之后再次使用 再次ready</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">Job Lifecycle</span><br><span class="line">-------------</span><br><span class="line"></span><br><span class="line">A job in beanstalk gets created by a client with the &quot;put&quot; command. During its life it can be in one of four states: &quot;ready&quot;, &quot;reserved&quot;, &quot;delayed&quot;, or &quot;buried&quot;.</span><br><span class="line"></span><br><span class="line">After the put command, a job typically starts out ready. It waits in the ready queue until a worker comes along and runs the &quot;reserve&quot; command. If this job is next in the queue, it will be reserved for the worker. The worker</span><br><span class="line">will execute the job; when it is finished the worker will send a &quot;delete&quot;</span><br><span class="line">command to delete the job.</span><br><span class="line"></span><br><span class="line">Here is a picture of the typical job lifecycle:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   put            reserve               delete</span><br><span class="line">  -----&gt; [READY] ---------&gt; [RESERVED] --------&gt; *poof*</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Here is a picture with more possibilities:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   put with delay               release with delay</span><br><span class="line">  ----------------&gt; [DELAYED] &lt;------------.</span><br><span class="line">                        |                   |</span><br><span class="line">                        | (time passes)     |</span><br><span class="line">                        |                   |</span><br><span class="line">   put                  v     reserve       |       delete</span><br><span class="line">  -----------------&gt; [READY] ---------&gt; [RESERVED] --------&gt; *poof*</span><br><span class="line">                       ^  ^                |  |</span><br><span class="line">                       |   \  release      |  |</span><br><span class="line">                       |    &#96;-------------&#39;   |</span><br><span class="line">                       |                      |</span><br><span class="line">                       | kick                 |</span><br><span class="line">                       |                      |</span><br><span class="line">                       |       bury           |</span><br><span class="line">                    [BURIED] &lt;---------------&#39;</span><br><span class="line">                       |</span><br><span class="line">                       |  delete</span><br><span class="line">                        &#96;--------&gt; *poof*</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">The system has one or more tubes. Each tube consists of a ready queue and a</span><br><span class="line">delay queue. Each job spends its entire life in one tube. Consumers can show</span><br><span class="line">interest in tubes by sending the &quot;watch&quot; command; they can show disinterest by</span><br><span class="line">sending the &quot;ignore&quot; command. This set of interesting tubes is said to be a</span><br><span class="line">consumer&#39;s &quot;watch list&quot;. When a client reserves a job, it may come from any of</span><br><span class="line">the tubes in its watch list.</span><br><span class="line"></span><br><span class="line">When a client connects, its watch list is initially just the tube named</span><br><span class="line">&quot;default&quot;. If it submits jobs without having sent a &quot;use&quot; command, they will</span><br><span class="line">live in the tube named &quot;default&quot;.</span><br><span class="line"></span><br><span class="line">Tubes are created on demand whenever they are referenced. If a tube is empty</span><br><span class="line">(that is, it contains no ready, delayed, or buried jobs) and no client refers</span><br><span class="line">to it, it will be deleted.</span><br></pre></td></tr></table></figure>
+
+
+<p>具体示意图：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210326113318.png" alt="img"></p>
+<h2 id="五、-Beanstalkd-的安装"><a href="#五、-Beanstalkd-的安装" class="headerlink" title="五、 Beanstalkd 的安装"></a>五、 Beanstalkd 的安装</h2><h3 id="MAC-安装"><a href="#MAC-安装" class="headerlink" title="MAC 安装"></a>MAC 安装</h3><p>可以直接去官方文档上查看，因为我使用的是阿里云centos，git clone不下来，建议用其他方式</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://beanstalkd.github.io/" >https://beanstalkd.github.io<i class="fas fa-external-link-alt"></i></a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew install beanstalkd</span><br><span class="line">brew install composer</span><br></pre></td></tr></table></figure>
+<p>Once Composer is installed, this one-liner will install and configure the beanstalk_console monitor (replace <code>path/to/install</code> to your desired install location):</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer create-project ptrofimov/beanstalk_console -s dev /Users/yuxuan/beanskalkd</span><br></pre></td></tr></table></figure>
+
+
+<p>We’ll also create a helper <code>run.sh</code> script inside the <code>path/to/install</code> directory. This script prepares your dev environment by restarting Beanstalkd, launching a local PHP server with the monitor, and finally opening a new tab on Chrome pointing to it (<code>127.0.0.1:8005</code>).</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> CD into the script<span class="string">&#x27;s actual directory</span></span></span><br><span class="line">DIR=&quot;$( cd &quot;$( dirname &quot;$&#123;BASH_SOURCE[0]&#125;&quot; )&quot; &gt;/dev/null &amp;&amp; pwd )&quot;</span><br><span class="line">cd $&#123;DIR&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Restart the core Beanstalkd service</span></span><br><span class="line">brew services restart beanstalkd</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Launch a new Chrome window pointing to the console</span></span><br><span class="line">open -a &quot;Google Chrome&quot; &quot;http://127.0.0.1:8005&quot;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Start the <span class="built_in">local</span> PHP server with the beanstalk_console</span></span><br><span class="line">php -S 127.0.0.1:8005 -t public</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><p>linux 安装 beanstalkd 并不难。<br>我们知道，linux 自定义安装（编译安装），一般经历这么几步：</p>
+<ul>
+<li>wget （或者压缩包已经在目录下了）</li>
+<li>tar 解压</li>
+<li>make &amp;&amp; make install</li>
+</ul>
+<p>那么，我们只需要下载你需要的版本的 beanstalkd 压缩包到，再解压，再编译安装，就行了。</p>
+<p>这里，记录一下我安装的过程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/beanstalkd/beanstalkd/archive/v1.10.zip</span><br><span class="line">tar xzvf beanstalkd-1.10.zip</span><br><span class="line"><span class="built_in">cd</span> beanstalkd-1.10</span><br><span class="line">make &amp;&amp; make install</span><br><span class="line">beanstalkd -v</span><br></pre></td></tr></table></figure>
+<p>最后一个命令执行之后如果能够反馈给你 beanstalkd 的版本号，说明安装成功了，接下来就是启动 beanstalkd 的服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">beanstalkd -l 0.0.0.0 -p 11300 -b /<span class="built_in">log</span>/beanstalkd/binlog -F</span><br></pre></td></tr></table></figure>
+<p><strong>-l 指绑定的 ip ，默认为 127.0.0.1</strong><br><strong>-p 指绑定的端口，默认端口 11300</strong><br>-b 指开启 binlog 进行持久化，用于断电后恢复数据<br>-F 不把内存文件写入磁盘</p>
+<p>更多的选项，可以通过 beanstalkd -h 查看</p>
+<blockquote>
+<p>当然，你还可以直接使用 yum 或者 apt-get 来安装，更加方便。</p>
+</blockquote>
+<p><strong>如果重复运行 beanstalkd -l -p 的命令，可以让 beanstalkd 同时监听多个 ip 和端口。</strong></p>
+<p>默认情况下，我们的 beanstalkd 没有开启 binlog 的功能，且绑定的 ip 为 127.0.0.1 ，网上有很多文章说，如果安装 web 控制台的时候，无法连接 beanstalkd ，就把 127.0.0.1 改成 0.0.0.0 ，这是不对的。<br>这个 ip 是指 beanstalkd 监听（允许连接）的客户端，比如你的客户端 ip 为 155.22.98.28 ，此时，你设置 -l 为该 ip ， 则，该 ip 可以访问 beanstalkd 的服务器。<br>如果改成 0.0.0.0 ，指不限制，那么，你的 beanstalkd 服务器就非常危险，任何 ip 都能访问进来。<br>这里，必须要知道一下，为什么改成 0.0.0.0 就可以访问了。<br>你可能需要根据你的部署架构来综合分析，如何设置这个 ip ，并理清你的内外网、物理机、虚拟机，这样才能设置最合理的 ip 。<br>另外，在部署环境里，如果非要设置 0.0.0.0 （均衡负载的情况下可能有多个客户端连接过来），此时，就需要通过网络环境上的 ip 白名单、端口等方式来过滤。</p>
+<blockquote>
+<p>总的来讲，beanstalkd 的服务器没有一个账号密码体系，只有监听 ip 的方式，来鉴别它是否处理你的指令。所以，它非常纯洁，如果我们需要最大程度上控制安全，最好让 beanstalkd server 只允许本机访问，而外部则访问位于本机上的 client ，由 client 进行安全校验和连接 beanstalkd server 。</p>
+</blockquote>
+<h2 id="六、beanstalkd-使用（PHP）"><a href="#六、beanstalkd-使用（PHP）" class="headerlink" title="六、beanstalkd 使用（PHP）"></a>六、beanstalkd 使用（PHP）</h2><h3 id="阿里云使用"><a href="#阿里云使用" class="headerlink" title="阿里云使用"></a>阿里云使用</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">查看端口号是否被占用</span></span><br><span class="line">ps aux | grep bean</span><br></pre></td></tr></table></figure>
+<h3 id="Pheanstalk"><a href="#Pheanstalk" class="headerlink" title="Pheanstalk"></a>Pheanstalk</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$pheanstalk</span> = <span class="keyword">require</span> <span class="string">&#x27;beanstalkd.php&#x27;</span>;</span><br><span class="line"><span class="comment">//print_r($pheanstalk-&gt;listTubes());</span></span><br><span class="line"><span class="comment">//print_r($pheanstalk-&gt;stats());</span></span><br><span class="line"><span class="comment">//print_r($pheanstalk-&gt;statsTube(&#x27;default&#x27;));</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// useTube</span></span><br><span class="line"><span class="comment">//$pheanstalk-&gt;useTube(&#x27;newUsers&#x27;)-&gt;put(&#x27;test&#x27;);</span></span><br><span class="line"><span class="comment">//print_r($pheanstalk-&gt;statsTube(&#x27;newUsers&#x27;));</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// statsJob</span></span><br><span class="line"><span class="comment">//$job = $pheanstalk-&gt;watch(&#x27;newUsers&#x27;)-&gt;reserve();</span></span><br><span class="line"><span class="comment">//$stats = $pheanstalk-&gt;statsJob($job);</span></span><br><span class="line"><span class="comment">//print_r($stats);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// peek</span></span><br><span class="line"><span class="comment">//$job = $pheanstalk-&gt;peek(1);</span></span><br><span class="line"><span class="comment">//$stats = $pheanstalk-&gt;statsJob($job);</span></span><br><span class="line"><span class="comment">//print_r($stats);</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 生产者</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//优先级</span></span><br><span class="line"><span class="comment">//$pheanstalk-&gt;putInTube(&#x27;newUsers&#x27;, 6666);</span></span><br><span class="line"><span class="comment">//$tube = $pheanstalk-&gt;useTube(&#x27;newUsers&#x27;);</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//$tube -&gt; put(&#x27;member_1024&#x27;);</span></span><br><span class="line"><span class="comment">//$tube-&gt;put(&#x27;member_4&#x27;, 4);</span></span><br><span class="line"><span class="comment">//$tube-&gt;put(&#x27;member_3&#x27;, 3);</span></span><br><span class="line"><span class="comment">//$tube-&gt;put(&#x27;member_1000&#x27;, 1000);</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$job</span> = <span class="variable">$pheanstalk</span>-&gt;watch(<span class="string">&#x27;newUsers&#x27;</span>)-&gt;reserve();</span><br><span class="line">print_r(<span class="variable">$job</span>);</span><br><span class="line"><span class="variable">$pheanstalk</span>-&gt;delete(<span class="variable">$job</span>);</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="七、什么是消息队列"><a href="#七、什么是消息队列" class="headerlink" title="七、什么是消息队列"></a>七、什么是消息队列</h2><p>以下主要搬运下面这个链接的消息，请去原文观看</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://www.kancloud.cn/vson/php-message-queue/885553" >https://www.kancloud.cn/vson/php-message-queue/885553<i class="fas fa-external-link-alt"></i></a></p>
+<h4 id="几个名词"><a href="#几个名词" class="headerlink" title="几个名词"></a>几个名词</h4><ul>
+<li>消息<br>消息（ Message ），在计算机底层，是一种数据传输单位。</li>
+<li>队列<br>队列（ Queue ），一种数据结构，具有先进先出、有先后顺序的特性。</li>
+<li>消息队列<br>消息队列（ Message Queue , MQ ），一种<strong>队列结构</strong>的存储中间件，即，它本身是一个存储容器，而内部数据的存放结构是队列。</li>
+<li>生产者<br>生产者（ Producer ），它生成消息，并将消息存入消息队列中。</li>
+<li>消费者<br>消费者（ Consumer ），它从消息队列中取出消息，进行处理，处理完成之后，该消息从队列中删除。<strong>有些地方也会叫做订阅者。</strong></li>
+</ul>
+<h2 id="八、消息队列的应用场景"><a href="#八、消息队列的应用场景" class="headerlink" title="八、消息队列的应用场景"></a>八、消息队列的应用场景</h2><h4 id="数据冗余"><a href="#数据冗余" class="headerlink" title="数据冗余"></a>数据冗余</h4><p>我们可能在看到“冗余”这个词的时候，觉得他是个贬义词。<br>但实际上，一定程度的冗余，会让我们的数据更加安全。<br>比如，数据库备份，就是一种数据冗余，mysql读写分离，亦是通过日志和轮询实现数据冗余。<br><strong>这样，当我们某一份数据出现问题时，我们还有第二份数据，数据就更加安全。</strong><br>那么，消息队列如何提供冗余功能呢？</p>
+<blockquote>
+<p>常见的消息队列系统，会将数据保存在内存中，以提高数据读写效率。既然数据在内存中，就可能出现丢失的情况，所以，它们又提供持久化的功能，保证在队列系统崩溃后，数据仍然存在。<br>另外，消息队列内的每一条消息，都必然存在 reserved 和 deleted 两个状态，只有当消费者给队列系统发送处理成功的信号时，消息才会从队列中删除，并不会因为消息已接收，就删除消息。</p>
+</blockquote>
+<p>可以说，消息队列，也是增对数据库层的一道输入向缓存，对数据有冗余作用。即，当有数据需要进入数据库，会先经过消息队列，再进入数据库。</p>
+<h4 id="解耦合"><a href="#解耦合" class="headerlink" title="解耦合"></a>解耦合</h4><p>我们知道软件工程讲究<strong>高内聚低耦合</strong>，所以我们会想许多办法来控制耦合度，即解耦。<br>消息队列，也是一种解耦的方案。<br>按照普通流程，<strong>消费代码</strong>可能会直接跟在<strong>生产代码</strong>后面，那么，生产和消费就成了彼此的上下文，甚至连变量、作用域等都会有依赖，此时，你若对生产代码的某个变量进行修改，你必须仔细检查消费代码是否也使用了这个变量。</p>
+<blockquote>
+<p>通过消息队列，我们将生产代码和消费代码拆分开来，它们不再互相依赖彼此的具体实现，只依赖于消息队列中<strong>消息的结构</strong>。只要消息结构不变，生产代码和消费代码如何修改，都不会影响到彼此。</p>
+</blockquote>
+<p>这一点，我们可以联想到上一章《什么是消息队列？》中的下单功能辅助理解。</p>
+<h4 id="异步能力"><a href="#异步能力" class="headerlink" title="异步能力"></a>异步能力</h4><p>有人说，<strong>高性能离不开异步，异步离不开队列</strong>。<br>一定意义上来说，这句话是很有道理的。<br>异步，它让每一个调用都能及时返回，提升响应速度。队列，保证了异步调用的处理不会丢失。这句话中的“处理”一词，指处理工作，是个名词。</p>
+<blockquote>
+<p>我们知道，异步，它先返回的是调用动作是否成功的结果，而具体调用执行的逻辑和结果，并不在这里返回，而是以通知（回调）的形式进行。队列，是确保每一个调用的处理都会被执行数据结构。</p>
+</blockquote>
+<p>这一点，我们可以在之后消息队列的实践中，体会到。<br>消息队列，能够让在架构上提供异步能力（注意，是架构上，而非代码层面如函数调用的异步能力）。<br>关于这个异步能力，还是可以参考上一章《什么是消息队列？》中的下单功能，</p>
+<h4 id="扩展性"><a href="#扩展性" class="headerlink" title="扩展性"></a>扩展性</h4><p>当架构中加入消息队列，生产者和消费者就比较容易扩展。<br>仍然以下单功能举例，如果生产者和消费者的代码耦合在一起，互相严重依赖，当我们想对生产者产生内容进行不同的处理（消费）时，则需要在原有的源码中进行扩展，这对原有代码产生伤害，便不必说扩展性了。</p>
+<blockquote>
+<p>但如果以消息队列将生产者和消费者进行解耦，则，我们只需要添加订阅消息的消费者程序即可，新的消费者对旧消费者没有任何伤害，它依旧依赖于消息队列，只需要确保它能收到消息即可。</p>
+</blockquote>
+<h4 id="顺序保证"><a href="#顺序保证" class="headerlink" title="顺序保证"></a>顺序保证</h4><p>队列本身具备“先进先出”的特性，消息队列是一种队列结构的中间件，则，消费者会根据消息进入的先后顺序，进行先后处理。<br><strong>其本身就能解决顺序问题</strong></p>
+<h4 id="削峰填谷"><a href="#削峰填谷" class="headerlink" title="削峰填谷"></a>削峰填谷</h4><p>在某些高并发的场景下，流量突然激增，比如秒杀。<br>此时，数据库的压力很大，而数据库的读写处理能力普遍低于内存式的消息队列。<br>此时，可以将消息临时存储于消息队列中，减少数据库的压力，然后再由消费者按数据库能够接受的频率去读取消息，进行处理，因为数据库只在秒杀那一刻压力很大，平时会清闲一些。<br><strong>这就是将山峰削掉，填补山谷</strong></p>
+<h2 id="九、消息队列的注意事项"><a href="#九、消息队列的注意事项" class="headerlink" title="九、消息队列的注意事项"></a>九、消息队列的注意事项</h2><h3 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h3><p>最简单的架构可能只有 PHP+MYSQL ，此时，复杂度是低的。<br>我们遇到问题，需要考虑的可能性也会较少，需要检查的部件也比较少。<br>而当我们开始使用消息队列，我们自然而然需要考虑到消息队列的相关信息，复杂度，自然提升了。<br>当然，这可能无法避免。</p>
+<blockquote>
+<p>比如，生活中，我们使用电风扇，可以吹到凉风。但如果我们还需要制热，就会购买空调。电风扇若是坏了，我们或许能自己修回去，但若是空调坏了，我们可能需要有一定专业知识，才能修理。这就是复杂度。</p>
+</blockquote>
+<p><strong>当能力变强的同时，复杂度也会提升，这一点通常无法避免，除非，我们找到更多的方案，再分析方案间的利弊，最后决策</strong></p>
+<h3 id="可用性"><a href="#可用性" class="headerlink" title="可用性"></a>可用性</h3><p>因为生产者和消费者都依赖于消息队列，比如订单系统使用了消息队列，那么，我们需要考虑到消息队列的可用性，消息队列一旦崩溃，订单系统便不能正常运转，而任何依赖于订单系统的功能，也将无法提供服务。</p>
+<blockquote>
+<p>虽然，消息队列出现崩溃的概率相对较低，但在选型初期和设计架构的时候，还是要充分考虑，并尽可能设计好预备方案。</p>
+</blockquote>
+<p>一般而言，常见的消息队列系统，会通过分布式来提高可用性。</p>
+<h3 id="消息可靠性"><a href="#消息可靠性" class="headerlink" title="消息可靠性"></a>消息可靠性</h3><p>在消息队列使用过程中，我们可能会遇到这种情况：</p>
+<ul>
+<li><p>生产者将消息发出，但消息队列没有接收到<br>这很可能是网络原因，比如，生产者发出消息，但由于网络或者消息队列方面的一些原因，最终，消息没有被存入指定的队列中，此时，可能引起消息丢失。</p>
+<blockquote>
+<p>一般我们会要求消息队列返回一个确认信息，告诉生产者，消息放好了。如果，生产者迟迟未能接收到确认信息，则再次发送消息。以此来保证消息不被丢失。</p>
+</blockquote>
+</li>
+<li><p>消息队列崩溃或服务器宕机，内存清空，数据丢失<br>当遇到这种情况，会导致其存储在内存中的数据丢失，消息的可靠性就得不到保证。</p>
+<blockquote>
+<p>一般我们会通过持久化来保证消息不丢失，不同的消息队列系统，持久化的方式未必一样，具体的使用，将会在后面章节详细介绍。</p>
+</blockquote>
+</li>
+<li><p>消费者崩溃，无法正确处理消息<br>还有一种情况，当消费者从消息队列中读取出消息，消息状态变成了 reserved 或者，干脆直接在队列中被删除，而此时，消费者却在执行后面的程序时崩溃了，导致业务流程没有顺利执行，但消息已经被取出。<br><strong>这也是一种数据丢失的现象。</strong></p>
+<blockquote>
+<p>一般此时，也需要消费者与消息队列之间建立反馈机制，一定要当在消费者处理完消息之后，给消息队列发送明确的删除指令，才能删除消息。<br>另外消息队列这边，可以建立 TTR（ time-to-run , 超时重发）机制，如果队列中处于 reserved 状态的消息过了一定时间还未被删除，可以将之丢回 ready 状态，继续被消费者读取</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="顺序消费"><a href="#顺序消费" class="headerlink" title="顺序消费"></a>顺序消费</h3><p><strong>首先，顺序消费和顺序保证，是两回事</strong><br>顺序保证是指同类型的消息被消费的先后顺序，而顺序消费，是指，当一个消息，需要被多个消费者按一定顺序先后消费。<br>例如，当消息队列中存放一个订单信息时，我们有以下消费者：</p>
+<ul>
+<li>发短信</li>
+<li>发邮件</li>
+<li>发 APP 推送</li>
+</ul>
+<p>而我们必须先发短信、再发邮件、再发 APP 推送，不可提前，不可押后。<br>这就是一种顺序消费的场景。<br>一般来讲，有两种比较常见的解决方案：</p>
+<ul>
+<li><p>合并消费者<br>这种方式一般不推荐，但前期实现起来复杂度较低。<br>它意味着将多个消费者合并为一个消费者，再顺序执行。<br>虽然可以实现逻辑，但本身却降低了可扩展性，提高了耦合，这对未来维护项目而言，会增加隐性成本。</p>
+</li>
+<li><p>控制消费状态</p>
+<p>还有一种方案，我们在生产者中放入短信消息，当短信消息被处理完后，在消费者中往邮件队列放入消息，以此类推。</p>
+<blockquote>
+<p>但这也会引起问题，比如，当我们将短信—&gt;邮件—&gt;推送串联好，但我们又要在短信和邮件之间，插入一个新的消费者，此时，我们除了要新增消费者以外，还需要修改短信消费者。<br><strong>这种设计就像是一个链表，头是生产者，指向短信，短信指向邮件，此时中间插入一个，需要将短信原本指向邮件的指针，指向新的消费者，而新的消费者则指向邮件。</strong></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="消息重复"><a href="#消息重复" class="headerlink" title="消息重复"></a>消息重复</h3><p>前面有说过，为了保证消息可靠性，我们可能会让生产者重复发送消息（当迟迟没有收到消息队列反馈的时候）。<br>但是，这种情况，大多数时候是由网络不稳定引起的。<br>也就是说，虽然消息队列的反馈，可能迟到，但并不代表，消息已经丢失了。<br>此时，生产者再次往消息队列发送消息，则消息队列可能会收到两条重复的消息。</p>
+<blockquote>
+<p>这里举个例子：比如消费者需要为用户余额加 5 元钱，如果消息重复，就有可能为用户加上好几个 5 元。</p>
+</blockquote>
+<p>我们一般通过保证消费者被重复执行的幂等性来避免消息重复带来的问题。<br><strong>幂等性指：多次进行同样的操作，执行结果都一致</strong><br>比如，你输入的数据在不变的情况下，你的算法应保证处理结果是一致的，特别是在业务逻辑上。<br>为什么要通过保证消费者的幂等性来避免消息重复？<br>因为我们无法保证，网络不出现拥堵，不出现故障。<br>所以，我们无法保证，生产者不重复往队列中写入消息。<br>因此，比较好的方案，是在消费者上面进行控制。<br><strong>比如，幂等性能够保证，同样一条消息，尽管被消费者读取多次，但在现实中产生的影响，却只有一次。</strong><br>至于如此保证幂等性，会是一个比较复杂的问题，我们需要根据项目的实际情况和实际架构，进行具体的设计。</p>
+<h3 id="一致性"><a href="#一致性" class="headerlink" title="一致性"></a>一致性</h3><p>因为消息队列赋予了异步能力，所以，当我们生产者在调用的时候，并非业务逻辑已经成功执行完。<br>比如，我们在生产者中调用发短信，实际上，短信并未发出去，只是将要发短信的任务存储到队列中，等到被执行。<br>那么，此时给调用返回的结果，只是调用的结果，并不等于发送成功。<br><strong>所以，我们无法以调用结果来判定业务处理结果。</strong><br>这个就是暂时不一致性。<br>这个结果，暂时的，与你所知的不一致。<br>但，它最终会一致，也就是说，最终，消息队列内的每一条消息都会被取出来消费。<br>这个就是最终一致性</p>
+<h2 id="十、beanstalkd-协议翻译"><a href="#十、beanstalkd-协议翻译" class="headerlink" title="十、beanstalkd 协议翻译"></a>十、beanstalkd 协议翻译</h2><h3 id="协议描述"><a href="#协议描述" class="headerlink" title="协议描述"></a>协议描述</h3><p>beanstalkd 协议 运行在 TCP 层上，并采用了 ASCII 编码。</p>
+<p>大致工作流程为：开启客户端连接、发送命令和数据、等待响应、关闭连接。<br>对于每一个连接而言，服务器会按照接收到指令的顺序一一执行这些指令，并且按照同样的顺序，发送响应。<br>在本协议中，所有涉及到的整数，都是指十进制，且为非负，除非另有说明。</p>
+<h3 id="命名约定"><a href="#命名约定" class="headerlink" title="命名约定"></a>命名约定</h3><p><strong>只支持 ASCII 字符进行命名</strong></p>
+<p>其支持的字符有：</p>
+<ul>
+<li>字母（ A-Z、a-z ）</li>
+<li>数字（ 0-9 ）</li>
+<li>小短横（ - ）</li>
+<li>加号（ + ）</li>
+<li>正斜杠（ / ）</li>
+<li>英文封号（ ; ）</li>
+<li>英文点号（ . ）</li>
+<li>美元符（ $ ）</li>
+<li>英文下划线（ _ ）</li>
+<li>英文左右小括号（ “(“ 和 “)” ）</li>
+</ul>
+<blockquote>
+<p>注意：命名不可以 - 作为开头，当遇到空格或换行时，会视作命名结束。每个命名的长度，至少为 1+ 个字符。</p>
+</blockquote>
+<h3 id="Errors"><a href="#Errors" class="headerlink" title="Errors"></a>Errors</h3><table>
+<thead>
+<tr>
+<th align="left">错误类型</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>OUT_OF_MEMORY\r\n</em></td>
+<td align="left">服务器内存不够分配了，可能需要过一会再尝试</td>
+</tr>
+<tr>
+<td align="left"><em>INTERNAL_ERROR\r\n</em></td>
+<td align="left">这说明服务器，也就是 beanstalkd 内部出现了 bug ，理论上不应该出现这个错误，如果出现了，请将这个 bug 提交到 google group</td>
+</tr>
+<tr>
+<td align="left"><em>BAD_FORMAT\r\n</em></td>
+<td align="left">发送的命令格式错误。比如，命令行不是以 \r\n 结尾，又或者在该传入数值的地方传入了非数值，也可能参数数量错误等一切命令格式有误的可能性。</td>
+</tr>
+<tr>
+<td align="left"><em>UNKMOWM_COMMAND\r\n</em></td>
+<td align="left">使用了未定义的命令（找不到这个命令），此时可能要检查是否拼写有错</td>
+</tr>
+</tbody></table>
+<h3 id="Job-生命周期"><a href="#Job-生命周期" class="headerlink" title="Job 生命周期"></a>Job 生命周期</h3><p>一个 Job 由 put 命令创建，在它的生命周期以内，它必将处于以下四种状态中的一种：「ready」、「reserved」、「delayed」、「buried」<br>当使用完 put 命令，Job 一般从 「ready」 开始，它会在「ready」队列中等待，直到有「reserved」命令过来，当接收成功之后，则将该 Job 放入到 「reserved」 队列。接着，当进程处理完这个 Job 之后，则会发送一个「delete」命令，将这个 Job 从 beanstalkd 中删除。</p>
+<table>
+<thead>
+<tr>
+<th align="left">状态</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>ready</em></td>
+<td align="left">被放入 Tube 之后等待被接收和处理</td>
+</tr>
+<tr>
+<td align="left"><em>reserved</em></td>
+<td align="left">当 Job 被 reserve 命令接收，Job 会进入这个状态，它代表被接收，但还没有得到其他反馈</td>
+</tr>
+<tr>
+<td align="left"><em>delayed</em></td>
+<td align="left">延迟状态，等时间到了会变成 ready 状态</td>
+</tr>
+<tr>
+<td align="left"><em>buried</em></td>
+<td align="left">预留状态，一般当消费者处理失败时，会将它设置为预留</td>
+</tr>
+</tbody></table>
+<p>图示 Job 生命周期：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> put            reserve               delete</span><br><span class="line">-----&gt; [READY] ---------&gt; [RESERVED] --------&gt; *poof*</span><br></pre></td></tr></table></figure>
+<p>当然，它也可能经历更复杂的演化，如下图：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"> put with delay               release with delay</span><br><span class="line">----------------&gt; [DELAYED] &lt;------------.</span><br><span class="line">                      |                   |</span><br><span class="line">               kick   | (time passes)     |</span><br><span class="line">                      |                   |</span><br><span class="line"> put                  v     reserve       |       delete</span><br><span class="line">-----------------&gt; [READY] ---------&gt; [RESERVED] --------&gt; *poof*</span><br><span class="line">                     ^  ^                |  |</span><br><span class="line">                     |   \  release      |  |</span><br><span class="line">                     |    &#96;-------------&#39;   |</span><br><span class="line">                     |                      |</span><br><span class="line">                     | kick                 |</span><br><span class="line">                     |                      |</span><br><span class="line">                     |       bury           |</span><br><span class="line">                  [BURIED] &lt;---------------&#39;</span><br><span class="line">                     |</span><br><span class="line">                     |  delete</span><br><span class="line">                      &#96;--------&gt; *poof*</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Tubes"><a href="#Tubes" class="headerlink" title="Tubes"></a>Tubes</h3><p>一个 beanstalkd 服务允许拥有多个 Tube ，每一个 Tube 包含两个队列： ready queue 和 delay queue 。<br>每个 Job 都必然会存在于某个 Tube 之下。<br>可以通过 watch 指令关注某个 Tube ，也可以通过 ignore 命令取消关注。<br>当你使用 watch list 命令时，它会返回你所关注的 tubes 。<br>当消费者开始接收 Job 的时候，Job 一般来自 watch 了的 Tube。<br>当一个客户端连接进来，watch list 最初只有一个名为 default 的 tube 。如果当存入 Job 时没有使用 use 命令指定 tube ，这个 Job 就会被放入到 default tube 中。<br>Tubes 会在你使用到它的时候创建，如果 Tube 变空了（没有 ready Job ，没有 delayed Job ， 没有 buried Job），且没有客户端连接指向它，它就会被删掉。</p>
+<h3 id="生产者命令"><a href="#生产者命令" class="headerlink" title="生产者命令"></a>生产者命令</h3><h3 id="put"><a href="#put" class="headerlink" title="put"></a>put</h3><p>此命令用于向队列中插入 job ，命令格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">put &lt;pri&gt; &lt;delay&gt; &lt;ttr&gt; &lt;bytes&gt;\r\n</span><br><span class="line">&lt;data&gt;\r\n</span><br></pre></td></tr></table></figure>
+<p><em>它默认会将 job 插入到当前所 use 的 tube ， 这点可以参考下面的 use命令</em></p>
+<table>
+<thead>
+<tr>
+<th align="left">选项</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>pri</em></td>
+<td align="left">这是一个整型数值，代表着这个 job 的优先级，数值越小，排队排在越前面，优先级最高为 0 ，最后面为 4294967295</td>
+</tr>
+<tr>
+<td align="left"><em>delay</em></td>
+<td align="left">这也是一个整型数值，是一个秒数，指多少秒之后将这个 job 放入到 ready queue 中，在那之前，这个 job 都将处于 delayed 状态</td>
+</tr>
+<tr>
+<td align="left"><em>ttr</em></td>
+<td align="left">这也是一个整型数值，是一个描述，指一个 job 被允许处理的最大时间，这个时间从 job 被 reserve 起开始计算，超过时间还未被 delete 、 release 、 bury ，则服务器会自动释放这个 job，并重新插入到 ready queue 中。此数值最小支持 1 ，如果传的是 0 ，则服务器会默认将它变成 1</td>
+</tr>
+<tr>
+<td align="left"><em>bytes</em></td>
+<td align="left">这是一个数值，用于指明这个 job body 的大小，不包含「\r\n」这两个字符。这个值必须小于 beanstalkd 配置的 max-job-size ， 单位是 bytes</td>
+</tr>
+<tr>
+<td align="left"><em>data</em></td>
+<td align="left">这是 job body ，上一行的 bytes 就是由此行除却「\r\n」计算得出的。</td>
+</tr>
+</tbody></table>
+<p>当成功发送 put 命令后，客户端要等待响应，响应结果可能是如下几个：</p>
+<table>
+<thead>
+<tr>
+<th align="left">响应</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>INSERTED \r\n</em></td>
+<td align="left">插入成功，id 是一个 interger ，标识新插入的 job</td>
+</tr>
+<tr>
+<td align="left"><em>BURIED \r\n</em></td>
+<td align="left">如果服务器因为增加优先级队列而内存不足时会返回这个结果，id 是一个 interger ，标识新插入的 job</td>
+</tr>
+<tr>
+<td align="left"><em>EXPECTED_CRLF\r\n</em></td>
+<td align="left">job body 必须以「\r\n」结尾，这两个字节不用计入上一行的 bytes 计算中</td>
+</tr>
+<tr>
+<td align="left"><em>JOB_TOO_BIG\r\n</em></td>
+<td align="left">job body 超出了 max-job-size 的限制</td>
+</tr>
+<tr>
+<td align="left"><em>DRAINING\r\n</em></td>
+<td align="left">目标服务器不再接收新的请求，需要尝试其他服务器，或断开连接之后晚点再重新尝试</td>
+</tr>
+</tbody></table>
+<h3 id="use"><a href="#use" class="headerlink" title="use"></a>use</h3><p>此命令为 Producer 提供，当发送此命令之后，后续的 put 命令，就会把 job 全部放入到此 use 命令指定的 tube 中。如果没有通过 use 指定 tube ， 则会默认将 job 放入到 default tube 中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use &lt;tube&gt;\r\n</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="left">选项</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>tube</em></td>
+<td align="left">一个最大不超过 200 bytes 的名称，它指定一个 tube ，如果这个 tube 不存在，则会自动创建</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">响应</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>USING \r\n</em></td>
+<td align="left">是接下来开始使用的 tube</td>
+</tr>
+</tbody></table>
+<h3 id="消费者命令"><a href="#消费者命令" class="headerlink" title="消费者命令"></a>消费者命令</h3><p>从 queue 中消费 job 会使用以下命令：</p>
+<ul>
+<li>reserve</li>
+<li>delete</li>
+<li>release</li>
+<li>bury</li>
+</ul>
+<h3 id="reserve"><a href="#reserve" class="headerlink" title="reserve"></a>reserve</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reserve\r\n</span><br></pre></td></tr></table></figure>
+<p>另外，你还能指定接收的超时时间，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reserve-with-timeout &lt;seconds&gt;\r\n</span><br></pre></td></tr></table></figure>
+<p>这个命令将会返回一个新的、reserved 状态的 job<br>如果没有可用的 job 能被接收，则 beanstalkd 一直等到出现一个可接收的 job 之后再返回。<br>一旦一个 job 被客户端接收，客户端要在 ttr 指定的时间限定内处理 job ，否则，超时的话，服务器会将 job 重新放回 ready queue 中。<br>可以在 stats-job 命令的 response 中找到 ttr 的值和已经使用掉的时间。<br>如果处于 ready 状态的 job 不止一个，beanstalkd 将会选择一个 priority 最小的 job，如果 priority 相等，则会选择一个最先 put 的 job 。</p>
+<blockquote>
+<p>题外话：这里我怀疑 beanstalkd 的协议有一处写错了，原文为 Within each priority, it will choose the one that was reserved first. 我认为应该将 reserved 改为 put 。</p>
+</blockquote>
+<p>如果指定的 timeout seconds 是 0 ，这将导致服务器立即返回 TIME_OUT 的响应（也有可能立即返回一个 job ，这取决于服务器的响应速度以及是否存在可接收的 job ）</p>
+<p>为 timeout 设置一个合理的 seconds ，可以限制客户端阻塞等待接收 job 的时间。</p>
+<table>
+<thead>
+<tr>
+<th align="left">失败响应</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>DEADLINE_SOON\r\n</em></td>
+<td align="left">ttr 的最后一秒，被服务器设定为安全界限，在此期间，该客户端不会接收到另外一个 job 。比如：客户端在安全界限时间里发送了一条 reserve 命令，或者，当一条 reserve 命令在等待反馈时，安全界限时间正好到期，这时候，都将得到一个 DEADLINE_SOON\r\n 的响应</td>
+</tr>
+<tr>
+<td align="left"><em>TIMED_OUT\r\n</em></td>
+<td align="left">当使用 reserve-with-timeout 命令，超过时间还未接收到 job ，又或者客户端连接已经关闭，此时会返回此值</td>
+</tr>
+</tbody></table>
+<p><strong>成功响应：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RESERVED &lt;id&gt; &lt;bytes&gt;\r\n</span><br><span class="line">&lt;data&gt;\r\n</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">id</td>
+<td align="left">job 的 id ，一个整型值，在这个 beanstalkd 服务器中具备<strong>全局唯一性</strong></td>
+</tr>
+<tr>
+<td align="left">bytes</td>
+<td align="left">表示 job data 的大小，不包含结束符 \r\n</td>
+</tr>
+<tr>
+<td align="left">data</td>
+<td align="left">job data , 之前 put 时放入的 job data ，原模原样返回</td>
+</tr>
+</tbody></table>
+<h3 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h3><p>delete 命令用于从服务器完全删除一个 job ， 这一般用于客户端成功处理 job 之后。<br>客户端可以删除 reserved 的 job ， 使 job 进入准备状态 ， 延迟 job ，预留 job 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete &lt;id&gt;\r\n</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="left">选项</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">id</td>
+<td align="left">job 的 id</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">响应</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>DELETED\r\n</em></td>
+<td align="left">删除成功</td>
+</tr>
+<tr>
+<td align="left"><em>NOT_FOUND\r\n</em></td>
+<td align="left">找不到这个 job ，或者这个 job 并非这台 client 接收的、或是 job 处于 ready 、 buried 状态。这很可能发生在 ttr 时间到了之后才发送 delete 命令的情况下。</td>
+</tr>
+</tbody></table>
+<h3 id="release"><a href="#release" class="headerlink" title="release"></a>release</h3><p>此命令可以把 reserved job 放回 ready 队列中，同时 job 的状态也会回到 ready ，release 之后，这个 job 可以被任何其他的客户端接收。<br>一般这个命令用在消费者处理 job 失败的情况下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">release &lt;id&gt; &lt;pri&gt; &lt;delay&gt;\r\n</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="left">选项</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">id</td>
+<td align="left">job id</td>
+</tr>
+<tr>
+<td align="left">pri</td>
+<td align="left">interger ，指定一个新的优先级，数值越小，越早被接收</td>
+</tr>
+<tr>
+<td align="left">delay</td>
+<td align="left">interger ，指定一个新的延迟，如果设置了预留值，则 job 的状态会是 delayed ，直到延迟时间到期</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">响应</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>RELEASED\r\n</em></td>
+<td align="left">处理成功</td>
+</tr>
+<tr>
+<td align="left"><em>BURIED\r\n</em></td>
+<td align="left">因为新增优先级队列数据结构而导致内存溢出</td>
+</tr>
+<tr>
+<td align="left"><em>NOT_FOUND\r\n</em></td>
+<td align="left">没有找到这个 job 或 此 job 不是当前客户端接收的</td>
+</tr>
+</tbody></table>
+<h3 id="bury"><a href="#bury" class="headerlink" title="bury"></a>bury</h3><p>这个命令可以将一个 job 操作为 buried 状态。<br>buried job 被存放在一个 FIFO （first input first out ，先进先出）的链表中，它不会被服务器再次操作，除非有客户端对它发起了 kick 命令。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bury &lt;id&gt; &lt;pri&gt;\r\n</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="left">选项</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">id</td>
+<td align="left">job id</td>
+</tr>
+<tr>
+<td align="left">pri</td>
+<td align="left">优先级，一个整型数字，越小的越先被接收</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">响应</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>BURIED\r\n</em></td>
+<td align="left">操作成功</td>
+</tr>
+<tr>
+<td align="left"><em>NOT_FOUND\r\n</em></td>
+<td align="left">找不到 job 或该 job 不是被当前客户端所接收</td>
+</tr>
+</tbody></table>
+<h3 id="touch"><a href="#touch" class="headerlink" title="touch"></a>touch</h3><p>此命令能让当前消费者得到更多的执行 job 的时间。<br>比如，ttr 是用于避免消费者崩溃而导致 job 丢失，但同样也会误伤一批执行时间过长的消费者，实际上消费者没有崩溃，但执行时间已经超出了 ttr ，此时，通过 touch 命令，可以让客户端得到更多的处理时间，不先触发 ttr 机制。<br>当然，使用了 touch 命令，只是延长了 ttr 的时间，ttr 的机制仍然存在。<br>通过这个命令，消费者可以定期告诉服务器，当前处理程序仍处于活跃状态。<br><strong>此命令不受 DEADLINE_SOON影响</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch &lt;id&gt;\r\n</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="left">选项</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">id</td>
+<td align="left">job id</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">响应</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>TOUCHED\r\n</em></td>
+<td align="left">操作成功</td>
+</tr>
+<tr>
+<td align="left"><em>NOT_FOUND\r\n</em></td>
+<td align="left">没有找到这个 job 或者 该 job 不是这个客户端接收的</td>
+</tr>
+</tbody></table>
+<h3 id="watch"><a href="#watch" class="headerlink" title="watch"></a>watch</h3><p>watch 命令会往 watch list 中添加一个 tube ，消费者通过 reserve ，可以接收到 watch list 中任何一个 tube 传来的 job 。一个新的连接，watch list 中默认存在一个 default tube 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">watch &lt;tube&gt;\r\n</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="left">选项</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">tube</td>
+<td align="left">200 bytes 以内的字符串，代表着 tube 的名字，如果该 tube 不存在，则会自动创建</td>
+</tr>
+</tbody></table>
+<p>返回响应：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WATCHING &lt;count&gt;\r\n</span><br></pre></td></tr></table></figure>
+<p>conut 是一个数值，指当前 watch list 中有多少 tube 。</p>
+<h3 id="ignore"><a href="#ignore" class="headerlink" title="ignore"></a>ignore</h3><p>此命令用于从 watch list 中移除一个 tube ，移除之后，该消费者不再接收被移除的 tube 内的 job 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ignore &lt;tube&gt;\r\n</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="left">选项</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">tube</td>
+<td align="left">200 bytes 以内的字符串，代表着 tube 的名字，如果该 tube 不存在，则会自动创建</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">失败响应</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>NOT_IGNORED\r\n</em></td>
+<td align="left">如果当前 watch list 中只存在最后一个 tube，则会返回这个响应</td>
+</tr>
+</tbody></table>
+<p>成功响应：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WATCHING &lt;count&gt;\r\n</span><br></pre></td></tr></table></figure>
+<p>conut 是一个数值，指当前 watch list 中有多少 tube 。</p>
+<h3 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h3><h3 id="peek"><a href="#peek" class="headerlink" title="peek"></a>peek</h3><p>用于客户端检查 job ，此命令有四种形态，除了第一个操作以外，其它操作都只针对于当前的 tube 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">peek &lt;id&gt;\r\n 根据 id 返回一个 job</span><br><span class="line">peek-ready\r\n 返回下一个 ready job</span><br><span class="line">peek-delayed\r\n 返回下一个剩余延迟时间最短的 delayed job</span><br><span class="line">peek-buried\r\n 返回下一个 buried job</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="left">失败响应</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>NOT_FOUND\r\n</em></td>
+<td align="left">找不到 job 或没有该状态的 job</td>
+</tr>
+</tbody></table>
+<p>成功响应：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FOUND &lt;id&gt; &lt;bytes&gt;\r\n</span><br><span class="line">&lt;data&gt;\r\n</span><br></pre></td></tr></table></figure>
+<p>其中，id 为 job 的 id ，bytes 指 data 的大小（不包含 \r\n ），data 是 job 的具体内容</p>
+<h3 id="kick"><a href="#kick" class="headerlink" title="kick"></a>kick</h3><p>此命令只适用于当前指定的 tube 。<br>此命令能将 job 状态改成 ready ， 它需要传入一个数字，用于指定需要修改多少个 job 。<br>比如，你传入 10 ，则会将队列中十个 buried 或 delayed 状态的 job ，修改为 ready 。<br>如果，指定的队列中存在 buried job ，则只会修改 buried job，否则，就修改 delayed job 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kick &lt;bound&gt;\r\n</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="left">选项</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">bound</td>
+<td align="left">指定要 kick 多少 job</td>
+</tr>
+</tbody></table>
+<p>响应：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">KICKED &lt;count&gt;\r\n</span><br></pre></td></tr></table></figure>
+<p>count 表示该操作成功修改了几个 job 。</p>
+<h3 id="kick-job"><a href="#kick-job" class="headerlink" title="kick-job"></a>kick-job</h3><p>这是一个 kick 扩展命令，用于将单独的一个 job 修改为 ready 。它需要传入一个 job id 。<br>如果传入的 job id 所代表的 job 在当前 tube 中存在，并且该 job 的状态处于 buried 或 delayed ，则会将这个 job 设置为 ready ，并仍然在当前 tube 中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kick-job &lt;id&gt;\r\n</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="left">选项</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">id</td>
+<td align="left">job id</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">响应</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>NOT_FOUND\r\n</em></td>
+<td align="left">job 不存在或不处于可 kick 的状态，另外，这也可能发生在内部错误上</td>
+</tr>
+<tr>
+<td align="left"><em>KICKED\r\n</em></td>
+<td align="left">操作成功</td>
+</tr>
+</tbody></table>
+<h3 id="stats-job"><a href="#stats-job" class="headerlink" title="stats-job"></a>stats-job</h3><p>此命令用于查看一个 job 的统计信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stats-job &lt;id&gt;\r\n</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="left">选项</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">id</td>
+<td align="left">job id</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">错误响应</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>NOT_FOUND\r\n</em></td>
+<td align="left">job 不存在</td>
+</tr>
+</tbody></table>
+<p>成功响应：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">OK &lt;bytes&gt;\r\n</span><br><span class="line">&lt;data&gt;\r\n</span><br></pre></td></tr></table></figure>
+<p>bytes 指后面 data 的大小，data 则是该 job 的统计信息，是一个 YAML 格式的文本。<br>data 包含以下 key ：</p>
+<table>
+<thead>
+<tr>
+<th align="left">key</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">id</td>
+<td align="left">job id</td>
+</tr>
+<tr>
+<td align="left">tube</td>
+<td align="left">此 job 所在的 tube</td>
+</tr>
+<tr>
+<td align="left">state</td>
+<td align="left">job 的状态</td>
+</tr>
+<tr>
+<td align="left">pri</td>
+<td align="left">job 的优先级</td>
+</tr>
+<tr>
+<td align="left">age</td>
+<td align="left">job 在队列中存在的时间，是一个秒数</td>
+</tr>
+<tr>
+<td align="left">time-left</td>
+<td align="left">此 job 距离被放入 ready queue 的剩余秒数，这个时间到达之后，此 job j就会被放入到 ready 队列。此参数只在 job 状态为 reserved 和 delayed 时有意义，当状态为 reserved 时，此参数代表 job 的超时剩余秒数，即 ttr</td>
+</tr>
+<tr>
+<td align="left">file</td>
+<td align="left">此 job 的 binlog 序号，如果未开启 binlog ，则此值为 0</td>
+</tr>
+<tr>
+<td align="left">reserved</td>
+<td align="left">此 job 被 reserve 的次数</td>
+</tr>
+<tr>
+<td align="left">timeouts</td>
+<td align="left">此 job 的超时次数</td>
+</tr>
+<tr>
+<td align="left">releases</td>
+<td align="left">此 job 被 released 的次数</td>
+</tr>
+<tr>
+<td align="left">buries</td>
+<td align="left">此 job 被 bury 的次数</td>
+</tr>
+<tr>
+<td align="left">kicks</td>
+<td align="left">被 kicked的次数</td>
+</tr>
+</tbody></table>
+<h3 id="stats-tube"><a href="#stats-tube" class="headerlink" title="stats-tube"></a>stats-tube</h3><p>此命令返回 tube 的统计信息，如果这个 tube 存在的话。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stats-tube &lt;tube&gt;\r\n</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="left">选项</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">tube</td>
+<td align="left">传入 tube 的名称</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">失败响应</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>NOT_FOUND\r\n</em></td>
+<td align="left">不存在这个 tube</td>
+</tr>
+</tbody></table>
+<p>成功响应：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">OK &lt;bytes&gt;\r\n</span><br><span class="line">&lt;data&gt;\r\n</span><br></pre></td></tr></table></figure>
+<p>bytes 是指 data 的大小，不包含 「\r\n」。<br>data 是一个 YAML 格式的文本，它包含了你想要的 tube 的统计信息</p>
+<p>下面是 data 的 key ：</p>
+<table>
+<thead>
+<tr>
+<th align="left">key</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">name</td>
+<td align="left">tube 的 name</td>
+</tr>
+<tr>
+<td align="left">current-jobs-urgent</td>
+<td align="left">这个 tube 中，优先级小于 1024 的 ready job 数量</td>
+</tr>
+<tr>
+<td align="left">current-jobs-ready</td>
+<td align="left">这个 tube 中的 ready job 数量</td>
+</tr>
+<tr>
+<td align="left">current-jobs-reserved</td>
+<td align="left">这个 tube 中被 reserve 的 job 数量，不论它是被哪个消费者接收的</td>
+</tr>
+<tr>
+<td align="left">current-jobs-delayed</td>
+<td align="left">这个 tube 中处于 delayed 状态的 job 数量</td>
+</tr>
+<tr>
+<td align="left">current-jobs-buried</td>
+<td align="left">这个 tube 中处于 buried 状态的 job 数量</td>
+</tr>
+<tr>
+<td align="left">total-jobs</td>
+<td align="left">此 tube 一共创建过几个 job</td>
+</tr>
+<tr>
+<td align="left">current-using</td>
+<td align="left">指向此 tube 的连接数量</td>
+</tr>
+<tr>
+<td align="left">current-waiting</td>
+<td align="left">指向此 tube 并且处于接收等待状态、但还未接收到 job 的连接数量</td>
+</tr>
+<tr>
+<td align="left">current-watching</td>
+<td align="left">watch 了此 tube 的连接数量</td>
+</tr>
+<tr>
+<td align="left">pause</td>
+<td align="left">此 tube 停止服务的秒数</td>
+</tr>
+<tr>
+<td align="left">cmd-delete</td>
+<td align="left">此 tube 累计执行了几次 delete</td>
+</tr>
+<tr>
+<td align="left">cmd-pause-tube</td>
+<td align="left">此 tube 累计执行了几次 pause-tube</td>
+</tr>
+<tr>
+<td align="left">cmd-time-left</td>
+<td align="left">此 tube 几秒之后提供服务</td>
+</tr>
+</tbody></table>
+<h3 id="stats"><a href="#stats" class="headerlink" title="stats"></a>stats</h3><p>此命令返回整个服务器系统的统计信息。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stats\r\n</span><br></pre></td></tr></table></figure>
+<p>成功响应：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">OK &lt;bytes&gt;\r\n</span><br><span class="line">&lt;data&gt;\r\n</span><br></pre></td></tr></table></figure>
+<p>bytes 是指 data 的大小，但不包括 「\r\n」。<br>data 是一个 YAML 文本，包含了如下 key ：</p>
+<table>
+<thead>
+<tr>
+<th align="left">key</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">current-jobs-urgent</td>
+<td align="left">优先级小于 1024 的 ready job 数量</td>
+</tr>
+<tr>
+<td align="left">current-jobs-ready</td>
+<td align="left">ready job 的数量</td>
+</tr>
+<tr>
+<td align="left">current-jobs-reserved</td>
+<td align="left">被接受的 job 数量，不区分客户端（消费者）</td>
+</tr>
+<tr>
+<td align="left">current-jobs-delayed</td>
+<td align="left">delayed job 的数量</td>
+</tr>
+<tr>
+<td align="left">current-jobs-buried</td>
+<td align="left">buried job 的数量</td>
+</tr>
+<tr>
+<td align="left">cmd-put</td>
+<td align="left">累积执行 put 的次数</td>
+</tr>
+<tr>
+<td align="left">cmd-peek</td>
+<td align="left">累积执行 peek 的次数</td>
+</tr>
+<tr>
+<td align="left">cmd-peek-ready</td>
+<td align="left">累积执行 peek-ready 的次数</td>
+</tr>
+<tr>
+<td align="left">cmd-peek-delayed</td>
+<td align="left">累积执行 peek-delayed 的次数</td>
+</tr>
+<tr>
+<td align="left">cmd-peek-buried</td>
+<td align="left">累积执行 peek-buried 的次数</td>
+</tr>
+<tr>
+<td align="left">cmd-reserve</td>
+<td align="left">累积执行 cmd-reserve 的次数</td>
+</tr>
+<tr>
+<td align="left">cmd-use</td>
+<td align="left">累积执行 use 的次数</td>
+</tr>
+<tr>
+<td align="left">cmd-watch</td>
+<td align="left">累积执行 watch 的次数</td>
+</tr>
+<tr>
+<td align="left">cmd-ignore</td>
+<td align="left">累积执行 ignore 的次数</td>
+</tr>
+<tr>
+<td align="left">cmd-delete</td>
+<td align="left">累积执行 delete 的次数</td>
+</tr>
+<tr>
+<td align="left">cmd-release</td>
+<td align="left">累积执行 release 的次数</td>
+</tr>
+<tr>
+<td align="left">cmd-bury</td>
+<td align="left">累积执行 bury 的次数</td>
+</tr>
+<tr>
+<td align="left">cmd-kick</td>
+<td align="left">累积执行 kick 的次数</td>
+</tr>
+<tr>
+<td align="left">cmd-stats</td>
+<td align="left">累积执行 stats 的次数</td>
+</tr>
+<tr>
+<td align="left">cmd-stats-job</td>
+<td align="left">累积执行 stats-job 的次数</td>
+</tr>
+<tr>
+<td align="left">cmd-stats-tube</td>
+<td align="left">累积执行 stats-tube 的次数</td>
+</tr>
+<tr>
+<td align="left">cmd-list-tubes</td>
+<td align="left">累积执行 list-tubes 的次数</td>
+</tr>
+<tr>
+<td align="left">cmd-list-tube-used</td>
+<td align="left">累积执行 list-tube-used 的次数</td>
+</tr>
+<tr>
+<td align="left">cmd-list-tubes-watched</td>
+<td align="left">累积执行 list-tubes-watched 的次数</td>
+</tr>
+<tr>
+<td align="left">cmd-pause-tube</td>
+<td align="left">累积执行 pause-tube 的次数</td>
+</tr>
+<tr>
+<td align="left">job-timeouts</td>
+<td align="left">累积 timeout 的 job 总数</td>
+</tr>
+<tr>
+<td align="left">total-jobs</td>
+<td align="left">累积创建了几个 job</td>
+</tr>
+<tr>
+<td align="left">max-job-size</td>
+<td align="left">最大允许的 job 字节数</td>
+</tr>
+<tr>
+<td align="left">current-tubes</td>
+<td align="left">当前有几个 tube</td>
+</tr>
+<tr>
+<td align="left">current-connections</td>
+<td align="left">当前有几个连接</td>
+</tr>
+<tr>
+<td align="left">current-producers</td>
+<td align="left">当前有几个至少发出过一条 put 指令的连接</td>
+</tr>
+<tr>
+<td align="left">current-workers</td>
+<td align="left">当前有几个至少发出过一条 reserve 指令的连接</td>
+</tr>
+<tr>
+<td align="left">current-waiting</td>
+<td align="left">当前有几个至少发出过一条 reserve 指令但还未接收到 response 的连接</td>
+</tr>
+<tr>
+<td align="left">total-connections</td>
+<td align="left">累积有过几个连接</td>
+</tr>
+<tr>
+<td align="left">pid</td>
+<td align="left">服务器的进程 id</td>
+</tr>
+<tr>
+<td align="left">version</td>
+<td align="left">当前服务器的版本</td>
+</tr>
+<tr>
+<td align="left">rusage-utime</td>
+<td align="left">进程占用用户 cpu 的时间，分别有「秒」和「微秒」的单位</td>
+</tr>
+<tr>
+<td align="left">rusage-stime</td>
+<td align="left">进程占用系统 cpu 的时间，分别有「秒」和「微秒」的单位</td>
+</tr>
+<tr>
+<td align="left">uptime</td>
+<td align="left">此进程已运行的秒数</td>
+</tr>
+<tr>
+<td align="left">binlog-oldest-index</td>
+<td align="left">最早存储的 job binlog 索引号</td>
+</tr>
+<tr>
+<td align="left">binlog-current-index</td>
+<td align="left">当前的 job binlog 索引号，新的 binlog 会从这里开始写入，如果未开启 binlog ，此值为 0</td>
+</tr>
+<tr>
+<td align="left">binlog-max-size</td>
+<td align="left">每个 binlog 文件允许分配的最大容量，单位 bytes</td>
+</tr>
+<tr>
+<td align="left">binlog-record-written</td>
+<td align="left">写入 binlog 的累积次数</td>
+</tr>
+<tr>
+<td align="left">binlog-records-migrated</td>
+<td align="left">以压缩形式写入 binlog 的累积次数</td>
+</tr>
+<tr>
+<td align="left">id</td>
+<td align="left">一个随机字符串，用于标记这个进程，在 beanstalkd 开启时生成</td>
+</tr>
+<tr>
+<td align="left">hostname</td>
+<td align="left">主机名，由 uname 决定</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>上面这些 key 的信息，自从 beanstalkd 启动以来就开始累积，如果重启，就会重新累积。另外，这些数据不存放在 binlog 中</p>
+</blockquote>
+<h3 id="list-tubes"><a href="#list-tubes" class="headerlink" title="list-tubes"></a>list-tubes</h3><p>此命令返回所有存在的 tube 。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list-tubes\r\n</span><br></pre></td></tr></table></figure>
+<p>成功响应：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">OK &lt;bytes&gt;\r\n</span><br><span class="line">&lt;data&gt;\r\n</span><br></pre></td></tr></table></figure>
+<p>bytes 是指 data 的大小，不包含「\r\n」。<br>data 返回一个 YAML 字符串，里面包含了 tube 的列表。</p>
+<h3 id="list-tube-used"><a href="#list-tube-used" class="headerlink" title="list-tube-used"></a>list-tube-used</h3><p>此命令返回当前所 use 的 tube 。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list-tube-used\r\n</span><br></pre></td></tr></table></figure>
+<p>成功响应：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">USING &lt;tube&gt;\r\n</span><br></pre></td></tr></table></figure>
+<p>tube 是指当前 use 的 tube 名字。</p>
+<h3 id="list-tubes-watched"><a href="#list-tubes-watched" class="headerlink" title="list-tubes-watched"></a>list-tubes-watched</h3><p>此命令用于查看当前客户端 watch-list 中的 tube 。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list-tubes-watched\r\n</span><br></pre></td></tr></table></figure>
+<p>成功响应：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">OK &lt;bytes&gt;\r\n</span><br><span class="line">&lt;data&gt;\r\n</span><br></pre></td></tr></table></figure>
+<p>bytes 是指 data 的大小，不包含「\r\n」。<br>data 是一个包含了 tube list 的 YAML 字符串。</p>
+<h3 id="quit"><a href="#quit" class="headerlink" title="quit"></a>quit</h3><p>此命令用于关闭当前连接。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">quit\r\n</span><br></pre></td></tr></table></figure>
+<h3 id="pause-tube"><a href="#pause-tube" class="headerlink" title="pause-tube"></a>pause-tube</h3><p>此命令为某个 tube 指定一个时间，在这个时间内，此 tube 内的 job 将不会被 reserve 。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pause-tube &lt;tbe-name&gt; &lt;delay&gt;\r\n</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="left">选项</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">tube</td>
+<td align="left">tube 的名字</td>
+</tr>
+<tr>
+<td align="left">delay</td>
+<td align="left">指定一个秒数</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">响应</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>PAUSED\r\n</em></td>
+<td align="left">操作成功</td>
+</tr>
+<tr>
+<td align="left"><em>NOT_FOUND\r\n</em></td>
+<td align="left">没有这个 tube</td>
+</tr>
+</tbody></table>
+<h2 id="十、Beanstalkd-关键命令表格"><a href="#十、Beanstalkd-关键命令表格" class="headerlink" title="十、Beanstalkd 关键命令表格"></a>十、Beanstalkd 关键命令表格</h2><table>
+<thead>
+<tr>
+<th align="left">命令</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">put</td>
+<td align="left">在队列中生成 job</td>
+</tr>
+<tr>
+<td align="left">use</td>
+<td align="left">用于生产者指定后续要存放 job 的 tube</td>
+</tr>
+<tr>
+<td align="left">reserve</td>
+<td align="left">用于消费者从队列中预定一个 job （接收 job），此命令会阻塞控制台，直到接收到 job</td>
+</tr>
+<tr>
+<td align="left">reserve-with-timeout</td>
+<td align="left">接收 job ，附带超时时间，超过时间未接收到 job 就结束了</td>
+</tr>
+<tr>
+<td align="left">delete</td>
+<td align="left">删除一个 job</td>
+</tr>
+<tr>
+<td align="left">release</td>
+<td align="left">将一个 reserved job 放回 ready 队列</td>
+</tr>
+<tr>
+<td align="left">bury</td>
+<td align="left">将一个 job 操作为 buried</td>
+</tr>
+<tr>
+<td align="left">touch</td>
+<td align="left">延长一个 job 的 ttr</td>
+</tr>
+<tr>
+<td align="left">watch</td>
+<td align="left">将一个 tube 加入到 watch list ，只有加入到 watch list 的 tube 才会被 reserve 命令接收到 job</td>
+</tr>
+<tr>
+<td align="left">ignore</td>
+<td align="left">从 watch list 中移除 tube</td>
+</tr>
+<tr>
+<td align="left">peek</td>
+<td align="left">根据 id 返回一个 job ，纯返回，不会修改 job 的状态</td>
+</tr>
+<tr>
+<td align="left">peek-ready</td>
+<td align="left">返回当前 tube 的一个 ready job</td>
+</tr>
+<tr>
+<td align="left">peek-delayed</td>
+<td align="left">从当前 tube 中返回一个剩余延迟时间最短的 delayed job</td>
+</tr>
+<tr>
+<td align="left">peek-buried</td>
+<td align="left">从当前 tube 中返回下一个 buried job</td>
+</tr>
+<tr>
+<td align="left">kick</td>
+<td align="left">一次性修改多个非 ready 的 job 到 ready 状态，其中会先处理 buried 再处理 delayed</td>
+</tr>
+<tr>
+<td align="left">kick-job</td>
+<td align="left">将指定的 job 调整为 ready 状态，调整后仍在原 tube 内</td>
+</tr>
+<tr>
+<td align="left">stats-job</td>
+<td align="left">查看某 job 的统计信息</td>
+</tr>
+<tr>
+<td align="left">stats-tube</td>
+<td align="left">查看某 tube 的统计信息</td>
+</tr>
+<tr>
+<td align="left">stats</td>
+<td align="left">查看 beanstalkd 的统计信息</td>
+</tr>
+<tr>
+<td align="left">list-tubes</td>
+<td align="left">返回当前存在的所有 tube</td>
+</tr>
+<tr>
+<td align="left">list-tube-used</td>
+<td align="left">查看当前 use 的 tube</td>
+</tr>
+<tr>
+<td align="left">list-tubes-watched</td>
+<td align="left">查看当前 watch list 中的 tube</td>
+</tr>
+<tr>
+<td align="left">quit</td>
+<td align="left">关闭当前连接</td>
+</tr>
+<tr>
+<td align="left">pause-tube</td>
+<td align="left">暂停 tube ，暂停后，tube 内的 job 不会再被接收</td>
+</tr>
+</tbody></table>
+<h2 id="十一、Pheanstalk-协议解析"><a href="#十一、Pheanstalk-协议解析" class="headerlink" title="十一、Pheanstalk 协议解析"></a>十一、Pheanstalk 协议解析</h2><h3 id="PheanstalkInterface"><a href="#PheanstalkInterface" class="headerlink" title="PheanstalkInterface"></a>PheanstalkInterface</h3><p>这是一个连接实例的接口。<br>它定义了一个 beanstalkd 连接必须拥有的方法。</p>
+<h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><table>
+<thead>
+<tr>
+<th align="left">常量</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>DEFAULT_PORT = 11300</em></td>
+<td align="left">默认连接端口号</td>
+</tr>
+<tr>
+<td align="left"><em>DEFAULT_DELAY = 0</em></td>
+<td align="left">默认延迟秒数，0 为不延迟</td>
+</tr>
+<tr>
+<td align="left"><em>DEFAULT_PRIORITY = 1024</em></td>
+<td align="left">默认优先级，0 为最高优先级</td>
+</tr>
+<tr>
+<td align="left"><em>DEFAULT_TTR = 60</em></td>
+<td align="left">默认 TTR 60秒</td>
+</tr>
+<tr>
+<td align="left"><em>DEFAULT_TUBE = ‘default’</em></td>
+<td align="left">默认 tube</td>
+</tr>
+</tbody></table>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">bury</td>
+<td align="left">put 一个 buried job ，只有在 kick 后才能被 reserve</td>
+</tr>
+<tr>
+<td align="left">delete</td>
+<td align="left">永久删除一个 job</td>
+</tr>
+<tr>
+<td align="left">ignore</td>
+<td align="left">从 watchlist 中移除一个 tube</td>
+</tr>
+<tr>
+<td align="left">kick</td>
+<td align="left">移动指定数量的 buried 或 delayed job 到 ready 对列中，有buried 会先处理 buried</td>
+</tr>
+<tr>
+<td align="left">kickJob</td>
+<td align="left">将单个 job 移动到 ready 队列中，移动后仍处于该 tube</td>
+</tr>
+<tr>
+<td align="left">listTubes</td>
+<td align="left">当前 server 的所有 tube</td>
+</tr>
+<tr>
+<td align="left">listTubesWatched</td>
+<td align="left">查看当前 watchlist，可通过传入 true 还是 false ，来要求是从服务器获取，还是从缓存获取</td>
+</tr>
+<tr>
+<td align="left">listTubeUsed</td>
+<td align="left">当前 use 的 tube ，传入 true ， 则从服务器请求，传入 false ，则使用上一次的结果（缓存）</td>
+</tr>
+<tr>
+<td align="left">pauseTube</td>
+<td align="left">暂时不让 tube 内的 job 被 reserve</td>
+</tr>
+<tr>
+<td align="left">resumeTube</td>
+<td align="left">恢复被暂停的 Tube</td>
+</tr>
+<tr>
+<td align="left">peek</td>
+<td align="left">查看一个 job ，不论它处于什么 tube</td>
+</tr>
+<tr>
+<td align="left">peekReady</td>
+<td align="left">查看 ready 队列中下一个可被 reserve 的 job （当前 tube 中）</td>
+</tr>
+<tr>
+<td align="left">peekDelayed</td>
+<td align="left">查看 delayed 队列中下一个即将进入 ready 的 job （当前 tube 中）</td>
+</tr>
+<tr>
+<td align="left">peekBuried</td>
+<td align="left">查看下一个 buried job （当前 job 中）</td>
+</tr>
+<tr>
+<td align="left">put</td>
+<td align="left">放入一个 job</td>
+</tr>
+<tr>
+<td align="left">release</td>
+<td align="left">把一个 reserved job 重新放回 ready 队列</td>
+</tr>
+<tr>
+<td align="left">reserve</td>
+<td align="left">从当前 watchlist 中锁定一个 job （接收一个 job）</td>
+</tr>
+<tr>
+<td align="left">reserveWithTimeout</td>
+<td align="left">有超时时间的 reserve</td>
+</tr>
+<tr>
+<td align="left">statsJob</td>
+<td align="left">查看一个 job 的统计信息</td>
+</tr>
+<tr>
+<td align="left">statsTube</td>
+<td align="left">查看一个 tube 的统计信息</td>
+</tr>
+<tr>
+<td align="left">stats</td>
+<td align="left">查看 server 的统计信息</td>
+</tr>
+<tr>
+<td align="left">touch</td>
+<td align="left">为 job 延长一次 ttr</td>
+</tr>
+<tr>
+<td align="left">useTube</td>
+<td align="left">use 一个 tube ，用于接着 put job</td>
+</tr>
+<tr>
+<td align="left">watch</td>
+<td align="left">把一个 tube 加入到 watchlist</td>
+</tr>
+<tr>
+<td align="left">watchOnly</td>
+<td align="left">往 watchlist 中加入一个 tube ，并 ignore 其他所有 tube</td>
+</tr>
+</tbody></table>
+<h3 id="JobIdInterface"><a href="#JobIdInterface" class="headerlink" title="JobIdInterface"></a>JobIdInterface</h3><h4 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h4><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">getId</td>
+<td align="left">获得 Job 的 id</td>
+</tr>
+</tbody></table>
+<h3 id="CommandInterface"><a href="#CommandInterface" class="headerlink" title="CommandInterface"></a>CommandInterface</h3><p>pheanstalk 的设计中，每个 beanstalkd 命令都以一个类的形式呈现，想要向 beanstalkd server 发送命令，需要通过实例化各 command 类来实现。</p>
+<p>CommandInterface 接口，是所有 command 类最抽象的形态，我们观察 pheanstalk 的源码，可以发现，AbstractCommand 抽象类实现了这个接口。</p>
+<p>而 AbstractCommand 又会被 TubeCommand 、JobCommand 类继承，再往下，还会有具体的命令 command 类继承 Tube 和 Job command 类。</p>
+<blockquote>
+<p>由此，我们也可以看出 pheanstalk 在代码设计上的思路：从 CommandInterface ，到 AbstractCommand ，再到 TubeCommand、JobCommand ， 再到具体的命令 command ，它们便是一个典型的从抽象到具体的过程。</p>
+</blockquote>
+<p><strong>在此，我们可以再回去看看 beanstalkd 的协议，熟悉各种命令和用途，结合 pheanstalk 对 command 的封装过程，以提升我们在面向对象上的设计能力。</strong></p>
+<p>要求每一个 command 类都必须实现以下几个方法，且拥有以下几个常量。</p>
+<h4 id="常量-1"><a href="#常量-1" class="headerlink" title="常量"></a>常量</h4><p>CommandInterface 的常量格式为 COMMAND_* ，如 COMMAND_PUT 、 COMMAND_USE 。<br>它分别定义了一系列 beanstalkd 的命令。<br><strong>之所以把 put 、 use 等命令，以常量的形式存储，是为了将「具体命令」和「具体业务逻辑」剥离，并将「具体命令」放在最高级抽象的接口中。</strong><br>这样，如果 beanstalkd 更新后更改了某些命令，如，将 put 改成 put1 ，我们的 pheanstalk 只需要更新 CommandInterface 即可，而其它「相对具体」的代码中，使用的是 CommandInterface 的常量，不会受到影响。<br>这是利用接口解耦的思路。<br>而这里的常量，一般用于组装要发送到 beanstalkd server 的命令行字符串。</p>
+<h4 id="方法-2"><a href="#方法-2" class="headerlink" title="方法"></a>方法</h4><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">getCommandLine</td>
+<td align="left">获取当前命令行的字符串形式，会返回即将发送给 beanstalkd server 的命令行字符串形式，但不包括 CRLF ，即 \r\n</td>
+</tr>
+<tr>
+<td align="left">hasData</td>
+<td align="left">此命令是否存在 data</td>
+</tr>
+<tr>
+<td align="left">getData</td>
+<td align="left">返回此命令的 data 数据</td>
+</tr>
+<tr>
+<td align="left">getDataLength</td>
+<td align="left">返回此命令 data 的 bytes</td>
+</tr>
+<tr>
+<td align="left">getResponseParser</td>
+<td align="left">返回 ResponseParser 实例</td>
+</tr>
+</tbody></table>
+<h3 id="ResponseInterface"><a href="#ResponseInterface" class="headerlink" title="ResponseInterface"></a>ResponseInterface</h3><p>这个接口，定义了一个 beanstalkd 返回实例该有的常量和方法。</p>
+<h4 id="常量-2"><a href="#常量-2" class="headerlink" title="常量"></a>常量</h4><p>此接口下的所有常量，都以 RESPONSE_ 作为前缀，分别定义了 beanstalkd 可能返回的响应前缀，即响应中大写的那一部分。（可以回头参考下 beanstalkd 的协议）<br>这里的常量，也是用于组装 beantalkd 返回的命令行字符串。</p>
+<h4 id="方法-3"><a href="#方法-3" class="headerlink" title="方法"></a>方法</h4><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">getResponseName</td>
+<td align="left">获取 response 的名字，一般指此 response 是哪个命令的</td>
+</tr>
+</tbody></table>
+<h3 id="ResponseParserInterface"><a href="#ResponseParserInterface" class="headerlink" title="ResponseParserInterface"></a>ResponseParserInterface</h3><h4 id="方法-4"><a href="#方法-4" class="headerlink" title="方法"></a>方法</h4><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">parseResponse</td>
+<td align="left">将 beanstalkd 返回的命令行字符串，解析为 Response Object</td>
+</tr>
+</tbody></table>
+<h3 id="SocketFactoryInterface"><a href="#SocketFactoryInterface" class="headerlink" title="SocketFactoryInterface"></a>SocketFactoryInterface</h3><h4 id="方法-5"><a href="#方法-5" class="headerlink" title="方法"></a>方法</h4><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">create</td>
+<td align="left">返回一个 socket 连接</td>
+</tr>
+</tbody></table>
+<h3 id="SocketInterface"><a href="#SocketInterface" class="headerlink" title="SocketInterface"></a>SocketInterface</h3><p>此接口定义了 Socket 类所必须存在的操作，Socket 类主要处理和 beastalkd 通信相关事项。</p>
+<h4 id="方法-6"><a href="#方法-6" class="headerlink" title="方法"></a>方法</h4><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">write</td>
+<td align="left">向 socket 写入数据</td>
+</tr>
+<tr>
+<td align="left">read</td>
+<td align="left">从 socket 读取指定字节量的数据</td>
+</tr>
+<tr>
+<td align="left">getLine</td>
+<td align="left">获取下一行</td>
+</tr>
+<tr>
+<td align="left">disconnect</td>
+<td align="left">关闭 socket 连接</td>
+</tr>
+</tbody></table>
+<h2 id="十二、Pheanstalk-使用手册"><a href="#十二、Pheanstalk-使用手册" class="headerlink" title="十二、Pheanstalk 使用手册"></a>十二、Pheanstalk 使用手册</h2><p>在过了一遍 contracts 之后，我们可以发现，pheanstalk 最接近用户层（开发者）的接口，就是 PheanstalkInterface 。<br>那么，使用手册，我们也通过解读 PheanstalkInterface 的具体实现 Pheanstalk 类来撰写。</p>
+<h3 id="建立连接"><a href="#建立连接" class="headerlink" title="建立连接"></a>建立连接</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include_once</span> <span class="string">&quot;vendor/autoload.php&quot;</span>;</span><br><span class="line"><span class="variable">$conn</span> = \Pheanstalk\Pheanstalk::create(<span class="string">&#x27;127.0.0.1&#x27;</span>,<span class="number">11300</span>,<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+<p>上面的 create 方法，第一个参数必填，需要传入目标 beanstalkd 服务器的 ip ，前提是，对于 beanstalkd server 而言，你的 ip （可能是内网，也可能是外网，也可能是本机），必须在它的监听列表中。<br>第二个参数是端口，可不填，默认为 11300 ，当然你可以修改。<br>第三个参数是连接超时时间，可不填，默认为 10 ，表示 10 秒之后还未连接成功就超时了。</p>
+<p><strong>要注意的是：此 create 方法只是返回一个配置好的 pheanstalk 实例，但并非是一个连接好的实例。</strong><br>如何理解呢？<br>从实现上， pheanstalk 的流程是等到有指令了，也就是有 dispatch 指令后，才建立一个 socket 连接，而它与 beanstalkd 通信的底层，用的也是 socket 。<br>所以，如果你只写了 create 方法，并不能看出是否能够连接成功。<br>你还需要发送一个指令才能知道是否能够连接成功。<br>一旦发送过指令之后，Pheanstalk-&gt;connection-&gt;socket 就会指向一个 socket 资源。</p>
+<h3 id="关闭、重连"><a href="#关闭、重连" class="headerlink" title="关闭、重连"></a>关闭、重连</h3><p>虽然，我们能看到 Pheanstalkd 类中，有 reconnect 方法，还有 $this-&gt;connection 的属性。<br>然而它们的访问权限是 private 。<br>这告诉我们，关闭和重连，不需要我们手动操作。<br>我们可以看到，这两个方法，只有在 pheanstalk 向 beanstalkd 发送指令时，会用到。<br><strong>因为 PHP 使用 socket 连接时，socket 是有生命周期的，超出一定时间 socket 就会失效，此时，Pheanstalk 的 dispatch 方法就会自动重连。</strong><br>我们知道，pheanstalk 的底层通信基于 php 的 socket ，那么，必然具备 socket 的特性，再深入的内容，可以参考 php 手册中的 socket 部分。</p>
+<h3 id="生产者操作"><a href="#生产者操作" class="headerlink" title="生产者操作"></a>生产者操作</h3><h4 id="选择-tube"><a href="#选择-tube" class="headerlink" title="选择 tube"></a>选择 tube</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$conn</span>-&gt;useTube(<span class="string">&#x27;myTube&#x27;</span>); <span class="comment">// 会返回 this ，因此支持链式操作</span></span><br></pre></td></tr></table></figure>
+<h4 id="put-job"><a href="#put-job" class="headerlink" title="put job"></a>put job</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$job</span> = <span class="variable">$conn</span>-&gt;put(<span class="string">&#x27;this is my first job !&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>这里传入的字符串，就是放到 beanstalkd 中 job 的 body<br>当然，关于 priority 、 delay 、 ttr 这些参数你可以在 body 后面传入，具体可参考方法接口。<br>put 会返回一个 Job 实例，如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Pheanstalk\Job <span class="keyword">Object</span></span><br><span class="line">(</span><br><span class="line">    [id:Pheanstalk\Job:<span class="keyword">private</span>] =&gt; <span class="number">1</span></span><br><span class="line">    [data:Pheanstalk\Job:<span class="keyword">private</span>] =&gt; this is my first job !</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h4 id="链式操作"><a href="#链式操作" class="headerlink" title="链式操作"></a>链式操作</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$job</span> = <span class="variable">$conn</span>-&gt;useTube(<span class="string">&#x27;myTube&#x27;</span>)-&gt;put(<span class="string">&#x27;this is my 2nd job !&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="默认-Tube"><a href="#默认-Tube" class="headerlink" title="默认 Tube"></a>默认 Tube</h4><p>我们知道，默认的 Tube 是 default ，如果我们不使用 useTube 的话，put 的 job 就会在 default tube 中。</p>
+<h3 id="消费者操作"><a href="#消费者操作" class="headerlink" title="消费者操作"></a>消费者操作</h3><h4 id="接收-job"><a href="#接收-job" class="headerlink" title="接收 job"></a>接收 job</h4><h4 id="reserve-1"><a href="#reserve-1" class="headerlink" title="reserve"></a>reserve</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$job</span> = <span class="variable">$conn</span>-&gt;reserve(); <span class="comment">// 默认情况会接收 default tube 的 job</span></span><br><span class="line">print_r(<span class="variable">$job</span>); <span class="comment">// 如果 reserve 没能得到 job ，就会一直阻塞在上面</span></span><br></pre></td></tr></table></figure>
+<p>上面返回的一定是 Job 实例。</p>
+<h4 id="reserveWithTimeOut"><a href="#reserveWithTimeOut" class="headerlink" title="reserveWithTimeOut"></a>reserveWithTimeOut</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="variable">$job2</span> = <span class="variable">$conn</span>-&gt;reserveWithTimeout(<span class="number">10</span>);  <span class="comment">// 阻塞接收，10秒之后超时，就不再接收了</span></span><br><span class="line">    print_r(<span class="variable">$job2</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$job2</span> === <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Exception</span>(<span class="string">&#x27;超时了&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 处理 job ...</span></span><br><span class="line"></span><br><span class="line">    sleep(<span class="number">60</span>);</span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">catch</span> (\Pheanstalk\<span class="built_in">Exception</span>\DeadlineSoonException <span class="variable">$e</span>) &#123;</span><br><span class="line">    print_r(<span class="string">&#x27;deadline soon&#x27;</span> . <span class="variable">$e</span>-&gt;getMessage());</span><br><span class="line">&#125; <span class="keyword">catch</span> (<span class="built_in">Exception</span> <span class="variable">$e</span>) &#123;</span><br><span class="line">    print_r(<span class="variable">$e</span>-&gt;getMessage());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：这个方法，超时的话会返回 null ，成功的话，会返回一个 Job 实例。<br>还有，上面代码片段中有一行 sleep ，这一行的作用，是做一个小实验。<br>当，job 被成功返回过来，但没有 sleep 这一行，你会发现，你连续运行两次该代码，返回的 job 是同一个。<br>理论上，我们应该接收到下一个 job ，因为这个 job 被接收了之后，状态就变成 reserved 而不再是 ready 。<br>那如何来测试 job 是否真的变成 reserved 了呢？<br>这就是 sleep 的用处，步骤如下：</p>
+<ul>
+<li>先往你的 beanstalkd 加入两个 job</li>
+<li>再在两个 cli 窗口运行两次含 sleep 的消费者代码</li>
+</ul>
+<p>你会发现这个情况，如下图：<br><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210329094725.png" alt="img"><br><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210329094725.png" alt="img"><br>它们分别接收了两个 job 。</p>
+<blockquote>
+<p>这里不要用 web 测试，用 cli 才能更直观地看到效果。</p>
+</blockquote>
+<p>这个现象，也很好理解：</p>
+<ul>
+<li>reserve 成功之后，你的 php 进程还在于 beanstalkd 保持着 socket 连接，此连接不销毁，beanstalkd 都会为你冻结此 job 。</li>
+<li>一旦 php 进程销毁（执行结束），beanstalkd 没有接收到其他对 job 的操作，自然就回到 ready 队列中了</li>
+</ul>
+<h3 id="删除-job"><a href="#删除-job" class="headerlink" title="删除 job"></a>删除 job</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$conn</span>-&gt;delete(<span class="variable">$job2</span>);</span><br></pre></td></tr></table></figure>
+<p>这个方法没有返回值，但如果出错的话，会抛出异常。<br>一般在 job 被消费者处理完毕之后才调用 delete 方法。</p>
+<h3 id="释放-reserved-job"><a href="#释放-reserved-job" class="headerlink" title="释放 reserved job"></a>释放 reserved job</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$conn</span>-&gt;release(<span class="variable">$job</span>,<span class="variable">$priority</span>,<span class="variable">$delay</span>);</span><br></pre></td></tr></table></figure>
+<p>此方法没有返回值，如果出错会抛出异常。<br>此方法可以将 reserved job 重新放回 ready 队列中，一般在消费者逻辑处理失败后，才使用这个方法。</p>
+<h3 id="预留"><a href="#预留" class="headerlink" title="预留"></a>预留</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$conn</span>-&gt;bury(<span class="variable">$job</span>,<span class="variable">$priority</span>);</span><br></pre></td></tr></table></figure>
+<p>此方法没有返回值，如果出错会抛出异常。<br>此方法可以将一个 job 操作为 buried 状态，比如当你的消费者接收到这个 job 时，对 job 进行了一系列检查，经检查，发现这个 job 还不能被消费，此时可以将 job 操作为 buried ，直到有客户端对这个 job 发送了 kick 指令，才会被再次 reserve 。</p>
+<h3 id="延迟-ttr"><a href="#延迟-ttr" class="headerlink" title="延迟 ttr"></a>延迟 ttr</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$conn</span>-&gt;touch(<span class="variable">$job</span>);</span><br></pre></td></tr></table></figure>
+<p>此方法没有返回值，如果出错会抛出异常。</p>
+<h3 id="添加监听的管道"><a href="#添加监听的管道" class="headerlink" title="添加监听的管道"></a>添加监听的管道</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$conn</span>-&gt;watch(<span class="string">&#x27;test&#x27;</span>)-&gt;watch(<span class="string">&#x27;sms&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>此方法返回 $conn 本身，可链式操作，每次运行，都会为 watch list 添加一个 tube 。</p>
+<h4 id="删除监听的管道"><a href="#删除监听的管道" class="headerlink" title="删除监听的管道"></a>删除监听的管道</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$conn</span>-&gt;ignore(<span class="string">&#x27;email&#x27;</span>)-&gt;ignore(<span class="string">&#x27;sms&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>此方法返回 $conn 本身，可链式操作，每次运行，都会从 watch list 中移除一个 tube 。</p>
+<blockquote>
+<p>默认，watch list 中会有一个 default ，所以，当你执行 watch 时，default 仍然在 watch list 中。</p>
+</blockquote>
+<h3 id="仅监听一个管道"><a href="#仅监听一个管道" class="headerlink" title="仅监听一个管道"></a>仅监听一个管道</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$conn</span>-&gt;watchOnly(<span class="string">&#x27;sms&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>此方法返回 $conn 本身，可链式操作。<br>通过此快捷方法，可以一次性移除 watch list 中所有的 tube ，除了此方法传入的 tube 以外。</p>
+<h3 id="其他命令-1"><a href="#其他命令-1" class="headerlink" title="其他命令"></a>其他命令</h3><h4 id="单纯获取-job"><a href="#单纯获取-job" class="headerlink" title="单纯获取 job"></a>单纯获取 job</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$conn</span>-&gt;peek(<span class="keyword">new</span> \Pheanstalk\Job(<span class="number">1</span>,<span class="string">&#x27;&#x27;</span>)); <span class="comment">// 根据 id 获取 job ，id 在 beanstalkd 是唯一的，不论处于什么 tube</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$conn</span>-&gt;useTube(<span class="string">&#x27;order&#x27;</span>)-&gt;peekReady(); <span class="comment">// 从 order tube 中获取排在最前面的 job（这个顺序，同 reserve 的顺序）</span></span><br><span class="line"><span class="variable">$conn</span>-&gt;peekDelayed(); <span class="comment">// 从 default tube 中获取（最）即将变成 ready 的 delayed job</span></span><br><span class="line"><span class="variable">$conn</span>-&gt;peekBuried(); <span class="comment">// 返回下一个 buried job</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这里的 peekReady 、 peekDelayed 、 peekBuried 虽然在译文解释中，提到「下一个」，但它并非是一个指针，当你调用一起 peekReady ，下一次再调用 peekReady 就自动将指针移动到「下一个」。<strong>如果你不手动将当前得到的 Job 操作为其他状态，或者延长延迟时间等，你多次调用 peek 命令，他将返回同一个 Job。</strong></p>
+</blockquote>
+<h3 id="批量操作-job-为-ready"><a href="#批量操作-job-为-ready" class="headerlink" title="批量操作 job 为 ready"></a>批量操作 job 为 ready</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$conn</span>-&gt;useTube(<span class="string">&#x27;order&#x27;</span>);</span><br><span class="line"><span class="variable">$kicked</span> = <span class="variable">$conn</span>-&gt;kick(<span class="number">10</span>);</span><br><span class="line">print_r(<span class="variable">$kicked</span>);</span><br></pre></td></tr></table></figure>
+<p>上面的代码片段，是针对 order tube 操作 10 条 buried 或 delayed 为 ready 。<br>具体可以看 beanstalkd 译文中的 kick 命令。</p>
+<h3 id="操作指定-job-为-ready"><a href="#操作指定-job-为-ready" class="headerlink" title="操作指定 job 为 ready"></a>操作指定 job 为 ready</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$conn</span>-&gt;useTube(<span class="string">&#x27;sms&#x27;</span>)-&gt;kickJob(<span class="variable">$job</span>);</span><br></pre></td></tr></table></figure>
+<p>此方法没有返回值。</p>
+<h3 id="获取-job-的统计信息"><a href="#获取-job-的统计信息" class="headerlink" title="获取 job 的统计信息"></a>获取 job 的统计信息</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$job</span> = <span class="variable">$conn</span>-&gt;reserve();</span><br><span class="line"><span class="variable">$res</span> = <span class="variable">$conn</span>-&gt;statsJob(<span class="variable">$job</span>);</span><br><span class="line">print_r(<span class="variable">$res</span>);</span><br></pre></td></tr></table></figure>
+<p>此方法返回一个 ArrayResponse 实例，具体字段意义，需参考 beanstalkd 译文。<br>$res 如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Pheanstalk\Response\ArrayResponse <span class="keyword">Object</span></span><br><span class="line">(</span><br><span class="line">    [name:Pheanstalk\Response\ArrayResponse:<span class="keyword">private</span>] =&gt; OK</span><br><span class="line">    [storage:<span class="built_in">ArrayObject</span>:<span class="keyword">private</span>] =&gt; <span class="keyword">Array</span></span><br><span class="line">        (</span><br><span class="line">            [id] =&gt; <span class="number">2</span></span><br><span class="line">            [tube] =&gt; <span class="keyword">default</span></span><br><span class="line">            [state] =&gt; reserved</span><br><span class="line">            [pri] =&gt; <span class="number">1</span></span><br><span class="line">            [age] =&gt; <span class="number">92865</span></span><br><span class="line">            [delay] =&gt; <span class="number">0</span></span><br><span class="line">            [ttr] =&gt; <span class="number">60</span></span><br><span class="line">            [time-left] =&gt; <span class="number">59</span></span><br><span class="line">            [file] =&gt; <span class="number">0</span></span><br><span class="line">            [reserves] =&gt; <span class="number">8</span></span><br><span class="line">            [timeouts] =&gt; <span class="number">0</span></span><br><span class="line">            [releases] =&gt; <span class="number">0</span></span><br><span class="line">            [buries] =&gt; <span class="number">0</span></span><br><span class="line">            [kicks] =&gt; <span class="number">0</span></span><br><span class="line">        )</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="获取-tube-统计信息"><a href="#获取-tube-统计信息" class="headerlink" title="获取 tube 统计信息"></a>获取 tube 统计信息</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$res</span> = <span class="variable">$conn</span>-&gt;statsTube(<span class="string">&#x27;default&#x27;</span>);</span><br><span class="line">print_r(<span class="variable">$res</span>);</span><br></pre></td></tr></table></figure>
+<p>此方法返回一个 ArrayResponse 实例，具体字段意义，需参考 beanstalkd 译文。<br>$res 如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Pheanstalk\Response\ArrayResponse <span class="keyword">Object</span></span><br><span class="line">(</span><br><span class="line">    [name:Pheanstalk\Response\ArrayResponse:<span class="keyword">private</span>] =&gt; OK</span><br><span class="line">    [storage:<span class="built_in">ArrayObject</span>:<span class="keyword">private</span>] =&gt; <span class="keyword">Array</span></span><br><span class="line">        (</span><br><span class="line">            [name] =&gt; <span class="keyword">default</span></span><br><span class="line">            [current-jobs-urgent] =&gt; <span class="number">1</span></span><br><span class="line">            [current-jobs-ready] =&gt; <span class="number">2</span></span><br><span class="line">            [current-jobs-reserved] =&gt; <span class="number">0</span></span><br><span class="line">            [current-jobs-delayed] =&gt; <span class="number">0</span></span><br><span class="line">            [current-jobs-buried] =&gt; <span class="number">0</span></span><br><span class="line">            [total-jobs] =&gt; <span class="number">2</span></span><br><span class="line">            [current-using] =&gt; <span class="number">1</span></span><br><span class="line">            [current-watching] =&gt; <span class="number">1</span></span><br><span class="line">            [current-waiting] =&gt; <span class="number">0</span></span><br><span class="line">            [cmd-delete] =&gt; <span class="number">0</span></span><br><span class="line">            [cmd-pause-tube] =&gt; <span class="number">0</span></span><br><span class="line">            [pause] =&gt; <span class="number">0</span></span><br><span class="line">            [pause-time-left] =&gt; <span class="number">0</span></span><br><span class="line">        )</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="获取-beanstalkd-服务器统计信息"><a href="#获取-beanstalkd-服务器统计信息" class="headerlink" title="获取 beanstalkd 服务器统计信息"></a>获取 beanstalkd 服务器统计信息</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$res</span> = <span class="variable">$conn</span>-&gt;stats();</span><br><span class="line">print_r(<span class="variable">$res</span>);</span><br></pre></td></tr></table></figure>
+<p>此方法返回一个 ArrayResponse 实例，具体字段意义，需参考 beanstalkd 译文。<br>$res 如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">Pheanstalk\Response\ArrayResponse <span class="keyword">Object</span></span><br><span class="line">(</span><br><span class="line">    [name:Pheanstalk\Response\ArrayResponse:<span class="keyword">private</span>] =&gt; OK</span><br><span class="line">    [storage:<span class="built_in">ArrayObject</span>:<span class="keyword">private</span>] =&gt; <span class="keyword">Array</span></span><br><span class="line">        (</span><br><span class="line">            [current-jobs-urgent] =&gt; <span class="number">1</span></span><br><span class="line">            [current-jobs-ready] =&gt; <span class="number">2</span></span><br><span class="line">            [current-jobs-reserved] =&gt; <span class="number">0</span></span><br><span class="line">            [current-jobs-delayed] =&gt; <span class="number">0</span></span><br><span class="line">            [current-jobs-buried] =&gt; <span class="number">0</span></span><br><span class="line">            [cmd-put] =&gt; <span class="number">2</span></span><br><span class="line">            [cmd-peek] =&gt; <span class="number">10</span></span><br><span class="line">            [cmd-peek-ready] =&gt; <span class="number">11</span></span><br><span class="line">            [cmd-peek-delayed] =&gt; <span class="number">10</span></span><br><span class="line">            [cmd-peek-buried] =&gt; <span class="number">10</span></span><br><span class="line">            [cmd-reserve] =&gt; <span class="number">2</span></span><br><span class="line">            [cmd-reserve-with-timeout] =&gt; <span class="number">16</span></span><br><span class="line">            [cmd-delete] =&gt; <span class="number">0</span></span><br><span class="line">            [cmd-release] =&gt; <span class="number">0</span></span><br><span class="line">            [cmd-<span class="keyword">use</span>] =&gt; 7</span><br><span class="line">            [<span class="title">cmd</span>-<span class="title">watch</span>] =&gt; 4</span><br><span class="line">            [<span class="title">cmd</span>-<span class="title">ignore</span>] =&gt; 4</span><br><span class="line">            [<span class="title">cmd</span>-<span class="title">bury</span>] =&gt; 0</span><br><span class="line">            [<span class="title">cmd</span>-<span class="title">kick</span>] =&gt; 4</span><br><span class="line">            [<span class="title">cmd</span>-<span class="title">touch</span>] =&gt; 0</span><br><span class="line">            [<span class="title">cmd</span>-<span class="title">stats</span>] =&gt; 1</span><br><span class="line">            [<span class="title">cmd</span>-<span class="title">stats</span>-<span class="title">job</span>] =&gt; 1</span><br><span class="line">            [<span class="title">cmd</span>-<span class="title">stats</span>-<span class="title">tube</span>] =&gt; 1</span><br><span class="line">            [<span class="title">cmd</span>-<span class="title">list</span>-<span class="title">tubes</span>] =&gt; 0</span><br><span class="line">            [<span class="title">cmd</span>-<span class="title">list</span>-<span class="title">tube</span>-<span class="title">used</span>] =&gt; 0</span><br><span class="line">            [<span class="title">cmd</span>-<span class="title">list</span>-<span class="title">tubes</span>-<span class="title">watched</span>] =&gt; 0</span><br><span class="line">            [<span class="title">cmd</span>-<span class="title">pause</span>-<span class="title">tube</span>] =&gt; 0</span><br><span class="line">            [<span class="title">job</span>-<span class="title">timeouts</span>] =&gt; 0</span><br><span class="line">            [<span class="title">total</span>-<span class="title">jobs</span>] =&gt; 2</span><br><span class="line">            [<span class="title">max</span>-<span class="title">job</span>-<span class="title">size</span>] =&gt; 65535</span><br><span class="line">            [<span class="title">current</span>-<span class="title">tubes</span>] =&gt; 1</span><br><span class="line">            [<span class="title">current</span>-<span class="title">connections</span>] =&gt; 1</span><br><span class="line">            [<span class="title">current</span>-<span class="title">producers</span>] =&gt; 0</span><br><span class="line">            [<span class="title">current</span>-<span class="title">workers</span>] =&gt; 0</span><br><span class="line">            [<span class="title">current</span>-<span class="title">waiting</span>] =&gt; 0</span><br><span class="line">            [<span class="title">total</span>-<span class="title">connections</span>] =&gt; 37</span><br><span class="line">            [<span class="title">pid</span>] =&gt; 1</span><br><span class="line">            [<span class="title">version</span>] =&gt; 1.10</span><br><span class="line">            [<span class="title">rusage</span>-<span class="title">utime</span>] =&gt; 0.020000</span><br><span class="line">            [<span class="title">rusage</span>-<span class="title">stime</span>] =&gt; 0.030000</span><br><span class="line">            [<span class="title">uptime</span>] =&gt; 96714</span><br><span class="line">            [<span class="title">binlog</span>-<span class="title">oldest</span>-<span class="title">index</span>] =&gt; 0</span><br><span class="line">            [<span class="title">binlog</span>-<span class="title">current</span>-<span class="title">index</span>] =&gt; 0</span><br><span class="line">            [<span class="title">binlog</span>-<span class="title">records</span>-<span class="title">migrated</span>] =&gt; 0</span><br><span class="line">            [<span class="title">binlog</span>-<span class="title">records</span>-<span class="title">written</span>] =&gt; 0</span><br><span class="line">            [<span class="title">binlog</span>-<span class="title">max</span>-<span class="title">size</span>] =&gt; 10485760</span><br><span class="line">            [<span class="title">id</span>] =&gt; <span class="title">a1e58a6bbd4c3b8b</span></span><br><span class="line">            [<span class="title">hostname</span>] =&gt; 91<span class="title">db88742cda</span></span><br><span class="line">        )</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="查看当前-tube-列表"><a href="#查看当前-tube-列表" class="headerlink" title="查看当前 tube 列表"></a>查看当前 tube 列表</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$res</span> = <span class="variable">$conn</span>-&gt;listTubes();</span><br><span class="line">print_r(<span class="variable">$res</span>);</span><br></pre></td></tr></table></figure>
+<p>此方法将返回一个数组，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [0] &#x3D;&gt; default</span><br><span class="line">    [1] &#x3D;&gt; myTube</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="查看当前-use-的-tube-列表"><a href="#查看当前-use-的-tube-列表" class="headerlink" title="查看当前 use 的 tube 列表"></a>查看当前 use 的 tube 列表</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$res</span> = <span class="variable">$conn</span>-&gt;listTubeUsed();</span><br><span class="line">print_r(<span class="variable">$res</span>);</span><br></pre></td></tr></table></figure>
+<p>此方法返回一个字符串，为当前 used 的 tube 名。<br>注意，同一时间，只有一个 tube 会被 used 。</p>
+<h3 id="查看当前-watch-list"><a href="#查看当前-watch-list" class="headerlink" title="查看当前 watch list"></a>查看当前 watch list</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$res</span> = <span class="variable">$conn</span>-&gt;listTubesWatched();</span><br><span class="line">print_r(<span class="variable">$res</span>);</span><br></pre></td></tr></table></figure>
+<p>此方法将返回一个数组，如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [0] =&gt; default</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="冻结-tube"><a href="#冻结-tube" class="headerlink" title="冻结 tube"></a>冻结 tube</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$conn</span>-&gt;pauseTube(<span class="string">&#x27;default&#x27;</span>,<span class="number">90</span>);</span><br></pre></td></tr></table></figure>
+<p>此方法没有返回值，会将 tube 冻结 90 秒，冻结期间，消费者无法 reserve job ，如果 tube 冻结后，有客户端发送了 reserve 指令，则会阻塞，直到冻结结束，或 reserve time out 。</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：Beanstalkd 笔记</li>
+        <li>Post author：Yuxuan Wu</li>
+        <li>Create time：2021-03-25 20:07:32</li>
+        <li>
+            Post link：yuxuanwu17.github.io2021/03/25/2021-03-26-Beanstalkd-笔记/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/03/25/2021-03-26-RNAseq-demo-&amp;-notes/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">RNAseq demo &amp; notes</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/03/23/2021-03-24-SQL-where-1-=-1-%E7%94%A8%E6%B3%95/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">SQL where 1 = 1 用法</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span> -
+            
+            2021 <i class="fas fa-heart icon-animate"></i> <a href="/">Yuxuan Wu</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count <span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a> | Theme <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.3.1</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-Beanstalkd-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.</span> <span class="nav-text">一、  Beanstalkd 是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-Beanstalkd-%E7%89%B9%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">二、  Beanstalkd 特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A7%EF%BC%88priority%EF%BC%89"><span class="nav-number">2.0.1.</span> <span class="nav-text">优先级（priority）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BB%B6%E8%BF%9F%EF%BC%88delay%EF%BC%89"><span class="nav-number">2.0.2.</span> <span class="nav-text">延迟（delay）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%81%E4%B9%85%E5%8C%96%EF%BC%88persistent-data%EF%BC%89"><span class="nav-number">2.0.3.</span> <span class="nav-text">持久化（persistent data）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%84%E7%95%99%EF%BC%88buried%EF%BC%89"><span class="nav-number">2.0.4.</span> <span class="nav-text">预留（buried）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E8%B6%85%E6%97%B6%E9%87%8D%E5%8F%91%EF%BC%88time-to-run%EF%BC%89"><span class="nav-number">2.0.5.</span> <span class="nav-text">任务超时重发（time-to-run）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F"><span class="nav-number">2.0.6.</span> <span class="nav-text">分布式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E7%AE%A1%E9%81%93%EF%BC%88tube%EF%BC%89%E4%B8%8E%E4%BB%BB%E5%8A%A1%EF%BC%88job%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">三、 管道（tube）与任务（job）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E6%B5%81%E7%A8%8B"><span class="nav-number">3.1.</span> <span class="nav-text">具体流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81Beanstalkd-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="nav-number">4.</span> <span class="nav-text">四、Beanstalkd 消息队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81-Beanstalkd-%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">5.</span> <span class="nav-text">五、 Beanstalkd 的安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MAC-%E5%AE%89%E8%A3%85"><span class="nav-number">5.1.</span> <span class="nav-text">MAC 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux"><span class="nav-number">5.2.</span> <span class="nav-text">Linux</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81beanstalkd-%E4%BD%BF%E7%94%A8%EF%BC%88PHP%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">六、beanstalkd 使用（PHP）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%BF%E9%87%8C%E4%BA%91%E4%BD%BF%E7%94%A8"><span class="nav-number">6.1.</span> <span class="nav-text">阿里云使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pheanstalk"><span class="nav-number">6.2.</span> <span class="nav-text">Pheanstalk</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="nav-number">7.</span> <span class="nav-text">七、什么是消息队列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%A0%E4%B8%AA%E5%90%8D%E8%AF%8D"><span class="nav-number">7.0.1.</span> <span class="nav-text">几个名词</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">8.</span> <span class="nav-text">八、消息队列的应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%86%97%E4%BD%99"><span class="nav-number">8.0.1.</span> <span class="nav-text">数据冗余</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E8%80%A6%E5%90%88"><span class="nav-number">8.0.2.</span> <span class="nav-text">解耦合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E8%83%BD%E5%8A%9B"><span class="nav-number">8.0.3.</span> <span class="nav-text">异步能力</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E6%80%A7"><span class="nav-number">8.0.4.</span> <span class="nav-text">扩展性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A1%BA%E5%BA%8F%E4%BF%9D%E8%AF%81"><span class="nav-number">8.0.5.</span> <span class="nav-text">顺序保证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%8A%E5%B3%B0%E5%A1%AB%E8%B0%B7"><span class="nav-number">8.0.6.</span> <span class="nav-text">削峰填谷</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%9D%E3%80%81%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">9.</span> <span class="nav-text">九、消息队列的注意事项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">9.1.</span> <span class="nav-text">复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E7%94%A8%E6%80%A7"><span class="nav-number">9.2.</span> <span class="nav-text">可用性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E5%8F%AF%E9%9D%A0%E6%80%A7"><span class="nav-number">9.3.</span> <span class="nav-text">消息可靠性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%BA%E5%BA%8F%E6%B6%88%E8%B4%B9"><span class="nav-number">9.4.</span> <span class="nav-text">顺序消费</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E9%87%8D%E5%A4%8D"><span class="nav-number">9.5.</span> <span class="nav-text">消息重复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-number">9.6.</span> <span class="nav-text">一致性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E3%80%81beanstalkd-%E5%8D%8F%E8%AE%AE%E7%BF%BB%E8%AF%91"><span class="nav-number">10.</span> <span class="nav-text">十、beanstalkd 协议翻译</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%8F%E8%AE%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">10.1.</span> <span class="nav-text">协议描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%BD%E5%90%8D%E7%BA%A6%E5%AE%9A"><span class="nav-number">10.2.</span> <span class="nav-text">命名约定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Errors"><span class="nav-number">10.3.</span> <span class="nav-text">Errors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Job-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">10.4.</span> <span class="nav-text">Job 生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tubes"><span class="nav-number">10.5.</span> <span class="nav-text">Tubes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E4%BA%A7%E8%80%85%E5%91%BD%E4%BB%A4"><span class="nav-number">10.6.</span> <span class="nav-text">生产者命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#put"><span class="nav-number">10.7.</span> <span class="nav-text">put</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#use"><span class="nav-number">10.8.</span> <span class="nav-text">use</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E8%80%85%E5%91%BD%E4%BB%A4"><span class="nav-number">10.9.</span> <span class="nav-text">消费者命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reserve"><span class="nav-number">10.10.</span> <span class="nav-text">reserve</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#delete"><span class="nav-number">10.11.</span> <span class="nav-text">delete</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#release"><span class="nav-number">10.12.</span> <span class="nav-text">release</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bury"><span class="nav-number">10.13.</span> <span class="nav-text">bury</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#touch"><span class="nav-number">10.14.</span> <span class="nav-text">touch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#watch"><span class="nav-number">10.15.</span> <span class="nav-text">watch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ignore"><span class="nav-number">10.16.</span> <span class="nav-text">ignore</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%91%BD%E4%BB%A4"><span class="nav-number">10.17.</span> <span class="nav-text">其他命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#peek"><span class="nav-number">10.18.</span> <span class="nav-text">peek</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kick"><span class="nav-number">10.19.</span> <span class="nav-text">kick</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kick-job"><span class="nav-number">10.20.</span> <span class="nav-text">kick-job</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stats-job"><span class="nav-number">10.21.</span> <span class="nav-text">stats-job</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stats-tube"><span class="nav-number">10.22.</span> <span class="nav-text">stats-tube</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stats"><span class="nav-number">10.23.</span> <span class="nav-text">stats</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#list-tubes"><span class="nav-number">10.24.</span> <span class="nav-text">list-tubes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#list-tube-used"><span class="nav-number">10.25.</span> <span class="nav-text">list-tube-used</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#list-tubes-watched"><span class="nav-number">10.26.</span> <span class="nav-text">list-tubes-watched</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#quit"><span class="nav-number">10.27.</span> <span class="nav-text">quit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pause-tube"><span class="nav-number">10.28.</span> <span class="nav-text">pause-tube</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E3%80%81Beanstalkd-%E5%85%B3%E9%94%AE%E5%91%BD%E4%BB%A4%E8%A1%A8%E6%A0%BC"><span class="nav-number">11.</span> <span class="nav-text">十、Beanstalkd 关键命令表格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%B8%80%E3%80%81Pheanstalk-%E5%8D%8F%E8%AE%AE%E8%A7%A3%E6%9E%90"><span class="nav-number">12.</span> <span class="nav-text">十一、Pheanstalk 协议解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PheanstalkInterface"><span class="nav-number">12.1.</span> <span class="nav-text">PheanstalkInterface</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E9%87%8F"><span class="nav-number">12.2.</span> <span class="nav-text">常量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">12.3.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JobIdInterface"><span class="nav-number">12.4.</span> <span class="nav-text">JobIdInterface</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95-1"><span class="nav-number">12.4.1.</span> <span class="nav-text">方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CommandInterface"><span class="nav-number">12.5.</span> <span class="nav-text">CommandInterface</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E9%87%8F-1"><span class="nav-number">12.5.1.</span> <span class="nav-text">常量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95-2"><span class="nav-number">12.5.2.</span> <span class="nav-text">方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ResponseInterface"><span class="nav-number">12.6.</span> <span class="nav-text">ResponseInterface</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E9%87%8F-2"><span class="nav-number">12.6.1.</span> <span class="nav-text">常量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95-3"><span class="nav-number">12.6.2.</span> <span class="nav-text">方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ResponseParserInterface"><span class="nav-number">12.7.</span> <span class="nav-text">ResponseParserInterface</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95-4"><span class="nav-number">12.7.1.</span> <span class="nav-text">方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SocketFactoryInterface"><span class="nav-number">12.8.</span> <span class="nav-text">SocketFactoryInterface</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95-5"><span class="nav-number">12.8.1.</span> <span class="nav-text">方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SocketInterface"><span class="nav-number">12.9.</span> <span class="nav-text">SocketInterface</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95-6"><span class="nav-number">12.9.1.</span> <span class="nav-text">方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%BA%8C%E3%80%81Pheanstalk-%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C"><span class="nav-number">13.</span> <span class="nav-text">十二、Pheanstalk 使用手册</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5"><span class="nav-number">13.1.</span> <span class="nav-text">建立连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E3%80%81%E9%87%8D%E8%BF%9E"><span class="nav-number">13.2.</span> <span class="nav-text">关闭、重连</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E4%BA%A7%E8%80%85%E6%93%8D%E4%BD%9C"><span class="nav-number">13.3.</span> <span class="nav-text">生产者操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%89%E6%8B%A9-tube"><span class="nav-number">13.3.1.</span> <span class="nav-text">选择 tube</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#put-job"><span class="nav-number">13.3.2.</span> <span class="nav-text">put job</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%93%BE%E5%BC%8F%E6%93%8D%E4%BD%9C"><span class="nav-number">13.3.3.</span> <span class="nav-text">链式操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4-Tube"><span class="nav-number">13.3.4.</span> <span class="nav-text">默认 Tube</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E8%80%85%E6%93%8D%E4%BD%9C"><span class="nav-number">13.4.</span> <span class="nav-text">消费者操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A5%E6%94%B6-job"><span class="nav-number">13.4.1.</span> <span class="nav-text">接收 job</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#reserve-1"><span class="nav-number">13.4.2.</span> <span class="nav-text">reserve</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#reserveWithTimeOut"><span class="nav-number">13.4.3.</span> <span class="nav-text">reserveWithTimeOut</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4-job"><span class="nav-number">13.5.</span> <span class="nav-text">删除 job</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8A%E6%94%BE-reserved-job"><span class="nav-number">13.6.</span> <span class="nav-text">释放 reserved job</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%84%E7%95%99"><span class="nav-number">13.7.</span> <span class="nav-text">预留</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%B6%E8%BF%9F-ttr"><span class="nav-number">13.8.</span> <span class="nav-text">延迟 ttr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E7%9B%91%E5%90%AC%E7%9A%84%E7%AE%A1%E9%81%93"><span class="nav-number">13.9.</span> <span class="nav-text">添加监听的管道</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E7%9B%91%E5%90%AC%E7%9A%84%E7%AE%A1%E9%81%93"><span class="nav-number">13.9.1.</span> <span class="nav-text">删除监听的管道</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%85%E7%9B%91%E5%90%AC%E4%B8%80%E4%B8%AA%E7%AE%A1%E9%81%93"><span class="nav-number">13.10.</span> <span class="nav-text">仅监听一个管道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%91%BD%E4%BB%A4-1"><span class="nav-number">13.11.</span> <span class="nav-text">其他命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E7%BA%AF%E8%8E%B7%E5%8F%96-job"><span class="nav-number">13.11.1.</span> <span class="nav-text">单纯获取 job</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E6%93%8D%E4%BD%9C-job-%E4%B8%BA-ready"><span class="nav-number">13.12.</span> <span class="nav-text">批量操作 job 为 ready</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%8C%87%E5%AE%9A-job-%E4%B8%BA-ready"><span class="nav-number">13.13.</span> <span class="nav-text">操作指定 job 为 ready</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96-job-%E7%9A%84%E7%BB%9F%E8%AE%A1%E4%BF%A1%E6%81%AF"><span class="nav-number">13.14.</span> <span class="nav-text">获取 job 的统计信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96-tube-%E7%BB%9F%E8%AE%A1%E4%BF%A1%E6%81%AF"><span class="nav-number">13.15.</span> <span class="nav-text">获取 tube 统计信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96-beanstalkd-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BB%9F%E8%AE%A1%E4%BF%A1%E6%81%AF"><span class="nav-number">13.16.</span> <span class="nav-text">获取 beanstalkd 服务器统计信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D-tube-%E5%88%97%E8%A1%A8"><span class="nav-number">13.17.</span> <span class="nav-text">查看当前 tube 列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D-use-%E7%9A%84-tube-%E5%88%97%E8%A1%A8"><span class="nav-number">13.18.</span> <span class="nav-text">查看当前 use 的 tube 列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D-watch-list"><span class="nav-number">13.19.</span> <span class="nav-text">查看当前 watch list</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%BB%E7%BB%93-tube"><span class="nav-number">13.20.</span> <span class="nav-text">冻结 tube</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

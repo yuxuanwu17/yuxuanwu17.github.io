@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Welcome to my personal blogs">
+    <meta name="author" content="Yuxuan Wu">
+    
+    <title>
+        
+            阿里云轻量服务器配置jupyter notebook及远程网页打开 |
+        
+        Yuxuan Wu
+    </title>
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep coding, Keep hungry."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.3.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days age","week":"%s weeks age","month":"%s months age","year":"%s years age"};
+  </script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Yuxuan Wu
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content normal-code-theme">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">阿里云轻量服务器配置jupyter notebook及远程网页打开</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Yuxuan Wu</span>
+                        <span class="level">Lv11</span>
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i> 2021-01-25 19:32:27
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Python/">Python</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/tags/tutorial/">tutorial</a>
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Jupyter-notebook/">Jupyter_notebook</a>
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/cloud-server/">cloud server</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i> <span>1k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i> <span>3 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>具体阿里云服务器的参数和购买可以参考我上一篇专栏</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/269047002" >loner：从阿里云轻量服务器安装Hadoop及环境配置<i class="fas fa-external-link-alt"></i></a></p>
+<p>首先保证你的服务器上安装成功 Anaconda，具体教程可以参考如下链接</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/64930395" >寐语：Linux-Centos7下安装Anaconda（2019年新版）<i class="fas fa-external-link-alt"></i></a></p>
+<h3 id="安装jupyter-notebook"><a href="#安装jupyter-notebook" class="headerlink" title="安装jupyter notebook"></a>安装jupyter notebook</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install jupyter notebook </span><br></pre></td></tr></table></figure>
+<p><img src="https://pic1.zhimg.com/v2-fded09bc06bc572a1b1fa4b37908bba0_b.png" alt="img"></p>
+<p>安装完成后导出jupyter的config文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter notebook --generate-config</span><br></pre></td></tr></table></figure>
+<p><img src="https://pic4.zhimg.com/v2-03a1115c5cc9e61e1c5f792c40411c8f_b.png" alt="img"></p>
+<p>可以看见一般默认地址是在 /root/.jupyter/jupyter_notebook_config.py</p>
+<p>命令行输入python3，进入python3环境</p>
+<p><img src="https://pic2.zhimg.com/v2-5d85b851016dd6c381f8e703d7031b1d_b.png" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">from IPython.lib import passwd</span><br><span class="line">passwd()</span><br></pre></td></tr></table></figure>
+<p>这里的password是可以随便写的，只要保证两次输入的相同就行，重点是返回的哈希值（e.g. ‘sha1:d208466595c9:91e23f1a*<strong><strong><strong><strong><strong><strong><strong><strong>**</strong></strong></strong></strong></strong></strong></strong></strong>‘）</p>
+<h3 id="开始编译jupyter-的config文件"><a href="#开始编译jupyter-的config文件" class="headerlink" title="开始编译jupyter 的config文件"></a>开始编译jupyter 的config文件</h3><p>vim 打开配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi ~&#x2F;.jupyter&#x2F;jupyter_notebook_config.py</span><br></pre></td></tr></table></figure>
+<p>搜索password关键字(命令模式下输入/password)，找到其中代码块：</p>
+<p><img src="https://pic2.zhimg.com/v2-02ea1c6c29a091ccae81ba8f67b6a129_b.png" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># c.NotebookApp.password&#x3D;&#39;&#39;</span><br><span class="line"></span><br><span class="line">#将其替换成：</span><br><span class="line"></span><br><span class="line">c.NotebookApp.password &#x3D; u&#39;sha1:d208466595c9:91e23f1a***********************************’</span><br></pre></td></tr></table></figure>
+<p>其中引号中的内容即为之前复制下来的哈希密码，主义引号之前还有一个u</p>
+<p>然后拖到最下面输入一下配置信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">c.NotebookApp.ip &#x3D; &#39;*&#39; #所有绑定服务器的IP都能访问，若想只在特定ip访问，输入ip地址即可</span><br><span class="line">c.NotebookApp.port &#x3D; 8889 #端口设置，注意该端口可以设置的范围可以在服务器控制台的防火墙选项中找到</span><br><span class="line">c.NotebookApp.open_browser &#x3D; False #我们并不想在服务器上直接打开Jupyter Notebook，所以设置成False</span><br><span class="line">c.NotebookApp.notebook_dir &#x3D; &#39;&#x2F;root&#39; #这里是设置Jupyter的根目录，若不设置将默认root的根目录，不安全</span><br><span class="line">c.NotebookApp.allow_root &#x3D; True # 为了安全，Jupyter默认不允许以root权限启动jupyter</span><br></pre></td></tr></table></figure>
+<p><img src="https://pic4.zhimg.com/v2-de707fe4b5de8205b72cdc1123628c3b_b.png" alt="img"></p>
+<p>注意：这里的端口一定要在阿里云的防火墙上打开，否则会无法链接，具体可以看本文最顶上之前我配置Hadoop的文章</p>
+<h3 id="启动jupyter-notebook"><a href="#启动jupyter-notebook" class="headerlink" title="启动jupyter notebook"></a>启动jupyter notebook</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter notebook ## 第一次打开用，这种打开会随着网页的关闭而停止运行</span><br></pre></td></tr></table></figure>
+<p><img src="https://pic4.zhimg.com/v2-011eeae6a7935e1d46ea3dbf4fb2c03b_b.png" alt="img"></p>
+<p>注意红框里面的token，接下来会用到，这里的端口是8888，是我第一次配置的端口，忘记改了（你在config文件里怎么设置的端口，这里显示的就会是什么样）</p>
+<h3 id="连接浏览器"><a href="#连接浏览器" class="headerlink" title="连接浏览器"></a>连接浏览器</h3><p>打开你的浏览器输入你的公网ip和在配置文件里确定的端口号。例如 12*.*<em>.2</em>:8889来链接 （ip+开放的端口）</p>
+<p><img src="https://pic1.zhimg.com/v2-4452ed380dc7f4c2410b8729fd055028_b.png" alt="img"></p>
+<p>在红框里输入你的token，直接复制，然后就可以进入你的jupyter notebook了</p>
+<p><img src="https://pic3.zhimg.com/v2-9dd595bfb3f58dfbfee01649d4c44162_b.png" alt="img"></p>
+<p>通常来说是用如下来打开jupyter，这样就可以保证在后台运行,程序不会随着你关闭网页而暂停</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup jupyter-notebook &amp;</span><br></pre></td></tr></table></figure>
+<h3 id="方法二：映射ip到本地"><a href="#方法二：映射ip到本地" class="headerlink" title="方法二：映射ip到本地"></a>方法二：映射ip到本地</h3><p>在保证之前的config文件配置完成后，进入服务器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup jupyter-notebook --no-browser --port&#x3D;8889</span><br></pre></td></tr></table></figure>
+<p><img src="https://pic2.zhimg.com/v2-2f8493bad3e754d3f882c06a14030581_b.png" alt="img"></p>
+<p>然后新建一个窗口，<strong>不要进入服务器</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -N -f -L localhost:8889:localhost:8889 root@123.56.56.215</span><br></pre></td></tr></table></figure>
+<p>保证两个localhost相同，因为我也搞不清哪个代表本地，哪个代表云服务器</p>
+<p><img src="https://pic1.zhimg.com/v2-2c7e46d6860948d2c83ac9eddee17668_b.png" alt="img"></p>
+<p>然后打开浏览器 输入<a class="link"   target="_blank" rel="noopener" href="http://localhost:8889/tree" >localhost:8889<i class="fas fa-external-link-alt"></i></a> 也可以轻松打开</p>
+<p><img src="https://pic1.zhimg.com/v2-0c1cf7886039bd2eef0dac4ac2563e58_b.png" alt="img"></p>
+<p>因为也用到了nohup，所以并不会随着你关闭网页而停止运行</p>
+<p>如果在本地映射端口的时候提醒端口占用如下，需要清理端口，运行下面代码，端口改成对应的就行，然后再输入一下上面的映射，就可以重新进入</p>
+<p><img src="https://pic4.zhimg.com/v2-baef76a58e509e5c8650a22ac5e539ef_b.png" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof -ti:8889 | xargs kill -9</span><br></pre></td></tr></table></figure>
+<h3 id="一些基本操作，如创建虚拟环境，和jupyter-没有太大关系"><a href="#一些基本操作，如创建虚拟环境，和jupyter-没有太大关系" class="headerlink" title="一些基本操作，如创建虚拟环境，和jupyter 没有太大关系"></a>一些基本操作，如创建虚拟环境，和jupyter 没有太大关系</h3><p>虚拟环境可以随便你折腾，不会影响到服务器其他的配置，搞坏了大不了删掉重新来</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda info --env</span><br></pre></td></tr></table></figure>
+<p>查看当前anaconda的环境</p>
+<p><img src="https://pic2.zhimg.com/v2-02d41999d1770a66703f7e0e37fb9171_b.png" alt="img"></p>
+<p>创建conda 虚拟环境，这里是指定python3.7</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create --name python3.7 python&#x3D;3.7 </span><br></pre></td></tr></table></figure>
+<p><img src="https://pic2.zhimg.com/v2-b09202c2d15eb5c8c6dc7eff27624f09_b.png" alt="img"></p>
+<p>安装成功后可以用如下命令打开</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda activate python3.7</span><br></pre></td></tr></table></figure>
+<p><img src="https://pic4.zhimg.com/v2-663c168e06a9f8558f7cb4185ddf91c7_b.png" alt="img"></p>
+<p>当base变成你的虚拟环境的名称，则表示你的环境已经创建成功了</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：阿里云轻量服务器配置jupyter notebook及远程网页打开</li>
+        <li>Post author：Yuxuan Wu</li>
+        <li>Create time：2021-01-25 19:32:27</li>
+        <li>
+            Post link：yuxuanwu17.github.io2021/01/25/阿里云轻量服务器配置jupyter-notebook及远程网页打开/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/01/25/sklearn%E9%87%8CLinearSVC%E4%B8%8ESVC%E5%8C%BA%E5%88%AB/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">sklearn里LinearSVC与SVC区别</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/01/25/IntelliJ-IDEA-%E8%B0%83%E8%AF%95%E9%85%8D%E7%BD%AEHadoop/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">IntelliJ IDEA 调试配置Hadoop</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span> -
+            
+            2021 <i class="fas fa-heart icon-animate"></i> <a href="/">Yuxuan Wu</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count <span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a> | Theme <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.3.1</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85jupyter-notebook"><span class="nav-number">1.</span> <span class="nav-text">安装jupyter notebook</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E7%BC%96%E8%AF%91jupyter-%E7%9A%84config%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">开始编译jupyter 的config文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8jupyter-notebook"><span class="nav-number">3.</span> <span class="nav-text">启动jupyter notebook</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">连接浏览器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A%E6%98%A0%E5%B0%84ip%E5%88%B0%E6%9C%AC%E5%9C%B0"><span class="nav-number">5.</span> <span class="nav-text">方法二：映射ip到本地</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%EF%BC%8C%E5%A6%82%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%EF%BC%8C%E5%92%8Cjupyter-%E6%B2%A1%E6%9C%89%E5%A4%AA%E5%A4%A7%E5%85%B3%E7%B3%BB"><span class="nav-number">6.</span> <span class="nav-text">一些基本操作，如创建虚拟环境，和jupyter 没有太大关系</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

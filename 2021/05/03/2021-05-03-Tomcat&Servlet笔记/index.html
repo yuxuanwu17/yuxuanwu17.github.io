@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Welcome to my personal blogs">
+    <meta name="author" content="Yuxuan Wu">
+    
+    <title>
+        
+            Tomcat&amp;Servlet笔记 |
+        
+        Yuxuan Wu
+    </title>
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep coding, Keep hungry."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.3.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days age","week":"%s weeks age","month":"%s months age","year":"%s years age"};
+  </script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Yuxuan Wu
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content normal-code-theme">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Tomcat&amp;Servlet笔记</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Yuxuan Wu</span>
+                        <span class="level">Lv11</span>
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i> 2021-05-03 23:24:10
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/categories/web/">web</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Java/">Java</a>
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/notes/">notes</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i> <span>2.6k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i> <span>10 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="今日内容"><a href="#今日内容" class="headerlink" title="今日内容"></a>今日内容</h1><pre><code>1. web相关概念回顾
+2. web服务器软件：Tomcat
+3. Servlet入门学习</code></pre>
+<h2 id="web相关概念回顾"><a href="#web相关概念回顾" class="headerlink" title="web相关概念回顾"></a>web相关概念回顾</h2><h3 id="软件架构"><a href="#软件架构" class="headerlink" title="软件架构"></a>软件架构</h3><ol>
+<li>C/S：客户端/服务器端</li>
+<li>B/S：浏览器/服务器端</li>
+</ol>
+<h3 id="资源分类"><a href="#资源分类" class="headerlink" title="资源分类"></a>资源分类</h3><ol>
+<li>静态资源：所有用户访问后，得到的结果都是一样的，称为静态资源.静态资源可以直接被浏览器解析<ul>
+<li>如： html,css,JavaScript</li>
+</ul>
+</li>
+<li>动态资源:每个用户访问相同资源后，得到的结果可能不一样。称为动态资源。动态资源被访问后，需要先转换为静态资源，在返回给浏览器<ul>
+<li>如：servlet/jsp,php,asp….</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210503154253.bmp" alt="资源分类"></p>
+<h3 id="网络通信三要素"><a href="#网络通信三要素" class="headerlink" title="网络通信三要素"></a>网络通信三要素</h3><ol>
+<li>IP：电子设备(计算机)在网络中的唯一标识。</li>
+<li>端口：应用程序在计算机中的唯一标识。 0~65536</li>
+<li>传输协议：规定了数据传输的规则<ol>
+<li>基础协议：<ol>
+<li>tcp:安全协议，三次握手。 速度稍慢</li>
+<li>udp:不安全协议。 速度快</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="web服务器软件："><a href="#web服务器软件：" class="headerlink" title="web服务器软件："></a>web服务器软件：</h2><ul>
+<li>服务器：安装了服务器软件的计算机</li>
+<li>服务器软件：接收用户的请求，处理请求，做出响应</li>
+<li>web服务器软件：接收用户的请求，处理请求，做出响应。<ul>
+<li>在web服务器软件中，可以部署web项目，让用户通过浏览器来访问这些项目</li>
+<li>web容器</li>
+</ul>
+</li>
+</ul>
+<h3 id="常见的java相关的web服务器软件："><a href="#常见的java相关的web服务器软件：" class="headerlink" title="常见的java相关的web服务器软件："></a>常见的java相关的web服务器软件：</h3><ul>
+<li>webLogic：oracle公司，大型的JavaEE服务器，支持所有的JavaEE规范，收费的。</li>
+<li>webSphere：IBM公司，大型的JavaEE服务器，支持所有的JavaEE规范，收费的。</li>
+<li>JBOSS：JBOSS公司的，大型的JavaEE服务器，支持所有的JavaEE规范，收费的。</li>
+<li>Tomcat：Apache基金组织，中小型的JavaEE服务器，仅仅支持少量的JavaEE规范servlet/jsp。开源的，免费的。</li>
+</ul>
+<h3 id="Tomcat：web服务器软件"><a href="#Tomcat：web服务器软件" class="headerlink" title="Tomcat：web服务器软件"></a>Tomcat：web服务器软件</h3><pre><code>* JavaEE：Java语言在企业级开发中使用的技术规范的总和，一共规定了13项大的规范
+
+* Tomcat：web服务器软件
+    1. 下载：http://tomcat.apache.org/
+    2. 安装：解压压缩包即可。
+        * 注意：安装目录建议不要有中文和空格
+    3. 卸载：删除目录就行了
+    4. 启动：
+        * bin/startup.bat ,双击运行该文件即可
+        * 访问：浏览器输入：http://localhost:8080 回车访问自己
+                          http://别人的ip:8080 访问别人
+
+        * 可能遇到的问题：
+            1. 黑窗口一闪而过：
+                * 原因： 没有正确配置JAVA_HOME环境变量
+                * 解决方案：正确配置JAVA_HOME环境变量
+
+            2. 启动报错：
+                1. 暴力：找到占用的端口号，并且找到对应的进程，杀死该进程
+                    * netstat -ano
+                2. 温柔：修改自身的端口号
+                    * conf/server.xml
+                    * &lt;Connector port=&quot;8888&quot; protocol=&quot;HTTP/1.1&quot;
+                       connectionTimeout=&quot;20000&quot;
+                       redirectPort=&quot;8445&quot; /&gt;
+                    * 一般会将tomcat的默认端口号修改为80。80端口号是http协议的默认端口号。
+                        * 好处：在访问时，就不用输入端口号
+    5. 关闭：
+        1. 正常关闭：
+            * bin/shutdown.bat
+            * ctrl+c
+        2. 强制关闭：
+            * 点击启动窗口的×
+    6. 配置:
+        * 部署项目的方式：
+            1. 直接将项目放到webapps目录下即可。
+                * /hello：项目的访问路径--&gt;虚拟目录
+                * 简化部署：将项目打成一个war包，再将war包放置到webapps目录下。
+                    * war包会自动解压缩
+
+            2. 配置conf/server.xml文件
+                在&lt;Host&gt;标签体中配置
+                &lt;Context docBase=&quot;D:\hello&quot; path=&quot;/hehe&quot; /&gt;
+                * docBase:项目存放的路径
+                * path：虚拟目录
+
+            3. 在conf\Catalina\localhost创建任意名称的xml文件。在文件中编写
+                &lt;Context docBase=&quot;D:\hello&quot; /&gt;
+                * 虚拟目录：xml文件的名称
+
+        * 静态项目和动态项目：
+            * 目录结构
+                * java动态项目的目录结构：
+                    -- 项目的根目录
+                        -- WEB-INF目录：
+                            -- web.xml：web项目的核心配置文件
+                            -- classes目录：放置字节码文件的目录
+                            -- lib目录：放置依赖的jar包
+
+
+        * 将Tomcat集成到IDEA中，并且创建JavaEE的项目，部署项目。</code></pre>
+<h3 id="静态项目和动态项目："><a href="#静态项目和动态项目：" class="headerlink" title="静态项目和动态项目："></a>静态项目和动态项目：</h3><p><code>java动态项目的目录结构：</code><br>– 项目的根目录<br>        – WEB-INF目录：<br>            – web.xml：web项目的核心配置文件<br>            – classes目录：放置字节码文件的目录<br>            – lib目录：放置依赖的jar包</p>
+<h2 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h2><h3 id="下载TomCat"><a href="#下载TomCat" class="headerlink" title="下载TomCat"></a>下载TomCat</h3><pre><code>1. 安装or解压
+2. 了解配置和环境变量
+3. 教程参考 https://zhuanlan.zhihu.com/p/149763645</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210503160033.png" alt="tomcat目录结构"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210503155355.png" alt="image-20210222152647371"></p>
+<p>可能的问题</p>
+<ol>
+<li>java环境变量</li>
+<li>闪退问题：需要配置兼容性</li>
+<li>乱码问题：配置文件中的设置</li>
+</ol>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/image-20210222190744919.png" alt="image-20210222190744919"></p>
+<p>可以配置启动的端口号</p>
+<ul>
+<li>tomcat默认的端口号是8080</li>
+<li>mysql:3306</li>
+<li>http:80</li>
+<li>Https:443</li>
+</ul>
+<p>可以在conf/server.xml 中更改端口号</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">&quot;8080&quot;</span> <span class="attr">protocol</span>=<span class="string">&quot;HTTP/1.1&quot;</span></span></span><br><span class="line"><span class="tag">           <span class="attr">connectionTimeout</span>=<span class="string">&quot;20000&quot;</span></span></span><br><span class="line"><span class="tag">           <span class="attr">redirectPort</span>=<span class="string">&quot;8443&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>可以配置主机的名称</p>
+<ul>
+<li>默认的主机名：localhost-&gt;127.0.0.1</li>
+<li>默认网站应用存放的位置为：webapps</li>
+</ul>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh /Users/yuxuan/apache-tomcat-9.0.43/bin/startup.sh </span><br></pre></td></tr></table></figure>
+
+
+<h3 id="高难度面试题"><a href="#高难度面试题" class="headerlink" title="高难度面试题"></a>高难度面试题</h3><p>请你谈谈网站是如何进行访问的！</p>
+<ol>
+<li><p>输入一个域名；回车</p>
+</li>
+<li><p>检查本机的/etc/hosts配置文件下有没有这个域名的映射</p>
+<ol>
+<li><p>有：直接返回对应的ip地址，这个地址中，有我们需要访问的web程序，可以直接访问</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">127.0</span><span class="number">.1</span> localhost</span><br></pre></td></tr></table></figure></li>
+<li><p>没有，去DNS服务器找，找到的就找到，找不到就找不到</p>
+</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210222201426.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210222201406.png"></p>
+<h3 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><h3 id="发布一个网站"><a href="#发布一个网站" class="headerlink" title="发布一个网站"></a>发布一个网站</h3><p>不会就先模仿</p>
+<ul>
+<li>将自己写的网站，放到tomcat中指定的web应用文件夹（webapps）下，就可以访问了，网站应该有的结构</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">--webapps: Tomcat的服务器web目录</span><br><span class="line">  -ROOT</span><br><span class="line">  -kuangstudy: 网站的目录名</span><br><span class="line">    -	WEB-INF</span><br><span class="line">    	- classes	: java</span><br><span class="line">      - lib: web 应用所依赖的jar包</span><br><span class="line">    - index.demo10 默认的首页</span><br><span class="line">    - <span class="keyword">static</span> </span><br><span class="line">        -css</span><br><span class="line">        	-style.css</span><br><span class="line">        -js</span><br><span class="line">        -img</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>HTTP协议：面试</p>
+<p>Maven: 构建工具</p>
+<ul>
+<li>Maven 安装包</li>
+</ul>
+<p>Servlet 入门</p>
+<ul>
+<li>HelloWorld</li>
+<li>Servlet 配置</li>
+<li>原理</li>
+</ul>
+<h2 id="HTTP："><a href="#HTTP：" class="headerlink" title="HTTP："></a>HTTP：</h2><h3 id="什么是HTTP："><a href="#什么是HTTP：" class="headerlink" title="什么是HTTP："></a>什么是HTTP：</h3><p>超文本传输协议（Hypertext Transfer Protocol，HTTP）是一个简单的请求-响应协议，它通常运行在TCP之上。</p>
+<ul>
+<li>文本：html，字符串</li>
+<li>超文本：图片，音乐，视屏，地图：</li>
+<li>80</li>
+</ul>
+<p>HTTPs：安全的</p>
+<ul>
+<li>443</li>
+</ul>
+<h3 id="两个时代"><a href="#两个时代" class="headerlink" title="两个时代"></a>两个时代</h3><ul>
+<li>http1.0<ul>
+<li>HTTP/1.0: 客服端可以于web服务器相连接后，只能获得一个web资源，断开链接</li>
+</ul>
+</li>
+<li>http2.0<ul>
+<li>HTTP/1.1：客服端可以于web服务器相连接后，可以获得一个web资源，断开链接</li>
+</ul>
+</li>
+</ul>
+<h3 id="Http-请求"><a href="#Http-请求" class="headerlink" title="Http 请求"></a>Http 请求</h3><ul>
+<li>客户端—发请求—服务器</li>
+</ul>
+<h2 id="Servlet：-server-applet"><a href="#Servlet：-server-applet" class="headerlink" title="Servlet：  server applet"></a>Servlet：  server applet</h2><ul>
+<li>概念：运行在服务器端的小程序<ul>
+<li>Servlet就是一个接口，定义了Java类被浏览器访问到(tomcat识别)的规则。</li>
+<li>将来我们自定义一个类，实现Servlet接口，复写方法。</li>
+</ul>
+</li>
+</ul>
+<h3 id="快速入门："><a href="#快速入门：" class="headerlink" title="快速入门："></a>快速入门：</h3><ol>
+<li><p>创建JavaEE项目</p>
+</li>
+<li><p>定义一个类，实现Servlet接口</p>
+<ul>
+<li>public class ServletDemo1 implements Servlet</li>
+</ul>
+</li>
+<li><p>实现接口中的抽象方法</p>
+</li>
+<li><p>配置Servlet<br>  在web.xml中配置：</p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置Servlet --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>demo1<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>cn.itcast.web.servlet.ServletDemo1<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>demo1<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/demo1<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210503193230.bmp" alt="Servlet"></p>
+</li>
+</ol>
+<h3 id="执行原理："><a href="#执行原理：" class="headerlink" title="执行原理："></a>执行原理：</h3><ol>
+<li>当服务器接受到客户端浏览器的请求后，会解析请求URL路径，获取访问的Servlet的资源路径</li>
+<li>查找web.xml文件，是否有对应的&lt;url-pattern&gt;标签体内容。</li>
+<li>如果有，则在找到对应的&lt;servlet-class&gt;全类名</li>
+<li>tomcat会将字节码文件加载进内存，并且创建其对象</li>
+<li>调用其方法</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210503193205.bmp" alt="Servlet执行原理"></p>
+<h3 id="Servlet中的生命周期方法："><a href="#Servlet中的生命周期方法：" class="headerlink" title="Servlet中的生命周期方法："></a>Servlet中的生命周期方法：</h3><p>被创建：执行init方法，只执行一次</p>
+<p><code>Servlet什么时候被创建？</code></p>
+<ul>
+<li>默认情况下，第一次被访问时，Servlet被创建</li>
+<li>可以配置执行Servlet的创建时机。<ul>
+<li>在&lt;servlet&gt;标签下配置<ol>
+<li>第一次被访问时，创建<pre><code>   * \&lt;load-on-startup&gt;的值为负数</code></pre>
+</li>
+<li>在服务器启动时，创建<ul>
+<li>&lt;load-on-startup&gt;的值为0或正整数</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<p>Servlet的init方法，只执行一次，说明一个Servlet在内存中只存在一个对象，Servlet是单例的<br>        * 多个用户同时访问时，<code>可能存在线程安全问题。</code><br>        * 解决：尽量不要在Servlet中定义成员变量。即使定义了成员变量，也不要对修改值</p>
+<p><code>提供服务：执行service方法，执行多次</code></p>
+<ul>
+<li>每次访问Servlet时，Service方法都会被调用一次。</li>
+</ul>
+<p><code>被销毁：执行destroy方法，只执行一次</code></p>
+<ul>
+<li>Servlet被销毁时执行。服务器关闭时，Servlet被销毁</li>
+<li>只有服务器正常关闭时，才会执行destroy方法。</li>
+<li>destroy方法在Servlet被销毁之前执行，一般用于释放资源</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.web.servlet;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.*;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Servlet的方法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServletDemo2</span> <span class="keyword">implements</span> <span class="title">Servlet</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 初始化方法</span></span><br><span class="line"><span class="comment">     * 在Servlet被创建时，执行。只会执行一次</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> servletConfig</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> ServletException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(ServletConfig servletConfig)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;init.....&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取ServletConfig对象</span></span><br><span class="line"><span class="comment">     * ServletConfig：Servlet的配置对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServletConfig <span class="title">getServletConfig</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 提供服务方法</span></span><br><span class="line"><span class="comment">     * 每一次Servlet被访问时，执行。执行多次</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> servletRequest</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> servletResponse</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> ServletException</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;service.....&quot;</span>);</span><br><span class="line">        <span class="keyword">int</span> number = <span class="number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取Servlet的一些信息，版本，作者等等。。</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getServletInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 销毁方法</span></span><br><span class="line"><span class="comment">     * 在服务器正常关闭时，执行，执行一次。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;destroy.....&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Servlet3-0："><a href="#Servlet3-0：" class="headerlink" title="Servlet3.0："></a>Servlet3.0：</h3><ul>
+<li><p>好处：</p>
+<ul>
+<li>支持<code>注解配置</code>。可以不需要web.xml了。</li>
+</ul>
+</li>
+<li><p>步骤：</p>
+<ol>
+<li>创建JavaEE项目，选择Servlet的版本3.0以上，可以不创建web.xml</li>
+<li>定义一个类，实现Servlet接口</li>
+<li>复写方法</li>
+<li>在类上使用@WebServlet注解，进行配置<ul>
+<li>@WebServlet(“资源路径”)</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target(&#123;ElementType.TYPE&#125;)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> WebServlet &#123;</span><br><span class="line"><span class="function">String <span class="title">name</span><span class="params">()</span> <span class="keyword">default</span> &quot;&quot;</span>;<span class="comment">//相当于&lt;Servlet-name&gt;</span></span><br><span class="line"></span><br><span class="line">String[] value() <span class="keyword">default</span> &#123;&#125;;<span class="comment">//代表urlPatterns()属性配置</span></span><br><span class="line"></span><br><span class="line">String[] urlPatterns() <span class="keyword">default</span> &#123;&#125;;<span class="comment">//相当于&lt;url-pattern&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">loadOnStartup</span><span class="params">()</span> <span class="keyword">default</span> -1</span>;<span class="comment">//相当于&lt;load-on-startup&gt;</span></span><br><span class="line"></span><br><span class="line">WebInitParam[] initParams() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">asyncSupported</span><span class="params">()</span> <span class="keyword">default</span> <span class="keyword">false</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">String <span class="title">smallIcon</span><span class="params">()</span> <span class="keyword">default</span> &quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function">String <span class="title">largeIcon</span><span class="params">()</span> <span class="keyword">default</span> &quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function">String <span class="title">description</span><span class="params">()</span> <span class="keyword">default</span> &quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function">String <span class="title">displayName</span><span class="params">()</span> <span class="keyword">default</span> &quot;&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="IDEA与tomcat的相关配置"><a href="#IDEA与tomcat的相关配置" class="headerlink" title="IDEA与tomcat的相关配置"></a>IDEA与tomcat的相关配置</h2><ol>
+<li><p>IDEA会为每一个tomcat部署的项目单独建立一份配置文件</p>
+<ul>
+<li>查看控制台的log：Using CATALINA_BASE:   “C:\Users\fqy.IntelliJIdea2018.1\system\tomcat_itcast”</li>
+</ul>
+</li>
+<li><p>工作空间项目    和     tomcat部署的web项目</p>
+<ul>
+<li>tomcat真正访问的是“tomcat部署的web项目”，”tomcat部署的web项目”对应着”工作空间项目” 的web目录下的所有资源</li>
+<li>WEB-INF目录下的资源不能被浏览器直接访问。</li>
+</ul>
+</li>
+<li><p>断点调试：使用”小虫子”启动 dubug 启动</p>
+</li>
+</ol>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：Tomcat&amp;Servlet笔记</li>
+        <li>Post author：Yuxuan Wu</li>
+        <li>Create time：2021-05-03 23:24:10</li>
+        <li>
+            Post link：yuxuanwu17.github.io2021/05/03/2021-05-03-Tomcat&amp;Servlet笔记/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/05/04/2021-05-04-Servlet&amp;HTTP&amp;Request%E7%AC%94%E8%AE%B0/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Servlet&amp;HTTP&amp;Request笔记</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/05/02/2021-05-02-%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">函数式接口</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span> -
+            
+            2021 <i class="fas fa-heart icon-animate"></i> <a href="/">Yuxuan Wu</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count <span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a> | Theme <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.3.1</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8A%E6%97%A5%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">今日内容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#web%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5%E5%9B%9E%E9%A1%BE"><span class="nav-number">1.1.</span> <span class="nav-text">web相关概念回顾</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84"><span class="nav-number">1.1.1.</span> <span class="nav-text">软件架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%84%E6%BA%90%E5%88%86%E7%B1%BB"><span class="nav-number">1.1.2.</span> <span class="nav-text">资源分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1%E4%B8%89%E8%A6%81%E7%B4%A0"><span class="nav-number">1.1.3.</span> <span class="nav-text">网络通信三要素</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BD%AF%E4%BB%B6%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">web服务器软件：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84java%E7%9B%B8%E5%85%B3%E7%9A%84web%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BD%AF%E4%BB%B6%EF%BC%9A"><span class="nav-number">1.2.1.</span> <span class="nav-text">常见的java相关的web服务器软件：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tomcat%EF%BC%9Aweb%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BD%AF%E4%BB%B6"><span class="nav-number">1.2.2.</span> <span class="nav-text">Tomcat：web服务器软件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%8A%A8%E6%80%81%E9%A1%B9%E7%9B%AE%EF%BC%9A"><span class="nav-number">1.2.3.</span> <span class="nav-text">静态项目和动态项目：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tomcat"><span class="nav-number">1.3.</span> <span class="nav-text">Tomcat</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BDTomCat"><span class="nav-number">1.3.1.</span> <span class="nav-text">下载TomCat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">1.3.2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8"><span class="nav-number">1.3.3.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E9%9A%BE%E5%BA%A6%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="nav-number">1.3.4.</span> <span class="nav-text">高难度面试题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">1.3.5.</span> <span class="nav-text">配置环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E5%B8%83%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99"><span class="nav-number">1.3.6.</span> <span class="nav-text">发布一个网站</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%EF%BC%9A"><span class="nav-number">1.4.</span> <span class="nav-text">HTTP：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFHTTP%EF%BC%9A"><span class="nav-number">1.4.1.</span> <span class="nav-text">什么是HTTP：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%A4%E4%B8%AA%E6%97%B6%E4%BB%A3"><span class="nav-number">1.4.2.</span> <span class="nav-text">两个时代</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Http-%E8%AF%B7%E6%B1%82"><span class="nav-number">1.4.3.</span> <span class="nav-text">Http 请求</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Servlet%EF%BC%9A-server-applet"><span class="nav-number">1.5.</span> <span class="nav-text">Servlet：  server applet</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%EF%BC%9A"><span class="nav-number">1.5.1.</span> <span class="nav-text">快速入门：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86%EF%BC%9A"><span class="nav-number">1.5.2.</span> <span class="nav-text">执行原理：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Servlet%E4%B8%AD%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="nav-number">1.5.3.</span> <span class="nav-text">Servlet中的生命周期方法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Servlet3-0%EF%BC%9A"><span class="nav-number">1.5.4.</span> <span class="nav-text">Servlet3.0：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IDEA%E4%B8%8Etomcat%E7%9A%84%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE"><span class="nav-number">1.6.</span> <span class="nav-text">IDEA与tomcat的相关配置</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

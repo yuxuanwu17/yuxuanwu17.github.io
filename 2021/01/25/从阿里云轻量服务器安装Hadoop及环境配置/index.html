@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Welcome to my personal blogs">
+    <meta name="author" content="Yuxuan Wu">
+    
+    <title>
+        
+            从阿里云轻量服务器安装Hadoop及环境配置 |
+        
+        Yuxuan Wu
+    </title>
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep coding, Keep hungry."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.3.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days age","week":"%s weeks age","month":"%s months age","year":"%s years age"};
+  </script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Yuxuan Wu
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content normal-code-theme">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">从阿里云轻量服务器安装Hadoop及环境配置</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Yuxuan Wu</span>
+                        <span class="level">Lv11</span>
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i> 2021-01-25 20:35:27
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Hadoop/">Hadoop</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Hadoop/">Hadoop</a>
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/tutorial/">tutorial</a>
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/cloud-server/">cloud server</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i> <span>1.3k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i> <span>5 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>知乎首次写文章，恳请大家多多担待</p>
+<p>本人是一名大四生物信息的学生，在大数据课上，老师需要我们配置Hadoop去处理一些东西。网上的一些教程互相冲突，记录一下这个从头可以完全运行成功的教程</p>
+<ol>
+<li>购买服务器</li>
+</ol>
+<p>因为本人使用的仍然是14年的MBP，怕随随便便装个新系统把电脑给折腾坏了，这里购买的是云服务器，这里首推阿里云。</p>
+<p>若您是常年使用谷歌搜索，请注意关闭梯子，因为阿里云是有国内国外两个系统，各自独立，虽然墙外的服务器可以免费试用2个月，但各种实名认证是绕不开的。</p>
+<p>若您是学生，阿里云有一个开发者成长计划，专门针对在校大学生，也就是教育优惠。非常便宜，只需要9.5一个月</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://developer.aliyun.com/plan/grow-up" >阿里云开发者成长计划<i class="fas fa-external-link-alt"></i></a></p>
+<p><img src="https://pic1.zhimg.com/v2-b9cf2d24d57aa3e715020e3f6e38cd1c_b.png" alt="img"></p>
+<p>\2. 服务器选择和配置</p>
+<p>这里选择的是轻量服务器，系统镜像和应用镜像不需要改变，保持默认值就行（WordPress, CentOS 7.3）</p>
+<p><img src="https://pic2.zhimg.com/v2-12c765376ed1ffb827435c4047b8a671_b.png" alt="img"></p>
+<p>这里需要设置root权限和密码</p>
+<p>设置成功后通过本地terminal（MAC）或者cmd（Windows）来构建ssh</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@****</span><br></pre></td></tr></table></figure>
+<p>然后输入之前设置的root的权限的密码（注意：这里的密码是不会有任何显示的）</p>
+<p><img src="https://pic1.zhimg.com/v2-af9e75a4cb07870aa8373b4671862198_b.png" alt="img"></p>
+<p>若出现上图的情况，需要清理一下之前的key</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -R XX.XX.XX.XX</span><br></pre></td></tr></table></figure>
+<p>然后再次用ssh连接，然后yes</p>
+<p><img src="https://pic2.zhimg.com/v2-e12d923ff1d5a1f5f75c86ee11fd447d_b.png" alt="img"></p>
+<p>好，到此我们进入到了阿里云的服务器</p>
+<p>\3. 我们开始配置java环境</p>
+<p>首先下载java的jdk</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;download.java.net&#x2F;openjdk&#x2F;jdk8u41&#x2F;ri&#x2F;openjdk-8u41-b04-linux-x64-14_jan_2020.tar.gz</span><br></pre></td></tr></table></figure>
+<p>然后解压</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf openjdk-8u41-b04-linux-x64-14_jan_2020.tar.gz</span><br></pre></td></tr></table></figure>
+<p>移动位置并且配置java路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mv java-se-8u41-ri&#x2F; &#x2F;usr&#x2F;java8</span><br><span class="line">echo &#39;export JAVA_HOME&#x3D;&#x2F;usr&#x2F;java8&#39; &gt;&gt; &#x2F;etc&#x2F;profile</span><br><span class="line">echo &#39;export PATH&#x3D;$PATH:$JAVA_HOME&#x2F;bin&#39; &gt;&gt; &#x2F;etc&#x2F;profile</span><br><span class="line">source &#x2F;etc&#x2F;profile</span><br></pre></td></tr></table></figure>
+<p>检查是否安装成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+<p><img src="https://pic1.zhimg.com/v2-85701c9548e5c31b2faaf569c31eed48_b.png" alt="img"></p>
+<p>这是理想情况，若安装成功会出现如下结果</p>
+<p>\4. 我们进行Hadoop的安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;apache&#x2F;hadoop&#x2F;common&#x2F;hadoop-2.9.2&#x2F;hadoop-2.9.2.tar.gz</span><br></pre></td></tr></table></figure>
+<p>这儿是清华的镜像源，国内的小伙伴下载比较快</p>
+<p>按照惯例解压</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf hadoop-2.9.2.tar.gz -C &#x2F;opt&#x2F;</span><br><span class="line">mv &#x2F;opt&#x2F;hadoop-2.9.2 &#x2F;opt&#x2F;hadoop</span><br></pre></td></tr></table></figure>
+<p>配置地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">echo &#39;export HADOOP_HOME&#x3D;&#x2F;opt&#x2F;hadoop&#x2F;&#39; &gt;&gt; &#x2F;etc&#x2F;profile</span><br><span class="line">echo &#39;export PATH&#x3D;$PATH:$HADOOP_HOME&#x2F;bin&#39; &gt;&gt; &#x2F;etc&#x2F;profile</span><br><span class="line">echo &#39;export PATH&#x3D;$PATH:$HADOOP_HOME&#x2F;sbin&#39; &gt;&gt; &#x2F;etc&#x2F;profile</span><br><span class="line">source &#x2F;etc&#x2F;profile</span><br></pre></td></tr></table></figure>
+<p>配置yarn和hadoop</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;export JAVA_HOME&#x3D;&#x2F;usr&#x2F;java8&quot; &gt;&gt; &#x2F;opt&#x2F;hadoop&#x2F;etc&#x2F;hadoop&#x2F;yarn-env.sh</span><br><span class="line">echo &quot;export JAVA_HOME&#x3D;&#x2F;usr&#x2F;java8&quot; &gt;&gt; &#x2F;opt&#x2F;hadoop&#x2F;etc&#x2F;hadoop&#x2F;hadoop-env.sh</span><br></pre></td></tr></table></figure>
+<p>查看Hadoop 安装情况</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop version</span><br></pre></td></tr></table></figure>
+<p><img src="https://pic3.zhimg.com/v2-c7b11851e5c3f5083809748875ef90aa_b.png" alt="img"></p>
+<p>若出现上图情况，则说明安装成功</p>
+<p>\5. 接下来需要利用vim来操作core-site 和 hdfs-site</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;opt&#x2F;hadoop&#x2F;etc&#x2F;hadoop&#x2F;core-site.xml</span><br></pre></td></tr></table></figure>
+<p>进入vim环境</p>
+<p><img src="https://pic2.zhimg.com/v2-c913566815ccb9dc077e6b1905c9f261_b.png" alt="img"></p>
+<p>按下i（insert）修改</p>
+<p>光标移动至configuration之间，复制如下的信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;hadoop.tmp.dir&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;file:&#x2F;opt&#x2F;hadoop&#x2F;tmp&lt;&#x2F;value&gt;</span><br><span class="line">        &lt;description&gt;location to store temporary files&lt;&#x2F;description&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;fs.defaultFS&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;hdfs:&#x2F;&#x2F;localhost:9000&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br></pre></td></tr></table></figure>
+<p>然后按下esc，停止修改，然后打”:wq”（实际无“”）退出vim修改</p>
+<p>同理操作hdfs-site</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;opt&#x2F;hadoop&#x2F;etc&#x2F;hadoop&#x2F;hdfs-site.xml</span><br><span class="line">&lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.replication&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;1&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.namenode.name.dir&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;file:&#x2F;opt&#x2F;hadoop&#x2F;tmp&#x2F;dfs&#x2F;name&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.datanode.data.dir&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;file:&#x2F;opt&#x2F;hadoop&#x2F;tmp&#x2F;dfs&#x2F;data&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br></pre></td></tr></table></figure>
+<p>配置master和slave连接，运行如下指令，并且一直回车，直至出现如下图</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa </span><br></pre></td></tr></table></figure>
+<p><img src="https://pic3.zhimg.com/v2-2a2c7f685bee80d7e51469a49c64c282_b.png" alt="img"></p>
+<p>运行如下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd .ssh</span><br><span class="line">cat id_rsa.pub &gt;&gt; authorized_keys</span><br></pre></td></tr></table></figure>
+<p>启动Hadoop</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hadoop namenode -format</span><br><span class="line">start-dfs.sh</span><br><span class="line">start-yarn.sh</span><br></pre></td></tr></table></figure>
+<p>查看是否配置成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jps</span><br></pre></td></tr></table></figure>
+<p>成功图</p>
+<p><img src="https://pic3.zhimg.com/v2-1d41b7f780ab263558dcdd06b11623be_b.png" alt="img"></p>
+<p>\7. 注意注意：接下来需要开启你在阿里云的防火墙端口，才可以在浏览器上访问，否则你怎么弄都是访问不到 (这里我卡了快一个礼拜，最后非常感谢阿里云的小哥哥帮我解决了这个问题)</p>
+<p><img src="https://pic1.zhimg.com/v2-ca4e2239f097d66886dae184064870fc_b.png" alt="img"></p>
+<p>最后你就可以在浏览器输入XX.XX.XX.XX**:50070 或者**XX.XX.XX.XX:8088来在浏览器上访问你的Hadoop</p>
+<p>效果图如下</p>
+<p><img src="https://pic1.zhimg.com/v2-a562c44a3df91441ca1fd4945fdcbc10_b.png" alt="img"></p>
+<p>以及</p>
+<p><img src="https://pic3.zhimg.com/v2-335aaf433e9d3fdec8ef045419837fba_b.png" alt="img"></p>
+<p><strong>结语</strong> </p>
+<p>因为我是一名大四生物信息的学生，对于计算机的至少掌握不是全，一些tcp-ip协议之类的指令没有掌握，所以很多都是一知半解，只是照着教程一步步装，若有错误，请大家指导。</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：从阿里云轻量服务器安装Hadoop及环境配置</li>
+        <li>Post author：Yuxuan Wu</li>
+        <li>Create time：2021-01-25 20:35:27</li>
+        <li>
+            Post link：yuxuanwu17.github.io2021/01/25/从阿里云轻量服务器安装Hadoop及环境配置/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/01/25/Hadoop-%E5%9C%A8mac%E6%9C%AC%E5%9C%B0%E7%9A%84%E9%85%8D%E7%BD%AE/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Hadoop 在mac本地的配置</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/01/25/macOS%E4%BD%BF%E7%94%A8IntelliJ-IDEA%E8%BF%9E%E6%8E%A5%E6%9C%AC%E5%9C%B0Hadoop/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">macOS:使用IntelliJ IDEA连接本地Hadoop</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span> -
+            
+            2021 <i class="fas fa-heart icon-animate"></i> <a href="/">Yuxuan Wu</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count <span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a> | Theme <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.3.1</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

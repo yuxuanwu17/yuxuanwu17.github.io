@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Welcome to my personal blogs">
+    <meta name="author" content="Yuxuan Wu">
+    
+    <title>
+        
+            macOS:使用IntelliJ IDEA连接本地Hadoop |
+        
+        Yuxuan Wu
+    </title>
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep coding, Keep hungry."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.3.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days age","week":"%s weeks age","month":"%s months age","year":"%s years age"};
+  </script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Yuxuan Wu
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content normal-code-theme">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">macOS:使用IntelliJ IDEA连接本地Hadoop</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Yuxuan Wu</span>
+                        <span class="level">Lv11</span>
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i> 2021-01-25 19:44:27
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Hadoop/">Hadoop</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/tags/tutorial/">tutorial</a>
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/macOS/">macOS</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i> <span>826 Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i> <span>3 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>本文的所有操作是建立在本地已经配置好Hadoop和java环境的基础上，若未完成，请去这个链接先学习好</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/277611350" >loner：Hadoop 在mac本地的配置<i class="fas fa-external-link-alt"></i></a></p>
+<p>本文参考博客</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45774600/article/details/105289999" >macOS：使用IntelliJ IDEA远程连接Hadoop<i class="fas fa-external-link-alt"></i></a></p>
+<p>首先使用intelliJ IDEA 配置指定的jdk</p>
+<p>这里操作其实只需要在java class 里面运行就可以了，命名进入</p>
+<p><img src="https://pic2.zhimg.com/v2-bbb99e7ef2a3a2ab4a2057d38c54e3cd_b.png" alt="img"></p>
+<p>老样子进入project structure （File-Project Structure: 快捷键command+;）</p>
+<p><img src="https://pic1.zhimg.com/v2-5087d33ec42e95648bb8e19367110d50_b.png" alt="img"></p>
+<p>先检查SDK的情况，如果默认显示就是这样的，则就这样，如果不是添加（那个+号），路径基本上在mac上都差不多是这样的/Library/Java/JavaVirtualMachine/前应该都是一样的。</p>
+<p><img src="https://pic3.zhimg.com/v2-0db76d6a8e59222eb80f24dc52269f0a_b.png" alt="img"></p>
+<p>然后进入到Project的情况</p>
+<p><img src="https://pic1.zhimg.com/v2-9142a0b3ff0d0ffd5ccf34512c6f0280_b.png" alt="img"></p>
+<p>然后进入到module，导入依赖（dependencies）</p>
+<p><img src="https://pic3.zhimg.com/v2-b90f33443a8e6bfd9fae39f1812e8e2a_b.png" alt="img"></p>
+<p><img src="https://pic3.zhimg.com/v2-18890b2899813acc7496601932de2c0e_b.png" alt="img"></p>
+<p>选择JARs or directories,按照下面操作多批次的导入解压后Hadoop的位置</p>
+<p>注意这儿Hadoop的位置是解压后的安装包在share-&gt;hadoop</p>
+<p><img src="https://pic2.zhimg.com/v2-b5434323d331ae6c36db581641366819_b.png" alt="img"></p>
+<p>依次导入8个依赖，一个一个手动加，然后Apply，OK</p>
+<p><img src="https://pic4.zhimg.com/v2-ad8a2f1ec4a6669a4b833145bda45c2f_b.png" alt="img"></p>
+<p>编译和运行</p>
+<p>运行如下WordCount.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.StringTokenizer;</span><br><span class="line"></span><br><span class="line">import org.apache.hadoop.conf.Configuration;</span><br><span class="line">import org.apache.hadoop.fs.Path;</span><br><span class="line">import org.apache.hadoop.io.IntWritable;</span><br><span class="line">import org.apache.hadoop.io.Text;</span><br><span class="line">import org.apache.hadoop.mapreduce.Job;</span><br><span class="line">import org.apache.hadoop.mapreduce.Mapper;</span><br><span class="line">import org.apache.hadoop.mapreduce.Reducer;</span><br><span class="line">import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;</span><br><span class="line">import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;</span><br><span class="line"></span><br><span class="line">public class WordCount &#123;</span><br><span class="line"></span><br><span class="line">    public static class TokenizerMapper</span><br><span class="line">            extends Mapper&lt;Object, Text, Text, IntWritable&gt;&#123;</span><br><span class="line"></span><br><span class="line">        private final static IntWritable one &#x3D; new IntWritable(1);</span><br><span class="line">        private Text word &#x3D; new Text();</span><br><span class="line"></span><br><span class="line">        public void map(Object key, Text value, Context context</span><br><span class="line">        ) throws IOException, InterruptedException &#123;</span><br><span class="line">            StringTokenizer itr &#x3D; new StringTokenizer(value.toString());</span><br><span class="line">            while (itr.hasMoreTokens()) &#123;</span><br><span class="line">                word.set(itr.nextToken());</span><br><span class="line">                context.write(word, one);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static class IntSumReducer</span><br><span class="line">            extends Reducer&lt;Text,IntWritable,Text,IntWritable&gt; &#123;</span><br><span class="line">        private IntWritable result &#x3D; new IntWritable();</span><br><span class="line"></span><br><span class="line">        public void reduce(Text key, Iterable&lt;IntWritable&gt; values,</span><br><span class="line">                           Context context</span><br><span class="line">        ) throws IOException, InterruptedException &#123;</span><br><span class="line">            int sum &#x3D; 0;</span><br><span class="line">            for (IntWritable val : values) &#123;</span><br><span class="line">                sum +&#x3D; val.get();</span><br><span class="line">            &#125;</span><br><span class="line">            result.set(sum);</span><br><span class="line">            context.write(key, result);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        Configuration conf &#x3D; new Configuration();</span><br><span class="line">        Job job &#x3D; Job.getInstance(conf, &quot;word count&quot;);</span><br><span class="line">        job.setJarByClass(WordCount.class);</span><br><span class="line">        job.setMapperClass(TokenizerMapper.class);</span><br><span class="line">        job.setCombinerClass(IntSumReducer.class);</span><br><span class="line">        job.setReducerClass(IntSumReducer.class);</span><br><span class="line">        job.setOutputKeyClass(Text.class);</span><br><span class="line">        job.setOutputValueClass(IntWritable.class);</span><br><span class="line">        FileInputFormat.addInputPath(job, new Path(args[0]));</span><br><span class="line">        FileOutputFormat.setOutputPath(job, new Path(args[1]));</span><br><span class="line">        System.exit(job.waitForCompletion(true) ? 0 : 1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://pic3.zhimg.com/v2-b972bff0438429263be2842c94e319b2_b.png" alt="img"></p>
+<p><img src="https://pic2.zhimg.com/v2-c83dbde658707eb3ef7955ba02e34a61_b.png" alt="img"></p>
+<p>选择application后需要配置如下，name随意，最重要的是Main class: 保证名字和你new的java文件名字一致，input和output是等会要放入的文件，输入和输出</p>
+<p><img src="https://pic3.zhimg.com/v2-87d680b6ed9ae34a669c898ba636be22_b.png" alt="img"></p>
+<p>配置输入文件</p>
+<p>这里我刚刚在configuration里面写了我的输入文件叫input，需要配置输入路径，这里在（src同级目录下）新建一个文件夹input，并且把你需要输入的文件放进去，这儿还是之前的pg100.txt</p>
+<p><img src="https://pic4.zhimg.com/v2-c43f3e376a689e401c3585bd9625cf8f_b.png" alt="img"></p>
+<p>运行</p>
+<p><img src="https://pic4.zhimg.com/v2-f43cf63ac94ae2df051221c0b49a001f_b.png" alt="img"></p>
+<p>出现如下情况</p>
+<p><img src="https://pic1.zhimg.com/v2-1171ebce5dad8f3a92d14cd4d10a6274_b.png" alt="img"></p>
+<p><img src="https://pic2.zhimg.com/v2-9079be8c4a11d97d40154dc51cc080f1_b.png" alt="img"></p>
+<p>和之前在terminal里运行成功的一模一样，成功后会出现一个 output的文件夹，由于output的先天特性，它无法覆盖，所以下次运行的时候请删除之前的那个，或者你改个名字（我后来好像看见这个可以用其他方法覆盖的，这里就不做涉及）</p>
+<p><img src="https://pic3.zhimg.com/v2-df5dda07bd75d6324ba25680e367e6c6_b.png" alt="img"></p>
+<p>到现在位置，Hadoop的教程都已经结束，无论是阿里云Hadoop的配置，运行WordCount.java还是mac本地的Hadoop运行调试，还是借助IDEA直接单机模式运行，都已经完成了。如果有不明白的，请关注我的专栏，里面有详细的步骤。</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：macOS:使用IntelliJ IDEA连接本地Hadoop</li>
+        <li>Post author：Yuxuan Wu</li>
+        <li>Create time：2021-01-25 19:44:27</li>
+        <li>
+            Post link：yuxuanwu17.github.io2021/01/25/macOS使用IntelliJ-IDEA连接本地Hadoop/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/01/25/%E4%BB%8E%E9%98%BF%E9%87%8C%E4%BA%91%E8%BD%BB%E9%87%8F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85Hadoop%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">从阿里云轻量服务器安装Hadoop及环境配置</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/01/25/sklearn%E9%87%8CLinearSVC%E4%B8%8ESVC%E5%8C%BA%E5%88%AB/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">sklearn里LinearSVC与SVC区别</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span> -
+            
+            2021 <i class="fas fa-heart icon-animate"></i> <a href="/">Yuxuan Wu</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count <span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a> | Theme <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.3.1</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
