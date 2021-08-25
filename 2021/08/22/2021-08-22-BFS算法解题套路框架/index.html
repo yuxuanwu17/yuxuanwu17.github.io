@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Welcome to my personal blogs">
+    <meta name="author" content="Yuxuan Wu">
+    
+    <title>
+        
+            BFS算法解题套路框架 |
+        
+        Yuxuan Wu
+    </title>
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep coding, Keep hungry."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.3.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days age","week":"%s weeks age","month":"%s months age","year":"%s years age"};
+  </script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Yuxuan Wu
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content normal-code-theme">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">BFS算法解题套路框架</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Yuxuan Wu</span>
+                        <span class="level">Lv11</span>
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i> 2021-08-22 20:43:23
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Algorithms/">Algorithms</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/tags/leetcode/">leetcode</a>
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/BFS/">BFS</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i> <span>2.5k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i> <span>10 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="框架思想"><a href="#框架思想" class="headerlink" title="框架思想"></a>框架思想</h1><ol>
+<li>DFS 的本质就是回溯算法</li>
+<li>BFS的核心是队列</li>
+</ol>
+<blockquote>
+<p>BFS 的核心思想应该不难理解的，就是把一些问题抽象成图，从一个点开始，向四周开始扩散。一般来说，我们写 BFS 算法都是用「队列」这种数据结构，每次将一个节点周围的所有节点加入队列。</p>
+</blockquote>
+<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p>BFS 相对 DFS 的最主要的区别是：<strong>BFS 找到的路径一定是最短的，但代价就是空间复杂度可能比 DFS 大很多</strong>，至于为什么，我们后面介绍了框架就很容易看出来了。</p>
+<h2 id="BFS常见场景"><a href="#BFS常见场景" class="headerlink" title="BFS常见场景"></a>BFS常见场景</h2><p>本质就是在一副图中找到从起点到终点的<code>最近距离</code></p>
+<blockquote>
+<p>这个广义的描述可以有各种变体，比如走迷宫，有的格子是围墙不能走，从起点到终点的最短距离是多少？如果这个迷宫带「传送门」可以瞬间传送呢？</p>
+<p>再比如说两个单词，要求你通过某些替换，把其中一个变成另一个，每次只能替换一个字符，最少要替换几次？</p>
+<p>再比如说连连看游戏，两个方块消除的条件不仅仅是图案相同，还得保证两个方块之间的最短连线不能多于两个拐点。你玩连连看，点击两个坐标，游戏是如何判断它俩的最短连线有几个拐点的？</p>
+</blockquote>
+<h3 id="伪代码实现"><a href="#伪代码实现" class="headerlink" title="伪代码实现"></a>伪代码实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 计算从起点 start 到终点 target 的最近距离</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">BFS</span><span class="params">(Node start, Node target)</span> </span>&#123;</span><br><span class="line">    Queue&lt;Node&gt; q; <span class="comment">// 核心数据结构</span></span><br><span class="line">    Set&lt;Node&gt; visited; <span class="comment">// 避免走回头路</span></span><br><span class="line"></span><br><span class="line">    q.offer(start); <span class="comment">// 将起点加入队列</span></span><br><span class="line">    visited.add(start);</span><br><span class="line">    <span class="keyword">int</span> step = <span class="number">0</span>; <span class="comment">// 记录扩散的步数</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (q not empty) &#123;</span><br><span class="line">        <span class="keyword">int</span> sz = q.size();</span><br><span class="line">        <span class="comment">/* 将当前队列中的所有节点向四周扩散 */</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sz; i++) &#123;</span><br><span class="line">            Node cur = q.poll();</span><br><span class="line">            <span class="comment">/* 划重点：这里判断是否到达终点 */</span></span><br><span class="line">            <span class="keyword">if</span> (cur is target)</span><br><span class="line">                <span class="keyword">return</span> step;</span><br><span class="line">            <span class="comment">/* 将 cur 的相邻节点加入队列 */</span></span><br><span class="line">            <span class="keyword">for</span> (Node x : cur.adj())</span><br><span class="line">                <span class="keyword">if</span> (x not in visited) &#123;</span><br><span class="line">                    q.offer(x);</span><br><span class="line">                    visited.add(x);</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/* 划重点：更新步数在这里 */</span></span><br><span class="line">        step++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>队列 <code>q</code> 就不说了，BFS 的核心数据结构；<code>cur.adj()</code> 泛指 <code>cur</code> 相邻的节点，比如说二维数组中，<code>cur</code> 上下左右四面的位置就是相邻节点；<code>visited</code> 的主要作用是防止走回头路，大部分时候都是必须的，但是像一般的二叉树结构，没有子节点到父节点的指针，不会走回头路就不需要 <code>visited</code>。</p>
+<p>核心问题就是找到和确定起点<code>start</code>和终点<code>target</code>    是什么</p>
+<h2 id="111-二叉树的最小深度"><a href="#111-二叉树的最小深度" class="headerlink" title="111. 二叉树的最小深度"></a><a class="link"   target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/" >111. 二叉树的最小深度<i class="fas fa-external-link-alt"></i></a></h2><p>给定一个二叉树，找出其最小深度。</p>
+<p>最小深度是从根节点到最近叶子节点的最短路径上的节点数量。</p>
+<p><strong>说明：</strong>叶子节点是指没有子节点的节点。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20210823073452.jpg" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：root &#x3D; [3,9,20,null,null,15,7]</span><br><span class="line">输出：2</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：root &#x3D; [2,null,3,null,4,null,5,null,6]</span><br><span class="line">输出：5</span><br></pre></td></tr></table></figure>
+
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">minDepth</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    Queue&lt;TreeNode&gt; q = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    q.offer(root);</span><br><span class="line">    <span class="comment">// root 本身就是一层，depth 初始化为 1</span></span><br><span class="line">    <span class="keyword">int</span> depth = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (!q.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">int</span> sz = q.size();</span><br><span class="line">        <span class="comment">/* 将当前队列中的所有节点向四周扩散 */</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sz; i++) &#123;</span><br><span class="line">            TreeNode cur = q.poll();</span><br><span class="line">            <span class="comment">/* 判断是否到达终点 */</span></span><br><span class="line">            <span class="keyword">if</span> (cur.left == <span class="keyword">null</span> &amp;&amp; cur.right == <span class="keyword">null</span>) </span><br><span class="line">                <span class="keyword">return</span> depth;</span><br><span class="line">            <span class="comment">/* 将 cur 的相邻节点加入队列 */</span></span><br><span class="line">            <span class="keyword">if</span> (cur.left != <span class="keyword">null</span>)</span><br><span class="line">                q.offer(cur.left);</span><br><span class="line">            <span class="keyword">if</span> (cur.right != <span class="keyword">null</span>) </span><br><span class="line">                q.offer(cur.right);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/* 这里增加步数 */</span></span><br><span class="line">        depth++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> depth;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="两个核心问题："><a href="#两个核心问题：" class="headerlink" title="两个核心问题："></a>两个核心问题：</h3><ol>
+<li><strong>为什么BFS可以找到最短距离，DFS不行吗？</strong><ul>
+<li>BFS 的逻辑，<code>depth</code> 每增加一次，队列中的所有节点都向前迈一步，这保证了第一次到达终点的时候，走的步数是最少的。</li>
+<li>DFS的时间复杂度相对来讲高很多，DFS本质是靠堆栈记录走过的路径，他必须遍历完整所有的路径才可以最后得出结果</li>
+<li>BFS的本质是借助<code>队列</code> 来做到一次一步的齐头并进</li>
+<li>形象点说，DFS 是线，BFS 是面；DFS 是单打独斗，BFS 是集体行动。这个应该比较容易理解吧</li>
+</ul>
+</li>
+<li><strong>既然 BFS 那么好，为啥 DFS 还要存在</strong>？<ul>
+<li>BFS 可以找到最短距离，但是空间复杂度高，而 DFS 的空间复杂度较低。</li>
+<li>假设给你的这个二叉树是满二叉树，节点数为 <code>N</code>，对于 DFS 算法来说，空间复杂度无非就是递归堆栈，最坏情况下顶多就是树的高度，也就是 <code>O(logN)</code>。</li>
+<li>队列中每次都会储存着二叉树一层的节点，这样的话最坏情况下空间复杂度应该是树的最底层节点的数量，也就是 <code>N/2</code>，用 Big O 表示的话也就是 <code>O(N)</code>。</li>
+<li>由此观之，BFS 还是有代价的，一般来说在找最短路径的时候使用 BFS，其他时候还是 DFS 使用得多一些（主要是递归代码好写）。</li>
+</ul>
+</li>
+</ol>
+<h2 id="752-打开转盘锁"><a href="#752-打开转盘锁" class="headerlink" title="752. 打开转盘锁"></a><a class="link"   target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/open-the-lock/" >752. 打开转盘锁<i class="fas fa-external-link-alt"></i></a></h2><p>你有一个带有四个圆形拨轮的转盘锁。每个拨轮都有10个数字： <code>&#39;0&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;</code> 。每个拨轮可以自由旋转：例如把 <code>&#39;9&#39;</code> 变为 <code>&#39;0&#39;</code>，<code>&#39;0&#39;</code> 变为 <code>&#39;9&#39;</code> 。每次旋转都只能旋转一个拨轮的一位数字。</p>
+<p>锁的初始数字为 <code>&#39;0000&#39;</code> ，一个代表四个拨轮的数字的字符串。</p>
+<p>列表 <code>deadends</code> 包含了一组死亡数字，一旦拨轮的数字和列表里的任何一个元素相同，这个锁将会被永久锁定，无法再被旋转。</p>
+<p>字符串 <code>target</code> 代表可以解锁的数字，你需要给出解锁需要的最小旋转次数，如果无论如何不能解锁，返回 <code>-1</code> 。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：deadends &#x3D; [&quot;0201&quot;,&quot;0101&quot;,&quot;0102&quot;,&quot;1212&quot;,&quot;2002&quot;], target &#x3D; &quot;0202&quot;</span><br><span class="line">输出：6</span><br><span class="line">解释：</span><br><span class="line">可能的移动序列为 &quot;0000&quot; -&gt; &quot;1000&quot; -&gt; &quot;1100&quot; -&gt; &quot;1200&quot; -&gt; &quot;1201&quot; -&gt; &quot;1202&quot; -&gt; &quot;0202&quot;。</span><br><span class="line">注意 &quot;0000&quot; -&gt; &quot;0001&quot; -&gt; &quot;0002&quot; -&gt; &quot;0102&quot; -&gt; &quot;0202&quot; 这样的序列是不能解锁的，</span><br><span class="line">因为当拨动到 &quot;0102&quot; 时这个锁就会被锁定。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: deadends &#x3D; [&quot;8888&quot;], target &#x3D; &quot;0009&quot;</span><br><span class="line">输出：1</span><br><span class="line">解释：</span><br><span class="line">把最后一位反向旋转一次即可 &quot;0000&quot; -&gt; &quot;0009&quot;。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: deadends &#x3D; [&quot;8887&quot;,&quot;8889&quot;,&quot;8878&quot;,&quot;8898&quot;,&quot;8788&quot;,&quot;8988&quot;,&quot;7888&quot;,&quot;9888&quot;], target &#x3D; &quot;8888&quot;</span><br><span class="line">输出：-1</span><br><span class="line">解释：</span><br><span class="line">无法旋转到目标数字且不被锁定。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 4:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: deadends &#x3D; [&quot;0000&quot;], target &#x3D; &quot;8888&quot;</span><br><span class="line">输出：-1</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>1： 不能出现deadends的情况下计算出最少的转动着次数</p>
+<blockquote>
+<ul>
+<li>如果没有deadends 的限制，若想获得所有可能的密码组合，最合适的就是穷举</li>
+<li>可以抽象成一幅图，每个节点有8个相邻的节点，就可以转换成经典的BFS问题</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将 s[j] 向上拨动一次</span></span><br><span class="line"><span class="function">String <span class="title">plusOne</span><span class="params">(String s, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span>[] ch = s.toCharArray();</span><br><span class="line">    <span class="keyword">if</span> (ch[j] == <span class="string">&#x27;9&#x27;</span>)</span><br><span class="line">        ch[j] = <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        ch[j] += <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> String(ch);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 将 s[i] 向下拨动一次</span></span><br><span class="line"><span class="function">String <span class="title">minusOne</span><span class="params">(String s, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span>[] ch = s.toCharArray();</span><br><span class="line">    <span class="keyword">if</span> (ch[j] == <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">        ch[j] = <span class="string">&#x27;9&#x27;</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        ch[j] -= <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> String(ch);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// BFS 框架，打印出所有可能的密码</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BFS</span><span class="params">(String target)</span> </span>&#123;</span><br><span class="line">    Queue&lt;String&gt; q = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    q.offer(<span class="string">&quot;0000&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (!q.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">int</span> sz = q.size();</span><br><span class="line">        <span class="comment">/* 将当前队列中的所有节点向周围扩散 */</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sz; i++) &#123;</span><br><span class="line">            String cur = q.poll();</span><br><span class="line">            <span class="comment">/* 判断是否到达终点 */</span></span><br><span class="line">            System.out.println(cur);</span><br><span class="line"></span><br><span class="line">            <span class="comment">/* 将一个节点的相邻节点加入队列 */</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">4</span>; j++) &#123;</span><br><span class="line">                String up = plusOne(cur, j);</span><br><span class="line">                String down = minusOne(cur, j);</span><br><span class="line">                q.offer(up);</span><br><span class="line">                q.offer(down);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/* 在这里增加步数 */</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>这段 BFS 代码已经能够穷举所有可能的密码组合了，但是显然不能完成题目，有如下问题需要解决</strong>：</p>
+<p>1、会走回头路。比如说我们从 <code>&quot;0000&quot;</code> 拨到 <code>&quot;1000&quot;</code>，但是等从队列拿出 <code>&quot;1000&quot;</code> 时，还会拨出一个 <code>&quot;0000&quot;</code>，这样的话会产生死循环。</p>
+<p>2、没有终止条件，按照题目要求，我们找到 <code>target</code> 就应该结束并返回拨动的次数。</p>
+<p>3、没有对 <code>deadends</code> 的处理，按道理这些「死亡密码」是不能出现的，也就是说你遇到这些密码的时候需要跳过。</p>
+<p>如果你能够看懂上面那段代码，真得给你鼓掌，只要按照 BFS 框架在对应的位置稍作修改即可修复这些问题：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">openLock</span><span class="params">(String[] deadends, String target)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 记录需要跳过的死亡密码</span></span><br><span class="line">    Set&lt;String&gt; deads = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (String s : deadends) deads.add(s);</span><br><span class="line">    <span class="comment">// 记录已经穷举过的密码，防止走回头路</span></span><br><span class="line">    Set&lt;String&gt; visited = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">    Queue&lt;String&gt; q = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    <span class="comment">// 从起点开始启动广度优先搜索</span></span><br><span class="line">    <span class="keyword">int</span> step = <span class="number">0</span>;</span><br><span class="line">    q.offer(<span class="string">&quot;0000&quot;</span>);</span><br><span class="line">    visited.add(<span class="string">&quot;0000&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (!q.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">int</span> sz = q.size();</span><br><span class="line">        <span class="comment">/* 将当前队列中的所有节点向周围扩散 */</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sz; i++) &#123;</span><br><span class="line">            String cur = q.poll();</span><br><span class="line"></span><br><span class="line">            <span class="comment">/* 判断是否到达终点 */</span></span><br><span class="line">            <span class="keyword">if</span> (deads.contains(cur))</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span> (cur.equals(target))</span><br><span class="line">                <span class="keyword">return</span> step;</span><br><span class="line"></span><br><span class="line">            <span class="comment">/* 将一个节点的未遍历相邻节点加入队列 */</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">4</span>; j++) &#123;</span><br><span class="line">                String up = plusOne(cur, j);</span><br><span class="line">                <span class="keyword">if</span> (!visited.contains(up)) &#123;</span><br><span class="line">                    q.offer(up);</span><br><span class="line">                    visited.add(up);</span><br><span class="line">                &#125;</span><br><span class="line">                String down = minusOne(cur, j);</span><br><span class="line">                <span class="keyword">if</span> (!visited.contains(down)) &#123;</span><br><span class="line">                    q.offer(down);</span><br><span class="line">                    visited.add(down);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/* 在这里增加步数 */</span></span><br><span class="line">        step++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 如果穷举完都没找到目标密码，那就是找不到了</span></span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：BFS算法解题套路框架</li>
+        <li>Post author：Yuxuan Wu</li>
+        <li>Create time：2021-08-22 20:43:23</li>
+        <li>
+            Post link：yuxuanwu17.github.io2021/08/22/2021-08-22-BFS算法解题套路框架/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/08/08/2021-08-08-%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">回溯算法</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span> -
+            
+            2021 <i class="fas fa-heart icon-animate"></i> <a href="/">Yuxuan Wu</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count <span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a> | Theme <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.3.1</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A1%86%E6%9E%B6%E6%80%9D%E6%83%B3"><span class="nav-number">1.</span> <span class="nav-text">框架思想</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.</span> <span class="nav-text">区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BFS%E5%B8%B8%E8%A7%81%E5%9C%BA%E6%99%AF"><span class="nav-number">1.2.</span> <span class="nav-text">BFS常见场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%AA%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.2.1.</span> <span class="nav-text">伪代码实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#111-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6"><span class="nav-number">1.3.</span> <span class="nav-text">111. 二叉树的最小深度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%A4%E4%B8%AA%E6%A0%B8%E5%BF%83%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="nav-number">1.3.1.</span> <span class="nav-text">两个核心问题：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#752-%E6%89%93%E5%BC%80%E8%BD%AC%E7%9B%98%E9%94%81"><span class="nav-number">1.4.</span> <span class="nav-text">752. 打开转盘锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%9E%90"><span class="nav-number">1.4.1.</span> <span class="nav-text">分析</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
