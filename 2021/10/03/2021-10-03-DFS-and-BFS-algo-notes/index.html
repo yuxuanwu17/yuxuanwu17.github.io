@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Welcome to my personal blogs">
+    <meta name="author" content="Yuxuan Wu">
+    
+    <title>
+        
+            DFS and BFS algo notes |
+        
+        Yuxuan Wu
+    </title>
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep coding, Keep hungry."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.3.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days age","week":"%s weeks age","month":"%s months age","year":"%s years age"};
+  </script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Yuxuan Wu
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content normal-code-theme">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">DFS and BFS algo notes</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Yuxuan Wu</span>
+                        <span class="level">Lv11</span>
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i> 2021-10-03 09:47:23
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/categories/CMUAlgoNotes/">CMUAlgoNotes</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/tags/BFS/">BFS</a>
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/graph/">graph</a>
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/DFS/">DFS</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i> <span>929 Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i> <span>5 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h1><h2 id="Basic-idea"><a href="#Basic-idea" class="headerlink" title="Basic idea"></a>Basic idea</h2><ul>
+<li><p>DFS keeps walking down a path until it forced to backtrack</p>
+</li>
+<li><p>It backtrack until find a new path to go down </p>
+</li>
+<li><p>The overall results would be a <code>DFS tree</code></p>
+</li>
+<li><p>LIFO (Last IN First OUT Method)</p>
+</li>
+</ul>
+<h2 id="Non-DFS-Tree-edges"><a href="#Non-DFS-Tree-edges" class="headerlink" title="Non-DFS-Tree edges"></a>Non-DFS-Tree edges</h2><p>Theorem: Let x and y be nodes in the <code>DFS tree</code> <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.375ex" xmlns="http://www.w3.org/2000/svg" width="2.692ex" height="1.906ex" role="img" focusable="false" viewBox="0 -677 1189.8 842.6"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="mi" transform="translate(584, -150) scale(0.707)"><path data-c="1D43A" d="M50 252Q50 367 117 473T286 641T490 704Q580 704 633 653Q642 643 648 636T656 626L657 623Q660 623 684 649Q691 655 699 663T715 679T725 690L740 705H746Q760 705 760 698Q760 694 728 561Q692 422 692 421Q690 416 687 415T669 413H653Q647 419 647 422Q647 423 648 429T650 449T651 481Q651 552 619 605T510 659Q492 659 471 656T418 643T357 615T294 567T236 496T189 394T158 260Q156 242 156 221Q156 173 170 136T206 79T256 45T308 28T353 24Q407 24 452 47T514 106Q517 114 529 161T541 214Q541 222 528 224T468 227H431Q425 233 425 235T427 254Q431 267 437 273H454Q494 271 594 271Q634 271 659 271T695 272T707 272Q721 272 721 263Q721 261 719 249Q714 230 709 228Q706 227 694 227Q674 227 653 224Q646 221 643 215T629 164Q620 131 614 108Q589 6 586 3Q584 1 581 1Q571 1 553 21T530 52Q530 53 528 52T522 47Q448 -22 322 -22Q201 -22 126 55T50 252Z"></path></g></g></g></g></svg></mjx-container> such that {x,y} is an edge in a undirected graph G. Then one of x or y is an ancestor of the other in <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.375ex" xmlns="http://www.w3.org/2000/svg" width="2.692ex" height="1.906ex" role="img" focusable="false" viewBox="0 -677 1189.8 842.6"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="mi" transform="translate(584, -150) scale(0.707)"><path data-c="1D43A" d="M50 252Q50 367 117 473T286 641T490 704Q580 704 633 653Q642 643 648 636T656 626L657 623Q660 623 684 649Q691 655 699 663T715 679T725 690L740 705H746Q760 705 760 698Q760 694 728 561Q692 422 692 421Q690 416 687 415T669 413H653Q647 419 647 422Q647 423 648 429T650 449T651 481Q651 552 619 605T510 659Q492 659 471 656T418 643T357 615T294 567T236 496T189 394T158 260Q156 242 156 221Q156 173 170 136T206 79T256 45T308 28T353 24Q407 24 452 47T514 106Q517 114 529 161T541 214Q541 222 528 224T468 227H431Q425 233 425 235T427 254Q431 267 437 273H454Q494 271 594 271Q634 271 659 271T695 272T707 272Q721 272 721 263Q721 261 719 249Q714 230 709 228Q706 227 694 227Q674 227 653 224Q646 221 643 215T629 164Q620 131 614 108Q589 6 586 3Q584 1 581 1Q571 1 553 21T530 52Q530 53 528 52T522 47Q448 -22 322 -22Q201 -22 126 55T50 252Z"></path></g></g></g></g></svg></mjx-container></p>
+<h2 id="Recursive-implementation-of-DFS"><a href="#Recursive-implementation-of-DFS" class="headerlink" title="Recursive implementation of DFS"></a>Recursive implementation of DFS</h2><h3 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h3><ol>
+<li>Create a recursive function that takes the index of the node and a visited array</li>
+<li>Mark the current node/vertex as visited and print the node (this would be further code processing part)</li>
+<li>Traverse all the adjacency and mark all the nodes and recursively use the dfs functions</li>
+</ol>
+<h3 id="pseudo-code"><a href="#pseudo-code" class="headerlink" title="pseudo code"></a>pseudo code</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">procedure dfs (G,u)</span><br><span class="line">	mark u as visited</span><br><span class="line">	while u has an unvisited neighbor in G</span><br><span class="line">		v:= an unvisited neighbor of u</span><br><span class="line">		dfs(G,u)</span><br></pre></td></tr></table></figure>
+<h3 id="Java-implementation"><a href="#Java-implementation" class="headerlink" title="Java implementation"></a>Java implementation</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> graph;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DFS</span> </span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">boolean</span>[] visited;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> count;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// creat the DFS object</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DFS</span><span class="params">(Graph G, <span class="keyword">int</span> s)</span> </span>{</span><br><span class="line">        visited = <span class="keyword">new</span> <span class="keyword">boolean</span>[G.V()];</span><br><span class="line">        dfs(G, s);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">// use DFS to find all the adjacent point in graph G</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(Graph g, <span class="keyword">int</span> v)</span> </span>{</span><br><span class="line">        <span class="comment">// mark vertex v as visited</span></span><br><span class="line">        visited[v] = <span class="keyword">true</span>;</span><br><span class="line">      	<span class="comment">// print the vertex v, if further process needs, type code in this place</span></span><br><span class="line">        System.out.println(v);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Iterate through all the neighbor, obtain each vertex w</span></span><br><span class="line">        <span class="keyword">for</span> (Integer w : g.adj(v)) {</span><br><span class="line">            <span class="keyword">if</span> (!visited[w]) dfs(g, w);</span><br><span class="line">        }</span><br><span class="line">        count++;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">// check whether w and s are connected</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">visited</span><span class="params">(<span class="keyword">int</span> w)</span> </span>{</span><br><span class="line">        <span class="keyword">return</span> visited[w];</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">// obtain the number of vertex that is connected to vertex s</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">count</span><span class="params">()</span> </span>{</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Stack-based-implantation-of-DFS"><a href="#Stack-based-implantation-of-DFS" class="headerlink" title="Stack based implantation of DFS"></a>Stack based implantation of DFS</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">procedure DFS(G,s)</span><br><span class="line">	S:= stack containing only s</span><br><span class="line">	S.push(s)</span><br><span class="line">	while s not empty</span><br><span class="line">		v:= s.pop()</span><br><span class="line">		if v is not visited:</span><br><span class="line">			mark v as visited</span><br><span class="line">			for w in G.neighbors(v):</span><br><span class="line">				s.push(w)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> graph;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Stack;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DFS_Stack</span> </span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">boolean</span>[] visited;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DFS_Stack</span><span class="params">(Graph g, <span class="keyword">int</span> s)</span> </span>{</span><br><span class="line">        visited = <span class="keyword">new</span> <span class="keyword">boolean</span>[g.V()];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g.V(); i++) {</span><br><span class="line">            <span class="keyword">if</span> (!visited[i]) dfs(g, s);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(Graph g, <span class="keyword">int</span> s)</span> </span>{</span><br><span class="line">        <span class="comment">// create a stack used to do iterative DFS</span></span><br><span class="line">        Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// push the source node into stack</span></span><br><span class="line">        stack.push(s);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// while s not empty</span></span><br><span class="line">        <span class="keyword">while</span> (!stack.empty()) {</span><br><span class="line">            <span class="comment">// pop a vertex from the</span></span><br><span class="line">            <span class="keyword">int</span> v = stack.pop();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// if the vertex v is already visited, we would ignore it</span></span><br><span class="line">            <span class="keyword">if</span> (visited[v]) <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// the vertex v is not yet visited, we would mark as true</span></span><br><span class="line">            visited[v] = <span class="keyword">true</span>;</span><br><span class="line">            System.out.println(v);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// do for every edge v-&gt;w</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (Integer w : g.adj(v)) {</span><br><span class="line">                <span class="keyword">if</span> (!visited[w]) {</span><br><span class="line">                    stack.push(w);</span><br><span class="line">                }</span><br><span class="line"></span><br><span class="line">            }</span><br><span class="line"></span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h3 id="Comparison-of-recursively-achieved-and-stack-based-algorithm"><a href="#Comparison-of-recursively-achieved-and-stack-based-algorithm" class="headerlink" title="Comparison of recursively achieved and stack-based algorithm"></a>Comparison of recursively achieved and stack-based algorithm</h3><p>These two variations of DFS visit the neighbors of each vertex in the opposite order from each other: the first neighbor of <em>v</em> visited by the recursive variation is the first one in the list of adjacent edges, while in the iterative variation the first visited neighbor is the last one in the list of adjacent edges. </p>
+<blockquote>
+<p>The recursive implementation will visit the nodes from the example graph in the following order: A, B, D, F, E, C, G. </p>
+<p>sThe non-recursive implementation will visit the nodes as: A, E, F, B, D, C, G.</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20211004163957.png" alt="An undirected graph with edges AB, BD, BF, FE, AC, CG, AE"></p>
+<p>The non-recursive implementation is similar to <a class="link" target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Breadth-first_search">breadth-first search<i class="fas fa-external-link-alt"></i></a> but differs from it in two ways:</p>
+<ol>
+<li>it uses a stack instead of a queue, and</li>
+<li>it delays checking whether a vertex has been discovered until the vertex is popped from the stack rather than making this check before adding the vertex.</li>
+</ol>
+<p>If <em>G</em> is a <a class="link" target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Tree_(data_structure)">tree<i class="fas fa-external-link-alt"></i></a>, replacing the queue of the breadth-first search algorithm with a stack will yield a depth-first search algorithm. For general graphs, replacing the stack of the iterative depth-first search implementation with a queue would also produce a breadth-first search algorithm, although a somewhat nonstandard one.[<a class="link" target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Depth-first_search#cite_note-7">7]<i class="fas fa-external-link-alt"></i></a></p>
+<p>Another possible implementation of iterative depth-first search uses a stack of <a class="link" target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Iterator">iterators<i class="fas fa-external-link-alt"></i></a> of the list of neighbors of a node, instead of a stack of nodes. This yields the same traversal as recursive DFS.[<a class="link" target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Depth-first_search#cite_note-8">8]<i class="fas fa-external-link-alt"></i></a></p>
+<h3 id="Topological-sorting-DFS-application"><a href="#Topological-sorting-DFS-application" class="headerlink" title="Topological sorting (DFS application)"></a>Topological sorting (DFS application)</h3><h2 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h2><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20211004173740.png" alt="image-20211004173738005"></p>
+<h3 id="Pseudocode"><a href="#Pseudocode" class="headerlink" title="Pseudocode"></a>Pseudocode</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">procedure bfs(G,root) is</span><br><span class="line">	let Q be a queue </span><br><span class="line">	mark root as explored</span><br><span class="line">	Q.enqueue(root)</span><br><span class="line">	while Q is not empty do</span><br><span class="line">		v:= Q.dequeue</span><br><span class="line">		if v is the goal then return v</span><br><span class="line">		for all edges from v to w in G.adjacnetEdges(v) do </span><br><span class="line">			if w is not marked then label w as explored</span><br><span class="line">				Q.enqueue(w)</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>Java implementation</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> graph;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.LinkedList;</span><br><span class="line"><span class="keyword">import</span> java.util.Queue;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BFS</span> </span>{</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">boolean</span>[] marked;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> count;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Queue&lt;Integer&gt; waitSearch;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BFS</span><span class="params">(Graph G, <span class="keyword">int</span> s)</span> </span>{</span><br><span class="line">        <span class="keyword">this</span>.marked = <span class="keyword">new</span> <span class="keyword">boolean</span>[G.V()];</span><br><span class="line">        <span class="keyword">this</span>.count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">this</span>.waitSearch = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        bfs(G,s);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">bfs</span><span class="params">(Graph G, <span class="keyword">int</span> v)</span> </span>{</span><br><span class="line">        <span class="comment">// mark v as visited</span></span><br><span class="line">        marked[v] = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// let v in the queue, ready to search</span></span><br><span class="line">        waitSearch.add(v);</span><br><span class="line"></span><br><span class="line">        System.out.println(v);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (!waitSearch.isEmpty()) {</span><br><span class="line">            Integer wait = waitSearch.remove();</span><br><span class="line">            <span class="comment">// iterate wait's adjacency matrix</span></span><br><span class="line">            <span class="keyword">for</span> (Integer w : G.adj(wait)) {</span><br><span class="line">                <span class="keyword">if</span> (!marked[w]) {</span><br><span class="line">                    marked[w] = <span class="keyword">true</span>;</span><br><span class="line">                    waitSearch.add(w);</span><br><span class="line">                    System.out.println(w);</span><br><span class="line">                }</span><br><span class="line"></span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="comment">// let connected vertex +1</span></span><br><span class="line">        count++;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">marked</span><span class="params">(<span class="keyword">int</span> w)</span> </span>{</span><br><span class="line">        <span class="keyword">return</span> marked[w];</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">count</span><span class="params">()</span> </span>{</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h3 id="Bipartiteness"><a href="#Bipartiteness" class="headerlink" title="Bipartiteness"></a>Bipartiteness</h3><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20211004193624.png" alt="image-20211004193619901"></p>
+<ol>
+<li>Do a BFS starting from some node s</li>
+<li>Color even levels “blue” and odd levels “red”</li>
+<li>Check each edge to see if any edge has both endpoints the same level</li>
+</ol>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：DFS and BFS algo notes</li>
+        <li>Post author：Yuxuan Wu</li>
+        <li>Create time：2021-10-03 09:47:23</li>
+        <li>
+            Post link：yuxuanwu17.github.io2021/10/03/2021-10-03-DFS-and-BFS-algo-notes/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/10/03/2021-10-03-Undirected-Graph-implementation-in-Java/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Undirected Graph implementation in Java</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/09/02/2021-09-02-%E5%9B%BE%E8%AE%BA%E5%9F%BA%E7%A1%80/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">图论基础</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span> -
+            
+            2021 <i class="fas fa-heart icon-animate"></i> <a href="/">Yuxuan Wu</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count <span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a> | Theme <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.3.1</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DFS"><span class="nav-number">1.</span> <span class="nav-text">DFS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-idea"><span class="nav-number">1.1.</span> <span class="nav-text">Basic idea</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Non-DFS-Tree-edges"><span class="nav-number">1.2.</span> <span class="nav-text">Non-DFS-Tree edges</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Recursive-implementation-of-DFS"><span class="nav-number">1.3.</span> <span class="nav-text">Recursive implementation of DFS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Algorithm"><span class="nav-number">1.3.1.</span> <span class="nav-text">Algorithm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pseudo-code"><span class="nav-number">1.3.2.</span> <span class="nav-text">pseudo code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-implementation"><span class="nav-number">1.3.3.</span> <span class="nav-text">Java implementation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stack-based-implantation-of-DFS"><span class="nav-number">1.3.4.</span> <span class="nav-text">Stack based implantation of DFS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Comparison-of-recursively-achieved-and-stack-based-algorithm"><span class="nav-number">1.3.5.</span> <span class="nav-text">Comparison of recursively achieved and stack-based algorithm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Topological-sorting-DFS-application"><span class="nav-number">1.3.6.</span> <span class="nav-text">Topological sorting (DFS application)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BFS"><span class="nav-number">1.4.</span> <span class="nav-text">BFS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pseudocode"><span class="nav-number">1.4.1.</span> <span class="nav-text">Pseudocode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bipartiteness"><span class="nav-number">1.4.2.</span> <span class="nav-text">Bipartiteness</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
