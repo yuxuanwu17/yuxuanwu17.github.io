@@ -9,7 +9,7 @@
     
     <title>
         
-            Undirected Graph implementation in Java |
+            golang 安装 tensorflow |
         
         Yuxuan Wu
     </title>
@@ -30,7 +30,124 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
 
 
 <body>
@@ -168,7 +285,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">Undirected Graph implementation in Java</span>
+            <span class="title-hover-animation">golang 安装 tensorflow</span>
         </div>
 
         
@@ -184,7 +301,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i> 2021-10-03 09:50:23
+        <i class="fas fa-edit"></i> 2021-10-08 22:20:23
     </span>
     
         <span class="article-categories article-meta-item">
@@ -192,7 +309,7 @@
             <ul>
                 
                     <li>
-                        <a href="/categories/CMUAlgoNotes/">CMUAlgoNotes</a>
+                        <a href="/categories/Go/">Go</a>
                     </li>
                 
             </ul>
@@ -204,7 +321,11 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/graph/">graph</a>
+                        <a href="/tags/golang/">golang</a>
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/tf/">tf</a>
                     </li>
                 
             </ul>
@@ -214,7 +335,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i> <span>229 Words</span>
+            <i class="fas fa-file-word"></i> <span>302 Words</span>
         </span>
     
     
@@ -235,26 +356,42 @@
         
 
         <div class="article-content markdown-body">
-            <h1 id="Graph-implementation"><a href="#Graph-implementation" class="headerlink" title="Graph implementation"></a>Graph implementation</h1><h2 id="adjacency-matrix"><a href="#adjacency-matrix" class="headerlink" title="adjacency matrix"></a>adjacency matrix</h2><blockquote>
-<p>本质是一个大小为v（vertex的数量） 的数组，每个数组存储了一个LinkedList对象，这里代表的是与当前vertex相连的数</p>
-</blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20211003100619.png" alt="image-20211003100616294"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20211003100650.png" alt="image-20211003100648307"></p>
-<blockquote>
-<p>这里的Queue不是java内置的队列，而是调用之前实现的队列，这里用linkedlist来代替</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> graph;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.LinkedList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Graph</span> </span>&#123;</span><br><span class="line">    <span class="comment">// vertex</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> V;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// edge</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> E;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// adjacency matrix, an array storing the Queue</span></span><br><span class="line">    <span class="keyword">private</span> LinkedList[] adj;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// construct the graph</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Graph</span><span class="params">(<span class="keyword">int</span> V)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.V = V;</span><br><span class="line">        <span class="keyword">this</span>.E = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">this</span>.adj = <span class="keyword">new</span> LinkedList[V];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; adj.length; i++) &#123;</span><br><span class="line">            adj[i] = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// return the number of vertex V</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">V</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> V;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// return the number of edge E</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">E</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> E;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addEdge</span><span class="params">(<span class="keyword">int</span> v, <span class="keyword">int</span> w)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// add w to queue adj[v], so vertex v would have w in their queue</span></span><br><span class="line">        adj[v].add(w);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// reversely add v to vertex w</span></span><br><span class="line">        adj[w].add(v);</span><br><span class="line">        E++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// return all the vertex that are frontiers of vertex v</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> LinkedList&lt;Integer&gt; <span class="title">adj</span><span class="params">(<span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> adj[v];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h1 id="本文记录tfgo的安装和使用教程-（mac）"><a href="#本文记录tfgo的安装和使用教程-（mac）" class="headerlink" title="本文记录tfgo的安装和使用教程 （mac）"></a>本文记录tfgo的安装和使用教程 （mac）</h1><ul>
+<li>下载安装依赖（dependency）</li>
+<li>go get 安装</li>
+<li>测试</li>
+</ul>
+<h2 id="TF-GitHub-地址"><a href="#TF-GitHub-地址" class="headerlink" title="TF GitHub 地址"></a>TF GitHub 地址</h2><p><a class="link" target="_blank" rel="noopener" href="https://github.com/galeone/tfgo#tensorflow-installation">https://github.com/galeone/tfgo#tensorflow-installation<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="Dependencies-依赖"><a href="#Dependencies-依赖" class="headerlink" title="Dependencies (依赖)"></a>Dependencies (依赖)</h2><p>需要安装c library</p>
+<p><a class="link" target="_blank" rel="noopener" href="https://www.tensorflow.org/install/lang_c">https://www.tensorflow.org/install/lang_c<i class="fas fa-external-link-alt"></i></a></p>
+<p>因为我是mac系统，所以下载如下的链接到本地</p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20211008222854.png" alt="image-20211008222851847"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20211008223044.png" alt="image-20211008223042617"></p>
+<p>可以选择主动解压，然后将解压后的文件移到如下的位置 <code>/usr/local</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv libtensorflow-cpu-darwin-x86_64-2.6.0 /usr/<span class="built_in">local</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Installation-安装"><a href="#Installation-安装" class="headerlink" title="Installation (安装)"></a>Installation (安装)</h2><p>在命令行输入go get 下载tfgo</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go get github.com/galeone/tfgo</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">        <span class="string">"fmt"</span></span><br><span class="line">        tg <span class="string">"github.com/galeone/tfgo"</span></span><br><span class="line">        tf <span class="string">"github.com/galeone/tensorflow/tensorflow/go"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> {</span><br><span class="line">        root := tg.NewRoot()</span><br><span class="line">        A := tg.NewTensor(root, tg.Const(root, [<span class="number">2</span>][<span class="number">2</span>]<span class="keyword">int32</span>{{<span class="number">1</span>, <span class="number">2</span>}, {<span class="number">-1</span>, <span class="number">-2</span>}}))</span><br><span class="line">        x := tg.NewTensor(root, tg.Const(root, [<span class="number">2</span>][<span class="number">1</span>]<span class="keyword">int64</span>{{<span class="number">10</span>}, {<span class="number">100</span>}}))</span><br><span class="line">        b := tg.NewTensor(root, tg.Const(root, [<span class="number">2</span>][<span class="number">1</span>]<span class="keyword">int32</span>{{<span class="number">-10</span>}, {<span class="number">10</span>}}))</span><br><span class="line">        Y := A.MatMul(x.Output).Add(b.Output)</span><br><span class="line">        <span class="comment">// Please note that Y is just a pointer to A!</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// If we want to create a different node in the graph, we have to clone Y</span></span><br><span class="line">        <span class="comment">// or equivalently A</span></span><br><span class="line">        Z := A.Clone()</span><br><span class="line">        results := tg.Exec(root, []tf.Output{Y.Output, Z.Output}, <span class="literal">nil</span>, &amp;tf.SessionOptions{})</span><br><span class="line">        fmt.Println(<span class="string">"Y: "</span>, results[<span class="number">0</span>].Value(), <span class="string">"Z: "</span>, results[<span class="number">1</span>].Value())</span><br><span class="line">        fmt.Println(<span class="string">"Y == A"</span>, Y == A) <span class="comment">// ==&gt; true</span></span><br><span class="line">        fmt.Println(<span class="string">"Z == A"</span>, Z == A) <span class="comment">// ==&gt; false</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>看看是否输出了如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Y:  [[200] [-200]] Z:  [[200] [-200]]</span><br><span class="line">Y == A true</span><br><span class="line">Z == A false</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20211008223624.png" alt="image-20211008223622383"></p>
+<p>上述结果说明已经成功安装成功tfgo</p>
+
         </div>
 
         
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>Post title：Undirected Graph implementation in Java</li>
+        <li>Post title：golang 安装 tensorflow</li>
         <li>Post author：Yuxuan Wu</li>
-        <li>Create time：2021-10-03 09:50:23</li>
+        <li>Create time：2021-10-08 22:20:23</li>
         <li>
-            Post link：yuxuanwu17.github.io2021/10/03/2021-10-03-Undirected-Graph-implementation-in-Java/
+            Post link：yuxuanwu17.github.io2021/10/08/2021-10-08-golang-安装-tensorflow/
         </li>
         <li>
             Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
@@ -268,29 +405,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2021/10/08/2021-10-08-golang-%E5%AE%89%E8%A3%85-tensorflow/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">golang 安装 tensorflow</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/10/03/2021-10-03-DFS-and-BFS-algo-notes/"
+                           href="/2021/10/03/2021-10-03-Undirected-Graph-implementation-in-Java/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">DFS and BFS algo notes</span>
+                                <span class="post-nav-title-item">Undirected Graph implementation in Java</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -413,7 +535,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Graph-implementation"><span class="nav-number">1.</span> <span class="nav-text">Graph implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#adjacency-matrix"><span class="nav-number">1.1.</span> <span class="nav-text">adjacency matrix</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E8%AE%B0%E5%BD%95tfgo%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B-%EF%BC%88mac%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">本文记录tfgo的安装和使用教程 （mac）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TF-GitHub-%E5%9C%B0%E5%9D%80"><span class="nav-number">1.1.</span> <span class="nav-text">TF GitHub 地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dependencies-%E4%BE%9D%E8%B5%96"><span class="nav-number">1.2.</span> <span class="nav-text">Dependencies (依赖)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation-%E5%AE%89%E8%A3%85"><span class="nav-number">1.3.</span> <span class="nav-text">Installation (安装)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#test"><span class="nav-number">1.4.</span> <span class="nav-text">test</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>
