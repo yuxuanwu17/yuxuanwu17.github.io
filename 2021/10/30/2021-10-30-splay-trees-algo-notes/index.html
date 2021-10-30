@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Welcome to my personal blogs">
+    <meta name="author" content="Yuxuan Wu">
+    
+    <title>
+        
+            splay trees algo notes |
+        
+        Yuxuan Wu
+    </title>
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep coding, Keep hungry."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.3.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days age","week":"%s weeks age","month":"%s months age","year":"%s years age"};
+  </script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Yuxuan Wu
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content normal-code-theme">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">splay trees algo notes</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Yuxuan Wu</span>
+                        <span class="level">Lv12</span>
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i> 2021-10-30 10:57:23
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/categories/CMUAlgoNotes/">CMUAlgoNotes</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/tags/splaytree/">splaytree</a>
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/BST/">BST</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i> <span>794 Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i> <span>4 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="BST-definition"><a href="#BST-definition" class="headerlink" title="BST definition"></a>BST definition</h1><p><code>Property:</code> if a node has key k then keys in the left subtree are &lt; k and keys in the right subtree are &gt; k. For convenience, we disallow the duplicate keys.</p>
+<h2 id="Find-amp-Insert"><a href="#Find-amp-Insert" class="headerlink" title="Find & Insert"></a>Find &amp; Insert</h2><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20211030105508.png" alt="image-20211030105506775"></p>
+<h3 id="FindMin"><a href="#FindMin" class="headerlink" title="FindMin"></a>FindMin</h3><p>Walk left until you can’t go left any more</p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20211030110123.png" alt="image-20211030110122035"></p>
+<h2 id="Delete"><a href="#Delete" class="headerlink" title="Delete"></a>Delete</h2><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20211030110354.png" alt="image-20211030110352601"></p>
+<h2 id="BST-Operations-summary"><a href="#BST-Operations-summary" class="headerlink" title="BST Operations summary"></a>BST Operations summary</h2><h3 id="Find"><a href="#Find" class="headerlink" title="Find"></a>Find</h3><p>Walk left or right according to the key comparison </p>
+<h3 id="Insert"><a href="#Insert" class="headerlink" title="Insert"></a>Insert</h3><p>Put the new node where a Find for it would have fallen off the tree</p>
+<h3 id="Delete-1"><a href="#Delete-1" class="headerlink" title="Delete"></a>Delete</h3><ol>
+<li>If deleting a leaf, just remove it</li>
+<li>If deleting a node u with 1 child, move that child up to be a child of u’s parent</li>
+<li>If deleting a node u with 2 children: find the <code>smallest key in the right subtree </code> rooted at u, delete it, and replace u with that key</li>
+</ol>
+<h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><h3 id="What’s-the-worst-possible-insertion-order"><a href="#What’s-the-worst-possible-insertion-order" class="headerlink" title="What’s the worst possible insertion order"></a>What’s the worst possible insertion order</h3><p>Insertion should start from the root of the tree, to the low maximum length. <code>Order matters.</code></p>
+<p>Insert keys in increasing trees and continue to add in increasing order (e.g. continue to add to the right of the BST)</p>
+<blockquote>
+<p>Same to the structure of the Linked list, and the insertion, deletion and find would be O(N)</p>
+</blockquote>
+<h3 id="What’s-the-best-possible-insertion-order"><a href="#What’s-the-best-possible-insertion-order" class="headerlink" title="What’s the best possible insertion order"></a>What’s the best possible insertion order</h3><p>The depth of left subtrees and right subtrees are roughly the same would be the best. Also, called as the balanced tree</p>
+<ul>
+<li>Need a method to force a BST tree to be balanced if items are constantly being inserted and deleted. </li>
+<li>Splay trees are thus proposed</li>
+</ul>
+<h2 id="BST-Java-implementation"><a href="#BST-Java-implementation" class="headerlink" title="BST Java implementation"></a>BST Java implementation</h2><p><a class="link" target="_blank" rel="noopener" href="https://yuxuanwu17.github.io/2021/07/26/2021-07-26-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E6%A0%91%EF%BC%88Binary-Search-Tree%EF%BC%89/">https://yuxuanwu17.github.io/2021/07/26/2021-07-26-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E6%A0%91%EF%BC%88Binary-Search-Tree%EF%BC%89/<i class="fas fa-external-link-alt"></i></a></p>
+<h1 id="Splay-trees"><a href="#Splay-trees" class="headerlink" title="Splay trees"></a>Splay trees</h1><h2 id="Characters"><a href="#Characters" class="headerlink" title="Characters"></a>Characters</h2><ol>
+<li>No extra storage requirement</li>
+<li>Simple to implement</li>
+<li>Main idea: move frequently accessed items up in tree</li>
+<li>Amortized O(log n) performance</li>
+<li>Worst case single operation is <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex" xmlns="http://www.w3.org/2000/svg" width="4.751ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 2100 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="3A9" d="M55 454Q55 503 75 546T127 617T197 665T272 695T337 704H352Q396 704 404 703Q527 687 596 615T666 454Q666 392 635 330T559 200T499 83V80H543Q589 81 600 83T617 93Q622 102 629 135T636 172L637 177H677V175L660 89Q645 3 644 2V0H552H488Q461 0 456 3T451 20Q451 89 499 235T548 455Q548 512 530 555T483 622T424 656T361 668Q332 668 303 658T243 626T193 560T174 456Q174 380 222 233T270 20Q270 7 263 0H77V2Q76 3 61 89L44 175V177H84L85 172Q85 171 88 155T96 119T104 93Q109 86 120 84T178 80H222V83Q206 132 162 199T87 329T55 454Z"></path></g><g data-mml-node="mo" transform="translate(722, 0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(1111, 0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(1711, 0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container></li>
+</ol>
+<h2 id="Operations"><a href="#Operations" class="headerlink" title="Operations"></a>Operations</h2><p><code>Splay (T, K)</code>: if k <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.09ex" xmlns="http://www.w3.org/2000/svg" width="1.509ex" height="1.312ex" role="img" focusable="false" viewBox="0 -540 667 580"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="2208" d="M84 250Q84 372 166 450T360 539Q361 539 377 539T419 540T469 540H568Q583 532 583 520Q583 511 570 501L466 500Q355 499 329 494Q280 482 242 458T183 409T147 354T129 306T124 272V270H568Q583 262 583 250T568 230H124V228Q124 207 134 177T167 112T231 48T328 7Q355 1 466 0H570Q583 -10 583 -20Q583 -32 568 -40H471Q464 -40 446 -40T417 -41Q262 -41 172 45Q84 127 84 250Z"></path></g></g></g></svg></mjx-container> T, then move k to the root using a particular set of transformations of the tree. Otherwise, move either inorder successor or predecessor of k to the root</p>
+<p><code>find(T,k)</code>: splay(T,k). If root(T) = k, return k, otherwise return not found.</p>
+<p><code>insert(T,k)</code>: splay(T,k). If root(T) = k, return duplicate! Otherwise, make k the root and add children as in figure</p>
+<p><code>concat(T1,T2)</code>: Assumes all keys in T1 are &lt; all keys in T2. Splay(T1, <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex" xmlns="http://www.w3.org/2000/svg" width="5.597ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 2474 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mtext" fill="red" stroke="red"><path data-c="5C" d="M56 731Q56 740 62 745T75 750Q85 750 92 740Q96 733 270 255T444 -231Q444 -239 438 -244T424 -250Q414 -250 407 -240Q404 -236 230 242T56 731Z"></path><path data-c="69" d="M69 609Q69 637 87 653T131 669Q154 667 171 652T188 609Q188 579 171 564T129 549Q104 549 87 564T69 609ZM247 0Q232 3 143 3Q132 3 106 3T56 1L34 0H26V46H42Q70 46 91 49Q100 53 102 60T104 102V205V293Q104 345 102 359T88 378Q74 385 41 385H30V408Q30 431 32 431L42 432Q52 433 70 434T106 436Q123 437 142 438T171 441T182 442H185V62Q190 52 197 50T232 46H255V0H247Z" transform="translate(500, 0)"></path><path data-c="6E" d="M41 46H55Q94 46 102 60V68Q102 77 102 91T102 122T103 161T103 203Q103 234 103 269T102 328V351Q99 370 88 376T43 385H25V408Q25 431 27 431L37 432Q47 433 65 434T102 436Q119 437 138 438T167 441T178 442H181V402Q181 364 182 364T187 369T199 384T218 402T247 421T285 437Q305 442 336 442Q450 438 463 329Q464 322 464 190V104Q464 66 466 59T477 49Q498 46 526 46H542V0H534L510 1Q487 2 460 2T422 3Q319 3 310 0H302V46H318Q379 46 379 62Q380 64 380 200Q379 335 378 343Q372 371 358 385T334 402T308 404Q263 404 229 370Q202 343 195 315T187 232V168V108Q187 78 188 68T191 55T200 49Q221 46 249 46H265V0H257L234 1Q210 2 183 2T145 3Q42 3 33 0H25V46H41Z" transform="translate(778, 0)"></path><path data-c="66" d="M273 0Q255 3 146 3Q43 3 34 0H26V46H42Q70 46 91 49Q99 52 103 60Q104 62 104 224V385H33V431H104V497L105 564L107 574Q126 639 171 668T266 704Q267 704 275 704T289 705Q330 702 351 679T372 627Q372 604 358 590T321 576T284 590T270 627Q270 647 288 667H284Q280 668 273 668Q245 668 223 647T189 592Q183 572 182 497V431H293V385H185V225Q185 63 186 61T189 57T194 54T199 51T206 49T213 48T222 47T231 47T241 46T251 46H282V0H273Z" transform="translate(1334, 0)"></path><path data-c="69" d="M69 609Q69 637 87 653T131 669Q154 667 171 652T188 609Q188 579 171 564T129 549Q104 549 87 564T69 609ZM247 0Q232 3 143 3Q132 3 106 3T56 1L34 0H26V46H42Q70 46 91 49Q100 53 102 60T104 102V205V293Q104 345 102 359T88 378Q74 385 41 385H30V408Q30 431 32 431L42 432Q52 433 70 434T106 436Q123 437 142 438T171 441T182 442H185V62Q190 52 197 50T232 46H255V0H247Z" transform="translate(1640, 0)"></path><path data-c="6E" d="M41 46H55Q94 46 102 60V68Q102 77 102 91T102 122T103 161T103 203Q103 234 103 269T102 328V351Q99 370 88 376T43 385H25V408Q25 431 27 431L37 432Q47 433 65 434T102 436Q119 437 138 438T167 441T178 442H181V402Q181 364 182 364T187 369T199 384T218 402T247 421T285 437Q305 442 336 442Q450 438 463 329Q464 322 464 190V104Q464 66 466 59T477 49Q498 46 526 46H542V0H534L510 1Q487 2 460 2T422 3Q319 3 310 0H302V46H318Q379 46 379 62Q380 64 380 200Q379 335 378 343Q372 371 358 385T334 402T308 404Q263 404 229 370Q202 343 195 315T187 232V168V108Q187 78 188 68T191 55T200 49Q221 46 249 46H265V0H257L234 1Q210 2 183 2T145 3Q42 3 33 0H25V46H41Z" transform="translate(1918, 0)"></path></g></g></g></svg></mjx-container>). Now root T1 contains the largest item and has no right child. Make T2 right child of T1</p>
+<p><code>delete(T,k)</code>: splay(T,k). If root r contains k, concat(Left(r),Right(r))</p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20211030142106.png" alt="image-20211030142105283"></p>
+<blockquote>
+<p>The rotation would not change the in-order traversal.</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20211030142125.png" alt="image-20211030142124772"></p>
+<h3 id="Find-operation"><a href="#Find-operation" class="headerlink" title="Find operation"></a>Find operation</h3><ol>
+<li>Like a standard BST search operation</li>
+<li>We make rotations when we find the given element we are looking for -&gt; it is going to be the root node, which also called as “splaying” (It don’t need to be strictly balanced)</li>
+<li>Why? Because in the next search it can be accessed very fast even in O(1) time </li>
+<li>There are 3 ways we can make it happen <ol>
+<li>Zig-zag situation </li>
+<li>Zig-zig situation</li>
+<li>Zig situation</li>
+</ol>
+</li>
+</ol>
+<p>The priority was not to be balance, but to find the root we are looking for </p>
+<h3 id="Zig-zag-situation-two-rotations"><a href="#Zig-zag-situation-two-rotations" class="headerlink" title="Zig-zag situation (two rotations)"></a>Zig-zag situation (two rotations)</h3><ul>
+<li>The given node X is a right child of a left child</li>
+<li>The given node X is a left child of a right child</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20211030145725.png" alt="image-20211030145723408"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20211030145743.png" alt="image-20211030145742625"></p>
+<h3 id="Zig-zig-situation-Two-rotations"><a href="#Zig-zig-situation-Two-rotations" class="headerlink" title="Zig-zig situation (Two rotations)"></a>Zig-zig situation (Two rotations)</h3><ul>
+<li>The given node X is left child of a left child </li>
+<li>The given node X is a right child of a right child</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20211030145848.png" alt="image-20211030145847006"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20211030145900.png" alt="image-20211030145859643"></p>
+<h3 id="Zig-situation-single-rotation"><a href="#Zig-situation-single-rotation" class="headerlink" title="Zig situation (single rotation)"></a>Zig situation (single rotation)</h3><ul>
+<li>We have to repeat the previous two steps over and over again until we get to the root</li>
+<li>Sometimes we end up at the left/right child of the root: we just have to make a single right/left rotation accordingly</li>
+<li>So here X is just the child of the root</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20211030150146.png" alt="image-20211030150145112"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20211030150204.png" alt="image-20211030150203128"></p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20211030150621.png" alt="image-20211030150620344"></p>
+<ul>
+<li>Self adjusting binary search trees</li>
+<li>Guarantee that any m consecutive tree operations starting from an empty tree take O(m log n) time, where n is the maximum number of elements in tree at any time</li>
+<li>Another way of saying this is that the average cost of an operation (averaged over all the operations) is O(log n). Note: this makes no assumption about the sequence of accesses</li>
+<li>Call this amortized logarithmic cost</li>
+</ul>
+<blockquote>
+<p>Find =&gt; Rotation =&gt; insertion</p>
+</blockquote>
+<h3 id="Splay-idea"><a href="#Splay-idea" class="headerlink" title="Splay idea"></a>Splay idea</h3><ul>
+<li>The find/insert/delete operations can be written in terms of the “splay operation”</li>
+<li>Splay is implemented by doing a standard BST “find” and then applying particular rotations walking back up toward the root</li>
+<li>Splay may actually make the tree worse, but over a series of operations the tree always gets better (a slow find results in a long splay, but this long splay tends to flatten the tree a lot)</li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：splay trees algo notes</li>
+        <li>Post author：Yuxuan Wu</li>
+        <li>Create time：2021-10-30 10:57:23</li>
+        <li>
+            Post link：yuxuanwu17.github.io2021/10/30/2021-10-30-splay-trees-algo-notes/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/10/29/2021-10-26-skip-list-algo-notes/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">skip list algo notes</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span> -
+            
+            2021 <i class="fas fa-heart icon-animate"></i> <a href="/">Yuxuan Wu</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count <span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a> | Theme <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.3.1</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#BST-definition"><span class="nav-number">1.</span> <span class="nav-text">BST definition</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Find-amp-Insert"><span class="nav-number">1.1.</span> <span class="nav-text">Find &amp; Insert</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FindMin"><span class="nav-number">1.1.1.</span> <span class="nav-text">FindMin</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Delete"><span class="nav-number">1.2.</span> <span class="nav-text">Delete</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BST-Operations-summary"><span class="nav-number">1.3.</span> <span class="nav-text">BST Operations summary</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Find"><span class="nav-number">1.3.1.</span> <span class="nav-text">Find</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Insert"><span class="nav-number">1.3.2.</span> <span class="nav-text">Insert</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Delete-1"><span class="nav-number">1.3.3.</span> <span class="nav-text">Delete</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis"><span class="nav-number">1.4.</span> <span class="nav-text">Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#What%E2%80%99s-the-worst-possible-insertion-order"><span class="nav-number">1.4.1.</span> <span class="nav-text">What’s the worst possible insertion order</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#What%E2%80%99s-the-best-possible-insertion-order"><span class="nav-number">1.4.2.</span> <span class="nav-text">What’s the best possible insertion order</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BST-Java-implementation"><span class="nav-number">1.5.</span> <span class="nav-text">BST Java implementation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Splay-trees"><span class="nav-number">2.</span> <span class="nav-text">Splay trees</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Characters"><span class="nav-number">2.1.</span> <span class="nav-text">Characters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Operations"><span class="nav-number">2.2.</span> <span class="nav-text">Operations</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Find-operation"><span class="nav-number">2.2.1.</span> <span class="nav-text">Find operation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Zig-zag-situation-two-rotations"><span class="nav-number">2.2.2.</span> <span class="nav-text">Zig-zag situation (two rotations)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Zig-zig-situation-Two-rotations"><span class="nav-number">2.2.3.</span> <span class="nav-text">Zig-zig situation (Two rotations)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Zig-situation-single-rotation"><span class="nav-number">2.2.4.</span> <span class="nav-text">Zig situation (single rotation)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">2.3.</span> <span class="nav-text">Summary</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Splay-idea"><span class="nav-number">2.3.1.</span> <span class="nav-text">Splay idea</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
