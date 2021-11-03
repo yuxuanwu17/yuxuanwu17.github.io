@@ -339,12 +339,12 @@ mjx-container[display="true"] + br {
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i> <span>1.8k Words</span>
+            <i class="fas fa-file-word"></i> <span>1.9k Words</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i> <span>9 Mins</span>
+            <i class="fas fa-clock"></i> <span>10 Mins</span>
         </span>
     
     
@@ -458,6 +458,28 @@ mjx-container[display="true"] + br {
 <li>“Find” operation too much =&gt; array based</li>
 <li>“Union” operation too much =&gt; tree based</li>
 </ol>
+<h3 id="Clustering-Kruskal’s-algorithm-application"><a href="#Clustering-Kruskal’s-algorithm-application" class="headerlink" title="Clustering - Kruskal’s algorithm application"></a>Clustering - Kruskal’s algorithm application</h3><p>Also known as the <code>Maximum Minimum Distance</code></p>
+<p>Goal: divide the n items up into k groups so that the minimum distance between items in different group is maximized</p>
+<p><code>Idea</code></p>
+<ul>
+<li>Maintain clusters as a set of connected components of a graph</li>
+<li>Iteratively combine the clusters containing the two closest items</li>
+<li>Stop when there are two clusters</li>
+</ul>
+<blockquote>
+<p>This is exactly Kruskal’s algorithm</p>
+</blockquote>
+<ol>
+<li>The clusters are the connected components that Kruskal’s algorithm has created after a certain point</li>
+<li>Example of single-link, agglomerative clustering</li>
+</ol>
+<blockquote>
+<p>Agglomerative: combine clusters single-link: combine as soon as a single link joins clusters.</p>
+</blockquote>
+<p><code>Another way </code></p>
+<p>Delete the k-1 most expensive edges from the MST.</p>
+<p>The spacing d of the clustering C that this produces is the length of the (k-1)st most expensive edge</p>
+<p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20211102105845.png" alt="image-20211102105844214"></p>
 <h1 id="Negative-weight-for-MST"><a href="#Negative-weight-for-MST" class="headerlink" title="Negative weight for MST"></a>Negative weight for MST</h1><p> The concept of MST allows weights of an arbitrary sign. The two most popular algorithms for finding MST (Kruskal’s and Prim’s) work fine with negative edges.</p>
 <p>Actually, you can just add a big positive constant to all the edges of your graph, making all the edges positive. The MST (as a subset of edges) will remain the same.</p>
 
@@ -630,7 +652,7 @@ mjx-container[display="true"] + br {
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Prior-Knowledge"><span class="nav-number">1.</span> <span class="nav-text">Prior Knowledge</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tree%E2%80%99s-characteristics"><span class="nav-number">1.1.</span> <span class="nav-text">Tree’s characteristics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MST-problem"><span class="nav-number">1.2.</span> <span class="nav-text">MST problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MST-property-summary"><span class="nav-number">1.3.</span> <span class="nav-text">MST property summary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MST-useful-statement-in-HW"><span class="nav-number">1.4.</span> <span class="nav-text">MST useful statement in HW</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Greedy-minimum-spanning-tree-rules"><span class="nav-number">2.</span> <span class="nav-text">Greedy minimum spanning tree rules</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prims"><span class="nav-number">2.1.</span> <span class="nav-text">Prims</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-implementation"><span class="nav-number">2.1.1.</span> <span class="nav-text">Java implementation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Time-complexity"><span class="nav-number">2.1.2.</span> <span class="nav-text">Time complexity</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kruskal%E2%80%99s-algorithm"><span class="nav-number">2.2.</span> <span class="nav-text">Kruskal’s algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#array-based-UF"><span class="nav-number">2.2.1.</span> <span class="nav-text">array based UF:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tree-based-UF"><span class="nav-number">2.2.2.</span> <span class="nav-text">tree based UF:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Option-used-in-UF"><span class="nav-number">2.2.3.</span> <span class="nav-text">Option used in UF</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Negative-weight-for-MST"><span class="nav-number">3.</span> <span class="nav-text">Negative weight for MST</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Prior-Knowledge"><span class="nav-number">1.</span> <span class="nav-text">Prior Knowledge</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tree%E2%80%99s-characteristics"><span class="nav-number">1.1.</span> <span class="nav-text">Tree’s characteristics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MST-problem"><span class="nav-number">1.2.</span> <span class="nav-text">MST problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MST-property-summary"><span class="nav-number">1.3.</span> <span class="nav-text">MST property summary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MST-useful-statement-in-HW"><span class="nav-number">1.4.</span> <span class="nav-text">MST useful statement in HW</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Greedy-minimum-spanning-tree-rules"><span class="nav-number">2.</span> <span class="nav-text">Greedy minimum spanning tree rules</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prims"><span class="nav-number">2.1.</span> <span class="nav-text">Prims</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-implementation"><span class="nav-number">2.1.1.</span> <span class="nav-text">Java implementation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Time-complexity"><span class="nav-number">2.1.2.</span> <span class="nav-text">Time complexity</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kruskal%E2%80%99s-algorithm"><span class="nav-number">2.2.</span> <span class="nav-text">Kruskal’s algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#array-based-UF"><span class="nav-number">2.2.1.</span> <span class="nav-text">array based UF:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tree-based-UF"><span class="nav-number">2.2.2.</span> <span class="nav-text">tree based UF:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Option-used-in-UF"><span class="nav-number">2.2.3.</span> <span class="nav-text">Option used in UF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Clustering-Kruskal%E2%80%99s-algorithm-application"><span class="nav-number">2.2.4.</span> <span class="nav-text">Clustering - Kruskal’s algorithm application</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Negative-weight-for-MST"><span class="nav-number">3.</span> <span class="nav-text">Negative weight for MST</span></a></li></ol>
     </div>
 </div>
         </aside>
