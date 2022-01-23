@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Welcome to my personal blogs">
+    <meta name="author" content="Yuxuan Wu">
+    
+    <title>
+        
+            bash command combo |
+        
+        Yuxuan Wu
+    </title>
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep coding, Keep hungry."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.3.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days age","week":"%s weeks age","month":"%s months age","year":"%s years age"};
+  </script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Yuxuan Wu
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content normal-code-theme">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">bash command combo</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Yuxuan Wu</span>
+                        <span class="level">Lv13</span>
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i> 2022-01-20 19:38:03
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Linux/">Linux</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/tags/notes/">notes</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i> <span>1.2k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i> <span>7 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h1><p><img src="https://cdn.jsdelivr.net/gh/imgstore/typora/20220120193937.png" alt="image-20220120193936093"></p>
+<blockquote>
+<p>ls -lh</p>
+</blockquote>
+<p>The option -l of the command ls also reports the size of the file. </p>
+<p>Adding the flag -h makes it “human-readable” (i.e., using K, M, instead of printing the number of bytes). </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(base) yuxuan@Yuxuan sandbox % ls -lh</span><br><span class="line">total 640</span><br><span class="line">-rw-r--r--  1 yuxuan  staff   311K Jan 20 18:22 BodyM.csv</span><br><span class="line">drwxr-xr-x  3 yuxuan  staff    96B Jan 20 15:00 Papers and reviews</span><br><span class="line">(base) yuxuan@Yuxuan sandbox % ls -l</span><br><span class="line">total 640</span><br><span class="line">-rw-r--r--  1 yuxuan  staff  318599 Jan 20 18:22 BodyM.csv</span><br><span class="line">drwxr-xr-x  3 yuxuan  staff      96 Jan 20 15:00 Papers and reviews</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>The size could also be calculated as </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">du -h ../data/Marra2014_data.fasta </span><br></pre></td></tr></table></figure>
+</blockquote>
+<h1 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># To count the occurrences of a given string, use </span></span><br><span class="line">grep with the option -c</span><br><span class="line"></span><br><span class="line"><span class="comment"># Prompt grep to match only full words</span></span><br><span class="line">grep with the option -w</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>grep</code> is a powerful command that finds all the lines of a file that match a given pattern</p>
+</blockquote>
+<h1 id="wc"><a href="#wc" class="headerlink" title="wc"></a>wc</h1><p><code>wc</code> Line, word, and byte (character) count of a file. The option returns the <code>wc-l</code> line count only and is a quick way to get an idea of the size of a text file</p>
+<h1 id="cut"><a href="#cut" class="headerlink" title="cut"></a>cut</h1><p><code>cut</code> is used to select the columns and the option d is to specify the delimiter</p>
+<p>The additional option -f let us to extract specific column 1 (-f 1-4)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">'&gt;'</span> my_file.fasta | cut -d <span class="string">','</span> -f 4 | head -n 2</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Now we want to sort according to the number of reads. However, the number of reads is part of a more complex string. We can use -t '=' to split according to the = sign, and then take the second column (-k 2) to sort numerically (-n)</span></span><br><span class="line"></span><br><span class="line">grep <span class="string">'&gt;'</span> my_file.fasta | cut -d <span class="string">','</span> -f 1,3 | sort -t <span class="string">'='</span> -k 2 -n | head -n 5</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="tail"><a href="#tail" class="headerlink" title="tail"></a>tail</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Display last two lines of the file</span></span><br><span class="line">tail -n 2 ....csv</span><br><span class="line"></span><br><span class="line"><span class="comment"># Display from line 2 on ward</span></span><br><span class="line">tail -n +2 ....csv</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h1 id="tr"><a href="#tr" class="headerlink" title="tr"></a>tr</h1><p><code>tr</code>: is used to substitute characters using tr </p>
+<blockquote>
+<p>Substitute all characters a with b:</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">"aaaabbb"</span> | tr <span class="string">"a"</span> <span class="string">"b"</span></span><br><span class="line"></span><br><span class="line">bbbbbbb</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Substitute every digit in the range 1 through 5 with 0:</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">"123456789"</span> | tr 1-5 0</span><br><span class="line"></span><br><span class="line">000006789 </span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Substitute lowercase letters with uppercase ones:</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">"ACtGGcAaTT"</span> | tr actg ACTG</span><br><span class="line"></span><br><span class="line">ACTGGCAATT</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>We obtain the same result by using bracketed expressions that provide a predefined set of characters. Here, we use the set of all lowercase letters [:lower:] and translate into uppercase letters [:upper:]:</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">"ACtGGcAaTT"</span> | tr [:lower:] [:upper:]</span><br><span class="line"></span><br><span class="line">ACTGGCAATT</span><br></pre></td></tr></table></figure>
+<p>We can also indicate ranges of characters to substitute:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">"aabbccddee"</span> | tr a-c 1-3</span><br><span class="line"></span><br><span class="line">112233ddee</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Delete all occurrences of a:</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">"aaaaabbbb"</span> | tr -d a</span><br><span class="line">bbbb</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>“Squeeze” all consecutive occurrences of a:</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">"aaaaabbbb"</span> | tr -s a</span><br><span class="line"></span><br><span class="line">abbbb</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="Bash-script-hw1"><a href="#Bash-script-hw1" class="headerlink" title="Bash_script_hw1"></a>Bash_script_hw1</h1><p><a class="link" target="_blank" rel="noopener" href="http://computingskillsforbiologists.com/downloads/exercises/#unix">http://computingskillsforbiologists.com/downloads/exercises/#unix<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="1"><a href="#1" class="headerlink" title="1"></a>1</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 2. Write a script taking as input the file name and the ID of the individual, and returning the number of records for that ID.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># We just need to a) read the input from the command</span></span><br><span class="line"><span class="comment"># line (using $1 for filename and $2 for ID), and</span></span><br><span class="line"><span class="comment"># then run the commands above.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># The script count_baboons.sh shows the solution</span></span><br><span class="line"></span><br><span class="line">   </span><br><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># function of script:</span></span><br><span class="line"><span class="comment"># read input:</span></span><br><span class="line"><span class="comment"># $1 is the file name</span></span><br><span class="line"><span class="comment"># $2 is the maleID</span></span><br><span class="line"></span><br><span class="line">cut -f 1 <span class="variable">$1</span> | grep -c -w <span class="variable">$2</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">bash count_baboons.sh ../data/Gesquiere2011_data.csv 27</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="2"><a href="#2" class="headerlink" title="2"></a>2</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">###################################################</span></span><br><span class="line"><span class="comment"># Exercise 1.10.3 </span></span><br><span class="line"><span class="comment">###################################################</span></span><br><span class="line"><span class="comment"># 1) Write a script that takes one of these files and determines the number of rows (pollinators) and columns (plants). Counting the number of rows amount to counting the number of lines. This is easily done with wc -l. For example:</span></span><br><span class="line"></span><br><span class="line">wc -l ../data/Saavedra2013/n10.txt </span><br><span class="line"></span><br><span class="line"><span class="comment"># Which returns </span></span><br><span class="line"><span class="comment"># 14 ../data/Saavedra2013/n10.txt</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># To avoid printing the file name we</span></span><br><span class="line"><span class="comment"># can either use cat</span></span><br><span class="line"></span><br><span class="line">cat ../data/Saavedra2013/n10.txt | wc -l</span><br><span class="line"><span class="comment"># 14</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># or use the symbol &lt; for the input</span></span><br><span class="line"></span><br><span class="line">wc -l &lt; ../data/Saavedra2013/n10.txt </span><br><span class="line"><span class="comment"># 14</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Counting the number of columns is more work.</span></span><br><span class="line"><span class="comment"># First, we need only the first line:</span></span><br><span class="line"></span><br><span class="line">head -n 1 ../data/Saavedra2013/n10.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Now we can remove all spaces and the line terminator using tr:</span></span><br><span class="line">head -n 1 ../data/Saavedra2013/n10.txt | tr -d <span class="string">' '</span> | tr -d <span class="string">'\n'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 01000001000000000100</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Finally, we can use wc -c to count the number</span></span><br><span class="line"><span class="comment"># of characters in the string:</span></span><br><span class="line"></span><br><span class="line">head -n 1 ../data/Saavedra2013/n10.txt | tr -d <span class="string">' '</span> | tr -d <span class="string">'\n'</span> | wc -c</span><br><span class="line"><span class="comment"># 20</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Armed with this information, we can write our</span></span><br><span class="line"><span class="comment"># script (see the file netsize.sh).</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="3"><a href="#3" class="headerlink" title="3"></a>3</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">FILES=../data/Saavedra2013/*.txt</span><br><span class="line"><span class="keyword">for</span> f <span class="keyword">in</span> <span class="variable">$FILES</span> </span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    myrow=`cat <span class="variable">$f</span> | wc -l`</span><br><span class="line">    mycol=`head -n 1 <span class="variable">$f</span> | tr -d <span class="string">' '</span> | tr -d <span class="string">'\n'</span> | wc -c`</span><br><span class="line">    <span class="built_in">echo</span> <span class="variable">$f</span> <span class="variable">$myrow</span> <span class="variable">$mycol</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 2) Write a script that prints the number of rows and columns for each network</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># This requires some commands that we haven't covered</span></span><br><span class="line"><span class="comment"># in the text. We put this example to show how many</span></span><br><span class="line"><span class="comment"># problems can be solved by searching the web for</span></span><br><span class="line"><span class="comment"># an answer. You don't need to remember all of the</span></span><br><span class="line"><span class="comment"># commands, but you need to be able to find solutions</span></span><br><span class="line"><span class="comment"># online!</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># In a script, if you write:</span></span><br><span class="line"></span><br><span class="line">FILES=../data/Saavedra2013/*.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># You create a list of all the .txt files in the</span></span><br><span class="line"><span class="comment"># "variable" FILES. You can then iterate through</span></span><br><span class="line"><span class="comment"># all the files in the directory with a "for"</span></span><br><span class="line"><span class="comment"># loop (more on this when we start programming).</span></span><br><span class="line"><span class="comment"># For example, a script with the line above and</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> f <span class="keyword">in</span> <span class="variable">$FILES</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="variable">$f</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># would print the file names in the directory.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># From the point above, you know how to determine</span></span><br><span class="line"><span class="comment"># the number of rows. You can store the result in</span></span><br><span class="line"><span class="comment"># another variable:</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> f <span class="keyword">in</span> <span class="variable">$FILES</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    myrow=`cat <span class="variable">$f</span> | wc -l`</span><br><span class="line">    <span class="built_in">echo</span> <span class="variable">$f</span> <span class="variable">$myrow</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Note the use of backticks `: the syntax of bash is</span></span><br><span class="line"><span class="comment"># very finnicky, and you need to write the commands</span></span><br><span class="line"><span class="comment"># exactly as above.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># This script prints the file name as well as</span></span><br><span class="line"><span class="comment"># the number of rows. Using these concepts, you can</span></span><br><span class="line"><span class="comment"># write the script netsize_all.sh</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="4"><a href="#4" class="headerlink" title="4"></a>4</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">###################################################</span></span><br><span class="line"><span class="comment"># Exercise 1.10.4 on Buzzard et al. (2016)</span></span><br><span class="line"><span class="comment">###################################################</span></span><br><span class="line"><span class="comment"># 1)  Write a script that, for a given csv file and</span></span><br><span class="line"><span class="comment"># column number, prints:</span></span><br><span class="line"><span class="comment"># - Column name</span></span><br><span class="line"><span class="comment"># - Number of distinct values</span></span><br><span class="line"><span class="comment"># - Minimum value</span></span><br><span class="line"><span class="comment"># - Maximum value</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># First, we need to extract the column name.</span></span><br><span class="line"><span class="comment"># For example, for the Buzzard data file, and col 7</span></span><br><span class="line"></span><br><span class="line">cut -d <span class="string">','</span> -f 7 ../data/Buzzard2015_data.csv | head -n 1</span><br><span class="line"></span><br><span class="line"><span class="comment"># biomass</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Second, we need to obtain the number of</span></span><br><span class="line"><span class="comment"># distinct values. We can sort the results</span></span><br><span class="line"><span class="comment"># (after removing the header), and use uniq</span></span><br><span class="line"></span><br><span class="line">cut -d <span class="string">','</span> -f 7 ../data/Buzzard2015_data.csv | tail -n +2 | sort | uniq | wc -l</span><br><span class="line"></span><br><span class="line"><span class="comment"># 285</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Third, to get the max/min value we can use</span></span><br><span class="line"><span class="comment"># the code above, sort using -n, and either</span></span><br><span class="line"><span class="comment"># head (for min) or tail (for max) the result.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Minimum</span></span><br><span class="line">cut -d <span class="string">','</span> -f 7 ../data/Buzzard2015_data.csv | tail -n +2 | sort -n | head -n 1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1.048466198</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Maximum</span></span><br><span class="line">cut -d <span class="string">','</span> -f 7 ../data/Buzzard2015_data.csv | tail -n +2 | sort -n | tail -n 1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 14897.29471</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># The file explore.sh is possible incarnation</span></span><br><span class="line"><span class="comment"># of the script.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># For example:</span></span><br><span class="line"></span><br><span class="line">bash explore.sh ../data/Buzzard2015_data.csv 6</span><br><span class="line"></span><br><span class="line"><span class="comment"># Column name</span></span><br><span class="line"><span class="comment"># Abund.n</span></span><br><span class="line"><span class="comment"># Number of distinct values:</span></span><br><span class="line"><span class="comment"># 46</span></span><br><span class="line"><span class="comment"># Minimum value:</span></span><br><span class="line"><span class="comment"># 1</span></span><br><span class="line"><span class="comment"># Maximum value:</span></span><br><span class="line"><span class="comment"># 157</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># This works well also for alphabetical order:</span></span><br><span class="line"></span><br><span class="line">bash explore.sh ../data/Buzzard2015_data.csv 3</span><br><span class="line"></span><br><span class="line"><span class="comment"># Column name</span></span><br><span class="line"><span class="comment"># genus</span></span><br><span class="line"><span class="comment"># Number of distinct values:</span></span><br><span class="line"><span class="comment"># 85</span></span><br><span class="line"><span class="comment"># Minimum value:</span></span><br><span class="line"><span class="comment"># Acacia</span></span><br><span class="line"><span class="comment"># Maximum value:</span></span><br><span class="line"><span class="comment"># Zanthoxylum</span></span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：bash command combo</li>
+        <li>Post author：Yuxuan Wu</li>
+        <li>Create time：2022-01-20 19:38:03</li>
+        <li>
+            Post link：yuxuanwu17.github.io2022/01/20/2022-01-20-bash-command-combo/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/11/26/2021-11-18-Dynamic-programming-notes/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Dynamic programming notes</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span> -
+            
+            2022 <i class="fas fa-heart icon-animate"></i> <a href="/">Yuxuan Wu</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count <span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a> | Theme <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.3.1</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ls"><span class="nav-number">1.</span> <span class="nav-text">ls</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#grep"><span class="nav-number">2.</span> <span class="nav-text">grep</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#wc"><span class="nav-number">3.</span> <span class="nav-text">wc</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cut"><span class="nav-number">4.</span> <span class="nav-text">cut</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sort"><span class="nav-number">5.</span> <span class="nav-text">sort</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tail"><span class="nav-number">6.</span> <span class="nav-text">tail</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tr"><span class="nav-number">7.</span> <span class="nav-text">tr</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bash-script-hw1"><span class="nav-number">8.</span> <span class="nav-text">Bash_script_hw1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1"><span class="nav-number">8.1.</span> <span class="nav-text">1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2"><span class="nav-number">8.2.</span> <span class="nav-text">2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3"><span class="nav-number">8.3.</span> <span class="nav-text">3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4"><span class="nav-number">8.4.</span> <span class="nav-text">4</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
