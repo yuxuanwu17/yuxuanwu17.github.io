@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Welcome to my personal blogs">
+    <meta name="author" content="Yuxuan Wu">
+    
+    <title>
+        
+            RNAseq demo in BIO316 CW1 |
+        
+        Yuxuan Wu
+    </title>
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep coding, Keep hungry."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.3.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days age","week":"%s weeks age","month":"%s months age","year":"%s years age"};
+  </script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                Yuxuan Wu
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content normal-code-theme">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">RNAseq demo in BIO316 CW1</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Yuxuan Wu</span>
+                        <span class="level">Lv13</span>
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i> 2022-03-11 11:37:32
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Bioinformatics/">Bioinformatics</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>
+            <ul>
+                
+                    <li>
+                        <a href="/tags/RNA-modification/">RNA modification</a>
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/notes/">notes</a>
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/bash/">bash</a>
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i> <span>2.7k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i> <span>17 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="BIO316-CW1"><a href="#BIO316-CW1" class="headerlink" title="BIO316-CW1"></a>BIO316-CW1</h1><h3 id="Requirements"><a href="#Requirements" class="headerlink" title="Requirements"></a>Requirements</h3><ul>
+<li><p>Briefly explain the results you obtained. You can use figures to illustrate the results, however, figures must be a readable size and of publication quality resolution. It is essential that you explain what you find; i.e. you need to explain the results using your own words. Figures and the outputs of the analysis software alone will only earn partial marks: the most important aspect is to demonstrate your understanding of the result.</p>
+</li>
+<li><p>Provide your code with proper annotations.</p>
+</li>
+<li><p>The answers for Tasks 1-3, including figures and scripts, must not exceed 2 pages for each task and for task 4 must not exceed 300 words. Please use font size 10 and double spacing. </p>
+</li>
+</ul>
+<p>如何使用并且观察igvtools </p>
+<ul>
+<li><p><a class="link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/36703085" >https://zhuanlan.zhihu.com/p/36703085<i class="fas fa-external-link-alt"></i></a></p>
+</li>
+<li><p><input disabled="" type="checkbox"> </p>
+<pre><code># use IGV to visualize the TDF files
+# use IGV to visualize the BAM files (with the .bai index file)
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">1. Download any RNAseq datasets for an experiment. You can use your own data or find one of interest from NCBI GEO (https:&#x2F;&#x2F;www.ncbi.nlm.nih.gov&#x2F;geo&#x2F; ). You must identify a dataset comparing at least two conditions (you may use the example shown in class), and align these to the appropriate reference genome. Perform basic data quality assessment using FastQC or other software, trim data if necessary. Please don’t be over-ambitious and discuss with the lecturer about the dataset you selected if necessary.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">The answers for Tasks 1-3, including figures and scripts, must not exceed 2 pages (Please use font size 10 and double spacing)</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">The RNAseq datasets used in this experiments were downloaded from https:&#x2F;&#x2F;www.ncbi.nlm.nih.gov&#x2F;geo&#x2F;query&#x2F;acc.cgi?acc&#x3D;GSE128699.  The datasets were obtained from single-nucleotide resolution m6A mapping (miCLIP) on wild-type and METTL5 knockout HCT116 cells to identify the METTL5-dependent methylation events. </span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;bash</span><br><span class="line"># Wild Type</span><br><span class="line">(nohup fastq-dump --split-3 SRR8767363 -O $dir_fastq &gt; $dir_fastq&#x2F;226.out)&amp;</span><br><span class="line">(nohup fastq-dump --split-3 SRR8767364 -O $dir_fastq &gt; $dir_fastq&#x2F;227.out)&amp;</span><br><span class="line"></span><br><span class="line"># METTL5 knockout</span><br><span class="line">(nohup fastq-dump --split-3 SRR8767365 -O $dir_fastq &gt; $dir_fastq&#x2F;228.out)&amp;</span><br><span class="line">(nohup fastq-dump --split-3 SRR8767366 -O $dir_fastq &gt; $dir_fastq&#x2F;229.out)&amp;</span><br></pre></td></tr></table></figure>
+Once the datasets were successfully downloaded to the server, quality control method would be used by &quot;fastqc&quot;. In this case the sequence data were paired-end, which required me to check the data quality of both ends. 
+</code></pre>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># S4. quality control ####################</span></span><br><span class="line"><span class="comment"># for paired end of data, you have to check the data quality of both reads</span></span><br><span class="line">fastqc -o <span class="variable">$dir_fastqc_report</span> -f fastq <span class="variable">$dir_fastq</span>/SRR8767363_1.fastq <span class="variable">$dir_fastq</span>/SRR8767363_2.fastq</span><br><span class="line">fastqc -o <span class="variable">$dir_fastqc_report</span> -f fastq <span class="variable">$dir_fastq</span>/SRR8767364_1.fastq <span class="variable">$dir_fastq</span>/SRR8767364_2.fastq</span><br><span class="line">fastqc -o <span class="variable">$dir_fastqc_report</span> -f fastq <span class="variable">$dir_fastq</span>/SRR8767365_1.fastq <span class="variable">$dir_fastq</span>/SRR8767365_2.fastq</span><br><span class="line">fastqc -o <span class="variable">$dir_fastqc_report</span> -f fastq <span class="variable">$dir_fastq</span>/SRR8767366_1.fastq <span class="variable">$dir_fastq</span>/SRR8767366_2.fastq</span><br></pre></td></tr></table></figure>
+<p>All the data achieved high performance, but considering the page limits, I would randomly select one sample to illustrate the results. </p>
+<img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210330194453.png" alt="image-20210330194453016" style="zoom:30%;" />
+
+
+
+
+
+<p>Task2 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># S5 obtain the reference genome</span></span><br><span class="line"></span><br><span class="line">wget -O ~/cw1/P1/index/hg38.fa http://10.7.88.74/MyWeb/Genomes/hg38/genome.fa <span class="comment"># download the genome</span></span><br><span class="line">wget -O ~/cw1/P1/index/hg38.gtf http://10.7.88.74/MyWeb/Genomes/hg38/genes.gtf <span class="comment"># download the annotation</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># S6 build index, needed for alignment</span></span><br><span class="line">(nohup hisat2-build ~/cw1/P1/index/hg38.fa ~/cw1/P1/index/hg38 &gt; ~/cw1/P2/index/build_index.out)&amp; <span class="comment"># build index, take a very long time</span></span><br><span class="line"><span class="comment">#the index is necessary for the alignment and increase the query rate</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># S7 alignment</span></span><br><span class="line"></span><br><span class="line">(nohup hisat2 -x ~/cw1/P1/index/hg38 -1 ~/cw1/P1/fastq/SRR8767363_1.fastq -2 ~/cw1/P1/fastq/SRR8767363_2.fastq -S ~/cw1/P1/bam/SRR8767363.sam&gt; ~/cw1/P2/bam/align_SRR8767363.out)&amp;</span><br><span class="line">(nohup hisat2 -x ~/cw1/P1/index/hg38 -1 ~/cw1/P1/fastq/SRR8767364_1.fastq -2 ~/cw1/P1/fastq/SRR8767364_2.fastq -S ~/cw1/P1/bam/SRR8767364.sam&gt; ~/cw1/P2/bam/align_SRR8767364.out)&amp;</span><br><span class="line">(nohup hisat2 -x ~/cw1/P1/index/hg38 -1 ~/cw1/P1/fastq/SRR8767365_1.fastq -2 ~/cw1/P1/fastq/SRR8767365_2.fastq -S ~/cw1/P1/bam/SRR8767365.sam&gt; ~/cw1/P2/bam/align_SRR8767365.out)&amp;</span><br><span class="line">(nohup hisat2 -x ~/cw1/P1/index/hg38 -1 ~/cw1/P1/fastq/SRR8767366_1.fastq -2 ~/cw1/P1/fastq/SRR8767366_2.fastq -S ~/cw1/P1/bam/SRR8767366.sam&gt; ~/cw1/P2/bam/align_SRR8767366.out)&amp;</span><br><span class="line"></span><br><span class="line"><span class="comment"># S8 convert SAM to BAM</span></span><br><span class="line"></span><br><span class="line">(nohup samtools view -bS ~/cw1/P1/bam/SRR8767363.sam -o ~/cw1/P1/bam/SRR8767363.bam)&amp; <span class="comment"># convert sam to bam file</span></span><br><span class="line">(nohup samtools view -bS ~/cw1/P1/bam/SRR8767364.sam -o ~/cw1/P1/bam/SRR8767364.bam)&amp; <span class="comment"># convert sam to bam file</span></span><br><span class="line">(nohup samtools view -bS ~/cw1/P1/bam/SRR8767365.sam -o ~/cw1/P1/bam/SRR8767365.bam)&amp; <span class="comment"># convert sam to bam file</span></span><br><span class="line">(nohup samtools view -bS ~/cw1/P1/bam/SRR8767366.sam -o ~/cw1/P1/bam/SRR8767366.bam)&amp; <span class="comment"># convert sam to bam file</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># S9 sort alignment IGV Tools</span></span><br><span class="line">(nohup samtools sort ~/cw1/P1/bam/SRR8767363.bam -o ~/cw1/P1/bam/SRR8767363_sorted.bam &gt; ~/cw1/P2/bam/sort_SRR8767363.out)&amp; <span class="comment"># sort alignment by coordinates</span></span><br><span class="line">(nohup samtools sort ~/cw1/P1/bam/SRR8767364.bam -o ~/cw1/P1/bam/SRR8767364_sorted.bam &gt; ~/cw1/P2/bam/sort_SRR8767364.out)&amp; <span class="comment"># sort alignment by coordinates</span></span><br><span class="line">(nohup samtools sort ~/cw1/P1/bam/SRR8767364.bam -o ~/cw1/P1/bam/SRR8767365_sorted.bam &gt; ~/cw1/P2/bam/sort_SRR8767365.out)&amp; <span class="comment"># sort alignment by coordinates</span></span><br><span class="line">(nohup samtools sort ~/cw1/P1/bam/SRR8767364.bam -o ~/cw1/P1/bam/SRR8767366_sorted.bam &gt; ~/cw1/P2/bam/sort_SRR8767366.out)&amp; <span class="comment"># sort alignment by coordinates</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># S10 index all the bam files, which is required for visualization in IGV</span></span><br><span class="line">(nohup samtools index ~/cw1/P1/bam/SRR8767363_sorted.bam)&amp; <span class="comment"># a file with the same name and ended with &quot;.bai&quot; is generated. This is the index of a BAM file.</span></span><br><span class="line">(nohup samtools index ~/cw1/P1/bam/SRR8767364_sorted.bam)&amp; <span class="comment"># a file with the same name and ended with &quot;.bai&quot; is generated. This is the index of a BAM file.</span></span><br><span class="line">(nohup samtools index ~/cw1/P1/bam/SRR8767365_sorted.bam)&amp; <span class="comment"># a file with the same name and ended with &quot;.bai&quot; is generated. This is the index of a BAM file.</span></span><br><span class="line">(nohup samtools index ~/cw1/P1/bam/SRR8767366_sorted.bam)&amp; <span class="comment"># a file with the same name and ended with &quot;.bai&quot; is generated. This is the index of a BAM file.</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># S11 visualization of bam files</span></span><br><span class="line">wget -O ~/cw1/P1/tdf/hg38.chrom.sizes http://10.7.88.74/MyWeb/Genomes/chrom.sizes/hg38.chrom.sizes <span class="comment"># use a different genome size file if necessary</span></span><br><span class="line"></span><br><span class="line">(nohup igvtools count -z 5 -w 10 -e 0 ~/cw1/P1/bam/SRR8767363_sorted.bam\</span><br><span class="line"> ~/cw1/P1/tdf/SRR8767363.tdf ~/cw1/P1/tdf/hg38.chrom.sizes &gt; ~/P2/tdf/tdf_SRR8767363.out)&amp; <span class="comment"># generated tdf</span></span><br><span class="line">(nohup igvtools count -z 5 -w 10 -e 0 ~/cw1/P1/bam/SRR8767364_sorted.bam\</span><br><span class="line"> ~/cw1/P1/tdf/SRR8767364.tdf ~/cw1/P1/tdf/hg38.chrom.sizes &gt; ~/P2/tdf/tdf_SRR8767364.out)&amp; <span class="comment"># generated tdf</span></span><br><span class="line">(nohup igvtools count -z 5 -w 10 -e 0 ~/cw1/P1/bam/SRR8767365_sorted.bam\</span><br><span class="line"> ~/cw1/P1/tdf/SRR8767365.tdf ~/cw1/P1/tdf/hg38.chrom.sizes &gt; ~/P2/tdf/tdf_SRR8767365.out)&amp; <span class="comment"># generated tdf</span></span><br><span class="line">(nohup igvtools count -z 5 -w 10 -e 0 ~/cw1/P1/bam/SRR8767366_sorted.bam\</span><br><span class="line"> ~/cw1/P1/tdf/SRR8767366.tdf ~/cw1/P1/tdf/hg38.chrom.sizes &gt; ~/P2/tdf/tdf_SRR8767366.out)&amp; <span class="comment"># generated tdf</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># use IGV to visualize the TDF files</span></span><br><span class="line"><span class="comment"># use IGV to visualize the BAM files (with the .bai index file)</span></span><br><span class="line"><span class="comment"># compare the tdf file generated with the gtf files</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># S12. find transcribed regions of a single sample</span></span><br><span class="line">(nohup cufflinks  ~/cw1/P1/bam/SRR8767363_sorted.bam -o  ~/cw1/P1/bam/SRR8767363 -g /home/yuxuan/cw1/P1/index/hg38.gtf&gt;  ~/cw1/P1/gtf/cufflinks_SRR8767363_g.out)&amp; <span class="comment"># reference-based transcriptome reconstruction</span></span><br><span class="line">(nohup cufflinks  ~/cw1/P1/bam/SRR8767364_sorted.bam -o  ~/cw1/P1/bam/SRR8767364 -g /home/yuxuan/cw1/P1/index/hg38.gtf&gt;  ~/cw1/P1/gtf/cufflinks_SRR8767364_g.out)&amp; <span class="comment"># reference-based transcriptome reconstruction</span></span><br><span class="line">(nohup cufflinks  ~/cw1/P1/bam/SRR8767365_sorted.bam -o  ~/cw1/P1/bam/SRR8767365 -g /home/yuxuan/cw1/P1/index/hg38.gtf&gt;  ~/cw1/P1/gtf/cufflinks_SRR8767365_g.out)&amp; <span class="comment"># reference-based transcriptome reconstruction</span></span><br><span class="line">(nohup cufflinks  ~/cw1/P1/bam/SRR8767366_sorted.bam -o  ~/cw1/P1/bam/SRR8767366 -g /home/yuxuan/cw1/P1/index/hg38.gtf&gt;  ~/cw1/P1/gtf/cufflinks_SRR8767366_g.out)&amp; <span class="comment"># reference-based transcriptome reconstruction</span></span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210402233902.png" alt="image-20210402233857001"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210402234114.png" alt="image-20210402234114271"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210402234233.png" alt="image-20210402234233220"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210403093831.png" alt="image-20210403093831911"></p>
+<p>Task3</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">wt=/home/yuxuan/cw1/P1/bam/SRR8767363_sorted.bam,/home/yuxuan/cw1/P1/bam/SRR8767364_sorted.bam</span><br><span class="line">METTL5_KO=/home/yuxuan/cw1/P1/bam/SRR8767365_sorted.bam,/home/yuxuan/cw1/P1/bam/SRR8767366_sorted.bam</span><br><span class="line">labels=WT,METTL5_KO</span><br><span class="line">(nohup cuffdiff -o /home/yuxuan/cw1/P1/DGE -p 2 -L <span class="variable">$labels</span>\</span><br><span class="line"> -b /home/yuxuan/cw1/P1/index/hg38.fa \</span><br><span class="line"> -u /home/yuxuan/cw1/P1/index/hg38.gtf \</span><br><span class="line"> <span class="variable">$wt</span>\</span><br><span class="line"> <span class="variable">$METTL5_KO</span>\</span><br><span class="line"> &gt; /home/yuxuan/cw1/P1/DGE/cuffdiff.out)&amp;</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="https://cdn.jsdelivr.net/gh/yuxuanwu17/image-hosting/typora/20210403000843.png" alt="image-20210403000843602"></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">selected &lt;- cuffdiff_result[cuffdiff_result$p_value&lt;=<span class="number">0.05</span>,]</span><br><span class="line">nrow(selected)</span><br></pre></td></tr></table></figure>
+<p>第三题的终极疑惑，cuffdiff的结果怎么在igv里面显示</p>
+<h1 id="The-full-code"><a href="#The-full-code" class="headerlink" title="The full code"></a>The full code</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># RNAseq data analysis</span></span><br><span class="line"><span class="comment"># BIO316</span></span><br><span class="line"><span class="comment"># 2021-03-29</span></span><br><span class="line"><span class="comment"># Bash script</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># S1. make your working directory P1 ##################################</span></span><br><span class="line">dir=<span class="string">&quot;cw1&quot;</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$dir</span></span><br><span class="line"></span><br><span class="line">P1=<span class="string">&quot;P1&quot;</span></span><br><span class="line"><span class="keyword">if</span> [ ! -d <span class="variable">$P1</span> ]; <span class="keyword">then</span></span><br><span class="line">  mkdir <span class="variable">$P1</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;the file of <span class="variable">$P1</span> exists!&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># S2. download the raw data in sra format ####################################</span></span><br><span class="line"><span class="comment"># Data from: https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE128699</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># specify the directory inside P1 ~cw1/P1/fastq</span></span><br><span class="line"></span><br><span class="line">dir_p1=$(<span class="built_in">pwd</span>)/P1</span><br><span class="line">fastq=<span class="string">&quot;fastq&quot;</span></span><br><span class="line"><span class="keyword">if</span> [ ! -d <span class="string">&quot;<span class="variable">$dir_p1</span>/<span class="variable">$fastq</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">  mkdir <span class="string">&quot;<span class="variable">$dir_p1</span>/<span class="variable">$fastq</span>&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;the file of <span class="variable">$fastq</span> exists!&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">dir_fastq=<span class="string">&quot;<span class="variable">$dir_p1</span>/<span class="variable">$fastq</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># S3 download all the data in parallel</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Wild Type</span></span><br><span class="line">(nohup fastq-dump --split-3 SRR8767363 -O <span class="variable">$dir_fastq</span> &gt; <span class="variable">$dir_fastq</span>/226.out)&amp;</span><br><span class="line">(nohup fastq-dump --split-3 SRR8767364 -O <span class="variable">$dir_fastq</span> &gt; <span class="variable">$dir_fastq</span>/227.out)&amp;</span><br><span class="line"></span><br><span class="line"><span class="comment"># METTL5 knockout</span></span><br><span class="line">(nohup fastq-dump --split-3 SRR8767365 -O <span class="variable">$dir_fastq</span> &gt; <span class="variable">$dir_fastq</span>/228.out)&amp;</span><br><span class="line">(nohup fastq-dump --split-3 SRR8767366 -O <span class="variable">$dir_fastq</span> &gt; <span class="variable">$dir_fastq</span>/229.out)&amp;</span><br><span class="line"></span><br><span class="line"><span class="comment"># ZCCHC4 knockout (no use in this case)</span></span><br><span class="line">(nohup fastq-dump --split-3 SRR8767367 -O <span class="variable">$dir_fastq</span> &gt; <span class="variable">$dir_fastq</span>/230.out)&amp;</span><br><span class="line">(nohup fastq-dump --split-3 SRR8767368 -O <span class="variable">$dir_fastq</span> &gt; <span class="variable">$dir_fastq</span>/231.out)&amp;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># S4. quality control ####################################</span></span><br><span class="line">fastqc_report=<span class="string">&quot;fastqc_report&quot;</span></span><br><span class="line">dir_fastqc_report=<span class="string">&quot;<span class="variable">$dir_p1</span>/<span class="variable">$fastqc_report</span>&quot;</span></span><br><span class="line"><span class="keyword">if</span> [ ! -d <span class="variable">$dir_fastqc_report</span> ]; <span class="keyword">then</span></span><br><span class="line">  mkdir <span class="variable">$dir_fastqc_report</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;the file of <span class="variable">$fastqc_report</span> exists!&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">fastqc -o <span class="variable">$dir_fastqc_report</span> -f fastq <span class="variable">$dir_fastq</span>/SRR8767363_1.fastq <span class="variable">$dir_fastq</span>/SRR8767363_2.fastq</span><br><span class="line">fastqc -o <span class="variable">$dir_fastqc_report</span> -f fastq <span class="variable">$dir_fastq</span>/SRR8767364_1.fastq <span class="variable">$dir_fastq</span>/SRR8767364_2.fastq</span><br><span class="line">fastqc -o <span class="variable">$dir_fastqc_report</span> -f fastq <span class="variable">$dir_fastq</span>/SRR8767365_1.fastq <span class="variable">$dir_fastq</span>/SRR8767365_2.fastq</span><br><span class="line">fastqc -o <span class="variable">$dir_fastqc_report</span> -f fastq <span class="variable">$dir_fastq</span>/SRR8767366_1.fastq <span class="variable">$dir_fastq</span>/SRR8767366_2.fastq</span><br><span class="line"><span class="comment"># for paired end of data, you have to check the data quality of both reads</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># S5 obtain the reference genome</span></span><br><span class="line"></span><br><span class="line">wget -O ~/cw1/P1/index/hg38.fa http://10.7.88.74/MyWeb/Genomes/hg38/genome.fa <span class="comment"># download the genome</span></span><br><span class="line">wget -O ~/cw1/P1/index/hg38.gtf http://10.7.88.74/MyWeb/Genomes/hg38/genes.gtf <span class="comment"># download the annotation</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># S6 build index, needed for alignment</span></span><br><span class="line">(nohup hisat2-build ~/cw1/P1/index/hg38.fa ~/cw1/P1/index/hg38 &gt; ~/cw1/P2/index/build_index.out)&amp; <span class="comment"># build index, take a very long time</span></span><br><span class="line"><span class="comment">#the index is necessary for the alignment and increase the query rate</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># S7 alignment</span></span><br><span class="line"></span><br><span class="line">(nohup hisat2 -x ~/cw1/P1/index/hg38 -1 ~/cw1/P1/fastq/SRR8767363_1.fastq -2 ~/cw1/P1/fastq/SRR8767363_2.fastq -S ~/cw1/P1/bam/SRR8767363.sam&gt; ~/cw1/P2/bam/align_SRR8767363.out)&amp;</span><br><span class="line">(nohup hisat2 -x ~/cw1/P1/index/hg38 -1 ~/cw1/P1/fastq/SRR8767364_1.fastq -2 ~/cw1/P1/fastq/SRR8767364_2.fastq -S ~/cw1/P1/bam/SRR8767364.sam&gt; ~/cw1/P2/bam/align_SRR8767364.out)&amp;</span><br><span class="line">(nohup hisat2 -x ~/cw1/P1/index/hg38 -1 ~/cw1/P1/fastq/SRR8767365_1.fastq -2 ~/cw1/P1/fastq/SRR8767365_2.fastq -S ~/cw1/P1/bam/SRR8767365.sam&gt; ~/cw1/P2/bam/align_SRR8767365.out)&amp;</span><br><span class="line">(nohup hisat2 -x ~/cw1/P1/index/hg38 -1 ~/cw1/P1/fastq/SRR8767366_1.fastq -2 ~/cw1/P1/fastq/SRR8767366_2.fastq -S ~/cw1/P1/bam/SRR8767366.sam&gt; ~/cw1/P2/bam/align_SRR8767366.out)&amp;</span><br><span class="line"></span><br><span class="line"><span class="comment"># S8 convert SAM to BAM</span></span><br><span class="line"></span><br><span class="line">(nohup samtools view -bS ~/cw1/P1/bam/SRR8767363.sam -o ~/cw1/P1/bam/SRR8767363.bam)&amp; <span class="comment"># convert sam to bam file</span></span><br><span class="line">(nohup samtools view -bS ~/cw1/P1/bam/SRR8767364.sam -o ~/cw1/P1/bam/SRR8767364.bam)&amp; <span class="comment"># convert sam to bam file</span></span><br><span class="line">(nohup samtools view -bS ~/cw1/P1/bam/SRR8767365.sam -o ~/cw1/P1/bam/SRR8767365.bam)&amp; <span class="comment"># convert sam to bam file</span></span><br><span class="line">(nohup samtools view -bS ~/cw1/P1/bam/SRR8767366.sam -o ~/cw1/P1/bam/SRR8767366.bam)&amp; <span class="comment"># convert sam to bam file</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># S9 sort alignment IGV Tools需要使用按坐标sort好的BAM文件并配合相应的BAM index</span></span><br><span class="line">(nohup samtools sort ~/cw1/P1/bam/SRR8767363.bam -o ~/cw1/P1/bam/SRR8767363_sorted.bam &gt; ~/cw1/P2/bam/sort_SRR8767363.out)&amp; <span class="comment"># sort alignment by coordinates</span></span><br><span class="line">(nohup samtools sort ~/cw1/P1/bam/SRR8767364.bam -o ~/cw1/P1/bam/SRR8767364_sorted.bam &gt; ~/cw1/P2/bam/sort_SRR8767364.out)&amp; <span class="comment"># sort alignment by coordinates</span></span><br><span class="line">(nohup samtools sort ~/cw1/P1/bam/SRR8767364.bam -o ~/cw1/P1/bam/SRR8767365_sorted.bam &gt; ~/cw1/P2/bam/sort_SRR8767365.out)&amp; <span class="comment"># sort alignment by coordinates</span></span><br><span class="line">(nohup samtools sort ~/cw1/P1/bam/SRR8767364.bam -o ~/cw1/P1/bam/SRR8767366_sorted.bam &gt; ~/cw1/P2/bam/sort_SRR8767366.out)&amp; <span class="comment"># sort alignment by coordinates</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># S10 index all the bam files, which is required for visualization in IGV</span></span><br><span class="line">(nohup samtools index ~/cw1/P1/bam/SRR8767363_sorted.bam)&amp; <span class="comment"># a file with the same name and ended with &quot;.bai&quot; is generated. This is the index of a BAM file.</span></span><br><span class="line">(nohup samtools index ~/cw1/P1/bam/SRR8767364_sorted.bam)&amp; <span class="comment"># a file with the same name and ended with &quot;.bai&quot; is generated. This is the index of a BAM file.</span></span><br><span class="line">(nohup samtools index ~/cw1/P1/bam/SRR8767365_sorted.bam)&amp; <span class="comment"># a file with the same name and ended with &quot;.bai&quot; is generated. This is the index of a BAM file.</span></span><br><span class="line">(nohup samtools index ~/cw1/P1/bam/SRR8767366_sorted.bam)&amp; <span class="comment"># a file with the same name and ended with &quot;.bai&quot; is generated. This is the index of a BAM file.</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># S11 visualization of bam files</span></span><br><span class="line">wget -O ~/cw1/P1/tdf/hg38.chrom.sizes http://10.7.88.74/MyWeb/Genomes/chrom.sizes/hg38.chrom.sizes <span class="comment"># use a different genome size file if necessary</span></span><br><span class="line"></span><br><span class="line">(nohup igvtools count -z 5 -w 10 -e 0 ~/cw1/P1/bam/SRR8767363_sorted.bam\</span><br><span class="line"> ~/cw1/P1/tdf/SRR8767363.tdf ~/cw1/P1/tdf/hg38.chrom.sizes &gt; ~/P2/tdf/tdf_SRR8767363.out)&amp; <span class="comment"># generated tdf</span></span><br><span class="line">(nohup igvtools count -z 5 -w 10 -e 0 ~/cw1/P1/bam/SRR8767364_sorted.bam\</span><br><span class="line"> ~/cw1/P1/tdf/SRR8767364.tdf ~/cw1/P1/tdf/hg38.chrom.sizes &gt; ~/P2/tdf/tdf_SRR8767364.out)&amp; <span class="comment"># generated tdf</span></span><br><span class="line">(nohup igvtools count -z 5 -w 10 -e 0 ~/cw1/P1/bam/SRR8767365_sorted.bam\</span><br><span class="line"> ~/cw1/P1/tdf/SRR8767365.tdf ~/cw1/P1/tdf/hg38.chrom.sizes &gt; ~/P2/tdf/tdf_SRR8767365.out)&amp; <span class="comment"># generated tdf</span></span><br><span class="line">(nohup igvtools count -z 5 -w 10 -e 0 ~/cw1/P1/bam/SRR8767366_sorted.bam\</span><br><span class="line"> ~/cw1/P1/tdf/SRR8767366.tdf ~/cw1/P1/tdf/hg38.chrom.sizes &gt; ~/P2/tdf/tdf_SRR8767366.out)&amp; <span class="comment"># generated tdf</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># use IGV to visualize the TDF files</span></span><br><span class="line"><span class="comment"># use IGV to visualize the BAM files (with the .bai index file)</span></span><br><span class="line"><span class="comment"># compare the tdf file generated with the gtf files</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># S12. find transcribed regions of a single sample</span></span><br><span class="line">(nohup cufflinks  ~/cw1/P1/bam/SRR8767363_sorted.bam -o  ~/cw1/P1/bam/SRR8767363 -g /home/yuxuan/cw1/P1/index/hg38.gtf&gt;  ~/cw1/P1/gtf/cufflinks_SRR8767363_g.out)&amp; <span class="comment"># reference-based transcriptome reconstruction</span></span><br><span class="line">(nohup cufflinks  ~/cw1/P1/bam/SRR8767364_sorted.bam -o  ~/cw1/P1/bam/SRR8767364 -g /home/yuxuan/cw1/P1/index/hg38.gtf&gt;  ~/cw1/P1/gtf/cufflinks_SRR8767364_g.out)&amp; <span class="comment"># reference-based transcriptome reconstruction</span></span><br><span class="line">(nohup cufflinks  ~/cw1/P1/bam/SRR8767365_sorted.bam -o  ~/cw1/P1/bam/SRR8767365 -g /home/yuxuan/cw1/P1/index/hg38.gtf&gt;  ~/cw1/P1/gtf/cufflinks_SRR8767365_g.out)&amp; <span class="comment"># reference-based transcriptome reconstruction</span></span><br><span class="line">(nohup cufflinks  ~/cw1/P1/bam/SRR8767366_sorted.bam -o  ~/cw1/P1/bam/SRR8767366 -g /home/yuxuan/cw1/P1/index/hg38.gtf&gt;  ~/cw1/P1/gtf/cufflinks_SRR8767366_g.out)&amp; <span class="comment"># reference-based transcriptome reconstruction</span></span><br><span class="line"></span><br><span class="line">cufflinks --<span class="built_in">help</span> <span class="comment"># check how to do reference-based transcriptome assembly</span></span><br><span class="line"><span class="comment"># view the gtf file in IGV</span></span><br><span class="line"><span class="comment"># compare it with the standard gtf file provided in IGV</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#S13  differential analysis with cuffdiff</span></span><br><span class="line">wt=/home/yuxuan/cw1/P1/bam/SRR8767363_sorted.bam,/home/yuxuan/cw1/P1/bam/SRR8767364_sorted.bam</span><br><span class="line">METTL5_KO=/home/yuxuan/cw1/P1/bam/SRR8767365_sorted.bam,/home/yuxuan/cw1/P1/bam/SRR8767366_sorted.bam</span><br><span class="line">labels=WT,METTL5_KO</span><br><span class="line">(nohup cuffdiff -o /home/yuxuan/cw1/P1/DGE -p 2 -L <span class="variable">$labels</span>\</span><br><span class="line"> -b /home/yuxuan/cw1/P1/index/hg38.fa \</span><br><span class="line"> -u /home/yuxuan/cw1/P1/index/hg38.gtf \</span><br><span class="line"> <span class="variable">$wt</span>\</span><br><span class="line"> <span class="variable">$METTL5_KO</span>\</span><br><span class="line"> &gt; /home/yuxuan/cw1/P1/DGE/cuffdiff.out)&amp;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：RNAseq demo in BIO316 CW1</li>
+        <li>Post author：Yuxuan Wu</li>
+        <li>Create time：2022-03-11 11:37:32</li>
+        <li>
+            Post link：yuxuanwu17.github.io2022/03/11/BIO316-CW1/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/01/20/2022-01-20-bash-command-combo/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">bash command combo</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span> -
+            
+            2022 <i class="fas fa-heart icon-animate"></i> <a href="/">Yuxuan Wu</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count <span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a> | Theme <a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.3.1</a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#BIO316-CW1"><span class="nav-number">1.</span> <span class="nav-text">BIO316-CW1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Requirements"><span class="nav-number">1.0.1.</span> <span class="nav-text">Requirements</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-full-code"><span class="nav-number">2.</span> <span class="nav-text">The full code</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
